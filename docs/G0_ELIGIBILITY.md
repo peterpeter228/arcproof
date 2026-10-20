@@ -35,3 +35,19 @@ Web open failed on DoraHacks; Exa returned HTTP 405. Parallel Search extracted t
 ## Studio access checkpoint
 
 Live browser inspection reported at 2026-10-20 03:09 UTC: Studio is signed out. Its sign-in page has an explicit unchecked Terms/Privacy acceptance gate; email and Google login are disabled before acceptance. No checkbox was accepted and no login started. Public FAQ describes a complimentary daily allowance but does not expose the exact available account quota. Account/quota gate remains blocked. This does not authorize accepting the agreement or starting a login.
+
+## Access and eligibility checkpoint update
+
+Updated 2026-10-20 03:31 UTC; local checkpoint pending research reconciliation, not yet published.
+
+- Basic entrant information was provided privately. Do not infer a legal eligibility conclusion from this alone or publish unnecessary personal details.
+- User-approved Studio terms and login were completed, with a manual handoff resolving a generic login error. Browser now verifies a signed-in account, an empty New Project screen, and 0% usage for both 24-hour and 30-day windows. Exact absolute allocation is unspecified. No project or application code has been generated.
+- Authorized human verification on DoraHacks completed. Submit Build leads to login; an authenticated submission form has not been inspected.
+- Deadline text reads November 2, 13:59 in a browser environment configured UTC+09:00. Converting this to 04:59 UTC is an inference, not a timezone expressly stated by the official page.
+- Independent reconciliation is pending: distinguish actual published requirements from extra gates such as an assumed requirement for express organizer blessing of atomic forwarding. The absence of such blessing alone must not create an invented requirement.
+
+Earlier signed-out/CAPTCHA checkpoint descriptions are historical and superseded by this update. No signatures, funds transfers, public publication or grant submission occurred.
+
+## Live entry route evidence
+
+At 2026-10-20 03:16:25 UTC, after authorized human verification, the official round-two Submit Build action reached a functioning normal login screen at https://dorahacks.io/login?redirect_uri=%2Fhackathon%2Farc-microgrants-2%2Fdetail . It showed email/Get Code/Continue and Google/GitHub login choices without an error. No login or application was submitted. This passes the published entry-route availability check, not personal eligibility or authenticated submission readiness. At 03:32 UTC a fresh read presented another CAPTCHA, which was not solved.

@@ -25,8 +25,8 @@
     },
     {
       "path": "STATUS.md",
-      "bytes": 2035,
-      "sha256": "2291e10509792132eb81042e5e0cf7ec2ae6b06e2bb1f1a4f2834e08939d7b5f",
+      "bytes": 3463,
+      "sha256": "d058104821dc016f4e32f7e5db853ca313d845db0c6cce75919e2f9314281b08",
       "role": "planning_or_g0_evidence"
     },
     {
@@ -73,8 +73,14 @@
     },
     {
       "path": "docs/G0_ELIGIBILITY.md",
-      "bytes": 4528,
-      "sha256": "16a405adf87f778beff141f27f12055a87cfb553d07cd37a247b573ac901049c",
+      "bytes": 6507,
+      "sha256": "41aa4325cd51460be24006ff528e1b919f08b9948d5d6269e3b47d10e57b9cde",
+      "role": "planning_or_g0_evidence"
+    },
+    {
+      "path": "docs/G0_RECONCILIATION.md",
+      "bytes": 6864,
+      "sha256": "e51d7b8830f914aa6734bf77aeedbb0b754e9d8634c44256275284f6b91464bf",
       "role": "planning_or_g0_evidence"
     },
     {
@@ -235,8 +241,8 @@
     },
     {
       "path": "evidence/gate.json",
-      "bytes": 9188,
-      "sha256": "b2cf449445e4ff614a2713ec5f8475114b129ac309f3a3127866e8632c1cc465",
+      "bytes": 10409,
+      "sha256": "083ae69a9a54be75db2ddb12bb63a9ca22189bdcecaaa76040c135e8564cdac6",
       "role": "planning_or_g0_evidence"
     },
     {

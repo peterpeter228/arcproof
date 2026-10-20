@@ -38,7 +38,7 @@
     "url": "https://dorahacks.io/hackathon/arc-microgrants-2/build",
     "lastResearchExtractionResult": "HTTP 405",
     "resultMeaning": "本次正文提取受限；不证明页面不存在，也不证明入口开放或本人可提交。",
-    "entryOpen": null,
+    "entryOpen": true,
     "fullRulesRead": true,
     "eligibilityConfirmed": null,
     "payoutTerms": null,
@@ -60,13 +60,13 @@
     },
     {
       "id": "submission_entry_open",
-      "status": "blocked",
-      "verifiedValue": null,
+      "status": "passed",
+      "verifiedValue": true,
       "blocksGrantEngineeringWhenUnknown": true,
       "blocksFastCashWhenUnknown": true,
-      "reason": "Public Submit Build is visible but authenticated acceptance unverified; official-page browser CAPTCHA requires pending user approval.",
-      "checkedAt": "2026-10-20T03:08:46.686381+00:00",
-      "evidence": "docs/G0_ELIGIBILITY.md"
+      "reason": "Live official Submit Build reached a functioning normal login UI with no error after authorized human verification. Establishes advertised current entry route, not authenticated eligibility or successful submission. Later 03:32 reload showed a fresh CAPTCHA not solved.",
+      "checkedAt": "2026-10-20T03:16:25Z",
+      "evidence": "docs/G0_ELIGIBILITY.md#live-entry-route-evidence"
     },
     {
       "id": "personal_entry_eligibility",
@@ -74,9 +74,9 @@
       "verifiedValue": null,
       "blocksGrantEngineeringWhenUnknown": true,
       "blocksFastCashWhenUnknown": true,
-      "reason": "User individual/company and country information requested; no qualification inferred.",
-      "checkedAt": "2026-10-20T03:08:46.686381+00:00",
-      "evidence": "docs/G0_ELIGIBILITY.md"
+      "reason": "Basic entrant information supplied privately. Reconciliation against current official eligibility and jurisdiction requirements pending; no personal details stored here.",
+      "checkedAt": "2026-10-20T03:31:33.842275+00:00",
+      "evidence": "docs/G0_ELIGIBILITY.md#access-and-eligibility-checkpoint-update"
     },
     {
       "id": "personal_award_eligibility",
@@ -84,9 +84,9 @@
       "verifiedValue": null,
       "blocksGrantEngineeringWhenUnknown": true,
       "blocksFastCashWhenUnknown": true,
-      "reason": "Private recipient verification and sanctions/jurisdiction match not established.",
-      "checkedAt": "2026-10-20T03:08:46.686381+00:00",
-      "evidence": "docs/G0_ELIGIBILITY.md"
+      "reason": "Basic entrant information supplied privately; actual award verification and payout eligibility still require rule reconciliation.",
+      "checkedAt": "2026-10-20T03:31:33.842275+00:00",
+      "evidence": "docs/G0_ELIGIBILITY.md#access-and-eligibility-checkpoint-update"
     },
     {
       "id": "deadline_time_and_timezone",
@@ -94,9 +94,9 @@
       "verifiedValue": null,
       "blocksGrantEngineeringWhenUnknown": true,
       "blocksFastCashWhenUnknown": true,
-      "reason": "November 1 date and November 2 04:59 timeline observed; official timezone not verified. Do not infer UTC.",
-      "checkedAt": "2026-10-20T03:08:46.686381+00:00",
-      "evidence": "docs/G0_ELIGIBILITY.md"
+      "reason": "Live deadline text November 2 13:59 observed in browser environment with UTC+09:00 timezone. Conversion to 04:59 UTC is inference, not an explicitly labeled official timezone; reconciliation pending.",
+      "checkedAt": "2026-10-20T03:31:33.842275+00:00",
+      "evidence": "docs/G0_ELIGIBILITY.md#access-and-eligibility-checkpoint-update"
     },
     {
       "id": "round_2_studio_provenance_requirements",
@@ -120,13 +120,13 @@
     },
     {
       "id": "studio_account_and_quota",
-      "status": "blocked",
-      "verifiedValue": null,
+      "status": "passed",
+      "verifiedValue": true,
       "blocksGrantEngineeringWhenUnknown": true,
       "blocksFastCashWhenUnknown": false,
-      "reason": "Live browser verified signed-out Studio. Explicit Terms/Privacy acceptance checkbox remains unchecked; email/Google login disabled. No agreement accepted or login started. Public FAQ mentions complimentary daily allowance but exact quota unverified.",
-      "checkedAt": "2026-10-20T03:09:21.431320+00:00",
-      "evidence": "docs/G0_ELIGIBILITY.md#studio-access-checkpoint"
+      "reason": "Verified usable signed-in Studio account and empty New Project; 24-hour and 30-day usage both 0%. Exact numerical allocation undisclosed, not an original gate prerequisite. Stop on quota exhaustion/payment request; no project/code generated.",
+      "checkedAt": "2026-10-20T03:32:25.201656+00:00",
+      "evidence": "docs/G0_RECONCILIATION.md"
     },
     {
       "id": "dot_runtime_and_wallet_handoff",
@@ -150,23 +150,23 @@
     },
     {
       "id": "atomic_payment_fit_and_ip_terms",
-      "status": "blocked",
-      "verifiedValue": null,
+      "status": "passed",
+      "verifiedValue": true,
       "blocksGrantEngineeringWhenUnknown": true,
       "blocksFastCashWhenUnknown": true,
-      "reason": "No equity/IP assignment/exclusivity reported; rights required. Atomic forwarding fits by inference only, not explicit organizer approval; any contact needs authorization.",
-      "checkedAt": "2026-10-20T03:08:46.686381+00:00",
-      "evidence": "docs/G0_ELIGIBILITY.md"
+      "reason": "Published-rule assessment passed: exact atomic USDC forwarding through app and contract fits the stated criterion; no individual organizer blessing is required. Public repository and rights required; no specified OSS license or IP assignment. This is not implementation, acceptance or award evidence.",
+      "checkedAt": "2026-10-20T03:32:25.201656+00:00",
+      "evidence": "docs/G0_RECONCILIATION.md"
     },
     {
       "id": "mainnet_review_or_audit_requirement",
-      "status": "blocked",
-      "verifiedValue": null,
+      "status": "passed",
+      "verifiedValue": true,
       "blocksGrantEngineeringWhenUnknown": true,
       "blocksFastCashWhenUnknown": true,
-      "reason": "Official Arc introduction calls for professional audit before mainnet. Whether this is a hard round-two prerequisite remains unresolved; cannot substitute LLM review.",
-      "checkedAt": "2026-10-20T03:08:46.686381+00:00",
-      "evidence": "docs/G0_ELIGIBILITY.md"
+      "reason": "Requirement assessment passed: round-two listing and Studio Terms do not impose a hard professional-audit entry prerequisite. Independent review/testing/validation remains required; blog professional-audit recommendation and risk retained. No actual audit, G3 test or mainnet safety gate has passed.",
+      "checkedAt": "2026-10-20T03:32:25.201656+00:00",
+      "evidence": "docs/G0_RECONCILIATION.md"
     }
   ],
   "stageGates": [
@@ -225,11 +225,21 @@
     "applicationCommit": null,
     "studioProjectUrl": null
   },
-  "nextAction": "Resolve official-page CAPTCHA permission, personal jurisdiction/entry details and Studio account/quota. No financial implementation until all engineering-blocking checks pass.",
+  "nextAction": "Await user decision on narrow public official Q&A inquiry about applicable participation/payout conditions and deadline, and prospective wallet type. No external inquiry sent. Keep G0_HOLD; do not create Studio project or application code.",
   "repository": {
     "url": "https://github.com/peterpeter228/arcproof",
     "visibility": "private",
     "bootstrapCommit": "cba6f8abdfe92416f734560acdb02f6c09f11cf5",
     "applicationCommit": null
+  },
+  "checkpointPublication": {
+    "status": "ready_for_authorized_docs_update",
+    "priorPublishedCommit": "d777024f6251f46f1d2fb3dcda6bd1351a4ac788"
+  },
+  "pendingUserDecision": {
+    "requestReference": "Sentinel_e86abacbd92c8191be10795ebb660972",
+    "purpose": "Permission for bounded official public Q&A inquiry and prospective wallet handoff details",
+    "status": "pending",
+    "externalInquirySent": false
   }
 }
