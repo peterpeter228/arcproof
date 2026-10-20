@@ -3,7 +3,10 @@
  * Arc Light aesthetic: ivory background, dark readable type, teal accent.
  * No emojis, no invented data, no marketing copy.
  */
-import React from 'react';
+import React, { useState } from 'react';
+import { useSubmissions, useSubmissionRequests, type Submission } from '../../arcproof/submissions';
+import { explorerTx } from '../../arcproof/testnet';
+import { reconcileSubmission, errorMessage, testnetClient } from '../../arcproof/testnetClient';
 import { ConnectKitButton } from 'connectkit';
 
 type NavTab = 'dashboard' | 'verify' | 'evidence';
@@ -18,7 +21,7 @@ export function PrototypeBanner() {
   return (
     <div className="w-full bg-amber-50 border-b border-amber-200 py-2 px-4 text-center">
       <p className="text-xs font-medium text-amber-800 tracking-wide">
-        Prototype &bull; not deployed &bull; test assets only &bull; no real funds
+        Arc Testnet prototype &bull; test assets only &bull; mainnet disabled
       </p>
     </div>
   );
@@ -40,6 +43,32 @@ const NAV_ITEMS: { id: NavTab; label: string }[] = [
   { id: 'verify', label: 'Verify receipt' },
   { id: 'evidence', label: 'Evidence' },
 ];
+
+function SavedTransactions() {
+  const submissions = useSubmissions();
+  const requests = useSubmissionRequests();
+  const [busy, setBusy] = useState<string | null>(null);
+  const [message, setMessage] = useState('');
+  async function refresh(row: Submission) {
+    if (busy) return;
+    setBusy(row.hash); setMessage('');
+    try { await reconcileSubmission(testnetClient, row); setMessage('Saved transaction status refreshed from Arc Testnet. This is not verified settlement.'); }
+    catch (error) { setMessage(errorMessage(error)); }
+    finally { setBusy(null); }
+  }
+  const row = (item: Submission) => <div key={item.hash} className="space-y-1 border-b border-amber-200 py-2 last:border-0">
+    <p className="break-all"><strong>{item.kind} · {item.state}</strong>: <a className="underline" href={explorerTx(item.hash)} target="_blank" rel="noreferrer">{item.hash}</a></p>
+    <button type="button" className="underline disabled:opacity-50" disabled={busy !== null} onClick={() => { void refresh(item); }}>Refresh saved status</button>
+  </div>;
+  if (!submissions.length && !requests.length) return null;
+  return <aside className="mb-5 rounded-lg border border-amber-200 bg-amber-50 p-3 text-xs text-amber-900" aria-label="Saved wallet transactions">
+    {requests.length > 0 && <p role="status">A wallet request is outstanding or its outcome is uncertain. Do not refresh this page or submit again until you have checked your wallet activity. The request lock does not survive a reload or coordinate other tabs; no automatic resend will occur.</p>}
+    <p>Saved hashes are unverified locators. Check status before another request. Browser storage is best-effort.</p>
+    {submissions[0] && row(submissions[0])}
+    {submissions.length > 1 && <details><summary className="cursor-pointer py-2">Older saved transactions ({submissions.length - 1})</summary>{submissions.slice(1).map(row)}</details>}
+    {message && <p role="status" className="mt-2">{message}</p>}
+  </aside>;
+}
 
 export function Layout({ activeTab, onTabChange, children }: LayoutProps) {
   return (
@@ -84,6 +113,7 @@ export function Layout({ activeTab, onTabChange, children }: LayoutProps) {
 
       {/* Content */}
       <main className="flex-1 max-w-5xl mx-auto w-full px-4 py-6">
+        <SavedTransactions />
         {children}
       </main>
 
@@ -92,7 +122,7 @@ export function Layout({ activeTab, onTabChange, children }: LayoutProps) {
         <div className="max-w-5xl mx-auto px-4 py-3 text-xs text-stone-400 flex flex-wrap gap-x-4 gap-y-1">
           <span>ArcProof prototype &mdash; G1 reviewed, not audited</span>
           <span>Grant eligibility: HOLD</span>
-          <span>No real deployment</span>
+          <span>Checked testnet deployment · live payment acceptance pending</span>
         </div>
       </footer>
     </div>

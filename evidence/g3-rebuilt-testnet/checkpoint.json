@@ -1,0 +1,65 @@
+{
+  "stage": "REBUILT_TESTNET_CANDIDATE_FROZEN",
+  "baseCommit": "89fc2c3ba931253e0b97ae582611baa5d8c4db4e",
+  "preparedAt": "2026-10-20T11:36:00Z",
+  "scope": "Dedicated checked Arc Testnet deployment only; user-controlled wallet approval; no mainnet. New candidate after local artifact loss, not assumed identical to the former candidate.",
+  "projectTests": {
+    "status": "passed",
+    "passed": 197,
+    "failed": 0,
+    "scope": "Fresh offline unit and JSDOM tests, not real wallet or chain execution."
+  },
+  "independentReview": {
+    "status": "passed",
+    "passed": 138,
+    "failed": 0,
+    "serviceProbes": 114,
+    "jsdomUIAndWalletHookTests": 24,
+    "report": "qa/new-independent-review/REVIEW.md"
+  },
+  "legacyAdversarialProbes": {
+    "status": "passed",
+    "passed": 26,
+    "failed": 0
+  },
+  "legacyDOMTests": {
+    "status": "passed",
+    "passed": 6,
+    "failed": 0
+  },
+  "typecheck": {
+    "status": "passed"
+  },
+  "readOnlyLint": {
+    "status": "passed"
+  },
+  "productionBuild": {
+    "status": "passed",
+    "warnings": "Existing vendor annotation and >500 kB chunk-size warnings."
+  },
+  "actualBrowserRendering": {
+    "status": "blocked",
+    "reason": "Local sandbox browser process unavailable; native file preview blocked by organization policy. Supported Studio preview acceptance still pending."
+  },
+  "walletInteroperability": {
+    "status": "not_run"
+  },
+  "liveCreateAndPay": {
+    "status": "not_run"
+  },
+  "arcNativeSettlement": {
+    "status": "not_run"
+  },
+  "verifiedReceiptFlag": false,
+  "mainnetConfigured": false,
+  "agentLiveWalletRequests": 0,
+  "agentLiveRpcRequests": 0,
+  "externalIntegrationStatus": "not_run",
+  "timestampNote": "Log runner wall-clock timestamps are approximately nine hours ahead of authoritative UTC. preparedAt uses the authoritative conversation/tool clock; raw runner logs are not claimed to be UTC.",
+  "recoveredProbesFreshRerun": {
+    "status": "passed",
+    "passed": 22,
+    "failed": 0,
+    "note": "16 service + 4 wallet-hook + 2 saved-history UI probes rerun, not inherited. Valid receipt fixture gained explicit log metadata required by stricter adapter; UI selectors updated to new labels. Assertions on behavior unchanged."
+  }
+}

@@ -58,7 +58,7 @@ export function ReceiptScreen({ chainId, deploymentId, invoiceId, txHash }: Rece
     await new Promise((r) => setTimeout(r, 400));
     setVerifyResult({
       status: 'PENDING',
-      message: 'No trusted deployment exists. Receipt verification requires a verified deployed contract in the manifest.',
+      message: 'No trusted deployment exists for this request. Use the checked Arc Testnet deployment; unknown deployments cannot authorize verification.',
       paymentLogIndex: null,
       blockHash: null,
       verifiedAt: Date.now(),
@@ -117,7 +117,7 @@ export function ReceiptScreen({ chainId, deploymentId, invoiceId, txHash }: Rece
 
         <div className="space-y-3">
           {[
-            { label: 'Chain ID', value: formChainId, setter: setFormChainId, placeholder: '2482601649' },
+            { label: 'Chain ID', value: formChainId, setter: setFormChainId, placeholder: '5042002' },
             { label: 'Deployment ID', value: formDeploymentId, setter: setFormDeploymentId, placeholder: 'e.g. arc-testnet-001' },
             { label: 'Invoice ID (bytes32)', value: formInvoiceId, setter: (v: string) => setFormInvoiceId(v as `0x${string}`), placeholder: '0x...' },
             { label: 'Transaction hash (optional)', value: formTxHash, setter: setFormTxHash, placeholder: '0x...' },

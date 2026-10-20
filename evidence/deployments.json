@@ -1,8 +1,8 @@
 {
   "schemaVersion": "1.0",
   "project": "ArcProof",
-  "artifactRole": "undeployed_manifest_template",
-  "note": "网络参数来自官方文档快照。两个deploymentId仅为初始保留标识，没有实际部署、字节码、源码commit或交易。地址未核实前禁止签名。",
+  "artifactRole": "checked_testnet_deployment_mainnet_unconfigured",
+  "note": "Root independently verified successful testnet deployment and entire runtime against the reviewed artifact. Legacy reservations retained. No source-publication, payment, audit or income claim.",
   "identityPolicy": {
     "key": [
       "chainId",
@@ -74,7 +74,7 @@
         "runtimeCheckedAt": null,
         "runtimeEvidence": null
       },
-      "activeDeploymentId": null,
+      "activeDeploymentId": "0xdba9a4da8a5b2a834b451f595653dd3cb4c3e51addb2d8df8e0b18312f382d2d",
       "deployments": {
         "arcproof-v1-testnet-01": {
           "deploymentId": "arcproof-v1-testnet-01",
@@ -97,6 +97,26 @@
           "verifiedAt": null,
           "authorizationEvidence": null,
           "evidence": null
+        },
+        "0xdba9a4da8a5b2a834b451f595653dd3cb4c3e51addb2d8df8e0b18312f382d2d": {
+          "deploymentId": "0xdba9a4da8a5b2a834b451f595653dd3cb4c3e51addb2d8df8e0b18312f382d2d",
+          "chainId": 5042002,
+          "status": "passed",
+          "deployed": true,
+          "contractAddress": "0x3Dcd2bDD924BCC384Cb39e9e12038e00fde0FA30",
+          "deploymentTxHash": "0x2e43459e213e993b2290749e5549f993d63db1af6e1d8feab2fcca94917db535",
+          "deploymentBlockNumber": 68161841,
+          "deployedAt": "2026-10-20T09:48:47Z",
+          "runtimeBytes": 2296,
+          "runtimeBytecodeSha256": "6b4aee1db6fe2518afdf037eaa277313712bbfb22675bd30f3c46735b8833f2c",
+          "runtimeBytecodeKeccak256": "0xa36ede95ccce8289224d3bbabe3a2445a888c44e763a04ac4b6f4f2f03dd344c",
+          "artifactPath": "evidence/g1/ArcProofInvoices.artifact.json",
+          "sourceBaseCommit": "89fc2c3ba931253e0b97ae582611baa5d8c4db4e",
+          "verificationScope": "Successful deployment receipt and exact runtime bytes including metadata independently observed by root through official explorer. Not payment acceptance.",
+          "verifiedOn": "2026-10-20",
+          "sourcePublished": false,
+          "paymentAcceptanceStatus": "not_run",
+          "evidenceUrl": "https://explorer.testnet.arc.io/address/0x3Dcd2bDD924BCC384Cb39e9e12038e00fde0FA30?tab=contract"
         }
       }
     }

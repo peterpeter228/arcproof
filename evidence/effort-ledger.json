@@ -177,5 +177,16 @@
     ],
     "deduplication": "相同chainId+txHash+paymentLogIndex不能重复计收入；收款、交付确认与退款义务通过relatedEntryId关联，不相加为多笔收入。",
     "note": "支付证据证明转账，不自动证明服务已履约。测试网资产、本地fixture和报价不进入实际收入账。"
+  },
+  "rebuiltTestnetCandidate": {
+    "path": "evidence/g3-rebuilt-testnet/checkpoint.json",
+    "preparedAt": "2026-10-20T11:28:00Z",
+    "baseCommit": "89fc2c3ba931253e0b97ae582611baa5d8c4db4e",
+    "note": "New reconstructed local candidate. Historical records retained; actual browser/wallet/chain acceptance not passed."
+  },
+  "rebuiltTestnetEffort": {
+    "actualHours": null,
+    "status": "pending_root_aggregation",
+    "note": "Root must include original work, artifact recovery/reconstruction, verification and parallel reviewer effort in the existing 18-hour cap. Historical total is not treated as current."
   }
 }

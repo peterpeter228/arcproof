@@ -435,5 +435,11 @@
       "evidence": null,
       "remainingLimitation": null
     }
-  ]
+  ],
+  "rebuiltTestnetCandidate": {
+    "path": "evidence/g3-rebuilt-testnet/checkpoint.json",
+    "preparedAt": "2026-10-20T11:28:00Z",
+    "baseCommit": "89fc2c3ba931253e0b97ae582611baa5d8c4db4e",
+    "note": "New reconstructed local candidate. Historical records retained; actual browser/wallet/chain acceptance not passed."
+  }
 }

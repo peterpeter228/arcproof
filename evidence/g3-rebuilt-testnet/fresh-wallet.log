@@ -1,0 +1,12 @@
+{
+  "status": "passed",
+  "count": 4,
+  "probes": [
+    "Raw provider event invalidates synchronously before React rerender",
+    "Account switch invalidates prior session",
+    "Disconnect returns null and invalidates prior session",
+    "Unmount invalidates captured session closure and removes all listeners"
+  ],
+  "walletRequests": 0,
+  "liveNetworkCalls": 0
+}

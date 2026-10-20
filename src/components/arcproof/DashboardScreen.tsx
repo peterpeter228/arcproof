@@ -1,6 +1,6 @@
 /**
  * DashboardScreen.tsx — Merchant invoice creation + paginated history.
- * All signing DISABLED until a trusted deployment exists.
+ * Offline simulation only. This screen never invokes the live testnet adapter.
  * Paginated history derived from nextNonce, 20 per page, newest-first.
  */
 import React, { useState, useMemo } from 'react';
@@ -10,7 +10,7 @@ import { deriveInvoiceIds } from '../../arcproof/invoiceId';
 import { AtomicForwardingWarning } from './Layout';
 import { AlertCircle, FileText } from 'lucide-react';
 
-const DEMO_CHAIN_ID = 2482601649; // Arc Testnet
+const DEMO_CHAIN_ID = 5042002; // Arc Testnet fixture domain; these addresses are not the live deployment
 const DEMO_MERCHANT = '0x0000000000000000000000000000000000000002' as `0x${string}`;
 const DEMO_CONTRACT = '0x0000000000000000000000000000000000000001' as `0x${string}`;
 
@@ -86,7 +86,7 @@ export function DashboardScreen() {
     <div className="space-y-6">
       {/* Demo mode notice */}
       <div className="rounded-lg border border-teal-200 bg-teal-50 px-4 py-3 text-sm text-teal-800">
-        <strong>Demo mode</strong> &mdash; no trusted deployment exists. Invoice creation below
+        <strong>Offline demo mode</strong> &mdash; separate from the live testnet deployment. Invoice creation below
         demonstrates the ID derivation and UI flow only; no transaction is sent. No wallet is needed. The fixed demo merchant and contract are fixtures, not deployed addresses.
       </div>
 

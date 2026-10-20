@@ -1,6 +1,6 @@
 {
-  "stage": "LOCAL_OFFLINE_PROTOTYPE_ACCEPTED",
-  "nextStage": "G3_BLOCKED_WALLET",
+  "stage": "REBUILT_TESTNET_CANDIDATE_FROZEN",
+  "nextStage": "STUDIO_PREVIEW_AND_USER_CONTROLLED_TESTNET_ACCEPTANCE",
   "sourceSnapshot": "Studio 052720 plus verified final2 native source",
   "basePatchSha256": "1197b674362cabba796f8ebf9925dff12f4a614748dd330704417bcdcb1fecf3",
   "responsivePatchSha256": "95e04b41742de63ef4dd7911a40afd08153003f0f8d6ad246f1663600308db09",
@@ -45,7 +45,7 @@
       "sha256": "745476dbf5c166ceb32fab85f5346b204258b7991a5c5b1541e8002d0cb75fa5"
     },
     {
-      "path": "RUN_\u4e2d\u6587.md",
+      "path": "RUN_中文.md",
       "bytes": 4535,
       "sha256": "b23143acc46ec5ac7147207fe9d29566b56689e3bacfb3f055b0c0a0500d90c8"
     },
@@ -614,5 +614,11 @@
       "bytes": 1086,
       "sha256": "b271381a1e99682053e5445b35872fbbb75e0b448bfee8815cab701e3575e45a"
     }
-  ]
+  ],
+  "rebuiltTestnetCandidate": {
+    "path": "evidence/g3-rebuilt-testnet/checkpoint.json",
+    "preparedAt": "2026-10-20T11:28:00Z",
+    "baseCommit": "89fc2c3ba931253e0b97ae582611baa5d8c4db4e",
+    "note": "New reconstructed local candidate. Historical records retained; actual browser/wallet/chain acceptance not passed."
+  }
 }

@@ -1,0 +1,13 @@
+
+ RUN  v2.1.9 /workspace/scratch/c01bd6fe117d/arcproof-testnet-rebuild/repo
+
+ ✓ qa/new-independent-review/wallet-probes.test.tsx (8 tests) 143ms
+ ✓ qa/new-independent-review/ui-probes.test.tsx (16 tests) 2002ms
+   ✓ Independent reconstructed UI probes with mocked service; no actual browser > replacement receipt does not mark original included or lose original hash 1184ms
+
+ Test Files  2 passed (2)
+      Tests  24 passed (24)
+   Start at  20:35:38
+   Duration  10.28s (transform 1.42s, setup 0ms, collect 3.65s, tests 2.15s, environment 5.04s, prepare 1.86s)
+
+JSON report written to /workspace/scratch/c01bd6fe117d/arcproof-testnet-rebuild/repo/qa/new-independent-review/ui-probes-results.json

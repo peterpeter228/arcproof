@@ -1,3 +1,19 @@
+# ArcProof current checkpoint
+
+Stage: REBUILT_TESTNET_CANDIDATE_FROZEN.
+
+The user-signed Arc Testnet deployment and complete runtime were independently checked. A dedicated testnet adapter/UI has been reconstructed after the previous temporary local handoff was lost before persistence. This is a new candidate with fresh testing; previous candidate QA is not inherited.
+
+197 fresh project tests, 26 legacy adversarial probes and six legacy DOM checks passed. TypeScript and read-only lint passed. Fresh independent review: 138/138 passed; 22 recovered probes freshly rerun; production build passed. Exact evidence is in evidence/g3-rebuilt-testnet/checkpoint.json. Actual browser rendering is still blocked/pending supported Studio preview. No live RPC or real wallet transaction was performed by this implementation task.
+
+Mainnet is unconfigured and rejected. Offline simulation is separate. The real receipt verifier remains verified=false / UNVERIFIED_ARC_EVIDENCE after standard checks. Genuine payment receipt/native transfer/finality acceptance remains not run. Grant qualification, income and professional audit are not claimed.
+
+See docs/TESTNET_INTEGRATION.md. Root owns final review, private integration, actual Studio QA and effort aggregation against the unchanged 18-hour cap.
+
+## Historical offline checkpoint
+
+The original checkpoint below is preserved as history, not current deployment state.
+
 # ArcProof technical checkpoint
 
 Stage: LOCAL_OFFLINE_PROTOTYPE_ACCEPTED / G3_BLOCKED_WALLET.

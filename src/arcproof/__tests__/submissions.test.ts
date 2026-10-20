@@ -1,0 +1,18 @@
+import { describe, it, expect } from 'vitest';
+import { beginSubmission, getSubmissions, recordSubmission, updateSubmission } from '../submissions';
+import type { Hex, Address } from 'viem';
+let n=1000;
+const hash=():Hex=>`0x${(++n).toString(16).padStart(64,'0')}`;
+const account:Address='0x7777777777777777777777777777777777777777';
+describe('Centralized wallet submission registry (offline)', () => {
+  it('blocks repeated payment requests before the wallet returns', () => { const id=hash();const lease=beginSubmission('pay',account,id); expect(()=>beginSubmission('pay',account,id)).toThrow();lease.finish(); });
+  it('normalizes invoice casing in request leases', () => { const id:Hex=`0x${'b'.repeat(64)}`;const lease=beginSubmission('pay',account,id);expect(()=>beginSubmission('pay',account,`0x${'B'.repeat(64)}`)).toThrow();lease.finish(); });
+  it('blocks another payer on the same outstanding invoice', () => { const id=hash();const lease=beginSubmission('pay',account,id);expect(()=>beginSubmission('pay','0x8888888888888888888888888888888888888888',id)).toThrow();lease.finish(); });
+  it('releases an explicit rejected request only when finished', () => { const id=hash();const lease=beginSubmission('pay',account,id);lease.finish();expect(()=>beginSubmission('pay',account,id).finish()).not.toThrow(); });
+  it('retains an uncertain wallet outcome lock', () => { const id=hash();const lease=beginSubmission('pay',account,id);lease.uncertain();expect(()=>beginSubmission('pay',account,id)).toThrow();lease.finish(); });
+  it('locks account-scoped creation across request repetitions', () => { const lease=beginSubmission('create',account);expect(()=>beginSubmission('create',account)).toThrow();lease.finish(); });
+  it('normalizes and deduplicates hashes without trusting them as proof', () => { const h:Hex=`0x${'d'.repeat(64)}`;recordSubmission({hash:h,kind:'pay',invoiceId:hash(),account,state:'submitted'});recordSubmission({hash:`0x${'D'.repeat(64)}`,kind:'pay',invoiceId:hash(),account,state:'submitted'});expect(getSubmissions().filter(x=>x.hash===h)).toHaveLength(1); });
+  it('cannot resend an included payment from the registry', () => { const id=hash(),h=hash();recordSubmission({hash:h,kind:'pay',invoiceId:id,account,state:'included'});expect(()=>beginSubmission('pay',account,id)).toThrow(); });
+  it('allows review after a specifically reconciled reverted payment', () => { const id=hash(),h=hash();recordSubmission({hash:h,kind:'pay',invoiceId:id,account,state:'submitted'});updateSubmission(h,'reverted');expect(()=>beginSubmission('pay',account,id).finish()).not.toThrow(); });
+  it('never evicts unresolved hashes when completed history is capped', () => { const unresolved:Hex[]=[]; for(let i=0;i<30;i++){const h=hash();unresolved.push(h);recordSubmission({hash:h,kind:'pay',invoiceId:hash(),account,state:'submitted'});}for(let i=0;i<30;i++)recordSubmission({hash:hash(),kind:'pay',invoiceId:hash(),account,state:'reverted'});const rows=getSubmissions();expect(rows.filter(x=>x.state!=='submitted').length).toBeLessThanOrEqual(20);expect(unresolved.every(h=>rows.some(x=>x.hash===h))).toBe(true); });
+});

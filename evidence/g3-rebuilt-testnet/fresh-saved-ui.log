@@ -1,0 +1,11 @@
+{
+  "status": "passed",
+  "count": 2,
+  "probes": [
+    "An older saved hash has its own refresh control targeting that exact record",
+    "All saved hashes remain visible after Layout remount with localStorage denied"
+  ],
+  "mockedReadOnlyReconciliationCalls": 1,
+  "walletRequests": 0,
+  "liveNetworkCalls": 0
+}

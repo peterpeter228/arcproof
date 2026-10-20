@@ -1,0 +1,21 @@
+$ vitest run
+
+ RUN  v2.1.9 /workspace/scratch/c01bd6fe117d/arcproof-testnet-rebuild/repo
+
+ ✓ src/arcproof/__tests__/T18_amountParser.test.ts (30 tests) 47ms
+ ✓ src/arcproof/__tests__/nativeRepair.test.ts (8 tests) 95ms
+ ✓ src/arcproof/__tests__/submissions.test.ts (10 tests) 54ms
+ ✓ src/arcproof/__tests__/T22_receiptVerifier.test.ts (26 tests) 71ms
+ ✓ src/arcproof/__tests__/T20_preparedPayment.test.ts (22 tests) 36ms
+ ✓ src/arcproof/__tests__/testnetClient.test.ts (30 tests) 379ms
+ ✓ src/arcproof/__tests__/T19_manifest.test.ts (18 tests) 137ms
+ ✓ src/arcproof/__tests__/T24_exportUtils.test.ts (27 tests) 133ms
+ ✓ src/arcproof/__tests__/testnetIdentity.test.ts (12 tests) 28ms
+ ✓ src/arcproof/__tests__/offlineDemo.test.tsx (1 test) 99ms
+ ✓ src/arcproof/__tests__/testnetUi.test.tsx (13 tests) 521ms
+
+ Test Files  11 passed (11)
+      Tests  197 passed (197)
+   Start at  20:35:41
+   Duration  10.58s (transform 2.53s, setup 0ms, collect 17.11s, tests 1.60s, environment 8.29s, prepare 4.78s)
+

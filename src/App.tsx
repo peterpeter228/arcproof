@@ -6,10 +6,12 @@
  */
 import { useState, useEffect } from 'react';
 import { Layout } from './components/arcproof/Layout';
-import { DashboardScreen } from './components/arcproof/DashboardScreen';
 import { PayScreen } from './components/arcproof/PayScreen';
 import { ReceiptScreen } from './components/arcproof/ReceiptScreen';
 import { EvidenceScreen } from './components/arcproof/EvidenceScreen';
+import { TestnetDashboard, TestnetPayScreen, TestnetReceiptScreen } from './components/arcproof/TestnetScreens';
+import { TESTNET_MANIFEST } from './arcproof/testnet';
+import { resolveDeployment } from './arcproof/manifest';
 
 type NavTab = 'dashboard' | 'verify' | 'evidence';
 
@@ -74,8 +76,9 @@ export default function App() {
   let effectiveTab: NavTab = activeTab;
 
   if (route.screen === 'pay') {
+    const deployment = resolveDeployment(TESTNET_MANIFEST, route.chainId!, route.deploymentId!);
     content = (
-      <PayScreen
+      deployment ? <TestnetPayScreen key={`${route.chainId}:${route.deploymentId}:${route.invoiceId}`} invoiceId={route.invoiceId!} /> : <PayScreen
         chainId={route.chainId!}
         deploymentId={route.deploymentId!}
         invoiceId={route.invoiceId!}
@@ -83,8 +86,9 @@ export default function App() {
     );
     effectiveTab = 'dashboard'; // no specific tab
   } else if (route.screen === 'receipt') {
+    const deployment = resolveDeployment(TESTNET_MANIFEST, route.chainId!, route.deploymentId!);
     content = (
-      <ReceiptScreen
+      deployment ? <TestnetReceiptScreen key={`${route.chainId}:${route.deploymentId}:${route.invoiceId}`} invoiceId={route.invoiceId} txHash={route.txHash} /> : <ReceiptScreen
         chainId={route.chainId}
         deploymentId={route.deploymentId}
         invoiceId={route.invoiceId}
@@ -95,10 +99,10 @@ export default function App() {
   } else {
     switch (activeTab) {
       case 'dashboard':
-        content = <DashboardScreen />;
+        content = <TestnetDashboard />;
         break;
       case 'verify':
-        content = <ReceiptScreen />;
+        content = <TestnetReceiptScreen />;
         break;
       case 'evidence':
         content = <EvidenceScreen />;

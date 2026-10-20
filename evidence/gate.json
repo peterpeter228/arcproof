@@ -5,7 +5,7 @@
   "preparedOn": "2026-10-20",
   "note": "Imported planning pack verified; current official-rule research is partial. No G0 pass or implementation authorization inferred.",
   "project_started_at": "2026-10-20T03:04:27Z",
-  "currentStage": "FREE_STUDIO_PROTOTYPE_GENERATING",
+  "currentStage": "REBUILT_TESTNET_CANDIDATE_FROZEN",
   "g0_status": "blocked",
   "g0_pass": false,
   "grantEngineeringAllowed": false,
@@ -225,7 +225,7 @@
     "applicationCommit": null,
     "studioProjectUrl": "https://studio.arc.io/app/2dbdda0d-1b70-408b-ae23-cccb8a4b8753?thread=12185290-60f7-4446-9e99-5ca51e8c30b0"
   },
-  "nextAction": "Monitor current Studio generation in the existing project; export actual source/test output when complete, then independently verify. Do not create duplicate project.",
+  "nextAction": "Review new candidate, persist authorized private source, and verify in supported Studio preview before user wallet actions.",
   "repository": {
     "url": "https://github.com/peterpeter228/arcproof",
     "visibility": "private",
@@ -274,5 +274,11 @@
     "reviewReceived": false,
     "usageReturned": false,
     "retried": false
+  },
+  "rebuiltTestnetCandidate": {
+    "path": "evidence/g3-rebuilt-testnet/checkpoint.json",
+    "preparedAt": "2026-10-20T11:28:00Z",
+    "baseCommit": "89fc2c3ba931253e0b97ae582611baa5d8c4db4e",
+    "note": "New reconstructed local candidate. Historical records retained; actual browser/wallet/chain acceptance not passed."
   }
 }

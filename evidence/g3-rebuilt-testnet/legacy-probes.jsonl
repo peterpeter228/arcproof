@@ -1,0 +1,26 @@
+{"test":"baseline no Arc evidence","status":"UNVERIFIED_ARC_EVIDENCE","verified":false,"passed":true}
+{"test":"wrong tx hash","status":"WRONG_TX_TARGET","verified":false,"passed":true}
+{"test":"wrong tx target","status":"WRONG_TX_TARGET","verified":false,"passed":true}
+{"test":"wrong tx chain","status":"WRONG_TX_CHAINID","verified":false,"passed":true}
+{"test":"wrong tx payer","status":"WRONG_TX_FROM","verified":false,"passed":true}
+{"test":"wrong receipt payer","status":"WRONG_TX_FROM","verified":false,"passed":true}
+{"test":"wrong receipt hash","status":"WRONG_TX_TARGET","verified":false,"passed":true}
+{"test":"wrong event tx hash","status":"NO_MATCHING_EVENT","verified":false,"passed":true}
+{"test":"wrong block number","status":"BLOCK_MISMATCH","verified":false,"passed":true}
+{"test":"wrong deployment chain","status":"WRONG_CHAIN","verified":false,"passed":true}
+{"test":"wrong bytecode","status":"WRONG_BYTECODE","verified":false,"passed":true}
+{"test":"wrong merchant","status":"WRONG_EVENT_DATA","verified":false,"passed":true}
+{"test":"wrong payer","status":"WRONG_TX_FROM","verified":false,"passed":true}
+{"test":"wrong amount","status":"WRONG_EVENT_DATA","verified":false,"passed":true}
+{"test":"malformed event data","status":"WRONG_EVENT_DATA","verified":false,"passed":true}
+{"test":"malformed topic address","status":"WRONG_EVENT_DATA","verified":false,"passed":true}
+{"test":"negative log index","status":"WRONG_EVENT_DATA","verified":false,"passed":true}
+{"test":"receipt unknown status","status":"FAILED","verified":false,"passed":true}
+{"test":"wrong block hash","status":"BLOCKHASH_MISMATCH","verified":false,"passed":true}
+{"test":"wrong paid block","status":"BLOCK_MISMATCH","verified":false,"passed":true}
+{"test":"wrong paid time","status":"TIMESTAMP_MISMATCH","verified":false,"passed":true}
+{"test":"tampered context deploymentId","actual":"Deployment has changed since payment was prepared","passed":true}
+{"test":"tampered context contract","actual":"Contract address has changed since payment was prepared","passed":true}
+{"test":"tampered context calldata","actual":"Prepared calldata does not match re-derived calldata for fresh invoice","passed":true}
+{"test":"tampered context value","actual":"Prepared value does not match fresh invoice amount","passed":true}
+{"test":"fresh unsupported terms","actual":"UNSUPPORTED_TERMS: Fresh invoice has nonzero terms","passed":true}

@@ -1,0 +1,24 @@
+{
+  "status": "passed",
+  "count": 16,
+  "probes": [
+    "Higher gas with lower total fee is rejected",
+    "Review expiring during preflight is rejected",
+    "Merchant EOA assumption is rechecked at send",
+    "Replacement receipt cannot settle original request",
+    "Bound creation event and read-back are accepted",
+    "Foreign creation event transaction hash is rejected",
+    "Export uses exact verifier snapshot when payment mines between reads",
+    "In-flight lock is invoice-scoped and case-insensitive across accounts",
+    "Returned hashes survive denied storage and block pending repeats",
+    "Wrong receipt hash cannot unlock restored pending payment",
+    "Bound reverted payment can be reconciled read-only after refresh",
+    "Reduced fee is actually submitted within reviewed cap and current balance",
+    "A second explicit call cannot rebroadcast a pending creation",
+    "Explicit 4001 rejection releases request lease without retrying automatically",
+    "Ambiguous post-send error retains unresolved lease and blocks another call",
+    "All 30 unresolved hashes survive while only completed history is capped at 20"
+  ],
+  "mockSuccessfulSendCount": 1,
+  "liveNetworkCalls": 0
+}

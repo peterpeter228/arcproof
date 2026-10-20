@@ -5,6 +5,7 @@
  * tests (T25/T26) have run. Honest about HOLD status.
  */
 import React from 'react';
+import { ARC_TESTNET, TESTNET_DEPLOYMENT, DEPLOYMENT_TX, explorerTx } from '../../arcproof/testnet';
 import { CheckCircle, Clock, AlertCircle } from 'lucide-react';
 
 interface TestRow {
@@ -36,12 +37,12 @@ const FORGE_TESTS: TestRow[] = [
   { id: 'T18', description: 'Amount parser: exact boundaries and invalid strings (Vitest)', status: 'pass' },
   { id: 'T19', description: 'Manifest: tampering, unknown deployment, isolation, terms gate (Vitest)', status: 'pass' },
   { id: 'T20', description: 'PreparedPayment: explicit fields, context validation (Vitest)', status: 'pass' },
-  { id: 'T21', description: 'Wallet rejection, timeout, and no auto-rebroadcast', status: 'not_run', note: 'Synchronous context helper tests only; no live wallet or asynchronous lifecycle demonstrated.' },
+  { id: 'T21', description: 'Wallet rejection, timeout, and no auto-rebroadcast', status: 'not_run', note: 'Dedicated adapter and lifecycle guards implemented; real-wallet acceptance is still not run.' },
   { id: 'T22', description: 'Receipt verifier: forged receipts, wrong chain/contract/emitter (Vitest)', status: 'pass' },
-  { id: 'T23', description: 'Receipt recovery and RPC conflict handling', status: 'not_run', note: 'Block-hash mismatch unit test exists. Single-block hash recovery and second-endpoint conflict handling are not implemented.' },
+  { id: 'T23', description: 'Receipt recovery and RPC conflict handling', status: 'not_run', note: 'Paid-block hash recovery and saved-transaction reconciliation implemented. Real-chain recovery and second-endpoint conflict acceptance remain not run.' },
   { id: 'T24', description: 'Nonce pagination, integer strings, export dedupe, untrusted flags (Vitest)', status: 'pass' },
-  { id: 'T25', description: 'Arc native-USDC system Transfer event at official emitter', status: 'not_run', note: 'Requires real Arc Testnet + verified emitter config. Not run. Anvil does not prove Arc log behaviour.' },
-  { id: 'T26', description: 'Arc committed-block finality and receipt verification on real chain', status: 'not_run', note: 'Requires real Arc Testnet deployment. Not run.' },
+  { id: 'T25', description: 'Arc native-USDC system Transfer event at official emitter', status: 'not_run', note: 'Official native emitter reference identified; genuine payment receipt evidence is still required. Anvil does not prove Arc log behaviour.' },
+  { id: 'T26', description: 'Arc committed-block finality and receipt verification on real chain', status: 'not_run', note: 'Deployment checked; genuine payment/finality acceptance not run.' },
 ];
 
 function StatusIcon({ status }: { status: 'pass' | 'pending' | 'not_run' }) {
@@ -63,8 +64,8 @@ export function EvidenceScreen() {
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
           {[
             { label: 'Forge tests', value: '73 (69 Studio + 4 supplemental)' },
-            { label: 'Vitest tests', value: '132 local unit / DOM tests' },
-            { label: 'Deployment', value: 'None' },
+            { label: 'Local testing', value: 'Offline unit / DOM coverage only' },
+            { label: 'Deployment', value: 'Arc Testnet checked' },
             { label: 'Grant eligibility', value: 'HOLD' },
           ].map(({ label, value }) => (
             <div key={label} className="bg-stone-50 rounded-lg p-3">
@@ -76,7 +77,7 @@ export function EvidenceScreen() {
 
         <div className="text-xs text-stone-500 space-y-1">
           <p><strong>Source review:</strong> Independent review in progress; frontend results are local unit coverage, not full acceptance or live-wallet evidence. G1: 69 Studio-export tests plus 4 native supplemental tests, 73 independently passed.</p>
-          <p><strong>No deployment:</strong> No transaction hashes. No contract addresses on testnet. Trusted manifest is empty.</p>
+          <p className="break-all"><strong>Checked testnet deployment:</strong> <a className="underline" href={`${ARC_TESTNET.blockExplorers.default.url}/address/${TESTNET_DEPLOYMENT.contractAddress}?tab=contract`} target="_blank" rel="noreferrer">{TESTNET_DEPLOYMENT.contractAddress}</a>. Full runtime matched the reviewed artifact. <a className="underline" href={explorerTx(DEPLOYMENT_TX)} target="_blank" rel="noreferrer">Deployment transaction</a>. Source publication and payment acceptance are not claimed.</p>
           <p><strong>Grant:</strong> Eligibility HOLD. Free prototype development authorized for testnet/local scope per 2026-10-20 directive. Do not claim grant eligibility established.</p>
           <p><strong>Atomic forwarding:</strong> The contract passes funds directly to the merchant atomically. This is not custody. It does touch funds. It is not a claim of escrow-free operation — the contract's execution touches and routes value.</p>
         </div>
@@ -113,12 +114,12 @@ export function EvidenceScreen() {
       <div className="bg-white rounded-xl border border-stone-200 shadow-sm p-5 space-y-3">
         <h3 className="font-medium text-stone-800 text-sm">Known limitations (P0)</h3>
         <ul className="text-xs text-stone-600 space-y-1.5 list-disc list-outside ml-4">
-          <li>No real deployment. Trusted manifest is empty. All signing disabled.</li>
-          <li>Arc native-USDC system Transfer events (T25/T26) not verified. Official emitter address not confirmed.</li>
+          <li>Only the checked Arc Testnet deployment is configured. Mainnet remains disabled; the user alone approves testnet wallet requests.</li>
+          <li>Arc native-USDC system Transfer and finality evidence (T25/T26) are not verified against a genuine payment receipt. Official native events use 18 decimals at 0xfffffffffffffffffffffffffffffffffffffffe, not the 6-decimal ERC-20 path.</li>
           <li>Receipt verifier compares runtime keccak256 against the supplied manifest. Real network evidence is still unavailable.</li>
           <li>P0 UI only supports ordinary EOA wallets. Other account types are explicitly unsupported.</li>
           <li>No nonzero termsHash protocol in P0. Historical paid invoices with nonzero hash are readable but payment blocked in UI.</li>
-          <li>Pending transaction recovery is not demonstrated in this UI; cache-key helpers do not prove wallet recovery.</li>
+          <li>Saved transaction locators and read-only status refresh are implemented. Storage is best-effort; actual browser-wallet recovery is not yet accepted.</li>
           <li>Offline fixture requests and simulated exports do not send transactions or establish chain evidence. No backend, database, login service, or LLM at runtime.</li>
         </ul>
       </div>

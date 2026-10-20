@@ -33,6 +33,7 @@ export interface ReceiptExportRecord {
   /** 'fixture' | 'testnet' | 'unknown' */
   mode: 'fixture' | 'testnet' | 'unknown';
   amountDisplay: string | null;
+  controlled_demo?: boolean;
 }
 
 export interface InvoiceExportRow {
@@ -104,7 +105,7 @@ export function exportReceiptsJson(records: ReceiptExportRecord[]): string {
 const RECEIPT_CSV_HEADERS = [
   'chainId', 'deploymentId', 'contract', 'invoiceId', 'transactionHash',
   'paymentLogIndex', 'amountNative', 'amountDisplay', 'payer', 'merchant',
-  'paidAt', 'paidBlockNumber', 'blockHash', 'verificationStatus', 'mode',
+  'paidAt', 'paidBlockNumber', 'blockHash', 'verificationStatus', 'mode', 'controlled_demo',
 ];
 
 /** Export a list of receipt records as CSV string. */
@@ -130,6 +131,7 @@ export function exportReceiptsCsv(records: ReceiptExportRecord[]): string {
       csvCell(r.blockHash),
       csvCell(r.verificationStatus),
       csvCell(r.mode),
+      csvCell(r.controlled_demo),
     ].join(','));
   }
   return rows.join('\n');
@@ -173,6 +175,7 @@ export function buildReceiptExport(
     blockHash: result.blockHash,
     verificationStatus: result.status,
     mode: isFixture ? 'fixture' : 'testnet',
+    controlled_demo: !!payer && !!merchant && payer.toLowerCase() === merchant.toLowerCase(),
     amountDisplay: amountNative === null ? null : formatAmountDisplay(amountNative),
   };
 }

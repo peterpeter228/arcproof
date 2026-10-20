@@ -46,7 +46,7 @@ export const ARCPROOF_ABI = [
           { name: 'termsHash', type: 'bytes32' },
           { name: 'paid', type: 'bool' },
           { name: 'payer', type: 'address' },
-          { name: 'paidAt', type: 'uint256' },
+          { name: 'paidAt', type: 'uint64' },
           { name: 'paidBlockNumber', type: 'uint256' },
         ],
       },
