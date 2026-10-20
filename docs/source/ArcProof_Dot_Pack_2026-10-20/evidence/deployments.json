@@ -1,0 +1,104 @@
+{
+  "schemaVersion": "1.0",
+  "project": "ArcProof",
+  "artifactRole": "undeployed_manifest_template",
+  "note": "网络参数来自官方文档快照。两个deploymentId仅为初始保留标识，没有实际部署、字节码、源码commit或交易。地址未核实前禁止签名。",
+  "identityPolicy": {
+    "key": [
+      "chainId",
+      "deploymentId"
+    ],
+    "deploymentIdImmutable": true,
+    "preserveHistoricalDeployments": true,
+    "neverRetargetAnExistingDeploymentId": true,
+    "newContractAddressRequiresNewDeploymentId": true,
+    "signingRequiresRuntimeVerification": true,
+    "note": "首次真实部署并核验后填入保留记录；后续换合约地址必须新增deploymentId，不能覆盖历史记录。"
+  },
+  "networks": {
+    "5042": {
+      "chainId": 5042,
+      "networkName": "Arc mainnet",
+      "officialConfigSnapshot": {
+        "sourceId": "S07",
+        "sourceUrl": "https://docs.arc.io/arc/references/connect-to-arc",
+        "accessedOn": "2026-10-20",
+        "nativeCurrencySymbol": "USDC",
+        "nativeCurrencyDecimals": 18,
+        "rpcUrl": "https://rpc.mainnet.arc.io",
+        "explorerUrl": "https://explorer.arc.io",
+        "runtimeVerified": false,
+        "runtimeObservedChainId": null,
+        "runtimeCheckedAt": null,
+        "runtimeEvidence": null
+      },
+      "activeDeploymentId": null,
+      "deployments": {
+        "arcproof-v1-mainnet-01": {
+          "deploymentId": "arcproof-v1-mainnet-01",
+          "chainId": 5042,
+          "status": "not_run",
+          "deployed": false,
+          "contractAddress": null,
+          "creationBytecode": null,
+          "runtimeBytecode": null,
+          "runtimeBytecodeHash": null,
+          "sourceCommit": null,
+          "buildArtifactHash": null,
+          "compilerVersion": null,
+          "dependencyLockHash": null,
+          "deploymentTxHash": null,
+          "deploymentBlockNumber": null,
+          "deploymentBlockHash": null,
+          "deployer": null,
+          "deployedAt": null,
+          "verifiedAt": null,
+          "authorizationEvidence": null,
+          "evidence": null
+        }
+      }
+    },
+    "5042002": {
+      "chainId": 5042002,
+      "networkName": "Arc testnet",
+      "officialConfigSnapshot": {
+        "sourceId": "S07",
+        "sourceUrl": "https://docs.arc.io/arc/references/connect-to-arc",
+        "accessedOn": "2026-10-20",
+        "nativeCurrencySymbol": "USDC",
+        "nativeCurrencyDecimals": 18,
+        "rpcUrl": "https://rpc.testnet.arc.io",
+        "explorerUrl": "https://explorer.testnet.arc.io",
+        "runtimeVerified": false,
+        "runtimeObservedChainId": null,
+        "runtimeCheckedAt": null,
+        "runtimeEvidence": null
+      },
+      "activeDeploymentId": null,
+      "deployments": {
+        "arcproof-v1-testnet-01": {
+          "deploymentId": "arcproof-v1-testnet-01",
+          "chainId": 5042002,
+          "status": "not_run",
+          "deployed": false,
+          "contractAddress": null,
+          "creationBytecode": null,
+          "runtimeBytecode": null,
+          "runtimeBytecodeHash": null,
+          "sourceCommit": null,
+          "buildArtifactHash": null,
+          "compilerVersion": null,
+          "dependencyLockHash": null,
+          "deploymentTxHash": null,
+          "deploymentBlockNumber": null,
+          "deploymentBlockHash": null,
+          "deployer": null,
+          "deployedAt": null,
+          "verifiedAt": null,
+          "authorizationEvidence": null,
+          "evidence": null
+        }
+      }
+    }
+  }
+}

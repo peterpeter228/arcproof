@@ -1,0 +1,235 @@
+{
+  "schemaVersion": "1.0",
+  "project": "ArcProof",
+  "artifactRole": "live_g0_checkpoint",
+  "preparedOn": "2026-10-20",
+  "note": "Imported planning pack verified; current official-rule research is partial. No G0 pass or implementation authorization inferred.",
+  "project_started_at": "2026-10-20T03:04:27Z",
+  "currentStage": "G0_HOLD",
+  "g0_status": "blocked",
+  "g0_pass": false,
+  "grantEngineeringAllowed": false,
+  "fast_cash": false,
+  "cash_fast_pass": false,
+  "cashFlagNote": "fast_cash与cash_fast_pass为同一判断，必须同步；付款时间与其他硬门槛未闭合。",
+  "knownOfficialWebSnapshot": {
+    "sourceId": "S01",
+    "sourceUrl": "https://community.arc.io/pages/arc-studio-xm3qwi",
+    "accessedOn": "2026-10-20",
+    "scope": "官方社区页公开信息；不替代第二期正式完整规则或登录后的提交入口核验",
+    "round": "Arc Microgrants Round 2",
+    "awardCurrency": "USDC",
+    "maximumRecipientCount": 8,
+    "amountPerRecipient": "500",
+    "maximumNominalPoolDerived": "4000",
+    "awardWording": "may be awarded",
+    "allSlotsGuaranteed": false,
+    "applicantAwarded": false,
+    "submissionDeadlineDateAsPublished": "2026-11-01",
+    "submissionDeadlineTime": null,
+    "submissionDeadlineTimezone": null,
+    "submissionDeadlineInstant": null,
+    "builtWithStudioRequired": true,
+    "arcMainnetAndRealUsdcRequired": true,
+    "officialFullRulesSnapshotPath": null,
+    "officialFullRulesSnapshotSha256": null
+  },
+  "formalSubmission": {
+    "url": "https://dorahacks.io/hackathon/arc-microgrants-2/build",
+    "lastResearchExtractionResult": "HTTP 405",
+    "resultMeaning": "本次正文提取受限；不证明页面不存在，也不证明入口开放或本人可提交。",
+    "entryOpen": null,
+    "fullRulesRead": true,
+    "eligibilityConfirmed": null,
+    "payoutTerms": null,
+    "payoutDueAt": null,
+    "submittedAt": null,
+    "submissionId": null,
+    "submissionEvidence": null
+  },
+  "checks": [
+    {
+      "id": "full_round_2_rules",
+      "status": "passed",
+      "verifiedValue": true,
+      "blocksGrantEngineeringWhenUnknown": true,
+      "blocksFastCashWhenUnknown": true,
+      "reason": "Official round-two published rules retrieved; see G0_ELIGIBILITY. Runtime entry and individual eligibility remain separate gates.",
+      "checkedAt": "2026-10-20T03:08:46.686381+00:00",
+      "evidence": "docs/G0_ELIGIBILITY.md"
+    },
+    {
+      "id": "submission_entry_open",
+      "status": "blocked",
+      "verifiedValue": null,
+      "blocksGrantEngineeringWhenUnknown": true,
+      "blocksFastCashWhenUnknown": true,
+      "reason": "Public Submit Build is visible but authenticated acceptance unverified; official-page browser CAPTCHA requires pending user approval.",
+      "checkedAt": "2026-10-20T03:08:46.686381+00:00",
+      "evidence": "docs/G0_ELIGIBILITY.md"
+    },
+    {
+      "id": "personal_entry_eligibility",
+      "status": "blocked",
+      "verifiedValue": null,
+      "blocksGrantEngineeringWhenUnknown": true,
+      "blocksFastCashWhenUnknown": true,
+      "reason": "User individual/company and country information requested; no qualification inferred.",
+      "checkedAt": "2026-10-20T03:08:46.686381+00:00",
+      "evidence": "docs/G0_ELIGIBILITY.md"
+    },
+    {
+      "id": "personal_award_eligibility",
+      "status": "blocked",
+      "verifiedValue": null,
+      "blocksGrantEngineeringWhenUnknown": true,
+      "blocksFastCashWhenUnknown": true,
+      "reason": "Private recipient verification and sanctions/jurisdiction match not established.",
+      "checkedAt": "2026-10-20T03:08:46.686381+00:00",
+      "evidence": "docs/G0_ELIGIBILITY.md"
+    },
+    {
+      "id": "deadline_time_and_timezone",
+      "status": "blocked",
+      "verifiedValue": null,
+      "blocksGrantEngineeringWhenUnknown": true,
+      "blocksFastCashWhenUnknown": true,
+      "reason": "November 1 date and November 2 04:59 timeline observed; official timezone not verified. Do not infer UTC.",
+      "checkedAt": "2026-10-20T03:08:46.686381+00:00",
+      "evidence": "docs/G0_ELIGIBILITY.md"
+    },
+    {
+      "id": "round_2_studio_provenance_requirements",
+      "status": "passed",
+      "verifiedValue": true,
+      "blocksGrantEngineeringWhenUnknown": true,
+      "blocksFastCashWhenUnknown": true,
+      "reason": "App and contracts must originate in Studio; contracts tested there. Studio URL and real build/mainnet video required; outside-Studio builds excluded.",
+      "checkedAt": "2026-10-20T03:08:46.686381+00:00",
+      "evidence": "docs/G0_ELIGIBILITY.md"
+    },
+    {
+      "id": "payout_conditions",
+      "status": "blocked",
+      "verifiedValue": null,
+      "blocksGrantEngineeringWhenUnknown": true,
+      "blocksFastCashWhenUnknown": true,
+      "reason": "USDC wallet and private verification required; individual receipt feasibility and verification requirements unresolved.",
+      "checkedAt": "2026-10-20T03:08:46.686381+00:00",
+      "evidence": "docs/G0_ELIGIBILITY.md"
+    },
+    {
+      "id": "studio_account_and_quota",
+      "status": "blocked",
+      "verifiedValue": null,
+      "blocksGrantEngineeringWhenUnknown": true,
+      "blocksFastCashWhenUnknown": false,
+      "reason": "Live browser verified signed-out Studio. Explicit Terms/Privacy acceptance checkbox remains unchecked; email/Google login disabled. No agreement accepted or login started. Public FAQ mentions complimentary daily allowance but exact quota unverified.",
+      "checkedAt": "2026-10-20T03:09:21.431320+00:00",
+      "evidence": "docs/G0_ELIGIBILITY.md#studio-access-checkpoint"
+    },
+    {
+      "id": "dot_runtime_and_wallet_handoff",
+      "status": "blocked",
+      "verifiedValue": null,
+      "blocksGrantEngineeringWhenUnknown": true,
+      "blocksFastCashWhenUnknown": false,
+      "reason": "Document workspace and private repository available; full runtime and user-controlled wallet handoff unverified.",
+      "checkedAt": "2026-10-20T03:08:46.686381+00:00",
+      "evidence": "docs/G0_ELIGIBILITY.md"
+    },
+    {
+      "id": "payout_due_date",
+      "status": "blocked",
+      "verifiedValue": null,
+      "blocksGrantEngineeringWhenUnknown": false,
+      "blocksFastCashWhenUnknown": true,
+      "reason": "Official payout date not stated; fast_cash and cash_fast_pass remain false.",
+      "checkedAt": "2026-10-20T03:08:46.686381+00:00",
+      "evidence": "docs/G0_ELIGIBILITY.md"
+    },
+    {
+      "id": "atomic_payment_fit_and_ip_terms",
+      "status": "blocked",
+      "verifiedValue": null,
+      "blocksGrantEngineeringWhenUnknown": true,
+      "blocksFastCashWhenUnknown": true,
+      "reason": "No equity/IP assignment/exclusivity reported; rights required. Atomic forwarding fits by inference only, not explicit organizer approval; any contact needs authorization.",
+      "checkedAt": "2026-10-20T03:08:46.686381+00:00",
+      "evidence": "docs/G0_ELIGIBILITY.md"
+    },
+    {
+      "id": "mainnet_review_or_audit_requirement",
+      "status": "blocked",
+      "verifiedValue": null,
+      "blocksGrantEngineeringWhenUnknown": true,
+      "blocksFastCashWhenUnknown": true,
+      "reason": "Official Arc introduction calls for professional audit before mainnet. Whether this is a hard round-two prerequisite remains unresolved; cannot substitute LLM review.",
+      "checkedAt": "2026-10-20T03:08:46.686381+00:00",
+      "evidence": "docs/G0_ELIGIBILITY.md"
+    }
+  ],
+  "stageGates": [
+    {
+      "stage": "G0",
+      "status": "blocked",
+      "passedAt": null,
+      "evidence": "docs/G0_ELIGIBILITY.md"
+    },
+    {
+      "stage": "G1",
+      "status": "not_run",
+      "passedAt": null,
+      "evidence": null
+    },
+    {
+      "stage": "G2",
+      "status": "not_run",
+      "passedAt": null,
+      "evidence": null
+    },
+    {
+      "stage": "G3",
+      "status": "not_run",
+      "passedAt": null,
+      "evidence": null
+    },
+    {
+      "stage": "G4",
+      "status": "not_run",
+      "passedAt": null,
+      "evidence": null
+    }
+  ],
+  "snapshotPolicy": {
+    "internalMaxAgeHours": 24,
+    "exactFullRulesCheckedAt": null,
+    "expiresAt": null,
+    "recheckBeforeSubmission": true,
+    "recheckBeforeSpendingOrMainnetAction": true,
+    "note": "24小时为内部证据有效期，不是主办方期限；不得自行补官方截止时刻或时区。"
+  },
+  "executionState": {
+    "applicationCodeWritten": false,
+    "studioProjectCreated": false,
+    "applicationTestsRun": false,
+    "testnetDeployed": false,
+    "mainnetDeployed": false,
+    "walletSigned": false,
+    "publiclyPublished": false,
+    "registered": false,
+    "submitted": false,
+    "outboundMessagesSent": false,
+    "customerPaymentReceived": false,
+    "grantPaymentReceived": false,
+    "applicationCommit": null,
+    "studioProjectUrl": null
+  },
+  "nextAction": "Resolve official-page CAPTCHA permission, personal jurisdiction/entry details and Studio account/quota. No financial implementation until all engineering-blocking checks pass.",
+  "repository": {
+    "url": "https://github.com/peterpeter228/arcproof",
+    "visibility": "private",
+    "bootstrapCommit": "cba6f8abdfe92416f734560acdb02f6c09f11cf5",
+    "applicationCommit": null
+  }
+}

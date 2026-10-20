@@ -1,0 +1,229 @@
+{
+  "schemaVersion": "1.0",
+  "project": "ArcProof",
+  "artifactRole": "planning_evidence_template",
+  "preparedOn": "2026-10-20",
+  "note": "已完成公开信息研究与PRD；这不是G0通过记录、开发完成记录或外部操作授权。公开网页快照不等于当日运行时核验。",
+  "project_started_at": null,
+  "currentStage": "PRD_READY_G0_PENDING",
+  "g0_status": "not_run",
+  "g0_pass": false,
+  "grantEngineeringAllowed": false,
+  "fast_cash": false,
+  "cash_fast_pass": false,
+  "cashFlagNote": "fast_cash与cash_fast_pass为同一判断，必须同步；付款时间与其他硬门槛未闭合。",
+  "knownOfficialWebSnapshot": {
+    "sourceId": "S01",
+    "sourceUrl": "https://community.arc.io/pages/arc-studio-xm3qwi",
+    "accessedOn": "2026-10-20",
+    "scope": "官方社区页公开信息；不替代第二期正式完整规则或登录后的提交入口核验",
+    "round": "Arc Microgrants Round 2",
+    "awardCurrency": "USDC",
+    "maximumRecipientCount": 8,
+    "amountPerRecipient": "500",
+    "maximumNominalPoolDerived": "4000",
+    "awardWording": "may be awarded",
+    "allSlotsGuaranteed": false,
+    "applicantAwarded": false,
+    "submissionDeadlineDateAsPublished": "2026-11-01",
+    "submissionDeadlineTime": null,
+    "submissionDeadlineTimezone": null,
+    "submissionDeadlineInstant": null,
+    "builtWithStudioRequired": true,
+    "arcMainnetAndRealUsdcRequired": true,
+    "officialFullRulesSnapshotPath": null,
+    "officialFullRulesSnapshotSha256": null
+  },
+  "formalSubmission": {
+    "url": "https://dorahacks.io/hackathon/arc-microgrants-2/build",
+    "lastResearchExtractionResult": "HTTP 405",
+    "resultMeaning": "本次正文提取受限；不证明页面不存在，也不证明入口开放或本人可提交。",
+    "entryOpen": null,
+    "fullRulesRead": null,
+    "eligibilityConfirmed": null,
+    "payoutTerms": null,
+    "payoutDueAt": null,
+    "submittedAt": null,
+    "submissionId": null,
+    "submissionEvidence": null
+  },
+  "checks": [
+    {
+      "id": "full_round_2_rules",
+      "status": "not_run",
+      "verifiedValue": null,
+      "blocksGrantEngineeringWhenUnknown": true,
+      "blocksFastCashWhenUnknown": true,
+      "reason": "完整第二期正式规则尚未取得",
+      "checkedAt": null,
+      "evidence": null
+    },
+    {
+      "id": "submission_entry_open",
+      "status": "not_run",
+      "verifiedValue": null,
+      "blocksGrantEngineeringWhenUnknown": true,
+      "blocksFastCashWhenUnknown": true,
+      "reason": "正式提交入口当前状态尚未核实",
+      "checkedAt": null,
+      "evidence": null
+    },
+    {
+      "id": "personal_entry_eligibility",
+      "status": "not_run",
+      "verifiedValue": null,
+      "blocksGrantEngineeringWhenUnknown": true,
+      "blocksFastCashWhenUnknown": true,
+      "reason": "本人参赛资格尚未核实",
+      "checkedAt": null,
+      "evidence": null
+    },
+    {
+      "id": "personal_award_eligibility",
+      "status": "not_run",
+      "verifiedValue": null,
+      "blocksGrantEngineeringWhenUnknown": true,
+      "blocksFastCashWhenUnknown": true,
+      "reason": "本人领奖及必要身份核验条件尚未核实",
+      "checkedAt": null,
+      "evidence": null
+    },
+    {
+      "id": "deadline_time_and_timezone",
+      "status": "not_run",
+      "verifiedValue": null,
+      "blocksGrantEngineeringWhenUnknown": true,
+      "blocksFastCashWhenUnknown": true,
+      "reason": "已确认11月1日日期，具体时刻和时区未知",
+      "checkedAt": null,
+      "evidence": null
+    },
+    {
+      "id": "round_2_studio_provenance_requirements",
+      "status": "not_run",
+      "verifiedValue": null,
+      "blocksGrantEngineeringWhenUnknown": true,
+      "blocksFastCashWhenUnknown": true,
+      "reason": "须以本期正式规则闭合Studio制作与证明要求",
+      "checkedAt": null,
+      "evidence": null
+    },
+    {
+      "id": "payout_conditions",
+      "status": "not_run",
+      "verifiedValue": null,
+      "blocksGrantEngineeringWhenUnknown": true,
+      "blocksFastCashWhenUnknown": true,
+      "reason": "必须确认奖励为本人可收的USDC及兑现条件；实际付款日单独判断，不将服务抵扣算现金",
+      "checkedAt": null,
+      "evidence": null
+    },
+    {
+      "id": "studio_account_and_quota",
+      "status": "not_run",
+      "verifiedValue": null,
+      "blocksGrantEngineeringWhenUnknown": true,
+      "blocksFastCashWhenUnknown": false,
+      "reason": "Studio登录、可用额度和本人账户状态未知",
+      "checkedAt": null,
+      "evidence": null
+    },
+    {
+      "id": "dot_runtime_and_wallet_handoff",
+      "status": "not_run",
+      "verifiedValue": null,
+      "blocksGrantEngineeringWhenUnknown": true,
+      "blocksFastCashWhenUnknown": false,
+      "reason": "接手dot的实际工具、运行环境及钱包交接未检查",
+      "checkedAt": null,
+      "evidence": null
+    },
+    {
+      "id": "payout_due_date",
+      "status": "not_run",
+      "verifiedValue": null,
+      "blocksGrantEngineeringWhenUnknown": false,
+      "blocksFastCashWhenUnknown": true,
+      "reason": "实际付款日期未核实；保持fast_cash=false，即使其他条件允许Grant实验",
+      "checkedAt": null,
+      "evidence": null
+    },
+    {
+      "id": "atomic_payment_fit_and_ip_terms",
+      "status": "not_run",
+      "verifiedValue": null,
+      "blocksGrantEngineeringWhenUnknown": true,
+      "blocksFastCashWhenUnknown": true,
+      "reason": "原子付款的资格适配、Studio项目要求、开源和作品复用条款须以本期规则确认",
+      "checkedAt": null,
+      "evidence": null
+    },
+    {
+      "id": "mainnet_review_or_audit_requirement",
+      "status": "not_run",
+      "verifiedValue": null,
+      "blocksGrantEngineeringWhenUnknown": true,
+      "blocksFastCashWhenUnknown": true,
+      "reason": "核对本期是否将专业审计列为硬要求；若要求且时间成本无法满足则停止",
+      "checkedAt": null,
+      "evidence": null
+    }
+  ],
+  "stageGates": [
+    {
+      "stage": "G0",
+      "status": "not_run",
+      "passedAt": null,
+      "evidence": null
+    },
+    {
+      "stage": "G1",
+      "status": "not_run",
+      "passedAt": null,
+      "evidence": null
+    },
+    {
+      "stage": "G2",
+      "status": "not_run",
+      "passedAt": null,
+      "evidence": null
+    },
+    {
+      "stage": "G3",
+      "status": "not_run",
+      "passedAt": null,
+      "evidence": null
+    },
+    {
+      "stage": "G4",
+      "status": "not_run",
+      "passedAt": null,
+      "evidence": null
+    }
+  ],
+  "snapshotPolicy": {
+    "internalMaxAgeHours": 24,
+    "exactFullRulesCheckedAt": null,
+    "expiresAt": null,
+    "recheckBeforeSubmission": true,
+    "recheckBeforeSpendingOrMainnetAction": true,
+    "note": "24小时为内部证据有效期，不是主办方期限；不得自行补官方截止时刻或时区。"
+  },
+  "executionState": {
+    "applicationCodeWritten": false,
+    "studioProjectCreated": false,
+    "applicationTestsRun": false,
+    "testnetDeployed": false,
+    "mainnetDeployed": false,
+    "walletSigned": false,
+    "publiclyPublished": false,
+    "registered": false,
+    "submitted": false,
+    "outboundMessagesSent": false,
+    "customerPaymentReceived": false,
+    "grantPaymentReceived": false,
+    "applicationCommit": null,
+    "studioProjectUrl": null
+  },
+  "nextAction": "由接手dot执行G0只读核验；未知资格或正式入口不能默认为通过。"
+}

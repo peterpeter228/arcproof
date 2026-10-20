@@ -1,0 +1,285 @@
+{
+  "schemaVersion": "1.0",
+  "project": "ArcProof",
+  "preparedOn": "2026-10-20",
+  "packageStage": "G0_HOLD",
+  "note": "Working checkpoint manifest; original manifest preserved under docs/source. Hashes do not prove application execution.",
+  "files": [
+    {
+      "path": "AGENTS.md",
+      "bytes": 6035,
+      "sha256": "895274d727a6372403b247185beec35c94b251c1f26691dfb1ffcb5d9cb0d18d",
+      "role": "planning_or_g0_evidence"
+    },
+    {
+      "path": "README.md",
+      "bytes": 2828,
+      "sha256": "4fd3f369b1efed2473e9d0d945b78dfde5d425255d03e0b449fec27d9ace847a",
+      "role": "planning_or_g0_evidence"
+    },
+    {
+      "path": "START_HERE.txt",
+      "bytes": 2850,
+      "sha256": "494bb59f4dc9c99535fc2be85e4bc0cb3124dbeebd62391ddec8052158087b91",
+      "role": "planning_or_g0_evidence"
+    },
+    {
+      "path": "STATUS.md",
+      "bytes": 2035,
+      "sha256": "2291e10509792132eb81042e5e0cf7ec2ae6b06e2bb1f1a4f2834e08939d7b5f",
+      "role": "planning_or_g0_evidence"
+    },
+    {
+      "path": "docs/01_VERIFIED_REVIEW.md",
+      "bytes": 11079,
+      "sha256": "d4e9c5e170f944955081a41de8c34066775cc27d1823d9af2a3a32628d431827",
+      "role": "planning_or_g0_evidence"
+    },
+    {
+      "path": "docs/02_PRODUCT_PRD.md",
+      "bytes": 26075,
+      "sha256": "561bcf1dc416b44cdc2eb2f70aa085bd16984c6f2a34875fcaac216e11d94212",
+      "role": "planning_or_g0_evidence"
+    },
+    {
+      "path": "docs/03_DOT_EXECUTION.md",
+      "bytes": 7048,
+      "sha256": "12c21a4a8050e25aafecca94d56bbcfd7d0f27391782dbc81366f1651fea1262",
+      "role": "planning_or_g0_evidence"
+    },
+    {
+      "path": "docs/04_BUSINESS_VALIDATION.md",
+      "bytes": 8560,
+      "sha256": "8ab93a76e9208fe095e81d2b561f5c842c092250a0bcb86fc383398a591f2220",
+      "role": "planning_or_g0_evidence"
+    },
+    {
+      "path": "docs/05_SUBMISSION_PACK.md",
+      "bytes": 8545,
+      "sha256": "612d300f17a30e7d3d3c03c7f9a8769956394d171b9f24d6d120f7fe0521f2b5",
+      "role": "planning_or_g0_evidence"
+    },
+    {
+      "path": "docs/06_SCANNER_RULES.md",
+      "bytes": 13417,
+      "sha256": "ae2ba10c1dd8b837a6dcd41d590273e8029de4bbd4f5d3e0f43e6b1b65b08076",
+      "role": "planning_or_g0_evidence"
+    },
+    {
+      "path": "docs/CONTRACT_SPEC.md",
+      "bytes": 22595,
+      "sha256": "ba75d4282ccb8e5e8e2d37b519bc9c85e67404fba24bc2cf36217a1ae9c3bce1",
+      "role": "planning_or_g0_evidence"
+    },
+    {
+      "path": "docs/G0_ELIGIBILITY.md",
+      "bytes": 4528,
+      "sha256": "16a405adf87f778beff141f27f12055a87cfb553d07cd37a247b573ac901049c",
+      "role": "planning_or_g0_evidence"
+    },
+    {
+      "path": "docs/IMPORT_AND_EXECUTION_NOTES.md",
+      "bytes": 1148,
+      "sha256": "d4ac264b7b824ea360a28e438401d06ca693cbaced5ae96372d2933aed76f15d",
+      "role": "planning_or_g0_evidence"
+    },
+    {
+      "path": "docs/SOURCES.md",
+      "bytes": 7827,
+      "sha256": "8275aff692a8edf9c571bc17120c8426309a94ad1b102246d264a18ef7af621a",
+      "role": "planning_or_g0_evidence"
+    },
+    {
+      "path": "docs/TEST_MATRIX.md",
+      "bytes": 13613,
+      "sha256": "b8000af74c8ac25b47418f04f453cd07f027284e304646517c990a7cfb831fda",
+      "role": "planning_or_g0_evidence"
+    },
+    {
+      "path": "docs/source/ArcProof_Dot_Pack_2026-10-20/AGENTS.md",
+      "bytes": 6035,
+      "sha256": "895274d727a6372403b247185beec35c94b251c1f26691dfb1ffcb5d9cb0d18d",
+      "role": "original_source"
+    },
+    {
+      "path": "docs/source/ArcProof_Dot_Pack_2026-10-20/README.md",
+      "bytes": 2828,
+      "sha256": "4fd3f369b1efed2473e9d0d945b78dfde5d425255d03e0b449fec27d9ace847a",
+      "role": "original_source"
+    },
+    {
+      "path": "docs/source/ArcProof_Dot_Pack_2026-10-20/START_HERE.txt",
+      "bytes": 2850,
+      "sha256": "494bb59f4dc9c99535fc2be85e4bc0cb3124dbeebd62391ddec8052158087b91",
+      "role": "original_source"
+    },
+    {
+      "path": "docs/source/ArcProof_Dot_Pack_2026-10-20/STATUS.md",
+      "bytes": 1374,
+      "sha256": "e2ad7b9a6223467dd7d8d76d07039e3893fc854751c29ef6047f2a6790b38757",
+      "role": "original_source"
+    },
+    {
+      "path": "docs/source/ArcProof_Dot_Pack_2026-10-20/docs/01_VERIFIED_REVIEW.md",
+      "bytes": 11079,
+      "sha256": "d4e9c5e170f944955081a41de8c34066775cc27d1823d9af2a3a32628d431827",
+      "role": "original_source"
+    },
+    {
+      "path": "docs/source/ArcProof_Dot_Pack_2026-10-20/docs/02_PRODUCT_PRD.md",
+      "bytes": 26075,
+      "sha256": "561bcf1dc416b44cdc2eb2f70aa085bd16984c6f2a34875fcaac216e11d94212",
+      "role": "original_source"
+    },
+    {
+      "path": "docs/source/ArcProof_Dot_Pack_2026-10-20/docs/03_DOT_EXECUTION.md",
+      "bytes": 7048,
+      "sha256": "12c21a4a8050e25aafecca94d56bbcfd7d0f27391782dbc81366f1651fea1262",
+      "role": "original_source"
+    },
+    {
+      "path": "docs/source/ArcProof_Dot_Pack_2026-10-20/docs/04_BUSINESS_VALIDATION.md",
+      "bytes": 8560,
+      "sha256": "8ab93a76e9208fe095e81d2b561f5c842c092250a0bcb86fc383398a591f2220",
+      "role": "original_source"
+    },
+    {
+      "path": "docs/source/ArcProof_Dot_Pack_2026-10-20/docs/05_SUBMISSION_PACK.md",
+      "bytes": 8545,
+      "sha256": "612d300f17a30e7d3d3c03c7f9a8769956394d171b9f24d6d120f7fe0521f2b5",
+      "role": "original_source"
+    },
+    {
+      "path": "docs/source/ArcProof_Dot_Pack_2026-10-20/docs/06_SCANNER_RULES.md",
+      "bytes": 13417,
+      "sha256": "ae2ba10c1dd8b837a6dcd41d590273e8029de4bbd4f5d3e0f43e6b1b65b08076",
+      "role": "original_source"
+    },
+    {
+      "path": "docs/source/ArcProof_Dot_Pack_2026-10-20/docs/CONTRACT_SPEC.md",
+      "bytes": 22595,
+      "sha256": "ba75d4282ccb8e5e8e2d37b519bc9c85e67404fba24bc2cf36217a1ae9c3bce1",
+      "role": "original_source"
+    },
+    {
+      "path": "docs/source/ArcProof_Dot_Pack_2026-10-20/docs/SOURCES.md",
+      "bytes": 7827,
+      "sha256": "8275aff692a8edf9c571bc17120c8426309a94ad1b102246d264a18ef7af621a",
+      "role": "original_source"
+    },
+    {
+      "path": "docs/source/ArcProof_Dot_Pack_2026-10-20/docs/TEST_MATRIX.md",
+      "bytes": 13613,
+      "sha256": "b8000af74c8ac25b47418f04f453cd07f027284e304646517c990a7cfb831fda",
+      "role": "original_source"
+    },
+    {
+      "path": "docs/source/ArcProof_Dot_Pack_2026-10-20/evidence/artifact-index.json",
+      "bytes": 4627,
+      "sha256": "683915761a3d2376c21f4a6e708f4e7299dafedaed404b9577021659e65b6a8e",
+      "role": "original_source"
+    },
+    {
+      "path": "docs/source/ArcProof_Dot_Pack_2026-10-20/evidence/deployments.json",
+      "bytes": 3555,
+      "sha256": "a1ded709ddfe61b2a1e1492010447b6d20a58cce48170bc1d286267b9f80ff29",
+      "role": "original_source"
+    },
+    {
+      "path": "docs/source/ArcProof_Dot_Pack_2026-10-20/evidence/effort-ledger.json",
+      "bytes": 5422,
+      "sha256": "1270f34aca5f463f9f0faf127ec6ae9ee0983208166b49d2570275df2b4e1c43",
+      "role": "original_source"
+    },
+    {
+      "path": "docs/source/ArcProof_Dot_Pack_2026-10-20/evidence/gate.json",
+      "bytes": 7501,
+      "sha256": "34c0ab5c4e7ae126121d9bfab51643f0323d069d33f21e4f7c3247b750c85e89",
+      "role": "original_source"
+    },
+    {
+      "path": "docs/source/ArcProof_Dot_Pack_2026-10-20/evidence/receipt.example.json",
+      "bytes": 818,
+      "sha256": "66816e45a6e207f9c0dbcf9fe67057668c1cfb402ab256c4323ad480c26089b8",
+      "role": "original_source"
+    },
+    {
+      "path": "docs/source/ArcProof_Dot_Pack_2026-10-20/evidence/test-results.json",
+      "bytes": 19416,
+      "sha256": "52e21258595fe92866f542d0af97d5f05bb82ca8c1f4436b12e045347833846d",
+      "role": "original_source"
+    },
+    {
+      "path": "docs/source/ArcProof_Dot_Pack_2026-10-20/prompts/ARC_STUDIO_BUILD.txt",
+      "bytes": 6847,
+      "sha256": "0f8492b9f4378c41a466b7b782a0808b23a4bbd39063b5d1c743ee39c0e007fa",
+      "role": "original_source"
+    },
+    {
+      "path": "docs/source/ArcProof_Dot_Pack_2026-10-20/prompts/ARC_STUDIO_REVIEW.txt",
+      "bytes": 3009,
+      "sha256": "80a6259366149d1bf7793050e223591827c923854119df079967e259acb1ffe9",
+      "role": "original_source"
+    },
+    {
+      "path": "evidence/deployments.json",
+      "bytes": 3555,
+      "sha256": "a1ded709ddfe61b2a1e1492010447b6d20a58cce48170bc1d286267b9f80ff29",
+      "role": "planning_or_g0_evidence"
+    },
+    {
+      "path": "evidence/effort-ledger.json",
+      "bytes": 5919,
+      "sha256": "f603fe7917d9e416ab78329e8ff697b9dbadcbf389e92dfaf63dc4bbf73e2fc4",
+      "role": "planning_or_g0_evidence"
+    },
+    {
+      "path": "evidence/gate.json",
+      "bytes": 9188,
+      "sha256": "b2cf449445e4ff614a2713ec5f8475114b129ac309f3a3127866e8632c1cc465",
+      "role": "planning_or_g0_evidence"
+    },
+    {
+      "path": "evidence/import-verification.json",
+      "bytes": 2821,
+      "sha256": "d496853cbc7c702ef7bece7f2d2f4909b85a7bc6b3fe83e35b9558c1cbbd52d4",
+      "role": "planning_or_g0_evidence"
+    },
+    {
+      "path": "evidence/receipt.example.json",
+      "bytes": 818,
+      "sha256": "66816e45a6e207f9c0dbcf9fe67057668c1cfb402ab256c4323ad480c26089b8",
+      "role": "planning_or_g0_evidence"
+    },
+    {
+      "path": "evidence/test-results.json",
+      "bytes": 19416,
+      "sha256": "52e21258595fe92866f542d0af97d5f05bb82ca8c1f4436b12e045347833846d",
+      "role": "planning_or_g0_evidence"
+    },
+    {
+      "path": "prompts/ARC_STUDIO_BUILD.txt",
+      "bytes": 6847,
+      "sha256": "0f8492b9f4378c41a466b7b782a0808b23a4bbd39063b5d1c743ee39c0e007fa",
+      "role": "planning_or_g0_evidence"
+    },
+    {
+      "path": "prompts/ARC_STUDIO_REVIEW.txt",
+      "bytes": 3009,
+      "sha256": "80a6259366149d1bf7793050e223591827c923854119df079967e259acb1ffe9",
+      "role": "planning_or_g0_evidence"
+    }
+  ],
+  "documentChecks": {
+    "requiredFilesPresent": true,
+    "jsonParsePassed": true,
+    "markdownFencesBalanced": true,
+    "testIdsUniqueAndCount": 28,
+    "applicationTestsExecuted": false,
+    "promptCharacterLimit": 10000,
+    "allPromptsWithinLimit": true,
+    "engineeringBudgetHours": 18,
+    "unknownChainEvidenceRemainsNull": true,
+    "canonicalFieldsAndRoutesConsistent": true
+  }
+}

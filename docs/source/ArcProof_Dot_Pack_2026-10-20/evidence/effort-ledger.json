@@ -1,0 +1,169 @@
+{
+  "schemaVersion": "1.0",
+  "project": "ArcProof",
+  "artifactRole": "unstarted_effort_and_cash_ledger_template",
+  "note": "此前研究与PRD写作不冒充应用开发；当前应用工程、消费、交易、商业联系及收入均未发生。预算和报价是提案，不是承诺或消费授权。",
+  "project_started_at": null,
+  "accountingTimezone": "Asia/Shanghai",
+  "engineering": {
+    "budgetHoursTotal": 18,
+    "actualHoursTotal": 0,
+    "elapsedHours": null,
+    "countingPolicy": "G0、失败重试、测试、文档与交稿准备计入工程总上限。并行任务工时相加，不能只记墙钟历时。",
+    "stages": [
+      {
+        "stage": "G0",
+        "name": "资格与工具核验",
+        "budgetHours": 1.5,
+        "actualHours": 0,
+        "status": "not_run",
+        "startedAt": null,
+        "finishedAt": null
+      },
+      {
+        "stage": "G1",
+        "name": "合约最小验证",
+        "budgetHours": 2.5,
+        "actualHours": 0,
+        "status": "not_run",
+        "startedAt": null,
+        "finishedAt": null
+      },
+      {
+        "stage": "G2",
+        "name": "端到端界面",
+        "budgetHours": 5,
+        "actualHours": 0,
+        "status": "not_run",
+        "startedAt": null,
+        "finishedAt": null
+      },
+      {
+        "stage": "G3",
+        "name": "独立审查与测试网",
+        "budgetHours": 5,
+        "actualHours": 0,
+        "status": "not_run",
+        "startedAt": null,
+        "finishedAt": null
+      },
+      {
+        "stage": "G4",
+        "name": "主网准备与提交材料",
+        "budgetHours": 4,
+        "actualHours": 0,
+        "status": "not_run",
+        "startedAt": null,
+        "finishedAt": null
+      }
+    ],
+    "entries": []
+  },
+  "cashBudgetProposal": {
+    "currency": "USD",
+    "suggestedMaximumNewCashExposure": "20.00",
+    "spendingAuthorized": false,
+    "authorizationEvidence": null,
+    "budgetNature": "建议上限；不授权买币、桥接、转账、付费托管或购买服务",
+    "actualNewCashCosts": "0.00",
+    "actualPrincipalAtRisk": "0.00"
+  },
+  "proposedControlledDemo": {
+    "status": "not_run",
+    "currency": "USDC",
+    "invoiceCount": 3,
+    "amountPerInvoice": "0.20",
+    "plannedGrossWalletTransfers": "0.60",
+    "actualGrossWalletTransfers": "0.00",
+    "isRevenue": false,
+    "authorized": false,
+    "authorizationEvidence": null,
+    "note": "自有钱包间本金流转独立记账，不算销售额、收入或默认全部损失；Gas、桥接与服务费用另记。"
+  },
+  "pricingExperiment": {
+    "status": "not_run",
+    "currency": "USD",
+    "diagnosticPrice": "99.00",
+    "integratedUpgradeTotalPrice": "299.00",
+    "diagnosticCreditAgainstUpgrade": "99.00",
+    "remainingUpgradeBalance": "200.00",
+    "upgradeBeforeStart": "100.00",
+    "upgradeAfterAcceptance": "100.00",
+    "totalIfUpgraded": "299.00",
+    "formula": "99 + 100 + 100 = 299; 诊断费抵扣，不能记为398。",
+    "actualCustomers": 0,
+    "actualContracts": 0,
+    "actualPaymentsReceived": "0.00",
+    "note": "实验报价尚未成交。客户预付现金、已赚服务收入和可能退款义务必须分开。"
+  },
+  "businessObservations": {
+    "timeOriginField": "project_started_at",
+    "doNotRestartClockAtAward": true,
+    "day7": {
+      "offsetDays": 7,
+      "dueAt": null,
+      "status": "not_run",
+      "evidence": null
+    },
+    "day14": {
+      "offsetDays": 14,
+      "dueAt": null,
+      "status": "not_run",
+      "evidence": null
+    },
+    "note": "实际启动后计算两个观察时点；未开始则日期保持null。获客试验未运行不能记录为市场验证失败。",
+    "outboundAuthorizationEvidence": null,
+    "actualOutreachCount": 0,
+    "actualInterviewCount": 0,
+    "actualPayingCustomerCount": 0
+  },
+  "ledgers": {
+    "customerCashReceipts": [],
+    "earnedServiceRevenue": [],
+    "grantCashReceipts": [],
+    "customerPrepaymentLiabilities": [],
+    "refundObligations": [],
+    "refundCashPayments": [],
+    "deliveryCosts": [],
+    "gasCosts": [],
+    "otherCashCosts": [],
+    "subsidyCosts": [],
+    "controlledWalletTransfers": []
+  },
+  "actualTotals": {
+    "serviceCashReceivedUsd": "0.00",
+    "earnedServiceRevenueUsd": "0.00",
+    "grantUsdcReceived": "0.00",
+    "customerPrepaymentLiabilitiesUsd": "0.00",
+    "refundObligationsUsd": "0.00",
+    "refundCashPaidUsd": "0.00",
+    "cashCostsUsd": "0.00",
+    "subsidyCostsUsd": "0.00",
+    "controlledDemoUsdcTransferred": "0.00"
+  },
+  "entryRequirements": {
+    "moneyFields": "使用十进制字符串，保留原币种；USD估值需要汇率、估值时点和来源。不得把USDC数量直接伪装为已提现法币。",
+    "requiredPerEntry": [
+      "entryId",
+      "occurredAt",
+      "currency",
+      "amount",
+      "category",
+      "evidence"
+    ],
+    "optionalLinkage": [
+      "customerId",
+      "invoiceId",
+      "chainId",
+      "deploymentId",
+      "txHash",
+      "paymentLogIndex",
+      "relatedEntryId",
+      "usdValuation",
+      "valuationAt",
+      "valuationSource"
+    ],
+    "deduplication": "相同chainId+txHash+paymentLogIndex不能重复计收入；收款、交付确认与退款义务通过relatedEntryId关联，不相加为多笔收入。",
+    "note": "支付证据证明转账，不自动证明服务已履约。测试网资产、本地fixture和报价不进入实际收入账。"
+  }
+}

@@ -1,0 +1,16 @@
+Independently review the attached ArcProof source and requirements. Do not rely on the generator's self-review or claim that tests have passed. Do not deploy, sign, send money, change account access, or submit externally.
+
+Identify only concrete issues that can change funds, immutable invoice terms, single-payment behavior, receipt validity, provenance, or reproducibility. For every finding give severity, exact file/function, failure path, a minimal reproducer or test, and the smallest correction. If none are found, state the reviewed commit, scope, performed checks and remaining unverified boundaries, not a security certification.
+
+Check:
+1. Immutable merchant=creator; exact typed abi.encode(uint256,address,address,uint256) ID derivation, zero-start next-unused nonce; immutable deploymentId in routes/config/cache. Old deployments and links remain resolvable, unknown deployments cannot sign.
+2. Positive amount<=1USDC; six-decimal input to native18; exact value only; expiry future<=7days. UI always creates zero termsHash and blocks payment for unsupported nonzero hashes; optional titles are unbound text.
+3. One successful payment per invoice; both modifying functions use the same mature reentrancy guard; callback failures fully revert; paid/payer/paidAt/paidBlockNumber cannot be overwritten.
+4. Forward exactly this call's msg.value, isolate pre-existing balances, and verify post-call balance equals the saved pre-value balance. Callback forced additions revert. No withdrawal/rescue/admin/upgrade/fees/custody route.
+5. Malicious recipients, same/cross-invoice reentry, callback creation, gas exhaustion, premature return and forged events.
+6. Trusted deployment and correct chain; re-read/simulate before wallet signature; PreparedPayment binds exact wallet/deployment/invoice/value/calldata/context version. Context changes invalidate old requests and delayed results; check again before explicit wallet arguments. No local/URL override, approval or automatic retry after ambiguous submission.
+7. Independent receipt checks transaction destination/input/value/from, successful receipt, correct emitter/ID/merchant/amount, stored payment facts and committed block hash. Native system18 logs are not ERC20 six-decimal logs. Test fixtures are not real Arc evidence.
+8. Studio provenance, source/build/deployment hash links, secrets absent, and accurate testnet/mainnet labels.
+9. Clean-browser recovery uses stored paidBlockNumber and exactly one matching event from that block, then complete receipt verification; no genesis scan or onchain txHash. Export actual paymentLogIndex and deploymentId, compare stored payment block/time. Exported JSON is untrusted until reverified; no duplicated totals or controlled tests counted as revenue.
+
+Return critical blockers first. Suggest removing scope when it reduces risk. Do not add custody, AI, multi-chain, backend infrastructure or security theater to a small grant prototype. LLM review does not replace an independent professional audit.

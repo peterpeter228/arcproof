@@ -1,0 +1,114 @@
+{
+  "checkedAt": "2026-10-20T03:08:00.026272+00:00",
+  "scope": "Original planning-document import integrity only; not application tests",
+  "originalFileCount": 21,
+  "manifestChecks": [
+    {
+      "path": "README.md",
+      "status": "passed"
+    },
+    {
+      "path": "START_HERE.txt",
+      "status": "passed"
+    },
+    {
+      "path": "AGENTS.md",
+      "status": "passed"
+    },
+    {
+      "path": "STATUS.md",
+      "status": "passed"
+    },
+    {
+      "path": "docs/01_VERIFIED_REVIEW.md",
+      "status": "passed"
+    },
+    {
+      "path": "docs/02_PRODUCT_PRD.md",
+      "status": "passed"
+    },
+    {
+      "path": "docs/CONTRACT_SPEC.md",
+      "status": "passed"
+    },
+    {
+      "path": "docs/TEST_MATRIX.md",
+      "status": "passed"
+    },
+    {
+      "path": "docs/03_DOT_EXECUTION.md",
+      "status": "passed"
+    },
+    {
+      "path": "docs/04_BUSINESS_VALIDATION.md",
+      "status": "passed"
+    },
+    {
+      "path": "docs/05_SUBMISSION_PACK.md",
+      "status": "passed"
+    },
+    {
+      "path": "docs/06_SCANNER_RULES.md",
+      "status": "passed"
+    },
+    {
+      "path": "docs/SOURCES.md",
+      "status": "passed"
+    },
+    {
+      "path": "prompts/ARC_STUDIO_BUILD.txt",
+      "status": "passed"
+    },
+    {
+      "path": "prompts/ARC_STUDIO_REVIEW.txt",
+      "status": "passed"
+    },
+    {
+      "path": "evidence/gate.json",
+      "status": "passed"
+    },
+    {
+      "path": "evidence/deployments.json",
+      "status": "passed"
+    },
+    {
+      "path": "evidence/test-results.json",
+      "status": "passed"
+    },
+    {
+      "path": "evidence/receipt.example.json",
+      "status": "passed"
+    },
+    {
+      "path": "evidence/effort-ledger.json",
+      "status": "passed"
+    }
+  ],
+  "sourceZipSha256": "5010e7a68789939b3378b20292eedc1c9e4f999c6ab42962c294ec7135c3bb37",
+  "sourceCompletePrdSha256": "6acef2e4299d6695e2d33b1d173b28def8ec6122bd7aee1c2f97d85096ac5f35",
+  "completePrdModuleComparison": {
+    "README.md": true,
+    "START_HERE.txt": true,
+    "docs/01_VERIFIED_REVIEW.md": true,
+    "docs/02_PRODUCT_PRD.md": true,
+    "docs/CONTRACT_SPEC.md": true,
+    "docs/TEST_MATRIX.md": true,
+    "docs/03_DOT_EXECUTION.md": true,
+    "docs/04_BUSINESS_VALIDATION.md": true,
+    "docs/05_SUBMISSION_PACK.md": true,
+    "docs/06_SCANNER_RULES.md": true,
+    "docs/SOURCES.md": true,
+    "AGENTS.md": true,
+    "STATUS.md": true,
+    "prompts/ARC_STUDIO_BUILD.txt": true,
+    "prompts/ARC_STUDIO_REVIEW.txt": true,
+    "evidence/gate.json": true,
+    "evidence/deployments.json": true,
+    "evidence/test-results.json": true,
+    "evidence/receipt.example.json": true,
+    "evidence/effort-ledger.json": true,
+    "evidence/artifact-index.json": true
+  },
+  "applicationTestsRun": false,
+  "originalArchivePath": "docs/source/ArcProof_Dot_Pack_2026-10-20"
+}
