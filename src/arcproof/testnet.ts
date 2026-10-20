@@ -1,5 +1,6 @@
 import { defineChain } from 'viem';
 import type { DeploymentRecord } from './manifest';
+import { ARC_TESTNET_SETTLEMENT_POLICY, isSupportedSettlementPolicy } from './arcSettlement';
 
 /** This build never accepts another network, even if a wallet or URL requests it. */
 export const ARC_TESTNET = defineChain({
@@ -22,6 +23,7 @@ export const TESTNET_DEPLOYMENT: DeploymentRecord = Object.freeze({
   contractAddress: '0x3Dcd2bDD924BCC384Cb39e9e12038e00fde0FA30',
   runtimeCodeHash: '0xa36ede95ccce8289224d3bbabe3a2445a888c44e763a04ac4b6f4f2f03dd344c',
   label: 'ArcProof testnet prototype',
+  settlementPolicy: ARC_TESTNET_SETTLEMENT_POLICY,
   deployedAt: '2026-10-20T09:48:47Z',
 });
 export const TESTNET_MANIFEST = Object.freeze([TESTNET_DEPLOYMENT]);
@@ -34,7 +36,7 @@ export const explorerTx = (hash: `0x${string}`) => `${ARC_TESTNET.blockExplorers
 export function assertTestnetDeployment(deployment: DeploymentRecord): void {
   const trusted = TESTNET_MANIFEST.find((item) =>
     item.deploymentId === deployment.deploymentId && item.chainId === deployment.chainId);
-  if (!trusted || trusted.chainId !== ARC_TESTNET.id ||
+  if (!trusted || !isSupportedSettlementPolicy(deployment.settlementPolicy, deployment.chainId) || trusted.chainId !== ARC_TESTNET.id ||
       trusted.contractAddress.toLowerCase() !== deployment.contractAddress.toLowerCase() ||
       trusted.runtimeCodeHash.toLowerCase() !== deployment.runtimeCodeHash.toLowerCase()) {
     throw new Error('Untrusted deployment. This app supports only the checked Arc Testnet deployment.');

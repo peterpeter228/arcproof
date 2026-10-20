@@ -272,10 +272,16 @@ export function receiptRpc(client: PublicClient, onInvoiceRead?: (invoice: Loade
     },
     getTransaction: async (hash) => {
       const tx = await client.getTransaction({ hash });
-      return { hash: tx.hash, from: tx.from, to: tx.to, input: tx.input, value: tx.value, chainId: tx.chainId };
+      return { hash: tx.hash, from: tx.from, to: tx.to, input: tx.input, value: tx.value, chainId: tx.chainId,
+        blockHash: tx.blockHash, blockNumber: tx.blockNumber, transactionIndex: tx.transactionIndex };
     },
     getBlock: async (blockNumber) => {
       const block = await client.getBlock({ blockNumber });
+      return { number: block.number, hash: block.hash, timestamp: block.timestamp };
+    },
+    getFinalizedBlock: async () => {
+      // Fail closed if this endpoint does not implement the finalized tag.
+      const block = await client.getBlock({ blockTag: 'finalized' });
       return { number: block.number, hash: block.hash, timestamp: block.timestamp };
     },
     getTransactionReceipt: async (hash) => {
@@ -290,6 +296,8 @@ export function receiptRpc(client: PublicClient, onInvoiceRead?: (invoice: Loade
       return { ...receipt, logs: receipt.logs.map((log) => ({
         address: log.address, topics: log.topics, data: log.data,
         logIndex: log.logIndex, transactionHash: log.transactionHash,
+        blockHash: log.blockHash, blockNumber: log.blockNumber, removed: log.removed,
+        transactionIndex: log.transactionIndex,
       })) };
     },
   };

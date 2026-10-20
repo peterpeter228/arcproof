@@ -14,6 +14,13 @@ import type { DeploymentRecord } from './manifest';
 import { formatAmountDisplay } from './amountParser';
 
 export interface ReceiptExportRecord {
+  /** New builders emit these; optional only for compatibility with legacy records. */
+  schemaVersion?: '1.1';
+  contractAddress?: string;
+  txHash?: string | null;
+  blockNumber?: string | null;
+  gasFeeNative?: string | null;
+  verifiedAt?: number;
   chainId: number;
   deploymentId: string;
   contract: string;
@@ -34,6 +41,7 @@ export interface ReceiptExportRecord {
   mode: 'fixture' | 'testnet' | 'unknown';
   amountDisplay: string | null;
   controlled_demo?: boolean;
+  settlementEvidence?: VerificationResult['settlementEvidence'];
 }
 
 export interface InvoiceExportRow {
@@ -106,6 +114,9 @@ const RECEIPT_CSV_HEADERS = [
   'chainId', 'deploymentId', 'contract', 'invoiceId', 'transactionHash',
   'paymentLogIndex', 'amountNative', 'amountDisplay', 'payer', 'merchant',
   'paidAt', 'paidBlockNumber', 'blockHash', 'verificationStatus', 'mode', 'controlled_demo',
+  'settlementPolicy', 'nativeEmitter', 'nativeDecimals', 'payerToContractLogIndex', 'contractToMerchantLogIndex',
+  'finalizedBlockNumber', 'finalizedBlockHash',
+  'schemaVersion', 'contractAddress', 'txHash', 'blockNumber', 'gasFeeNative', 'verifiedAt',
 ];
 
 /** Export a list of receipt records as CSV string. */
@@ -132,6 +143,15 @@ export function exportReceiptsCsv(records: ReceiptExportRecord[]): string {
       csvCell(r.verificationStatus),
       csvCell(r.mode),
       csvCell(r.controlled_demo),
+      csvCell(r.settlementEvidence?.policyId),
+      csvCell(r.settlementEvidence?.nativeEmitter),
+      csvCell(r.settlementEvidence?.decimals),
+      csvCell(r.settlementEvidence?.payerToContractLogIndex),
+      csvCell(r.settlementEvidence?.contractToMerchantLogIndex),
+      csvNumericCell(r.settlementEvidence?.finalizedBlockNumber),
+      csvCell(r.settlementEvidence?.finalizedBlockHash),
+      csvCell(r.schemaVersion), csvCell(r.contractAddress), csvCell(r.txHash),
+      csvNumericCell(r.blockNumber), csvNumericCell(r.gasFeeNative), csvCell(r.verifiedAt),
     ].join(','));
   }
   return rows.join('\n');
@@ -161,6 +181,12 @@ export function buildReceiptExport(
   isFixture: boolean,
 ): ReceiptExportRecord {
   return {
+    schemaVersion: '1.1',
+    contractAddress: deployment.contractAddress,
+    txHash,
+    blockNumber: result.blockNumber ?? null,
+    gasFeeNative: result.gasFeeNative ?? null,
+    verifiedAt: result.verifiedAt,
     chainId: deployment.chainId,
     deploymentId: deployment.deploymentId,
     contract: deployment.contractAddress,
@@ -174,6 +200,7 @@ export function buildReceiptExport(
     paidBlockNumber: paidBlockNumber !== null ? paidBlockNumber.toString() : null,
     blockHash: result.blockHash,
     verificationStatus: result.status,
+    ...(result.verified && result.settlementEvidence ? { settlementEvidence: result.settlementEvidence } : {}),
     mode: isFixture ? 'fixture' : 'testnet',
     controlled_demo: !!payer && !!merchant && payer.toLowerCase() === merchant.toLowerCase(),
     amountDisplay: amountNative === null ? null : formatAmountDisplay(amountNative),

@@ -8,7 +8,11 @@
  * the contract address, chainId, or merchant for that deployment.
  */
 
+import type { ArcSettlementPolicy } from './arcSettlement';
+
 export interface DeploymentRecord {
+  /** Trusted application settlement policy. Absent/unsupported policies fail closed. */
+  readonly settlementPolicy?: ArcSettlementPolicy;
   /** Opaque stable ID. Derived from keccak256(chainId || contractAddress) at deploy time. */
   readonly deploymentId: string;
   /** Chain ID as number */

@@ -3,10 +3,9 @@
  * Pure/injectable receipt verifier. Takes an RPC provider function (injected)
  * so it can be tested with controlled mocks without a real network.
  *
- * ARC-SPECIFIC LIMITATION: Arc native-USDC system Transfer events require the
- * official 18-decimal emitter address and real Arc Testnet evidence. This verifier
- * never returns VERIFIED — it returns UNVERIFIED_ARC_EVIDENCE once all other checks
- * pass. DO NOT invent the emitter address or claim Anvil validates Arc-specific logs.
+ * VERIFIED requires the deployment's supported native settlement policy, two
+ * exact native-system Transfer legs and explicit finalized-header evidence.
+ * Injected mock/reconstructed fixtures test logic, never prove live settlement.
  *
  * Selectors and topics are derived from the frozen ABI via viem; no hardcoded hex.
  */
@@ -14,8 +13,11 @@
 import { encodeEventTopics, encodeFunctionData, keccak256 } from 'viem';
 import { ARCPROOF_ABI } from './arcproofAbi';
 import type { DeploymentRecord } from './manifest';
+import { isSupportedSettlementPolicy, NATIVE_TRANSFER_ABI } from './arcSettlement';
 
 export interface RawReceipt {
+  gasUsed?: bigint;
+  effectiveGasPrice?: bigint;
   blockNumber: bigint;
   blockHash: `0x${string}`;
   transactionHash: `0x${string}`;
@@ -27,6 +29,11 @@ export interface RawReceipt {
 }
 
 export interface RawLog {
+  /** Optional in the transport type to diagnose incomplete sources; required to verify. */
+  blockHash?: `0x${string}`;
+  blockNumber?: bigint;
+  removed?: boolean;
+  transactionIndex?: number;
   address: `0x${string}`;
   topics: `0x${string}`[];
   data: `0x${string}`;
@@ -41,6 +48,10 @@ export interface RawBlock {
 }
 
 export interface RawTransaction {
+  /** Preserve original inclusion metadata; pending/missing values cannot verify. */
+  blockHash?: `0x${string}` | null;
+  blockNumber?: bigint | null;
+  transactionIndex?: number | null;
   hash: `0x${string}`;
   from: `0x${string}`;
   to: `0x${string}` | null;
@@ -65,6 +76,8 @@ export interface RpcProvider {
   getTransactionReceipt(hash: `0x${string}`): Promise<RawReceipt | null>;
   getTransaction(hash: `0x${string}`): Promise<RawTransaction | null>;
   getBlock(blockNumber: bigint): Promise<RawBlock | null>;
+  /** Never substitute latest/safe or synthesize from elapsed confirmations. */
+  getFinalizedBlock?(): Promise<RawBlock | null>;
   getContractCode(address: `0x${string}`): Promise<`0x${string}` | null>;
   getInvoice(contractAddress: `0x${string}`, invoiceId: `0x${string}`): Promise<OnchainInvoiceState | null>;
   getChainId(): Promise<number>;
@@ -88,7 +101,11 @@ export type VerificationStatus =
   | 'TIMESTAMP_MISMATCH'       // block.timestamp != invoice.paidAt
   | 'BLOCKHASH_MISMATCH'       // receipt block hash conflict
   | 'INVOICE_NOT_PAID'         // getInvoice().paid == false
-  | 'UNVERIFIED_ARC_EVIDENCE'; // all chain checks passed, but Arc system Transfer not verified
+  | 'UNVERIFIED_ARC_EVIDENCE'  // unsupported/missing trusted settlement policy
+  | 'TRANSACTION_INCLUSION_MISMATCH' // transaction inclusion must match receipt
+  | 'INVALID_LOG_PROVENANCE'   // removed, missing, conflicting or duplicate log identity
+  | 'INVALID_NATIVE_TRANSFER'  // missing/ambiguous/malformed/incorrect native legs
+  | 'UNVERIFIED_FINALITY';     // absent/unsupported/stale/conflicting finality evidence
 
 export interface VerificationResult {
   status: VerificationStatus;
@@ -96,14 +113,23 @@ export interface VerificationResult {
   paymentLogIndex: number | null;
   blockHash: `0x${string}` | null;
   verifiedAt: number; // ms
+  blockNumber?: string;
+  gasFeeNative?: string | null;
   /**
    * true ONLY when status === 'VERIFIED'.
-   * This verifier never returns VERIFIED — it returns UNVERIFIED_ARC_EVIDENCE once
-   * all standard checks pass, because Arc native-USDC system Transfer validation
-   * requires a verified emitter config that does not yet exist.
    * NEVER trust an imported verified flag from JSON/localStorage.
    */
   verified: boolean;
+  settlementEvidence?: {
+    policyId: string;
+    nativeEmitter: `0x${string}`;
+    decimals: 18;
+    payerToContractLogIndex: number;
+    contractToMerchantLogIndex: number;
+    finalizedBlockNumber: string;
+    finalizedBlockHash: `0x${string}`;
+    controlled_demo: boolean;
+  };
 }
 
 // ---------------------------------------------------------------------------
@@ -133,6 +159,7 @@ function getInvoicePaidTopic(): `0x${string}` {
 // Compute once at module load — pure, no side-effects
 const PAY_INVOICE_SELECTOR: `0x${string}` = getPayInvoiceSelector();
 const INVOICE_PAID_TOPIC: `0x${string}` = getInvoicePaidTopic();
+const NATIVE_TRANSFER_TOPIC = encodeEventTopics({ abi: NATIVE_TRANSFER_ABI, eventName: 'Transfer' })[0];
 
 // ---------------------------------------------------------------------------
 // Helpers
@@ -225,7 +252,7 @@ export async function verifyReceipt(
     return fail('WRONG_TX_CHAINID', `tx.chainId ${tx.chainId} != expected ${expectedChainId}`);
 
   // tx.input: first 4 bytes must be payInvoice selector (derived from ABI)
-  if (!tx.input.toLowerCase().startsWith(PAY_INVOICE_SELECTOR.toLowerCase()))
+  if (!/^0x[0-9a-fA-F]{72}$/.test(tx.input) || !tx.input.toLowerCase().startsWith(PAY_INVOICE_SELECTOR.toLowerCase()))
     return fail('WRONG_SELECTOR',
       `tx.input selector ${tx.input.slice(0, 10)} != ${PAY_INVOICE_SELECTOR}`);
 
@@ -317,22 +344,114 @@ export async function verifyReceipt(
     return fail('BLOCKHASH_MISMATCH',
       `receipt.blockHash ${receipt.blockHash} != block.hash ${block.hash}`);
 
-  // 12. Arc system Transfer event — NOT verifiable without official Arc emitter config.
-  //     All standard checks above have passed. We return UNVERIFIED_ARC_EVIDENCE
-  //     (verified: false) rather than VERIFIED (verified: true), because the Arc
-  //     native-USDC 18-decimal system Transfer at the official emitter has not been
-  //     validated. This is not a check that can be satisfied in this environment.
-  //     A future version may add this when the verified emitter address is available.
+  // 12. A supported policy must be part of the trusted deployment, never a URL
+  // or imported receipt flag. Legacy/unknown networks remain unverified.
+  const policy = deployment.settlementPolicy;
+  if (!policy || !isSupportedSettlementPolicy(policy, expectedChainId)) return {
+    ...fail('UNVERIFIED_ARC_EVIDENCE', 'No supported trusted Arc native settlement policy for this deployment.'),
+    paymentLogIndex, blockHash: receipt.blockHash,
+  };
+
+  const isHash = (value: unknown): value is `0x${string}` =>
+    typeof value === 'string' && /^0x[0-9a-fA-F]{64}$/.test(value) && !/^0x0{64}$/.test(value);
+  const validBlock = (value: RawBlock): boolean =>
+    typeof value.number === 'bigint' && value.number >= 0n && isHash(value.hash) &&
+    typeof value.timestamp === 'bigint' && value.timestamp > 0n;
+  if (!validBlock(block) || !isHash(receipt.transactionHash) ||
+      !Number.isSafeInteger(receipt.transactionIndex) || receipt.transactionIndex < 0)
+    return fail('INVALID_LOG_PROVENANCE', 'Malformed committed receipt/block identity.');
+
+  if (!isHash(tx.blockHash) || !addrEq(tx.blockHash, receipt.blockHash) ||
+      tx.blockNumber !== receipt.blockNumber || tx.transactionIndex !== receipt.transactionIndex)
+    return fail('TRANSACTION_INCLUSION_MISMATCH', 'Transaction inclusion metadata is absent, pending or conflicts with the receipt.');
+
+  const zeroAddress = '0x0000000000000000000000000000000000000000';
+  if (!/^0x[0-9a-fA-F]{40}$/.test(onchain.payer) || !/^0x[0-9a-fA-F]{40}$/.test(onchain.merchant) ||
+      addrEq(onchain.payer, zeroAddress) || addrEq(onchain.merchant, zeroAddress) ||
+      addrEq(onchain.payer, deployment.contractAddress) || addrEq(onchain.merchant, deployment.contractAddress) ||
+      onchain.paidAt >= onchain.expiresAt)
+    return fail('WRONG_EVENT_DATA', 'Paid invoice has an impossible sender, recipient or expiry relationship.');
+
+  // Bind EVERY raw log to this receipt, including ignored emitters. Do not erase
+  // removed/blockHash/blockNumber/txHash at the adapter boundary. Unique indices
+  // prevent one log from being reused for two evidence legs or invoice payment.
+  const indices = new Set<number>();
+  for (const log of receipt.logs) {
+    if (log.removed !== false || log.blockNumber !== receipt.blockNumber ||
+        !isHash(log.blockHash) || !addrEq(log.blockHash, receipt.blockHash) ||
+        !addrEq(log.transactionHash, receipt.transactionHash) ||
+        log.transactionIndex !== receipt.transactionIndex ||
+        !Number.isSafeInteger(log.logIndex) || log.logIndex < 0 || indices.has(log.logIndex))
+      return fail('INVALID_LOG_PROVENANCE', 'Receipt log provenance is missing, removed, duplicated or inconsistent.');
+    indices.add(log.logIndex);
+  }
+
+  if (onchain.amountNative <= 0n || onchain.amountNative > 10n ** 18n || onchain.amountNative % (10n ** 12n) !== 0n)
+    return fail('WRONG_EVENT_DATA', 'Invoice amount is outside the native P0 amount/precision policy.');
+
+  // Decode only the official native emitter at 18 decimals. ERC-20 6-decimal
+  // logs, same-named logs elsewhere and gas fees cannot satisfy either leg.
+  const nativeLogs = receipt.logs.filter((log) => addrEq(log.address, policy.emitter));
+  const transfers: { log: RawLog; from: `0x${string}`; to: `0x${string}`; amount: bigint }[] = [];
+  for (const log of nativeLogs) {
+    if (log.topics.length !== 3 || !addrEq(log.topics[0], NATIVE_TRANSFER_TOPIC) ||
+        !/^0x0{24}[0-9a-fA-F]{40}$/.test(log.topics[1]) ||
+        !/^0x0{24}[0-9a-fA-F]{40}$/.test(log.topics[2]) ||
+        !/^0x[0-9a-fA-F]{64}$/.test(log.data))
+      return fail('INVALID_NATIVE_TRANSFER', 'Malformed native-system Transfer ABI encoding.');
+    transfers.push({ log, from: topicToAddress(log.topics[1]), to: topicToAddress(log.topics[2]), amount: dataToUint256(log.data) });
+  }
+  const involvingContract = transfers.filter((t) =>
+    addrEq(t.from, deployment.contractAddress) || addrEq(t.to, deployment.contractAddress));
+  const incoming = involvingContract.filter((t) => addrEq(t.from, onchain.payer) && addrEq(t.to, deployment.contractAddress));
+  const outgoing = involvingContract.filter((t) => addrEq(t.from, deployment.contractAddress) && addrEq(t.to, onchain.merchant));
+  if (involvingContract.length !== 2 || incoming.length !== 1 || outgoing.length !== 1 ||
+      incoming[0].log.logIndex === outgoing[0].log.logIndex ||
+      incoming[0].amount !== onchain.amountNative || outgoing[0].amount !== onchain.amountNative ||
+      incoming[0].log.logIndex >= outgoing[0].log.logIndex || outgoing[0].log.logIndex >= paymentLogIndex)
+    return fail('INVALID_NATIVE_TRANSFER', 'Require two distinct, unambiguous, exact native transfer legs: payer → contract → merchant, before InvoicePaid.');
+
+  // 13. Arc is final on commit. This application additionally requires the RPC
+  // finalized header as explicit evidence; it does not add an Ethereum wait.
+  // Unsupported/null/older/conflicting responses fail closed, without fallback.
+  if (!rpc.getFinalizedBlock)
+    return fail('UNVERIFIED_FINALITY', 'RPC finalized-header evidence is unavailable.');
+  const finalized = await rpc.getFinalizedBlock().catch(() => null);
+  if (!finalized || !validBlock(finalized) || finalized.number < receipt.blockNumber || finalized.timestamp < block.timestamp)
+    return fail('UNVERIFIED_FINALITY', 'RPC finalized-header evidence is missing, malformed or behind the payment block.');
+  if (finalized.number === receipt.blockNumber &&
+      (!addrEq(finalized.hash, receipt.blockHash) || finalized.timestamp !== block.timestamp))
+    return fail('UNVERIFIED_FINALITY', 'Finalized header conflicts with the payment block.');
+  if (finalized.number > receipt.blockNumber && addrEq(finalized.hash, receipt.blockHash))
+    return fail('UNVERIFIED_FINALITY', 'Different finalized heights cannot share the payment block hash.');
+  const finalizedByNumber = finalized.number === receipt.blockNumber ? null :
+    await rpc.getBlock(finalized.number).catch(() => null);
+  if (finalized.number !== receipt.blockNumber &&
+      (!finalizedByNumber || !validBlock(finalizedByNumber) || finalizedByNumber.number !== finalized.number ||
+       !addrEq(finalizedByNumber.hash, finalized.hash) || finalizedByNumber.timestamp !== finalized.timestamp))
+    return fail('UNVERIFIED_FINALITY', 'Finalized-tag header conflicts with the same height read by number.');
+  // Read the payment height again AFTER observing finality to detect inconsistent
+  // provider snapshots. This is RPC-trusted verification, not a BFT light client.
+  const canonical = await rpc.getBlock(receipt.blockNumber).catch(() => null);
+  if (!canonical || !validBlock(canonical) || canonical.number !== receipt.blockNumber ||
+      !addrEq(canonical.hash, receipt.blockHash) || canonical.timestamp !== block.timestamp)
+    return fail('UNVERIFIED_FINALITY', 'Payment block is unavailable or conflicts after finalized-header observation.');
+
   return {
-    status: 'UNVERIFIED_ARC_EVIDENCE',
-    message:
-      'All standard on-chain checks passed (chain, bytecode, receipt, tx binding, event fields, ' +
-      'block consistency). However, Arc native-USDC system Transfer event validation requires ' +
-      'a verified Arc emitter config that is not yet available. ' +
-      'verified=false; do not treat this as proof of final settlement.',
-    paymentLogIndex,
-    blockHash: receipt.blockHash,
-    verifiedAt: now,
-    verified: false,
+    status: 'VERIFIED',
+    message: 'Arc Testnet payment verified against RPC data: exact native 18-decimal transfer legs, InvoicePaid, ' +
+      'transaction/state/block binding and finalized-header policy passed. Not an independent consensus proof, revenue or proof of delivery.',
+    paymentLogIndex, blockHash: receipt.blockHash, verifiedAt: now, verified: true,
+    blockNumber: receipt.blockNumber.toString(),
+    gasFeeNative: typeof receipt.gasUsed === 'bigint' && receipt.gasUsed >= 0n &&
+      typeof receipt.effectiveGasPrice === 'bigint' && receipt.effectiveGasPrice >= 0n
+      ? (receipt.gasUsed * receipt.effectiveGasPrice).toString() : null,
+    settlementEvidence: {
+      policyId: policy.id, nativeEmitter: policy.emitter, decimals: 18,
+      payerToContractLogIndex: incoming[0].log.logIndex,
+      contractToMerchantLogIndex: outgoing[0].log.logIndex,
+      finalizedBlockNumber: finalized.number.toString(), finalizedBlockHash: finalized.hash,
+      controlled_demo: addrEq(onchain.payer, onchain.merchant),
+    },
   };
 }

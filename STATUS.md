@@ -1,3 +1,17 @@
+# Native settlement candidate (local, pending parent review)
+
+Stage: NATIVE_SETTLEMENT_CANDIDATE_LOCAL_REVIEW.
+
+The missing native-USDC verification and explicit finality policy are implemented locally. Both exact transfer legs, strict ABI, per-log provenance and finalized-header consistency are required before VERIFIED. Same-wallet exports remain controlled_demo. Mainnet remains unconfigured. No GitHub or Studio update and no new wallet action occurred.
+
+Project tests: 253/253 passed, including 56 new focused verifier tests; new independent adversarial tests: 137/137 passed; existing independent UI/wallet regressions: 24/24 passed. TypeScript, source lint/type-aware lint and Vite build passed. Whole-repository read-only lint fails only in unchanged archived review/helper files; aggregate check is not claimed green. New independent verifier review is recorded in the candidate report. Solidity tests were not rerun because Solidity/ABI/artifact are unchanged.
+
+The observed self-demo was already mined, but archived data is normalized explorer observation, not a raw receipt. Tests reconstruct missing provenance/finality and are not live acceptance. Real post-integration RPC verification, raw capture and the two-wallet T25/T26 acceptance remain incomplete. Current Studio code is unchanged; do not describe the local candidate as deployed or the actual receipt as newly VERIFIED.
+
+See docs/NATIVE_SETTLEMENT_VERIFIER.md and evidence/g3-native-verifier/candidate-report.json for exact evidence and limits. All earlier checkpoint text below is historical.
+
+---
+
 # ArcProof current checkpoint
 
 Stage: REBUILT_TESTNET_CANDIDATE_FROZEN.

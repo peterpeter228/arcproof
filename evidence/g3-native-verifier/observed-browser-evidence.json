@@ -1,0 +1,98 @@
+{
+  "artifact_kind": "normalized_browser_observation_not_raw_rpc_receipt",
+  "observed_at_utc": "2026-10-20T17:09:53Z",
+  "network": "Arc Testnet",
+  "chain_id": 5042002,
+  "classification": "controlled_demo",
+  "financial_significance": "test assets only; payer and merchant are same wallet; not customer revenue",
+  "transaction": {
+    "hash": "0x0987c87540b6701be5fe047c55a7ac1b9277fda7dd989f31c8ea3ccd25350ace",
+    "status_explorer": "Success",
+    "from": "0xf22c752EBeB09d3eD8C6b8ba04c7F299D1C9C960",
+    "to": "0x3Dcd2bDD924BCC384Cb39e9e12038e00fde0FA30",
+    "value_native18": "200000000000000000",
+    "value_test_usdc": "0.20",
+    "input": "0x222ab3477d20865f026a9e1e2477c203c1d7e9170b0c095b903b9ff27c15c624ec1c985e",
+    "method": "payInvoice(bytes32)",
+    "invoice_id": "0x7d20865f026a9e1e2477c203c1d7e9170b0c095b903b9ff27c15c624ec1c985e",
+    "block_number": 68212829,
+    "block_hash_explorer": "0x1ce95f577d39c6fa9ec98bab2f83a901cf12bdbb85d23c364431f762de4b1e2f",
+    "timestamp_utc": "2026-10-20T17:04:18Z",
+    "transaction_position": 1,
+    "account_transaction_nonce": 3,
+    "gas_used": 84487,
+    "fee_test_usdc": "0.002112175"
+  },
+  "balance_change_explorer": {
+    "wallet": "0xf22c752EBeB09d3eD8C6b8ba04c7F299D1C9C960",
+    "before_test_usdc": "19.981010995",
+    "after_test_usdc": "19.97889882",
+    "delta_test_usdc": "-0.002112175"
+  },
+  "events_displayed": [
+    {
+      "log_index": 6,
+      "emitter": "0xfffffffffffffffffffffffffffffffffffffffe",
+      "event": "Transfer(address,address,uint256)",
+      "topic0": "0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef",
+      "from": "0xf22c752EBeB09d3eD8C6b8ba04c7F299D1C9C960",
+      "to": "0x3Dcd2bDD924BCC384Cb39e9e12038e00fde0FA30",
+      "amount_native18": "200000000000000000"
+    },
+    {
+      "log_index": 7,
+      "emitter": "0xfffffffffffffffffffffffffffffffffffffffe",
+      "event": "Transfer(address,address,uint256)",
+      "topic0": "0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef",
+      "from": "0x3Dcd2bDD924BCC384Cb39e9e12038e00fde0FA30",
+      "to": "0xf22c752EBeB09d3eD8C6b8ba04c7F299D1C9C960",
+      "amount_native18": "200000000000000000"
+    },
+    {
+      "log_index": 8,
+      "emitter": "0x3Dcd2bDD924BCC384Cb39e9e12038e00fde0FA30",
+      "event": "InvoicePaid(bytes32,address,address,uint256)",
+      "topic0": "0x787fcac3b50ab9534e1ef2e289dfa2a75eb9481de9f9061d4773232074751582",
+      "invoice_id": "0x7d20865f026a9e1e2477c203c1d7e9170b0c095b903b9ff27c15c624ec1c985e",
+      "payer": "0xf22c752EBeB09d3eD8C6b8ba04c7F299D1C9C960",
+      "merchant": "0xf22c752EBeB09d3eD8C6b8ba04c7F299D1C9C960",
+      "amount_native18": "200000000000000000"
+    }
+  ],
+  "application_verifier": {
+    "heading": "Standard checks passed; settlement evidence incomplete",
+    "status_inferred_from_reviewed_source": "UNVERIFIED_ARC_EVIDENCE",
+    "verified": false,
+    "passed_as_displayed": [
+      "chain",
+      "bytecode",
+      "receipt",
+      "tx binding",
+      "event fields",
+      "block consistency"
+    ],
+    "missing_as_displayed": "Arc native-USDC system Transfer event validation requires a verified Arc emitter config",
+    "controlled_self_demo_displayed": true
+  },
+  "acceptance_boundaries": {
+    "payment_inclusion_and_transfer_path": "verified via public explorer UI and application standard checks",
+    "native_event_emitter_and_both_legs": "manually checked against official Arc docs and actual transaction logs",
+    "full_G3_acceptance": "not claimed",
+    "two_wallet_acceptance": "not performed",
+    "raw_RPC_receipt_archive": "not captured",
+    "per_log_raw_blockHash_transactionHash_removed_provenance": "not independently archived; app standard adapter checks passed",
+    "finalized_tag_response": "not queried/captured",
+    "consensus_certificate": "not independently validated",
+    "official_app_export": "JSON export attempted once; download event timed out, no official JSON/CSV export captured"
+  },
+  "sources": {
+    "transaction": "https://explorer.testnet.arc.io/tx/0x0987c87540b6701be5fe047c55a7ac1b9277fda7dd989f31c8ea3ccd25350ace",
+    "logs": "https://explorer.testnet.arc.io/tx/0x0987c87540b6701be5fe047c55a7ac1b9277fda7dd989f31c8ea3ccd25350ace?tab=logs",
+    "state": "https://explorer.testnet.arc.io/tx/0x0987c87540b6701be5fe047c55a7ac1b9277fda7dd989f31c8ea3ccd25350ace?tab=state",
+    "block": "https://explorer.testnet.arc.io/block/68212829",
+    "studio": "https://studio.arc.io/app/2dbdda0d-1b70-408b-ae23-cccb8a4b8753?thread=12185290-60f7-4446-9e99-5ca51e8c30b0",
+    "native_events_reference": "https://docs.arc.io/arc/references/usdc-system-events",
+    "finality_reference": "https://docs.arc.io/arc/concepts/deterministic-finality",
+    "reviewed_source_commit": "8588d80dd08a5ee819efc0d2f723ed50655f8b9d"
+  }
+}

@@ -1,0 +1,136 @@
+{
+  "stage": "NATIVE_SETTLEMENT_CANDIDATE_READY_FOR_PARENT_REVIEW",
+  "scope": "Local code candidate only; no GitHub/Studio integration or new wallet action",
+  "upstreamBaseCommit": "8588d80dd08a5ee819efc0d2f723ed50655f8b9d",
+  "localBaselineCommit": "0baa683",
+  "productionSourceSha256": {
+    "src/arcproof/arcSettlement.ts": "47a04fd31c27c4fd444a1e68463a2e1a3426cfdd2a8dc3c0cfcff8b75c891fc9",
+    "src/arcproof/receiptVerifier.ts": "0505e1e7fe5f87ffbc9dc33f6e4caaf3651fef24d51a9f5b8e7461dc50f2452a",
+    "src/arcproof/manifest.ts": "c65ef5a548db9454c838b5ce154b811403bbd96b91aebedfb585db587c533357",
+    "src/arcproof/testnet.ts": "729b3325f1b1574b9a9ea9c5e96061cd9228b25959c6ebd56b574313cc81c811",
+    "src/arcproof/testnetClient.ts": "ab95aa1b60696c0d39a4afccec5b968a2e419643cb5d9b36bde8874150254ebc",
+    "src/arcproof/exportUtils.ts": "6d50562a74a6e79eb5f8750ddff0dbc62d1e4617330da5c138e3f76dac3b5b00"
+  },
+  "implementation": {
+    "chainId": 5042002,
+    "policy": "arc-testnet-native-eip7708-finalized-v1",
+    "nativeEmitter": "0xfffffffffffffffffffffffffffffffffffffffe",
+    "decimals": 18,
+    "nativeLegs": "Exactly one payer to contract and one contract to fixed merchant, full exact amount, distinct source indices, ordered before InvoicePaid; never sum logs",
+    "provenance": "Original receipt/log/transaction inclusion metadata must agree; removed or absent fields fail closed",
+    "finality": "RPC finalized tag with same-height canonical cross-read, then payment-height re-read; no latest/safe/N-confirmation fallback",
+    "trustBoundary": "Trusted RPC evidence, not independent BFT certificate validation",
+    "export": "Schema 1.1, aliases, block/verification time, nullable exact gasFeeNative, policy and finality evidence, controlled_demo retained"
+  },
+  "checks": {
+    "projectTests": {
+      "status": "passed",
+      "passed": 253,
+      "failed": 0,
+      "log": "full-tests.log"
+    },
+    "focusedNewTests": {
+      "status": "passed",
+      "passed": 56,
+      "failed": 0,
+      "includedInProjectTests": true,
+      "log": "focused-tests.log"
+    },
+    "independentAdversarialReview": {
+      "status": "passed",
+      "passed": 137,
+      "failed": 0,
+      "log": "../../qa/native-settlement-review/final-run.log",
+      "report": "../../qa/native-settlement-review/REVIEW.md",
+      "initialFindingCount": 11,
+      "initialFindingsRemediated": true
+    },
+    "existingIndependentUiWalletRegression": {
+      "status": "passed",
+      "passed": 24,
+      "failed": 0,
+      "log": "legacy-ui-tests.log"
+    },
+    "typescript": {
+      "status": "passed",
+      "log": "typecheck.log"
+    },
+    "sourceLint": {
+      "status": "passed",
+      "log": "lint-source.log"
+    },
+    "sourceTypeAwareLint": {
+      "status": "passed",
+      "log": "lint-type.log"
+    },
+    "productionBuild": {
+      "status": "passed",
+      "log": "build.log",
+      "warnings": "Existing vendor PURE annotations and >500kB chunks"
+    },
+    "wholeRepoReadOnlyLint": {
+      "status": "failed",
+      "log": "lint.log",
+      "reason": "124 pre-existing archived review/helper diagnostics; baseline-archived-lint.log reproduces them in unchanged files",
+      "newDiagnosticCount": 0
+    },
+    "aggregateCheckScript": {
+      "status": "not_run",
+      "reason": "Uses --fix and includes known-failing archived files; read-only constituent equivalents run instead; aggregate green NOT claimed"
+    },
+    "solidityTests": {
+      "status": "not_run",
+      "reason": "No Solidity, ABI, compiled artifact or dependency changes; previous G1 retained, not claimed rerun"
+    },
+    "browserRendering": {
+      "status": "not_run",
+      "reason": "No UI layout changes; JSDOM regressions passed but real browser acceptance not inherited"
+    },
+    "liveRawReceiptAndFinality": {
+      "status": "blocked",
+      "reason": "Only normalized explorer observation was archived. Raw receipt provenance and finalized-tag response not captured. Restricted direct RPC route not retried."
+    },
+    "studioIntegration": {
+      "status": "not_run"
+    },
+    "githubUpdate": {
+      "status": "not_run"
+    },
+    "newWalletAction": {
+      "status": "not_run"
+    }
+  },
+  "observedSelfDemo": {
+    "transactionHash": "0x0987c87540b6701be5fe047c55a7ac1b9277fda7dd989f31c8ea3ccd25350ace",
+    "classification": "controlled_demo",
+    "source": "observed-browser-evidence.json",
+    "fixture": "../../src/arcproof/__tests__/fixtures/observedPayment.ts",
+    "fixtureProvenance": "reconstructed, not raw RPC; missing log and tx provenance, invoice state and finalized replies synthesized solely for unit tests",
+    "realTransactionNewVerifierStatus": "not observed; do not promote to VERIFIED based on fixtures",
+    "twoWalletAcceptance": "not_run",
+    "T25_T26_fullAcceptance": "not_run"
+  },
+  "restrictions": {
+    "mainnet": "unconfigured/not_run",
+    "publicPublication": "not_run",
+    "paidServices": "not_run",
+    "newCredentials": "not_run",
+    "newCashCost": "0.00",
+    "grantQualification": "not claimed",
+    "professionalAudit": "not claimed",
+    "revenue": "not claimed"
+  },
+  "environment": {
+    "node": "v24.19.0",
+    "bun": "1.3.14",
+    "install": "bun install --frozen-lockfile",
+    "dependencyOrLockChanges": false,
+    "executorClockNote": "Runner timestamps are approximately nine hours ahead of authoritative UTC; task UTC is recorded separately."
+  },
+  "nextStep": "Parent review, preserve durable backup, then separately authorized Studio integration and read-only replay of the existing transaction with raw receipt/finality capture. No further payment is needed to replay it.",
+  "authoritativeUtc": {
+    "implementationStarted": "2026-10-20T17:14:14Z",
+    "finalChecksCompleted": "2026-10-20T17:29:23Z",
+    "independentReviewCompleted": "2026-10-20T17:28:57Z"
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "sourceCommit": "8588d80dd08a5ee819efc0d2f723ed50655f8b9d",
+  "sourceFiles": 201,
+  "restoredBaselineFilesChecked": 201,
+  "errors": [],
+  "transport": "GitHub read connector; all recovered baseline files checked against upstream Git blob SHA",
+  "localGitBase": "0baa683",
+  "note": "Local snapshot commit is not upstream commit history."
+}

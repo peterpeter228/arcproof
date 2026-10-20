@@ -1,0 +1,65 @@
+
+ RUN  v2.1.9 /workspace/scratch/c01bd6fe117d/arcproof-testnet-rebuild/repo
+
+ ✓ src/arcproof/__tests__/nativeSettlement.test.ts > Native settlement: reconstructed observed self-demo fixture, NOT live RPC acceptance > verifies both exact 0.20 native18 legs and explicit same-height finalized header
+ ✓ src/arcproof/__tests__/nativeSettlement.test.ts > Native settlement: reconstructed observed self-demo fixture, NOT live RPC acceptance > matches content and source logIndex, never array offsets or fixed 6/7/8 positions
+ ✓ src/arcproof/__tests__/nativeSettlement.test.ts > Native settlement: reconstructed observed self-demo fixture, NOT live RPC acceptance > supports a distinct merchant in a synthetic fixture without marking it a self-demo
+ ✓ src/arcproof/__tests__/nativeSettlement.test.ts > Native settlement: reconstructed observed self-demo fixture, NOT live RPC acceptance > does not count an additional ERC-20 six-decimal stream or gas as another payment
+ ✓ src/arcproof/__tests__/nativeSettlement.test.ts > Native settlement: reconstructed observed self-demo fixture, NOT live RPC acceptance > rejects missing incoming
+ ✓ src/arcproof/__tests__/nativeSettlement.test.ts > Native settlement: reconstructed observed self-demo fixture, NOT live RPC acceptance > rejects missing outgoing
+ ✓ src/arcproof/__tests__/nativeSettlement.test.ts > Native settlement: reconstructed observed self-demo fixture, NOT live RPC acceptance > rejects duplicate incoming with unique identity
+ ✓ src/arcproof/__tests__/nativeSettlement.test.ts > Native settlement: reconstructed observed self-demo fixture, NOT live RPC acceptance > rejects duplicate outgoing with unique identity
+ ✓ src/arcproof/__tests__/nativeSettlement.test.ts > Native settlement: reconstructed observed self-demo fixture, NOT live RPC acceptance > rejects wrong native emitter
+ ✓ src/arcproof/__tests__/nativeSettlement.test.ts > Native settlement: reconstructed observed self-demo fixture, NOT live RPC acceptance > rejects ERC-20 emitter substituted
+ ✓ src/arcproof/__tests__/nativeSettlement.test.ts > Native settlement: reconstructed observed self-demo fixture, NOT live RPC acceptance > rejects wrong incoming payer
+ ✓ src/arcproof/__tests__/nativeSettlement.test.ts > Native settlement: reconstructed observed self-demo fixture, NOT live RPC acceptance > rejects wrong incoming destination
+ ✓ src/arcproof/__tests__/nativeSettlement.test.ts > Native settlement: reconstructed observed self-demo fixture, NOT live RPC acceptance > rejects wrong outgoing source
+ ✓ src/arcproof/__tests__/nativeSettlement.test.ts > Native settlement: reconstructed observed self-demo fixture, NOT live RPC acceptance > rejects wrong merchant
+ ✓ src/arcproof/__tests__/nativeSettlement.test.ts > Native settlement: reconstructed observed self-demo fixture, NOT live RPC acceptance > rejects six-decimal amount at native emitter
+ ✓ src/arcproof/__tests__/nativeSettlement.test.ts > Native settlement: reconstructed observed self-demo fixture, NOT live RPC acceptance > rejects incorrect outgoing amount
+ ✓ src/arcproof/__tests__/nativeSettlement.test.ts > Native settlement: reconstructed observed self-demo fixture, NOT live RPC acceptance > rejects zero native amount
+ ✓ src/arcproof/__tests__/nativeSettlement.test.ts > Native settlement: reconstructed observed self-demo fixture, NOT live RPC acceptance > rejects reversed direction
+ ✓ src/arcproof/__tests__/nativeSettlement.test.ts > Native settlement: reconstructed observed self-demo fixture, NOT live RPC acceptance > rejects wrong signature
+ ✓ src/arcproof/__tests__/nativeSettlement.test.ts > Native settlement: reconstructed observed self-demo fixture, NOT live RPC acceptance > rejects missing topic
+ ✓ src/arcproof/__tests__/nativeSettlement.test.ts > Native settlement: reconstructed observed self-demo fixture, NOT live RPC acceptance > rejects extra topic
+ ✓ src/arcproof/__tests__/nativeSettlement.test.ts > Native settlement: reconstructed observed self-demo fixture, NOT live RPC acceptance > rejects noncanonical address padding
+ ✓ src/arcproof/__tests__/nativeSettlement.test.ts > Native settlement: reconstructed observed self-demo fixture, NOT live RPC acceptance > rejects short address topic
+ ✓ src/arcproof/__tests__/nativeSettlement.test.ts > Native settlement: reconstructed observed self-demo fixture, NOT live RPC acceptance > rejects short uint256 data
+ ✓ src/arcproof/__tests__/nativeSettlement.test.ts > Native settlement: reconstructed observed self-demo fixture, NOT live RPC acceptance > rejects extra data word
+ ✓ src/arcproof/__tests__/nativeSettlement.test.ts > Native settlement: reconstructed observed self-demo fixture, NOT live RPC acceptance > rejects malformed hex data
+ ✓ src/arcproof/__tests__/nativeSettlement.test.ts > Native settlement: reconstructed observed self-demo fixture, NOT live RPC acceptance > rejects incoming after outgoing
+ ✓ src/arcproof/__tests__/nativeSettlement.test.ts > Native settlement: reconstructed observed self-demo fixture, NOT live RPC acceptance > rejects outgoing after InvoicePaid
+ ✓ src/arcproof/__tests__/nativeSettlement.test.ts > Native settlement: reconstructed observed self-demo fixture, NOT live RPC acceptance > rejects split amounts must not be summed
+ ✓ src/arcproof/__tests__/nativeSettlement.test.ts > Native settlement: reconstructed observed self-demo fixture, NOT live RPC acceptance > rejects missing, removed or foreign provenance for log 0
+ ✓ src/arcproof/__tests__/nativeSettlement.test.ts > Native settlement: reconstructed observed self-demo fixture, NOT live RPC acceptance > rejects missing, removed or foreign provenance for log 1
+ ✓ src/arcproof/__tests__/nativeSettlement.test.ts > Native settlement: reconstructed observed self-demo fixture, NOT live RPC acceptance > rejects missing, removed or foreign provenance for log 2
+ ✓ src/arcproof/__tests__/nativeSettlement.test.ts > Native settlement: reconstructed observed self-demo fixture, NOT live RPC acceptance > rejects duplicate log indices even across different emitters
+ ✓ src/arcproof/__tests__/nativeSettlement.test.ts > Native settlement: reconstructed observed self-demo fixture, NOT live RPC acceptance > rejects a duplicate InvoicePaid
+ ✓ src/arcproof/__tests__/nativeSettlement.test.ts > Native settlement: reconstructed observed self-demo fixture, NOT live RPC acceptance > rejects appended calldata rather than only comparing selector prefix
+ ✓ src/arcproof/__tests__/nativeSettlement.test.ts > Native settlement: reconstructed observed self-demo fixture, NOT live RPC acceptance > keeps absent and altered settlement policies unverified
+ ✓ src/arcproof/__tests__/nativeSettlement.test.ts > Explicit Arc finalized-header policy with no latest fallback > fails closed: missing method
+ ✓ src/arcproof/__tests__/nativeSettlement.test.ts > Explicit Arc finalized-header policy with no latest fallback > fails closed: null
+ ✓ src/arcproof/__tests__/nativeSettlement.test.ts > Explicit Arc finalized-header policy with no latest fallback > fails closed: throw
+ ✓ src/arcproof/__tests__/nativeSettlement.test.ts > Explicit Arc finalized-header policy with no latest fallback > fails closed: older
+ ✓ src/arcproof/__tests__/nativeSettlement.test.ts > Explicit Arc finalized-header policy with no latest fallback > fails closed: same-height wrong hash
+ ✓ src/arcproof/__tests__/nativeSettlement.test.ts > Explicit Arc finalized-header policy with no latest fallback > fails closed: same-height wrong timestamp
+ ✓ src/arcproof/__tests__/nativeSettlement.test.ts > Explicit Arc finalized-header policy with no latest fallback > fails closed: malformed hash
+ ✓ src/arcproof/__tests__/nativeSettlement.test.ts > Explicit Arc finalized-header policy with no latest fallback > fails closed: negative number
+ ✓ src/arcproof/__tests__/nativeSettlement.test.ts > Explicit Arc finalized-header policy with no latest fallback > accepts a later finalized head only when its numbered lookup also matches
+ ✓ src/arcproof/__tests__/nativeSettlement.test.ts > Explicit Arc finalized-header policy with no latest fallback > rejects absent numbered finalized header
+ ✓ src/arcproof/__tests__/nativeSettlement.test.ts > Explicit Arc finalized-header policy with no latest fallback > rejects wrong hash numbered finalized header
+ ✓ src/arcproof/__tests__/nativeSettlement.test.ts > Explicit Arc finalized-header policy with no latest fallback > rejects wrong number numbered finalized header
+ ✓ src/arcproof/__tests__/nativeSettlement.test.ts > Explicit Arc finalized-header policy with no latest fallback > rejects wrong timestamp numbered finalized header
+ ✓ src/arcproof/__tests__/nativeSettlement.test.ts > Explicit Arc finalized-header policy with no latest fallback > rechecks payment block after finality and rejects changed or missing evidence
+ ✓ src/arcproof/__tests__/nativeSettlement.test.ts > Adapter and export preserve provenance and self-demo boundaries > retains every original provenance field and explicitly requests finalized
+ ✓ src/arcproof/__tests__/nativeSettlement.test.ts > Adapter and export preserve provenance and self-demo boundaries > does not fall back when finalized is unsupported
+ ✓ src/arcproof/__tests__/nativeSettlement.test.ts > Adapter and export preserve provenance and self-demo boundaries > never repairs absent original provenance from enclosing receipt fields
+ ✓ src/arcproof/__tests__/nativeSettlement.test.ts > Adapter and export preserve provenance and self-demo boundaries > exports exact native gas, schema and verification time without treating fee as payment
+ ✓ src/arcproof/__tests__/nativeSettlement.test.ts > Adapter and export preserve provenance and self-demo boundaries > leaves unavailable gas fee null rather than fabricating zero
+ ✓ src/arcproof/__tests__/nativeSettlement.test.ts > Adapter and export preserve provenance and self-demo boundaries > exports RPC evidence and controlled_demo without trusting imported verification flags
+
+ Test Files  1 passed (1)
+      Tests  56 passed (56)
+   Start at  02:28:02
+   Duration  1.40s (transform 240ms, setup 0ms, collect 620ms, tests 93ms, environment 0ms, prepare 106ms)
+

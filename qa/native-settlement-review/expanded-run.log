@@ -1,0 +1,138 @@
+
+ RUN  v2.1.9 /workspace/scratch/c01bd6fe117d/arcproof-testnet-rebuild/repo
+
+ ✓ qa/native-settlement-review/independent.test.ts > independent complete synthetic control reaches VERIFIED with exact leg metadata
+ ✓ qa/native-settlement-review/independent.test.ts > independent native event adversaries > missing incoming
+ ✓ qa/native-settlement-review/independent.test.ts > independent native event adversaries > missing outgoing
+ ✓ qa/native-settlement-review/independent.test.ts > independent native event adversaries > same-emitter unrelated transfer cannot replace incoming
+ ✓ qa/native-settlement-review/independent.test.ts > independent native event adversaries > wrong payer leg source
+ ✓ qa/native-settlement-review/independent.test.ts > independent native event adversaries > merchant-to-contract wrong outgoing direction
+ ✓ qa/native-settlement-review/independent.test.ts > independent native event adversaries > direct payer-to-merchant is not atomic path
+ ✓ qa/native-settlement-review/independent.test.ts > independent native event adversaries > incoming fake emitter
+ ✓ qa/native-settlement-review/independent.test.ts > independent native event adversaries > outgoing ERC20 emitter at native18 amount
+ ✓ qa/native-settlement-review/independent.test.ts > independent native event adversaries > incoming microUSDC units
+ ✓ qa/native-settlement-review/independent.test.ts > independent native event adversaries > outgoing amount one unit under
+ ✓ qa/native-settlement-review/independent.test.ts > independent native event adversaries > outgoing amount one unit over
+ ✓ qa/native-settlement-review/independent.test.ts > independent native event adversaries > duplicate exact incoming unique index
+ ✓ qa/native-settlement-review/independent.test.ts > independent native event adversaries > duplicate wrong-amount incoming unique index
+ ✓ qa/native-settlement-review/independent.test.ts > independent native event adversaries > duplicate wrong-amount outgoing unique index
+ ✓ qa/native-settlement-review/independent.test.ts > independent native event adversaries > unexpected contract-to-other movement
+ ✓ qa/native-settlement-review/independent.test.ts > independent native event adversaries > split incoming totals not proof
+ ✓ qa/native-settlement-review/independent.test.ts > independent native event adversaries > malformed uint missing word
+ ✓ qa/native-settlement-review/independent.test.ts > independent native event adversaries > malformed uint short word
+ ✓ qa/native-settlement-review/independent.test.ts > independent native event adversaries > malformed uint long word
+ ✓ qa/native-settlement-review/independent.test.ts > independent native event adversaries > noncanonical address high bits
+ ✓ qa/native-settlement-review/independent.test.ts > independent native event adversaries > native missing source topic
+ ✓ qa/native-settlement-review/independent.test.ts > independent native event adversaries > native extra topic
+ ✓ qa/native-settlement-review/independent.test.ts > independent native event adversaries > native wrong signature
+ ✓ qa/native-settlement-review/independent.test.ts > independent native event adversaries > duplicate InvoicePaid
+ ✓ qa/native-settlement-review/independent.test.ts > independent native event adversaries > wrong InvoicePaid issuer
+ ✓ qa/native-settlement-review/independent.test.ts > independent native event adversaries > wrong InvoicePaid ID
+ ✓ qa/native-settlement-review/independent.test.ts > independent native event adversaries > incoming after outgoing index
+ ✓ qa/native-settlement-review/independent.test.ts > independent native event adversaries > outgoing after business event
+ ✓ qa/native-settlement-review/independent.test.ts > independent native event adversaries > wrong policy emitter
+ ✓ qa/native-settlement-review/independent.test.ts > independent native event adversaries > wrong policy decimal
+ ✓ qa/native-settlement-review/independent.test.ts > independent native event adversaries > unapproved policy ID
+ ✓ qa/native-settlement-review/independent.test.ts > independent native event adversaries > unknown policy chain
+ ✓ qa/native-settlement-review/independent.test.ts > independent native event adversaries > wrong native tx value
+ ✓ qa/native-settlement-review/independent.test.ts > independent native event adversaries > calldata trailing bytes
+ ✓ qa/native-settlement-review/independent.test.ts > independent native event adversaries > ignores valid unrelated movement but still validates its provenance
+ ✓ qa/native-settlement-review/independent.test.ts > independent native event adversaries > does not depend on array position
+ ✓ qa/native-settlement-review/independent.test.ts > independent provenance adversaries > log 0: removed omitted
+ ✓ qa/native-settlement-review/independent.test.ts > independent provenance adversaries > log 0: removed true
+ ✓ qa/native-settlement-review/independent.test.ts > independent provenance adversaries > log 0: blockHash omitted
+ ✓ qa/native-settlement-review/independent.test.ts > independent provenance adversaries > log 0: wrong blockHash
+ ✓ qa/native-settlement-review/independent.test.ts > independent provenance adversaries > log 0: blockNumber omitted
+ ✓ qa/native-settlement-review/independent.test.ts > independent provenance adversaries > log 0: wrong blockNumber
+ ✓ qa/native-settlement-review/independent.test.ts > independent provenance adversaries > log 0: txIndex omitted
+ ✓ qa/native-settlement-review/independent.test.ts > independent provenance adversaries > log 0: wrong txIndex
+ ✓ qa/native-settlement-review/independent.test.ts > independent provenance adversaries > log 0: wrong txHash
+ ✓ qa/native-settlement-review/independent.test.ts > independent provenance adversaries > log 0: negative logIndex
+ ✓ qa/native-settlement-review/independent.test.ts > independent provenance adversaries > log 0: fractional logIndex
+ ✓ qa/native-settlement-review/independent.test.ts > independent provenance adversaries > log 0: unsafe logIndex
+ ✓ qa/native-settlement-review/independent.test.ts > independent provenance adversaries > log 0: NaN logIndex
+ ✓ qa/native-settlement-review/independent.test.ts > independent provenance adversaries > log 0: infinite logIndex
+ ✓ qa/native-settlement-review/independent.test.ts > independent provenance adversaries > log 1: removed omitted
+ ✓ qa/native-settlement-review/independent.test.ts > independent provenance adversaries > log 1: removed true
+ ✓ qa/native-settlement-review/independent.test.ts > independent provenance adversaries > log 1: blockHash omitted
+ ✓ qa/native-settlement-review/independent.test.ts > independent provenance adversaries > log 1: wrong blockHash
+ ✓ qa/native-settlement-review/independent.test.ts > independent provenance adversaries > log 1: blockNumber omitted
+ ✓ qa/native-settlement-review/independent.test.ts > independent provenance adversaries > log 1: wrong blockNumber
+ ✓ qa/native-settlement-review/independent.test.ts > independent provenance adversaries > log 1: txIndex omitted
+ ✓ qa/native-settlement-review/independent.test.ts > independent provenance adversaries > log 1: wrong txIndex
+ ✓ qa/native-settlement-review/independent.test.ts > independent provenance adversaries > log 1: wrong txHash
+ ✓ qa/native-settlement-review/independent.test.ts > independent provenance adversaries > log 1: negative logIndex
+ ✓ qa/native-settlement-review/independent.test.ts > independent provenance adversaries > log 1: fractional logIndex
+ ✓ qa/native-settlement-review/independent.test.ts > independent provenance adversaries > log 1: unsafe logIndex
+ ✓ qa/native-settlement-review/independent.test.ts > independent provenance adversaries > log 1: NaN logIndex
+ ✓ qa/native-settlement-review/independent.test.ts > independent provenance adversaries > log 1: infinite logIndex
+ ✓ qa/native-settlement-review/independent.test.ts > independent provenance adversaries > log 2: removed omitted
+ ✓ qa/native-settlement-review/independent.test.ts > independent provenance adversaries > log 2: removed true
+ ✓ qa/native-settlement-review/independent.test.ts > independent provenance adversaries > log 2: blockHash omitted
+ ✓ qa/native-settlement-review/independent.test.ts > independent provenance adversaries > log 2: wrong blockHash
+ ✓ qa/native-settlement-review/independent.test.ts > independent provenance adversaries > log 2: blockNumber omitted
+ ✓ qa/native-settlement-review/independent.test.ts > independent provenance adversaries > log 2: wrong blockNumber
+ ✓ qa/native-settlement-review/independent.test.ts > independent provenance adversaries > log 2: txIndex omitted
+ ✓ qa/native-settlement-review/independent.test.ts > independent provenance adversaries > log 2: wrong txIndex
+ ✓ qa/native-settlement-review/independent.test.ts > independent provenance adversaries > log 2: wrong txHash
+ ✓ qa/native-settlement-review/independent.test.ts > independent provenance adversaries > log 2: negative logIndex
+ ✓ qa/native-settlement-review/independent.test.ts > independent provenance adversaries > log 2: fractional logIndex
+ ✓ qa/native-settlement-review/independent.test.ts > independent provenance adversaries > log 2: unsafe logIndex
+ ✓ qa/native-settlement-review/independent.test.ts > independent provenance adversaries > log 2: NaN logIndex
+ ✓ qa/native-settlement-review/independent.test.ts > independent provenance adversaries > log 2: infinite logIndex
+ ✓ qa/native-settlement-review/independent.test.ts > independent provenance adversaries > duplicate identity across ignored emitter is rejected
+ ✓ qa/native-settlement-review/independent.test.ts > independent provenance adversaries > ignored emitter missing provenance is rejected
+ ✓ qa/native-settlement-review/independent.test.ts > independent finalized-header adversaries > zero hash
+ ✓ qa/native-settlement-review/independent.test.ts > independent finalized-header adversaries > short hash
+ ✓ qa/native-settlement-review/independent.test.ts > independent finalized-header adversaries > malformed hash
+ ✓ qa/native-settlement-review/independent.test.ts > independent finalized-header adversaries > zero timestamp
+ ✓ qa/native-settlement-review/independent.test.ts > independent finalized-header adversaries > negative number
+ ✓ qa/native-settlement-review/independent.test.ts > independent finalized-header adversaries > lower height
+ ✓ qa/native-settlement-review/independent.test.ts > independent finalized-header adversaries > earlier timestamp
+ ✓ qa/native-settlement-review/independent.test.ts > independent finalized-header adversaries > same-height conflicting hash
+ ✓ qa/native-settlement-review/independent.test.ts > independent finalized-header adversaries > same-height conflicting timestamp
+ ✓ qa/native-settlement-review/independent.test.ts > independent finalized-header adversaries > larger height same hash
+ ✓ qa/native-settlement-review/independent.test.ts > independent finalized-header adversaries > missing method
+ ✓ qa/native-settlement-review/independent.test.ts > independent finalized-header adversaries > null response
+ ✓ qa/native-settlement-review/independent.test.ts > independent finalized-header adversaries > RPC error does not trigger latest fallback
+ ✓ qa/native-settlement-review/independent.test.ts > independent finalized-header adversaries > later finalized height requires matching canonical numbered header
+ ✓ qa/native-settlement-review/independent.test.ts > independent finalized-header adversaries > payment header disappearing after finality prevents verification
+ ✓ qa/native-settlement-review/independent.test.ts > independent finalized-header adversaries > payment timestamp change after finality prevents verification
+ ✓ qa/native-settlement-review/independent.test.ts > independent finalized-header adversaries > later consistent finalized height succeeds with two payment lookups
+ ✓ qa/native-settlement-review/independent.test.ts > adapter evidence boundaries > retains missing removed rather than fabricating false
+ ✓ qa/native-settlement-review/independent.test.ts > adapter evidence boundaries > retains missing transactionIndex rather than fabricating receipt value
+ ✓ qa/native-settlement-review/independent.test.ts > adapter evidence boundaries > requests finalized explicitly once
+ ✓ qa/native-settlement-review/independent.test.ts > export boundaries > decimal amount and block strings preserve precision
+ ✓ qa/native-settlement-review/independent.test.ts > export boundaries > fixture indicator remains fixture
+ ✓ qa/native-settlement-review/independent.test.ts > export boundaries > failed result cannot retain stale settlementEvidence
+ ✓ qa/native-settlement-review/independent.test.ts > export boundaries > JSON overwrites importedVerified true
+ ✓ qa/native-settlement-review/independent.test.ts > export boundaries > CSV neutralizes malicious evidence policy strings
+ ✓ qa/native-settlement-review/independent.test.ts > review findings: contradictory transaction inclusion metadata > must reject tx blockHash=0x9999999999999999999999999999999999999999999999999999999999999999
+ ✓ qa/native-settlement-review/independent.test.ts > review findings: contradictory transaction inclusion metadata > must reject tx blockNumber=100
+ ✓ qa/native-settlement-review/independent.test.ts > review findings: contradictory transaction inclusion metadata > must reject tx transactionIndex=3
+ ✓ qa/native-settlement-review/independent.test.ts > review findings: contradictory transaction inclusion metadata > must reject tx blockHash=null
+ ✓ qa/native-settlement-review/independent.test.ts > review findings: contradictory transaction inclusion metadata > must reject tx blockNumber=null
+ ✓ qa/native-settlement-review/independent.test.ts > review findings: contradictory transaction inclusion metadata > must reject tx transactionIndex=null
+ ✓ qa/native-settlement-review/independent.test.ts > additional impossible invoice/native evidence consistency > must reject payment exactly at expiry
+ ✓ qa/native-settlement-review/independent.test.ts > additional impossible invoice/native evidence consistency > must reject payment after expiry
+ ✓ qa/native-settlement-review/independent.test.ts > additional impossible invoice/native evidence consistency > must reject zero merchant with otherwise matching native event
+ ✓ qa/native-settlement-review/independent.test.ts > additional impossible invoice/native evidence consistency > must reject a contract-to-itself native transfer claimed as merchant payment
+ ✓ qa/native-settlement-review/independent.test.ts > additional impossible invoice/native evidence consistency > must reject zero payer with otherwise matching transaction/event
+ ✓ qa/native-settlement-review/independent.test.ts > extra amount, account and metadata boundaries > accepts valid P0 boundary 1000000000000n
+ ✓ qa/native-settlement-review/independent.test.ts > extra amount, account and metadata boundaries > accepts valid P0 boundary 1000000000000000000n
+ ✓ qa/native-settlement-review/independent.test.ts > extra amount, account and metadata boundaries > rejects consistent but invalid P0 amount 0n
+ ✓ qa/native-settlement-review/independent.test.ts > extra amount, account and metadata boundaries > rejects consistent but invalid P0 amount 1n
+ ✓ qa/native-settlement-review/independent.test.ts > extra amount, account and metadata boundaries > rejects consistent but invalid P0 amount 1000000000000000001n
+ ✓ qa/native-settlement-review/independent.test.ts > extra amount, account and metadata boundaries > same external payer and merchant is allowed but explicitly marked controlled_demo
+ ✓ qa/native-settlement-review/independent.test.ts > extra amount, account and metadata boundaries > paid transaction with one second before expiry remains valid
+ ✓ qa/native-settlement-review/independent.test.ts > extra amount, account and metadata boundaries > legacy Arc native precompile emitter cannot replace approved current system emitter
+ ✓ qa/native-settlement-review/independent.test.ts > extra amount, account and metadata boundaries > missing original transaction blockHash is not reconstructed
+ ✓ qa/native-settlement-review/independent.test.ts > extra amount, account and metadata boundaries > missing original transaction blockNumber is not reconstructed
+ ✓ qa/native-settlement-review/independent.test.ts > extra amount, account and metadata boundaries > missing original transaction transactionIndex is not reconstructed
+ ✓ qa/native-settlement-review/independent.test.ts > extra amount, account and metadata boundaries > contract as payer is not accepted as an ordinary EOA direct path
+
+ Test Files  1 passed (1)
+      Tests  129 passed (129)
+   Start at  02:27:00
+   Duration  1.34s (transform 263ms, setup 0ms, collect 605ms, tests 78ms, environment 0ms, prepare 312ms)
+

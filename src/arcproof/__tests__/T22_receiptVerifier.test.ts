@@ -4,8 +4,8 @@
  * All RPC calls are injected mocks — no network.
  *
  * FIXTURE NOTE: all receipts here are test fixtures, clearly not real proof.
- * Arc native-USDC system Transfer events are NOT verified — all paths that pass
- * standard checks return UNVERIFIED_ARC_EVIDENCE (verified: false), never VERIFIED.
+ * This legacy fixture has no trusted native settlement policy, so paths that pass
+ * standard checks still return UNVERIFIED_ARC_EVIDENCE (verified: false).
  * Anvil does not prove Arc log behaviour.
  *
  * Topic and selector values are derived from the ABI by the production module;
@@ -123,18 +123,18 @@ function makeRpc(overrides: Partial<RpcProvider> = {}): RpcProvider {
 // ---------------------------------------------------------------------------
 // T22 — Happy path
 // ---------------------------------------------------------------------------
-describe('T22 — Happy path: all checks pass -> UNVERIFIED_ARC_EVIDENCE', () => {
+describe('T22 — Legacy fixture without settlement policy -> UNVERIFIED_ARC_EVIDENCE', () => {
   it('returns UNVERIFIED_ARC_EVIDENCE (never VERIFIED) for a well-formed fixture', async () => {
     const r = await verifyReceipt(TX_HASH, INVOICE_ID, DEP, CHAIN_ID, makeRpc());
-    // REGRESSION: must NOT return VERIFIED — Arc system Transfer is unsupported
+    // REGRESSION: must NOT return VERIFIED without the trusted settlement policy
     expect(r.status).toBe('UNVERIFIED_ARC_EVIDENCE');
     expect(r.verified).toBe(false);
     expect(r.paymentLogIndex).toBe(0);
     expect(r.blockHash).toBe(BLOCK_HASH);
   });
 
-  it('verified is ALWAYS false — no path returns verified=true', async () => {
-    // The verifier never returns verified: true in its current implementation.
+  it('verified remains false for this unconfigured fixture', async () => {
+    // This unconfigured legacy fixture cannot return verified: true.
     // This is the regression guard for the original bug where VERIFIED was returned
     // after passing chain/receipt checks while Arc system Transfer was unverified.
     const r = await verifyReceipt(TX_HASH, INVOICE_ID, DEP, CHAIN_ID, makeRpc());

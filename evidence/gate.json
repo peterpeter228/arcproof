@@ -5,7 +5,7 @@
   "preparedOn": "2026-10-20",
   "note": "Imported planning pack verified; current official-rule research is partial. No G0 pass or implementation authorization inferred.",
   "project_started_at": "2026-10-20T03:04:27Z",
-  "currentStage": "REBUILT_TESTNET_CANDIDATE_FROZEN",
+  "currentStage": "NATIVE_SETTLEMENT_CANDIDATE_READY_FOR_PARENT_REVIEW",
   "g0_status": "blocked",
   "g0_pass": false,
   "grantEngineeringAllowed": false,
@@ -280,5 +280,11 @@
     "preparedAt": "2026-10-20T11:28:00Z",
     "baseCommit": "89fc2c3ba931253e0b97ae582611baa5d8c4db4e",
     "note": "New reconstructed local candidate. Historical records retained; actual browser/wallet/chain acceptance not passed."
+  },
+  "nativeSettlementCandidate": {
+    "report": "evidence/g3-native-verifier/candidate-report.json",
+    "status": "local_candidate_review",
+    "liveAcceptance": "not_run",
+    "upstreamBaseCommit": "8588d80dd08a5ee819efc0d2f723ed50655f8b9d"
   }
 }

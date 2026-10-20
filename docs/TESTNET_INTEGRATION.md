@@ -1,3 +1,5 @@
+> Current local candidate update: native transfer and explicit finalized-header verification are now implemented, with fail-closed provenance checks. See [NATIVE_SETTLEMENT_VERIFIER.md](NATIVE_SETTLEMENT_VERIFIER.md). The implementation described below is the historical rebuilt checkpoint; real post-integration verification and raw receipt capture are still pending. Studio/GitHub have not been updated by this candidate task.
+
 # Dedicated Arc Testnet integration: reconstructed candidate
 
 Base: private peterpeter228/arcproof commit 89fc2c3ba931253e0b97ae582611baa5d8c4db4e. Preserve Studio origin and all unaffected repository files. This increment is native implementation/reconstruction, not Studio-generated. A former temporary local candidate was lost before external persistence. Some files were recovered byte-for-byte against recorded SHA-256; the remaining files are a new candidate with fresh verification. Do not reuse former ZIP hashes or prior test acceptance.

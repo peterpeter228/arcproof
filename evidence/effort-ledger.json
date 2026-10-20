@@ -188,5 +188,14 @@
     "actualHours": null,
     "status": "pending_root_aggregation",
     "note": "Root must include original work, artifact recovery/reconstruction, verification and parallel reviewer effort in the existing 18-hour cap. Historical total is not treated as current."
+  },
+  "nativeSettlementCandidateEffort": {
+    "startedAt": "2026-10-20T17:14:14Z",
+    "checksCompletedAt": "2026-10-20T17:29:23Z",
+    "implementationAndRecoveryElapsedMinutes": 15.15,
+    "independentReviewerActiveMinutesApproximate": 9.5,
+    "newCashCost": "0.00",
+    "totalProjectHours": "pending_root_aggregation",
+    "note": "Add these task efforts to the existing 18-hour total; do not treat stale historical ledger totals as current. Backup packaging time is additional."
   }
 }
