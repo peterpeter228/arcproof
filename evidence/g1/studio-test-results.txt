@@ -1,0 +1,158 @@
+================================================================
+ArcProof G1 Final Test Evidence (post quality-gate corrections)
+Generated: Tue Oct 20 04:27:20 UTC 2026
+Grant eligibility: HOLD. Free prototype development authorized per 2026-10-20.
+================================================================
+
+--- COMMAND ---
+cd /home/user/app && forge test -v
+
+--- TOOLCHAIN ---
+forge Version: 1.7.1
+Commit SHA: 4072e48705af9d93e3c0f6e29e93b5e9a40caed8
+Build Timestamp: 2026-05-08T07:50:55.527285345Z (1778226655)
+Build Profile: dist
+solc: Version: 0.8.28+commit.7893614a.Linux.g++
+bun:  1.3.14
+
+--- DEPENDENCY EVIDENCE ---
+Package pin (package.json):         @openzeppelin/contracts 5.1.0
+Resolved version:                   5.1.0
+bun.lock integrity (sha512):        sha512-p1ULhl7BXzjjbha5aqst+QMLY+4/LCWADXOCsmLHRM77AqiPjnd9vvUN9sosUfhL9JGKpZ0TjEGxgvnizmWGSA==
+bun.lock sha256:                    308c8831c6e1efc13fe0194bdce22b4f4a15dc6614c4a7c21252dcf0d2d38ace
+ReentrancyGuard.sol sha256:         32fbb1c908ec1b4de85cc1bb10091aebd5816ffe80dfdd5ca5e084fbea67a462
+OZ package.json sha256:             765a3a984fc182b033cc1daa3051c8b5c2d3b75d209765fe5a711b2023f06967
+
+--- METHOD IDENTIFIERS ---
+
+╭---------------------------------------+------------╮
+| Method                                | Identifier |
++====================================================+
+| AMOUNT_QUANTUM()                      | 9eb6e80c   |
+|---------------------------------------+------------|
+| MAX_INVOICE_AMOUNT()                  | f168253a   |
+|---------------------------------------+------------|
+| MAX_LIFETIME()                        | 2ba2a665   |
+|---------------------------------------+------------|
+| createInvoice(uint256,uint64,bytes32) | a669ce48   |
+|---------------------------------------+------------|
+| getInvoice(bytes32)                   | cb802c8b   |
+|---------------------------------------+------------|
+| nextNonce(address)                    | 0cd55abf   |
+|---------------------------------------+------------|
+| payInvoice(bytes32)                   | 222ab347   |
+╰---------------------------------------+------------╯
+
+
+--- TEST SUITE SUMMARY ---
+ArcProofInvoicesTest  (T01-T17, fuzz T16): 58 tests
+ArcProofAcceptanceTest (I01-I09):           10 tests
+IndependentBalanceReview:                    1 test
+Total:                                      69 passed, 0 failed
+
+--- TEST MATRIX: L1 MOCK vs ARC L3 ---
+COVERED by local Foundry EVM (L1 mock):
+  - ID formula, amount/expiry validation, nonce correctness
+  - Exact-amount enforcement, WRONG_AMOUNT, EXPIRED, ALREADY_PAID
+  - Checks-effects-interactions: state written before .call
+  - MERCHANT_CALL_FAILED: rejecting and gas-exhausting receiver
+  - BALANCE_MISMATCH: selfdestruct force-send during callback (Paris EVM)
+  - ReentrancyGuard: same-invoice, cross-invoice, create-during-pay
+  - Immutable fields, no setter/cancel/edit selectors
+  - Nonce pagination, two deployments independence
+  - Fuzz: amount/lifetime, actor addresses, adversarial sequences, multi-merchant
+  - I01-I09 acceptance criteria (end-to-end, once-only, failed-call rollback, etc.)
+
+NOT COVERED (requires real Arc Testnet — G2 scope):
+  - Arc native-USDC system Transfer event at 18-decimal emitter
+  - Real Arc gas fee model and EIP-1559 dynamics
+  - Arc committed-block finality (no confirmation thresholds)
+  - Receipt verification: tx.to/from/input/value, log index, committed block hash
+  - Wallet signature flow, rejected/pending tx, reconnect after timeout
+  - nativeCurrency.decimals mismatch between Arc native view and ERC-20 view
+
+--- FULL TEST OUTPUT ---
+No files changed, compilation skipped
+
+Ran 1 test for contracts/test/IndependentBalanceReview.t.sol:IndependentBalanceReview
+[PASS] test_independentForcedBalanceRevertsExactlyAndRollsBack() (gas: 932916)
+Suite result: ok. 1 passed; 0 failed; 0 skipped; finished in 560.97µs (209.39µs CPU time)
+
+Ran 10 tests for contracts/test/ArcProofAcceptance.t.sol:ArcProofAcceptanceTest
+[PASS] test_I01_happyPathEndToEnd() (gas: 278401)
+[PASS] test_I02_onceOnlyPayment_differentPayer() (gas: 280939)
+[PASS] test_I02_onceOnlyPayment_samePayer() (gas: 282349)
+[PASS] test_I03_rejectingMerchantPreservesState() (gas: 239001)
+[PASS] test_I04_gasExhaustingMerchantPreservesState() (gas: 683098)
+[PASS] test_I05_nonzeroTermsHashStoredAndPayable() (gas: 293248)
+[PASS] test_I06_twoDeploymentsIndependentState() (gas: 961789)
+[PASS] test_I07_noncePaginatedHistory() (gas: 450504)
+[PASS] test_I08_expiryBoundary() (gas: 400276)
+[PASS] test_I09_contractBalanceInvariantMixedSequence() (gas: 639088)
+Suite result: ok. 10 passed; 0 failed; 0 skipped; finished in 1.94ms (2.20ms CPU time)
+
+Ran 58 tests for contracts/test/ArcProofInvoices.t.sol:ArcProofInvoicesTest
+[PASS] testFuzz_T16_createAndPayBalanceInvariant(uint64,uint32) (runs: 256, μ: 270006, ~: 270165)
+[PASS] testFuzz_T16_multiMerchantPayerIndependence(uint32,uint32) (runs: 256, μ: 530295, ~: 530160)
+[PASS] testFuzz_T16_nonceIncrements(uint8) (runs: 256, μ: 1286385, ~: 785790)
+[PASS] testFuzz_T16_revertOnWrongAmount(uint64,uint256) (runs: 256, μ: 131699, ~: 131891)
+[PASS] testFuzz_T16_variedActorsAdversarialSequence(address,address,uint32,uint32) (runs: 256, μ: 231532, ~: 231607)
+[PASS] test_T01_validCreationAndEmittedData() (gas: 121128)
+[PASS] test_T02_amountMaxAccepted() (gas: 115426)
+[PASS] test_T02_amountMinAccepted() (gas: 115450)
+[PASS] test_T02_amountNotDivisibleReverts() (gas: 39717)
+[PASS] test_T02_amountOverCapReverts() (gas: 20423)
+[PASS] test_T02_amountZeroReverts() (gas: 20412)
+[PASS] test_T02_largeExactDivisibleAccepted() (gas: 115492)
+[PASS] test_T03_expiryEqualTimestampReverts() (gas: 16281)
+[PASS] test_T03_expiryExactly7DaysAccepted() (gas: 112311)
+[PASS] test_T03_expiryFutureAccepted() (gas: 112314)
+[PASS] test_T03_expiryInPastReverts() (gas: 16373)
+[PASS] test_T03_expiryOver7DaysReverts() (gas: 16537)
+[PASS] test_T04_differentChainIdsProduceDifferentIds() (gas: 784)
+[PASS] test_T04_multipleNonces() (gas: 193703)
+[PASS] test_T04_nonce0Id() (gas: 112818)
+[PASS] test_T04_twoDeploymentsSameMerchantDifferentIds() (gas: 727402)
+[PASS] test_T04_twoMerchantsHaveIndependentNonces() (gas: 217596)
+[PASS] test_T05_immutableFieldsAfterCreation() (gas: 141251)
+[PASS] test_T06_payUnknownIdReverts() (gas: 24969)
+[PASS] test_T06_unknownIdBytes32ZeroGetInvoiceReverts() (gas: 23401)
+[PASS] test_T06_unknownIdGetInvoiceReverts() (gas: 23389)
+[PASS] test_T07_exactPaymentRecordsState() (gas: 207390)
+[PASS] test_T08_overPaymentReverts() (gas: 126429)
+[PASS] test_T08_prefundedBalanceDoesNotCoverUnderpayment() (gas: 125064)
+[PASS] test_T08_prefundedContractBalanceDoesNotAffectPayment() (gas: 263226)
+[PASS] test_T08_underPaymentReverts() (gas: 126407)
+[PASS] test_T08_zeroPaymentReverts() (gas: 119643)
+[PASS] test_T09_expiresAtExactIsRejected() (gas: 126598)
+[PASS] test_T09_expiresAtMinusOneIsAccepted() (gas: 268123)
+[PASS] test_T09_expiresAtPlusOneIsRejected() (gas: 126663)
+[PASS] test_T10_repeatPaymentDifferentPayer() (gas: 278779)
+[PASS] test_T10_repeatPaymentSamePayer() (gas: 276259)
+[PASS] test_T11_sameInvoiceReentryCaught() (gas: 387659)
+[PASS] test_T11_sameInvoiceReentryUncaught() (gas: 389265)
+[PASS] test_T12_bothEntrypointsShareSameReentrancyGuard() (gas: 365177)
+[PASS] test_T12_createInvoiceReentryCaught() (gas: 326148)
+[PASS] test_T12_createInvoiceReentryUncaught() (gas: 341505)
+[PASS] test_T12_crossInvoice_differentMerchant_reentryBlocked() (gas: 591031)
+[PASS] test_T12_crossInvoice_sameMerchant_bothPaidOnce() (gas: 505786)
+[PASS] test_T13_gasExhaustingMerchantRollsBackState() (gas: 685513)
+[PASS] test_T13_rejectingMerchantRollsBackState() (gas: 239080)
+[PASS] test_T14_createInvoiceWithValueReverts() (gas: 18383)
+[PASS] test_T14_directValueTransferReverts() (gas: 17570)
+[PASS] test_T14_wrongSelectorReverts() (gas: 10673)
+[PASS] test_T14_wrongSelectorWithValueReverts() (gas: 17917)
+[PASS] test_T15_forcedBalanceMutationDuringCallbackReverts() (gas: 420031)
+[PASS] test_T15_prefundedBalanceUntouched() (gas: 263202)
+[PASS] test_T17_callableSurface() (gas: 37753)
+[PASS] test_T17_distinctSameAmountInvoicesHaveDifferentIds() (gas: 191355)
+[PASS] test_T17_noncePageBoundaries() (gas: 1618468)
+[PASS] test_T17_nonzeroTermsHashPaymentSucceeds() (gas: 291310)
+[PASS] test_T17_ozVersionPinned() (gas: 5474)
+[PASS] test_T17_reentrancyGuardPresent() (gas: 5447)
+Suite result: ok. 58 passed; 0 failed; 0 skipped; finished in 96.67ms (100.41ms CPU time)
+
+Ran 3 test suites in 98.03ms (99.17ms CPU time): 69 tests passed, 0 failed, 0 skipped (69 total tests)
+
+--- EXIT STATUS ---
+EXIT:0

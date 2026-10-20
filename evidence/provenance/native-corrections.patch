@@ -1,0 +1,695 @@
+--- a/src/arcproof/__tests__/T20_preparedPayment.test.ts
++++ b/src/arcproof/__tests__/T20_preparedPayment.test.ts
+@@ -5,6 +5,7 @@
+  * post-broadcast mismatch detection.
+  */
+ import { describe, it, expect } from 'vitest';
++import { toFunctionSelector } from 'viem';
+ import {
+   preparePayment,
+   validatePaymentContext,
+@@ -36,7 +37,7 @@
+ 
+ const INVOICE: InvoiceSnapshot = {
+   invoiceId: '0x1234000000000000000000000000000000000000000000000000000000000000',
+-  merchant: '0xAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA',
++  merchant: '0x3333333333333333333333333333333333333333',
+   amountNative: 200_000_000_000_000_000n,
+   expiresAt: BigInt(NOW + 3600),
+   termsHash: '0x0000000000000000000000000000000000000000000000000000000000000000',
+@@ -89,10 +90,10 @@
+     expect(p!.value).toBe(INVOICE.amountNative);
+   });
+ 
+-  it('calldata selector derived from ABI: starts with payInvoice selector 0x9e5b6cac', () => {
++  it('calldata selector derived from ABI: starts with payInvoice selector for payInvoice(bytes32)', () => {
+     const p = makePrepared();
+     // Selector is computed by production module from frozen ABI via viem
+-    expect(p!.calldata.toLowerCase().startsWith('0x9e5b6cac')).toBe(true);
++    expect(p!.calldata.toLowerCase().startsWith(toFunctionSelector('payInvoice(bytes32)'))).toBe(true);
+   });
+ 
+   it('calldata encodes invoiceId as first argument', () => {
+--- a/src/arcproof/__tests__/T22_receiptVerifier.test.ts
++++ b/src/arcproof/__tests__/T22_receiptVerifier.test.ts
+@@ -212,9 +212,9 @@
+   });
+ 
+   it('wrong value -> WRONG_VALUE', async () => {
+-    const badOnchain = { ...GOOD_ONCHAIN, amountNative: 1_000_000_000_000n };
+-    const r = await verifyReceipt(TX_HASH, INVOICE_ID, DEP, CHAIN_ID,
+-      makeRpc({ getInvoice: () => Promise.resolve(badOnchain) }));
++    const badTx = { ...GOOD_TX, value: AMOUNT + 1n };
++    const r = await verifyReceipt(TX_HASH, INVOICE_ID, DEP, CHAIN_ID,
++      makeRpc({ getTransaction: () => Promise.resolve(badTx) }));
+     expect(r.status).toBe('WRONG_VALUE');
+   });
+ 
+--- a/src/arcproof/__tests__/T24_exportUtils.test.ts
++++ b/src/arcproof/__tests__/T24_exportUtils.test.ts
+@@ -15,7 +15,7 @@
+ import type { VerificationResult } from '../receiptVerifier';
+ 
+ const CHAIN_ID = 2482601649;
+-const CONTRACT = '0xAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' as `0x${string}`;
++const CONTRACT = '0xaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa' as `0x${string}`;
+ const DEP: DeploymentRecord = {
+   deploymentId: 'dep-001',
+   chainId: CHAIN_ID,
+--- /dev/null
++++ b/src/arcproof/__tests__/nativeRepair.test.ts
+@@ -0,0 +1,34 @@
++import { describe, it, expect } from 'vitest';
++import { deriveInvoiceId, deriveInvoiceIds } from '../invoiceId';
++import { buildReceiptExport, exportReceiptsCsv, exportReceiptsJson } from '../exportUtils';
++import { preparePayment, validatePaymentContext, isPrepareError } from '../preparedPayment';
++const contract = '0x3333333333333333333333333333333333333333';
++const merchant = '0x7777777777777777777777777777777777777777';
++const deployment = { chainId: 5042002, deploymentId: 'local-fixture', contractAddress: contract, runtimeCodeHash: '0x', label: 'Fixture', deployedAt: null } as const;
++const invoice = { invoiceId: ('0x' + '2'.repeat(64)) as `0x${string}`, merchant, amountNative: 200000000000000000n, expiresAt: 2000n, termsHash: ('0x' + '0'.repeat(64)) as `0x${string}`, paid: false } as const;
++const result = { status: 'PENDING', message: 'No chain data', paymentLogIndex: null, blockHash: null, verifiedAt: 0, verified: false } as const;
++describe('Native targeted regressions', () => {
++ it('keeps pagination exact above Number safe integer range', () => {
++  const next = 9007199254740993n;
++  const rows = deriveInvoiceIds(5042002, contract, merchant, next, 2, 1);
++  expect(rows.map(r => r.nonce)).toEqual([next - 3n, next - 4n]);
++  expect(rows[0].invoiceId).toBe(deriveInvoiceId(5042002, contract, merchant, next - 3n));
++ });
++ it.each(['\r=1+1', '\n=1+1', '\t=1+1', '  =1+1', '\u0000=1+1'])('neutralizes control or whitespace-prefixed CSV formulas %j', value => {
++  const record = buildReceiptExport({...deployment, deploymentId: value}, invoice.invoiceId, null, null, null, null, null, null, result, false);
++  const csv = exportReceiptsCsv([record]);
++  expect(csv).toContain('\t' + value);
++  if (/[\r\n]/.test(value)) expect(csv).toContain('"\t' + value + '"');
++ });
++ it('unknown amount exports null rather than fabricated zero', () => {
++  const record = buildReceiptExport(deployment, invoice.invoiceId, null, null, null, null, null, null, result, false);
++  expect((JSON.parse(exportReceiptsJson([record])) as Record<string, unknown>[])[0]).toMatchObject({ amountNative: null, amountDisplay: null, importedVerified: false });
++ });
++ it('rejects fresh nonzero terms and changed recipient before confirmation', () => {
++  const prepared = preparePayment(deployment, merchant, invoice, 1, 1000);
++  if (isPrepareError(prepared)) throw Error(prepared.message);
++  const validate = (fresh: typeof invoice) => validatePaymentContext(prepared, 5042002, merchant, 1, deployment.deploymentId, contract, fresh, 1000);
++  expect(validate({...invoice, termsHash: ('0x' + '1'.repeat(64)) as `0x${string}`})).toContain('UNSUPPORTED_TERMS');
++  expect(validate({...invoice, merchant: contract} as unknown as typeof invoice)).not.toBeNull();
++ });
++});
+--- /dev/null
++++ b/src/arcproof/__tests__/offlineDemo.test.tsx
+@@ -0,0 +1,26 @@
++// @vitest-environment jsdom
++import React, {act} from 'react';
++import {createRoot} from 'react-dom/client';
++import {it,expect,vi} from 'vitest';
++vi.mock('connectkit',()=>({ConnectKitButton:()=>null}));
++import {DashboardScreen} from '../../components/arcproof/DashboardScreen';
++it('creates a clearly marked offline fixture without a connected wallet or signing',()=>{
++ (globalThis as typeof globalThis & { IS_REACT_ACT_ENVIRONMENT: boolean }).IS_REACT_ACT_ENVIRONMENT=true;
++ const host=document.createElement('div'); const root=createRoot(host);
++ try {
++  act(()=>root.render(<DashboardScreen/>));
++  const button=Array.from(host.querySelectorAll('button')).find(b=>b.textContent?.includes('Create invoice'))!;
++  expect(button.disabled).toBe(false);
++  expect(host.textContent).toContain('No wallet is needed');
++  act(()=>button.click());
++  expect(host.textContent).toContain('Nonce 0');
++  expect(host.textContent).toContain('1 invoices (demo)');
++  expect(host.querySelector('a[href*="/pay/"]')).toBeNull();
++  const receiptButton=Array.from(host.querySelectorAll('button')).find(b=>b.textContent==='View simulated receipt')!;
++  act(()=>receiptButton.click());
++  expect(host.textContent).toContain('SIMULATED_NOT_VERIFIED');
++  expect(host.textContent).toContain('No payment occurred');
++  expect(host.textContent).toContain('Export simulated JSON');
++  expect(host.textContent).toContain('Example amount: 0.20 USDC');
++ } finally { act(()=>root.unmount()); }
++});
+--- a/src/arcproof/amountParser.ts
++++ b/src/arcproof/amountParser.ts
+@@ -94,6 +94,6 @@
+ export function formatAmountDisplay(native: bigint): string {
+   const full = formatInvoiceAmount(native);
+   const [i, f] = full.split('.');
+-  const trimmed = f.replace(/0+$/, '') || '0';
++  const trimmed = f === '000000' ? '0' : f.replace(/0+$/, '').padEnd(2, '0');
+   return `${i}.${trimmed}`;
+ }
+--- a/src/arcproof/exportUtils.ts
++++ b/src/arcproof/exportUtils.ts
+@@ -4,9 +4,9 @@
+  * Rules:
+  * - Large integers (amountNative, paidBlockNumber, paidAt) exported as strings.
+  * - importedVerified flags from JSON are always ignored; verifier must re-run.
+- * - CSV safe against formula injection (cells starting with =+-@ are quoted).
++ * - CSV neutralizes formula/control prefixes before quoting.
+  * - Receipts deduplicated by chain+deployment+tx+logIndex.
+- * - Unknown real values are null in JSON, "null" in CSV.
++ * - Unknown real values are null in JSON, empty cells in CSV.
+  */
+ 
+ import type { VerificationResult } from './receiptVerifier';
+@@ -21,7 +21,7 @@
+   transactionHash: string | null;
+   paymentLogIndex: number | null;
+   /** Native bigint as decimal string */
+-  amountNative: string;
++  amountNative: string | null;
+   payer: string | null;
+   merchant: string | null;
+   /** Unix seconds as decimal string */
+@@ -32,7 +32,7 @@
+   verificationStatus: string;
+   /** 'fixture' | 'testnet' | 'unknown' */
+   mode: 'fixture' | 'testnet' | 'unknown';
+-  amountDisplay: string;
++  amountDisplay: string | null;
+ }
+ 
+ export interface InvoiceExportRow {
+@@ -41,8 +41,8 @@
+   contract: string;
+   invoiceId: string;
+   merchant: string;
+-  amountNative: string;
+-  amountDisplay: string;
++  amountNative: string | null;
++  amountDisplay: string | null;
+   expiresAt: string;
+   termsHash: string;
+   paid: boolean;
+@@ -71,9 +71,9 @@
+   // Tab prefix is recognised by Excel, LibreOffice, and Google Sheets as a
+   // text-force marker. Quoting alone does not neutralise formula injection in
+   // all spreadsheet applications.
+-  const dangerous = /^[=+\-@|\t]/.test(s);
++  const dangerous = /^[\s\u0000-\u001f]*[=+\-@|]|^[\t\r\n]/.test(s);
+   const prefixed = dangerous ? '\t' + s : s;
+-  if (prefixed.includes(',') || prefixed.includes('\n') || prefixed.includes('"')) {
++  if (prefixed.includes(',') || prefixed.includes('\n') || prefixed.includes('\r') || prefixed.includes('"')) {
+     return `"${prefixed.replace(/"/g, '""')}"`;
+   }
+   return prefixed;
+@@ -150,7 +150,7 @@
+   deployment: DeploymentRecord,
+   invoiceId: `0x${string}`,
+   txHash: `0x${string}` | null,
+-  amountNative: bigint,
++  amountNative: bigint | null,
+   payer: `0x${string}` | null,
+   merchant: `0x${string}` | null,
+   paidAt: bigint | null,
+@@ -165,7 +165,7 @@
+     invoiceId,
+     transactionHash: txHash,
+     paymentLogIndex: result.paymentLogIndex,
+-    amountNative: amountNative.toString(),
++    amountNative: amountNative?.toString() ?? null,
+     payer: payer ?? null,
+     merchant: merchant ?? null,
+     paidAt: paidAt !== null ? paidAt.toString() : null,
+@@ -173,6 +173,6 @@
+     blockHash: result.blockHash,
+     verificationStatus: result.status,
+     mode: isFixture ? 'fixture' : 'testnet',
+-    amountDisplay: formatAmountDisplay(amountNative),
++    amountDisplay: amountNative === null ? null : formatAmountDisplay(amountNative),
+   };
+ }
+--- a/src/arcproof/invoiceId.ts
++++ b/src/arcproof/invoiceId.ts
+@@ -32,12 +32,12 @@
+   pageSize: number = 20,
+   pageIndex: number = 0,
+ ): Array<{ nonce: bigint; invoiceId: `0x${string}` }> {
+-  const total = Number(nextNonce);
+-  const startNonce = total - 1 - pageIndex * pageSize;
++  if (!Number.isSafeInteger(pageSize) || pageSize <= 0 || !Number.isSafeInteger(pageIndex) || pageIndex < 0 || nextNonce < 0n) throw new Error('Invalid pagination');
++  const startNonce = nextNonce - 1n - BigInt(pageIndex) * BigInt(pageSize);
+   const results: Array<{ nonce: bigint; invoiceId: `0x${string}` }> = [];
+ 
+-  for (let i = 0; i < pageSize && startNonce - i >= 0; i++) {
+-    const nonce = BigInt(startNonce - i);
++  for (let i = 0; i < pageSize && startNonce - BigInt(i) >= 0n; i++) {
++    const nonce = startNonce - BigInt(i);
+     results.push({
+       nonce,
+       invoiceId: deriveInvoiceId(chainId, contractAddress, merchant, nonce),
+--- a/src/arcproof/preparedPayment.ts
++++ b/src/arcproof/preparedPayment.ts
+@@ -137,10 +137,16 @@
+     return 'Contract address has changed since payment was prepared';
+   if (prepared.invoiceId !== freshInvoice.invoiceId)
+     return 'Invoice ID has changed';
++  if (freshInvoice.termsHash !== '0x' + '0'.repeat(64))
++    return 'UNSUPPORTED_TERMS: Fresh invoice has nonzero terms';
+   if (freshInvoice.paid)
+     return 'Invoice was paid between preparation and confirmation';
+   if (Number(freshInvoice.expiresAt) <= nowSeconds)
+     return 'Invoice expired between preparation and confirmation';
++  if (freshInvoice.merchant.toLowerCase() !== prepared.invoiceSnapshot.merchant.toLowerCase() ||
++      freshInvoice.expiresAt !== prepared.invoiceSnapshot.expiresAt ||
++      freshInvoice.termsHash !== prepared.invoiceSnapshot.termsHash)
++    return 'Immutable invoice terms changed';
+   if (freshInvoice.amountNative !== prepared.invoiceSnapshot.amountNative)
+     return 'Invoice amount changed (should be impossible for immutable contract)';
+   // Re-derive calldata from fresh invoice and verify it matches the prepared calldata
+--- a/src/arcproof/receiptVerifier.ts
++++ b/src/arcproof/receiptVerifier.ts
+@@ -171,6 +171,8 @@
+     return { status, message, paymentLogIndex: null, blockHash: null, verifiedAt: now, verified: false };
+   }
+ 
++  if (deployment.chainId !== expectedChainId) return fail('WRONG_CHAIN', 'Deployment chain does not match expected chain');
++
+   // 1. Chain ID — RPC must serve the expected chain
+   const chainId = await rpc.getChainId().catch(() => null);
+   if (chainId === null) return fail('PENDING', 'Could not determine chain ID from RPC');
+@@ -196,7 +198,7 @@
+   // 3. Fetch receipt — must be committed and successful
+   const receipt = await rpc.getTransactionReceipt(txHash).catch(() => null);
+   if (!receipt) return fail('PENDING', 'Transaction receipt not found or not yet committed');
+-  if (receipt.status === 'reverted') return fail('FAILED', 'Transaction reverted on chain');
++  if (receipt.status !== 'success') return fail('FAILED', 'Transaction reverted on chain');
+ 
+   // 4. Bind: receipt.transactionHash must match input txHash
+   if (receipt.transactionHash.toLowerCase() !== txHash.toLowerCase())
+@@ -254,6 +256,14 @@
+ 
+   const eventLog = matchingLogs[0];
+   const paymentLogIndex = eventLog.logIndex;
++  if (!Number.isSafeInteger(paymentLogIndex) || paymentLogIndex < 0)
++    return fail('WRONG_EVENT_DATA', 'Invalid event log index');
++  if (eventLog.topics.length !== 4 ||
++      !eventLog.topics.every((topic) => /^0x[0-9a-fA-F]{64}$/.test(topic)) ||
++      !/^0x0{24}[0-9a-fA-F]{40}$/.test(eventLog.topics[2]) ||
++      !/^0x0{24}[0-9a-fA-F]{40}$/.test(eventLog.topics[3]) ||
++      !/^0x[0-9a-fA-F]{64}$/.test(eventLog.data))
++    return fail('WRONG_EVENT_DATA', 'Malformed InvoicePaid ABI encoding');
+ 
+   // 7a. Bind receipt.blockHash to the log's parent tx
+   if (eventLog.transactionHash.toLowerCase() !== txHash.toLowerCase())
+@@ -263,6 +273,9 @@
+   const onchain = await rpc.getInvoice(deployment.contractAddress, invoiceId).catch(() => null);
+   if (!onchain) return fail('PENDING', 'Could not read current invoice state from chain');
+   if (!onchain.paid) return fail('INVOICE_NOT_PAID', 'Invoice reports unpaid on chain');
++
++  if (!addrEq(tx.from, onchain.payer) || !addrEq(receipt.from, onchain.payer))
++    return fail('WRONG_TX_FROM', 'Transaction and receipt sender must equal the recorded payer');
+ 
+   // 9. Decode and verify all event fields against on-chain state
+   //    topic[2] = payer (indexed address)
+@@ -293,6 +306,7 @@
+   const block = await rpc.getBlock(receipt.blockNumber).catch(() => null);
+   if (!block) return fail('PENDING', 'Block not found or not yet committed');
+ 
++  if (block.number !== receipt.blockNumber) return fail('BLOCK_MISMATCH', 'Fetched block number differs from receipt');
+   if (receipt.blockNumber !== onchain.paidBlockNumber)
+     return fail('BLOCK_MISMATCH',
+       `receipt.blockNumber ${receipt.blockNumber} != stored paidBlockNumber ${onchain.paidBlockNumber}`);
+--- a/src/components/arcproof/DashboardScreen.tsx
++++ b/src/components/arcproof/DashboardScreen.tsx
+@@ -4,13 +4,14 @@
+  * Paginated history derived from nextNonce, 20 per page, newest-first.
+  */
+ import React, { useState, useMemo } from 'react';
+-import { useAccount } from 'wagmi';
+ import { parseInvoiceAmount, ParseAmountError } from '../../arcproof/amountParser';
++import { DemoReceipt } from './DemoReceipt';
+ import { deriveInvoiceIds } from '../../arcproof/invoiceId';
+ import { AtomicForwardingWarning } from './Layout';
+ import { AlertCircle, FileText } from 'lucide-react';
+ 
+ const DEMO_CHAIN_ID = 2482601649; // Arc Testnet
++const DEMO_MERCHANT = '0x0000000000000000000000000000000000000002' as `0x${string}`;
+ const DEMO_CONTRACT = '0x0000000000000000000000000000000000000001' as `0x${string}`;
+ 
+ const MAX_TITLE_CODEPOINTS = 80;
+@@ -20,7 +21,6 @@
+ }
+ 
+ export function DashboardScreen() {
+-  const { address, isConnected } = useAccount();
+ 
+   // Create form state
+   const [amountStr, setAmountStr] = useState('0.20');
+@@ -31,6 +31,8 @@
+ 
+   // Simulated nonce for demo (no real contract call)
+   const [demoNonce, setDemoNonce] = useState(0n);
++  const [demoAmounts, setDemoAmounts] = useState<bigint[]>([]);
++  const [exampleReceipt, setExampleReceipt] = useState<{ invoiceId: string; amount: bigint } | null>(null);
+ 
+   // Pagination
+   const [page, setPage] = useState(0);
+@@ -69,14 +71,14 @@
+   function handleCreate() {
+     // Demo mode: increment nonce and show in list. No wallet signing.
+     if (!parsedAmount || amountError || titleError) return;
++    setDemoAmounts((amounts) => [...amounts, parsedAmount]);
+     setDemoNonce((n) => n + 1n);
+     setPage(0);
+   }
+ 
+   const invoiceIds = useMemo(() => {
+-    if (!address) return [];
+-    return deriveInvoiceIds(DEMO_CHAIN_ID, DEMO_CONTRACT, address, demoNonce, PAGE_SIZE, page);
+-  }, [address, demoNonce, page]);
++    return deriveInvoiceIds(DEMO_CHAIN_ID, DEMO_CONTRACT, DEMO_MERCHANT, demoNonce, PAGE_SIZE, page);
++  }, [demoNonce, page]);
+ 
+   const totalPages = Math.ceil(Number(demoNonce) / PAGE_SIZE);
+ 
+@@ -85,7 +87,7 @@
+       {/* Demo mode notice */}
+       <div className="rounded-lg border border-teal-200 bg-teal-50 px-4 py-3 text-sm text-teal-800">
+         <strong>Demo mode</strong> &mdash; no trusted deployment exists. Invoice creation below
+-        demonstrates the ID derivation and UI flow only; no transaction is sent.
++        demonstrates the ID derivation and UI flow only; no transaction is sent. No wallet is needed. The fixed demo merchant and contract are fixtures, not deployed addresses.
+       </div>
+ 
+       <AtomicForwardingWarning />
+@@ -96,12 +98,12 @@
+ 
+         {/* Amount */}
+         <div className="space-y-1">
+-          <label className="text-xs font-medium text-stone-500 uppercase tracking-wider">
++          <label htmlFor="invoice-amount" className="text-xs font-medium text-stone-500 uppercase tracking-wider">
+             Amount (USDC, max 1.000000)
+           </label>
+           <div className="flex items-center gap-2">
+             <input
+-              type="text"
++              id="invoice-amount" type="text"
+               value={amountStr}
+               onChange={(e) => handleAmountChange(e.target.value)}
+               placeholder="0.20"
+@@ -126,11 +128,11 @@
+ 
+         {/* Expiry */}
+         <div className="space-y-1">
+-          <label className="text-xs font-medium text-stone-500 uppercase tracking-wider">
++          <label htmlFor="invoice-expiry" className="text-xs font-medium text-stone-500 uppercase tracking-wider">
+             Expires in (hours, max 168)
+           </label>
+           <input
+-            type="number"
++            id="invoice-expiry" type="number"
+             min={1}
+             max={168}
+             value={lifetimeHours}
+@@ -144,12 +146,12 @@
+ 
+         {/* Title (optional, unbound) */}
+         <div className="space-y-1">
+-          <label className="text-xs font-medium text-stone-500 uppercase tracking-wider">
++          <label htmlFor="invoice-title" className="text-xs font-medium text-stone-500 uppercase tracking-wider">
+             Title (optional, unbound plain text &mdash; not stored on chain)
+           </label>
+           <input
+             type="text"
+-            value={title}
++            id="invoice-title" value={title}
+             onChange={(e) => handleTitleChange(e.target.value)}
+             maxLength={240}
+             placeholder="e.g. Design consultation"
+@@ -168,12 +170,14 @@
+ 
+         <button
+           onClick={handleCreate}
+-          disabled={!parsedAmount || !!amountError || !!titleError || !isConnected}
++          disabled={!parsedAmount || !!amountError || !!titleError}
+           className="w-full bg-teal-600 hover:bg-teal-700 disabled:bg-stone-200 disabled:text-stone-400 text-white rounded-lg py-2.5 text-sm font-medium transition-colors"
+         >
+-          {!isConnected ? 'Connect wallet to create' : 'Create invoice (demo — no signing)'}
++          Create invoice (offline demo — no signing)
+         </button>
+       </section>
++
++      {exampleReceipt && <DemoReceipt invoiceId={exampleReceipt.invoiceId} amount={exampleReceipt.amount} onClose={() => setExampleReceipt(null)} />}
+ 
+       {/* Invoice list */}
+       <section className="space-y-3">
+@@ -206,6 +210,7 @@
+                   <span className="shrink-0 px-2 py-0.5 rounded-full text-xs bg-stone-100 text-stone-500">
+                     demo
+                   </span>
++                  <button className="text-sm border rounded px-2 py-1" onClick={() => setExampleReceipt({ invoiceId, amount: demoAmounts[Number(nonce)] })}>View simulated receipt</button>
+                 </div>
+               ))}
+             </div>
+--- /dev/null
++++ b/src/components/arcproof/DemoReceipt.tsx
+@@ -0,0 +1,32 @@
++/** Offline example only. Never reads a wallet, RPC, or trusted deployment. */
++import { formatAmountDisplay } from '../../arcproof/amountParser';
++import { exportReceiptsJson, exportReceiptsCsv, type ReceiptExportRecord } from '../../arcproof/exportUtils';
++export function DemoReceipt({invoiceId, amount, onClose}: {invoiceId: string; amount: bigint; onClose: () => void}) {
++ const record: ReceiptExportRecord = {
++  chainId: 2482601649, deploymentId: 'offline-fixture',
++  contract: '0x0000000000000000000000000000000000000001', invoiceId,
++  transactionHash: null, paymentLogIndex: null, amountNative: amount.toString(),
++  amountDisplay: formatAmountDisplay(amount),
++  merchant: '0x0000000000000000000000000000000000000002', payer: null,
++  paidAt: null, paidBlockNumber: null, blockHash: null,
++  verificationStatus: 'SIMULATED_NOT_VERIFIED', mode: 'fixture',
++ };
++ function download(kind: 'json' | 'csv') {
++  const data = kind === 'json' ? exportReceiptsJson([record]) : exportReceiptsCsv([record]);
++  const url = URL.createObjectURL(new Blob([data], {type: kind === 'json' ? 'application/json' : 'text/csv'}));
++  const link = document.createElement('a'); link.href = url; link.download = `arcproof-SIMULATED-${invoiceId.slice(0,10)}.${kind}`; link.click(); URL.revokeObjectURL(url);
++ }
++ return <section aria-label="Simulated receipt" className="rounded-xl border border-amber-300 bg-amber-50 p-5 space-y-3">
++  <h3 className="font-semibold">DEMO — simulated receipt, not payment proof</h3>
++  <p className="text-sm">Offline fixture only. No payment occurred, no wallet was connected, and no transaction was sent. This is not a tax invoice.</p>
++  <p className="font-mono break-all text-sm">Invoice fixture: {invoiceId}</p>
++  <p className="text-sm">Example amount: {record.amountDisplay} USDC</p>
++  <p className="font-mono break-all text-sm">Fixture merchant: {record.merchant}</p>
++  <p className="text-sm">Payer, transaction, payment time, block, and event index: unavailable (null). Verification: SIMULATED_NOT_VERIFIED.</p>
++  <div className="flex flex-wrap gap-3">
++   <button className="border rounded px-3 py-2" onClick={()=>download('json')}>Export simulated JSON</button>
++   <button className="border rounded px-3 py-2" onClick={()=>download('csv')}>Export simulated CSV</button>
++   <button className="border rounded px-3 py-2" onClick={onClose}>Close example</button>
++  </div>
++ </section>;
++}
+--- a/src/components/arcproof/EvidenceScreen.tsx
++++ b/src/components/arcproof/EvidenceScreen.tsx
+@@ -36,9 +36,9 @@
+   { id: 'T18', description: 'Amount parser: exact boundaries and invalid strings (Vitest)', status: 'pass' },
+   { id: 'T19', description: 'Manifest: tampering, unknown deployment, isolation, terms gate (Vitest)', status: 'pass' },
+   { id: 'T20', description: 'PreparedPayment: explicit fields, context validation (Vitest)', status: 'pass' },
+-  { id: 'T21', description: 'Stale context / no auto-rebroadcast (Vitest)', status: 'pass' },
++  { id: 'T21', description: 'Wallet rejection, timeout, and no auto-rebroadcast', status: 'not_run', note: 'Synchronous context helper tests only; no live wallet or asynchronous lifecycle demonstrated.' },
+   { id: 'T22', description: 'Receipt verifier: forged receipts, wrong chain/contract/emitter (Vitest)', status: 'pass' },
+-  { id: 'T23', description: 'Inconsistent blockhash / RPC conflict / uncommitted (Vitest)', status: 'pass' },
++  { id: 'T23', description: 'Receipt recovery and RPC conflict handling', status: 'not_run', note: 'Block-hash mismatch unit test exists. Single-block hash recovery and second-endpoint conflict handling are not implemented.' },
+   { id: 'T24', description: 'Nonce pagination, integer strings, export dedupe, untrusted flags (Vitest)', status: 'pass' },
+   { id: 'T25', description: 'Arc native-USDC system Transfer event at official emitter', status: 'not_run', note: 'Requires real Arc Testnet + verified emitter config. Not run. Anvil does not prove Arc log behaviour.' },
+   { id: 'T26', description: 'Arc committed-block finality and receipt verification on real chain', status: 'not_run', note: 'Requires real Arc Testnet deployment. Not run.' },
+@@ -62,8 +62,8 @@
+ 
+         <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+           {[
+-            { label: 'Forge tests', value: '69 passed' },
+-            { label: 'Vitest tests', value: 'T18–T24 passed' },
++            { label: 'Forge tests', value: '73 (69 Studio + 4 supplemental)' },
++            { label: 'Vitest tests', value: '132 local unit / DOM tests' },
+             { label: 'Deployment', value: 'None' },
+             { label: 'Grant eligibility', value: 'HOLD' },
+           ].map(({ label, value }) => (
+@@ -75,7 +75,7 @@
+         </div>
+ 
+         <div className="text-xs text-stone-500 space-y-1">
+-          <p><strong>Source review:</strong> Independent review in progress. G1 export: 69 tests (58 unit + 10 acceptance + 1 independent).</p>
++          <p><strong>Source review:</strong> Independent review in progress; frontend results are local unit coverage, not full acceptance or live-wallet evidence. G1: 69 Studio-export tests plus 4 native supplemental tests, 73 independently passed.</p>
+           <p><strong>No deployment:</strong> No transaction hashes. No contract addresses on testnet. Trusted manifest is empty.</p>
+           <p><strong>Grant:</strong> Eligibility HOLD. Free prototype development authorized for testnet/local scope per 2026-10-20 directive. Do not claim grant eligibility established.</p>
+           <p><strong>Atomic forwarding:</strong> The contract passes funds directly to the merchant atomically. This is not custody. It does touch funds. It is not a claim of escrow-free operation — the contract's execution touches and routes value.</p>
+@@ -88,7 +88,7 @@
+           <h3 className="font-medium text-stone-800 text-sm">Test matrix</h3>
+           <div className="flex gap-3 text-xs text-stone-500">
+             <span className="flex items-center gap-1"><CheckCircle size={12} className="text-teal-600" /> {passCount} passed</span>
+-            <span className="flex items-center gap-1"><AlertCircle size={12} className="text-stone-400" /> {notRunCount} not run (Arc-specific)</span>
++            <span className="flex items-center gap-1"><AlertCircle size={12} className="text-stone-400" /> {notRunCount} not run</span>
+           </div>
+         </div>
+         <div className="divide-y divide-stone-100">
+@@ -115,11 +115,11 @@
+         <ul className="text-xs text-stone-600 space-y-1.5 list-disc list-outside ml-4">
+           <li>No real deployment. Trusted manifest is empty. All signing disabled.</li>
+           <li>Arc native-USDC system Transfer events (T25/T26) not verified. Official emitter address not confirmed.</li>
+-          <li>Receipt verifier: runtime bytecode hash check uses presence check only; full keccak256 comparison is G3 scope.</li>
++          <li>Receipt verifier compares runtime keccak256 against the supplied manifest. Real network evidence is still unavailable.</li>
+           <li>P0 UI only supports ordinary EOA wallets. Other account types are explicitly unsupported.</li>
+           <li>No nonzero termsHash protocol in P0. Historical paid invoices with nonzero hash are readable but payment blocked in UI.</li>
+-          <li>Pending tx persistence uses localStorage key binding; survives reload but not cross-device.</li>
+-          <li>No backend, database, login service, or LLM at runtime.</li>
++          <li>Pending transaction recovery is not demonstrated in this UI; cache-key helpers do not prove wallet recovery.</li>
++          <li>Offline fixture requests and simulated exports do not send transactions or establish chain evidence. No backend, database, login service, or LLM at runtime.</li>
+         </ul>
+       </div>
+     </div>
+--- a/src/components/arcproof/PayScreen.tsx
++++ b/src/components/arcproof/PayScreen.tsx
+@@ -3,29 +3,16 @@
+  * Signing is DISABLED: no trusted deployment exists. Shows PreparedPayment fields
+  * and explains why signing is blocked.
+  */
+-import React, { useMemo, useState } from 'react';
++import React, { useMemo } from 'react';
+ import { useAccount } from 'wagmi';
+-import { AlertCircle, ShieldOff, Clock } from 'lucide-react';
++import { ShieldOff } from 'lucide-react';
+ import { PRODUCTION_MANIFEST, resolveDeployment } from '../../arcproof/manifest';
+-import { preparePayment, isPrepareError } from '../../arcproof/preparedPayment';
+-import { formatAmountDisplay } from '../../arcproof/amountParser';
+-import type { InvoiceSnapshot } from '../../arcproof/preparedPayment';
+ 
+ interface PayScreenProps {
+   chainId: number;
+   deploymentId: string;
+   invoiceId: `0x${string}`;
+ }
+-
+-/** Placeholder invoice for display when no real data is available */
+-const PLACEHOLDER_INVOICE: InvoiceSnapshot = {
+-  invoiceId: '0x0000000000000000000000000000000000000000000000000000000000000000',
+-  merchant: '0x0000000000000000000000000000000000000000',
+-  amountNative: 200_000_000_000_000_000n,
+-  expiresAt: BigInt(Math.floor(Date.now() / 1000) + 86400),
+-  termsHash: '0x0000000000000000000000000000000000000000000000000000000000000000',
+-  paid: false,
+-};
+ 
+ function AddressDisplay({ address, label }: { address: string; label: string }) {
+   return (
+@@ -37,20 +24,13 @@
+ }
+ 
+ export function PayScreen({ chainId, deploymentId, invoiceId }: PayScreenProps) {
+-  const { address, isConnected, chainId: walletChainId } = useAccount();
+-  const [now] = useState(() => Math.floor(Date.now() / 1000));
++  const { isConnected, chainId: walletChainId } = useAccount();
+ 
+   const deployment = useMemo(
+     () => resolveDeployment(PRODUCTION_MANIFEST, chainId, deploymentId),
+     [chainId, deploymentId],
+   );
+ 
+-  const prepared = useMemo(() => {
+-    if (!address) return null;
+-    return preparePayment(deployment, address, PLACEHOLDER_INVOICE, 1, now);
+-  }, [deployment, address, now]);
+-
+-  const isExpired = Number(PLACEHOLDER_INVOICE.expiresAt) <= now;
+   const wrongChain = isConnected && walletChainId !== chainId;
+ 
+   return (
+@@ -67,62 +47,11 @@
+         </div>
+       )}
+ 
+-      {/* Invoice card */}
+-      <div className="bg-white rounded-xl border border-stone-200 shadow-sm p-5 space-y-4">
+-        <div className="flex items-start justify-between gap-4">
+-          <div>
+-            <p className="text-xs font-medium text-stone-500 uppercase tracking-wider">Amount</p>
+-            <p className="text-3xl font-semibold tabular-nums text-stone-900 mt-0.5">
+-              {formatAmountDisplay(PLACEHOLDER_INVOICE.amountNative)}
+-            </p>
+-            <p className="text-xs text-stone-400 font-mono mt-0.5">
+-              {PLACEHOLDER_INVOICE.amountNative.toString()} native units
+-            </p>
+-          </div>
+-          {isExpired && (
+-            <span className="shrink-0 flex items-center gap-1 text-xs bg-red-50 text-red-600 border border-red-200 rounded-full px-2 py-0.5">
+-              <Clock size={12} /> Expired
+-            </span>
+-          )}
+-        </div>
+-
+-        <AddressDisplay address={invoiceId} label="Invoice ID" />
+-        <AddressDisplay address={PLACEHOLDER_INVOICE.merchant} label="Recipient (merchant)" />
+-
+-        <div className="space-y-0.5">
+-          <p className="text-xs font-medium text-stone-500 uppercase tracking-wider">Expires</p>
+-          <p className="text-sm text-stone-700">
+-            {new Date(Number(PLACEHOLDER_INVOICE.expiresAt) * 1000).toLocaleString()}
+-          </p>
+-        </div>
+-
+-        <div className="space-y-0.5">
+-          <p className="text-xs font-medium text-stone-500 uppercase tracking-wider">Terms hash</p>
+-          <p className="font-mono text-xs text-stone-500">{PLACEHOLDER_INVOICE.termsHash}</p>
+-        </div>
+-      </div>
+-
+-      {/* PreparedPayment debug display (demo only) */}
+-      {prepared && !isPrepareError(prepared) && (
+-        <div className="bg-stone-50 rounded-lg border border-stone-200 p-4 text-xs space-y-2">
+-          <p className="font-medium text-stone-600 uppercase tracking-wider text-xs">
+-            Prepared payment (demo — not sent)
+-          </p>
+-          <div className="font-mono text-stone-500 space-y-1 break-all">
+-            <p>to: {prepared.contract}</p>
+-            <p>value: {prepared.value.toString()}</p>
+-            <p>data: {prepared.calldata.slice(0, 18)}...</p>
+-            <p>chainId: {prepared.chainId}</p>
+-          </div>
+-        </div>
+-      )}
+-
+-      {prepared && isPrepareError(prepared) && (
+-        <div className="rounded-lg border border-red-200 bg-red-50 px-4 py-3 flex gap-2">
+-          <AlertCircle size={16} className="text-red-500 shrink-0 mt-0.5" />
+-          <p className="text-sm text-red-700">{prepared.message}</p>
+-        </div>
+-      )}
++      <section className="bg-white rounded-xl border border-stone-200 p-5 space-y-3" aria-label="Unavailable invoice">
++        <AddressDisplay address={invoiceId} label="Requested invoice ID (not verified)" />
++        <p className="text-sm text-stone-700">Amount, recipient, expiry, and terms are unavailable. No invoice has been loaded from a trusted deployment.</p>
++        <p className="text-sm text-stone-700">Requested chain: {chainId}. Requested deployment: {deploymentId}.</p>
++      </section>
+ 
+       {/* Chain warning */}
+       {wrongChain && (
+@@ -140,8 +69,6 @@
+           ? 'Connect wallet to pay'
+           : !deployment
+           ? 'No trusted deployment — signing disabled'
+-          : isExpired
+-          ? 'Invoice expired'
+           : 'Pay invoice (deployment required)'}
+       </button>
+ 
+--- a/src/components/arcproof/ReceiptScreen.tsx
++++ b/src/components/arcproof/ReceiptScreen.tsx
+@@ -73,7 +73,7 @@
+       resolvedDeployment,
+       formInvoiceId as `0x${string}`,
+       (formTxHash || null) as `0x${string}` | null,
+-      0n, null, null, null, null,
++      null, null, null, null, null,
+       verifyResult, false,
+     );
+     const blob = new Blob([exportReceiptsJson([record])], { type: 'application/json' });
+@@ -90,7 +90,7 @@
+       resolvedDeployment,
+       formInvoiceId as `0x${string}`,
+       (formTxHash || null) as `0x${string}` | null,
+-      0n, null, null, null, null,
++      null, null, null, null, null,
+       verifyResult, false,
+     );
+     const blob = new Blob([exportReceiptsCsv([record])], { type: 'text/csv' });
+@@ -123,9 +123,9 @@
+             { label: 'Transaction hash (optional)', value: formTxHash, setter: setFormTxHash, placeholder: '0x...' },
+           ].map(({ label, value, setter, placeholder }) => (
+             <div key={label} className="space-y-1">
+-              <label className="text-xs font-medium text-stone-500 uppercase tracking-wider">{label}</label>
++              <label htmlFor={`receipt-${label}`} className="text-xs font-medium text-stone-500 uppercase tracking-wider">{label}</label>
+               <input
+-                type="text"
++                id={`receipt-${label}`} type="text"
+                 value={value}
+                 onChange={(e) => setter(e.target.value)}
+                 placeholder={placeholder}

@@ -1,0 +1,23 @@
+{
+  "source": "arcproof-native-reconciled",
+  "hash_entries": 30,
+  "hash_mismatches": [],
+  "project_tests": 132,
+  "additional_dom_tests": 6,
+  "total_tests": 138,
+  "adversarial_probes_passed": 26,
+  "typecheck": "passed",
+  "build": "passed",
+  "lint": "passed",
+  "browser": "actual_desktop_core_flows_and_mobile_responsive_pass_scoped",
+  "full_g2_acceptance": "not_run",
+  "patch_sha256": "1197b674362cabba796f8ebf9925dff12f4a614748dd330704417bcdcb1fecf3",
+  "browser_download_completion": "not_confirmed",
+  "mobile_width_observed": 375,
+  "mobile_scroll_width": 375,
+  "desktop_width_observed": 1138,
+  "desktop_scroll_width": 1138,
+  "responsive_incremental_patch_sha256": "95e04b41742de63ef4dd7911a40afd08153003f0f8d6ad246f1663600308db09",
+  "browser_console": "sample_contains_extension_metadata_errors_no_app_origin_entries",
+  "exact_390_1280": "not_tested"
+}

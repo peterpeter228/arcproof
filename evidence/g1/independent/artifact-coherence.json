@@ -1,0 +1,40 @@
+{
+  "sourceSha256": "8699071d250c834cd1166ece0d4001b7de95af7562796e19305ce2812635e25b",
+  "sourceKeccak": "0x9e8a352f07941c1ddc285d1a008b8dd94159617e021beb033e2fdf43c82b5074",
+  "artifactSourceKeccak": "0x9e8a352f07941c1ddc285d1a008b8dd94159617e021beb033e2fdf43c82b5074",
+  "abiEqualsArtifact": true,
+  "abiEqualsIndependentBuild": true,
+  "bytecodeEqualsIndependentBuild": true,
+  "runtimeEqualsIndependentBuild": true,
+  "functions": [
+    "AMOUNT_QUANTUM",
+    "MAX_INVOICE_AMOUNT",
+    "MAX_LIFETIME",
+    "createInvoice",
+    "getInvoice",
+    "nextNonce",
+    "payInvoice"
+  ],
+  "receiveFallback": [],
+  "compiler": {
+    "version": "0.8.28+commit.7893614a"
+  },
+  "settings": {
+    "remappings": [
+      "@openzeppelin/contracts/=node_modules/@openzeppelin/contracts/",
+      "forge-std/=lib/forge-std/src/"
+    ],
+    "optimizer": {
+      "enabled": true,
+      "runs": 200
+    },
+    "metadata": {
+      "bytecodeHash": "ipfs"
+    },
+    "compilationTarget": {
+      "contracts/ArcProofInvoices.sol": "ArcProofInvoices"
+    },
+    "evmVersion": "paris",
+    "libraries": {}
+  }
+}

@@ -1,32 +1,23 @@
-# ArcProof 当前执行状态
+# ArcProof technical checkpoint
 
-更新：2026-10-20 03:57 UTC。阶段：FREE_STUDIO_PROTOTYPE_GENERATING。
+Stage: LOCAL_OFFLINE_PROTOTYPE_ACCEPTED / G3_BLOCKED_WALLET.
 
-## 现在执行什么
+## Verified local scope
 
-用户于 03:37:56 UTC 要求直接执行，不再纠结国籍。免费 Arc Studio 原型合约、界面与自动测试已经获授权，独立于尚未通过的 Grant 资格 G0。当前启动说明为 AGENTS.md、START_HERE.txt 和 prompts/ARC_STUDIO_PROTOTYPE_BUILD.txt。不要使用旧 prompts/ARC_STUDIO_BUILD.txt 或 docs/source 的历史指令阻塞构建。
+G1 local contract review: 73 passed, 0 failed, 0 skipped (69 exported plus four independent supplemental tests). Exact reviewed Solidity, ABI, creation and runtime bytecode coherence evidence is preserved under evidence/g1.
 
-## 实际进度与当前动作
+Final2 local interface prototype: 132 project tests plus six independent DOM tests, 138/138 passed; 26/26 adversarial probes passed. TypeScript, read-only lint and Vite production build passed. Source hashes for all30 reviewed files match the native final tree and Studio integrated export 2026-10-20 05:27:20 UTC. Original Studio generation and later attributed native patches are kept distinct.
 
-- 私有仓库：https://github.com/peterpeter228/arcproof 。最近确认 main 提交：1eb11f60df4a393359a8a5982a3d8eef1b2f018a（文档检查点，不是应用代码）。
-- 原始 21 文件完整保存在 docs/source/ArcProof_Dot_Pack_2026-10-20；原包哈希与完整 PRD 对比已验证。
-- 规格附件上传已于 03:56:28 UTC 获批准。首次 Send 于 03:56:35 UTC 因附件加提示合计超过服务 10,000 字符限制失败，尚未开始生成。
-- 已在同一个项目用 8,579 字符纯文本 G1 详细规格恢复，03:57:15 UTC 开始生成；页面显示 Stop response。未重复创建项目。
-- 已验证 Studio 项目：https://studio.arc.io/app/2dbdda0d-1b70-408b-ae23-cccb8a4b8753?thread=12185290-60f7-4446-9e99-5ca51e8c30b0 。当前状态为生成中，尚无源码导出或实际测试结果，不能称为实现或测试已完成。
-- 28 项应用验收仍 not_run；下一步等当前生成完成，读取同一项目真实源码与测试输出，再独立核验。
+Actual browser core flows passed: amount precision error/recovery, keyboard no-wallet simulated creation, explicitly simulated receipts, unknown deployment Pending, and truthful evidence page. Responsive retest measured mobile375/scroll375 and desktop1138/scroll1138 without overflow. Exact390/1280 widths were not tested. JSON/CSV clicks were observed; completed browser downloads remain unconfirmed, with payload correctness covered by executable tests. Captured console sample had no app-origin errors, but extension-origin errors were present; no global clean-console claim.
 
-## 独立的 Grant 资格轨道
+## Not complete
 
-Grant G0 当前 6 项通过、6 项未闭合，不代表免费原型被暂停。通过项为公开入口、本期规则、Studio 来源要求、原子直付/IP 条款适配、审计要求识别、Studio 账号与可用额度。未知项包括个人参赛/领奖、收款适用条件、截止时刻核实、钱包交接与实际付款日。
+This accepts the local offline prototype only, not full real-chain G2/T18–T24 acceptance or a professional audit. Production deployment manifest is empty; live signing remains disabled. No testnet/mainnet deployment, real payment, grant submission or income evidence is claimed. G3 is blocked on a usable wallet/testnet workflow; no real-network acceptance test has run.
 
-公开 Submit Build 已于 03:16:25 UTC 到达正常登录页面，但未登录提交申请。Studio 0% 用量不代表无限额度。页面截止 11 月 2 日 13:59 在 UTC+09:00 环境下换算 04:59 UTC 仍为推断。fast_cash=false；无收益保证。不再以国籍问题阻塞原型，也未获许可发送官方 Q&A 或其他外部询问。
+Next stage is scoped testnet workflow validation only after its prerequisites are established. Browser lifecycle races, replacement/recovery, paidBlockNumber hash recovery, secondary-RPC conflict handling and real Arc USDC logs/finality still require evidence. Unknown grant qualification is not an implementation success claim.
 
-## 仍须独立授权的动作
+## Run and evidence
 
-真钱、主网、付费额度/服务、公开发布/公开仓库、Grant 报名或提交、对外通信及新持久访问均不由免费构建许可覆盖。独立 Argon 审查已另获许可，但调用失败：HTTP 503、model_not_found（供应方模型通道不可用）；未返回审查或用量，无重试。该失败不阻止免费构建，也不代表新增其他审查/费用授权。不得请求钱包秘密。
+Start with RUN_中文.md for actual commands and supported limits. The package.json build entry is the Vite CLI (bun run vite build), not a nonexistent build script. Evidence is under evidence/g1 and evidence/g2. Reviewer-only files under reviewer-tests reproduce the additional six DOM checks and 26 probes without altering canonical source.
 
-## 预算、安全和恢复
-
-累计工程上限 18 小时，包括并行任务实际工作、失败重试、测试及文档；等待用户批准的空闲时间不计实际工程工时。工时账目前仅记录部分已证实工时，需负责人汇总，不能把局部数当累计总数。建议 20 美元非消费许可；目前无新增现金支出。
-
-安全范围、28 项验收、真实 Studio 来源和资金操作门槛不变。读回同一项目/仓库和当前生成状态后继续，不重复创建项目或忽略待决操作。只有实际产生项目、代码、测试及部署证据才更新对应字段。
+Original docs/source are unchanged; root AGENTS.md is preserved. Node dependencies, secrets, accounts, logs containing private data, caches and deployment scripts are excluded. This source checkpoint is not a public deployment.

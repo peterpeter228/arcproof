@@ -1,0 +1,17 @@
+$ vitest run
+
+ RUN  v2.1.9 /workspace/shared/arcproof-native-reconciled
+
+ ✓ src/arcproof/__tests__/T18_amountParser.test.ts (30 tests) 25ms
+ ✓ src/arcproof/__tests__/nativeRepair.test.ts (8 tests) 20ms
+ ✓ src/arcproof/__tests__/T22_receiptVerifier.test.ts (26 tests) 33ms
+ ✓ src/arcproof/__tests__/T20_preparedPayment.test.ts (22 tests) 39ms
+ ✓ src/arcproof/__tests__/T19_manifest.test.ts (18 tests) 61ms
+ ✓ src/arcproof/__tests__/T24_exportUtils.test.ts (27 tests) 56ms
+ ✓ src/arcproof/__tests__/offlineDemo.test.tsx (1 test) 120ms
+
+ Test Files  7 passed (7)
+      Tests  132 passed (132)
+   Start at  14:26:11
+   Duration  3.83s (transform 1.54s, setup 0ms, collect 6.84s, tests 355ms, environment 1.80s, prepare 4.43s)
+
