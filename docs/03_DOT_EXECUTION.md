@@ -12,7 +12,7 @@ OpenAI 官方说明 dot 能在云端持续工作，委派后台任务，并通�
 
 在 G0 中并行做可独立的只读工作：正式活动条款、Studio CLI 与登录能力、开发环境和工具版本。适格性所需本人资料只收集真正必要的部分，不从 IP、语言或账号时区猜。证据字段见 evidence/gate.json。
 
-G0 不通过时，不生成新的资金合约。输出具体未闭合项与剩余材料；不要因网页抓取 405 就宣布活动不存在，也不要绕过站点的权限或验证。
+按 2026-10-20 03:37:56 UTC 用户授权，免费 Studio 原型代码和自动测试可独立于 Grant G0 执行。资格未闭合只限制资格声明及未授权外部动作，不再阻止该免费原型。记录具体未闭合项；不要因网页抓取 405 就宣布活动不存在，也不要绕过站点的权限或验证。
 
 ## 3 运行环境探测
 
@@ -26,10 +26,10 @@ Arc Studio CLI 文档最低要求 Node 20，实际版本以可用且仍受支持
 
 用官方 Studio 登录流程。账号已经授权就复用，不再要求同一授权；没有会话时走私密登录或本人接管，不在聊天粘贴 token。
 
-把 prompts/ARC_STUDIO_BUILD.txt 作为起点，附本包合约规格文件作为上下文。官方 CLI 可用以下模式驱动，具体选项由当前版本 --help 复核：
+把 prompts/ARC_STUDIO_PROTOTYPE_BUILD.txt 作为起点，附本包合约规格文件作为上下文。官方 CLI 可用以下模式驱动，具体选项由当前版本 --help 复核：
 
 ```text
-arc-studio run --prompt-file prompts/ARC_STUDIO_BUILD.txt --session arcproof-p0 --output json
+arc-studio run --prompt-file prompts/ARC_STUDIO_PROTOTYPE_BUILD.txt --session arcproof-p0 --output json
 arc-studio pull --session arcproof-p0 --out ./studio-export
 ```
 

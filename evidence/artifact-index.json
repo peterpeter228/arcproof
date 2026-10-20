@@ -2,49 +2,49 @@
   "schemaVersion": "1.0",
   "project": "ArcProof",
   "preparedOn": "2026-10-20",
-  "packageStage": "G0_HOLD",
+  "packageStage": "FREE_STUDIO_PROTOTYPE_GENERATING",
   "note": "Working checkpoint manifest; original manifest preserved under docs/source. Hashes do not prove application execution.",
   "files": [
     {
       "path": "AGENTS.md",
-      "bytes": 6035,
-      "sha256": "895274d727a6372403b247185beec35c94b251c1f26691dfb1ffcb5d9cb0d18d",
+      "bytes": 7510,
+      "sha256": "283b92adfb6847e3062b6b4ccd1a7b498d6b1854192d05b20bf7a82868be7875",
       "role": "planning_or_g0_evidence"
     },
     {
       "path": "README.md",
-      "bytes": 2828,
-      "sha256": "4fd3f369b1efed2473e9d0d945b78dfde5d425255d03e0b449fec27d9ace847a",
+      "bytes": 3131,
+      "sha256": "4b3c02373f0576833a9a6649b1ddabca440b72a913fe2555ce534694d940411e",
       "role": "planning_or_g0_evidence"
     },
     {
       "path": "START_HERE.txt",
-      "bytes": 2850,
-      "sha256": "494bb59f4dc9c99535fc2be85e4bc0cb3124dbeebd62391ddec8052158087b91",
+      "bytes": 3081,
+      "sha256": "117c6d1f902a5a85f7dcc1cbacafb3fe0e0bafb3cd7047e4018a8d080e1055b4",
       "role": "planning_or_g0_evidence"
     },
     {
       "path": "STATUS.md",
-      "bytes": 3463,
-      "sha256": "d058104821dc016f4e32f7e5db853ca313d845db0c6cce75919e2f9314281b08",
+      "bytes": 3337,
+      "sha256": "491600089703a938cc133065ff0bacea5f192235db3c0b82c1c3072720e9e92b",
       "role": "planning_or_g0_evidence"
     },
     {
       "path": "docs/01_VERIFIED_REVIEW.md",
-      "bytes": 11079,
-      "sha256": "d4e9c5e170f944955081a41de8c34066775cc27d1823d9af2a3a32628d431827",
+      "bytes": 11164,
+      "sha256": "d3f8b1b033a56b85690696f36bfd71ab3db5cab1c1485abee27cb68898b5c5da",
       "role": "planning_or_g0_evidence"
     },
     {
       "path": "docs/02_PRODUCT_PRD.md",
-      "bytes": 26075,
-      "sha256": "561bcf1dc416b44cdc2eb2f70aa085bd16984c6f2a34875fcaac216e11d94212",
+      "bytes": 26246,
+      "sha256": "0c012744135c3be7f3efbcd21517c9ecffe9afc353b1316076fa7ea7cac10a14",
       "role": "planning_or_g0_evidence"
     },
     {
       "path": "docs/03_DOT_EXECUTION.md",
-      "bytes": 7048,
-      "sha256": "12c21a4a8050e25aafecca94d56bbcfd7d0f27391782dbc81366f1651fea1262",
+      "bytes": 7213,
+      "sha256": "fed02948255c21303eaae8b0fa8e3526d3a87c55f1ea3a44b53c4e3c631e3a24",
       "role": "planning_or_g0_evidence"
     },
     {
@@ -67,8 +67,8 @@
     },
     {
       "path": "docs/CONTRACT_SPEC.md",
-      "bytes": 22595,
-      "sha256": "ba75d4282ccb8e5e8e2d37b519bc9c85e67404fba24bc2cf36217a1ae9c3bce1",
+      "bytes": 22744,
+      "sha256": "6000b05f580d087364491023d0cb0f9ee3948e8084a635feaa1b0f94722b84d8",
       "role": "planning_or_g0_evidence"
     },
     {
@@ -85,8 +85,14 @@
     },
     {
       "path": "docs/IMPORT_AND_EXECUTION_NOTES.md",
-      "bytes": 1148,
-      "sha256": "d4ac264b7b824ea360a28e438401d06ca693cbaced5ae96372d2933aed76f15d",
+      "bytes": 1269,
+      "sha256": "e2f15a7848fcacbd974b4e2bcc8dd3c3c11c7e001f64228bb7a587f49a255216",
+      "role": "planning_or_g0_evidence"
+    },
+    {
+      "path": "docs/PROTOTYPE_AUTHORIZATION.md",
+      "bytes": 1126,
+      "sha256": "91a30620c81754e95795ce5f8a30c0cc7f3cbb3d3dadbe0b41cdac75d63aa847",
       "role": "planning_or_g0_evidence"
     },
     {
@@ -241,8 +247,8 @@
     },
     {
       "path": "evidence/gate.json",
-      "bytes": 10409,
-      "sha256": "083ae69a9a54be75db2ddb12bb63a9ca22189bdcecaaa76040c135e8564cdac6",
+      "bytes": 12053,
+      "sha256": "5e075a2f5240d5dab235392c37a40ad40af3fb759ce571498203ed9c18827b4f",
       "role": "planning_or_g0_evidence"
     },
     {
@@ -265,8 +271,14 @@
     },
     {
       "path": "prompts/ARC_STUDIO_BUILD.txt",
-      "bytes": 6847,
-      "sha256": "0f8492b9f4378c41a466b7b782a0808b23a4bbd39063b5d1c743ee39c0e007fa",
+      "bytes": 7047,
+      "sha256": "e75fc38fe6b1c9577fbcc44793c5e523284dd4ee30fb929f8f39f2fed647c532",
+      "role": "planning_or_g0_evidence"
+    },
+    {
+      "path": "prompts/ARC_STUDIO_PROTOTYPE_BUILD.txt",
+      "bytes": 7306,
+      "sha256": "e6a3402fd085aecee8bd075ba5e3f22799c69ae4e8bfc9a87352c3dd6d5b4af0",
       "role": "planning_or_g0_evidence"
     },
     {

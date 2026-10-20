@@ -1,3 +1,5 @@
+HISTORICAL PROMPT — DO NOT EXECUTE. Use ARC_STUDIO_PROTOTYPE_BUILD.txt for the current user-authorized free prototype. The original G0-before-generation language below is retained only as history.
+
 Build ArcProof, a deliberately small invoice-bound native-USDC payment prototype on ARC TESTNET ONLY. The supervising dot must have completed G0 (current event eligibility, submission requirements, Studio availability). If G0 is not confirmed, stop before generating financial execution code and report the missing prerequisite.
 
 Use the existing Vite + React + TypeScript + Foundry workspace. Preserve real Studio provenance: project URL, session, changed files, test results, and exported source. Do not deploy to or transact on mainnet. Do not request wallet secrets.

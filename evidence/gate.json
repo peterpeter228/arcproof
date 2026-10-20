@@ -5,7 +5,7 @@
   "preparedOn": "2026-10-20",
   "note": "Imported planning pack verified; current official-rule research is partial. No G0 pass or implementation authorization inferred.",
   "project_started_at": "2026-10-20T03:04:27Z",
-  "currentStage": "G0_HOLD",
+  "currentStage": "FREE_STUDIO_PROTOTYPE_GENERATING",
   "g0_status": "blocked",
   "g0_pass": false,
   "grantEngineeringAllowed": false,
@@ -211,7 +211,7 @@
   },
   "executionState": {
     "applicationCodeWritten": false,
-    "studioProjectCreated": false,
+    "studioProjectCreated": true,
     "applicationTestsRun": false,
     "testnetDeployed": false,
     "mainnetDeployed": false,
@@ -223,9 +223,9 @@
     "customerPaymentReceived": false,
     "grantPaymentReceived": false,
     "applicationCommit": null,
-    "studioProjectUrl": null
+    "studioProjectUrl": "https://studio.arc.io/app/2dbdda0d-1b70-408b-ae23-cccb8a4b8753?thread=12185290-60f7-4446-9e99-5ca51e8c30b0"
   },
-  "nextAction": "Await user decision on narrow public official Q&A inquiry about applicable participation/payout conditions and deadline, and prospective wallet type. No external inquiry sent. Keep G0_HOLD; do not create Studio project or application code.",
+  "nextAction": "Monitor current Studio generation in the existing project; export actual source/test output when complete, then independently verify. Do not create duplicate project.",
   "repository": {
     "url": "https://github.com/peterpeter228/arcproof",
     "visibility": "private",
@@ -234,12 +234,45 @@
   },
   "checkpointPublication": {
     "status": "ready_for_authorized_docs_update",
-    "priorPublishedCommit": "d777024f6251f46f1d2fb3dcda6bd1351a4ac788"
+    "priorPublishedCommit": "1eb11f60df4a393359a8a5982a3d8eef1b2f018a"
   },
   "pendingUserDecision": {
     "requestReference": "Sentinel_e86abacbd92c8191be10795ebb660972",
     "purpose": "Permission for bounded official public Q&A inquiry and prospective wallet handoff details",
-    "status": "pending",
+    "status": "not_a_prototype_blocker",
     "externalInquirySent": false
+  },
+  "prototypeAuthorization": {
+    "status": "passed",
+    "authorizedAt": "2026-10-20T03:37:56Z",
+    "userMessageReference": "Sentinel_5e9795c32e4c8191b6fcdcdbf24911b8",
+    "scope": "Free Arc Studio prototype generation and testing independently of unresolved grant-qualification G0",
+    "grantEligibilityConfirmed": false,
+    "mainnetAuthorized": false,
+    "realFundsAuthorized": false,
+    "paidServicesAuthorized": false,
+    "grantSubmissionAuthorized": false,
+    "externalInquiryAuthorized": false,
+    "newPersistentAccessAuthorized": false,
+    "stopOn": "Payment request, quota exhaustion, real funds, mainnet, new persistent access or action outside scope; preserve work and request only missing approval."
+  },
+  "prototypeExecution": {
+    "status": "running",
+    "startedAt": "2026-10-20T03:57:15Z",
+    "checkedAt": "2026-10-20T03:57:30Z",
+    "reason": "Same project recovered after initial combined prompt/attachment 10k-character limit failure; 8,579-character text-only G1 prompt now generating, Stop response visible.",
+    "studioProjectUrl": "https://studio.arc.io/app/2dbdda0d-1b70-408b-ae23-cccb8a4b8753?thread=12185290-60f7-4446-9e99-5ca51e8c30b0",
+    "applicationCodeGenerated": null,
+    "testsRun": false,
+    "initialSendAt": "2026-10-20T03:56:35Z",
+    "uploadApprovalCompletedAt": "2026-10-20T03:56:28Z"
+  },
+  "externalReview": {
+    "provider": "Argon",
+    "status": "blocked",
+    "error": "503 model_not_found: provider model channel unavailable",
+    "reviewReceived": false,
+    "usageReturned": false,
+    "retried": false
   }
 }
