@@ -1,3 +1,31 @@
+# ArcProof 当前运行与复验说明（2026-10-21）
+
+当前源码基线是私有 GitHub `d34138b19a3878fd095413822c48d28fea6a4c58`；本次文档修订的交付仅以随后远端提交及回读收据确认。应用包含 Offline Demo 与既有测试网路径，不能再把整份源码描述为“从未部署测试网”或“所有签名始终禁用”。已有测试网部署并不证明当前核验器已在 Studio 集成或通过真实链路验收。Studio 仅有上次核实为旧 `8588d80` 的记录，本次未重查；主网仍未配置。本次复验没有连接钱包、签名、部署或发交易。
+
+## 当前可复现命令
+
+从项目根目录使用 Bun 1.4.3（本次 Node 为 24.19.0）：
+
+1. `bun install --frozen-lockfile --ignore-scripts`
+2. `bun run dev --host 127.0.0.1`，按终端地址打开，仅使用无需钱包的 Offline Demo 检查本地演示。
+3. `bun run test`：253 项项目测试。
+4. `bun run vitest run --config qa/native-settlement-review/vitest.config.ts`：137 项独立对抗测试。
+5. `bun run vitest run --config qa/new-independent-review/vitest.config.ts`：24 项 jsdom UI/钱包测试，不是浏览器布局验收。
+6. `bun run typecheck`
+7. `bun run oxlint src scripts` 和 `bun run oxlint --type-aware src scripts`：只读源码检查。
+8. `bun run vite build`：构建通过，有依赖 PURE 注释及大于 500 kB 分块警告。
+9. `bun run oxlint .`：本次仍失败，124 项诊断来自六个历史 reviewer/helper 文件，不能当成全仓库通过。
+
+`bun run lint` / `bun run check` 包含 `--fix`，会修改文件，不适用于原样复验。本次未运行它们。Foundry 当前不可用，未重跑未改动的合约；历史 73 项结果不是本轮新结果。`deploy:self`、`compass:deploy`、`fetch:abi` 不是本包支持的运行入口，不要执行。
+
+详见 [STATUS.md](STATUS.md) 和 [本轮基线报告](evidence/g4-baseline-20261021/baseline-report.json)。全部 240 个基线文件在安装和测试后仍与远端一致。历史浏览器通过记录不继承给当前测试网界面；真实 raw receipt、finalized 响应、双钱包 T25/T26 和当前浏览器验收仍未闭合。不要把本地测试或自转 `controlled_demo` 当成客户收入、主网完成或专业审计。
+
+## 历史离线版本说明（原文保留，非当前整体状态）
+
+下文中的“未部署”“真实签名禁用”“132 项”“尚未执行测试网操作”和“此包交付不代表 GitHub 已推送”只描述当时的离线包。当前交付状态以上文及 STATUS.md 为准；历史补丁、日志与来源未重写。
+
+---
+
 # ArcProof 离线原型运行说明
 
 这是无需钱包的模拟演示与源码包，不是已上线支付服务。模拟发票、收据和导出均不是付款证明。未部署到测试网或主网，真实签名禁用，生产部署清单为空；参赛资格与奖励未知。本地离线原型已通过限定范围浏览器验收，但不等于真实链路的完整 G2 验收通过。

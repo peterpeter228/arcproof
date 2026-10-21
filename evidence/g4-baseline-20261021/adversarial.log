@@ -1,0 +1,10 @@
+
+ RUN  v2.1.9 /workspace/scratch/c01bd6fe117d/arcproof-upload-20261020/candidate/arcproof
+
+ ✓ qa/native-settlement-review/independent.test.ts (137 tests) 59ms
+
+ Test Files  1 passed (1)
+      Tests  137 passed (137)
+   Start at  11:06:12
+   Duration  761ms (transform 127ms, setup 0ms, collect 336ms, tests 59ms, environment 0ms, prepare 186ms)
+

@@ -1,3 +1,5 @@
+> Dated reconciliation — 2026-10-21: the native-verifier candidate was subsequently delivered to private GitHub at `d34138b19a3878fd095413822c48d28fea6a4c58`, now freshly hash-checked and retested. This documentation revision is based on that verified baseline; delivery is confirmed only by a subsequent remote commit/readback receipt. Studio was last verified at the earlier `8588d80` checkpoint, not freshly inspected or updated here. Browser acceptance, genuine raw RPC/finality capture and two-wallet T25/T26 acceptance remain incomplete. No new wallet action, mainnet action or public publication occurred. See [current STATUS](../STATUS.md) and [fresh baseline evidence](../evidence/g4-baseline-20261021/baseline-report.json). Statements below about no GitHub update describe the original local implementation task, not its later private delivery.
+
 # Native settlement verifier candidate
 
 Scope: local candidate based on private repository source commit `8588d80dd08a5ee819efc0d2f723ed50655f8b9d`. No GitHub update, Studio integration, new transaction, mainnet action, or publication is performed by this work.

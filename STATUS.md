@@ -1,3 +1,19 @@
+# Current checkpoint — 2026-10-21 UTC
+
+Stage: PRIVATE_GITHUB_BASELINE_VERIFIED / DOCUMENTATION_RECONCILIATION.
+
+Private GitHub `main` was freshly read at `d34138b19a3878fd095413822c48d28fea6a4c58`. All 240 repository files matched the retrieved remote tree before and after the baseline checks. The source backup ZIP and all 325 backup-manifest entries also matched their recorded hashes. The private upload occurred on 2026-10-20; its receipt is preserved in `evidence/g4-baseline-20261021/github-delivery-receipt-20261020.json`. This dated documentation revision is based on that verified baseline; its delivery is confirmed only by a subsequent remote commit/readback receipt, not by this text. It is not a new deployment.
+
+Fresh baseline checks: 253 project tests, 137 independent adversarial tests and 24 jsdom UI/wallet tests passed. TypeScript, read-only source lint, type-aware source lint and Vite production build passed. Whole-repository read-only lint still fails with 124 existing diagnostics in archived reviewer/helper files. The mutating aggregate `check` was not run and is not claimed green. Foundry was unavailable and unchanged contracts were not rerun. See `evidence/g4-baseline-20261021/baseline-report.json` and adjacent logs. Test-runner wall-clock labels are not canonical UTC timestamps.
+
+Studio's last verified version remains the earlier `8588d80` checkpoint; Studio was not freshly inspected or updated by this baseline task. The known testnet deployment and observed same-wallet demo are historical evidence, not acceptance of the current verifier. No current real-browser rendering, genuine raw RPC/finality capture, post-integration verification or two-wallet T25/T26 acceptance is claimed. The 24 jsdom tests are not browser-layout tests. Mainnet remains unconfigured; no new wallet transaction, signing, deployment, public publication or grant submission occurred. Same-wallet evidence stays `controlled_demo`, never customer revenue. Grant eligibility and total project effort reconciliation remain unresolved.
+
+## Historical checkpoints below
+
+The following text records earlier stages in their original scope. Statements such as “No GitHub update” describe those earlier tasks, not the later private delivery confirmed above. Historical logs and reports have not been rewritten as fresh results.
+
+---
+
 # Native settlement candidate (local, pending parent review)
 
 Stage: NATIVE_SETTLEMENT_CANDIDATE_LOCAL_REVIEW.

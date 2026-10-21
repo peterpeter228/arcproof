@@ -1,0 +1,66 @@
+{
+  "verifiedAtUtc": "2026-10-21T02:06:36Z",
+  "timestampNote": "UTC from conversation clock; runner log local clock differs and must not be treated as UTC.",
+  "repository": "peterpeter228/arcproof",
+  "remoteMain": "d34138b19a3878fd095413822c48d28fea6a4c58",
+  "sourcePath": "/workspace/scratch/c01bd6fe117d/arcproof-upload-20261020/candidate/arcproof",
+  "remoteTreeFilesMatchedBeforeAndAfter": 240,
+  "backupManifestEntriesMatched": 325,
+  "zipSha256": "cc96af1518b5a586fd7988b0d11b726f994347b787c929ca187ac7cf28b2f9eb",
+  "runtime": {
+    "node": "24.19.0",
+    "bun": "1.4.3",
+    "install": "bun install --frozen-lockfile --ignore-scripts"
+  },
+  "checks": {
+    "project-tests": {
+      "exit": 0,
+      "log": "project-tests.log"
+    },
+    "adversarial": {
+      "exit": 0,
+      "log": "adversarial.log"
+    },
+    "ui-wallet": {
+      "exit": 0,
+      "log": "ui-wallet.log"
+    },
+    "typecheck": {
+      "exit": 0,
+      "log": "typecheck.log"
+    },
+    "lint-source": {
+      "exit": 0,
+      "log": "lint-source.log"
+    },
+    "lint-type": {
+      "exit": 0,
+      "log": "lint-type.log"
+    },
+    "lint-full": {
+      "exit": 1,
+      "log": "lint-full.log"
+    },
+    "build": {
+      "exit": 0,
+      "log": "build.log"
+    }
+  },
+  "passedTests": {
+    "project": 253,
+    "independentAdversarial": 137,
+    "jsdomUiWallet": 24
+  },
+  "wholeRepoLintDiagnostics": 124,
+  "notRun": [
+    "aggregate check (mutates with --fix)",
+    "Foundry (not installed; unchanged contracts)",
+    "real browser rendering",
+    "live RPC/raw receipt/finality acceptance",
+    "Studio integration",
+    "wallet transactions",
+    "mainnet",
+    "publication"
+  ],
+  "sourceEdits": false
+}

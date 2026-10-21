@@ -1,0 +1,421 @@
+{
+  "schemaVersion": "1.0",
+  "task": "Upload tested ArcProof native-settlement candidate",
+  "verifiedAtUtc": "2026-10-20T22:02:16Z",
+  "repository": "peterpeter228/arcproof",
+  "visibility": "private",
+  "branch": "main",
+  "previousCommit": "8588d80dd08a5ee819efc0d2f723ed50655f8b9d",
+  "commit": "d34138b19a3878fd095413822c48d28fea6a4c58",
+  "commitUrl": "https://github.com/peterpeter228/arcproof/commit/d34138b19a3878fd095413822c48d28fea6a4c58",
+  "treeSha": "b53ea82dfb340f3221e339420ce874dd938d540b",
+  "localTestedCandidateCommit": "761ad69457734d6ecf3d9bd7b32422e8fa1adceb",
+  "sourceBackup": {
+    "libraryFileId": "libfile_a272cf61f6cc8191aaade0af6789f614",
+    "filename": "ArcProof_native_verifier_candidate_20261020.zip",
+    "sha256": "cc96af1518b5a586fd7988b0d11b726f994347b787c929ca187ac7cf28b2f9eb"
+  },
+  "update": {
+    "force": false,
+    "expectedSha": "8588d80dd08a5ee819efc0d2f723ed50655f8b9d",
+    "success": true,
+    "unrelatedRemoteChanges": false,
+    "deletedFiles": 0
+  },
+  "verification": {
+    "completeCandidateTreeFiles": 240,
+    "completeTreeHashesMatched": true,
+    "changedFiles": 51,
+    "changedFilesIndividuallyFetchedAndHashed": 51,
+    "branchHeadRechecked": true,
+    "files": [
+      {
+        "path": "docs/NATIVE_SETTLEMENT_VERIFIER.md",
+        "gitBlobSha": "3c1d87ee3b4aa53160e3d8735540bbb7ba941740",
+        "sha256": "bed36fa4662431898a8f5a7d6c4796d124294c25b5cfe70bb46d624e876e7ebc",
+        "bytes": 6006,
+        "verified": true
+      },
+      {
+        "path": "docs/TESTNET_INTEGRATION.md",
+        "gitBlobSha": "64fdb809fed3972c32c1b195c63a22691cede1f9",
+        "sha256": "3d039be670ba8ec2ad4267675d1c5e0327bca9425b7b1bfbcf04436824f422f2",
+        "bytes": 6342,
+        "verified": true
+      },
+      {
+        "path": "evidence/artifact-index.json",
+        "gitBlobSha": "16423719560c8aac826ed76025930108307726b0",
+        "sha256": "7224ec6f43e27b59c55527a117b4e1c6f26935bc14ea36f774f52ad8caaa04e8",
+        "bytes": 21038,
+        "verified": true
+      },
+      {
+        "path": "evidence/effort-ledger.json",
+        "gitBlobSha": "1544f70524e682f55d9d85e6b658055d877e2776",
+        "sha256": "c9e76d9ca3d10dea9f11f22ed42eec3d1ba50abf4a5b51dda51f4219f1d35d26",
+        "bytes": 7028,
+        "verified": true
+      },
+      {
+        "path": "evidence/g3-native-verifier/baseline-archived-lint.exit",
+        "gitBlobSha": "d00491fd7e5bb6fa28c517a0bb32b8b506539d4d",
+        "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865",
+        "bytes": 2,
+        "verified": true
+      },
+      {
+        "path": "evidence/g3-native-verifier/baseline-archived-lint.log",
+        "gitBlobSha": "6464d357b4a184a38b5955f5822509a0b54ff378",
+        "sha256": "1e95517e3bb01ed686b8a0d3e01ee2282f5dd825e62640fc76628114186cc24d",
+        "bytes": 29194,
+        "verified": true
+      },
+      {
+        "path": "evidence/g3-native-verifier/build.exit",
+        "gitBlobSha": "573541ac9702dd3969c9bc859d2b91ec1f7e6e56",
+        "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+        "bytes": 2,
+        "verified": true
+      },
+      {
+        "path": "evidence/g3-native-verifier/build.log",
+        "gitBlobSha": "aacbf84291bc7b3f77f11d6c3c42946af7c99d54",
+        "sha256": "df8fec1b1644dc9aa5dfea1d01fb2cc5bc15ce47558561d25543d27d08ebbdcf",
+        "bytes": 10639,
+        "verified": true
+      },
+      {
+        "path": "evidence/g3-native-verifier/candidate-report.json",
+        "gitBlobSha": "86f2155c6a8a4972c94a06da970c6bcb30fcab0f",
+        "sha256": "ef8536146cb118793e9f5efef31c721f1e83b6147a221886e9c957a3578a8927",
+        "bytes": 5831,
+        "verified": true
+      },
+      {
+        "path": "evidence/g3-native-verifier/focused-tests.exit",
+        "gitBlobSha": "573541ac9702dd3969c9bc859d2b91ec1f7e6e56",
+        "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+        "bytes": 2,
+        "verified": true
+      },
+      {
+        "path": "evidence/g3-native-verifier/focused-tests.log",
+        "gitBlobSha": "b8a48fe2078d072998ce0785582da6a1cb297640",
+        "sha256": "4485303b97106d4e6f09d86fc224ecfc6ca7f7ff8a4da074fac4549f9d00d581",
+        "bytes": 10234,
+        "verified": true
+      },
+      {
+        "path": "evidence/g3-native-verifier/full-tests.exit",
+        "gitBlobSha": "573541ac9702dd3969c9bc859d2b91ec1f7e6e56",
+        "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+        "bytes": 2,
+        "verified": true
+      },
+      {
+        "path": "evidence/g3-native-verifier/full-tests.log",
+        "gitBlobSha": "ccc6764387b43d6549d3a5a5bc475782a7a386cb",
+        "sha256": "e67aad33ac90684af5a2ee2c5bf3f7851ecb2b941fd523433250e8a1d2ebeb92",
+        "bytes": 1076,
+        "verified": true
+      },
+      {
+        "path": "evidence/g3-native-verifier/legacy-qa-lint.exit",
+        "gitBlobSha": "d00491fd7e5bb6fa28c517a0bb32b8b506539d4d",
+        "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865",
+        "bytes": 2,
+        "verified": true
+      },
+      {
+        "path": "evidence/g3-native-verifier/legacy-qa-lint.log",
+        "gitBlobSha": "7e513c08a20316a5db33d2abe99e538e1b1bd58b",
+        "sha256": "ab9f428dcb18c970cb33f0c2c47a147f3074603a65fcdc3bcb2f25cdf3efc5fe",
+        "bytes": 28346,
+        "verified": true
+      },
+      {
+        "path": "evidence/g3-native-verifier/legacy-ui-tests.exit",
+        "gitBlobSha": "573541ac9702dd3969c9bc859d2b91ec1f7e6e56",
+        "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+        "bytes": 2,
+        "verified": true
+      },
+      {
+        "path": "evidence/g3-native-verifier/legacy-ui-tests.log",
+        "gitBlobSha": "61f1052d07076b25414701734c7a468c6121addd",
+        "sha256": "d7c9d35d7ff1d8ff99170f1790f0dd557141487d68278ae5a9f614c6bb58e748",
+        "bytes": 402,
+        "verified": true
+      },
+      {
+        "path": "evidence/g3-native-verifier/lint-source.exit",
+        "gitBlobSha": "573541ac9702dd3969c9bc859d2b91ec1f7e6e56",
+        "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+        "bytes": 2,
+        "verified": true
+      },
+      {
+        "path": "evidence/g3-native-verifier/lint-source.log",
+        "gitBlobSha": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0,
+        "verified": true
+      },
+      {
+        "path": "evidence/g3-native-verifier/lint-type.exit",
+        "gitBlobSha": "573541ac9702dd3969c9bc859d2b91ec1f7e6e56",
+        "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+        "bytes": 2,
+        "verified": true
+      },
+      {
+        "path": "evidence/g3-native-verifier/lint-type.log",
+        "gitBlobSha": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0,
+        "verified": true
+      },
+      {
+        "path": "evidence/g3-native-verifier/lint.exit",
+        "gitBlobSha": "d00491fd7e5bb6fa28c517a0bb32b8b506539d4d",
+        "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865",
+        "bytes": 2,
+        "verified": true
+      },
+      {
+        "path": "evidence/g3-native-verifier/lint.log",
+        "gitBlobSha": "73924d4d093dc156b43ac559e0de3ab0fc8d571c",
+        "sha256": "b793f0f2079f56da5db05a644df7c7102ff22dc1edd03b5e080ad3d2dab374bd",
+        "bytes": 29194,
+        "verified": true
+      },
+      {
+        "path": "evidence/g3-native-verifier/observed-browser-evidence.json",
+        "gitBlobSha": "af6f56a08e7e045688b4a4ae22260742ac4fad97",
+        "sha256": "68ddf5bc076c5f27e162033698008dc48c06535c5718d1ea0c14c636f5e08406",
+        "bytes": 4812,
+        "verified": true
+      },
+      {
+        "path": "evidence/g3-native-verifier/restore-verification.json",
+        "gitBlobSha": "8445a7d7675b2bfcc984113fa406099430a87550",
+        "sha256": "b227ce77ad21bf72944d34c730c0ba9c2f1170b2516d7d1cb061801808686b44",
+        "bytes": 346,
+        "verified": true
+      },
+      {
+        "path": "evidence/g3-native-verifier/typecheck.exit",
+        "gitBlobSha": "573541ac9702dd3969c9bc859d2b91ec1f7e6e56",
+        "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+        "bytes": 2,
+        "verified": true
+      },
+      {
+        "path": "evidence/g3-native-verifier/typecheck.log",
+        "gitBlobSha": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0,
+        "verified": true
+      },
+      {
+        "path": "evidence/gate.json",
+        "gitBlobSha": "d667217d9f2f4e51ceea8f61453f5ee6448edf9f",
+        "sha256": "716e416c51acdc3ccbd8f555ec300b82fe58d89f1203b9dd3bdd7a7cea207ada",
+        "bytes": 12604,
+        "verified": true
+      },
+      {
+        "path": "evidence/test-results.json",
+        "gitBlobSha": "9867daf213284ec35be77fa6998d29a9f4008d02",
+        "sha256": "162238f5dc69f654cb1c31ad622b923edfd14ac94cdd5b06bba74438fc9008b8",
+        "bytes": 19991,
+        "verified": true
+      },
+      {
+        "path": "qa/native-settlement-review/expanded-run.log",
+        "gitBlobSha": "28724fb1a9e474015b35576f5499ecaab2eb02e4",
+        "sha256": "192d3eccd737ec395fb47cd6651e74ba1a50f6dafb1a3f4b6a55715f7961ec8d",
+        "bytes": 16982,
+        "verified": true
+      },
+      {
+        "path": "qa/native-settlement-review/final-run.log",
+        "gitBlobSha": "c3df5de9f289e497dec80c8d308dd9e18dab36d7",
+        "sha256": "8620b17736cb2a79710072b980f990ec08cbe59b8da3fb0672990d7a0925b341",
+        "bytes": 18242,
+        "verified": true
+      },
+      {
+        "path": "qa/native-settlement-review/final-source-sha256.txt",
+        "gitBlobSha": "ca783f130923607f4745b87c44a198a509adf51b",
+        "sha256": "1dee0277b50f71f2358dc5707eaa529b931eb1e34329bde0252b3f0e21186247",
+        "bytes": 565,
+        "verified": true
+      },
+      {
+        "path": "qa/native-settlement-review/first-run.log",
+        "gitBlobSha": "7e23092cf7b46dc9dbc9303aa415dc01b380f8e6",
+        "sha256": "296afc709d1eca876d9dc536701d175f500a6d7a2436862d29eabdb22fbde147",
+        "bytes": 16248,
+        "verified": true
+      },
+      {
+        "path": "qa/native-settlement-review/independent.test.ts",
+        "gitBlobSha": "18f83b0c208163cdd48ede27b7b2046a3c835295",
+        "sha256": "f1d2eb4829916d1f15b0cdb7ca9ca5d6f620cffd4f31c55d856da63673c1e6c7",
+        "bytes": 18993,
+        "verified": true
+      },
+      {
+        "path": "qa/native-settlement-review/initial-source-sha256.txt",
+        "gitBlobSha": "7f79ffed1557a19f99fbf3dc8e439ec75c5c1e46",
+        "sha256": "21feb7da94fd0961f59fcf75f9b7217d4fce204c80b3991a36f1479ad04b08cb",
+        "bytes": 565,
+        "verified": true
+      },
+      {
+        "path": "qa/native-settlement-review/lint-before.log",
+        "gitBlobSha": "02ed86af25773a14c9ffc936ab0f174f9f60e92a",
+        "sha256": "9c02cc079200460b3aa280b2f0de61cbe74ac0b20f7cc5b4ce7e54c9d4186302",
+        "bytes": 2566,
+        "verified": true
+      },
+      {
+        "path": "qa/native-settlement-review/lint-final.log",
+        "gitBlobSha": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0,
+        "verified": true
+      },
+      {
+        "path": "qa/native-settlement-review/remediation-run.log",
+        "gitBlobSha": "18c9c9d5981bd37cbe2256368c1ffe3248ae90be",
+        "sha256": "508ceab3cfd6e936f9f96afd068508a0016f08f698bc14c924c120ef8c317282",
+        "bytes": 15027,
+        "verified": true
+      },
+      {
+        "path": "qa/native-settlement-review/REVIEW.md",
+        "gitBlobSha": "09be4419aeddbec47374e585712be8c2f4ee4c83",
+        "sha256": "8234b5322ac1f498e156e06dee26890da6cb0e96f44ada665f5aa2a28bd6719c",
+        "bytes": 7571,
+        "verified": true
+      },
+      {
+        "path": "qa/native-settlement-review/second-run.log",
+        "gitBlobSha": "f449096da283adc94038dd5eaf45d1264e13bfa1",
+        "sha256": "52dda5366a961aec14dfe8fcf925d4b3f90fb5a5f6dea3fc7371b84237d64b7c",
+        "bytes": 21692,
+        "verified": true
+      },
+      {
+        "path": "qa/native-settlement-review/vitest.config.ts",
+        "gitBlobSha": "17929d3bd654564e6d4add3e32333550d08dd8c3",
+        "sha256": "6cbe3671bffd445fcb727769ceb5b67a72b93d26546dcd2a310a9b3a7dfa8191",
+        "bytes": 165,
+        "verified": true
+      },
+      {
+        "path": "src/arcproof/__tests__/fixtures/observedPayment.ts",
+        "gitBlobSha": "749cc023a5bf78f24005dc451741f062de8c7872",
+        "sha256": "da7bda6762055575355e82f1389a22bc0082dcdd361c108315f61e15b5f63cda",
+        "bytes": 3456,
+        "verified": true
+      },
+      {
+        "path": "src/arcproof/__tests__/nativeSettlement.test.ts",
+        "gitBlobSha": "0ee0924dacf6365539864932d017b8961eb131d3",
+        "sha256": "55b8ee82a5e0e08a59b872bb6ef62d245fb3ba1af4a093161dd461decb5c3a51",
+        "bytes": 13178,
+        "verified": true
+      },
+      {
+        "path": "src/arcproof/__tests__/T22_receiptVerifier.test.ts",
+        "gitBlobSha": "a68204bc7de541cadf4d0d2041e436c2c7a5a26b",
+        "sha256": "1e2943c602024f05a6603b47306637290ecd06e35e8ecdb98955b231a7ecbafe",
+        "bytes": 15464,
+        "verified": true
+      },
+      {
+        "path": "src/arcproof/arcSettlement.ts",
+        "gitBlobSha": "7158de92a308a9802d866d31ec562951268d1cdb",
+        "sha256": "47a04fd31c27c4fd444a1e68463a2e1a3426cfdd2a8dc3c0cfcff8b75c891fc9",
+        "bytes": 1735,
+        "verified": true
+      },
+      {
+        "path": "src/arcproof/exportUtils.ts",
+        "gitBlobSha": "a85b5e19df249de273f593b8879757be76492e8d",
+        "sha256": "6d50562a74a6e79eb5f8750ddff0dbc62d1e4617330da5c138e3f76dac3b5b00",
+        "bytes": 8350,
+        "verified": true
+      },
+      {
+        "path": "src/arcproof/manifest.ts",
+        "gitBlobSha": "d6ac965396706c8ef947963fa49ffdcdbef76226",
+        "sha256": "c65ef5a548db9454c838b5ce154b811403bbd96b91aebedfb585db587c533357",
+        "bytes": 3236,
+        "verified": true
+      },
+      {
+        "path": "src/arcproof/receiptVerifier.ts",
+        "gitBlobSha": "ebb0baee35bee051a367c112f80072a5af23725c",
+        "sha256": "0505e1e7fe5f87ffbc9dc33f6e4caaf3651fef24d51a9f5b8e7461dc50f2452a",
+        "bytes": 23205,
+        "verified": true
+      },
+      {
+        "path": "src/arcproof/testnet.ts",
+        "gitBlobSha": "5214ff0016dcde6e6e8a590eaed0fb14a351ccbc",
+        "sha256": "729b3325f1b1574b9a9ea9c5e96061cd9228b25959c6ebd56b574313cc81c811",
+        "bytes": 2481,
+        "verified": true
+      },
+      {
+        "path": "src/arcproof/testnetClient.ts",
+        "gitBlobSha": "4bac587a839332d7d64abcd9f63173273a8a8300",
+        "sha256": "ab95aa1b60696c0d39a4afccec5b968a2e419643cb5d9b36bde8874150254ebc",
+        "bytes": 21165,
+        "verified": true
+      },
+      {
+        "path": "STATUS.md",
+        "gitBlobSha": "67fce5c6d85976d416c8ac27bd32a63149d230e5",
+        "sha256": "da3d02b330ab4c17bf30762bf191ae55a5bce8da75f1b5a32d47a4ede88ef8e8",
+        "bytes": 5625,
+        "verified": true
+      }
+    ]
+  },
+  "testBasis": {
+    "testsRerunDuringUpload": false,
+    "note": "No code was changed during upload. The complete remote tree and individual changed file contents match the archived tested candidate byte for byte. Test evidence refers to the earlier run of those exact bytes, not a newly executed build or CI run.",
+    "projectTestsPassed": 253,
+    "independentAdversarialTestsPassed": 137,
+    "existingUiWalletRegressionTestsPassed": 24,
+    "typecheck": "passed_on_exact_candidate",
+    "sourceLint": "passed_on_exact_candidate",
+    "productionBuild": "passed_on_exact_candidate",
+    "wholeRepositoryLint": "124 unchanged historical diagnostics; not claimed green",
+    "solidityTests": "not rerun; Solidity, ABI and artifact unchanged"
+  },
+  "githubCi": {
+    "checkRuns": 0,
+    "statuses": 0,
+    "workflowRuns": 0,
+    "combinedStatus": "pending",
+    "interpretation": "GitHub returned pending with zero statuses. No CI run/result exists for this commit at observation time; do not claim GitHub CI passed."
+  },
+  "actionBoundaries": {
+    "studioChanged": false,
+    "newWalletActions": false,
+    "newTransactions": false,
+    "mainnet": false,
+    "publicPublication": false,
+    "permissionChanges": false,
+    "liveRawReceiptFinalityAcceptance": "not_run"
+  },
+  "historicalCheckpointNote": "Candidate STATUS and reports record the pre-upload local checkpoint. This receipt records its subsequent authorized private GitHub persistence; Studio and live acceptance remain unchanged.",
+  "nextStep": "Parent prepares the requested prompt Markdown pinned to this verified commit. Studio execution is not authorized by this upload task."
+}

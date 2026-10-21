@@ -1,8 +1,10 @@
-# ArcProof 项目评估与 dot 开发包
+# ArcProof 发票直付原型与核验证据
 
-本包把 2026 年 10 月 20 日 Gemini 报告中的候选逐项核实，并将唯一条件主选收敛为 ArcProof 发票直付与付款凭证工具。它用于让 dot 开展有门槛、有上限、可核验的开发；尚未包含应用实现或已通过的测试。
+本仓库现在包含 ArcProof 合约、React 界面、原生 USDC 收据核验器和测试，不再只是初始开发规格。2026-10-21 已重新核对私有 GitHub main 的 `d34138b19a3878fd095413822c48d28fea6a4c58`，240 个文件与远端一致；本次文档修订基于该已核实版本；是否交付以随后远端提交及回读收据为准，不由本文自行声明。
 
-**当前开始方式：执行 START_HERE.txt 和 prompts/ARC_STUDIO_PROTOTYPE_BUILD.txt。** 用户已于 2026-10-20 03:37:56 UTC 授权免费 Studio 原型构建与测试，独立于尚未闭合的 Grant G0。不要把资格、支付日或个人胜率当作已知。原包保存在 docs/source；当前工作状态以 STATUS.md 为准。
+**恢复入口：[STATUS.md](STATUS.md)；运行入口：[RUN_中文.md](RUN_中文.md)。** 新一轮本地复验为 253 项项目测试、137 项独立对抗测试和 24 项 jsdom UI/钱包测试通过；类型检查、源码 lint 和构建通过，全仓库 lint 仍有 124 项历史诊断，不能宣称整体全绿。当前真实浏览器、原始 RPC/最终性和双钱包验收尚未完成；Studio 仅沿用上次核实的旧版本记录，本次未重查或更新。
+
+原始规划和生成来源仍保留。免费原型工作独立于未闭合的 Grant G0；测试网自测不是主网、收入、审计或参赛资格证明。以下索引包含历史规划，具体当前状态以 STATUS.md 和有日期的证据为准。
 
 ## 文件索引
 
@@ -10,11 +12,11 @@
 | --- | --- |
 | START_HERE.txt | 可直接交给 dot 的完整启动指令 |
 | AGENTS.md | 执行约束、固定范围、授权与证据规则 |
-| STATUS.md | 初始状态和恢复入口 |
+| STATUS.md | 当前状态、版本边界和历史检查点 |
 | docs/01_VERIFIED_REVIEW.md | 逐项核实、选择理由与现金经济 |
 | docs/02_PRODUCT_PRD.md | 详细功能、交互、架构、数据和阶段计划 |
 | docs/CONTRACT_SPEC.md | 合约函数、事件、状态、不变量和收据验证 |
-| docs/TEST_MATRIX.md | 28 项分层验收要求，尚未运行 |
+| docs/TEST_MATRIX.md | 28 项分层验收要求，不以本地测试数替代真实链路验收 |
 | docs/03_DOT_EXECUTION.md | 云端/本地、Studio、并行任务、恢复和交接 |
 | docs/04_BUSINESS_VALIDATION.md | 99/299 美元报价试验、付费信号与停止条件 |
 | docs/05_SUBMISSION_PACK.md | G0检查表、英文材料模板与视频分镜 |
@@ -25,7 +27,7 @@
 | prompts/ARC_STUDIO_REVIEW.txt | 独立审查提示，禁止以生成者自述代替证据 |
 | evidence/gate.json | G0与现金筛选状态，未知值保留null |
 | evidence/deployments.json | 测试网/主网部署记录模板，无虚构地址 |
-| evidence/test-results.json | 28项测试初始not_run状态 |
+| evidence/test-results.json | 历史分层测试记录；最新基线见 evidence/g4-baseline-20261021 |
 | evidence/receipt.example.json | 未执行收据模板，不能用作实际付款证明 |
 | evidence/effort-ledger.json | 工时、费用及收入分账模板 |
 | evidence/artifact-index.json | 本包文件哈希和用途，不证明应用已经运行 |
