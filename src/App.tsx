@@ -10,7 +10,7 @@ import { PayScreen } from './components/arcproof/PayScreen';
 import { ReceiptScreen } from './components/arcproof/ReceiptScreen';
 import { EvidenceScreen } from './components/arcproof/EvidenceScreen';
 import { TestnetDashboard, TestnetPayScreen, TestnetReceiptScreen } from './components/arcproof/TestnetScreens';
-import { TESTNET_MANIFEST } from './arcproof/testnet';
+import { TESTNET_MANIFEST, isBytes32 } from './arcproof/testnet';
 import { resolveDeployment } from './arcproof/manifest';
 
 type NavTab = 'dashboard' | 'verify' | 'evidence';
@@ -30,21 +30,14 @@ function parseHash(hash: string): HashRoute {
   const params = new URLSearchParams(search ?? '');
   const parts = pathname.split('/').filter(Boolean);
 
-  if (parts[0] === 'pay' && parts[1] && parts[2] && parts[3]) {
+  // Keep malformed payment/receipt routes on a read-only error page, not the wallet dashboard.
+  if (parts[0] === 'pay' || parts[0] === 'receipt') {
     return {
-      screen: 'pay',
-      chainId: Number(parts[1]),
+      screen: parts[0],
+      chainId: parts[1] && /^[0-9]+$/.test(parts[1]) ? Number(parts[1]) : undefined,
       deploymentId: parts[2],
-      invoiceId: parts[3] as `0x${string}`,
-    };
-  }
-  if (parts[0] === 'receipt' && parts[1] && parts[2] && parts[3]) {
-    return {
-      screen: 'receipt',
-      chainId: Number(parts[1]),
-      deploymentId: parts[2],
-      invoiceId: parts[3] as `0x${string}`,
-      txHash: params.get('tx') ?? undefined,
+      invoiceId: (parts.length === 4 ? parts[3] : undefined) as `0x${string}` | undefined,
+      txHash: params.has('tx') ? (params.getAll('tx').length === 1 ? params.get('tx')! : '') : undefined,
     };
   }
   return { screen: null };
@@ -74,21 +67,23 @@ export default function App() {
   // Determine what to render
   let content: React.ReactNode;
   let effectiveTab: NavTab = activeTab;
+  let hideWallet = activeTab === 'verify';
 
   if (route.screen === 'pay') {
     const deployment = resolveDeployment(TESTNET_MANIFEST, route.chainId!, route.deploymentId!);
+    hideWallet = !(deployment && route.invoiceId && isBytes32(route.invoiceId));
     content = (
-      deployment ? <TestnetPayScreen key={`${route.chainId}:${route.deploymentId}:${route.invoiceId}`} invoiceId={route.invoiceId!} /> : <PayScreen
-        chainId={route.chainId!}
-        deploymentId={route.deploymentId!}
-        invoiceId={route.invoiceId!}
+      deployment && route.invoiceId && isBytes32(route.invoiceId) ? <TestnetPayScreen key={`${route.chainId}:${route.deploymentId}:${route.invoiceId}`} invoiceId={route.invoiceId} /> : <PayScreen
+        chainId={route.chainId}
+        deploymentId={route.deploymentId}
+        invoiceId={route.invoiceId}
       />
     );
     effectiveTab = 'dashboard'; // no specific tab
   } else if (route.screen === 'receipt') {
     const deployment = resolveDeployment(TESTNET_MANIFEST, route.chainId!, route.deploymentId!);
     content = (
-      deployment ? <TestnetReceiptScreen key={`${route.chainId}:${route.deploymentId}:${route.invoiceId}`} invoiceId={route.invoiceId} txHash={route.txHash} /> : <ReceiptScreen
+      deployment && route.invoiceId && isBytes32(route.invoiceId) && (route.txHash === undefined || isBytes32(route.txHash)) ? <TestnetReceiptScreen key={`${route.chainId}:${route.deploymentId}:${route.invoiceId}:${route.txHash ?? ""}`} invoiceId={route.invoiceId} txHash={route.txHash} /> : <ReceiptScreen
         chainId={route.chainId}
         deploymentId={route.deploymentId}
         invoiceId={route.invoiceId}
@@ -96,6 +91,7 @@ export default function App() {
       />
     );
     effectiveTab = 'verify';
+    hideWallet = true;
   } else {
     switch (activeTab) {
       case 'dashboard':
@@ -111,7 +107,7 @@ export default function App() {
   }
 
   return (
-    <Layout activeTab={effectiveTab} onTabChange={handleTabChange}>
+    <Layout activeTab={effectiveTab} onTabChange={handleTabChange} hideWallet={hideWallet}>
       {content}
     </Layout>
   );

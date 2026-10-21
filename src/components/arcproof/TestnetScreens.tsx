@@ -1,6 +1,8 @@
-import { useEffect, useRef, useState } from 'react';
+import { receiptStatus } from '../../arcproof/receiptStatus';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { formatUnits, type Hex } from 'viem';
 import { ConnectKitButton } from 'connectkit';
+import { ReceiptFacts } from './ReceiptFacts';
 import { DashboardScreen } from './DashboardScreen';
 import { AtomicForwardingWarning } from './Layout';
 import { formatAmountDisplay } from '../../arcproof/amountParser';
@@ -134,7 +136,8 @@ function TestnetDashboardSession({ wallet }: { wallet: ReturnType<typeof useTest
       // Read-only waiting. Never broadcast again on timeout or replacement.
       const receipt = await testnetClient.waitForTransactionReceipt({ hash, timeout: 90_000, pollingInterval: 2_000 });
       assertReceiptMatches(action, hash, receipt);
-      if (receipt.status === 'reverted') {
+      if (receiptStatus(receipt.status) === 'unknown') throw new Error('Receipt status is unknown. Keep the saved request unresolved; do not resend.');
+      if (receiptStatus(receipt.status) === 'reverted') {
         updateSubmission(hash, 'reverted');
         throw new Error('Creation transaction reverted. Gas may have been spent.');
       }
@@ -253,7 +256,8 @@ function TestnetPaySession({ invoiceId, wallet }: { invoiceId: Hex; wallet: Retu
       const receipt = await testnetClient.waitForTransactionReceipt({ hash: sent, timeout: 90_000, pollingInterval: 2_000 });
       assertReceiptMatches(action, sent, receipt);
       await checkBroadcast(testnetClient, action, sent);
-      if (receipt.status === 'reverted') {
+      if (receiptStatus(receipt.status) === 'unknown') throw new Error('Receipt status is unknown. Keep the saved request unresolved; do not resend.');
+      if (receiptStatus(receipt.status) === 'reverted') {
         updateSubmission(sent, 'reverted');
         throw new Error('Payment transaction reverted. Gas may have been spent; no payment is confirmed.');
       }
@@ -300,64 +304,97 @@ function TestnetReceiptFields({ invoiceId, txHash }: { invoiceId?: Hex; txHash?:
   const [tx, setTx] = useState(txHash ?? '');
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState('');
+  const [copied, setCopied] = useState(false);
   const [verified, setVerified] = useState<Awaited<ReturnType<typeof verifyTestnetReceipt>> | null>(null);
   const sequence = useRef(0);
-  const lock = useRef(false);
-  useEffect(() => {
-    sequence.current += 1;
-    return () => { sequence.current += 1; };
-  }, [invoiceId, txHash]);
+  const activeRequest = useRef<number | null>(null);
   function edit(field: 'id' | 'tx', value: string) {
-    sequence.current += 1; setVerified(null); setError('');
+    sequence.current += 1; activeRequest.current = null;
+    setBusy(false); setVerified(null); setError(''); setCopied(false);
     if (field === 'id') setId(value); else setTx(value);
   }
-  async function verify() {
-    if (lock.current) return;
+  const runVerification = useCallback(async (targetId: string, targetTx: string) => {
+    if (activeRequest.current !== null) return;
     const token = ++sequence.current;
-    lock.current = true; setBusy(true); setError(''); setVerified(null);
+    activeRequest.current = token; setBusy(true); setError(''); setVerified(null); setCopied(false);
     try {
-      if (!isBytes32(id) || (tx && !isBytes32(tx))) throw new Error('Invoice ID and optional transaction hash must each contain 32 bytes.');
-      const result = await verifyTestnetReceipt(testnetClient, id, (tx || undefined) as Hex | undefined);
+      if (!isBytes32(targetId) || (targetTx && !isBytes32(targetTx))) throw new Error('Invoice ID and optional transaction hash must each contain 32 bytes.');
+      const result = await verifyTestnetReceipt(testnetClient, targetId, (targetTx || undefined) as Hex | undefined);
       if (sequence.current === token) setVerified(result);
     } catch (e) { if (sequence.current === token) setError(errorMessage(e)); }
-    finally { lock.current = false; if (sequence.current === token) setBusy(false); }
-  }
+    finally {
+      if (activeRequest.current === token) activeRequest.current = null;
+      if (sequence.current === token) setBusy(false);
+    }
+  }, []);
+  function verify() { return runVerification(id, tx); }
+  useEffect(() => {
+    // Defer only to the microtask queue: StrictMode's first setup is cancelled,
+    // so its replay makes exactly one read-only call, not two RPC sequences.
+    let active = true;
+    void Promise.resolve().then(() => {
+      if (active && invoiceId && isBytes32(invoiceId) && (txHash === undefined || isBytes32(txHash))) void runVerification(invoiceId, txHash ?? '');
+    });
+    return () => { active = false; sequence.current += 1; activeRequest.current = null; };
+  }, [invoiceId, txHash, runVerification]);
+  const record = verified ? buildReceiptExport(TESTNET_DEPLOYMENT, verified.invoice.invoiceId, verified.hash,
+    verified.invoice.amountNative,
+    verified.invoice.paid && verified.invoice.payer !== '0x0000000000000000000000000000000000000000' ? verified.invoice.payer : null,
+    verified.invoice.merchant, verified.invoice.paid && verified.invoice.paidAt > 0n ? verified.invoice.paidAt : null,
+    verified.invoice.paid && verified.invoice.paidBlockNumber > 0n ? verified.invoice.paidBlockNumber : null,
+    verified.result, false) : null;
+  const success = verified?.result.status === 'VERIFIED' && verified.result.verified && !!record?.settlementEvidence;
   function download(kind: 'json' | 'csv') {
-    if (!verified) return;
-    const { invoice, hash, result } = verified;
-    const record = buildReceiptExport(TESTNET_DEPLOYMENT, invoice.invoiceId, hash, invoice.amountNative,
-      invoice.payer, invoice.merchant, invoice.paidAt, invoice.paidBlockNumber, result, false);
+    if (!record) return;
     const output = kind === 'json' ? exportReceiptsJson([record]) : exportReceiptsCsv([record]);
     const blob = new Blob([output], { type: kind === 'json' ? 'application/json' : 'text/csv' });
     const url = URL.createObjectURL(blob); const anchor = document.createElement('a');
-    anchor.href = url; anchor.download = `arcproof-testnet-${invoice.invoiceId}.${kind}`;
+    anchor.href = url; anchor.download = `arcproof-testnet-${record.invoiceId}.${kind}`;
     document.body.appendChild(anchor); anchor.click(); anchor.remove();
     setTimeout(() => URL.revokeObjectURL(url), 1000);
   }
-  return <div className="max-w-xl mx-auto space-y-4">
-    <TestnetNotice />
-    <section className={panel}>
+  async function copyVerificationLink() {
+    if (!verified || !isBytes32(verified.invoice.invoiceId) || !isBytes32(verified.hash)) return;
+    const token = sequence.current;
+    const base = new URL(window.location.href);
+    base.search = ''; base.hash = route('receipt', verified.invoice.invoiceId, verified.hash);
+    try {
+      await navigator.clipboard.writeText(base.href);
+      if (sequence.current === token) setCopied(true);
+    } catch {
+      if (sequence.current === token) setError('Clipboard access was unavailable. Use the verification link below and copy its browser address.');
+    }
+  }
+  return <div className="max-w-xl mx-auto space-y-4 receipt-page">
+    <p className="rounded-lg bg-amber-50 border border-amber-200 p-3 text-sm text-amber-900">Arc Testnet · test USDC, no monetary value. Read-only verification: no wallet or signature required. Not audited.</p>
+    <form className={`${panel} print:hidden`} onSubmit={(event) => { event.preventDefault(); void verify(); }}>
       <h2 className="font-semibold text-lg">Verify a testnet receipt</h2>
-      <p className="text-sm">No wallet required. Network and contract come only from the checked manifest, never from imported receipt flags.</p>
+      <p className="text-sm">Network and contract come only from the checked manifest, never from imported receipt flags.</p>
       <p className="text-xs font-mono break-all">{TESTNET_DEPLOYMENT.contractAddress}</p>
       <label htmlFor="live-receipt-id" className="block text-sm">Invoice ID</label>
-      <input id="live-receipt-id" className={input} value={id} disabled={busy} onChange={(e) => edit('id', e.target.value)} />
+      <input id="live-receipt-id" className={input} value={id} aria-describedby={error ? 'receipt-error' : undefined} onChange={(e) => edit('id', e.target.value)} />
       <label htmlFor="live-receipt-tx" className="block text-sm">Payment transaction hash (optional)</label>
-      <input id="live-receipt-tx" className={input} value={tx} disabled={busy} onChange={(e) => edit('tx', e.target.value)} />
+      <input id="live-receipt-tx" className={input} value={tx} aria-describedby={error ? 'receipt-error' : undefined} onChange={(e) => edit('tx', e.target.value)} />
       <p className="text-xs text-stone-500">Without a hash, recovery searches only the invoice’s recorded paid block. Ambiguous evidence stays unverified.</p>
-      <button className={button} disabled={busy || !id} onClick={() => void verify()}>{busy ? 'Verifying…' : 'Verify from chain data'}</button>
-    </section>
-    {error && <p role="alert" className="rounded-lg bg-amber-50 p-3 text-sm text-amber-900 break-words">Not verified: {error}</p>}
-    {verified && <section className={panel}>
-      <h3 className="font-semibold">{verified.result.status === 'UNVERIFIED_ARC_EVIDENCE' ? 'Standard checks passed; settlement evidence incomplete' : verified.result.status}</h3>
-      <p className="text-sm break-words">{verified.result.message}</p>
-      <p className="text-sm">This is testnet evidence, not revenue, a tax invoice, or proof of delivery. Imported verification flags are never trusted.</p>
-      {verified.invoice.payer.toLowerCase() === verified.invoice.merchant.toLowerCase() && <p className="text-sm">Controlled self-demo: payer and merchant are the same wallet.</p>}
-      <a className="block font-mono text-xs break-all underline" href={explorerTx(verified.hash)} target="_blank" rel="noreferrer">{verified.hash}</a>
-      <div className="flex flex-wrap gap-3 text-sm">
-        <button className="underline" onClick={() => download('json')}>Export testnet JSON</button>
-        <button className="underline" onClick={() => download('csv')}>Export testnet CSV</button>
-        <button className="underline" onClick={() => window.print()}>Print</button>
+      <button type="submit" className={button} disabled={busy || !id}>{busy ? 'Verifying…' : 'Verify from chain data'}</button>
+      {busy && <p role="status" className="text-sm">Reading chain evidence. No transaction will be sent.</p>}
+    </form>
+    {error && <p id="receipt-error" role="alert" className="rounded-lg bg-amber-50 p-3 text-sm text-amber-900 break-words">{error}</p>}
+    {verified && record && <section className={panel} aria-label="Receipt result">
+      <div role="status" aria-live="polite">
+        <h3 className={`font-semibold ${success ? 'text-teal-800' : 'text-amber-900'}`}>{success ? 'Verified testnet payment' : verified.result.status === 'UNVERIFIED_ARC_EVIDENCE' ? 'Standard checks passed; settlement evidence incomplete' : `Not verified: ${verified.result.status}`}</h3>
+        <p className="text-sm break-words">{verified.result.message}</p>
+      </div>
+      {!success && <p className="text-sm text-amber-900">The following are observed invoice/receipt fields, not verified payment proof.</p>}
+      <ReceiptFacts record={record} />
+      <p className="text-sm">Testnet evidence only, not revenue, a tax invoice, or proof of delivery. Imported verification flags are never trusted.</p>
+      <a className="block font-mono text-xs break-all underline" href={explorerTx(verified.hash)} target="_blank" rel="noreferrer">Transaction: {verified.hash}</a>
+      <div className="flex flex-wrap gap-3 text-sm print:hidden">
+        <button className="underline py-2" onClick={() => void copyVerificationLink()}>{copied ? 'Verification link copied' : 'Copy verification link'}</button>
+        <a className="underline py-2" href={route('receipt', verified.invoice.invoiceId, verified.hash)}>Open verification link</a>
+        <button className="underline py-2" onClick={() => download('json')}>Export testnet JSON</button>
+        <button className="underline py-2" onClick={() => download('csv')}>Export testnet CSV</button>
+        <button className="underline py-2" onClick={() => window.print()}>Print</button>
       </div>
     </section>}
   </div>;

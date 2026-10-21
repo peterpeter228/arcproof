@@ -1,0 +1,11 @@
+{
+  "status": "failed",
+  "httpStatus": 403,
+  "providerRequestId": "202610210231249042766508268d9d6gzXmGdIJ",
+  "elapsedSeconds": 7.708,
+  "reason": "Provider-reported upstream authentication/channel cooldown.",
+  "reviewProduced": false,
+  "modelOrUsageConfirmed": false,
+  "retryPerformed": false,
+  "notApproval": true
+}

@@ -286,5 +286,14 @@
     "status": "local_candidate_review",
     "liveAcceptance": "not_run",
     "upstreamBaseCommit": "8588d80dd08a5ee819efc0d2f723ed50655f8b9d"
+  },
+  "currentIntegratedReview": {
+    "stage": "PRIVATE_LOCAL_INTEGRATED_REVIEW_CANDIDATE",
+    "report": "evidence/integrated-review-20261021/report.json",
+    "mainnet": "blocked",
+    "realRpc": "not_run",
+    "realBrowser": "blocked",
+    "flowRecovery": "partial",
+    "historicalFieldsBelowNotFreshAcceptance": true
   }
 }

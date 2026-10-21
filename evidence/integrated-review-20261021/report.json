@@ -1,0 +1,118 @@
+{
+  "stage": "PRIVATE_LOCAL_INTEGRATED_REVIEW_CANDIDATE",
+  "utcDate": "2026-10-21",
+  "remoteBaselineReportedVerified": "86ae2539bcdf15ca10029245bab52a3c59816e6d",
+  "localGitLabelNotRemote": "a5c75d4cac01851e5ff96731c458613efe5c7c0b",
+  "scope": [
+    "SEC-01 debug removal",
+    "DEV-01 loopback host/CORS",
+    "FLOW-01 partial durable intent and exact-call recovery",
+    "STATE-01 unknown status",
+    "UX-01 readable receipt",
+    "UI-03 invalid-link state",
+    "DEMO-01 coherent fixture"
+  ],
+  "independentIntegrationFixes": [
+    "Receipt route key includes tx hash: same invoice/new hash resets input and discards old result/export.",
+    "Legacy saved-hash recovery now requires matching non-null block hash, block number and transaction index.",
+    "Printed Studio attribution remains visible but no longer fixed over receipt."
+  ],
+  "tests": {
+    "project": {
+      "status": "passed",
+      "exit": 0
+    },
+    "adversarial": {
+      "status": "passed",
+      "exit": 0
+    },
+    "ui": {
+      "status": "passed",
+      "exit": 0
+    },
+    "typecheck": {
+      "status": "passed",
+      "exit": 0
+    },
+    "source-lint": {
+      "status": "passed",
+      "exit": 0
+    },
+    "type-lint": {
+      "status": "passed",
+      "exit": 0
+    },
+    "full-lint": {
+      "status": "failed",
+      "exit": 1
+    },
+    "build": {
+      "status": "passed",
+      "exit": 0
+    },
+    "security": {
+      "status": "passed",
+      "exit": 0
+    }
+  },
+  "counts": {
+    "project": 320,
+    "independentAdversarial": 137,
+    "independentJsdomUi": 24,
+    "securityHttpHmrGraph": 10
+  },
+  "wholeRepositoryLint": {
+    "status": "failed",
+    "historicalBaselineDiagnostics": 124,
+    "currentDiagnostics": 122,
+    "explanation": "Two removed capture-module diagnostics disappeared; archived helper/reviewer lint debt remains. No aggregate-green claim. Mutating check not run."
+  },
+  "realBrowser": {
+    "status": "blocked",
+    "attempts": 1,
+    "method": "Installed Playwright /usr/bin/chromium headless with chromiumSandbox:true",
+    "error": "Chromium process_singleton_posix.cc: socket() failed: Operation not permitted (1); crashpad handler --database is required; process SIGABRT before page.",
+    "notRun": [
+      "actual two-tab shared-origin mock-wallet send count",
+      "375/390/1280 responsive layout",
+      "zoom",
+      "print rendering",
+      "browser downloads"
+    ],
+    "noBypass": true
+  },
+  "externalReviewHistoricalRpc": {
+    "reportedResult": "Reviewer audit reports successful historical same-wallet testnet verification with controlled_demo=true.",
+    "rawLogsAvailableHere": false,
+    "independentCurrentRpc": "not_run",
+    "notAReplacementFor": "current browser/live two-wallet acceptance"
+  },
+  "limitations": [
+    "FLOW-01 remains partial: no replacement/cancellation or cross-device recovery. Hashless creation cannot resolve without wallet nonce evidence. Hashless reverted payment cannot unlock an unknown request.",
+    "Durable storage/Web Locks guards are origin/browser-local, not guarantees after storage removal or against hostile same-origin scripts. No automatic timeout release or retry.",
+    "No real RPC, wallet signing, real funds, contract/deployment changes, Studio update, GitHub push, public publication or grant submission.",
+    "Foundry unavailable; contracts unchanged and not rerun.",
+    "Prior aggregate 18-hour effort unknown, compliance with cap not claimed. Mainnet HOLD, grant eligibility unresolved."
+  ],
+  "nextAction": "Parent review / authorized private integration only; no external publication or funds.",
+  "effort": {
+    "integrationStartedUtc": "2026-10-21T02:26:09Z",
+    "checkpointUtc": "2026-10-21T02:31:30Z",
+    "checkpointWallMinutes": 5.35,
+    "historicalAggregateHours": null,
+    "capHours": 18,
+    "capCompliance": "unknown",
+    "newCashSpend": 0
+  },
+  "externalModelReview": {
+    "status": "failed",
+    "httpStatus": 403,
+    "providerRequestId": "202610210231249042766508268d9d6gzXmGdIJ",
+    "elapsedSeconds": 7.708,
+    "reason": "Provider-reported upstream authentication/channel cooldown.",
+    "reviewProduced": false,
+    "modelOrUsageConfirmed": false,
+    "retryPerformed": false,
+    "notApproval": true
+  }
+}

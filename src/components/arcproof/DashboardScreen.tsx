@@ -10,9 +10,7 @@ import { deriveInvoiceIds } from '../../arcproof/invoiceId';
 import { AtomicForwardingWarning } from './Layout';
 import { AlertCircle, FileText } from 'lucide-react';
 
-const DEMO_CHAIN_ID = 5042002; // Arc Testnet fixture domain; these addresses are not the live deployment
-const DEMO_MERCHANT = '0x0000000000000000000000000000000000000002' as `0x${string}`;
-const DEMO_CONTRACT = '0x0000000000000000000000000000000000000001' as `0x${string}`;
+import { OFFLINE_FIXTURE } from '../../arcproof/offlineFixture';
 
 const MAX_TITLE_CODEPOINTS = 80;
 
@@ -77,7 +75,7 @@ export function DashboardScreen() {
   }
 
   const invoiceIds = useMemo(() => {
-    return deriveInvoiceIds(DEMO_CHAIN_ID, DEMO_CONTRACT, DEMO_MERCHANT, demoNonce, PAGE_SIZE, page);
+    return deriveInvoiceIds(OFFLINE_FIXTURE.chainId, OFFLINE_FIXTURE.contract, OFFLINE_FIXTURE.merchant, demoNonce, PAGE_SIZE, page);
   }, [demoNonce, page]);
 
   const totalPages = Math.ceil(Number(demoNonce) / PAGE_SIZE);

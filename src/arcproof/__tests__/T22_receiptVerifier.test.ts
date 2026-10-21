@@ -175,6 +175,12 @@ describe('T22 — Forged receipt detection', () => {
     expect(r.status).toBe('WRONG_BYTECODE');
   });
 
+  it.each([undefined, '0x2', 'invalid'])('unsupported receipt status %s is PENDING, never FAILED', async (status) => {
+    const badReceipt = { ...GOOD_RECEIPT, status } as unknown as RawReceipt;
+    const r = await verifyReceipt(TX_HASH, INVOICE_ID, DEP, CHAIN_ID, makeRpc({ getTransactionReceipt: () => Promise.resolve(badReceipt) }));
+    expect(r.status).toBe('PENDING'); expect(r.verified).toBe(false);
+  });
+
   it('reverted receipt -> FAILED', async () => {
     const badReceipt = { ...GOOD_RECEIPT, status: 'reverted' as const };
     const r = await verifyReceipt(TX_HASH, INVOICE_ID, DEP, CHAIN_ID,

@@ -10,8 +10,7 @@
  *  https://studio.arc.io
  */
 
-import './tracing'
-import './console-capture'
+// Studio attribution is retained below; runtime capture is intentionally not shipped.
 
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
@@ -35,6 +34,7 @@ const StudioLogo = () => (
 // Studio watermark component - links back to Studio
 const StudioWatermark = () => (
   <a
+    className="studio-attribution"
     href="https://studio.arc.io/"
     target="_blank"
     rel="noopener noreferrer"

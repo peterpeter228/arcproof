@@ -6,12 +6,15 @@
 import React, { useState } from 'react';
 import { useSubmissions, useSubmissionRequests, type Submission } from '../../arcproof/submissions';
 import { explorerTx } from '../../arcproof/testnet';
-import { reconcileSubmission, errorMessage, testnetClient } from '../../arcproof/testnetClient';
+import { useWalletIntents, type WalletIntent } from '../../arcproof/walletIntents';
+import { isBytes32 } from '../../arcproof/testnet';
+import { recoverUnknownSubmission, reconcileSubmission, errorMessage, testnetClient } from '../../arcproof/testnetClient';
 import { ConnectKitButton } from 'connectkit';
 
 type NavTab = 'dashboard' | 'verify' | 'evidence';
 
 interface LayoutProps {
+  hideWallet?: boolean;
   activeTab: NavTab;
   onTabChange: (tab: NavTab) => void;
   children: React.ReactNode;
@@ -47,6 +50,8 @@ const NAV_ITEMS: { id: NavTab; label: string }[] = [
 function SavedTransactions() {
   const submissions = useSubmissions();
   const requests = useSubmissionRequests();
+  const intents = useWalletIntents().filter((item) => ['requesting', 'uncertain', 'submitted'].includes(item.state));
+  const [recoveryHashes, setRecoveryHashes] = useState<Record<string, string>>({});
   const [busy, setBusy] = useState<string | null>(null);
   const [message, setMessage] = useState('');
   async function refresh(row: Submission) {
@@ -60,9 +65,27 @@ function SavedTransactions() {
     <p className="break-all"><strong>{item.kind} · {item.state}</strong>: <a className="underline" href={explorerTx(item.hash)} target="_blank" rel="noreferrer">{item.hash}</a></p>
     <button type="button" className="underline disabled:opacity-50" disabled={busy !== null} onClick={() => { void refresh(item); }}>Refresh saved status</button>
   </div>;
-  if (!submissions.length && !requests.length) return null;
+  async function recover(intent: WalletIntent) {
+    const hash = recoveryHashes[intent.operationId] ?? intent.hash ?? '';
+    if (!isBytes32(hash)) { setMessage('Enter the full transaction hash from wallet history.'); return; }
+    if (busy) return;
+    setBusy(intent.operationId); setMessage('');
+    try { const state = await recoverUnknownSubmission(testnetClient, intent.operationId, hash); setMessage(`Exact saved request recovered: ${state}. This is not verified settlement; no transaction was sent.`); }
+    catch (error) { setMessage(errorMessage(error)); }
+    finally { setBusy(null); }
+  }
+  if (!submissions.length && !requests.length && !intents.length) return null;
   return <aside className="mb-5 rounded-lg border border-amber-200 bg-amber-50 p-3 text-xs text-amber-900" aria-label="Saved wallet transactions">
-    {requests.length > 0 && <p role="status">A wallet request is outstanding or its outcome is uncertain. Do not refresh this page or submit again until you have checked your wallet activity. The request lock does not survive a reload or coordinate other tabs; no automatic resend will occur.</p>}
+    {requests.length > 0 && intents.length === 0 && <p role="status">A wallet request is outstanding or its outcome is uncertain. Do not refresh this page or submit again until you have checked your wallet activity. The request lock does not survive a reload or coordinate other tabs; no automatic resend will occur.</p>}
+    {intents.length > 0 && <p role="status">A saved wallet request is unresolved. Do not submit again. Its durable guard survives reload in this browser and coordinates same-origin tabs while storage remains available. Check wallet history and recover the exact request below; no automatic resend or timeout release occurs.</p>}
+    {intents.map((intent) => <div key={intent.operationId} className="my-2 border border-amber-300 p-2">
+      <p className="break-all">{intent.kind} · {intent.state} · {intent.account}</p>
+      <label className="block">Transaction hash from wallet history
+        <input className="block w-full border p-1" value={recoveryHashes[intent.operationId] ?? intent.hash ?? ''} onChange={(event) => setRecoveryHashes((old) => ({ ...old, [intent.operationId]: event.target.value }))} />
+      </label>
+      <button type="button" className="underline disabled:opacity-50" disabled={busy !== null} onClick={() => { void recover(intent); }}>Recover this request (read only)</button>
+      <p>Hashless creation cannot be uniquely recovered here without wallet nonce evidence. A reverted hash cannot unlock a hashless request. Keep it unresolved for manual review. Replacement/cancellation and cross-device recovery are unsupported; do not clear storage to retry.</p>
+    </div>)}
     <p>Saved hashes are unverified locators. Check status before another request. Browser storage is best-effort.</p>
     {submissions[0] && row(submissions[0])}
     {submissions.length > 1 && <details><summary className="cursor-pointer py-2">Older saved transactions ({submissions.length - 1})</summary>{submissions.slice(1).map(row)}</details>}
@@ -70,7 +93,7 @@ function SavedTransactions() {
   </aside>;
 }
 
-export function Layout({ activeTab, onTabChange, children }: LayoutProps) {
+export function Layout({ activeTab, onTabChange, children, hideWallet = false }: LayoutProps) {
   return (
     <div className="min-h-dvh flex flex-col bg-stone-50 font-sans">
       <PrototypeBanner />
@@ -105,9 +128,9 @@ export function Layout({ activeTab, onTabChange, children }: LayoutProps) {
           </nav>
 
           {/* Wallet */}
-          <div className="col-start-2 row-start-1 justify-self-end shrink-0">
+          {!hideWallet && <div className="col-start-2 row-start-1 justify-self-end shrink-0">
             <ConnectKitButton />
-          </div>
+          </div>}
         </div>
       </header>
 

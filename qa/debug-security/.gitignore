@@ -1,0 +1,6 @@
+# Rebuilt by boundary.test.mjs; do not publish test fixtures or generated bundles.
+generated/
+mutation/
+mutation-output/
+*.log
+*.exit

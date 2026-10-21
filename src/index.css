@@ -11,3 +11,15 @@ body {
   font-family: system-ui, sans-serif;
   min-height: 100dvh;
 }
+
+@media print {
+  body:has(.receipt-page) header,
+  body:has(.receipt-page) footer,
+  body:has(.receipt-page) aside {
+    display: none !important;
+  }
+  body:has(.receipt-page) .studio-attribution { position: static !important; width: fit-content; margin: 1rem; box-shadow: none !important; }
+  .receipt-page { max-width: none; }
+  .receipt-page section { break-inside: avoid; box-shadow: none; }
+  .receipt-page a { overflow-wrap: anywhere; }
+}

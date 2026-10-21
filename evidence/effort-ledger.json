@@ -197,5 +197,15 @@
     "newCashCost": "0.00",
     "totalProjectHours": "pending_root_aggregation",
     "note": "Add these task efforts to the existing 18-hour total; do not treat stale historical ledger totals as current. Backup packaging time is additional."
+  },
+  "currentIntegrationEffortReconciliation": {
+    "integrationStartedUtc": "2026-10-21T02:26:09Z",
+    "checkpointUtc": "2026-10-21T02:31:30Z",
+    "checkpointWallMinutes": 5.35,
+    "historicalAggregateHours": null,
+    "capHours": 18,
+    "capCompliance": "unknown",
+    "newCashSpend": 0,
+    "note": "Historical ledger is incomplete. Earlier numeric totals are not a current full-project aggregate; root must reconcile parallel effort."
   }
 }

@@ -1,5 +1,27 @@
 # Current checkpoint — 2026-10-21 UTC
 
+Stage: PRIVATE_LOCAL_INTEGRATED_REVIEW_CANDIDATE. Mainnet HOLD.
+
+This isolated candidate integrates security, receipt clarity, and bounded wallet-recovery fixes against the parent-verified remote baseline 86ae2539bcdf15ca10029245bab52a3c59816e6d. The copied local git label is not that remote identity. No push, Studio update, deployment, real RPC, wallet action, funds, public publication, or grant submission occurred in this pass.
+
+Fresh integrated results: 320 project tests, 137 independent adversarial tests, 24 jsdom UI/wallet tests, TypeScript, source lint/type-aware lint, production build, and 10 security HTTP/HMR/production-graph checks passed. Whole-repository lint remains FAILED: historical baseline 124 diagnostics; current 122 after two diagnostics disappeared with deleted capture modules. Aggregate mutating check was not run. Contracts unchanged; Foundry unavailable, not rerun. Build retains large-chunk warnings.
+
+Production tracing/console capture removed; loopback-only Vite defaults, Host restriction and no CORS grant tested. Durable intent is stored before wallet dispatch and guarded by Web Locks. Missing primitives fail closed; ambiguous/hashless requests have no expiry or automatic retry. Exact known hash recovery binds chain/account/target/calldata/value/inclusion metadata; hashless creation and hashless reverted payment cannot unlock unknown requests. FLOW-01 remains PARTIAL: replacement/cancellation, cross-device recovery and actual two-tab browser acceptance are incomplete. Browser storage deletion is not a safe recovery mechanism.
+
+Receipts now expose amount, parties, UTC time, precise separate fee, settlement/finality details and controlled_demo labeling. Trusted receipt links auto-verify read-only; malformed links fail immediately; edits/navigation invalidate old results and exports. Full tx-hash route identity and legacy inclusion recovery received independent additional regression tests. Printing preserves non-fixed Studio attribution.
+
+Real browser QA is BLOCKED: installed Playwright/Chromium's one sandbox-enabled launch failed before a page with socket() Operation not permitted and crashpad error. No security bypass attempted. Responsive/zoom/print rendering, actual downloads and actual two-tab mock-wallet send counts are NOT_RUN. jsdom/shared-lock models are not browser acceptance.
+
+The independent audit reports a successful historical same-wallet testnet RPC verification (controlled_demo); its raw logs are unavailable here, so this is REVIEWER-REPORTED, not independently rerun. This pass's real RPC is NOT_RUN. Genuine current two-wallet T25/T26, deployment consistency, mainnet and professional audit remain unaccepted. Grant eligibility and cumulative 18-hour effort reconciliation remain unresolved; cap compliance is not claimed.
+
+External model review was attempted once and failed with provider HTTP 403; no review/model/usage result and no automatic retry. This candidate has internal checks only, not external-model approval.
+
+See evidence/integrated-review-20261021/report.json and adjacent fresh logs. Runner wall-clock labels are not canonical UTC. Prior checkpoints below are history, not current acceptance.
+
+---
+
+# Current checkpoint — 2026-10-21 UTC
+
 Stage: PRIVATE_GITHUB_BASELINE_VERIFIED / DOCUMENTATION_RECONCILIATION.
 
 Private GitHub `main` was freshly read at `d34138b19a3878fd095413822c48d28fea6a4c58`. All 240 repository files matched the retrieved remote tree before and after the baseline checks. The source backup ZIP and all 325 backup-manifest entries also matched their recorded hashes. The private upload occurred on 2026-10-20; its receipt is preserved in `evidence/g4-baseline-20261021/github-delivery-receipt-20261020.json`. This dated documentation revision is based on that verified baseline; its delivery is confirmed only by a subsequent remote commit/readback receipt, not by this text. It is not a new deployment.

@@ -10,7 +10,9 @@ import { deriveInvoiceId, deriveInvoiceIds } from './invoiceId';
 import { parseInvoiceAmount } from './amountParser';
 import { preparePayment, isPrepareError, validatePaymentContext, type PreparedPayment } from './preparedPayment';
 import { verifyReceipt, type RpcProvider, type OnchainInvoiceState, type VerificationResult } from './receiptVerifier';
-import { beginSubmission, recordSubmission, updateSubmission, type Submission } from './submissions';
+import { receiptStatus } from './receiptStatus';
+import { runWalletIntent, recoverWalletIntent, findUnresolvedWalletIntent } from './walletIntents';
+import { beginSubmission, recordSubmission, updateSubmission, releaseRecoveredRequest, type Submission } from './submissions';
 
 export const testnetClient = createPublicClient({
   chain: ARC_TESTNET,
@@ -139,23 +141,31 @@ export async function sendPreparedAction(
   client: PublicClient, wallet: WalletRequest, action: PreparedAction,
   getCurrentSession: () => Session | null,
 ): Promise<Hex> {
-  const lease = beginSubmission(action.kind, action.session.account, action.payment?.invoiceId);
-  let attempted = false;
-  try {
-    const hash = await sendPreparedActionOnce(client, wallet, action, getCurrentSession, () => { attempted = true; });
-    recordSubmission({ hash, kind: action.kind, account: action.session.account, invoiceId: action.payment?.invoiceId, state: 'submitted' });
-    lease.finish();
-    return hash;
-  } catch (error) {
-    if (attempted && !(error && typeof error === 'object' && 'code' in error && error.code === 4001)) lease.uncertain();
-    else lease.finish();
-    throw error;
-  }
+  return runWalletIntent({
+    chainId: ARC_TESTNET.id, deploymentId: action.deployment.deploymentId,
+    kind: action.kind, account: action.session.account, invoiceId: action.payment?.invoiceId,
+    to: action.to, data: action.data, value: action.value.toString(),
+  }, async (markRequested, markRejected) => {
+    const lease = beginSubmission(action.kind, action.session.account, action.payment?.invoiceId);
+    let attempted = false;
+    let rejected = false;
+    try {
+      const hash = await sendPreparedActionOnce(client, wallet, action, getCurrentSession,
+        () => { markRequested(); attempted = true; },
+        () => { rejected = true; markRejected(); });
+      recordSubmission({ hash, kind: action.kind, account: action.session.account, invoiceId: action.payment?.invoiceId, state: 'submitted' });
+      lease.finish();
+      return hash;
+    } catch (error) {
+      if (attempted && !rejected) lease.uncertain(); else lease.finish();
+      throw error;
+    }
+  });
 }
 
 async function sendPreparedActionOnce(
   client: PublicClient, wallet: WalletRequest, action: PreparedAction,
-  getCurrentSession: () => Session | null, onSend: () => void,
+  getCurrentSession: () => Session | null, onSend: () => void, onRejected: () => void,
 ): Promise<Hex> {
   const assertCurrent = () => assertSameSession(action.session, getCurrentSession());
   assertCurrent();
@@ -195,11 +205,16 @@ async function sendPreparedActionOnce(
   assertCurrent();
   if (Date.now() - action.preparedAt > 120_000) throw new Error('Review expired during preflight. Prepare a fresh request.');
   onSend();
-  const hash = await wallet.request({
+  let hash: unknown;
+  try { hash = await wallet.request({
     method: 'eth_sendTransaction',
     params: [{ from: action.session.account, chainId: toHex(ARC_TESTNET.id), to: action.to,
       data: action.data, value: toHex(action.value), gas: toHex(refreshed.gas), gasPrice: toHex(refreshed.gasPrice) }],
-  });
+  }); } catch (error) {
+    // Only a direct 4001 rejection of this exact send request releases its intent.
+    if (error && typeof error === 'object' && 'code' in error && error.code === 4001) onRejected();
+    throw error;
+  }
   if (typeof hash !== 'string' || !isBytes32(hash)) throw new Error('Wallet returned no usable transaction hash. Check your wallet history; do not resend automatically.');
   return hash;
 }
@@ -225,7 +240,8 @@ export async function readCreatedInvoice(client: PublicClient, action: PreparedA
   await checkBroadcast(client, action, hash);
   const receipt = await client.getTransactionReceipt({ hash });
   assertReceiptMatches(action, hash, receipt);
-  if (receipt.status !== 'success') throw new Error('Creation transaction reverted. Gas may have been spent.');
+  if (receiptStatus(receipt.status) === 'unknown') throw new Error('Creation receipt status is unknown. Keep the request unresolved; do not resend.');
+  if (receiptStatus(receipt.status) === 'reverted') throw new Error('Creation transaction reverted. Gas may have been spent.');
   const events = receipt.logs.filter((log) => log.address.toLowerCase() === action.to.toLowerCase()).flatMap((log) => {
     try {
       if (log.removed || log.transactionHash.toLowerCase() !== hash.toLowerCase() || log.blockHash !== receipt.blockHash ||
@@ -345,6 +361,8 @@ export function errorMessage(error: unknown): string {
 
 /** Read-only recovery for saved hashes. Never submits or retries a transaction. */
 export async function reconcileSubmission(client: PublicClient, row: Submission): Promise<Submission['state']> {
+  const intent = findUnresolvedWalletIntent(row.hash);
+  if (intent) return recoverUnknownSubmission(client, intent.operationId, row.hash);
   await checkDeployment(client);
   const [tx, receipt] = await Promise.all([
     client.getTransaction({ hash: row.hash }), client.getTransactionReceipt({ hash: row.hash }),
@@ -361,7 +379,41 @@ export async function reconcileSubmission(client: PublicClient, row: Submission)
       (row.kind === 'pay' && (call.functionName !== 'payInvoice' || call.args[0].toLowerCase() !== row.invoiceId?.toLowerCase()))) {
     throw new Error('Saved transaction function or invoice does not match.');
   }
-  const state = receipt.status === 'reverted' ? 'reverted' : 'included';
+  if (!tx.blockHash || tx.blockHash !== receipt.blockHash ||
+      tx.blockNumber === null || tx.blockNumber === undefined || tx.blockNumber !== receipt.blockNumber ||
+      tx.transactionIndex === null || tx.transactionIndex === undefined || tx.transactionIndex !== receipt.transactionIndex) {
+    throw new Error('Saved transaction inclusion identity is missing or conflicting. Request stays unresolved.');
+  }
+  if (receiptStatus(receipt.status) === 'unknown') throw new Error('Receipt status is unknown. The saved request remains unresolved.');
+  const state = receiptStatus(receipt.status) === 'reverted' ? 'reverted' : 'included';
   updateSubmission(row.hash, state);
+  return state;
+}
+
+/** Recover only the exact saved call. Replacement/cancellation and cross-device recovery are deliberately unsupported. */
+export async function recoverUnknownSubmission(client: PublicClient, operationId: string, hash: Hex) {
+  let matchedIntent: import('./walletIntents').WalletIntent | undefined;
+  const state = await recoverWalletIntent(operationId, hash, async (intent) => {
+    await checkDeployment(client);
+    const [tx, receipt] = await Promise.all([client.getTransaction({ hash }), client.getTransactionReceipt({ hash })]);
+    if (tx.hash.toLowerCase() !== hash.toLowerCase() || receipt.transactionHash.toLowerCase() !== hash.toLowerCase() ||
+        tx.chainId !== intent.chainId || tx.from.toLowerCase() !== intent.account.toLowerCase() ||
+        receipt.from.toLowerCase() !== intent.account.toLowerCase() || tx.to?.toLowerCase() !== intent.to.toLowerCase() ||
+        receipt.to?.toLowerCase() !== intent.to.toLowerCase() || tx.input.toLowerCase() !== intent.data.toLowerCase() ||
+        tx.value.toString() !== intent.value || !tx.blockHash || tx.blockHash !== receipt.blockHash ||
+        tx.blockNumber === null || tx.blockNumber === undefined || tx.blockNumber !== receipt.blockNumber ||
+        tx.transactionIndex === null || tx.transactionIndex === undefined || tx.transactionIndex !== receipt.transactionIndex) {
+      throw new Error('Hash does not match the saved call and committed transaction identity. Request stays unresolved.');
+    }
+    const status = receiptStatus(receipt.status);
+    if (status === 'unknown') throw new Error('Receipt status is unknown. Request stays unresolved.');
+    const state = status === 'success' ? 'included' : 'reverted';
+    matchedIntent = intent;
+    return state;
+  });
+  if (matchedIntent) {
+    recordSubmission({ hash, kind: matchedIntent.kind, account: matchedIntent.account, invoiceId: matchedIntent.invoiceId, state });
+    releaseRecoveredRequest(matchedIntent.kind, matchedIntent.account, matchedIntent.invoiceId);
+  }
   return state;
 }

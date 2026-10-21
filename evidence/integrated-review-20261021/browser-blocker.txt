@@ -1,0 +1,4 @@
+One normal sandbox-enabled Playwright launch attempted, before any browser page.
+chromium.launch({executablePath:"/usr/bin/chromium",headless:true,chromiumSandbox:true})
+Result BLOCKED: chrome_crashpad_handler: --database is required; FATAL chrome/browser/process_singleton_posix.cc:297 socket() failed: Operation not permitted (1); process SIGABRT.
+No bypass/escalation or alternative file/network route attempted. Actual browser two-tab/layout/print/download acceptance not run.

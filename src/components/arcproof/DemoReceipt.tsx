@@ -1,13 +1,13 @@
 /** Offline example only. Never reads a wallet, RPC, or trusted deployment. */
+import { OFFLINE_FIXTURE } from '../../arcproof/offlineFixture';
 import { formatAmountDisplay } from '../../arcproof/amountParser';
 import { exportReceiptsJson, exportReceiptsCsv, type ReceiptExportRecord } from '../../arcproof/exportUtils';
 export function DemoReceipt({invoiceId, amount, onClose}: {invoiceId: string; amount: bigint; onClose: () => void}) {
  const record: ReceiptExportRecord = {
-  chainId: 2482601649, deploymentId: 'offline-fixture',
-  contract: '0x0000000000000000000000000000000000000001', invoiceId,
+  ...OFFLINE_FIXTURE, invoiceId,
   transactionHash: null, paymentLogIndex: null, amountNative: amount.toString(),
   amountDisplay: formatAmountDisplay(amount),
-  merchant: '0x0000000000000000000000000000000000000002', payer: null,
+  payer: null,
   paidAt: null, paidBlockNumber: null, blockHash: null,
   verificationStatus: 'SIMULATED_NOT_VERIFIED', mode: 'fixture',
  };

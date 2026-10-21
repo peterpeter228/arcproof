@@ -1,3 +1,4 @@
+import { receiptStatus } from './receiptStatus';
 /**
  * receiptVerifier.ts
  * Pure/injectable receipt verifier. Takes an RPC provider function (injected)
@@ -225,7 +226,6 @@ export async function verifyReceipt(
   // 3. Fetch receipt — must be committed and successful
   const receipt = await rpc.getTransactionReceipt(txHash).catch(() => null);
   if (!receipt) return fail('PENDING', 'Transaction receipt not found or not yet committed');
-  if (receipt.status !== 'success') return fail('FAILED', 'Transaction reverted on chain');
 
   // 4. Bind: receipt.transactionHash must match input txHash
   if (receipt.transactionHash.toLowerCase() !== txHash.toLowerCase())
@@ -234,6 +234,8 @@ export async function verifyReceipt(
   // 5. tx.to — must be the contract
   if (!addrEq(receipt.to, deployment.contractAddress))
     return fail('WRONG_TX_TARGET', `tx.to ${receipt.to} != contract ${deployment.contractAddress}`);
+
+  if (receiptStatus(receipt.status) === 'unknown') return fail('PENDING', 'Receipt status is missing or unsupported; outcome remains unknown');
 
   // 6. Fetch transaction — bind from/to/chainId/input/value
   const tx = await rpc.getTransaction(txHash).catch(() => null);
@@ -260,6 +262,9 @@ export async function verifyReceipt(
   const txInvoiceId = ('0x' + tx.input.slice(10, 74)) as `0x${string}`;
   if (txInvoiceId.toLowerCase() !== invoiceId.toLowerCase())
     return fail('WRONG_SELECTOR', `tx invoiceId arg ${txInvoiceId} != expected ${invoiceId}`);
+
+  if (!addrEq(receipt.from, tx.from)) return fail('WRONG_TX_TARGET', 'Receipt sender does not match transaction');
+  if (receiptStatus(receipt.status) === 'reverted') return fail('FAILED', 'Transaction reverted on chain');
 
   // 7. Find exactly one InvoicePaid event from this contract for this invoiceId
   //    InvoicePaid(bytes32 indexed invoiceId, address indexed payer,

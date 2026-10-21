@@ -1,0 +1,11 @@
+
+ RUN  v2.1.9 /workspace/scratch/c01bd6fe117d/arcproof-integrated-20261021/repo
+
+ ✓ qa/new-independent-review/wallet-probes.test.tsx (8 tests) 33ms
+ ✓ qa/new-independent-review/ui-probes.test.tsx (16 tests) 192ms
+
+ Test Files  2 passed (2)
+      Tests  24 passed (24)
+   Start at  11:29:26
+   Duration  1.57s (transform 296ms, setup 0ms, collect 651ms, tests 224ms, environment 976ms, prepare 353ms)
+

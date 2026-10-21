@@ -1,10 +1,12 @@
+import { getWalletIntents } from '../walletIntents';
+import { memoryStorage, memoryLocks } from './fixtures/safeBrowser';
 /* eslint-disable typescript/require-await -- Promise-returning RPC mocks intentionally contain no await. */
-import { afterEach, describe, expect, it, vi } from 'vitest';
+import { beforeEach, afterEach, describe, expect, it, vi } from 'vitest';
 import { encodeFunctionData, toHex, type PublicClient, type Hex, type Address } from 'viem';
 import artifact from '../../../evidence/g1/ArcProofInvoices.artifact.json';
 import { ARCPROOF_ABI } from '../arcproofAbi';
 import { ARC_TESTNET, TESTNET_DEPLOYMENT, ZERO_TERMS } from '../testnet';
-import { checkDeployment, loadInvoice, prepareCreate, preparePay, sendPreparedAction, assertReceiptMatches, recoverPaymentHash, reconcileSubmission, type Session, type LoadedInvoice, type WalletRequest } from '../testnetClient';
+import { checkDeployment, loadInvoice, prepareCreate, preparePay, sendPreparedAction, assertReceiptMatches, recoverPaymentHash, reconcileSubmission, recoverUnknownSubmission, type Session, type LoadedInvoice, type WalletRequest } from '../testnetClient';
 import { getSubmissions, recordSubmission } from '../submissions';
 let seq=20000;
 const hex=():Hex=>`0x${(++seq).toString(16).padStart(64,'0')}`;
@@ -12,20 +14,21 @@ const address=():Address=>`0x${(++seq).toString(16).padStart(40,'0')}`;
 function fixture() {
  const session:Session={account:address(),chainId:ARC_TESTNET.id,connectionVersion:1};
  const invoice:LoadedInvoice={invoiceId:hex(),merchant:address(),amountNative:200000000000000000n,expiresAt:2000n,termsHash:ZERO_TERMS,paid:false,payer:'0x0000000000000000000000000000000000000000',paidAt:0n,paidBlockNumber:0n};
- const hash=hex();
+ const hash=hex(), blockHash=hex();
  const rpc={
   getChainId:vi.fn(async():Promise<number>=>ARC_TESTNET.id),
   getCode:vi.fn(async({address:a}:{address:Address})=>a.toLowerCase()===TESTNET_DEPLOYMENT.contractAddress.toLowerCase()?artifact.deployedBytecode.object as Hex:'0x'),
   readContract:vi.fn(async()=>({...invoice})), getBlock:vi.fn(async()=>({timestamp:1000n,number:10n,hash:hex()})),
   call:vi.fn(async()=>({data:'0x'})),estimateGas:vi.fn(async()=>100000n),getGasPrice:vi.fn(async()=>100n),getBalance:vi.fn(async()=>10n**20n),
   getContractEvents:vi.fn(async()=>[{transactionHash:hash}]),
-  getTransaction:vi.fn(async()=>({hash,chainId:ARC_TESTNET.id,from:session.account,to:TESTNET_DEPLOYMENT.contractAddress,input:encodeFunctionData({abi:ARCPROOF_ABI,functionName:'payInvoice',args:[invoice.invoiceId]}),value:invoice.amountNative})),
-  getTransactionReceipt:vi.fn(async()=>({transactionHash:hash,from:session.account,to:TESTNET_DEPLOYMENT.contractAddress,status:'reverted'})),
+  getTransaction:vi.fn(async()=>({hash,blockHash,blockNumber:12n,transactionIndex:0,chainId:ARC_TESTNET.id,from:session.account,to:TESTNET_DEPLOYMENT.contractAddress,input:encodeFunctionData({abi:ARCPROOF_ABI,functionName:'payInvoice',args:[invoice.invoiceId]}),value:invoice.amountNative})),
+  getTransactionReceipt:vi.fn(async()=>({transactionHash:hash,blockHash,blockNumber:12n,transactionIndex:0,from:session.account,to:TESTNET_DEPLOYMENT.contractAddress,status:'reverted'})),
  };
  const request=vi.fn(async({method}:{method:string;params?:readonly unknown[]})=>method==='eth_chainId'?toHex(ARC_TESTNET.id):method==='eth_accounts'?[session.account]:hash);
  return {session,invoice,hash,rpc,client:rpc as unknown as PublicClient,request,wallet:{request} as WalletRequest};
 }
-afterEach(()=>vi.restoreAllMocks());
+beforeEach(()=>{vi.stubGlobal('localStorage',memoryStorage());vi.stubGlobal('navigator',{locks:memoryLocks()});});
+afterEach(()=>{vi.restoreAllMocks();vi.unstubAllGlobals();});
 describe('Reconstructed dedicated testnet adapter with offline-only RPC/wallet mocks',()=>{
  it('rejects an RPC serving another chain',async()=>{const f=fixture();f.rpc.getChainId.mockResolvedValue(1);await expect(checkDeployment(f.client)).rejects.toThrow('wrong chain');});
  it('rejects wrong runtime bytecode',async()=>{const f=fixture();f.rpc.getCode.mockResolvedValue('0x6000');await expect(checkDeployment(f.client)).rejects.toThrow('Runtime');});
@@ -52,4 +55,73 @@ describe('Reconstructed dedicated testnet adapter with offline-only RPC/wallet m
  it('limits hash recovery to the recorded paid block',async()=>{const f=fixture();f.invoice.paid=true;f.invoice.paidBlockNumber=456n;expect(await recoverPaymentHash(f.client,f.invoice)).toBe(f.hash);expect(f.rpc.getContractEvents).toHaveBeenCalledWith(expect.objectContaining({fromBlock:456n,toBlock:456n,args:{invoiceId:f.invoice.invoiceId}}));});
  it('requires exactly one matching recovery event',async()=>{const f=fixture();f.invoice.paid=true;f.invoice.paidBlockNumber=456n;f.rpc.getContractEvents.mockResolvedValue([]);await expect(recoverPaymentHash(f.client,f.invoice)).rejects.toThrow('Exactly one');});
  it('only unlocks a saved reverted hash after exact sender/target/function binding',async()=>{const f=fixture(),row={hash:f.hash,kind:'pay' as const,invoiceId:f.invoice.invoiceId,account:f.session.account,state:'submitted' as const};recordSubmission(row);expect(await reconcileSubmission(f.client,row)).toBe('reverted');expect(getSubmissions().find(x=>x.hash===f.hash)?.state).toBe('reverted');});
+});
+
+describe('Recovery status and durable intent regression probes (mock RPC only)', () => {
+ it.each([undefined, '0x2', 'unexpected'])('never marks unsupported status %s included/reverted', async status => {
+  const f=fixture(); const row={hash:f.hash,kind:'pay' as const,invoiceId:f.invoice.invoiceId,account:f.session.account,state:'submitted' as const};recordSubmission(row);
+  const raw = await f.rpc.getTransactionReceipt();
+  f.rpc.getTransactionReceipt.mockResolvedValue({...raw,status} as unknown as typeof raw);
+  await expect(reconcileSubmission(f.client,row)).rejects.toThrow('unknown');expect(getSubmissions().find(x=>x.hash===f.hash)?.state).toBe('submitted');expect(f.request).not.toHaveBeenCalled();
+ });
+ it('keeps invalid hash wallet outcomes blocked, including after module reload', async () => {
+  const f=fixture(), a=await preparePay(f.client,f.session,f.invoice.invoiceId);
+  f.request.mockImplementation(async ({method})=>method==='eth_chainId'?toHex(ARC_TESTNET.id):method==='eth_accounts'?[f.session.account]:'0x123');
+  await expect(sendPreparedAction(f.client,f.wallet,a,()=>f.session)).rejects.toThrow('no usable');
+  vi.resetModules();const reloaded=await import('../testnetClient');
+  await expect(reloaded.sendPreparedAction(f.client,f.wallet,a,()=>f.session)).rejects.toThrow('unresolved');expect(f.request.mock.calls.filter(([x])=>x.method==='eth_sendTransaction')).toHaveLength(1);
+ });
+ it('only direct current send rejection code 4001 releases the durable guard', async () => {
+  const f=fixture(),a=await preparePay(f.client,f.session,f.invoice.invoiceId);let sends=0;
+  f.request.mockImplementation(async({method})=>{if(method==='eth_sendTransaction'){sends++;throw Object.assign(new Error('rejected'),{code:4001});}return method==='eth_chainId'?toHex(ARC_TESTNET.id):[f.session.account];});
+  await expect(sendPreparedAction(f.client,f.wallet,a,()=>f.session)).rejects.toMatchObject({code:4001});
+  await expect(sendPreparedAction(f.client,f.wallet,a,()=>f.session)).rejects.toMatchObject({code:4001});expect(sends).toBe(2);
+ });
+ it('nested rejection-like code is ambiguous and never unlocks', async () => {
+  const f=fixture(),a=await preparePay(f.client,f.session,f.invoice.invoiceId);f.request.mockImplementation(async({method})=>{if(method==='eth_sendTransaction')throw Object.assign(new Error('ambiguous'),{cause:{code:4001}});return method==='eth_chainId'?toHex(ARC_TESTNET.id):[f.session.account];});
+  await expect(sendPreparedAction(f.client,f.wallet,a,()=>f.session)).rejects.toBeDefined();await expect(sendPreparedAction(f.client,f.wallet,a,()=>f.session)).rejects.toThrow('unresolved');
+ });
+ it('recovery binds full saved call, keeps mismatched hashes locked and sends zero wallet calls', async () => {
+  const f=fixture(),a=await preparePay(f.client,f.session,f.invoice.invoiceId);
+  f.request.mockImplementation(async({method})=>{if(method==='eth_sendTransaction')throw Error('timeout');return method==='eth_chainId'?toHex(ARC_TESTNET.id):[f.session.account];});
+  await expect(sendPreparedAction(f.client,f.wallet,a,()=>f.session)).rejects.toThrow('timeout');
+  const op=getWalletIntents().find(x=>x.account===f.session.account)!;
+  const tx=await f.rpc.getTransaction(),rc=await f.rpc.getTransactionReceipt(),blockHash=hex();
+  f.rpc.getTransaction.mockResolvedValue({...tx,blockHash,blockNumber:12n,transactionIndex:0,value:a.value+1n});
+  f.rpc.getTransactionReceipt.mockResolvedValue({...rc,blockHash,blockNumber:12n,transactionIndex:0,status:'success'});
+  const calls=f.request.mock.calls.length;
+  await expect(recoverUnknownSubmission(f.client,op.operationId,f.hash)).rejects.toThrow('does not match');expect(getWalletIntents().find(x=>x.operationId===op.operationId)?.state).toBe('uncertain');
+  f.rpc.getTransaction.mockResolvedValue({...tx,blockHash,blockNumber:12n,transactionIndex:0,value:a.value});
+  await expect(recoverUnknownSubmission(f.client,op.operationId,f.hash)).resolves.toBe('included');expect(f.request.mock.calls.length).toBe(calls);
+ });
+});
+
+describe('Exact returned hash recovery identity', () => {
+ it.each(['chain','sender','target','calldata','value','blockHash','blockNumber','transactionIndex','status'])('does not resolve on mismatched %s', async field => {
+  const f=fixture(),a=await preparePay(f.client,f.session,f.invoice.invoiceId);await sendPreparedAction(f.client,f.wallet,a,()=>f.session);
+  const op=getWalletIntents().find(x=>x.hash===f.hash)!;const tx=await f.rpc.getTransaction(),rc=await f.rpc.getTransactionReceipt(),blockHash=hex();
+  const validTx={...tx,blockHash,blockNumber:12n,transactionIndex:0};const validReceipt={...rc,blockHash,blockNumber:12n,transactionIndex:0,status:'success'};
+  const bad:Record<string,unknown>={...validTx};const receipt:Record<string,unknown>={...validReceipt};
+  if(field==='chain')bad.chainId=1;if(field==='sender')bad.from=address();if(field==='target')bad.to=address();if(field==='calldata')bad.input='0x1234';if(field==='value')bad.value=a.value+1n;
+  if(field==='blockHash')bad.blockHash=hex();if(field==='blockNumber')bad.blockNumber=13n;if(field==='transactionIndex')bad.transactionIndex=1;if(field==='status')receipt.status=undefined;
+  f.rpc.getTransaction.mockResolvedValue(bad as unknown as typeof tx);f.rpc.getTransactionReceipt.mockResolvedValue(receipt as unknown as typeof rc);
+  const calls=f.request.mock.calls.length;await expect(recoverUnknownSubmission(f.client,op.operationId,f.hash)).rejects.toThrow();expect(getWalletIntents().find(x=>x.operationId===op.operationId)?.state).toBe('submitted');expect(f.request.mock.calls.length).toBe(calls);
+ });
+ it('retains a late returned hash after account context changes without another send', async () => {
+  const f=fixture(),a=await preparePay(f.client,f.session,f.invoice.invoiceId);let resolve!:(hash:Hex)=>void;const pending=new Promise<Hex>(r=>{resolve=r;});let current:Session|null=f.session;
+  const sent=vi.fn();f.request.mockImplementation(async({method})=>{if(method==='eth_sendTransaction'){sent();return pending;}return method==='eth_chainId'?toHex(ARC_TESTNET.id):[f.session.account];});
+  const result=sendPreparedAction(f.client,f.wallet,a,()=>current);await vi.waitFor(()=>expect(sent).toHaveBeenCalledOnce());current=null;resolve(f.hash);await expect(result).resolves.toBe(f.hash);expect(getWalletIntents().some(x=>x.hash===f.hash&&x.state==='submitted')).toBe(true);
+ });
+});
+
+
+describe('Independent integration: legacy inclusion recovery', () => {
+ it.each(['blockHash', 'blockNumber', 'transactionIndex', 'missing'])('does not release a legacy request with %s mismatch', async field => {
+  const f=fixture(); const row={hash:f.hash,kind:'pay' as const,invoiceId:f.invoice.invoiceId,account:f.session.account,state:'submitted' as const}; recordSubmission(row);
+  const tx=await f.rpc.getTransaction(); const bad:Record<string,unknown>={...tx};
+  if(field==='blockHash')bad.blockHash=hex(); if(field==='blockNumber')bad.blockNumber=13n; if(field==='transactionIndex')bad.transactionIndex=1; if(field==='missing')bad.blockHash=null;
+  f.rpc.getTransaction.mockResolvedValue(bad as unknown as typeof tx);
+  await expect(reconcileSubmission(f.client,row)).rejects.toThrow('inclusion identity');
+  expect(getSubmissions().find(x=>x.hash===f.hash)?.state).toBe('submitted'); expect(f.request).not.toHaveBeenCalled();
+ });
 });

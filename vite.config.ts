@@ -41,7 +41,15 @@ export default defineConfig({
     ],
   },
   server: {
-    allowedHosts: true,
-    cors: true,
+    // Keep source/HMR local. Cross-origin Studio previews need a separately
+    // verified, exact allowlist; never restore blanket Host/CORS access.
+    host: '127.0.0.1',
+    allowedHosts: [],
+    cors: false,
+  },
+  preview: {
+    host: '127.0.0.1',
+    allowedHosts: [],
+    cors: false,
   },
 })
