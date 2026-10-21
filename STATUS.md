@@ -1,3 +1,5 @@
+> 2026-10-21 UTC 交付记录：本轮源码、测试及文档已提交至私有 main：[648acc3](https://github.com/peterpeter228/arcproof/commit/648acc3cc1678fa682bc5833161e66ace1ff2603)。完整475文件树及215个变更文件内容已回读匹配。下方“尚未推送”等文字属于交付前历史快照，不是当前发布状态。本次补记仅修改 README 与 STATUS，运行代码、依赖和测试内容不变，未重新运行测试，也未更新 Studio、部署或启用 CI。
+
 ## 2026-10-21 Argon follow-on verification (current candidate, not yet pushed)
 
 Argon returned a substantive review. Independently reproduced and fixed the successful-creation durable-intent lifecycle gap, caller-supplied receipt provenance labels, and malformed supplied-hash validation order. Strict known-hash recovery gates, unknown-state locks, inclusion identity and persistence-failure behavior remain fail-closed. Standalone invoice inspection remains read-only.

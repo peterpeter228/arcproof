@@ -1,3 +1,5 @@
+> 2026-10-21 UTC 交付记录：本轮源码、测试及文档已提交至私有 main：[648acc3](https://github.com/peterpeter228/arcproof/commit/648acc3cc1678fa682bc5833161e66ace1ff2603)。完整475文件树及215个变更文件内容已回读匹配。下方“尚未推送”等文字属于交付前历史快照，不是当前发布状态。本次补记仅修改 README 与 STATUS，运行代码、依赖和测试内容不变，未重新运行测试，也未更新 Studio、部署或启用 CI。
+
 # ArcProof 发票直付原型与核验证据
 
 当前第二轮私有本地候选基于已回读的 main 提交42e9ac9d46f7769b9fa428e27511edd66e76c1c9；本轮尚未推送、更新 Studio 或部署。恢复入口：[STATUS.md](STATUS.md)，运行入口：[RUN_中文.md](RUN_中文.md)。
