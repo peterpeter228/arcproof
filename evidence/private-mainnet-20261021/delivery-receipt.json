@@ -1,0 +1,569 @@
+{
+  "schema": "arcproof-private-mainnet-delivery-v1",
+  "verifiedAtUTC": "2026-10-21T23:50:12.384Z",
+  "repository": "peterpeter228/arcproof",
+  "privateRepositoryVerified": true,
+  "sourceCommit": "10af4d92453583df04915706774914392e283e45",
+  "treeSha": "77cd9721c5bbebbafe03b9cbefc20edc68193345",
+  "parentCommit": "4deb74cce889ca122ef33903d27c2be10a1c437e",
+  "update": {
+    "force": false,
+    "expectedSha": "4deb74cce889ca122ef33903d27c2be10a1c437e"
+  },
+  "sourceSnapshotSha256": "8df6b66d77c12e99b268a19c0ed6f88f33336b24c177fb0fdda88834ba631432",
+  "treeBlobs": 772,
+  "treeMismatches": 0,
+  "changedFilesVerified": 91,
+  "changedContentMismatches": 0,
+  "headAfterReadback": "10af4d92453583df04915706774914392e283e45",
+  "files": [
+    {
+      "path": "AGENTS.md",
+      "sha": "2d4eea0646e426a2d32402801c7102ac727d5f5e",
+      "bytes": 8360,
+      "contentExact": true
+    },
+    {
+      "path": "README.md",
+      "sha": "9c1f7001daa4f85327379c39e26648332a9e61a5",
+      "bytes": 6359,
+      "contentExact": true
+    },
+    {
+      "path": "START_HERE.txt",
+      "sha": "0178ec6c29ebfd1a7b2c37e8686310f62b6266df",
+      "bytes": 3415,
+      "contentExact": true
+    },
+    {
+      "path": "STATUS.md",
+      "sha": "c582ac734e1f9c73223c3f431b04a299e85fdb12",
+      "bytes": 19569,
+      "contentExact": true
+    },
+    {
+      "path": "vite.config.ts",
+      "sha": "4963425974087fc3ae462c6af2dd4e96e855dbc3",
+      "bytes": 4022,
+      "contentExact": true
+    },
+    {
+      "path": "evidence/private-mainnet-20261021/REPORT.json",
+      "sha": "24763d69874df32a0d4f7642dd1f23626b5bcbf0",
+      "bytes": 5464,
+      "contentExact": true
+    },
+    {
+      "path": "evidence/private-mainnet-20261021/argon-final-input-manifest.json",
+      "sha": "33cce52480a3ae452da41fa96f39659ecfd8c7ba",
+      "bytes": 7823,
+      "contentExact": true
+    },
+    {
+      "path": "evidence/private-mainnet-20261021/argon-final-receipt.json",
+      "sha": "b3caabc393383a4223cc2cc4a9ee003f9236383e",
+      "bytes": 635,
+      "contentExact": true
+    },
+    {
+      "path": "evidence/private-mainnet-20261021/argon-final-review.md",
+      "sha": "ee2e490a10db496dab5ae6a1131b1964859268ff",
+      "bytes": 8938,
+      "contentExact": true
+    },
+    {
+      "path": "evidence/private-mainnet-20261021/argon-final-triage.md",
+      "sha": "200e19811f6a112044845b91f2dc34e0917e953a",
+      "bytes": 2199,
+      "contentExact": true
+    },
+    {
+      "path": "evidence/private-mainnet-20261021/argon-initial-input-manifest.json",
+      "sha": "4ca5046f816587a7d524a2a9c735b26300d9c505",
+      "bytes": 2635,
+      "contentExact": true
+    },
+    {
+      "path": "evidence/private-mainnet-20261021/argon-initial-receipt.json",
+      "sha": "b79aa1939ce3f8c4620d34427c84698c5a93d813",
+      "bytes": 637,
+      "contentExact": true
+    },
+    {
+      "path": "evidence/private-mainnet-20261021/argon-initial-review.md",
+      "sha": "dae22274ba65e64d701c7cff8f3dfbc8200a4356",
+      "bytes": 16140,
+      "contentExact": true
+    },
+    {
+      "path": "evidence/private-mainnet-20261021/build-mainnet-before-final-regressions.log",
+      "sha": "4d12fe77b4b9750b6ccc11f3d919c3c548409cf9",
+      "bytes": 11326,
+      "contentExact": true
+    },
+    {
+      "path": "evidence/private-mainnet-20261021/build-mainnet-browser-fix.log",
+      "sha": "6b8be1300ed46601436153dfb6b59846b29a2678",
+      "bytes": 13111,
+      "contentExact": true
+    },
+    {
+      "path": "evidence/private-mainnet-20261021/build-mainnet.log",
+      "sha": "781ba1a37177615a737b8ac0d409223049b80cac",
+      "bytes": 13256,
+      "contentExact": true
+    },
+    {
+      "path": "evidence/private-mainnet-20261021/build-provenance-mainnet-browser-fix.json",
+      "sha": "e30d4bee13353f316899596cba0793adf97e896f",
+      "bytes": 25509,
+      "contentExact": true
+    },
+    {
+      "path": "evidence/private-mainnet-20261021/build-provenance-testnet-browser-fix.json",
+      "sha": "97e77da8da3ce3d63627b8976c31bd584fc55704",
+      "bytes": 25509,
+      "contentExact": true
+    },
+    {
+      "path": "evidence/private-mainnet-20261021/build-readback-browser-fix.json",
+      "sha": "f8b84e223a5b4a834db138cacb461c5ddbb91da4",
+      "bytes": 981,
+      "contentExact": true
+    },
+    {
+      "path": "evidence/private-mainnet-20261021/build-readback.json",
+      "sha": "9e2888a250d2c8a61fa816f860e787595d586ab7",
+      "bytes": 791,
+      "contentExact": true
+    },
+    {
+      "path": "evidence/private-mainnet-20261021/build-testnet-before-final-regressions.log",
+      "sha": "046c7f26575ad244ed0291640859968db53b6b5a",
+      "bytes": 11326,
+      "contentExact": true
+    },
+    {
+      "path": "evidence/private-mainnet-20261021/build-testnet-browser-fix.log",
+      "sha": "7a1039c35d4c0b38f6fcf0312a2bd76f1c9151dd",
+      "bytes": 13111,
+      "contentExact": true
+    },
+    {
+      "path": "evidence/private-mainnet-20261021/build-testnet.log",
+      "sha": "bd62feef8fe6b1129a63a8483cdf77b586d85dba",
+      "bytes": 13256,
+      "contentExact": true
+    },
+    {
+      "path": "evidence/private-mainnet-20261021/check-browser-fix.log",
+      "sha": "2c6d4f3b5fa07a001faec8791ee7c7b2289628b1",
+      "bytes": 201,
+      "contentExact": true
+    },
+    {
+      "path": "evidence/private-mainnet-20261021/check-final-before-final-regressions.log",
+      "sha": "572564d7dd347426da5cbec9755cd1643b58d2c3",
+      "bytes": 109,
+      "contentExact": true
+    },
+    {
+      "path": "evidence/private-mainnet-20261021/check-final-browser-fix.log",
+      "sha": "572564d7dd347426da5cbec9755cd1643b58d2c3",
+      "bytes": 109,
+      "contentExact": true
+    },
+    {
+      "path": "evidence/private-mainnet-20261021/check-final.log",
+      "sha": "572564d7dd347426da5cbec9755cd1643b58d2c3",
+      "bytes": 109,
+      "contentExact": true
+    },
+    {
+      "path": "evidence/private-mainnet-20261021/check-generated-output-failure.json",
+      "sha": "17d76da5d19f3860051fb418bc88d59b7fd83a55",
+      "bytes": 2364,
+      "contentExact": true
+    },
+    {
+      "path": "evidence/private-mainnet-20261021/check-initial.log",
+      "sha": "572564d7dd347426da5cbec9755cd1643b58d2c3",
+      "bytes": 109,
+      "contentExact": true
+    },
+    {
+      "path": "evidence/private-mainnet-20261021/contract-identity.json",
+      "sha": "9c9ca86a8bc42157a017352d4bfdb9e8b320d5bf",
+      "bytes": 1040,
+      "contentExact": true
+    },
+    {
+      "path": "evidence/private-mainnet-20261021/core-network-regressions.log",
+      "sha": "4f0ab8512c92a06db35be3c93fcaee2cf755a66c",
+      "bytes": 411,
+      "contentExact": true
+    },
+    {
+      "path": "evidence/private-mainnet-20261021/core-typecheck.log",
+      "sha": "f5b99e8a88f3351bff2d974f340241915d097a47",
+      "bytes": 15,
+      "contentExact": true
+    },
+    {
+      "path": "evidence/private-mainnet-20261021/independent-network-review.md",
+      "sha": "52c962678f08f6cac89c65900887148de8e3cc76",
+      "bytes": 5937,
+      "contentExact": true
+    },
+    {
+      "path": "evidence/private-mainnet-20261021/invalid-build-selectors-browser-fix.json",
+      "sha": "e19a23b465662626078726c8fa426c0994290121",
+      "bytes": 5530,
+      "contentExact": true
+    },
+    {
+      "path": "evidence/private-mainnet-20261021/invalid-build-selectors.json",
+      "sha": "93866213f81e947bf717a3fcc360274c52b22856",
+      "bytes": 5434,
+      "contentExact": true
+    },
+    {
+      "path": "evidence/private-mainnet-20261021/project-tests-browser-fix.log",
+      "sha": "bf7d1175daf3ed9f735e8f8baf990a7c9ffee71c",
+      "bytes": 228,
+      "contentExact": true
+    },
+    {
+      "path": "evidence/private-mainnet-20261021/project-tests-final-before-final-regressions.log",
+      "sha": "701f0b074fcf462650dee95489642ee19cc140a4",
+      "bytes": 228,
+      "contentExact": true
+    },
+    {
+      "path": "evidence/private-mainnet-20261021/project-tests-final.log",
+      "sha": "539b7f211f14242003fc19e25ce9e753992b9b13",
+      "bytes": 228,
+      "contentExact": true
+    },
+    {
+      "path": "evidence/private-mainnet-20261021/project-tests-initial.log",
+      "sha": "c4a297188024a5d9316822b22e985bd0bad6b359",
+      "bytes": 1080,
+      "contentExact": true
+    },
+    {
+      "path": "evidence/private-mainnet-20261021/project-tests-pre-storage-fixture.log",
+      "sha": "d9d03639cbc6635c16d749187ecd959c874d2275",
+      "bytes": 6223,
+      "contentExact": true
+    },
+    {
+      "path": "evidence/private-mainnet-20261021/project-tests-round2.log",
+      "sha": "5808687e030bc16f787726322166250ddc34345c",
+      "bytes": 227,
+      "contentExact": true
+    },
+    {
+      "path": "evidence/private-mainnet-20261021/recovery-check.json",
+      "sha": "7f543555a1f2b523d7bdb6929aebfc0ab4143dd0",
+      "bytes": 740,
+      "contentExact": true
+    },
+    {
+      "path": "evidence/private-mainnet-20261021/source-snapshot-browser-fix.json",
+      "sha": "d1c5e8aeb38f08452a0345ff4d148131e62c5e03",
+      "bytes": 10768,
+      "contentExact": true
+    },
+    {
+      "path": "evidence/private-mainnet-20261021/source-snapshot.json",
+      "sha": "596088826d048168bc333925d7981460117c7901",
+      "bytes": 10768,
+      "contentExact": true
+    },
+    {
+      "path": "evidence/private-mainnet-20261021/studio-browser-fix-readback.json",
+      "sha": "07adfed743376e84fb085acffa0685250f79865e",
+      "bytes": 24074,
+      "contentExact": true
+    },
+    {
+      "path": "evidence/private-mainnet-20261021/studio-browser-fix-report.json",
+      "sha": "51a1314e99ebca26719f1fb16950668b604f76e4",
+      "bytes": 2942,
+      "contentExact": true
+    },
+    {
+      "path": "evidence/private-mainnet-20261021/studio-sync-final.json",
+      "sha": "f196d19fd8536ae0e9fc64a11c2e257e365b5866",
+      "bytes": 4318,
+      "contentExact": true
+    },
+    {
+      "path": "evidence/private-mainnet-20261021/studio-sync-readback-after-refresh.json",
+      "sha": "db458b1f13ff23b833a22a6b94d4148f72c4ac88",
+      "bytes": 23956,
+      "contentExact": true
+    },
+    {
+      "path": "evidence/private-mainnet-20261021/mainnet-browser-final/demo-ax.txt",
+      "sha": "21684b7bb39b27fc72a32f4bfa17e6ec7b31f8bf",
+      "bytes": 2610,
+      "contentExact": true
+    },
+    {
+      "path": "evidence/private-mainnet-20261021/mainnet-browser-final/evidence-ax.txt",
+      "sha": "142e3bbe1c22b115f14b7caf48c8633fe6c1a866",
+      "bytes": 9534,
+      "contentExact": true
+    },
+    {
+      "path": "evidence/private-mainnet-20261021/mainnet-browser-final/report.md",
+      "sha": "e5f0616798cdad5287931c9e4cac78de66aedd00",
+      "bytes": 2602,
+      "contentExact": true
+    },
+    {
+      "path": "evidence/private-mainnet-20261021/mainnet-browser-final/route-results.json",
+      "sha": "fafc3ec0a61778c3c2e89347d9e1c5c5f6dcb51e",
+      "bytes": 13092,
+      "contentExact": true
+    },
+    {
+      "path": "evidence/private-mainnet-20261021/mainnet-browser-before-fix/report.md",
+      "sha": "f120b1654628e6b7624ad6ee355185d2717839bc",
+      "bytes": 4434,
+      "contentExact": true
+    },
+    {
+      "path": "evidence/private-mainnet-20261021/mainnet-browser-before-fix/route-results.json",
+      "sha": "f0b015e75dd0402f16f35381db23ccd5017b2c10",
+      "bytes": 6594,
+      "contentExact": true
+    },
+    {
+      "path": "docs/NET01_PRIVATE_READINESS_DESIGN.md",
+      "sha": "75d00e52867591fddd23a0f4ff9fa16ef9af43aa",
+      "bytes": 14365,
+      "contentExact": true
+    },
+    {
+      "path": "docs/PRIVATE_MAINNET_PHASE_20261021.md",
+      "sha": "ab2604d2e1fef8be29a1aa5a9752b193a6b3bbbd",
+      "bytes": 6665,
+      "contentExact": true
+    },
+    {
+      "path": "src/App.tsx",
+      "sha": "15d79770905fbc930b12b20bb58c56127ff6efda",
+      "bytes": 4313,
+      "contentExact": true
+    },
+    {
+      "path": "src/config.ts",
+      "sha": "d268eb90b380f5b2e60e78d4bb43882c56e3cc75",
+      "bytes": 687,
+      "contentExact": true
+    },
+    {
+      "path": "src/components/arcproof/EvidenceScreen.tsx",
+      "sha": "87559e575bd99e8716e05b7d22b501a3deb0b07d",
+      "bytes": 11990,
+      "contentExact": true
+    },
+    {
+      "path": "src/components/arcproof/Layout.tsx",
+      "sha": "2f4da22f879eb42d1b3b005cab5de84698d7cc35",
+      "bytes": 10271,
+      "contentExact": true
+    },
+    {
+      "path": "src/components/arcproof/NetworkUnavailable.tsx",
+      "sha": "4ae102ea7300730c09761c6a7ae0afca2c383491",
+      "bytes": 1839,
+      "contentExact": true
+    },
+    {
+      "path": "src/arcproof/arcSettlement.ts",
+      "sha": "cecab8153ff53ec1155e5151b4c04f4fcf7ab187",
+      "bytes": 2254,
+      "contentExact": true
+    },
+    {
+      "path": "src/arcproof/buildIdentity.ts",
+      "sha": "859aa178e0419dbb56eb3d21a4d03b768a1b2ffd",
+      "bytes": 1525,
+      "contentExact": true
+    },
+    {
+      "path": "src/arcproof/exportUtils.ts",
+      "sha": "8422591fc53b42fd57dfe03226fc5781f349af25",
+      "bytes": 13077,
+      "contentExact": true
+    },
+    {
+      "path": "src/arcproof/networkPolicy.ts",
+      "sha": "1f2687a2729f5ce6ed3b91c0fad326c513d6be79",
+      "bytes": 4874,
+      "contentExact": true
+    },
+    {
+      "path": "src/arcproof/receiptVerifier.ts",
+      "sha": "5af8da46f989d128389f2fd32173448a1fd1d360",
+      "bytes": 27849,
+      "contentExact": true
+    },
+    {
+      "path": "src/arcproof/submissions.ts",
+      "sha": "de02674ec6f337e4c69a558d1ab97b5425d533d7",
+      "bytes": 7148,
+      "contentExact": true
+    },
+    {
+      "path": "src/arcproof/testnetClient.ts",
+      "sha": "c5db2618d953c7af8558b08fec2a8d9a607a3418",
+      "bytes": 30259,
+      "contentExact": true
+    },
+    {
+      "path": "src/arcproof/useTestnetWallet.ts",
+      "sha": "ca7f5abec0a30a5fd9cbed5eb4bc557f82a996df",
+      "bytes": 4227,
+      "contentExact": true
+    },
+    {
+      "path": "src/arcproof/walletIntents.ts",
+      "sha": "bf7533def3f0fbb3dc6c93b8a2e29e25b76d4308",
+      "bytes": 9104,
+      "contentExact": true
+    },
+    {
+      "path": "src/arcproof/__tests__/T24_exportUtils.test.ts",
+      "sha": "1b230addb38a98547675285388cf095699f056bf",
+      "bytes": 13063,
+      "contentExact": true
+    },
+    {
+      "path": "src/arcproof/__tests__/buildIdentity.test.ts",
+      "sha": "7983655a8932ca0f2761b63dffdb0f7d43417951",
+      "bytes": 1696,
+      "contentExact": true
+    },
+    {
+      "path": "src/arcproof/__tests__/mainnetReadonlyUi.test.tsx",
+      "sha": "92db75048f3ce15b5fb18c5a811bccbb9368c9c8",
+      "bytes": 3578,
+      "contentExact": true
+    },
+    {
+      "path": "src/arcproof/__tests__/mainnetWalletBootstrap.test.ts",
+      "sha": "450e931584e2b43a672b8dc5d34808c467b94050",
+      "bytes": 3351,
+      "contentExact": true
+    },
+    {
+      "path": "src/arcproof/__tests__/networkPolicy.test.ts",
+      "sha": "0bfbce5b69e603855f49e5168bf814e2d70d8f47",
+      "bytes": 9396,
+      "contentExact": true
+    },
+    {
+      "path": "src/arcproof/__tests__/readonlyRoutes.test.tsx",
+      "sha": "f688b2320a013531f3115bf708e3d16931633cfd",
+      "bytes": 6582,
+      "contentExact": true
+    },
+    {
+      "path": "src/arcproof/__tests__/submissions.test.ts",
+      "sha": "422b5ec2f0f37b0871f7d66d8d20065db335dec0",
+      "bytes": 3340,
+      "contentExact": true
+    },
+    {
+      "path": "evidence/private-mainnet-20261021/studio-browser-fix-evidence-cropped.png",
+      "sha": "0d03bff1322c0ff04f03f56d970b12cfd81529c0",
+      "bytes": 195632,
+      "contentExact": true
+    },
+    {
+      "path": "evidence/private-mainnet-20261021/studio-browser-fix-refreshed-identity-cropped.png",
+      "sha": "a7999f43c94b79363865c3cdee4d6118ebb1b4a2",
+      "bytes": 195805,
+      "contentExact": true
+    },
+    {
+      "path": "evidence/private-mainnet-20261021/studio-browser-fix-tests-cropped.png",
+      "sha": "59d01ea66c91f93c1c15948dd306c41a3caf748e",
+      "bytes": 42809,
+      "contentExact": true
+    },
+    {
+      "path": "evidence/private-mainnet-20261021/studio-evidence-final-cropped.png",
+      "sha": "0d5831a1d7a941edf332fdb6dc5a1796f6949910",
+      "bytes": 193769,
+      "contentExact": true
+    },
+    {
+      "path": "evidence/private-mainnet-20261021/studio-identity-final-cropped.png",
+      "sha": "a2d18e407526ff376c706afe1a3ec9bb7605e9ea",
+      "bytes": 193661,
+      "contentExact": true
+    },
+    {
+      "path": "evidence/private-mainnet-20261021/studio-simulated-receipt-cropped.png",
+      "sha": "957c355d1d4e545deec8229ba2bf74286dc31788",
+      "bytes": 128889,
+      "contentExact": true
+    },
+    {
+      "path": "evidence/private-mainnet-20261021/studio-tests-cropped.png",
+      "sha": "0c7e64095dab6a91c9a0034bed4c3a269e41ef76",
+      "bytes": 44002,
+      "contentExact": true
+    },
+    {
+      "path": "evidence/private-mainnet-20261021/studio-verify-error-cropped.png",
+      "sha": "67175d912b4c233b5fc52a89224ac3f06dbe8143",
+      "bytes": 113256,
+      "contentExact": true
+    },
+    {
+      "path": "evidence/private-mainnet-20261021/studio-verify-final-cropped.png",
+      "sha": "bddebaca0bc2049ab0f50ced9ca1f6722fd38610",
+      "bytes": 143149,
+      "contentExact": true
+    },
+    {
+      "path": "evidence/private-mainnet-20261021/mainnet-browser-final/01-root.png",
+      "sha": "7b6fe325e4bff0db6ee2d20ae5476db30b7eba2a",
+      "bytes": 74389,
+      "contentExact": true
+    },
+    {
+      "path": "evidence/private-mainnet-20261021/mainnet-browser-final/02-evidence-fixed.png",
+      "sha": "ddd1bfb9659e895f11ed07d69edda5dd5ea458b1",
+      "bytes": 310837,
+      "contentExact": true
+    },
+    {
+      "path": "evidence/private-mainnet-20261021/mainnet-browser-final/03-offline-demo.png",
+      "sha": "9d613626fa2c2077a1a24ca76be9e1e6e7cbd77e",
+      "bytes": 111714,
+      "contentExact": true
+    },
+    {
+      "path": "evidence/private-mainnet-20261021/mainnet-browser-final/04-invalid-route.png",
+      "sha": "1646402a27425baf7ee49940158afab2c2f003e5",
+      "bytes": 36232,
+      "contentExact": true
+    },
+    {
+      "path": "evidence/private-mainnet-20261021/mainnet-browser-before-fix/02-mainnet-evidence.png",
+      "sha": "f53a6f45ae1f8606ea8c0b520d22eb53ece76c21",
+      "bytes": 316337,
+      "contentExact": true
+    }
+  ],
+  "scope": "Private source and evidence delivery; no live mainnet acceptance or public deployment.",
+  "metadataCommitNote": "This receipt records the verified primary source commit; it does not self-attest the commit containing this receipt."
+}

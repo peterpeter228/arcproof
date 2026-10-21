@@ -1,6 +1,6 @@
 # ArcProof 私有主网准备与 Studio 同步
 
-日期：2026-10-21 UTC。当前为私有候选；Studio白名单源码已回读匹配，最终复审已完成，GitHub新提交待回读，不宣称链上完成。
+日期：2026-10-21 UTC。私有源码已交付；Studio白名单源码回读匹配，最终复审完成。GitHub源码提交10af4d92453583df04915706774914392e283e45的772文件树及91变更内容已回读，无差异；不宣称链上完成。
 
 ## 范围和来源
 
@@ -48,3 +48,7 @@ Argon初审实际HTTP200，请求模型gemini-4-argon-high，响应modelVersion=
 ## 最终辅助复审
 
 第二次Argon实际HTTP200，59.89秒；输入hash660c8ede1ec506303c25a604a46cf79b7f8d996e588e362067f684141f18ddff。模型没有提出可复现P0/P1/P2，两个P3为未启用主网收据的未来币种文案和惰性旧client实例。已独立核对当前不可达路径和安装依赖的fetch位置，不据此保证零缺陷或所有运行路径零网络调用。报告中headless和合约hash被称为基线的用词已在独立处理记录纠正。最终源码未变；两次批准调用均已使用，费用未知。见argon-final-review.md原始建议、argon-final-receipt.json及argon-final-triage.md。
+
+## 私有交付
+
+源码提交[10af4d9](https://github.com/peterpeter228/arcproof/commit/10af4d92453583df04915706774914392e283e45)使用expected_sha=4deb74cce889ca122ef33903d27c2be10a1c437e、force=false更新。772文件完整树及91个变更文件的实际内容全部匹配，main随后回读仍为该提交。完整记录在[delivery-receipt.json](../evidence/private-mainnet-20261021/delivery-receipt.json)。本状态补记不改变已审查和已同步的源码snapshot。

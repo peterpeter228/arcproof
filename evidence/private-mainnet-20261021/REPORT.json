@@ -1,9 +1,9 @@
 {
   "schema": "arcproof-private-mainnet-phase-v1",
-  "updatedAtUTC": "2026-10-21T23:41:17.536827+00:00",
+  "updatedAtUTC": "2026-10-21T23:50:12.908615+00:00",
   "baseCommit": "4deb74cce889ca122ef33903d27c2be10a1c437e",
   "candidateSourceSnapshotSha256": "8df6b66d77c12e99b268a19c0ed6f88f33336b24c177fb0fdda88834ba631432",
-  "state": "TESTED_REVIEWED_PRIVATE_CANDIDATE_REMOTE_READBACK_PENDING",
+  "state": "PRIVATE_PHASE_DELIVERED_PRIMARY_SOURCE_READBACK_VERIFIED",
   "authorization": {
     "reference": "Sentinel_f512248b01208191a4f4cc252be831fd",
     "legacy18HourCapRemovedForThisPhase": true,
@@ -96,9 +96,18 @@
     "finalTriage": "argon-final-triage.md",
     "professionalAudit": false
   },
-  "remotePersistence": "PENDING",
+  "remotePersistence": {
+    "status": "VERIFIED_PRIMARY_SOURCE_COMMIT",
+    "commit": "10af4d92453583df04915706774914392e283e45",
+    "tree": "77cd9721c5bbebbafe03b9cbefc20edc68193345",
+    "expectedSha": "4deb74cce889ca122ef33903d27c2be10a1c437e",
+    "force": false,
+    "treeFiles": 772,
+    "changedContentsReadBack": 91,
+    "mismatches": 0,
+    "receipt": "delivery-receipt.json"
+  },
   "remaining": [
-    "Nonforce expected_sha commit and readback",
     "Mainnet deployment/two-wallet/live finality/native system event evidence NOT_RUN and outside this phase",
     "No public release/submission/award/payment claim"
   ],
