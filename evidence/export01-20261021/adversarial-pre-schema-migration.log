@@ -1,0 +1,50 @@
+
+ RUN  v2.1.9 /workspace/scratch/c01bd6fe117d/arcproof-export01-20261021/repo
+
+ ❯ qa/native-settlement-review/independent.test.ts (137 tests | 2 failed) 68ms
+   × schema 1.1 and real-source gas export boundaries > includes minimum schema metadata and preserves aliases 8ms
+     → expected { schemaVersion: '1.2', …(34) } to match object { schemaVersion: '1.1', …(5) }
+(69 matching properties omitted from actual)
+   × schema 1.1 and real-source gas export boundaries > schema metadata and nullable gas are represented in CSV 2ms
+     → expected '1.2' to be '1.1' // Object.is equality
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  qa/native-settlement-review/independent.test.ts > schema 1.1 and real-source gas export boundaries > includes minimum schema metadata and preserves aliases
+AssertionError: expected { schemaVersion: '1.2', …(34) } to match object { schemaVersion: '1.1', …(5) }
+(69 matching properties omitted from actual)
+
+- Expected
++ Received
+
+  Object {
+    "blockNumber": "101",
+    "contractAddress": "0x2222222222222222222222222222222222222222",
+    "gasFeeNative": null,
+-   "schemaVersion": "1.1",
++   "schemaVersion": "1.2",
+    "txHash": "0x4444444444444444444444444444444444444444444444444444444444444444",
+    "verifiedAt": 1792551192336,
+  }
+
+ ❯ qa/native-settlement-review/independent.test.ts:148:143
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯
+
+ FAIL  qa/native-settlement-review/independent.test.ts > schema 1.1 and real-source gas export boundaries > schema metadata and nullable gas are represented in CSV
+AssertionError: expected '1.2' to be '1.1' // Object.is equality
+
+Expected: "1.1"
+Received: "1.2"
+
+ ❯ qa/native-settlement-review/independent.test.ts:152:292
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯
+
+ Test Files  1 failed (1)
+      Tests  2 failed | 135 passed (137)
+   Start at  11:53:11
+   Duration  732ms (transform 127ms, setup 0ms, collect 352ms, tests 68ms, environment 0ms, prepare 111ms)
+

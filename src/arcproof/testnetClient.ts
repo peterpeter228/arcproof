@@ -278,6 +278,7 @@ export function assertReceiptMatches(
 
 export function receiptRpc(client: PublicClient, onInvoiceRead?: (invoice: LoadedInvoice) => void): RpcProvider {
   return {
+    sourceLabel: 'Configured viem PublicClient (endpoint not exported)',
     getChainId: () => client.getChainId(),
     getContractCode: async (address) => (await client.getCode({ address })) ?? null,
     getInvoice: async (address, invoiceId) => {
@@ -331,8 +332,8 @@ export async function recoverPaymentHash(client: PublicClient, invoice: LoadedIn
 }
 
 export async function verifyTestnetReceipt(client: PublicClient, invoiceId: Hex, suppliedHash?: Hex) {
+  if (suppliedHash !== undefined && !isBytes32(suppliedHash)) throw new Error('Transaction hash must be a 32-byte hexadecimal value.');
   const invoice = await loadInvoice(client, invoiceId);
-  if (suppliedHash && !isBytes32(suppliedHash)) throw new Error('Transaction hash must be a 32-byte hexadecimal value.');
   const hash = suppliedHash || await recoverPaymentHash(client, invoice);
   let checkedInvoice: LoadedInvoice | undefined;
   const rpc = receiptRpc(client, (snapshot) => { checkedInvoice = snapshot; });
@@ -391,7 +392,7 @@ export async function reconcileSubmission(client: PublicClient, row: Submission)
 }
 
 /** Recover only the exact saved call. Replacement/cancellation and cross-device recovery are deliberately unsupported. */
-export async function recoverUnknownSubmission(client: PublicClient, operationId: string, hash: Hex) {
+export async function recoverUnknownSubmission(client: PublicClient, operationId: string, hash: Hex, expectedState?: 'included' | 'reverted') {
   let matchedIntent: import('./walletIntents').WalletIntent | undefined;
   const state = await recoverWalletIntent(operationId, hash, async (intent) => {
     await checkDeployment(client);
@@ -408,6 +409,7 @@ export async function recoverUnknownSubmission(client: PublicClient, operationId
     const status = receiptStatus(receipt.status);
     if (status === 'unknown') throw new Error('Receipt status is unknown. Request stays unresolved.');
     const state = status === 'success' ? 'included' : 'reverted';
+    if (expectedState && state !== expectedState) throw new Error('Receipt outcome changed during confirmation. Request stays unresolved.');
     matchedIntent = intent;
     return state;
   });
@@ -416,4 +418,18 @@ export async function recoverUnknownSubmission(client: PublicClient, operationId
     releaseRecoveredRequest(matchedIntent.kind, matchedIntent.account, matchedIntent.invoiceId);
   }
   return state;
+}
+
+/** Settle a returned hash only through the same strict read-only recovery gates. */
+export async function confirmSubmittedOutcome(client: PublicClient, hash: Hex, expectedState: 'included' | 'reverted') {
+  const intent = findUnresolvedWalletIntent(hash);
+  if (!intent) throw new Error('No unresolved saved intent matches this returned hash. Inspect wallet history.');
+  return recoverUnknownSubmission(client, intent.operationId, hash, expectedState);
+}
+
+/** Confirm this UI submission; standalone invoice inspection remains read-only. */
+export async function confirmCreatedInvoice(client: PublicClient, action: PreparedAction, hash: Hex): Promise<LoadedInvoice> {
+  const invoice = await readCreatedInvoice(client, action, hash);
+  await confirmSubmittedOutcome(client, hash, 'included');
+  return invoice;
 }

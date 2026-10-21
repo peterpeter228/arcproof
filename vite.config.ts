@@ -1,4 +1,4 @@
-/// <reference types="vitest" />
+/// <reference types="vitest/config" />
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import path from 'path'
@@ -10,7 +10,12 @@ export default defineConfig({
     include: ['src/**/*.test.ts', 'src/**/*.test.tsx'],
     globals: false,
   },
-  plugins: [react(), nodePolyfills()],
+  plugins: [react(), nodePolyfills({
+    // Bundle inspection needs only the existing browser Buffer/process globals.
+    // Do not alias every Node core module (crypto/fs/stream/etc.) by default.
+    include: ['buffer', 'process'],
+    globals: { Buffer: true, global: true, process: true },
+  })],
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src'),

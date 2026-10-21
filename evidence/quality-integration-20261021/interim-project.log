@@ -1,0 +1,9 @@
+
+ RUN  v4.1.12 /workspace/scratch/c01bd6fe117d/arcproof-quality-integration-20261021/repo
+
+
+ Test Files  17 passed (17)
+      Tests  360 passed (360)
+   Start at  11:56:36
+   Duration  2.90s (transform 2.11s, setup 0ms, import 7.60s, tests 1.63s, environment 3.97s)
+

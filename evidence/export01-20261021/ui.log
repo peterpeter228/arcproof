@@ -1,0 +1,11 @@
+
+ RUN  v2.1.9 /workspace/scratch/c01bd6fe117d/arcproof-export01-20261021/repo
+
+ ✓ qa/new-independent-review/wallet-probes.test.tsx (8 tests) 41ms
+ ✓ qa/new-independent-review/ui-probes.test.tsx (16 tests) 176ms
+
+ Test Files  2 passed (2)
+      Tests  24 passed (24)
+   Start at  11:55:17
+   Duration  1.81s (transform 407ms, setup 0ms, collect 843ms, tests 217ms, environment 1.10s, prepare 424ms)
+

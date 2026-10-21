@@ -74,6 +74,8 @@ export interface OnchainInvoiceState {
 
 /** Injected RPC provider interface — keeps verifier pure/testable */
 export interface RpcProvider {
+  /** Non-secret source label, never an authenticated URL or credential. */
+  sourceLabel?: string;
   getTransactionReceipt(hash: `0x${string}`): Promise<RawReceipt | null>;
   getTransaction(hash: `0x${string}`): Promise<RawTransaction | null>;
   getBlock(blockNumber: bigint): Promise<RawBlock | null>;
@@ -108,7 +110,49 @@ export type VerificationStatus =
   | 'INVALID_NATIVE_TRANSFER'  // missing/ambiguous/malformed/incorrect native legs
   | 'UNVERIFIED_FINALITY';     // absent/unsupported/stale/conflicting finality evidence
 
-export interface VerificationResult {
+export interface VerificationCheck {
+  id: string;
+  status: 'passed' | 'failed' | 'unavailable' | 'not_run';
+  reasonCode: VerificationStatus | null;
+  message: string | null;
+}
+
+/** Identity-bound RPC observations, NOT a settlement/finality endorsement. */
+export interface ObservedReceipt {
+  transactionHash: `0x${string}`;
+  from: `0x${string}`;
+  to: `0x${string}`;
+  status: 'success';
+  transactionIndex: number;
+  blockNumber: string;
+  blockHash: `0x${string}`;
+  blockTimestamp: string;
+  paymentLogIndex: number;
+  gasUsed: string | null;
+  effectiveGasPrice: string | null;
+  gasFeeNative: string | null;
+}
+
+export interface ObservedInvoice {
+  amountNative: string;
+  payer: `0x${string}`;
+  merchant: `0x${string}`;
+  paidAt: string;
+  paidBlockNumber: string;
+}
+
+export interface VerificationDiagnostics {
+  reasonCode: VerificationStatus;
+  checks: VerificationCheck[];
+  readStartedAt: number;
+  readCompletedAt: number;
+  source: { kind: 'rpc'; label: string };
+  observationScope: { chainId: number; deploymentId: string; contract: `0x${string}`; invoiceId: `0x${string}`; transactionHash: `0x${string}` };
+  observedReceipt: ObservedReceipt | null;
+  observedInvoice: ObservedInvoice | null;
+}
+
+export interface VerificationResult extends Partial<VerificationDiagnostics> {
   status: VerificationStatus;
   message: string;
   paymentLogIndex: number | null;
@@ -195,8 +239,32 @@ export async function verifyReceipt(
 ): Promise<VerificationResult> {
   const now = Date.now();
 
+  const checkIds = ['chain', 'runtime_code', 'receipt_identity', 'transaction_identity',
+    'payment_event', 'invoice_state', 'event_and_value', 'payment_block',
+    'settlement_policy', 'provenance', 'native_transfers', 'finality'] as const;
+  let stage = 0;
+  let observedReceipt: ObservedReceipt | null = null;
+  let observedInvoice: ObservedInvoice | null = null;
+  function enter(id: typeof checkIds[number]) { stage = checkIds.indexOf(id); }
+  function diagnostics(status: VerificationStatus, message: string): VerificationDiagnostics {
+    return {
+      reasonCode: status,
+      checks: checkIds.map((id, index) => ({ id,
+        status: status === 'VERIFIED' || index < stage ? 'passed' : index > stage ? 'not_run' :
+          status === 'PENDING' || status === 'UNVERIFIED_FINALITY' || status === 'UNVERIFIED_ARC_EVIDENCE' ? 'unavailable' : 'failed',
+        reasonCode: index === stage && status !== 'VERIFIED' ? status : null,
+        message: index === stage && status !== 'VERIFIED' ? message : null,
+      })),
+      readStartedAt: now, readCompletedAt: Date.now(),
+      source: { kind: 'rpc', label: rpc.sourceLabel ?? 'Injected RPC provider (endpoint unspecified)' },
+      observationScope: { chainId: expectedChainId, deploymentId: deployment.deploymentId,
+        contract: deployment.contractAddress, invoiceId, transactionHash: txHash },
+      observedReceipt, observedInvoice,
+    };
+  }
   function fail(status: VerificationStatus, message: string): VerificationResult {
-    return { status, message, paymentLogIndex: null, blockHash: null, verifiedAt: now, verified: false };
+    return { status, message, paymentLogIndex: null, blockHash: null, verifiedAt: now, verified: false,
+      ...diagnostics(status, message) };
   }
 
   if (deployment.chainId !== expectedChainId) return fail('WRONG_CHAIN', 'Deployment chain does not match expected chain');
@@ -207,6 +275,7 @@ export async function verifyReceipt(
   if (chainId !== expectedChainId)
     return fail('WRONG_CHAIN', `RPC chain ${chainId} != expected ${expectedChainId}`);
 
+  enter('runtime_code');
   // 2. Runtime code hash — required, not optional
   //    Fetches the bytecode at deployment.contractAddress and checks its keccak256
   //    against the manifest's runtimeCodeHash. An empty or absent runtimeCodeHash
@@ -223,6 +292,7 @@ export async function verifyReceipt(
       `Runtime code hash ${codeHash} != manifest ${deployment.runtimeCodeHash}`);
   }
 
+  enter('receipt_identity');
   // 3. Fetch receipt — must be committed and successful
   const receipt = await rpc.getTransactionReceipt(txHash).catch(() => null);
   if (!receipt) return fail('PENDING', 'Transaction receipt not found or not yet committed');
@@ -237,6 +307,7 @@ export async function verifyReceipt(
 
   if (receiptStatus(receipt.status) === 'unknown') return fail('PENDING', 'Receipt status is missing or unsupported; outcome remains unknown');
 
+  enter('transaction_identity');
   // 6. Fetch transaction — bind from/to/chainId/input/value
   const tx = await rpc.getTransaction(txHash).catch(() => null);
   if (!tx) return fail('PENDING', 'Transaction data not found');
@@ -266,6 +337,7 @@ export async function verifyReceipt(
   if (!addrEq(receipt.from, tx.from)) return fail('WRONG_TX_TARGET', 'Receipt sender does not match transaction');
   if (receiptStatus(receipt.status) === 'reverted') return fail('FAILED', 'Transaction reverted on chain');
 
+  enter('payment_event');
   // 7. Find exactly one InvoicePaid event from this contract for this invoiceId
   //    InvoicePaid(bytes32 indexed invoiceId, address indexed payer,
   //                address indexed merchant, uint256 amountNative)
@@ -301,6 +373,7 @@ export async function verifyReceipt(
   if (eventLog.transactionHash.toLowerCase() !== txHash.toLowerCase())
     return fail('NO_MATCHING_EVENT', 'InvoicePaid log transactionHash mismatch');
 
+  enter('invoice_state');
   // 8. Current invoice state from chain — must be paid
   const onchain = await rpc.getInvoice(deployment.contractAddress, invoiceId).catch(() => null);
   if (!onchain) return fail('PENDING', 'Could not read current invoice state from chain');
@@ -309,6 +382,7 @@ export async function verifyReceipt(
   if (!addrEq(tx.from, onchain.payer) || !addrEq(receipt.from, onchain.payer))
     return fail('WRONG_TX_FROM', 'Transaction and receipt sender must equal the recorded payer');
 
+  enter('event_and_value');
   // 9. Decode and verify all event fields against on-chain state
   //    topic[2] = payer (indexed address)
   //    topic[3] = merchant (indexed address)
@@ -334,6 +408,7 @@ export async function verifyReceipt(
   if (tx.value !== onchain.amountNative)
     return fail('WRONG_VALUE', `tx.value ${tx.value} != invoice amount ${onchain.amountNative}`);
 
+  enter('payment_block');
   // 11. Block: number, timestamp, and blockhash consistency
   const block = await rpc.getBlock(receipt.blockNumber).catch(() => null);
   if (!block) return fail('PENDING', 'Block not found or not yet committed');
@@ -349,6 +424,7 @@ export async function verifyReceipt(
     return fail('BLOCKHASH_MISMATCH',
       `receipt.blockHash ${receipt.blockHash} != block.hash ${block.hash}`);
 
+  enter('settlement_policy');
   // 12. A supported policy must be part of the trusted deployment, never a URL
   // or imported receipt flag. Legacy/unknown networks remain unverified.
   const policy = deployment.settlementPolicy;
@@ -357,6 +433,7 @@ export async function verifyReceipt(
     paymentLogIndex, blockHash: receipt.blockHash,
   };
 
+  enter('provenance');
   const isHash = (value: unknown): value is `0x${string}` =>
     typeof value === 'string' && /^0x[0-9a-fA-F]{64}$/.test(value) && !/^0x0{64}$/.test(value);
   const validBlock = (value: RawBlock): boolean =>
@@ -394,6 +471,22 @@ export async function verifyReceipt(
   if (onchain.amountNative <= 0n || onchain.amountNative > 10n ** 18n || onchain.amountNative % (10n ** 12n) !== 0n)
     return fail('WRONG_EVENT_DATA', 'Invoice amount is outside the native P0 amount/precision policy.');
 
+  // Publish observations only after all identity/inclusion/log provenance gates.
+  // Gas is independent of settlement: missing finality must not erase a known fee.
+  const gasUsed = typeof receipt.gasUsed === 'bigint' && receipt.gasUsed >= 0n ? receipt.gasUsed : null;
+  const gasPrice = typeof receipt.effectiveGasPrice === 'bigint' && receipt.effectiveGasPrice >= 0n ? receipt.effectiveGasPrice : null;
+  observedReceipt = {
+    transactionHash: receipt.transactionHash, from: receipt.from, to: deployment.contractAddress,
+    status: 'success', transactionIndex: receipt.transactionIndex,
+    blockNumber: receipt.blockNumber.toString(), blockHash: receipt.blockHash,
+    blockTimestamp: block.timestamp.toString(), paymentLogIndex,
+    gasUsed: gasUsed?.toString() ?? null, effectiveGasPrice: gasPrice?.toString() ?? null,
+    gasFeeNative: gasUsed !== null && gasPrice !== null ? (gasUsed * gasPrice).toString() : null,
+  };
+  observedInvoice = { amountNative: onchain.amountNative.toString(), payer: onchain.payer,
+    merchant: onchain.merchant, paidAt: onchain.paidAt.toString(), paidBlockNumber: onchain.paidBlockNumber.toString() };
+
+  enter('native_transfers');
   // Decode only the official native emitter at 18 decimals. ERC-20 6-decimal
   // logs, same-named logs elsewhere and gas fees cannot satisfy either leg.
   const nativeLogs = receipt.logs.filter((log) => addrEq(log.address, policy.emitter));
@@ -416,6 +509,7 @@ export async function verifyReceipt(
       incoming[0].log.logIndex >= outgoing[0].log.logIndex || outgoing[0].log.logIndex >= paymentLogIndex)
     return fail('INVALID_NATIVE_TRANSFER', 'Require two distinct, unambiguous, exact native transfer legs: payer → contract → merchant, before InvoicePaid.');
 
+  enter('finality');
   // 13. Arc is final on commit. This application additionally requires the RPC
   // finalized header as explicit evidence; it does not add an Ethereum wait.
   // Unsupported/null/older/conflicting responses fail closed, without fallback.
@@ -443,6 +537,7 @@ export async function verifyReceipt(
     return fail('UNVERIFIED_FINALITY', 'Payment block is unavailable or conflicts after finalized-header observation.');
 
   return {
+    ...diagnostics('VERIFIED', 'All verification checks passed.'),
     status: 'VERIFIED',
     message: 'Arc Testnet payment verified against RPC data: exact native 18-decimal transfer legs, InvoicePaid, ' +
       'transaction/state/block binding and finalized-header policy passed. Not an independent consensus proof, revenue or proof of delivery.',

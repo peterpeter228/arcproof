@@ -1,0 +1,47 @@
+
+ RUN  v4.1.12 /workspace/scratch/c01bd6fe117d/arcproof-quality-integration-20261021/repo
+
+ ❯ src/arcproof/__tests__/intentInputValidation.test.ts (8 tests | 7 failed) 35ms
+     × rejects invalid target before writing or dispatch, then permits a legitimate call 24ms
+     × rejects invalid deployment before writing or dispatch, then permits a legitimate call 2ms
+     × rejects invalid chain before writing or dispatch, then permits a legitimate call 1ms
+     × rejects invalid data before writing or dispatch, then permits a legitimate call 1ms
+     × rejects invalid account before writing or dispatch, then permits a legitimate call 1ms
+     × rejects invalid value before writing or dispatch, then permits a legitimate call 1ms
+     × rejects invalid kind before writing or dispatch, then permits a legitimate call 1ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 7 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  src/arcproof/__tests__/intentInputValidation.test.ts > Independent integration: invalid new intents cannot poison durable storage > rejects invalid target before writing or dispatch, then permits a legitimate call
+ FAIL  src/arcproof/__tests__/intentInputValidation.test.ts > Independent integration: invalid new intents cannot poison durable storage > rejects invalid deployment before writing or dispatch, then permits a legitimate call
+ FAIL  src/arcproof/__tests__/intentInputValidation.test.ts > Independent integration: invalid new intents cannot poison durable storage > rejects invalid chain before writing or dispatch, then permits a legitimate call
+ FAIL  src/arcproof/__tests__/intentInputValidation.test.ts > Independent integration: invalid new intents cannot poison durable storage > rejects invalid data before writing or dispatch, then permits a legitimate call
+ FAIL  src/arcproof/__tests__/intentInputValidation.test.ts > Independent integration: invalid new intents cannot poison durable storage > rejects invalid account before writing or dispatch, then permits a legitimate call
+ FAIL  src/arcproof/__tests__/intentInputValidation.test.ts > Independent integration: invalid new intents cannot poison durable storage > rejects invalid value before writing or dispatch, then permits a legitimate call
+ FAIL  src/arcproof/__tests__/intentInputValidation.test.ts > Independent integration: invalid new intents cannot poison durable storage > rejects invalid kind before writing or dispatch, then permits a legitimate call
+AssertionError: promise resolved "'0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee…'" instead of rejecting
+
+- Expected:
+Error {
+  "message": "rejected promise",
+}
+
++ Received:
+"0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"
+
+ ❯ src/arcproof/__tests__/intentInputValidation.test.ts:16:88
+     14|   ])('rejects invalid %s before writing or dispatch, then permits a le…
+     15|     const m=await import('../walletIntents');const send=vi.fn(async (m…
+     16|     await expect(m.runWalletIntent({...input,...fields} as unknown as …
+       |                                                                                        ^
+     17|     expect(send).not.toHaveBeenCalled();expect(localStorage.length).to…
+     18|     await expect(m.runWalletIntent(input,send)).resolves.toBe(hash);ex…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/7]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  7 failed | 1 passed (8)
+   Start at  11:55:39
+   Duration  737ms (transform 66ms, setup 0ms, import 363ms, tests 35ms, environment 0ms)
+

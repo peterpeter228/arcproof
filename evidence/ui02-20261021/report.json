@@ -1,0 +1,80 @@
+{
+  "status": "IMPLEMENTED_LOCAL_UI02_PARTIAL_ACCEPTANCE",
+  "base_commit": "42e9ac9d46f7769b9fa428e27511edd66e76c1c9",
+  "utc_date": "2026-10-21",
+  "base_check": "All290 allFiles entries in parent integrated manifest matched copied source, substituting saved pre-edit owned files, before explicit export01 mirror integration.",
+  "source_files": [
+    "src/components/arcproof/Layout.tsx",
+    "src/components/arcproof/TestnetScreens.tsx",
+    "src/components/arcproof/ReceiptFacts.tsx",
+    "src/components/arcproof/StudioAttribution.tsx",
+    "src/main.tsx",
+    "src/index.css",
+    "src/arcproof/__tests__/uiSemantics.test.tsx",
+    "src/arcproof/__tests__/receiptDiagnosticsUi.test.tsx",
+    "qa/debug-security/boundary.test.mjs"
+  ],
+  "source_sha256": {
+    "src/components/arcproof/Layout.tsx": "fb69e87add109f89cb9af8b48c2a0f5619cbee0ea340513609f390903972dfe8",
+    "src/components/arcproof/TestnetScreens.tsx": "ddcb75eaca86367e4b58128121560c86f9f7c4043352c01cc7a363f6854d7238",
+    "src/components/arcproof/ReceiptFacts.tsx": "31d12a821538ba1ab292861260a990e08dfabc375dff294f25ffb2c56e8251a1",
+    "src/components/arcproof/StudioAttribution.tsx": "b38e1f84992c4cd16d3be891bb880d383c04589bca80b0b2427ed967363487fd",
+    "src/main.tsx": "56c27060b86200f522289be89eb5173633fa2afcebca64d1e4d78cca468a1b5e",
+    "src/index.css": "c2bfed6550eb52084d4134f8516a8f57a164c4dc978640670fd821b6ad1c5ac6",
+    "src/arcproof/__tests__/uiSemantics.test.tsx": "681bb0bd5ee82540a6d84245bfd413164b95d51145742dbcc707ddb68282b962",
+    "src/arcproof/__tests__/receiptDiagnosticsUi.test.tsx": "e60040c70391796fd78509154b2c6d4631025b5cd232e9f852f0a660c85557d1",
+    "qa/debug-security/boundary.test.mjs": "74d3e33fd9b7699ea287b3ae914b6e205fe799d872d6846f6d60293c2756fd39"
+  },
+  "patch_sha256": "9b22dee2d9f4ba46d86b143e228fa0449197abe4ed41f2b716902628c572bd4f",
+  "implementation": [
+    "Original Studio logo/link extracted from main into ordinary Layout footer, no fixed overlay. Security capture removal untouched.",
+    "Single compact network warning; full atomic-forwarding risk warning retained in explicit pre-sign review. Testnet/unknown/self-demo statements retained.",
+    "Single h1, aria-current navigation, skip-to-main without changing hash route, visible focus CSS, 44px design-target controls, narrow form and wrapping.",
+    "Create form Enter submits only guarded preparation/review, never direct wallet send. Error descriptions and live statuses added. Pending/recovery guards unchanged.",
+    "Receipt diagnostic reason/message/source/read timing/checks and observed block/fee share export1.2 record. Observations explicitly distinguished from settlement/finality proof.",
+    "Canonical CSV Text-import warning shown; real spreadsheet roundtrip remains NOT_RUN."
+  ],
+  "dependencies": [
+    "Apply export01 core/type patch before this UI patch; ReceiptFacts imports1.2 fields and RECEIPT_CSV_IMPORT_NOTICE.",
+    "Six export01 files mirrored only for tests and excluded from this patch.",
+    "No dependency manifest/lock/vite changes; parent must rerun after dependency migration."
+  ],
+  "tests": {
+    "project": {
+      "status": "passed",
+      "count": 367,
+      "composition": "320 integrated baseline +32 export01 +15 UI02/diagnostic tests"
+    },
+    "independent_adversarial": {
+      "status": "passed",
+      "count": 137
+    },
+    "independent_ui_wallet": {
+      "status": "passed",
+      "count": 24
+    },
+    "security_boundary": {
+      "status": "passed",
+      "count": 10,
+      "test_migration": "Former transformed-main attribution assertion now fetches footer component and checks text, official link, original SVG path and Layout integration; capture/HMR/Host/CORS assertions unchanged."
+    },
+    "typecheck": "passed",
+    "source_type_aware_lint": "passed",
+    "build": "passed",
+    "new_ui_tests": {
+      "status": "passed",
+      "count": 15
+    },
+    "actual_browser_375px_200percent_print": "not_run",
+    "screen_reader": "not_run",
+    "spreadsheet_roundtrip": "not_run"
+  },
+  "limits": [
+    "Browser launch was already blocked by Operation not permitted in this environment. No browser retry, alternative flags or route used.",
+    "jsdom and CSS assertions are not rendered-layout/print/download/assistive-technology acceptance. UI02 is not fully closed.",
+    "Selected palette contrast arithmetic exceeds4.5:1; not whole-app WCAG conformance.44px is a design target.",
+    "No live RPC, wallet, signing, mainnet, publication, Studio edits, Argon calls or push.",
+    "Existing large build chunks remain outside this UI scope."
+  ],
+  "manual_checklist": "evidence/ui02-20261021/MANUAL_ACCEPTANCE.md"
+}

@@ -1,0 +1,43 @@
+{
+  "review": "External Argon review returned HTTP200; claims independently triaged, not audit certification",
+  "baseline": "Recovered tested second-batch candidate based on remote42e9ac9",
+  "findings": {
+    "creation_lifecycle": "Reproduced; successful UI path updated only legacy submissions, leaving durable submitted intent until manual recovery. Fixed by dedicated confirmation wrapper reusing strict recovery checks.",
+    "legacy_observation_labels": "Reproduced; label provenance now derives from factsBasis, not schema version.",
+    "malformed_supplied_hash": "Reproduced; reject invalid and empty supplied hash before any RPC.",
+    "nonzero_terms": "No blanket rejection: existing policy permits fund verification while unsupported terms require disclosure.",
+    "url_canonicalization": "Not established as payment-security defect; no speculative parser changes."
+  },
+  "tests": {
+    "project": 391,
+    "adversarial": 137,
+    "currentUi": 24,
+    "intentPoison": 1,
+    "service": 114,
+    "legacySafety": 26,
+    "legacyUi": 6,
+    "security": 10,
+    "sourceCheck": "passed",
+    "archivedTypecheck": "passed",
+    "frozenInstall": "passed"
+  },
+  "limitations": [
+    "Actual browser acceptance remains blocked; no retry or bypass.",
+    "No live RPC or wallet actions.",
+    "No Studio, deployment, CI activation, new external model call or main update during follow-on.",
+    "Residual dependency advisories and large chunks unchanged.",
+    "Mainnet HOLD."
+  ],
+  "regressionTrace": "Original candidate:7 new lifecycle/hash failures,52 existing/other passes. Final wrapper keeps standalone invoice inspection read-only; initial integration service113/114 prompted API separation, not weakened assertion.",
+  "remoteStatus": "main still42e9ac9; prior tree call interrupted, deterministic old candidate tree not found; no commit/ref call.",
+  "timestampNote": "Canonical review date2026-10-21 UTC; inherited runner local clock lines are raw tool output, not canonical UTC.",
+  "independentReview": "Read-only flow reviewer found no blocking safety defect. Two additional UI wiring regressions passed; mock wiring does not replace service identity proof or browser acceptance.",
+  "securityProcessExit": 0,
+  "deliveryOmission": "Optional historical bookkeeping updates excluded; exact existing remote blobs retained. Runtime and test source hashes unchanged. Denied data not relocated.",
+  "preservedBaselinePaths": [
+    "evidence/effort-ledger.json",
+    "evidence/gate.json",
+    "evidence/test-results.json",
+    "evidence/artifact-index.json"
+  ]
+}

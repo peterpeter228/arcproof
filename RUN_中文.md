@@ -1,3 +1,11 @@
+# 当前补充：2026-10-21 第二轮候选
+
+当前依赖为Bun1.4.3、Node24.19.0、Vitest4.1.12、Vite6.4.4；使用 bun install --frozen-lockfile --ignore-scripts。bun run lint 和 bun run check 已改为非自动修复，不再带 --fix；check 只包含lint与源码类型检查，不包含完整测试。
+
+完整现行命令及旧测试迁移依据见[质量门槛](docs/QUALITY_GATES.md)。最新结果以STATUS和argon-followon证据为准；下方旧版本/计数是历史说明。实际浏览器、钱包、RPC及主网不由本地通过推出。
+
+---
+
 # ArcProof 当前运行与复验说明（2026-10-21）
 
 当前源码基线是私有 GitHub `d34138b19a3878fd095413822c48d28fea6a4c58`；本次文档修订的交付仅以随后远端提交及回读收据确认。应用包含 Offline Demo 与既有测试网路径，不能再把整份源码描述为“从未部署测试网”或“所有签名始终禁用”。已有测试网部署并不证明当前核验器已在 Studio 集成或通过真实链路验收。Studio 仅有上次核实为旧 `8588d80` 的记录，本次未重查；主网仍未配置。本次复验没有连接钱包、签名、部署或发交易。
@@ -71,3 +79,8 @@ Studio 项目：https://studio.arc.io/app/2dbdda0d-1b70-408b-ae23-cccb8a4b8753?t
 
 ## 最终响应式版本
 增量补丁 SHA-256：95e04b41742de63ef4dd7911a40afd08153003f0f8d6ad246f1663600308db09。全部30个源码文件与独立检查清单及 Studio 05:27:20 导出一致。下一阶段测试网流程仅待只读检查，尚未执行测试网操作。
+
+
+## 当前质量门禁范围
+
+参见 [QUALITY_GATES.md](docs/QUALITY_GATES.md)：源码 typecheck、整仓 lint、归档辅助代码 typecheck、当前合成测试、归档语义失败和远端 CI 是不同结论。没有创建或运行有效 GitHub workflow；手动工作流只是 docs/ci 下的未启用草稿，零预算下需先确认不会产生费用。

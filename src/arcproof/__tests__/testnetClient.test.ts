@@ -1,12 +1,13 @@
+import { deriveInvoiceId } from '../invoiceId';
 import { getWalletIntents } from '../walletIntents';
 import { memoryStorage, memoryLocks } from './fixtures/safeBrowser';
 /* eslint-disable typescript/require-await -- Promise-returning RPC mocks intentionally contain no await. */
 import { beforeEach, afterEach, describe, expect, it, vi } from 'vitest';
-import { encodeFunctionData, toHex, type PublicClient, type Hex, type Address } from 'viem';
+import { encodeAbiParameters, encodeEventTopics, encodeFunctionData, toHex, type PublicClient, type Hex, type Address } from 'viem';
 import artifact from '../../../evidence/g1/ArcProofInvoices.artifact.json';
 import { ARCPROOF_ABI } from '../arcproofAbi';
 import { ARC_TESTNET, TESTNET_DEPLOYMENT, ZERO_TERMS } from '../testnet';
-import { checkDeployment, loadInvoice, prepareCreate, preparePay, sendPreparedAction, assertReceiptMatches, recoverPaymentHash, reconcileSubmission, recoverUnknownSubmission, type Session, type LoadedInvoice, type WalletRequest } from '../testnetClient';
+import { checkDeployment, loadInvoice, prepareCreate, preparePay, sendPreparedAction, assertReceiptMatches, recoverPaymentHash, reconcileSubmission, confirmSubmittedOutcome, confirmCreatedInvoice, verifyTestnetReceipt, recoverUnknownSubmission, type Session, type LoadedInvoice, type WalletRequest } from '../testnetClient';
 import { getSubmissions, recordSubmission } from '../submissions';
 let seq=20000;
 const hex=():Hex=>`0x${(++seq).toString(16).padStart(64,'0')}`;
@@ -123,5 +124,71 @@ describe('Independent integration: legacy inclusion recovery', () => {
   f.rpc.getTransaction.mockResolvedValue(bad as unknown as typeof tx);
   await expect(reconcileSubmission(f.client,row)).rejects.toThrow('inclusion identity');
   expect(getSubmissions().find(x=>x.hash===f.hash)?.state).toBe('submitted'); expect(f.request).not.toHaveBeenCalled();
+ });
+});
+
+
+describe('Argon review: confirmed creation lifecycle', () => {
+ async function created() {
+  const f=fixture(), a=await prepareCreate(f.client,f.session,'0.20',24);
+  await sendPreparedAction(f.client,f.wallet,a,()=>f.session);
+  const tx=await f.rpc.getTransaction(), rc=await f.rpc.getTransactionReceipt();
+  const invoiceId=deriveInvoiceId(ARC_TESTNET.id,a.to,f.session.account,0n);
+  f.rpc.getTransaction.mockResolvedValue({...tx,input:a.data,value:a.value});
+  f.rpc.readContract.mockResolvedValue({...f.invoice,invoiceId,merchant:f.session.account,amountNative:a.amountNative,expiresAt:a.expiresAt});
+  f.rpc.getTransactionReceipt.mockResolvedValue({...rc,status:'success',logs:[{
+   address:a.to,transactionHash:f.hash,blockHash:rc.blockHash,blockNumber:rc.blockNumber,removed:false,
+   topics:encodeEventTopics({abi:ARCPROOF_ABI,eventName:'InvoiceCreated',args:{invoiceId,merchant:f.session.account}}),
+   data:encodeAbiParameters([{type:'uint256'},{type:'uint256'},{type:'uint64'},{type:'bytes32'}],[0n,a.amountNative,a.expiresAt,ZERO_TERMS]),
+  }]} as unknown as typeof rc);
+  return {...f,a};
+ }
+ it('settles confirmed create A and permits next reviewed create B without manual recovery',async()=>{
+  const f=await created(); await confirmCreatedInvoice(f.client,f.a,f.hash);
+  expect(getWalletIntents().find(x=>x.hash===f.hash)?.state).toBe('included');
+  const b=await prepareCreate(f.client,f.session,'0.30',24), secondHash=hex();
+  f.request.mockImplementation(async({method})=>method==='eth_chainId'?toHex(ARC_TESTNET.id):method==='eth_accounts'?[f.session.account]:secondHash);
+  await expect(sendPreparedAction(f.client,f.wallet,b,()=>f.session)).resolves.toBe(secondHash);
+  expect(f.request.mock.calls.filter(([r])=>r.method==='eth_sendTransaction')).toHaveLength(2);
+ });
+ it.each(['missingBlockHash','wrongBlockNumber','missingIndex','unknownStatus'])('does not settle creation with %s',async field=>{
+  const f=await created(),tx=await f.rpc.getTransaction(),rc=await f.rpc.getTransactionReceipt();
+  if(field==='missingBlockHash')f.rpc.getTransaction.mockResolvedValue({...tx,blockHash:null} as unknown as typeof tx);
+  if(field==='wrongBlockNumber')f.rpc.getTransaction.mockResolvedValue({...tx,blockNumber:99n});
+  if(field==='missingIndex')f.rpc.getTransaction.mockResolvedValue({...tx,transactionIndex:undefined} as unknown as typeof tx);
+  if(field==='unknownStatus')f.rpc.getTransactionReceipt.mockResolvedValue({...rc,status:undefined} as unknown as typeof rc);
+  await expect(confirmCreatedInvoice(f.client,f.a,f.hash)).rejects.toThrow();
+  expect(getWalletIntents().find(x=>x.hash===f.hash)?.state).toBe('submitted');
+ });
+ it('keeps the durable creation guard when settlement persistence fails',async()=>{
+  const f=await created();vi.spyOn(localStorage,'setItem').mockImplementation(()=>{throw new Error('quota');});
+  await expect(confirmCreatedInvoice(f.client,f.a,f.hash)).rejects.toThrow('quota');
+  expect(getWalletIntents().find(x=>x.hash===f.hash)?.state).toBe('submitted');
+ });
+ it.each(['0xinvalid',''])('rejects supplied malformed hash %s before any RPC',async value=>{
+  const f=fixture();await expect(verifyTestnetReceipt(f.client,f.invoice.invoiceId,value as Hex)).rejects.toThrow('32-byte');
+  expect(f.rpc.getChainId).not.toHaveBeenCalled();expect(f.rpc.readContract).not.toHaveBeenCalled();
+ });
+});
+
+
+describe('Automatic outcome settlement retains safe retry boundaries', () => {
+ it('settles a strictly matched revert without a wallet call', async()=>{
+  const f=fixture(),a=await preparePay(f.client,f.session,f.invoice.invoiceId);await sendPreparedAction(f.client,f.wallet,a,()=>f.session);
+  const calls=f.request.mock.calls.length;
+  await expect(confirmSubmittedOutcome(f.client,f.hash,'reverted')).resolves.toBe('reverted');
+  expect(getWalletIntents().find(x=>x.hash===f.hash)?.state).toBe('reverted');expect(f.request.mock.calls.length).toBe(calls);
+ });
+ it('does not release when a fresh receipt contradicts the expected outcome',async()=>{
+  const f=fixture(),a=await preparePay(f.client,f.session,f.invoice.invoiceId);await sendPreparedAction(f.client,f.wallet,a,()=>f.session);
+  await expect(confirmSubmittedOutcome(f.client,f.hash,'included')).rejects.toThrow('outcome changed');
+  expect(getWalletIntents().find(x=>x.hash===f.hash)?.state).toBe('submitted');
+ });
+ it('settling a successful pay never enables paying the same paid invoice again',async()=>{
+  const f=fixture(),a=await preparePay(f.client,f.session,f.invoice.invoiceId);await sendPreparedAction(f.client,f.wallet,a,()=>f.session);
+  const rc=await f.rpc.getTransactionReceipt();f.rpc.getTransactionReceipt.mockResolvedValue({...rc,status:'success'});
+  await expect(confirmSubmittedOutcome(f.client,f.hash,'included')).resolves.toBe('included');
+  f.invoice.paid=true;await expect(sendPreparedAction(f.client,f.wallet,a,()=>f.session)).rejects.toThrow();
+  expect(f.request.mock.calls.filter(([r])=>r.method==='eth_sendTransaction')).toHaveLength(1);
  });
 });

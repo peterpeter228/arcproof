@@ -1,0 +1,61 @@
+{
+  "scope": "EXPORT-01 local isolated implementation; no live acceptance",
+  "utcDate": "2026-10-21",
+  "base": {
+    "parentVerifiedRemoteMain": "42e9ac9d46f7769b9fa428e27511edd66e76c1c9",
+    "freshProjectTestsBeforeEdits": 320,
+    "restoredSharedBaselineVerifierSha256": "b8dc2a4ab97cb7a3abc98203093f64c322c897b5ca7c621c23fa93c03ae75d9a"
+  },
+  "implementation": [
+    "Structured stages, stable reason/message, local read timing and non-secret RPC source label.",
+    "Identity-bound observations collected only after strict transaction, event, state, block and all-log provenance gates; finality/native-leg failures cannot erase bound gas facts or imply verification.",
+    "Schema1.2 separates observedReceipt/observedInvoice from verifiedEvidence, uses same-snapshot fact aliases, rejects mismatched export scope and preserves explicit legacy caller-supplied compatibility.",
+    "CSV appends diagnostics, preserves existing formula escaping, documents all-column Text import; JSON is machine evidence."
+  ],
+  "validation": {
+    "project": {
+      "status": "passed",
+      "count": 352,
+      "newTests": 32
+    },
+    "independentAdversarial": {
+      "status": "passed",
+      "count": 137,
+      "schemaMigration": "Only two literal version expectations 1.1 to1.2 and describe label. Original2fail/135pass log retained; no negative gate changed."
+    },
+    "independentUi": {
+      "status": "passed",
+      "count": 24
+    },
+    "typecheck": "passed",
+    "sourceLint": "passed",
+    "sourceTypeAwareLint": "passed",
+    "productionBuild": "passed_with_existing_large_chunk_warning",
+    "wholeRepositoryLint": "not_run_in_this_patch_known_baseline_debt",
+    "aggregateMutatingCheck": "not_run"
+  },
+  "limits": {
+    "actualSpreadsheetRoundTrip": "NOT_RUN",
+    "actualBrowserDownload": "NOT_RUN",
+    "actualBrowserRendering": "NOT_RUN_by_this_worker",
+    "realRpc": "NOT_RUN",
+    "walletSigning": "NOT_RUN",
+    "deployment": "NOT_RUN",
+    "Studio": "NOT_RUN",
+    "GitHubPush": "NOT_RUN",
+    "contracts": "unchanged_not_rerun",
+    "Argon": "NOT_RUN"
+  },
+  "notes": [
+    "Runner timestamps use non-UTC local clock labels; task date is canonical UTC.",
+    "Source endpoint remains explicitly unspecified unless a trusted caller supplies a non-secret label; no independent-provider claim.",
+    "Earlier failures conservatively have null observations, including valid-looking receipt fields with insufficient provenance.",
+    "No funding limits, contracts, verification gates or durable wallet-recovery logic changed."
+  ],
+  "effort": {
+    "startUtc": "2026-10-21T02:47:14Z",
+    "implementationCompleteApproxUtc": "2026-10-21T02:56:15Z",
+    "elapsedMinutesApprox": 9,
+    "doesNotReconcileHistorical18HourCap": true
+  }
+}

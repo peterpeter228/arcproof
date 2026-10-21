@@ -1,0 +1,47 @@
+
+ RUN  v4.1.12 /workspace/scratch/c01bd6fe117d/arcproof-legacy-label-fix-20261021
+
+ ❯ src/arcproof/__tests__/receiptDiagnosticsUi.test.tsx (8 tests | 2 failed) 320ms
+   × does not promote legacy caller-supplied schema 1.2 values to RPC observations 28ms
+   × uses neutral provenance labels when a schema 1.2 observation basis is unavailable 9ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  src/arcproof/__tests__/receiptDiagnosticsUi.test.tsx > does not promote legacy caller-supplied schema 1.2 values to RPC observations
+AssertionError: expected 'Verification reason: PENDINGLegacy re…' to contain 'Legacy caller-supplied invoice amount'
+
+Expected: "Legacy caller-supplied invoice amount"
+Received: "Verification reason: PENDINGLegacy result without identity-bound observations.Evidence sourceUnknownRead started (UTC)UnknownRead completed (UTC)UnknownRPC observations are not settlement or finality proof. A successful transaction status alone does not verify the payment.Observed invoice amount0.0 test USDCMerchant0x8888888888888888888888888888888888888888Payer0x7777777777777777777777777777777777777777Payment time (UTC)1970-01-01T00:00:01.000ZObserved transaction fee (separate from invoice amount; not settlement proof)0.000002592592569 test USDCObserved transaction blockUnknownObserved block hashUnknownObservation basislegacy caller suppliedNative settlement: Not verified; two transfer legs are not established.Finality: Not established by this result.JSON is the machine-evidence format. CSV is for reading: import all columns as Text, disable automatic numeric/date conversion, and verify raw integers after re-export. Excel/Sheets round-trip acceptance: NOT_RUN.Raw receipt detailsChain / deployment5042002 / 0xdba9a4da8a5b2a834b451f595653dd3cb4c3e51addb2d8df8e0b18312f382d2dContract0x3Dcd2bDD924BCC384Cb39e9e12038e00fde0FA30Invoice ID0xaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaAmount (native units, 18 decimals)1Payment time (Unix seconds)1Observed fee (native units)2592592569000Payment block / InvoicePaid log index1 / UnknownObserved block hash0xbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbSettlement policyNot establishedFinalized block hashNot established"
+
+ ❯ src/arcproof/__tests__/receiptDiagnosticsUi.test.tsx:80:28
+     78|   const [exported] = JSON.parse(exportReceiptsJson([record])) as Recei…
+     79|   render(record);
+     80|   expect(host.textContent).toContain('Legacy caller-supplied invoice a…
+       |                            ^
+     81|   expect(host.textContent).toContain('Legacy caller-supplied transacti…
+     82|   expect(host.textContent).toContain('not identity-bound RPC observati…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯
+
+ FAIL  src/arcproof/__tests__/receiptDiagnosticsUi.test.tsx > uses neutral provenance labels when a schema 1.2 observation basis is unavailable
+AssertionError: expected 'Verification reason: WRONG_CHAINFinal…' to contain 'Provenance unavailable'
+
+Expected: "Provenance unavailable"
+Received: "Verification reason: WRONG_CHAINFinalized header unavailable; payment not verified.Evidence sourceInjected offline fixture RPCRead started (UTC)2026-10-20T12:40:00.000ZRead completed (UTC)2026-10-20T12:40:01.000ZRPC observations are not settlement or finality proof. A successful transaction status alone does not verify the payment.Individual verification checksstandard identity: passedIdentity-bound receipt fields agree.finality: unavailable · WRONG_CHAINNo matching finalized header.Observed invoice amountUnknown amountMerchantUnknownPayerUnknownPayment time (UTC)UnknownObserved transaction fee (separate from invoice amount; not settlement proof)Unknown (not available from this receipt)Observed transaction blockUnknownObserved block hashUnknownObservation basisunavailableNative settlement: Not verified; two transfer legs are not established.Finality: Not established by this result.JSON is the machine-evidence format. CSV is for reading: import all columns as Text, disable automatic numeric/date conversion, and verify raw integers after re-export. Excel/Sheets round-trip acceptance: NOT_RUN.Raw receipt detailsChain / deployment5042002 / 0xdba9a4da8a5b2a834b451f595653dd3cb4c3e51addb2d8df8e0b18312f382d2dContract0x3Dcd2bDD924BCC384Cb39e9e12038e00fde0FA30Invoice ID0xaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaAmount (native units, 18 decimals)UnknownPayment time (Unix seconds)UnknownObserved fee (native units)UnknownPayment block / InvoicePaid log indexUnknown / UnknownObserved block hashUnknownSettlement policyNot establishedFinalized block hashNot established"
+
+ ❯ src/arcproof/__tests__/receiptDiagnosticsUi.test.tsx:93:28
+     91|   const record = recordFor({ ...diagnostic('WRONG_CHAIN'), observedRec…
+     92|   expect(record.factsBasis).toBe('unavailable'); render(record);
+     93|   expect(host.textContent).toContain('Provenance unavailable');
+       |                            ^
+     94|   expect(host.textContent).not.toContain('Observed invoice amount');
+     95|   expect(field('amountDisplay')).toBe('Unknown amount'); expect(field(…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  2 failed | 6 passed (8)
+   Start at  14:12:19
+   Duration  1.66s (transform 161ms, setup 0ms, import 440ms, tests 320ms, environment 698ms)
+

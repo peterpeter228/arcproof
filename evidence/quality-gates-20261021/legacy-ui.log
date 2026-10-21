@@ -1,0 +1,32 @@
+
+ RUN  v2.1.9 /workspace/scratch/c01bd6fe117d/arcproof-quality-fix-20261021/repo
+
+ ❯ reviewer-tests/reviewer-ui.test.tsx (6 tests | 2 failed) 135ms
+   × Independent rendered DOM guard checks > unknown deployment never renders a made-up invoice amount or recipient 49ms
+     → Cannot read properties of null (reading 'disabled')
+   × Independent rendered DOM guard checks > unknown receipt never reaches verified or offers proof exports 5ms
+     → Cannot read properties of null (reading 'click')
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  reviewer-tests/reviewer-ui.test.tsx > Independent rendered DOM guard checks > unknown deployment never renders a made-up invoice amount or recipient
+TypeError: Cannot read properties of null (reading 'disabled')
+ ❯ reviewer-tests/reviewer-ui.test.tsx:16:434
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯
+
+ FAIL  reviewer-tests/reviewer-ui.test.tsx > Independent rendered DOM guard checks > unknown receipt never reaches verified or offers proof exports
+TypeError: Cannot read properties of null (reading 'click')
+ ❯ reviewer-tests/reviewer-ui.test.tsx:20:252
+
+ ❯ Proxy.act ../../arcproof-integrated-20261021/repo/node_modules/react/cjs/react.development.js:2512:16
+ ❯ reviewer-tests/reviewer-ui.test.tsx:20:211
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯
+
+ Test Files  1 failed (1)
+      Tests  2 failed | 4 passed (6)
+   Start at  11:56:44
+   Duration  2.53s (transform 310ms, setup 0ms, collect 775ms, tests 135ms, environment 1.08s, prepare 326ms)
+

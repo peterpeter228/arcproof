@@ -1,0 +1,89 @@
+
+ RUN  v2.1.9 /workspace/scratch/c01bd6fe117d/arcproof-export01-20261021/repo
+
+ ✓ src/arcproof/__tests__/T19_manifest.test.ts (18 tests) 15ms
+ ✓ src/arcproof/__tests__/T24_exportUtils.test.ts (27 tests) 20ms
+ ✓ src/arcproof/__tests__/T22_receiptVerifier.test.ts (29 tests) 15ms
+ ✓ src/arcproof/__tests__/T20_preparedPayment.test.ts (22 tests) 26ms
+ ✓ src/arcproof/__tests__/exportObservations.test.ts (32 tests) 96ms
+ ✓ src/arcproof/__tests__/nativeSettlement.test.ts (56 tests) 140ms
+ ✓ src/arcproof/__tests__/walletIntents.test.ts (12 tests) 373ms
+ ✓ src/arcproof/__tests__/T18_amountParser.test.ts (30 tests) 9ms
+ ✓ src/arcproof/__tests__/testnetClient.test.ts (51 tests) 261ms
+ ✓ src/arcproof/__tests__/submissions.test.ts (10 tests) 13ms
+ ✓ src/arcproof/__tests__/nativeRepair.test.ts (8 tests) 13ms
+ ✓ src/arcproof/__tests__/testnetIdentity.test.ts (12 tests) 16ms
+stdout | src/security/debug-capture.test.ts > the application has no parent-frame capture bridge > does not install or enable capture: untrusted parent
+synthetic debug regression value
+synthetic debug regression value
+synthetic debug regression value
+
+stderr | src/security/debug-capture.test.ts > the application has no parent-frame capture bridge > does not install or enable capture: untrusted parent
+synthetic debug regression value
+synthetic debug regression value
+
+stdout | src/security/debug-capture.test.ts > the application has no parent-frame capture bridge > does not install or enable capture: opaque parent
+synthetic debug regression value
+synthetic debug regression value
+synthetic debug regression value
+
+stderr | src/security/debug-capture.test.ts > the application has no parent-frame capture bridge > does not install or enable capture: opaque parent
+synthetic debug regression value
+synthetic debug regression value
+
+stdout | src/security/debug-capture.test.ts > the application has no parent-frame capture bridge > does not install or enable capture: missing origin
+synthetic debug regression value
+synthetic debug regression value
+synthetic debug regression value
+
+stderr | src/security/debug-capture.test.ts > the application has no parent-frame capture bridge > does not install or enable capture: missing origin
+synthetic debug regression value
+synthetic debug regression value
+
+stdout | src/security/debug-capture.test.ts > the application has no parent-frame capture bridge > does not install or enable capture: wildcard origin
+synthetic debug regression value
+synthetic debug regression value
+synthetic debug regression value
+
+stderr | src/security/debug-capture.test.ts > the application has no parent-frame capture bridge > does not install or enable capture: wildcard origin
+synthetic debug regression value
+synthetic debug regression value
+
+stdout | src/security/debug-capture.test.ts > the application has no parent-frame capture bridge > does not install or enable capture: wrong source
+synthetic debug regression value
+synthetic debug regression value
+synthetic debug regression value
+
+stderr | src/security/debug-capture.test.ts > the application has no parent-frame capture bridge > does not install or enable capture: wrong source
+synthetic debug regression value
+synthetic debug regression value
+
+stdout | src/security/debug-capture.test.ts > the application has no parent-frame capture bridge > does not install or enable capture: Studio-looking parent (not authorization)
+synthetic debug regression value
+synthetic debug regression value
+synthetic debug regression value
+
+stderr | src/security/debug-capture.test.ts > the application has no parent-frame capture bridge > does not install or enable capture: Studio-looking parent (not authorization)
+synthetic debug regression value
+synthetic debug regression value
+
+stdout | src/security/debug-capture.test.ts > the application has no parent-frame capture bridge > does not install or enable capture: same-origin parent
+synthetic debug regression value
+synthetic debug regression value
+synthetic debug regression value
+
+stderr | src/security/debug-capture.test.ts > the application has no parent-frame capture bridge > does not install or enable capture: same-origin parent
+synthetic debug regression value
+synthetic debug regression value
+
+ ✓ src/security/debug-capture.test.ts (7 tests) 593ms
+   ✓ the application has no parent-frame capture bridge > does not install or enable capture: untrusted parent 456ms
+ ✓ src/arcproof/__tests__/offlineDemo.test.tsx (1 test) 58ms
+ ✓ src/arcproof/__tests__/testnetUi.test.tsx (13 tests) 177ms
+ ✓ src/arcproof/__tests__/receiptClarity.test.tsx (24 tests) 309ms
+
+ Test Files  16 passed (16)
+      Tests  352 passed (352)
+   Start at  11:55:12
+   Duration  3.29s (transform 1.47s, setup 0ms, collect 7.39s, tests 2.13s, environment 3.06s, prepare 2.54s)
+

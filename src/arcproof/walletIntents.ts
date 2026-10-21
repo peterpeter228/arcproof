@@ -70,10 +70,14 @@ async function withDispatchLock<T>(work: () => Promise<T>): Promise<T> {
 /** Durable intent and origin-wide atomic dispatch. No timer or lease expiration releases an unknown request. */
 export async function runWalletIntent(input: IntentInput, send: (markRequested: () => void, markRejected: () => void) => Promise<Hex>): Promise<Hex> {
   return withDispatchLock(async () => {
+    const intent: WalletIntent = { ...input, operationId: crypto.randomUUID(), state: 'requesting' };
+    // Reject malformed new input before persistence: even a cancelled invalid
+    // row would poison strict reads and prevent every later legitimate send.
+    // Already-persisted corrupt rows still fail closed in withDispatchLock.
+    if (!valid(intent)) throw new Error('Invalid wallet intent. Nothing was stored or sent.');
     if (readAll().some((row) => sameScope(row, input) && (unresolved(row) || (input.kind === 'pay' && row.state === 'included')))) {
       throw new Error('An earlier wallet request is unresolved. Recover that request from wallet history before trying again.');
     }
-    const intent: WalletIntent = { ...input, operationId: crypto.randomUUID(), state: 'requesting' };
     write(intent); // Must succeed before any wallet dispatch.
     let attempted = false;
     let explicitlyRejected = false;

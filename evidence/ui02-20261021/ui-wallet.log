@@ -1,0 +1,11 @@
+
+ RUN  v2.1.9 /workspace/scratch/c01bd6fe117d/arcproof-ui02-20261021
+
+ ✓ qa/new-independent-review/wallet-probes.test.tsx (8 tests) 45ms
+ ✓ qa/new-independent-review/ui-probes.test.tsx (16 tests) 284ms
+
+ Test Files  2 passed (2)
+      Tests  24 passed (24)
+   Start at  11:55:11
+   Duration  2.26s (transform 466ms, setup 0ms, collect 1.08s, tests 329ms, environment 1.31s, prepare 260ms)
+

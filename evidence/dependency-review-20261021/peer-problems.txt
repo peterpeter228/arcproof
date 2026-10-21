@@ -1,0 +1,132 @@
+ [
+  'invalid: typescript@7.0.2 /workspace/scratch/c01bd6fe117d/arcproof-dependency-fix-20261021/node_modules/typescript'
+]
+wagmi > @wagmi/connectors > @base-org/account > @coinbase/cdp-sdk > @solana/kit > @solana/accounts > @solana/codecs-core > typescript [
+  'invalid: typescript@7.0.2 /workspace/scratch/c01bd6fe117d/arcproof-dependency-fix-20261021/node_modules/typescript'
+]
+wagmi > @wagmi/connectors > @base-org/account > @coinbase/cdp-sdk > @solana/kit > @solana/accounts > @solana/codecs-strings > typescript [
+  'invalid: typescript@7.0.2 /workspace/scratch/c01bd6fe117d/arcproof-dependency-fix-20261021/node_modules/typescript'
+]
+wagmi > @wagmi/connectors > @base-org/account > @coinbase/cdp-sdk > @solana/kit > @solana/accounts > @solana/rpc-spec > typescript [
+  'invalid: typescript@7.0.2 /workspace/scratch/c01bd6fe117d/arcproof-dependency-fix-20261021/node_modules/typescript'
+]
+wagmi > @wagmi/connectors > @base-org/account > @coinbase/cdp-sdk > @solana/kit > @solana/accounts > typescript [
+  'invalid: typescript@7.0.2 /workspace/scratch/c01bd6fe117d/arcproof-dependency-fix-20261021/node_modules/typescript'
+]
+wagmi > @wagmi/connectors > @base-org/account > @coinbase/cdp-sdk > @solana/kit > @solana/addresses > @solana/assertions > typescript [
+  'invalid: typescript@7.0.2 /workspace/scratch/c01bd6fe117d/arcproof-dependency-fix-20261021/node_modules/typescript'
+]
+wagmi > @wagmi/connectors > @base-org/account > @coinbase/cdp-sdk > @solana/kit > @solana/addresses > @solana/nominal-types > typescript [
+  'invalid: typescript@7.0.2 /workspace/scratch/c01bd6fe117d/arcproof-dependency-fix-20261021/node_modules/typescript'
+]
+wagmi > @wagmi/connectors > @base-org/account > @coinbase/cdp-sdk > @solana/kit > @solana/addresses > typescript [
+  'invalid: typescript@7.0.2 /workspace/scratch/c01bd6fe117d/arcproof-dependency-fix-20261021/node_modules/typescript'
+]
+wagmi > @wagmi/connectors > @base-org/account > @coinbase/cdp-sdk > @solana/kit > @solana/codecs > @solana/codecs-data-structures > typescript [
+  'invalid: typescript@7.0.2 /workspace/scratch/c01bd6fe117d/arcproof-dependency-fix-20261021/node_modules/typescript'
+]
+wagmi > @wagmi/connectors > @base-org/account > @coinbase/cdp-sdk > @solana/kit > @solana/codecs > @solana/codecs-numbers > typescript [
+  'invalid: typescript@7.0.2 /workspace/scratch/c01bd6fe117d/arcproof-dependency-fix-20261021/node_modules/typescript'
+]
+wagmi > @wagmi/connectors > @base-org/account > @coinbase/cdp-sdk > @solana/kit > @solana/codecs > @solana/options > typescript [
+  'invalid: typescript@7.0.2 /workspace/scratch/c01bd6fe117d/arcproof-dependency-fix-20261021/node_modules/typescript'
+]
+wagmi > @wagmi/connectors > @base-org/account > @coinbase/cdp-sdk > @solana/kit > @solana/codecs > typescript [
+  'invalid: typescript@7.0.2 /workspace/scratch/c01bd6fe117d/arcproof-dependency-fix-20261021/node_modules/typescript'
+]
+wagmi > @wagmi/connectors > @base-org/account > @coinbase/cdp-sdk > @solana/kit > @solana/errors > typescript [
+  'invalid: typescript@7.0.2 /workspace/scratch/c01bd6fe117d/arcproof-dependency-fix-20261021/node_modules/typescript'
+]
+wagmi > @wagmi/connectors > @base-org/account > @coinbase/cdp-sdk > @solana/kit > @solana/functional > typescript [
+  'invalid: typescript@7.0.2 /workspace/scratch/c01bd6fe117d/arcproof-dependency-fix-20261021/node_modules/typescript'
+]
+wagmi > @wagmi/connectors > @base-org/account > @coinbase/cdp-sdk > @solana/kit > @solana/instruction-plans > @solana/promises > typescript [
+  'invalid: typescript@7.0.2 /workspace/scratch/c01bd6fe117d/arcproof-dependency-fix-20261021/node_modules/typescript'
+]
+wagmi > @wagmi/connectors > @base-org/account > @coinbase/cdp-sdk > @solana/kit > @solana/instruction-plans > typescript [
+  'invalid: typescript@7.0.2 /workspace/scratch/c01bd6fe117d/arcproof-dependency-fix-20261021/node_modules/typescript'
+]
+wagmi > @wagmi/connectors > @base-org/account > @coinbase/cdp-sdk > @solana/kit > @solana/instructions > typescript [
+  'invalid: typescript@7.0.2 /workspace/scratch/c01bd6fe117d/arcproof-dependency-fix-20261021/node_modules/typescript'
+]
+wagmi > @wagmi/connectors > @base-org/account > @coinbase/cdp-sdk > @solana/kit > @solana/keys > typescript [
+  'invalid: typescript@7.0.2 /workspace/scratch/c01bd6fe117d/arcproof-dependency-fix-20261021/node_modules/typescript'
+]
+wagmi > @wagmi/connectors > @base-org/account > @coinbase/cdp-sdk > @solana/kit > @solana/offchain-messages > typescript [
+  'invalid: typescript@7.0.2 /workspace/scratch/c01bd6fe117d/arcproof-dependency-fix-20261021/node_modules/typescript'
+]
+wagmi > @wagmi/connectors > @base-org/account > @coinbase/cdp-sdk > @solana/kit > @solana/plugin-core > typescript [
+  'invalid: typescript@7.0.2 /workspace/scratch/c01bd6fe117d/arcproof-dependency-fix-20261021/node_modules/typescript'
+]
+wagmi > @wagmi/connectors > @base-org/account > @coinbase/cdp-sdk > @solana/kit > @solana/programs > typescript [
+  'invalid: typescript@7.0.2 /workspace/scratch/c01bd6fe117d/arcproof-dependency-fix-20261021/node_modules/typescript'
+]
+wagmi > @wagmi/connectors > @base-org/account > @coinbase/cdp-sdk > @solana/kit > @solana/rpc-api > @solana/rpc-transformers > typescript [
+  'invalid: typescript@7.0.2 /workspace/scratch/c01bd6fe117d/arcproof-dependency-fix-20261021/node_modules/typescript'
+]
+wagmi > @wagmi/connectors > @base-org/account > @coinbase/cdp-sdk > @solana/kit > @solana/rpc-api > typescript [
+  'invalid: typescript@7.0.2 /workspace/scratch/c01bd6fe117d/arcproof-dependency-fix-20261021/node_modules/typescript'
+]
+wagmi > @wagmi/connectors > @base-org/account > @coinbase/cdp-sdk > @solana/kit > @solana/rpc-parsed-types > typescript [
+  'invalid: typescript@7.0.2 /workspace/scratch/c01bd6fe117d/arcproof-dependency-fix-20261021/node_modules/typescript'
+]
+wagmi > @wagmi/connectors > @base-org/account > @coinbase/cdp-sdk > @solana/kit > @solana/rpc-spec-types > typescript [
+  'invalid: typescript@7.0.2 /workspace/scratch/c01bd6fe117d/arcproof-dependency-fix-20261021/node_modules/typescript'
+]
+wagmi > @wagmi/connectors > @base-org/account > @coinbase/cdp-sdk > @solana/kit > @solana/rpc-subscriptions > @solana/fast-stable-stringify > typescript [
+  'invalid: typescript@7.0.2 /workspace/scratch/c01bd6fe117d/arcproof-dependency-fix-20261021/node_modules/typescript'
+]
+wagmi > @wagmi/connectors > @base-org/account > @coinbase/cdp-sdk > @solana/kit > @solana/rpc-subscriptions > @solana/rpc-subscriptions-api > typescript [
+  'invalid: typescript@7.0.2 /workspace/scratch/c01bd6fe117d/arcproof-dependency-fix-20261021/node_modules/typescript'
+]
+wagmi > @wagmi/connectors > @base-org/account > @coinbase/cdp-sdk > @solana/kit > @solana/rpc-subscriptions > @solana/rpc-subscriptions-channel-websocket > typescript [
+  'invalid: typescript@7.0.2 /workspace/scratch/c01bd6fe117d/arcproof-dependency-fix-20261021/node_modules/typescript'
+]
+wagmi > @wagmi/connectors > @base-org/account > @coinbase/cdp-sdk > @solana/kit > @solana/rpc-subscriptions > @solana/rpc-subscriptions-spec > typescript [
+  'invalid: typescript@7.0.2 /workspace/scratch/c01bd6fe117d/arcproof-dependency-fix-20261021/node_modules/typescript'
+]
+wagmi > @wagmi/connectors > @base-org/account > @coinbase/cdp-sdk > @solana/kit > @solana/rpc-subscriptions > @solana/subscribable > typescript [
+  'invalid: typescript@7.0.2 /workspace/scratch/c01bd6fe117d/arcproof-dependency-fix-20261021/node_modules/typescript'
+]
+wagmi > @wagmi/connectors > @base-org/account > @coinbase/cdp-sdk > @solana/kit > @solana/rpc-subscriptions > typescript [
+  'invalid: typescript@7.0.2 /workspace/scratch/c01bd6fe117d/arcproof-dependency-fix-20261021/node_modules/typescript'
+]
+wagmi > @wagmi/connectors > @base-org/account > @coinbase/cdp-sdk > @solana/kit > @solana/rpc-types > typescript [
+  'invalid: typescript@7.0.2 /workspace/scratch/c01bd6fe117d/arcproof-dependency-fix-20261021/node_modules/typescript'
+]
+wagmi > @wagmi/connectors > @base-org/account > @coinbase/cdp-sdk > @solana/kit > @solana/rpc > @solana/rpc-transport-http > typescript [
+  'invalid: typescript@7.0.2 /workspace/scratch/c01bd6fe117d/arcproof-dependency-fix-20261021/node_modules/typescript'
+]
+wagmi > @wagmi/connectors > @base-org/account > @coinbase/cdp-sdk > @solana/kit > @solana/rpc > typescript [
+  'invalid: typescript@7.0.2 /workspace/scratch/c01bd6fe117d/arcproof-dependency-fix-20261021/node_modules/typescript'
+]
+wagmi > @wagmi/connectors > @base-org/account > @coinbase/cdp-sdk > @solana/kit > @solana/signers > typescript [
+  'invalid: typescript@7.0.2 /workspace/scratch/c01bd6fe117d/arcproof-dependency-fix-20261021/node_modules/typescript'
+]
+wagmi > @wagmi/connectors > @base-org/account > @coinbase/cdp-sdk > @solana/kit > @solana/sysvars > typescript [
+  'invalid: typescript@7.0.2 /workspace/scratch/c01bd6fe117d/arcproof-dependency-fix-20261021/node_modules/typescript'
+]
+wagmi > @wagmi/connectors > @base-org/account > @coinbase/cdp-sdk > @solana/kit > @solana/transaction-confirmation > typescript [
+  'invalid: typescript@7.0.2 /workspace/scratch/c01bd6fe117d/arcproof-dependency-fix-20261021/node_modules/typescript'
+]
+wagmi > @wagmi/connectors > @base-org/account > @coinbase/cdp-sdk > @solana/kit > @solana/transaction-messages > typescript [
+  'invalid: typescript@7.0.2 /workspace/scratch/c01bd6fe117d/arcproof-dependency-fix-20261021/node_modules/typescript'
+]
+wagmi > @wagmi/connectors > @base-org/account > @coinbase/cdp-sdk > @solana/kit > @solana/transactions > typescript [
+  'invalid: typescript@7.0.2 /workspace/scratch/c01bd6fe117d/arcproof-dependency-fix-20261021/node_modules/typescript'
+]
+wagmi > @wagmi/connectors > @base-org/account > @coinbase/cdp-sdk > @solana/kit > typescript [
+  'invalid: typescript@7.0.2 /workspace/scratch/c01bd6fe117d/arcproof-dependency-fix-20261021/node_modules/typescript'
+]
+wagmi > @wagmi/connectors > @base-org/account > @coinbase/cdp-sdk > abitype > typescript [
+  'invalid: typescript@7.0.2 /workspace/scratch/c01bd6fe117d/arcproof-dependency-fix-20261021/node_modules/typescript'
+]
+wagmi > @wagmi/connectors > @base-org/account > ox > abitype > typescript [
+  'invalid: typescript@7.0.2 /workspace/scratch/c01bd6fe117d/arcproof-dependency-fix-20261021/node_modules/typescript'
+]
+wagmi > @wagmi/connectors > @coinbase/wallet-sdk > ox > abitype > typescript [
+  'invalid: typescript@7.0.2 /workspace/scratch/c01bd6fe117d/arcproof-dependency-fix-20261021/node_modules/typescript'
+]
+wagmi > @wagmi/connectors > porto > ox > abitype > typescript [
+  'invalid: typescript@7.0.2 /workspace/scratch/c01bd6fe117d/arcproof-dependency-fix-20261021/node_modules/typescript'
+]

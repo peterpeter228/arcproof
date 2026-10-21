@@ -1,0 +1,10 @@
+
+ RUN  v2.1.9 /workspace/scratch/c01bd6fe117d/arcproof-export01-20261021/repo
+
+ ✓ qa/native-settlement-review/independent.test.ts (137 tests) 67ms
+
+ Test Files  1 passed (1)
+      Tests  137 passed (137)
+   Start at  11:55:16
+   Duration  797ms (transform 158ms, setup 0ms, collect 374ms, tests 67ms, environment 0ms, prepare 178ms)
+

@@ -1,0 +1,153 @@
+PASS identity: empty production manifest, testnet-only frozen identity and exact full runtime
+PASS create: successful action uses refreshed lower gas/price and exact chain/value
+PASS create: prevents signing after wrong current chain
+PASS create: prevents signing after changed account
+PASS create: prevents signing after changed connection version
+PASS create: prevents signing after disconnected
+PASS create: prevents signing after changed RPC chain
+PASS create: prevents signing after changed runtime
+PASS create: prevents signing after changed deployment
+PASS create: prevents signing after changed target
+PASS create: prevents signing after expired review
+PASS create: prevents signing after payer now has code
+PASS create: prevents signing after wallet actual chain changed
+PASS create: prevents signing after wallet actual account changed
+PASS create: prevents signing after higher gas
+PASS create: prevents signing after higher gas price
+PASS create: prevents signing after higher gas but lower fee
+PASS create: prevents signing after higher gas price but lower fee
+PASS create: prevents signing after insufficient balance
+PASS create: prevents signing after context invalidated during simulation
+PASS create: prevents signing after review expires during preflight
+PASS pay: successful action uses refreshed lower gas/price and exact chain/value
+PASS pay: prevents signing after wrong current chain
+PASS pay: prevents signing after changed account
+PASS pay: prevents signing after changed connection version
+PASS pay: prevents signing after disconnected
+PASS pay: prevents signing after changed RPC chain
+PASS pay: prevents signing after changed runtime
+PASS pay: prevents signing after changed deployment
+PASS pay: prevents signing after changed target
+PASS pay: prevents signing after expired review
+PASS pay: prevents signing after payer now has code
+PASS pay: prevents signing after wallet actual chain changed
+PASS pay: prevents signing after wallet actual account changed
+PASS pay: prevents signing after higher gas
+PASS pay: prevents signing after higher gas price
+PASS pay: prevents signing after higher gas but lower fee
+PASS pay: prevents signing after higher gas price but lower fee
+PASS pay: prevents signing after insufficient balance
+PASS pay: prevents signing after context invalidated during simulation
+PASS pay: prevents signing after review expires during preflight
+PASS pay: action-time already paid
+PASS pay: action-time invoice expires
+PASS pay: action-time nonzero terms
+PASS pay: action-time merchant changes
+PASS pay: action-time amount changes
+PASS pay: action-time amount above cap
+PASS pay: action-time amount sub-quantum
+PASS pay: action-time merchant now has code
+PASS pay: action-time changed calldata
+PASS pay: action-time changed value
+PASS pay: action-time changed payment chain
+PASS pay: action-time changed payment deployment
+PASS create: action-time expired invoice
+PASS create: action-time expiry exceeds seven days
+PASS create: action-time nonzero value
+PASS create: action-time amount above cap
+PASS create: action-time sub-quantum amount
+PASS create: action-time changed calldata
+FAIL repeat-submit: only one wallet send while first wallet request unresolved AssertionError [ERR_ASSERTION]: The input did not match the regular expression /unresolved/. Input:
+
+'Error: Another tab has a wallet operation in progress. Check that request; do not resend.'
+
+    at expectedException (node:assert:327:33)
+    at expectsError (node:assert:395:20)
+    at assert.rejects (node:assert:434:17)
+    at async <anonymous> (/workspace/scratch/c01bd6fe117d/arcproof-quality-before-20261021/repo/qa/new-independent-review/service-probes.ts:133:476)
+    at async probe (/workspace/scratch/c01bd6fe117d/arcproof-quality-before-20261021/repo/qa/new-independent-review/service-probes.ts:25:65)
+PASS uncertain wallet result: invalid hash blocks same-invoice retry and another payer
+PASS uncertain wallet result: transport error blocks retry without resending
+PASS explicit wallet rejection: code 4001 releases request lease
+FAIL returned hash retained after context disappears and storage quota fails Error: mock quota failure
+    at setItem (/workspace/scratch/c01bd6fe117d/arcproof-quality-before-20261021/repo/qa/new-independent-review/service-probes.ts:15:354)
+    at write (/workspace/scratch/c01bd6fe117d/arcproof-quality-before-20261021/repo/src/arcproof/walletIntents.ts:50:16)
+    at <anonymous> (/workspace/scratch/c01bd6fe117d/arcproof-quality-before-20261021/repo/src/arcproof/walletIntents.ts:81:5)
+    at <anonymous> (/workspace/scratch/c01bd6fe117d/arcproof-quality-before-20261021/repo/src/arcproof/walletIntents.ts:67:12)
+    at <anonymous> (/workspace/scratch/c01bd6fe117d/arcproof-quality-before-20261021/repo/src/arcproof/__tests__/fixtures/safeBrowser.ts:13:24)
+    at withDispatchLock (/workspace/scratch/c01bd6fe117d/arcproof-quality-before-20261021/repo/src/arcproof/walletIntents.ts:64:26)
+    at runWalletIntent (/workspace/scratch/c01bd6fe117d/arcproof-quality-before-20261021/repo/src/arcproof/walletIntents.ts:72:10)
+    at sendPreparedAction (/workspace/scratch/c01bd6fe117d/arcproof-quality-before-20261021/repo/src/arcproof/testnetClient.ts:144:10)
+    at <anonymous> (/workspace/scratch/c01bd6fe117d/arcproof-quality-before-20261021/repo/qa/new-independent-review/service-probes.ts:137:209)
+    at async probe (/workspace/scratch/c01bd6fe117d/arcproof-quality-before-20261021/repo/qa/new-independent-review/service-probes.ts:25:65)
+PASS case-insensitive payment lease and hash deduplication
+PASS retention: every unresolved hash survives 60 completed insertions
+FAIL receipt: coherent fixture remains UNVERIFIED_ARC_EVIDENCE / verified false AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
++ actual - expected
+
++ 'TRANSACTION_INCLUSION_MISMATCH'
+- 'UNVERIFIED_ARC_EVIDENCE'
+
+    at <anonymous> (/workspace/scratch/c01bd6fe117d/arcproof-quality-before-20261021/repo/qa/new-independent-review/service-probes.ts:140:212)
+    at async probe (/workspace/scratch/c01bd6fe117d/arcproof-quality-before-20261021/repo/qa/new-independent-review/service-probes.ts:25:65)
+PASS receipt: rejects mismatched receipt replacement
+PASS receipt: rejects mismatched transaction replacement
+PASS receipt: rejects mismatched receipt sender
+PASS receipt: rejects mismatched transaction sender
+PASS receipt: rejects mismatched receipt target
+PASS receipt: rejects mismatched transaction target
+PASS receipt: rejects mismatched transaction chain
+PASS receipt: rejects mismatched transaction value
+PASS receipt: rejects mismatched transaction invoice
+PASS receipt: rejects mismatched event transaction hash
+PASS receipt: rejects mismatched event duplicate
+PASS receipt: rejects mismatched event sender
+PASS receipt: rejects mismatched event amount
+PASS receipt: rejects mismatched event malformed
+PASS receipt: rejects mismatched event invalid log index
+PASS receipt: rejects mismatched receipt block hash
+PASS receipt: rejects mismatched invoice paid block
+PASS receipt: rejects mismatched invoice paid time
+PASS receipt: rejects mismatched reverted receipt
+PASS receipt recovery: queries exactly paid block and bound invoice; rejects multiple results
+FAIL receipt export: returned invoice is the same read snapshot checked by verifier AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
++ actual - expected
+
++ 'TRANSACTION_INCLUSION_MISMATCH'
+- 'UNVERIFIED_ARC_EVIDENCE'
+
+    at <anonymous> (/workspace/scratch/c01bd6fe117d/arcproof-quality-before-20261021/repo/qa/new-independent-review/service-probes.ts:155:397)
+    at async probe (/workspace/scratch/c01bd6fe117d/arcproof-quality-before-20261021/repo/qa/new-independent-review/service-probes.ts:25:65)
+FAIL saved receipt: reconciliation binds exact transaction/function/invoice without signing Error: Saved transaction inclusion identity is missing or conflicting. Request stays unresolved.
+    at reconcileSubmission (/workspace/scratch/c01bd6fe117d/arcproof-quality-before-20261021/repo/src/arcproof/testnetClient.ts:385:15)
+    at async <anonymous> (/workspace/scratch/c01bd6fe117d/arcproof-quality-before-20261021/repo/qa/new-independent-review/service-probes.ts:156:326)
+    at async probe (/workspace/scratch/c01bd6fe117d/arcproof-quality-before-20261021/repo/qa/new-independent-review/service-probes.ts:25:65)
+PASS saved receipt: refuses mismatched receipt hash
+PASS saved receipt: refuses mismatched transaction hash
+PASS saved receipt: refuses mismatched sender
+PASS saved receipt: refuses mismatched target
+PASS saved receipt: refuses mismatched chain
+PASS saved receipt: refuses mismatched invoice
+PASS saved receipt: refuses mismatched function
+FAIL saved receipt: explicit reverted receipt releases repeat-payment registry lock Error: Saved transaction inclusion identity is missing or conflicting. Request stays unresolved.
+    at reconcileSubmission (/workspace/scratch/c01bd6fe117d/arcproof-quality-before-20261021/repo/src/arcproof/testnetClient.ts:385:15)
+    at async <anonymous> (/workspace/scratch/c01bd6fe117d/arcproof-quality-before-20261021/repo/qa/new-independent-review/service-probes.ts:163:352)
+    at async probe (/workspace/scratch/c01bd6fe117d/arcproof-quality-before-20261021/repo/qa/new-independent-review/service-probes.ts:25:65)
+PASS receipt: fails closed on inconsistent log blockHash
+PASS receipt: fails closed on inconsistent log blockNumber
+PASS receipt: fails closed on inconsistent removed log
+PASS creation read-back: binds transaction, exact event, derived ID and immutable terms
+PASS creation read-back: rejects replaced receipt
+PASS creation read-back: rejects replaced transaction
+PASS creation read-back: rejects wrong transaction input
+PASS creation read-back: rejects wrong transaction value
+PASS creation read-back: rejects wrong transaction sender
+PASS creation read-back: rejects wrong transaction chain
+PASS creation read-back: rejects wrong event transaction
+PASS creation read-back: rejects wrong event blockHash
+PASS creation read-back: rejects wrong event blockNumber
+PASS creation read-back: rejects duplicate creation event
+PASS creation read-back: rejects changed read-back terms
+PASS creation read-back: rejects removed creation log
+PASS network isolation: no global fetch attempted
+RESULT 108 passed; 6 failed; 0 network attempts

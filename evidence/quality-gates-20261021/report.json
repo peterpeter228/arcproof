@@ -1,0 +1,201 @@
+{
+  "utcDate": "2026-10-21",
+  "scope": "isolated quality-only candidate; no remote/Studio/RPC/wallet/publication/paid execution",
+  "runtime": {
+    "node": "24.19.0",
+    "bun": "1.4.3",
+    "vitest": "2.1.9; integrator reruns migrated tooling"
+  },
+  "reportedRemoteBase": "42e9ac9d46f7769b9fa428e27511edd66e76c1c9",
+  "remoteBaseIndependentlyRead": false,
+  "inputProof": "per-file before SHA-256 below; source copied from parent-provided integrated tree, not inferred from local git label",
+  "checks": {
+    "service-probes-before": {
+      "exit": 1,
+      "status": "failed"
+    },
+    "legacy-safety": {
+      "exit": 0,
+      "status": "passed"
+    },
+    "service-probes-input-validation": {
+      "exit": 1,
+      "status": "failed"
+    },
+    "lint-source": {
+      "exit": 0,
+      "status": "passed"
+    },
+    "archived-typecheck": {
+      "exit": 0,
+      "status": "passed"
+    },
+    "legacy-ui": {
+      "exit": 1,
+      "status": "failed"
+    },
+    "intent-poison": {
+      "exit": 1,
+      "status": "failed"
+    },
+    "ui-wallet": {
+      "exit": 0,
+      "status": "passed"
+    },
+    "service-probes": {
+      "exit": 1,
+      "status": "failed"
+    },
+    "intent-poison-after": {
+      "exit": 0,
+      "status": "passed"
+    },
+    "solc-wrapper-syntax": {
+      "exit": 0,
+      "status": "passed"
+    },
+    "lint-full": {
+      "exit": 0,
+      "status": "passed"
+    },
+    "legacy-ui-migrated": {
+      "exit": 0,
+      "status": "passed"
+    },
+    "legacy-safety-migrated": {
+      "exit": 0,
+      "status": "passed"
+    },
+    "service-probes-migrated": {
+      "exit": 0,
+      "status": "passed"
+    }
+  },
+  "lint": {
+    "before": 122,
+    "after": 0,
+    "newIgnores": false,
+    "removedAssertions": false
+  },
+  "serviceHarnessBeforeAfter": {
+    "before": [
+      104,
+      10
+    ],
+    "after": [
+      104,
+      10
+    ],
+    "sameNamedResults": true,
+    "note": "before adaptation only adds browser primitives and settled-loop cleanup so current guard can execute; assertions unchanged"
+  },
+  "focusedInputValidation": {
+    "passed": 108,
+    "failed": 6,
+    "productionFileSha256": "3e7199b133bc7e0b5d91e4327d1db1aeee2dd269317cdac345afeb3e8d7faedc",
+    "remainingFailures": [
+      {
+        "name": "repeat-submit: only one wallet send while first wallet request unresolved",
+        "detail": "AssertionError [ERR_ASSERTION]: The input did not match the regular expression /unresolved/. Input:\n\n'Error: Another tab has a wallet operation in progress. Check that request; do not resend.'\n\n    at expectedException (node:assert:327:33)\n    at expectsError (node:assert:395:20)\n    at assert.rejects (node:assert:434:17)\n    at async <anonymous> (/workspace/scratch/c01bd6fe117d/arcproof-quality-before-20261021/repo/qa/new-independent-review/service-probes.ts:133:476)\n    at async probe (/workspace/scratch/c01bd6fe117d/arcproof-quality-before-20261021/repo/qa/new-independent-review/service-probes.ts:25:65)"
+      },
+      {
+        "name": "returned hash retained after context disappears and storage quota fails",
+        "detail": "Error: mock quota failure\n    at setItem (/workspace/scratch/c01bd6fe117d/arcproof-quality-before-20261021/repo/qa/new-independent-review/service-probes.ts:15:354)\n    at write (/workspace/scratch/c01bd6fe117d/arcproof-quality-before-20261021/repo/src/arcproof/walletIntents.ts:50:16)\n    at <anonymous> (/workspace/scratch/c01bd6fe117d/arcproof-quality-before-20261021/repo/src/arcproof/walletIntents.ts:81:5)\n    at <anonymous> (/workspace/scratch/c01bd6fe117d/arcproof-quality-before-20261021/repo/src/arcproof/walletIntents.ts:67:12)\n    at <anonymous> (/workspace/scratch/c01bd6fe117d/arcproof-quality-before-20261021/repo/src/arcproof/__tests__/fixtures/safeBrowser.ts:13:24)\n    at withDispatchLock (/workspace/scratch/c01bd6fe117d/arcproof-quality-before-20261021/repo/src/arcproof/walletIntents.ts:64:26)\n    at runWalletIntent (/workspace/scratch/c01bd6fe117d/arcproof-quality-before-20261021/repo/src/arcproof/walletIntents.ts:72:10)\n    at sendPreparedAction (/workspace/scratch/c01bd6fe117d/arcproof-quality-before-20261021/repo/src/arcproof/testnetClient.ts:144:10)\n    at <anonymous> (/workspace/scratch/c01bd6fe117d/arcproof-quality-before-20261021/repo/qa/new-independent-review/service-probes.ts:137:209)\n    at async probe (/workspace/scratch/c01bd6fe117d/arcproof-quality-before-20261021/repo/qa/new-independent-review/service-probes.ts:25:65)"
+      },
+      {
+        "name": "receipt: coherent fixture remains UNVERIFIED_ARC_EVIDENCE / verified false",
+        "detail": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n+ actual - expected\n\n+ 'TRANSACTION_INCLUSION_MISMATCH'\n- 'UNVERIFIED_ARC_EVIDENCE'\n\n    at <anonymous> (/workspace/scratch/c01bd6fe117d/arcproof-quality-before-20261021/repo/qa/new-independent-review/service-probes.ts:140:212)\n    at async probe (/workspace/scratch/c01bd6fe117d/arcproof-quality-before-20261021/repo/qa/new-independent-review/service-probes.ts:25:65)"
+      },
+      {
+        "name": "receipt export: returned invoice is the same read snapshot checked by verifier",
+        "detail": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n+ actual - expected\n\n+ 'TRANSACTION_INCLUSION_MISMATCH'\n- 'UNVERIFIED_ARC_EVIDENCE'\n\n    at <anonymous> (/workspace/scratch/c01bd6fe117d/arcproof-quality-before-20261021/repo/qa/new-independent-review/service-probes.ts:155:397)\n    at async probe (/workspace/scratch/c01bd6fe117d/arcproof-quality-before-20261021/repo/qa/new-independent-review/service-probes.ts:25:65)"
+      },
+      {
+        "name": "saved receipt: reconciliation binds exact transaction/function/invoice without signing",
+        "detail": "Error: Saved transaction inclusion identity is missing or conflicting. Request stays unresolved.\n    at reconcileSubmission (/workspace/scratch/c01bd6fe117d/arcproof-quality-before-20261021/repo/src/arcproof/testnetClient.ts:385:15)\n    at async <anonymous> (/workspace/scratch/c01bd6fe117d/arcproof-quality-before-20261021/repo/qa/new-independent-review/service-probes.ts:156:326)\n    at async probe (/workspace/scratch/c01bd6fe117d/arcproof-quality-before-20261021/repo/qa/new-independent-review/service-probes.ts:25:65)"
+      },
+      {
+        "name": "saved receipt: explicit reverted receipt releases repeat-payment registry lock",
+        "detail": "Error: Saved transaction inclusion identity is missing or conflicting. Request stays unresolved.\n    at reconcileSubmission (/workspace/scratch/c01bd6fe117d/arcproof-quality-before-20261021/repo/src/arcproof/testnetClient.ts:385:15)\n    at async <anonymous> (/workspace/scratch/c01bd6fe117d/arcproof-quality-before-20261021/repo/qa/new-independent-review/service-probes.ts:163:352)\n    at async probe (/workspace/scratch/c01bd6fe117d/arcproof-quality-before-20261021/repo/qa/new-independent-review/service-probes.ts:25:65)"
+      }
+    ]
+  },
+  "legacySafety": {
+    "resultChecks": 26,
+    "passed": 26,
+    "note": "script process status alone insufficient"
+  },
+  "legacyUi": {
+    "passed": 4,
+    "failed": 2,
+    "reason": "historical unsupported-route button and fake-wait expectations retained"
+  },
+  "sourceChanges": {
+    "RUN_\u4e2d\u6587.md": {
+      "before": "91b288689c3f47d0776dfa5f3c5344878f644e7134738a114673b258baf99bc0",
+      "after": "32eae7ef9454ebc2aa1022e43b957309ab965640601214e857f203f2a8ae6d5f",
+      "typedRefactorAfter": "32eae7ef9454ebc2aa1022e43b957309ab965640601214e857f203f2a8ae6d5f"
+    },
+    "README.md": {
+      "before": "332cfb6ce7b25360ff9a5fe696c9be131078292b97c6ef8e547a2d2ce47a146d",
+      "after": "f594f8c5d4de588785e8d636659df9b2df377fc417d467bb0ac688c266942e7d",
+      "typedRefactorAfter": "f594f8c5d4de588785e8d636659df9b2df377fc417d467bb0ac688c266942e7d"
+    },
+    "docs/05_SUBMISSION_PACK.md": {
+      "before": "612d300f17a30e7d3d3c03c7f9a8769956394d171b9f24d6d120f7fe0521f2b5",
+      "after": "7a1af77c7a44984d83044d90a91f3c14fba031bbb644d500918f21cb29cb6124",
+      "typedRefactorAfter": "7a1af77c7a44984d83044d90a91f3c14fba031bbb644d500918f21cb29cb6124"
+    },
+    "reviewer-tests/reviewer-ui.test.tsx": {
+      "before": "5d79e92c8afc248ac4563a13aff35d58408db83fe90369df19c7711b13750f55",
+      "after": "13578aa277da2598953ac39eef9aea164459c52444a698e87559892776b5dd3b",
+      "typedRefactorAfter": "49c03c2573bcee513f65737cee8a5b87aacb574fa242b0887b2ea501db251cc0"
+    },
+    "reviewer-tests/reviewer-safety.ts": {
+      "before": "8d0cad1db36f3c32f310d369592a044b2be29f5195c7eba5330ab1ecaee0ab15",
+      "after": "2dfeb863e57f56c9947fa3bb12339b9a8dcba7df47546bbd82ea7c39e350d9af",
+      "typedRefactorAfter": "907eb30632bbe2eb3b2008acba66d500a5a6103b16d545c8cb5488f0993bb5ef"
+    },
+    "tools/g1-review/solc-wrapper.cjs": {
+      "before": "7e5af83d78543fe57b221dac1e09f30a7ecc3fb7c2d8391a84d969387e37291f",
+      "after": "59d219d2171fb511c81aed49159f55142381ca08963c29e6367fa6a6fd81d25d",
+      "typedRefactorAfter": "59d219d2171fb511c81aed49159f55142381ca08963c29e6367fa6a6fd81d25d"
+    },
+    "qa/new-independent-review/ui-probes.test.tsx": {
+      "before": "fa2031b33e275437a11a2a77974b383244713852cb8664679af7f5148282ec2e",
+      "after": "2f2fd35fbca57346434ce18889bb4880ca0a1847f2ea705ba562bd30507a03cf",
+      "typedRefactorAfter": "2f2fd35fbca57346434ce18889bb4880ca0a1847f2ea705ba562bd30507a03cf"
+    },
+    "qa/new-independent-review/wallet-probes.test.tsx": {
+      "before": "b254951ea69f5b3482cc1b7c3e42e528a9f140bf0e811362e34571924da5b476",
+      "after": "e164be378d4d5b61ddc30cec56a8a7e6038e67ebfcf630b4fd5f65a3a9409aca",
+      "typedRefactorAfter": "e164be378d4d5b61ddc30cec56a8a7e6038e67ebfcf630b4fd5f65a3a9409aca"
+    },
+    "qa/new-independent-review/service-probes.ts": {
+      "before": "2a994b930ca1ac5aa9069140bc7af1bd1b32ddcc071dd66c79b72a53fc089776",
+      "after": "c48652de629d1308792911cd066d0fa63c98f251fe9b82175ddaca7d303338f3",
+      "typedRefactorAfter": "52dc67b11f95bf231e7890651d6c03d5b699487b0e9268ea4c23ace1d9e39d61"
+    }
+  },
+  "notRun": [
+    "remote CI",
+    "current real browser",
+    "real RPC",
+    "wallet/chain action",
+    "solc compilation"
+  ],
+  "ci": "inactive docs/ci example only; no workflow created or dispatched",
+  "clock": "runner log wall clock is not canonical UTC",
+  "semanticMigration": {
+    "passed": 114,
+    "failed": 0,
+    "networkAttempts": 0,
+    "all114NamesPreserved": true,
+    "legacyUiPassed": 6,
+    "legacyUiFailed": 0,
+    "legacySafetyChecks": 26,
+    "legacySafetyFalseChecks": 0,
+    "mapping": "docs/QUALITY_PROBE_MIGRATION.md",
+    "validationProductionScope": "only integrator walletIntents.ts validation-before-write copied into separate validation tree"
+  }
+}

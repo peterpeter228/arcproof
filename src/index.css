@@ -23,3 +23,41 @@ body {
   .receipt-page section { break-inside: avoid; box-shadow: none; }
   .receipt-page a { overflow-wrap: anywhere; }
 }
+
+/* Normal-flow attribution cannot cover form fields or receipt evidence. */
+.studio-attribution {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0;
+  color: #1b3158;
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-decoration: underline;
+}
+.studio-attribution svg { flex-shrink: 0; }
+button, input, a, summary { -webkit-tap-highlight-color: transparent; }
+button, input, summary { min-height: 2.75rem; }
+input { min-width: 0; max-width: 100%; }
+:where(button, a, input, summary, [tabindex]):focus-visible {
+  outline: 3px solid #0f766e;
+  outline-offset: 3px;
+}
+.skip-link {
+  position: absolute;
+  top: 0.5rem;
+  left: 0.5rem;
+  transform: translateY(-200%);
+  z-index: 30;
+  padding: 0.75rem;
+  background: white;
+  color: #1c1917;
+}
+.skip-link:focus { transform: translateY(0); }
+@media print {
+  .skip-link, .footer-metadata { display: none !important; }
+  body:has(.receipt-page) .app-footer { display: block !important; border: 0; }
+  body:has(.receipt-page) main { padding: 0; }
+  .receipt-page .receipt-details { break-inside: auto; }
+  .receipt-page .receipt-details > :not(summary) { display: block !important; }
+}

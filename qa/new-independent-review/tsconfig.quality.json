@@ -1,0 +1,5 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {"incremental": false, "target": "ES2022"},
+  "include": ["*.tsx", "service-probes.ts", "../../reviewer-tests/*.tsx", "../../reviewer-tests/reviewer-safety.ts", "../quality-gates/*.ts"]
+}

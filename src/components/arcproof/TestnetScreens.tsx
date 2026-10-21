@@ -9,7 +9,7 @@ import { formatAmountDisplay } from '../../arcproof/amountParser';
 import { ARC_TESTNET, TESTNET_DEPLOYMENT, ZERO_TERMS, explorerTx, isBytes32 } from '../../arcproof/testnet';
 import {
   testnetClient, loadHistory, loadInvoice, prepareCreate, preparePay, sendPreparedAction,
-  readCreatedInvoice, checkBroadcast, rememberPaymentHash, errorMessage, verifyTestnetReceipt,
+  confirmCreatedInvoice, confirmSubmittedOutcome, checkBroadcast, rememberPaymentHash, errorMessage, verifyTestnetReceipt,
   assertReceiptMatches,
   type PreparedAction, type LoadedInvoice,
 } from '../../arcproof/testnetClient';
@@ -23,12 +23,6 @@ const input = 'w-full rounded-lg border border-stone-300 px-3 py-2 font-mono tex
 const route = (kind: 'pay' | 'receipt', id: Hex, tx?: Hex) =>
   `#/${kind}/${ARC_TESTNET.id}/${TESTNET_DEPLOYMENT.deploymentId}/${id}${tx ? `?tx=${tx}` : ''}`;
 
-function TestnetNotice() {
-  return <div className="rounded-lg bg-amber-50 border border-amber-200 p-3 text-sm text-amber-900">
-    Arc Testnet only · chain 5042002 · test USDC, no monetary value. Each action requires your own wallet approval.
-    Mainnet is disabled. This prototype is not audited.
-  </div>;
-}
 function TransactionNotice({ hash }: { hash: Hex }) {
   return <div className="rounded-lg bg-amber-50 p-3 text-sm break-words" role="status">
     Transaction submitted. A hash is not payment proof. Do not automatically resend.
@@ -50,10 +44,11 @@ function Review({ action, busy, confirm, cancel }: {
     <p>Expiry: {new Date(Number(action.expiresAt) * 1000).toLocaleString()} · No attached terms.</p>
     {action.payment && action.session.account.toLowerCase() === action.payment.invoiceSnapshot.merchant.toLowerCase() &&
       <p className="text-amber-800">Payer and merchant are the same wallet. This is a controlled self-demo, not revenue or a two-wallet acceptance test.</p>}
+    <AtomicForwardingWarning />
     <p className="text-sm text-stone-600">Only click below when you are ready to inspect and approve in your wallet. A submitted transaction cannot be cancelled here.</p>
     <div className="flex flex-wrap gap-3">
-      <button className={button} disabled={busy} onClick={confirm}>{busy ? 'Waiting for wallet / network…' : 'Open wallet to approve'}</button>
-      <button className="border rounded-lg px-4 py-2" disabled={busy} onClick={cancel}>Cancel review</button>
+      <button type="button" className={button} disabled={busy} onClick={confirm}>{busy ? 'Waiting for wallet / network…' : 'Open wallet to approve'}</button>
+      <button type="button" className="border rounded-lg px-4 py-2" disabled={busy} onClick={cancel}>Cancel review</button>
     </div>
   </section>;
 }
@@ -138,10 +133,10 @@ function TestnetDashboardSession({ wallet }: { wallet: ReturnType<typeof useTest
       assertReceiptMatches(action, hash, receipt);
       if (receiptStatus(receipt.status) === 'unknown') throw new Error('Receipt status is unknown. Keep the saved request unresolved; do not resend.');
       if (receiptStatus(receipt.status) === 'reverted') {
-        updateSubmission(hash, 'reverted');
+        await confirmSubmittedOutcome(testnetClient, hash, 'reverted');
         throw new Error('Creation transaction reverted. Gas may have been spent.');
       }
-      const invoice = await readCreatedInvoice(testnetClient, action, hash);
+      const invoice = await confirmCreatedInvoice(testnetClient, action, hash);
       updateSubmission(hash, 'included');
       if (op.current()) { setCreated(invoice); setHistory((old) => [invoice, ...old.filter((x) => x.invoiceId !== invoice.invoiceId)]); }
     } catch (e) {
@@ -161,27 +156,29 @@ function TestnetDashboardSession({ wallet }: { wallet: ReturnType<typeof useTest
     <DashboardScreen />
   </div>;
 
-  return <div className="space-y-5">
-    <TestnetNotice />
-    <AtomicForwardingWarning />
-    <section className={panel}>
+  return <div className="max-w-xl mx-auto space-y-5">
+    <form className={panel} aria-label="Create testnet invoice" aria-busy={busy} onSubmit={(event) => {
+      event.preventDefault();
+      if (!busy && canUseWallet && !action) void review();
+    }}>
       <div className="flex justify-between items-center gap-3 flex-wrap">
         <h2 className="font-semibold text-lg">Create a testnet invoice</h2>
-        <button className="underline text-sm" disabled={busy} onClick={() => setOffline(true)}>Use offline simulation instead</button>
+        <button type="button" className="underline text-sm" disabled={busy} onClick={() => setOffline(true)}>Use offline simulation instead</button>
       </div>
       {!wallet.session && <p>Connect an ordinary EOA wallet using the button above. No signature is needed to read invoices.</p>}
       {wallet.session && !canUseWallet && <p className="text-amber-800">Switch to Arc Testnet (5042002) in your wallet. Mainnet and other networks cannot create or pay here.</p>}
       <label className="block text-sm" htmlFor="testnet-amount">Amount (test USDC, maximum 1)</label>
-      <input id="testnet-amount" className={input} value={amount} disabled={busy || !!action} onChange={(e) => setAmount(e.target.value)} />
+      <input id="testnet-amount" inputMode="decimal" aria-describedby={error ? 'create-error create-context' : 'create-context'} className={input} value={amount} disabled={busy || !!action} onChange={(e) => setAmount(e.target.value)} />
       <label className="block text-sm" htmlFor="testnet-expiry">Expires in (whole hours, 1–168)</label>
-      <input id="testnet-expiry" type="number" min={1} max={168} className={input} value={hours} disabled={busy || !!action} onChange={(e) => setHours(Number(e.target.value))} />
-      <p className="text-xs text-stone-500">The connected wallet is the merchant. Terms hash is always zero. No customer information is written on chain.</p>
-      <button className={button} disabled={busy || !canUseWallet || !!action} onClick={() => void review()}>{busy ? 'Checking…' : 'Review invoice creation'}</button>
-    </section>
+      <input id="testnet-expiry" inputMode="numeric" aria-describedby={error ? 'create-error' : undefined} type="number" min={1} max={168} className={input} value={hours} disabled={busy || !!action} onChange={(e) => setHours(Number(e.target.value))} />
+      <p id="create-context" className="text-sm text-stone-600">The connected wallet is the merchant. Terms hash is always zero. No customer information is written on chain.</p>
+      <button type="submit" className={button} disabled={busy || !canUseWallet || !!action}>{busy ? 'Checking…' : 'Review invoice creation'}</button>
+      {busy && <p role="status" className="text-sm">Checking invoice creation. No automatic resubmission.</p>}
+    </form>
     {action && <Review action={action} busy={busy} confirm={() => void confirm()} cancel={() => setAction(null)} />}
-    {error && <p role="alert" className="rounded-lg bg-red-50 p-3 text-sm text-red-800 break-words">{error}</p>}
+    {error && <p id="create-error" role="alert" className="rounded-lg bg-red-50 p-3 text-sm text-red-800 break-words">{error}</p>}
     {created && <section className={panel}>
-      <h3 className="font-semibold">Invoice created on Arc Testnet</h3>
+      <h3 className="font-semibold" role="status">Invoice created on Arc Testnet</h3>
       <p className="font-mono break-all text-xs">{created.invoiceId}</p>
       <p>{formatAmountDisplay(created.amountNative)} test USDC · unpaid unless the chain now reports otherwise</p>
       <div className="flex gap-3 flex-wrap">
@@ -194,7 +191,7 @@ function TestnetDashboardSession({ wallet }: { wallet: ReturnType<typeof useTest
         <h3 className="font-semibold">On-chain invoice history</h3>
         <button className="underline text-sm" disabled={busy || !canUseWallet} onClick={() => void refreshHistory()}>Load / refresh history</button>
       </div>
-      <p className="text-xs text-stone-500">Loaded from merchant nonce and read-back state, not local demo data. This also recovers invoices after refresh.</p>
+      <p className="text-sm text-stone-600">Loaded from merchant nonce and read-back state, not local demo data. This also recovers invoices after refresh.</p>
       {history.length === 0 && <p className="text-sm text-stone-500">No invoices loaded. Connect the merchant wallet, then load history.</p>}
       {history.map((invoice) => <div key={invoice.invoiceId} className="border-t pt-3 space-y-1">
         <p className="text-xs font-mono break-all">{invoice.invoiceId}</p>
@@ -258,11 +255,11 @@ function TestnetPaySession({ invoiceId, wallet }: { invoiceId: Hex; wallet: Retu
       await checkBroadcast(testnetClient, action, sent);
       if (receiptStatus(receipt.status) === 'unknown') throw new Error('Receipt status is unknown. Keep the saved request unresolved; do not resend.');
       if (receiptStatus(receipt.status) === 'reverted') {
-        updateSubmission(sent, 'reverted');
+        await confirmSubmittedOutcome(testnetClient, sent, 'reverted');
         throw new Error('Payment transaction reverted. Gas may have been spent; no payment is confirmed.');
       }
       const fresh = await loadInvoice(testnetClient, invoiceId);
-      updateSubmission(sent, 'included');
+      await confirmSubmittedOutcome(testnetClient, sent, 'included');
       if (op.current()) setInvoice(fresh);
     } catch (e) {
       if (op.current()) { setAction(null); setError(`${errorMessage(e)}${sent ? ' The submitted hash is saved; verify it instead of resending.' : ' Check wallet history if submission is uncertain.'}`); }
@@ -272,8 +269,6 @@ function TestnetPaySession({ invoiceId, wallet }: { invoiceId: Hex; wallet: Retu
   const canPay = !!invoice && !invoice.paid && invoice.termsHash === ZERO_TERMS &&
     wallet.session?.chainId === ARC_TESTNET.id && !pending;
   return <div className="max-w-xl mx-auto space-y-4">
-    <TestnetNotice />
-    <AtomicForwardingWarning />
     <section className={panel}>
       <h2 className="font-semibold text-lg">Testnet payment request</h2>
       <p className="text-xs font-mono break-all">{invoiceId}</p>
@@ -281,17 +276,17 @@ function TestnetPaySession({ invoiceId, wallet }: { invoiceId: Hex; wallet: Retu
         <p className="text-xl font-semibold">{formatAmountDisplay(invoice.amountNative)} test USDC</p>
         <p className="break-all">Merchant: <span className="font-mono text-sm">{invoice.merchant}</span></p>
         <p>Expires: {new Date(Number(invoice.expiresAt) * 1000).toLocaleString()}</p>
-        <p>{invoice.paid ? 'Paid according to contract state. Verify the receipt independently below.' : 'Unpaid according to contract state. Fresh block time and terms are checked before signing.'}</p>
+        <p role="status">{invoice.paid ? 'Paid according to contract state. Verify the receipt independently below.' : 'Unpaid according to contract state. Fresh block time and terms are checked before signing.'}</p>
         {invoice.termsHash !== ZERO_TERMS && <p className="text-amber-800">Unsupported attached terms. This page is read-only and will not request a payment.</p>}
       </> : <p>Invoice amount, recipient and expiry are unavailable until trusted chain data loads.</p>}
       {!wallet.session && <ConnectKitButton />}
       {wallet.session && wallet.session.chainId !== ARC_TESTNET.id && <p className="text-amber-800">Switch your wallet to Arc Testnet (5042002). No other network is supported.</p>}
-      <button className={button} disabled={busy || !canPay || !!action} onClick={() => void review()}>{busy ? 'Checking…' : 'Review test payment'}</button>
+      <button type="button" aria-describedby={error ? 'pay-error' : undefined} className={button} disabled={busy || !canPay || !!action} onClick={() => void review()}>{busy ? 'Checking…' : 'Review test payment'}</button>
       {(invoice?.paid || hash) && <a className="block underline text-sm" href={route('receipt', invoiceId, hash ?? undefined)}>Verify receipt from chain data</a>}
     </section>
     {action && <Review action={action} busy={busy} confirm={() => void confirm()} cancel={() => setAction(null)} />}
     {hash && <TransactionNotice hash={hash} />}
-    {error && <p role="alert" className="rounded-lg bg-red-50 p-3 text-sm text-red-800 break-words">{error}</p>}
+    {error && <p id="pay-error" role="alert" className="rounded-lg bg-red-50 p-3 text-sm text-red-800 break-words">{error}</p>}
   </div>;
 }
 
@@ -366,16 +361,15 @@ function TestnetReceiptFields({ invoiceId, txHash }: { invoiceId?: Hex; txHash?:
     }
   }
   return <div className="max-w-xl mx-auto space-y-4 receipt-page">
-    <p className="rounded-lg bg-amber-50 border border-amber-200 p-3 text-sm text-amber-900">Arc Testnet · test USDC, no monetary value. Read-only verification: no wallet or signature required. Not audited.</p>
     <form className={`${panel} print:hidden`} onSubmit={(event) => { event.preventDefault(); void verify(); }}>
       <h2 className="font-semibold text-lg">Verify a testnet receipt</h2>
-      <p className="text-sm">Network and contract come only from the checked manifest, never from imported receipt flags.</p>
+      <p className="text-sm">Read-only verification: no wallet or signature required. Network and contract come only from the checked manifest, never from imported receipt flags.</p>
       <p className="text-xs font-mono break-all">{TESTNET_DEPLOYMENT.contractAddress}</p>
       <label htmlFor="live-receipt-id" className="block text-sm">Invoice ID</label>
-      <input id="live-receipt-id" className={input} value={id} aria-describedby={error ? 'receipt-error' : undefined} onChange={(e) => edit('id', e.target.value)} />
+      <input id="live-receipt-id" aria-invalid={!!error && !isBytes32(id)} autoCapitalize="none" spellCheck={false} className={input} value={id} aria-describedby={error ? 'receipt-error' : undefined} onChange={(e) => edit('id', e.target.value)} />
       <label htmlFor="live-receipt-tx" className="block text-sm">Payment transaction hash (optional)</label>
-      <input id="live-receipt-tx" className={input} value={tx} aria-describedby={error ? 'receipt-error' : undefined} onChange={(e) => edit('tx', e.target.value)} />
-      <p className="text-xs text-stone-500">Without a hash, recovery searches only the invoice’s recorded paid block. Ambiguous evidence stays unverified.</p>
+      <input id="live-receipt-tx" aria-invalid={!!error && !!tx && !isBytes32(tx)} autoCapitalize="none" spellCheck={false} className={input} value={tx} aria-describedby={error ? 'receipt-error' : undefined} onChange={(e) => edit('tx', e.target.value)} />
+      <p className="text-sm text-stone-600">Without a hash, recovery searches only the invoice’s recorded paid block. Ambiguous evidence stays unverified.</p>
       <button type="submit" className={button} disabled={busy || !id}>{busy ? 'Verifying…' : 'Verify from chain data'}</button>
       {busy && <p role="status" className="text-sm">Reading chain evidence. No transaction will be sent.</p>}
     </form>

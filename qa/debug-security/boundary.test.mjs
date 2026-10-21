@@ -76,7 +76,16 @@ await test('SEC-01 / DEV-01 source, real development HTTP, HMR, and production a
       assert.equal((await get(port, '/', { Host: `localhost:${port}` })).status, 200)
       const entry = await get(port, '/src/main.tsx')
       assert.equal(entry.status, 200)
-      assert.ok(entry.body.includes('Built with Arc Studio'))
+      // UI-02 moves preserved attribution into the normal Layout footer.
+      const attribution = await get(port, '/src/components/arcproof/StudioAttribution.tsx')
+      assert.equal(attribution.status, 200)
+      assert.ok(attribution.body.includes('Built with Arc Studio'))
+      assert.ok(attribution.body.includes('https://studio.arc.io/'))
+      assert.ok(attribution.body.includes('M0 21.5001')) // original SVG path
+      const layout = await get(port, '/src/components/arcproof/Layout.tsx')
+      assert.equal(layout.status, 200)
+      assert.ok(layout.body.includes('StudioAttribution'))
+      assert.ok(layout.body.includes('footer'))
       assert.ok(!entry.body.includes('console-capture'))
       assert.ok(!entry.body.includes('"/src/tracing.ts"'))
       assert.equal((await get(port, '/@vite/client')).status, 200)

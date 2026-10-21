@@ -1,0 +1,6 @@
+{
+  "utcDate": "2026-10-21",
+  "supersedes": "Prior integration narrative calling the outer receipt txHash key a demonstrated stale-input defect.",
+  "finding": "The original TestnetReceiptFields was already keyed by invoiceId and txHash; the added outer key is defense-in-depth and additional regression coverage, not a reproduced prior bug.",
+  "lesson": "Require reproduction against original behavior before labeling a change a bug fix. Raw historical logs are preserved unchanged."
+}

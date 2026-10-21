@@ -1,0 +1,141 @@
+{
+  "stage": "PRIVATE_LOCAL_QUALITY_EXPORT_UI_CANDIDATE",
+  "baseline": "42e9ac9d46f7769b9fa428e27511edd66e76c1c9",
+  "utcDate": "2026-10-21",
+  "pushed": false,
+  "tests": {
+    "install-clean-frozen": {
+      "exit": 0,
+      "status": "passed"
+    },
+    "check": {
+      "exit": 0,
+      "status": "passed"
+    },
+    "full-lint": {
+      "exit": 0,
+      "status": "passed"
+    },
+    "archived-typecheck": {
+      "exit": 0,
+      "status": "passed"
+    },
+    "project": {
+      "exit": 0,
+      "status": "passed"
+    },
+    "adversarial": {
+      "exit": 0,
+      "status": "passed"
+    },
+    "ui": {
+      "exit": 0,
+      "status": "passed"
+    },
+    "intent-poison": {
+      "exit": 0,
+      "status": "passed"
+    },
+    "service": {
+      "exit": 0,
+      "status": "passed"
+    },
+    "legacy-safety": {
+      "exit": 0,
+      "status": "passed"
+    },
+    "legacy-ui": {
+      "exit": 0,
+      "status": "passed"
+    },
+    "build": {
+      "exit": 0,
+      "status": "passed"
+    },
+    "security": {
+      "exit": 0,
+      "status": "passed"
+    },
+    "graph-build": {
+      "exit": 0,
+      "status": "passed"
+    },
+    "audit": {
+      "exit": 1,
+      "status": "failed"
+    },
+    "npm-ls": {
+      "exit": 1,
+      "status": "failed"
+    }
+  },
+  "counts": {
+    "project": 375,
+    "adversarial": 137,
+    "currentJsdomUI": 24,
+    "exactIntentPoison": 1,
+    "serviceProbes": 114,
+    "serviceNetworkAttempts": 0,
+    "legacySafety": 26,
+    "legacyUI": 6,
+    "securityHttpHmrGraph": 10,
+    "wholeRepoLintDiagnostics": 0
+  },
+  "dependencyAudit": {
+    "packageAdvisoryRecords": 5,
+    "critical": 0,
+    "high": 1,
+    "moderate": 3,
+    "low": 1,
+    "fullyClean": false,
+    "optionalPeerDebt": "TypeScript7 versus transitive optional Solana5 peer",
+    "bundle": "No standalone rendered modules for five advisory package names; WalletConnect/Reown prebundled chunks remain. This does not prove all vulnerable functions absent or safe.",
+    "report": "evidence/dependency-review-20261021/REPORT.md"
+  },
+  "independentValidation": [
+    "All287 baseline Git blobs matched verified remote42e9ac before edits.",
+    "Clean node_modules frozen lockfile install with scripts disabled passed; worker separately supplies cold-empty-cache evidence.",
+    "Vitest migration changed no assertions; schema migrations and historical safety/UI fixture changes are documented with original source and failing logs.",
+    "New malformed-intent tests:7 failed/1 passed before fix,8 passed after; exact independent poison regression also passes. Existing corrupt records still fail closed.",
+    "Observed facts emitted only after strict identity/provenance binding, never as verified settlement on finality/native-transfer failure; scope mismatch clears facts.",
+    "Final full lint and nonmutating aggregate check pass with no new ignore policy."
+  ],
+  "correction": "Prior outer receipt txHash key is defense-in-depth, not demonstrated stale-input bug. Existing inner fields already keyed full identity. See dated-correction.json.",
+  "notRunOrBlocked": {
+    "realBrowser": "blocked; prior sandbox-enabled Chromium launch failed; no retry/bypass",
+    "realRpc": "not_run",
+    "realWallet": "not_run",
+    "studio": "not inspected/updated; current version unknown",
+    "mainnet": "blocked/HOLD",
+    "csvSpreadsheetRoundtrip": "not_run",
+    "remoteCi": "not_run; workflow example inactive",
+    "foundry": "not_run; unavailable, contracts unchanged",
+    "externalModelReview": "no new call this batch; last request HTTP403, no review approval"
+  },
+  "remaining": [
+    "FLOW-01 replacement/cancellation/cross-device and real two-tab acceptance",
+    "DEP-02 audit records, wallet bundle width and optional peer debt",
+    "UI-02 actual375px/zoom/keyboard/contrast/print/download acceptance",
+    "QA-01 remote CI entitlement/zero-cost authorization",
+    "RULE-01/REL-01/IP-01 owner decisions and real evidence"
+  ],
+  "effort": {
+    "integrationStartUtc": "2026-10-21T02:48:39Z",
+    "checkpointUtc": "2026-10-21T03:11:00Z",
+    "wallMinutes": 22.35,
+    "historicalAggregateHours": null,
+    "capHours": 18,
+    "capCompliance": "unknown",
+    "newCashSpend": 0
+  },
+  "noActions": [
+    "push",
+    "Studio update",
+    "deployment",
+    "wallet signature",
+    "funds",
+    "publication",
+    "grant submission",
+    "CI activation"
+  ]
+}

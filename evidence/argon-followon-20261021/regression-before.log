@@ -1,0 +1,194 @@
+
+ RUN  v4.1.12 /workspace/scratch/c01bd6fe117d/arcproof-argon-fix-20261021/repo
+
+ ❯ src/arcproof/__tests__/testnetClient.test.ts (59 tests | 7 failed) 206ms
+     × settles confirmed create A and permits next reviewed create B without manual recovery 14ms
+     × does not settle creation with missingBlockHash 6ms
+     × does not settle creation with wrongBlockNumber 3ms
+     × does not settle creation with missingIndex 4ms
+     × keeps the durable creation guard when settlement persistence fails 3ms
+     × rejects supplied malformed hash 0xinvalid before any RPC 2ms
+     × rejects supplied malformed hash  before any RPC 1ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 7 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  src/arcproof/__tests__/testnetClient.test.ts > Argon review: confirmed creation lifecycle > settles confirmed create A and permits next reviewed create B without manual recovery
+AssertionError: expected 'submitted' to be 'included' // Object.is equality
+
+Expected: "included"
+Received: "submitted"
+
+ ❯ src/arcproof/__tests__/testnetClient.test.ts:148:62
+    146|  it('settles confirmed create A and permits next reviewed create B wit…
+    147|   const f=await created(); await readCreatedInvoice(f.client,f.a,f.has…
+    148|   expect(getWalletIntents().find(x=>x.hash===f.hash)?.state).toBe('inc…
+       |                                                              ^
+    149|   const b=await prepareCreate(f.client,f.session,'0.30',24);
+    150|   await expect(sendPreparedAction(f.client,f.wallet,b,()=>f.session)).…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/7]⎯
+
+ FAIL  src/arcproof/__tests__/testnetClient.test.ts > Argon review: confirmed creation lifecycle > does not settle creation with missingBlockHash
+AssertionError: promise resolved "{ …(9) }" instead of rejecting
+
+- Expected
++ Received
+
+- Error {
+-   "message": "rejected promise",
++ {
++   "amountNative": 200000000000000000n,
++   "expiresAt": 87400n,
++   "invoiceId": "0xb9758a96f68c45542005b33a8bc911dd559395f792050fa128c15643b1df300d",
++   "merchant": "0x0000000000000000000000000000000000004f6e",
++   "paid": false,
++   "paidAt": 0n,
++   "paidBlockNumber": 0n,
++   "payer": "0x0000000000000000000000000000000000000000",
++   "termsHash": "0x0000000000000000000000000000000000000000000000000000000000000000",
+  }
+
+ ❯ src/arcproof/__tests__/testnetClient.test.ts:159:55
+    157|   if(field==='missingIndex')f.rpc.getTransaction.mockResolvedValue({..…
+    158|   if(field==='unknownStatus')f.rpc.getTransactionReceipt.mockResolvedV…
+    159|   await expect(readCreatedInvoice(f.client,f.a,f.hash)).rejects.toThro…
+       |                                                       ^
+    160|   expect(getWalletIntents().find(x=>x.hash===f.hash)?.state).toBe('sub…
+    161|  });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/7]⎯
+
+ FAIL  src/arcproof/__tests__/testnetClient.test.ts > Argon review: confirmed creation lifecycle > does not settle creation with wrongBlockNumber
+AssertionError: promise resolved "{ …(9) }" instead of rejecting
+
+- Expected
++ Received
+
+- Error {
+-   "message": "rejected promise",
++ {
++   "amountNative": 200000000000000000n,
++   "expiresAt": 87400n,
++   "invoiceId": "0x0e90d33418d11ca1590231c44b465c41dbc7fdcd54395625cb62b7775471b166",
++   "merchant": "0x0000000000000000000000000000000000004f75",
++   "paid": false,
++   "paidAt": 0n,
++   "paidBlockNumber": 0n,
++   "payer": "0x0000000000000000000000000000000000000000",
++   "termsHash": "0x0000000000000000000000000000000000000000000000000000000000000000",
+  }
+
+ ❯ src/arcproof/__tests__/testnetClient.test.ts:159:55
+    157|   if(field==='missingIndex')f.rpc.getTransaction.mockResolvedValue({..…
+    158|   if(field==='unknownStatus')f.rpc.getTransactionReceipt.mockResolvedV…
+    159|   await expect(readCreatedInvoice(f.client,f.a,f.hash)).rejects.toThro…
+       |                                                       ^
+    160|   expect(getWalletIntents().find(x=>x.hash===f.hash)?.state).toBe('sub…
+    161|  });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/7]⎯
+
+ FAIL  src/arcproof/__tests__/testnetClient.test.ts > Argon review: confirmed creation lifecycle > does not settle creation with missingIndex
+AssertionError: promise resolved "{ …(9) }" instead of rejecting
+
+- Expected
++ Received
+
+- Error {
+-   "message": "rejected promise",
++ {
++   "amountNative": 200000000000000000n,
++   "expiresAt": 87400n,
++   "invoiceId": "0xf1f2721b28d276b840d9f47876f6de10579ddd32753c0d924b7eb3721ea68d6f",
++   "merchant": "0x0000000000000000000000000000000000004f7c",
++   "paid": false,
++   "paidAt": 0n,
++   "paidBlockNumber": 0n,
++   "payer": "0x0000000000000000000000000000000000000000",
++   "termsHash": "0x0000000000000000000000000000000000000000000000000000000000000000",
+  }
+
+ ❯ src/arcproof/__tests__/testnetClient.test.ts:159:55
+    157|   if(field==='missingIndex')f.rpc.getTransaction.mockResolvedValue({..…
+    158|   if(field==='unknownStatus')f.rpc.getTransactionReceipt.mockResolvedV…
+    159|   await expect(readCreatedInvoice(f.client,f.a,f.hash)).rejects.toThro…
+       |                                                       ^
+    160|   expect(getWalletIntents().find(x=>x.hash===f.hash)?.state).toBe('sub…
+    161|  });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/7]⎯
+
+ FAIL  src/arcproof/__tests__/testnetClient.test.ts > Argon review: confirmed creation lifecycle > keeps the durable creation guard when settlement persistence fails
+AssertionError: promise resolved "{ …(9) }" instead of rejecting
+
+- Expected
++ Received
+
+- Error {
+-   "message": "rejected promise",
++ {
++   "amountNative": 200000000000000000n,
++   "expiresAt": 87400n,
++   "invoiceId": "0xf158f24d69d95d627d52ff2b828a4a29618b2949ad4abc1a28c54302c331c213",
++   "merchant": "0x0000000000000000000000000000000000004f8a",
++   "paid": false,
++   "paidAt": 0n,
++   "paidBlockNumber": 0n,
++   "payer": "0x0000000000000000000000000000000000000000",
++   "termsHash": "0x0000000000000000000000000000000000000000000000000000000000000000",
+  }
+
+ ❯ src/arcproof/__tests__/testnetClient.test.ts:164:55
+    162|  it('keeps the durable creation guard when settlement persistence fail…
+    163|   const f=await created();vi.spyOn(localStorage,'setItem').mockImpleme…
+    164|   await expect(readCreatedInvoice(f.client,f.a,f.hash)).rejects.toThro…
+       |                                                       ^
+    165|   expect(getWalletIntents().find(x=>x.hash===f.hash)?.state).toBe('sub…
+    166|  });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/7]⎯
+
+ FAIL  src/arcproof/__tests__/testnetClient.test.ts > Argon review: confirmed creation lifecycle > rejects supplied malformed hash 0xinvalid before any RPC
+AssertionError: expected "vi.fn()" to not be called at all, but actually been called 1 times
+
+Received:
+
+  1st vi.fn() call:
+
+    Array []
+
+
+Number of calls: 1
+
+ ❯ src/arcproof/__tests__/testnetClient.test.ts:169:32
+    167|  it.each(['0xinvalid',''])('rejects supplied malformed hash %s before …
+    168|   const f=fixture();await expect(verifyTestnetReceipt(f.client,f.invoi…
+    169|   expect(f.rpc.getChainId).not.toHaveBeenCalled();expect(f.rpc.readCon…
+       |                                ^
+    170|  });
+    171| });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[6/7]⎯
+
+ FAIL  src/arcproof/__tests__/testnetClient.test.ts > Argon review: confirmed creation lifecycle > rejects supplied malformed hash  before any RPC
+AssertionError: expected [Function] to throw error including '32-byte' but got 'Invoice is not recorded as paid.'
+
+Expected: "32-byte"
+Received: "Invoice is not recorded as paid."
+
+ ❯ src/arcproof/__tests__/testnetClient.test.ts:168:97
+    166|  });
+    167|  it.each(['0xinvalid',''])('rejects supplied malformed hash %s before …
+    168|   const f=fixture();await expect(verifyTestnetReceipt(f.client,f.invoi…
+       |                                                                                                 ^
+    169|   expect(f.rpc.getChainId).not.toHaveBeenCalled();expect(f.rpc.readCon…
+    170|  });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[7/7]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  7 failed | 52 passed (59)
+   Start at  14:12:15
+   Duration  1.12s (transform 253ms, setup 0ms, import 575ms, tests 206ms, environment 0ms)
+

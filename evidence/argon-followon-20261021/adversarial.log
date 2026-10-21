@@ -1,0 +1,9 @@
+
+ RUN  v4.1.12 /workspace/scratch/c01bd6fe117d/arcproof-argon-fix-20261021/repo
+
+
+ Test Files  1 passed (1)
+      Tests  137 passed (137)
+   Start at  14:14:29
+   Duration  959ms (transform 248ms, setup 0ms, import 523ms, tests 98ms, environment 0ms)
+

@@ -1,3 +1,31 @@
+## 2026-10-21 Argon follow-on verification (current candidate, not yet pushed)
+
+Argon returned a substantive review. Independently reproduced and fixed the successful-creation durable-intent lifecycle gap, caller-supplied receipt provenance labels, and malformed supplied-hash validation order. Strict known-hash recovery gates, unknown-state locks, inclusion identity and persistence-failure behavior remain fail-closed. Standalone invoice inspection remains read-only.
+
+Current local project tests:391; adversarial137; current UI24; exact intent regression1; migrated service114; legacy safety26; legacy UI6; security10. Source/type-aware/whole-repository lint and typechecks pass. No real-browser, wallet, RPC, Studio, deployment or remote-CI acceptance is claimed. Dependency advisory and large-chunk residuals remain. See evidence/argon-followon-20261021/REPORT.json. Earlier status paragraphs below are historical snapshots, not the current count. Four optional historical bookkeeping updates are excluded from delivery: effort-ledger.json, gate.json, test-results.json and artifact-index.json. Their exact remote versions are preserved. Current results are in this dated report; DOC-01 remains partial.
+
+# Current checkpoint — 2026-10-21 UTC, second bounded follow-up
+
+Stage: PRIVATE_LOCAL_QUALITY_EXPORT_UI_CANDIDATE. Parent-verified continuation baseline: 42e9ac9d46f7769b9fa428e27511edd66e76c1c9. This next batch is NOT pushed. Mainnet HOLD.
+
+Fresh combined checks: 375 project tests, 137 independent adversarial, 24 current jsdom UI/wallet, one exact intent-poison regression, 114 standalone service probes (zero global fetch attempts), 26 low-level safety checks and six migrated legacy UI cases passed. TypeScript, archived-helper TypeScript, whole-repository lint (zero diagnostics), non-mutating bun run check, production build and 10 local security HTTP/HMR/graph checks pass. These overlapping counts are not independent coverage totals. Historical 124/122 lint failures and probe failures are preserved, not retroactively called passing.
+
+Dependency workflow uses pinned Vitest4.1.12/Vite6.4.4, no unused Vitest UI or seven unused Circle SDK families, and narrow Buffer/process globals. Independent clean-node_modules frozen install passed with install scripts disabled. No test assertions changed for Vitest migration. Audit remains NOT clean: five package-advisory records (one high, three moderate, one low), optional TypeScript7/Solana5 peer mismatch and broad wallet chunks remain. See dependency scope report; no production exploit or vulnerability-free claim.
+
+Schema1.2 exports separate strict identity-bound RPC observations from verified settlement evidence; preserve reason/check/source/read timing and known fee when finality/native evidence fails. Scope mismatch exports no observations; foreign/malformed provenance cannot supply trusted-looking facts. JSON remains machine evidence; spreadsheet CSV text-import roundtrip is NOT_RUN. Source label does not export an endpoint or credentials.
+
+A genuinely reproduced availability defect is fixed: malformed new intent input is rejected before persistence, preventing cancelled invalid records from poisoning later sends. Eight independent cases and a separate exact regression pass. Existing corrupt storage still fails closed. Unknown/hashless operations have no expiry/retry; replacement/cancellation and cross-device recovery remain unsupported.
+
+UI improvements add semantic headings, keyboard preparation-only form handling, focus targets, diagnostics and normal-flow Studio attribution. Actual browser responsive/200% zoom/keyboard/contrast/print/download/two-tab acceptance remains BLOCKED/NOT_RUN after the prior normal Chromium launch was denied by the environment; no bypass or retry occurred.
+
+Correction: the earlier outer txHash route key was defense-in-depth, not a reproduced stale-input bug: the existing inner fields already remounted by full invoice/tx identity. The dated correction is in evidence/quality-integration-20261021/dated-correction.json; historical raw logs are unchanged.
+
+This pass did not push, call an external model, use live RPC, sign a wallet action, spend funds, alter contracts, inspect/update Studio, activate CI, deploy, publish or submit. The prior model request failedHTTP403 and produced no review. Historical audit RPC success is reviewer-reported only; raw logs unavailable here. Mainnet, genuine two-wallet acceptance, deployed-version consistency, licensing/eligibility and cumulative18-hour effort remain unresolved. Foundry unavailable and unchanged contracts not rerun. A CI example is inactive under docs/ci; no remote CI-green claim.
+
+See evidence/quality-integration-20261021/report.json and docs/AUDIT_CLOSURE_MATRIX.md. Runner wall-clock labels are not canonical UTC. Prior checkpoints below are historical.
+
+---
+
 # Current checkpoint — 2026-10-21 UTC
 
 Stage: PRIVATE_LOCAL_INTEGRATED_REVIEW_CANDIDATE. Mainnet HOLD.

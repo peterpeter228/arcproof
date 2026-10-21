@@ -10,6 +10,7 @@ import { useWalletIntents, type WalletIntent } from '../../arcproof/walletIntent
 import { isBytes32 } from '../../arcproof/testnet';
 import { recoverUnknownSubmission, reconcileSubmission, errorMessage, testnetClient } from '../../arcproof/testnetClient';
 import { ConnectKitButton } from 'connectkit';
+import { StudioAttribution } from './StudioAttribution';
 
 type NavTab = 'dashboard' | 'verify' | 'evidence';
 
@@ -23,8 +24,8 @@ interface LayoutProps {
 export function PrototypeBanner() {
   return (
     <div className="w-full bg-amber-50 border-b border-amber-200 py-2 px-4 text-center">
-      <p className="text-xs font-medium text-amber-800 tracking-wide">
-        Arc Testnet prototype &bull; test assets only &bull; mainnet disabled
+      <p className="text-sm font-medium text-amber-900">
+        Arc Testnet (5042002) · test USDC, no monetary value · mainnet disabled · not audited
       </p>
     </div>
   );
@@ -32,7 +33,7 @@ export function PrototypeBanner() {
 
 export function AtomicForwardingWarning() {
   return (
-    <div className="rounded-lg border border-amber-200 bg-amber-50 p-3 text-xs text-amber-800 leading-relaxed">
+    <div className="rounded-lg border border-amber-200 bg-amber-50 p-3 text-sm text-amber-900 leading-relaxed">
       <strong>Notice:</strong> This contract uses atomic forwarding — funds are passed directly
       to the merchant in the same transaction. The contract is not a custodian, escrow, or
       intermediary, but it does touch funds. It is not audited, not production-ready, and
@@ -81,7 +82,7 @@ function SavedTransactions() {
     {intents.map((intent) => <div key={intent.operationId} className="my-2 border border-amber-300 p-2">
       <p className="break-all">{intent.kind} · {intent.state} · {intent.account}</p>
       <label className="block">Transaction hash from wallet history
-        <input className="block w-full border p-1" value={recoveryHashes[intent.operationId] ?? intent.hash ?? ''} onChange={(event) => setRecoveryHashes((old) => ({ ...old, [intent.operationId]: event.target.value }))} />
+        <input autoCapitalize="none" spellCheck={false} aria-describedby={message ? 'recovery-message' : undefined} className="block w-full border p-1" value={recoveryHashes[intent.operationId] ?? intent.hash ?? ''} onChange={(event) => setRecoveryHashes((old) => ({ ...old, [intent.operationId]: event.target.value }))} />
       </label>
       <button type="button" className="underline disabled:opacity-50" disabled={busy !== null} onClick={() => { void recover(intent); }}>Recover this request (read only)</button>
       <p>Hashless creation cannot be uniquely recovered here without wallet nonce evidence. A reverted hash cannot unlock a hashless request. Keep it unresolved for manual review. Replacement/cancellation and cross-device recovery are unsupported; do not clear storage to retry.</p>
@@ -89,31 +90,34 @@ function SavedTransactions() {
     <p>Saved hashes are unverified locators. Check status before another request. Browser storage is best-effort.</p>
     {submissions[0] && row(submissions[0])}
     {submissions.length > 1 && <details><summary className="cursor-pointer py-2">Older saved transactions ({submissions.length - 1})</summary>{submissions.slice(1).map(row)}</details>}
-    {message && <p role="status" className="mt-2">{message}</p>}
+    {message && <p id="recovery-message" role="status" className="mt-2">{message}</p>}
   </aside>;
 }
 
 export function Layout({ activeTab, onTabChange, children, hideWallet = false }: LayoutProps) {
   return (
     <div className="min-h-dvh flex flex-col bg-stone-50 font-sans">
+      <a className="skip-link" href="#main-content" onClick={(event) => { event.preventDefault(); document.getElementById('main-content')?.focus(); }}>Skip to main content</a>
       <PrototypeBanner />
 
       {/* Header */}
-      <header className="bg-white border-b border-stone-200 sticky top-0 z-10">
+      <header className="bg-white border-b border-stone-200 ">
         <div className="max-w-5xl mx-auto px-4 py-3 grid grid-cols-[minmax(0,1fr)_auto] items-center gap-x-4 gap-y-3 sm:h-14 sm:py-0 sm:flex sm:justify-between">
           {/* Wordmark */}
           <div className="flex items-center gap-2 shrink-0">
             <div className="w-6 h-6 rounded bg-teal-600" aria-hidden />
-            <span className="font-display font-semibold text-stone-900 tracking-tight text-sm">
+            <h1 className="font-display font-semibold text-stone-900 tracking-tight text-lg">
               ArcProof
-            </span>
+            </h1>
           </div>
 
           {/* Nav */}
-          <nav className="col-span-2 row-start-2 flex flex-wrap items-center justify-center gap-1 sm:justify-start">
+          <nav aria-label="Main navigation" className="col-span-2 row-start-2 flex flex-wrap items-center justify-center gap-1 sm:justify-start">
             {NAV_ITEMS.map((item) => (
               <button
                 key={item.id}
+                type="button"
+                aria-current={activeTab === item.id ? 'page' : undefined}
                 onClick={() => onTabChange(item.id)}
                 className={[
                   'px-3 py-1.5 rounded-md text-sm font-medium transition-colors',
@@ -135,18 +139,19 @@ export function Layout({ activeTab, onTabChange, children, hideWallet = false }:
       </header>
 
       {/* Content */}
-      <main className="flex-1 max-w-5xl mx-auto w-full px-4 py-6">
+      <main id="main-content" tabIndex={-1} className="flex-1 min-w-0 max-w-5xl mx-auto w-full px-4 py-6">
         <SavedTransactions />
         {children}
       </main>
 
       {/* Footer */}
-      <footer className="border-t border-stone-200 bg-white">
-        <div className="max-w-5xl mx-auto px-4 py-3 text-xs text-stone-400 flex flex-wrap gap-x-4 gap-y-1">
+      <footer className="app-footer border-t border-stone-200 bg-white">
+        <div className="footer-metadata max-w-5xl mx-auto px-4 py-3 text-sm text-stone-600 flex flex-wrap gap-x-4 gap-y-1">
           <span>ArcProof prototype &mdash; G1 reviewed, not audited</span>
           <span>Grant eligibility: HOLD</span>
           <span>Checked testnet deployment · live payment acceptance pending</span>
         </div>
+        <div className="max-w-5xl mx-auto px-4 pb-4"><StudioAttribution /></div>
       </footer>
     </div>
   );

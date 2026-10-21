@@ -1,0 +1,21 @@
+{
+  "finding": "Confirmed independently by executable regression: schema1.2 legacy_caller_supplied values were labelled Observed despite missing identity-bound RPC snapshot.",
+  "scope": "UI provenance labels and three regressions only. No export/verifier/wallet changes.",
+  "files": [
+    "src/components/arcproof/ReceiptFacts.tsx",
+    "src/arcproof/__tests__/receiptDiagnosticsUi.test.tsx"
+  ],
+  "baseline": {
+    "src/components/arcproof/ReceiptFacts.tsx": "31d12a821538ba1ab292861260a990e08dfabc375dff294f25ffb2c56e8251a1",
+    "src/arcproof/__tests__/receiptDiagnosticsUi.test.tsx": "e60040c70391796fd78509154b2c6d4631025b5cd232e9f852f0a660c85557d1"
+  },
+  "patch_sha256": "6a4b7eb88e84807707dcc9415a165e1c564fd7bca73d00e9dba450a95a2c9e6a",
+  "reproduction": "before.log: six existing tests passed and two added regressions failed against unmodified ReceiptFacts.",
+  "fix": "Use factsBasis to select Observed, Legacy caller-supplied or Unattributed labels. Explicit legacy/missing-provenance notice; precise fact values and export record unchanged.",
+  "tests": {
+    "project_tests_exit": "0",
+    "typecheck_exit": "0",
+    "changed_source_type_lint_exit": "0"
+  },
+  "limits": "No browser, RPC, wallet, GitHub or Argon calls. Existing builder fact flags remain the typed provenance source; this is not a new verification gate."
+}

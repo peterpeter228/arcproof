@@ -160,7 +160,7 @@ describe('Adapter and export preserve provenance and self-demo boundaries', () =
     const f = observedPaymentFixture(); f.receipt.gasUsed = 84487n; f.receipt.effectiveGasPrice = 25000000000n;
     const r = await verify(f);
     const record = buildReceiptExport(f.deployment, f.invoiceId, f.txHash, f.amount, f.payer, f.payer, f.block.timestamp, f.block.number, r, false);
-    expect(record).toMatchObject({ schemaVersion: '1.1', blockNumber: '68212829', gasFeeNative: '2112175000000000',
+    expect(record).toMatchObject({ schemaVersion: '1.2', blockNumber: '68212829', gasFeeNative: '2112175000000000',
       amountNative: '200000000000000000', verifiedAt: r.verifiedAt, contractAddress: f.contract, txHash: f.txHash });
     const parsed = JSON.parse(exportReceiptsJson([record])) as { gasFeeNative: string }[];
     expect(parsed[0].gasFeeNative).toBe('2112175000000000');

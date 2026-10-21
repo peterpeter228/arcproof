@@ -1,0 +1,5 @@
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+npm error code ELSPROBLEMS
+npm error invalid: typescript@7.0.2 /workspace/scratch/c01bd6fe117d/arcproof-quality-integration-20261021/repo/node_modules/typescript
+npm error Log files were not written due to an error writing to the directory: /home/agent/.npm/_logs
+npm error You can rerun the command with `--loglevel=verbose` to see the logs in your terminal
