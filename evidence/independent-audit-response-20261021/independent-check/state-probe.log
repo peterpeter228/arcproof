@@ -1,0 +1,10 @@
+{
+  "status": "passed",
+  "checks": 20,
+  "scope": "Actual modules with synthetic storage and lock primitives; no real browser, wallet, chain, external network, or paid model.",
+  "sources": {
+    "src/arcproof/walletIntents.ts": "6b69f9ea10cee4f6b41ea27660400cfea042cab4267e3d9b0227fed3de720ac6",
+    "src/arcproof/routes.ts": "ac933ea34f556f85ee6c93f0c5d486dbddb34e8f50a908ed63b125183cb2a8f7",
+    "src/arcproof/manifest.ts": "c65ef5a548db9454c838b5ce154b811403bbd96b91aebedfb585db587c533357"
+  }
+}

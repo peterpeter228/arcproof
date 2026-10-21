@@ -1,0 +1,10 @@
+$ vitest run src/arcproof/__tests__/unknownRequestIdentity.test.ts src/arcproof/__tests__/walletIntents.test.ts src/arcproof/__tests__/testnetClient.test.ts src/arcproof/__tests__/testnetUi.test.tsx src/arcproof/__tests__/readonlyRoutes.test.tsx src/arcproof/__tests__/walletBootstrap.test.ts src/arcproof/__tests__/buildIdentity.test.ts
+
+ RUN  v4.1.12 /workspace/scratch/c01bd6fe117d/arcproof-current
+
+
+ Test Files  7 passed (7)
+      Tests  122 passed (122)
+   Start at  01:06:52
+   Duration  5.31s (transform 4.21s, setup 0ms, import 10.93s, tests 2.08s, environment 4.33s)
+

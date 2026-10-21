@@ -105,9 +105,12 @@ export async function recoverWalletIntent(operationId: string, hash: Hex, verify
     const intent = readAll().find((row) => row.operationId === operationId);
     if (!intent || !unresolved(intent)) throw new Error('No unresolved saved intent found.');
     if (intent.hash && intent.hash.toLowerCase() !== hash.toLowerCase()) throw new Error('This intent already has a different hash. Replacement recovery is not supported here.');
-    if (!intent.hash && intent.kind === 'create') throw new Error('A hashless creation cannot be uniquely bound without its wallet nonce. Keep it unresolved; manual investigation is required.');
+    // Equal sender, calldata, value and receipt status identify a call, not the
+    // original wallet request. Without its returned hash (or unique request
+    // evidence we do not collect), even a successful matching payment is not
+    // authority to settle this intent or release its duplicate-send guard.
+    if (!intent.hash) throw new Error('A hashless request cannot be uniquely bound without its wallet nonce or original request identity. It remains unresolved. Verify a matching invoice payment separately; that does not resolve this request.');
     const state = await verify(intent);
-    if (!intent.hash && state === 'reverted') throw new Error('An older matching reverted call cannot identify this unknown request. Keep it unresolved; manual investigation is required.');
     write({ ...intent, hash, state });
     return state;
   });

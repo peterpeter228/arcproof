@@ -1,0 +1,3 @@
+Browser tab: 2, Title: "ArcProof — Prototype", URL: "http://127.0.0.1:5174/#/demo".
+There has been no change in the accessibility tree.
+The focused UI element is 52 button Export simulated CSV

@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "started_at_utc": "2026-10-21T15:57:06Z",
+  "baseline_sha": "94a84c44b02d52a827bed42fc9f9a5d414619b7d",
+  "request": "Apply independent audit to ArcProof with Argon supervision",
+  "scope": "private code, tests, read-only official evidence, private GitHub updates",
+  "excluded": [
+    "wallet signing",
+    "fund transfers",
+    "mainnet deployment",
+    "public publishing",
+    "competition submission",
+    "new credentials"
+  ],
+  "prior_effort_total_hours": null,
+  "remaining_original_18h_budget": null,
+  "effort_note": "Historical ledger is incomplete; do not treat 0.045h snapshot as current total or claim budget compliance. Current reversible safety and presentation work separately recorded. No unbounded mainnet rewrite."
+}

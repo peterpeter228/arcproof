@@ -391,7 +391,9 @@ export async function reconcileSubmission(client: PublicClient, row: Submission)
   return state;
 }
 
-/** Recover only the exact saved call. Replacement/cancellation and cross-device recovery are deliberately unsupported. */
+/** Recover only an original returned hash. Matching hashless calls are not request identity.
+ * Independent invoice verification uses verifyTestnetReceipt and never settles wallet intents.
+ * Replacement/cancellation and cross-device recovery are deliberately unsupported. */
 export async function recoverUnknownSubmission(client: PublicClient, operationId: string, hash: Hex, expectedState?: 'included' | 'reverted') {
   let matchedIntent: import('./walletIntents').WalletIntent | undefined;
   const state = await recoverWalletIntent(operationId, hash, async (intent) => {
@@ -413,7 +415,7 @@ export async function recoverUnknownSubmission(client: PublicClient, operationId
     matchedIntent = intent;
     return state;
   });
-  if (matchedIntent) {
+  if (matchedIntent?.hash && matchedIntent.hash.toLowerCase() === hash.toLowerCase()) {
     recordSubmission({ hash, kind: matchedIntent.kind, account: matchedIntent.account, invoiceId: matchedIntent.invoiceId, state });
     releaseRecoveredRequest(matchedIntent.kind, matchedIntent.account, matchedIntent.invoiceId);
   }

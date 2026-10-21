@@ -1,3 +1,13 @@
+## 2026-10-21 UTC 独立审查实施候选（最新）
+
+针对 94a84c44 基线完整恢复并验证 476 文件后，已修补 hashless 请求归因、分享异步状态，加入稳定只读入口、事实优先收据与真实构建身份。Argon 本次实际 HTTP200 返回；其建议已独立复核，部分错误判断未采纳。当前主套件 441 项 /26 文件，check 与构建通过；新鲜基线合约73项通过。后续私有提交与回读需以交付记录为准，不将本段当远端提交成功证明。
+
+真实浏览器的最终生产预览、模拟导出与有界响应式/缩放检查已取得证据，PDF/完整钱包验收仍缺；当前 RPC 读取被403阻止。主网、当前 Studio 同版本（已只读看到旧预览未匹配）、真实两钱包、公开许可与比赛提交尚未完成。本轮规则已读到：主网交易及 Studio 来源均为硬门槛，测试网完成不等于参赛就绪。历史18小时累计工时 unknown。
+
+详见 [实施记录](docs/INDEPENDENT_AUDIT_RESPONSE_20261021.md)、[Argon逐项处理](docs/ARGON_AUDIT_RESPONSE_TRIAGE_20261021.md)、[主网私有准备设计](docs/NET01_PRIVATE_READINESS_DESIGN.md)。下方旧记录为历史，数量与 NOT_RUN 不能替代本轮分层证据。
+
+---
+
 > 2026-10-21 UTC 交付记录：本轮源码、测试及文档已提交至私有 main：[648acc3](https://github.com/peterpeter228/arcproof/commit/648acc3cc1678fa682bc5833161e66ace1ff2603)。完整475文件树及215个变更文件内容已回读匹配。下方“尚未推送”等文字属于交付前历史快照，不是当前发布状态。本次补记仅修改 README 与 STATUS，运行代码、依赖和测试内容不变，未重新运行测试，也未更新 Studio、部署或启用 CI。
 
 ## 2026-10-21 Argon follow-on verification (current candidate, not yet pushed)

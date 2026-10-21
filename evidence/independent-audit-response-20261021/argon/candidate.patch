@@ -1,0 +1,1441 @@
+--- baseline/docs/BUILD_IDENTITY_AND_READONLY_ROUTES.md
++++ candidate/docs/BUILD_IDENTITY_AND_READONLY_ROUTES.md
+@@ -0,0 +1,33 @@
++# Read-only entry and candidate build provenance
++
++## Routes
++
++- Empty hash and `#/verify`: read-only receipt entry, no automatic business RPC until a complete receipt locator is provided or the user requests verification.
++- `#/evidence`: historical records, current build provenance, and limits.
++- `#/demo`: isolated offline fixtures; no live payment links, wallet requirement, or business chain request. Fixture exports remain `SIMULATED_NOT_VERIFIED`.
++- `#/invoices`: explicit live-testnet invoice workspace. Wallet requests still require user review and action.
++- Existing `#/pay/:chain/:deployment/:invoice` and `#/receipt/:chain/:deployment/:invoice?tx=...` retain exact deployment and identifier validation plus component identity keys. Duplicate transaction parameters, extra path segments, unsupported identities, and unknown paths fail closed.
++
++Navigation is derived from the URL, including refresh and hashchange history traversal. Unresolved real-wallet warnings remain available on verification/evidence pages; the offline demo hides saved activity to avoid mixing real and fixture context.
++
++## Provenance model
++
++`vite.config.ts` injects a build UTC timestamp and SHA-256 of a canonical sorted JSON list of declared source/config input paths and per-file SHA-256 values. The explicit roots are `src`, `public`, `contracts`, and `scripts`, plus the configuration/lock files listed in that config. The input hash is not a Git commit, compiled artifact hash, dependency-tree hash, or reproducible-build attestation.
++
++Current source commit is deliberately `Unknown`. This workspace can be materialized from a verified repository baseline and then changed without creating a genuine repository commit. No local `git HEAD` is consulted. An optional `ARCPROOF_VERIFIED_BASE_SHA` may be supplied only after the baseline has been independently verified; it is labeled as the base, never the changed candidate's source commit. Missing or malformed metadata remains `Unknown`.
++
++A production build emits `build-provenance.json` containing these inputs and hashes of Rollup-emitted bundle outputs. The manifest itself, copied public assets, installed dependency bytes, and toolchain binaries are excluded from the output list and clearly disclosed. Independent hashing of the final output files and remote-host readback are separate acceptance steps. A development server does not serve the generated production manifest. Restart the development server after source changes to refresh its injected snapshot; use a fresh build for any final candidate evidence.
++
++## Evidence interpretation
++
++The evidence screen labels repository records of 73 Forge tests and 391 project tests as historical. They overlap with other suites and must not be added. It does not silently update current acceptance from prior reports, model review, old controlled chain observations, or deployment records. Current results need external logs bound to the same final candidate hash; changing source or test files changes that identity.
++
++The new route regression tests render the actual root component in jsdom with live business clients/wallet functions mocked. They check deep-link/remount behavior, hashchange navigation, malformed links, fixture isolation, and stale receipt-route result suppression. They do not prove real browser navigation, absence of all provider-infrastructure traffic, real wallet behavior, chain settlement, or remote deployment identity. Those require separately recorded acceptance.
++
++No deployment, publication, new wallet interaction, runtime trust expansion, or external model call is introduced by this patch.
++
++## Bootstrap and local checks (2026-10-21)
++
++The installed Wagmi implementation defaults `reconnectOnMount` to true; its core hydration code calls `reconnect(config)` in that branch. `main.tsx` now explicitly sets `reconnectOnMount={false}` while retaining the manual ConnectKit provider. A static source regression guard protects that explicit option; real-wallet and previously authorized connector behavior still require browser acceptance.
++
++The focused run passed 20 tests across three files: `readonlyRoutes.test.tsx`, `buildIdentity.test.ts`, and `walletBootstrap.test.ts`. TypeScript checking passed. A production build completed with the existing large-chunk warning. Independent rehashing confirmed all 84 listed emitted output files matched the generated provenance manifest. The initial intermediate generateBundle hashes did not match later-transformed bytes; the implementation now rehashes actual written files in writeBundle, and the successful check applies to that correction. The development candidate remains mutable, so final evidence must rerun against the final frozen source rather than inheriting these counts or hashes.
+--- baseline/src/App.tsx
++++ candidate/src/App.tsx
+@@ -13,39 +13,11 @@
+ import { TESTNET_MANIFEST, isBytes32 } from './arcproof/testnet';
+ import { resolveDeployment } from './arcproof/manifest';
+ 
+-type NavTab = 'dashboard' | 'verify' | 'evidence';
+-
+-interface HashRoute {
+-  screen: 'pay' | 'receipt' | null;
+-  chainId?: number;
+-  deploymentId?: string;
+-  invoiceId?: `0x${string}`;
+-  txHash?: string;
+-}
+-
+-function parseHash(hash: string): HashRoute {
+-  // Remove leading #
+-  const path = hash.startsWith('#') ? hash.slice(1) : hash;
+-  const [pathname, search] = path.split('?');
+-  const params = new URLSearchParams(search ?? '');
+-  const parts = pathname.split('/').filter(Boolean);
+-
+-  // Keep malformed payment/receipt routes on a read-only error page, not the wallet dashboard.
+-  if (parts[0] === 'pay' || parts[0] === 'receipt') {
+-    return {
+-      screen: parts[0],
+-      chainId: parts[1] && /^[0-9]+$/.test(parts[1]) ? Number(parts[1]) : undefined,
+-      deploymentId: parts[2],
+-      invoiceId: (parts.length === 4 ? parts[3] : undefined) as `0x${string}` | undefined,
+-      txHash: params.has('tx') ? (params.getAll('tx').length === 1 ? params.get('tx')! : '') : undefined,
+-    };
+-  }
+-  return { screen: null };
+-}
++import { DashboardScreen } from './components/arcproof/DashboardScreen';
++import { parseHash, type HashRoute, type NavTab } from './arcproof/routes';
+ 
+ export default function App() {
+   const [route, setRoute] = useState<HashRoute>(() => parseHash(window.location.hash));
+-  const [activeTab, setActiveTab] = useState<NavTab>('dashboard');
+ 
+   useEffect(() => {
+     function onHashChange() {
+@@ -56,18 +28,14 @@
+   }, []);
+ 
+   function handleTabChange(tab: NavTab) {
+-    setActiveTab(tab);
+-    // Clear hash route when navigating via tab
+-    if (route.screen) {
+-      window.location.hash = '';
+-      setRoute({ screen: null });
+-    }
++    window.location.hash = tab === 'dashboard' ? '/invoices' : `/${tab}`;
++    setRoute(parseHash(window.location.hash));
+   }
+ 
+   // Determine what to render
+   let content: React.ReactNode;
+-  let effectiveTab: NavTab = activeTab;
+-  let hideWallet = activeTab === 'verify';
++  let effectiveTab: NavTab = route.screen === 'dashboard' ? 'dashboard' : route.screen === 'demo' ? 'demo' : route.screen === 'evidence' ? 'evidence' : 'verify';
++  let hideWallet = true;
+ 
+   if (route.screen === 'pay') {
+     const deployment = resolveDeployment(TESTNET_MANIFEST, route.chainId!, route.deploymentId!);
+@@ -93,12 +61,19 @@
+     effectiveTab = 'verify';
+     hideWallet = true;
+   } else {
+-    switch (activeTab) {
++    switch (route.screen) {
+       case 'dashboard':
++        hideWallet = false;
+         content = <TestnetDashboard />;
+         break;
+       case 'verify':
+         content = <TestnetReceiptScreen />;
++        break;
++      case 'demo':
++        content = <DashboardScreen />;
++        break;
++      case 'invalid':
++        content = <section role="alert"><h2>Unavailable route</h2><p>This link is not recognized. No wallet action or chain request was made.</p><a href="#/verify">Open read-only verification</a></section>;
+         break;
+       case 'evidence':
+         content = <EvidenceScreen />;
+@@ -107,7 +82,7 @@
+   }
+ 
+   return (
+-    <Layout activeTab={effectiveTab} onTabChange={handleTabChange} hideWallet={hideWallet}>
++    <Layout activeTab={effectiveTab} onTabChange={handleTabChange} hideWallet={hideWallet} hideSavedActivity={route.screen === 'demo'}>
+       {content}
+     </Layout>
+   );
+--- baseline/src/arcproof/__tests__/buildIdentity.test.ts
++++ candidate/src/arcproof/__tests__/buildIdentity.test.ts
+@@ -0,0 +1,16 @@
++import { describe, expect, it } from 'vitest';
++import { normalizeBuildIdentity, identityLabel } from '../buildIdentity';
++describe('candidate provenance is never substituted for a source commit', () => {
++  it('shows Unknown when build identity is unavailable', () => {
++    const identity = normalizeBuildIdentity(undefined);
++    expect(identity.sourceState).toBe('unknown');
++    for (const value of [identity.sourceCommit, identity.verifiedBaseCommit, identity.sourceSnapshotSha256, identity.builtAtUTC]) expect(identityLabel(value)).toBe('Unknown');
++  });
++  it('rejects malformed identities and timestamps', () => {
++    expect(normalizeBuildIdentity({ sourceCommit: 'a'.repeat(40), verifiedBaseCommit: 'HEAD', sourceSnapshotSha256: 'latest', builtAtUTC: '2026-99-99T00:00:00.000Z' })).toEqual(normalizeBuildIdentity(null));
++  });
++  it('keeps verified base distinct from modified candidate input identity', () => {
++    const identity = normalizeBuildIdentity({ sourceCommit: 'a'.repeat(40), verifiedBaseCommit: 'b'.repeat(40), sourceSnapshotSha256: 'c'.repeat(64), builtAtUTC: '2026-10-21T12:34:56.000Z' });
++    expect(identity.sourceCommit).toBeNull(); expect(identity.verifiedBaseCommit).toBe('b'.repeat(40)); expect(identity.sourceState).toBe('candidate'); expect(identity.sourceSnapshotSha256).toBe('c'.repeat(64));
++  });
++});
+--- baseline/src/arcproof/__tests__/offlineDemo.test.tsx
++++ candidate/src/arcproof/__tests__/offlineDemo.test.tsx
+@@ -21,6 +21,6 @@
+   expect(host.textContent).toContain('SIMULATED_NOT_VERIFIED');
+   expect(host.textContent).toContain('No payment occurred');
+   expect(host.textContent).toContain('Export simulated JSON');
+-  expect(host.textContent).toContain('Example amount: 0.20 USDC');
++  expect(host.textContent).toContain('Example amount: 0.20 test USDC');
+  } finally { act(()=>root.unmount()); }
+ });
+--- baseline/src/arcproof/__tests__/readonlyRoutes.test.tsx
++++ candidate/src/arcproof/__tests__/readonlyRoutes.test.tsx
+@@ -0,0 +1,90 @@
++// @vitest-environment jsdom
++import React, { act } from 'react';
++import { createRoot, type Root } from 'react-dom/client';
++import { beforeEach, afterEach, describe, expect, it, vi } from 'vitest';
++import { parseHash } from '../routes';
++import { TESTNET_DEPLOYMENT } from '../testnet';
++const calls = vi.hoisted(() => ({ wallet: vi.fn(), load: vi.fn(), verify: vi.fn(), send: vi.fn(), prepare: vi.fn() }));
++vi.mock('connectkit', () => ({ ConnectKitButton: () => <button>Connect wallet</button> }));
++vi.mock('../useTestnetWallet', () => ({ useTestnetWallet: () => ({ session: null, sessionKey: 'none', getSession: () => null, getProvider: calls.wallet }) }));
++vi.mock('../testnetClient', async () => ({ ...await vi.importActual<typeof import('../testnetClient')>('../testnetClient'), loadInvoice: calls.load, verifyTestnetReceipt: calls.verify, sendPreparedAction: calls.send, prepareCreate: calls.prepare, preparePay: calls.prepare }));
++import App from '../../App';
++let root: Root, host: HTMLDivElement;
++function navigate(hash: string) {
++  act(() => { window.history.replaceState(null, '', hash); window.dispatchEvent(new HashChangeEvent('hashchange')); });
++}
++function mount(hash: string) {
++  window.history.replaceState(null, '', hash);
++  act(() => root.render(<App />));
++}
++function assertNoActions() {
++  for (const call of Object.values(calls)) expect(call).not.toHaveBeenCalled();
++}
++beforeEach(() => {
++  (globalThis as typeof globalThis & { IS_REACT_ACT_ENVIRONMENT: boolean }).IS_REACT_ACT_ENVIRONMENT = true;
++  vi.clearAllMocks(); localStorage.clear();
++  host = document.createElement('div'); document.body.appendChild(host); root = createRoot(host);
++});
++afterEach(() => { act(() => root.unmount()); host.remove(); });
++describe('ENTRY-01 actual root rendering, offline DOM only', () => {
++  it.each([['#/verify', 'Verify'], ['#/evidence', 'Project evidence'], ['#/demo', 'Offline demo mode']])('opens and remounts %s without wallet or business RPC', (hash, label) => {
++    mount(hash); expect(host.textContent).toContain(label);
++    act(() => root.unmount()); root = createRoot(host); mount(hash);
++    expect(host.textContent).toContain(label); expect(host.textContent).not.toContain('Connect wallet'); assertNoActions();
++  });
++  it('uses URL state for navigation and hashchange traversal', () => {
++    mount('#/verify');
++    const evidence = [...host.querySelectorAll('nav button')].find(button => button.textContent === 'Evidence')!;
++    act(() => (evidence as HTMLButtonElement).click());
++    expect(window.location.hash).toBe('#/evidence'); expect(host.textContent).toContain('Project evidence');
++    navigate('#/demo'); expect(host.textContent).toContain('Offline demo mode');
++    navigate('#/verify'); expect(host.querySelector('[aria-current="page"]')?.textContent).toBe('Verify receipt');
++    assertNoActions();
++  });
++  it('starts empty routes in read-only verification rather than the wallet dashboard', () => {
++    mount('#'); expect(host.textContent).not.toContain('Connect wallet'); assertNoActions();
++  });
++  it.each(['#/nonsense', '#/pay', '#/pay/1/unknown/0x1234', '#/receipt/5042002/unknown/0x1234', '#/pay//5042002/anything/id', '#/demo/extra'])('fails closed for %s', hash => {
++    mount(hash); expect(host.textContent).toMatch(/unavailable/i); expect(host.textContent).not.toContain('Connect wallet'); assertNoActions();
++  });
++  it('remounts receipt identity and discards late prior-route failures', async () => {
++    const first = `0x${'a'.repeat(64)}`, second = `0x${'c'.repeat(64)}`, tx = `0x${'b'.repeat(64)}`;
++    let rejectOld!: (reason: Error) => void;
++    calls.verify.mockReturnValueOnce(new Promise((_resolve, reject) => { rejectOld = reject; })).mockReturnValueOnce(new Promise(() => {}));
++    mount(`#/receipt/5042002/${TESTNET_DEPLOYMENT.deploymentId}/${first}?tx=${tx}`);
++    await act(async () => { await Promise.resolve(); });
++    expect(calls.verify).toHaveBeenCalledTimes(1);
++    navigate(`#/receipt/5042002/${TESTNET_DEPLOYMENT.deploymentId}/${second}`);
++    await act(async () => { await Promise.resolve(); });
++    expect((host.querySelector('#live-receipt-id') as HTMLInputElement).value).toBe(second);
++    expect((host.querySelector('#live-receipt-tx') as HTMLInputElement).value).toBe('');
++    await act(async () => { rejectOld(new Error('OLD_ROUTE_FAILURE')); await Promise.resolve(); });
++    expect(host.textContent).not.toContain('OLD_ROUTE_FAILURE');
++    expect(calls.verify).toHaveBeenCalledTimes(2); expect(calls.wallet).not.toHaveBeenCalled(); expect(calls.send).not.toHaveBeenCalled();
++  });
++  it('rejects malformed tx for a known deployment before mounting verification', () => {
++    const invoice = `0x${'a'.repeat(64)}`;
++    mount(`#/receipt/5042002/${TESTNET_DEPLOYMENT.deploymentId}/${invoice}?tx=bad`);
++    expect(host.textContent).toContain('Invalid transaction hash'); assertNoActions();
++  });
++  it('keeps demo fixture creation and receipt export isolated from live clients', () => {
++    mount('#/demo');
++    const click = (text: string) => act(() => ([...host.querySelectorAll('button')].find(b => b.textContent?.includes(text))!).click());
++    click('Create invoice (offline'); click('View simulated receipt');
++    expect(host.textContent).toContain('SIMULATED_NOT_VERIFIED'); expect(host.querySelector('a[href*="/pay/"]')).toBeNull(); assertNoActions();
++  });
++});
++describe('route identity parsing', () => {
++  const invoice = `0x${'a'.repeat(64)}`;
++  const tx = `0x${'b'.repeat(64)}`;
++  const base = `/5042002/${TESTNET_DEPLOYMENT.deploymentId}/${invoice}`;
++  it('preserves all receipt identity and transaction fields', () => {
++    expect(parseHash(`#/receipt${base}?tx=${tx}`)).toEqual({ screen: 'receipt', chainId: 5042002, deploymentId: TESTNET_DEPLOYMENT.deploymentId, invoiceId: invoice, txHash: tx });
++    expect(parseHash(`#/pay${base}`).invoiceId).toBe(invoice);
++  });
++  it('does not normalize extra path segments into valid identities or duplicate hashes', () => {
++    expect(parseHash(`#/pay${base}/extra`).invoiceId).toBeUndefined();
++    expect(parseHash(`#/receipt${base}?tx=${tx}&tx=${tx}`).txHash).toBe('');
++    expect(parseHash(`#/pay/9007199254740993/x/${invoice}`).chainId).toBeUndefined();
++  });
++});
+--- baseline/src/arcproof/__tests__/receiptClarity.test.tsx
++++ candidate/src/arcproof/__tests__/receiptClarity.test.tsx
+@@ -207,3 +207,15 @@
+     expect(mocks.wallet).not.toHaveBeenCalled(); expect(mocks.send).not.toHaveBeenCalled();
+   });
+ });
++
++it('clears receipt-copy success before a failed retry and ignores older clipboard results', async () => {
++  await render(<TestnetReceiptScreen invoiceId={id} txHash={hash} />);
++  await click('Copy verification link'); expect(text()).toContain('Verification link copied');
++  mocks.clipboard.mockRejectedValueOnce(Error('clipboard blocked'));
++  await click('Verification link copied'); expect(text()).not.toContain('Verification link copied');
++  expect(text()).toContain('Clipboard access was unavailable');
++  const old = deferred<void>(); mocks.clipboard.mockReturnValueOnce(old.promise);
++  await click('Copy verification link'); mocks.clipboard.mockRejectedValueOnce(Error('newer copy failed'));
++  await click('Copy verification link'); await act(async () => old.resolve());
++  expect(text()).not.toContain('Verification link copied');
++});
+--- baseline/src/arcproof/__tests__/receiptDiagnosticsUi.test.tsx
++++ candidate/src/arcproof/__tests__/receiptDiagnosticsUi.test.tsx
+@@ -102,3 +102,25 @@
+   expect(host.textContent).not.toContain('Observed transaction fee');
+   expect(field('amountDisplay')).toBe(`${record.amountDisplay} test USDC`);
+ });
++
++it('places amount and parties before evidence, next step, and collapsed full diagnostics', () => {
++  render(recordFor(diagnostic()));
++  const amount = host.querySelector('[data-receipt-field="amountDisplay"]')!;
++  const merchant = host.querySelector('[data-receipt-field="merchant"]')!;
++  const evidence = host.querySelector('[aria-label="Evidence summary"]')!;
++  const next = host.querySelector('[aria-label="Next step"]')!;
++  const details = host.querySelector('details.receipt-details')!;
++  for (const [before, after] of [[amount, merchant], [merchant, evidence], [evidence, next], [next, details]]) {
++    expect(before.compareDocumentPosition(after) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
++  }
++  expect(details.hasAttribute('open')).toBe(false);
++  expect(details.querySelector('[data-receipt-field="reasonCode"]')?.textContent).toBe('UNVERIFIED_FINALITY');
++  expect(next.textContent).toContain('Do not resend');
++});
++it.each(['unavailable', 'not_run', 'failed'] as const)('preserves %s identity checks without promotion in the summary', status => {
++  const record = recordFor(diagnostic());
++  record.checks = [{ id: 'receipt_identity', status, reasonCode: null, message: 'Incomplete identity evidence' }];
++  render(record);
++  expect(host.querySelector('[aria-label="Evidence summary"]')?.textContent).toContain(status.replace(/_/g, ' '));
++  expect(host.querySelector('[aria-label="Evidence summary"]')?.textContent).not.toContain('passed');
++});
+--- baseline/src/arcproof/__tests__/testnetClient.test.ts
++++ candidate/src/arcproof/__tests__/testnetClient.test.ts
+@@ -82,7 +82,7 @@
+   const f=fixture(),a=await preparePay(f.client,f.session,f.invoice.invoiceId);f.request.mockImplementation(async({method})=>{if(method==='eth_sendTransaction')throw Object.assign(new Error('ambiguous'),{cause:{code:4001}});return method==='eth_chainId'?toHex(ARC_TESTNET.id):[f.session.account];});
+   await expect(sendPreparedAction(f.client,f.wallet,a,()=>f.session)).rejects.toBeDefined();await expect(sendPreparedAction(f.client,f.wallet,a,()=>f.session)).rejects.toThrow('unresolved');
+  });
+- it('recovery binds full saved call, keeps mismatched hashes locked and sends zero wallet calls', async () => {
++ it('hashless matching candidates never resolve the original request or send wallet calls', async () => {
+   const f=fixture(),a=await preparePay(f.client,f.session,f.invoice.invoiceId);
+   f.request.mockImplementation(async({method})=>{if(method==='eth_sendTransaction')throw Error('timeout');return method==='eth_chainId'?toHex(ARC_TESTNET.id):[f.session.account];});
+   await expect(sendPreparedAction(f.client,f.wallet,a,()=>f.session)).rejects.toThrow('timeout');
+@@ -91,9 +91,13 @@
+   f.rpc.getTransaction.mockResolvedValue({...tx,blockHash,blockNumber:12n,transactionIndex:0,value:a.value+1n});
+   f.rpc.getTransactionReceipt.mockResolvedValue({...rc,blockHash,blockNumber:12n,transactionIndex:0,status:'success'});
+   const calls=f.request.mock.calls.length;
+-  await expect(recoverUnknownSubmission(f.client,op.operationId,f.hash)).rejects.toThrow('does not match');expect(getWalletIntents().find(x=>x.operationId===op.operationId)?.state).toBe('uncertain');
++  await expect(recoverUnknownSubmission(f.client,op.operationId,f.hash)).rejects.toThrow('hashless');expect(getWalletIntents().find(x=>x.operationId===op.operationId)?.state).toBe('uncertain');
+   f.rpc.getTransaction.mockResolvedValue({...tx,blockHash,blockNumber:12n,transactionIndex:0,value:a.value});
+-  await expect(recoverUnknownSubmission(f.client,op.operationId,f.hash)).resolves.toBe('included');expect(f.request.mock.calls.length).toBe(calls);
++  // SEC-R01: equal calldata/value and successful inclusion cannot identify a missing original hash.
++  await expect(recoverUnknownSubmission(f.client,op.operationId,f.hash)).rejects.toThrow('hashless');
++  expect(getWalletIntents().find(x=>x.operationId===op.operationId)).toMatchObject({state:'uncertain'});
++  expect(getWalletIntents().find(x=>x.operationId===op.operationId)?.hash).toBeUndefined();
++  expect(f.request.mock.calls.length).toBe(calls);
+  });
+ });
+ 
+--- baseline/src/arcproof/__tests__/testnetUi.test.tsx
++++ candidate/src/arcproof/__tests__/testnetUi.test.tsx
+@@ -63,7 +63,59 @@
+  it('shows unknown invoice read errors without enabling payment',async()=>{mocks.session=session;mocks.key='testnet';mocks.load.mockRejectedValue(Error('Unknown invoice'));await render(<TestnetPayScreen invoiceId={id}/>);expect(button('Review test payment').disabled).toBe(true);expect(text()).toContain('Unknown invoice');});
+  it('loads a request without a wallet but does not enable paying',async()=>{await render(<TestnetPayScreen invoiceId={id}/>);expect(text()).toContain('0.20 test USDC');expect(button('Review test payment').disabled).toBe(true);expect(mocks.provider).not.toHaveBeenCalled();});
+  it('blocks a saved pending payment using alternate ID casing',async()=>{mocks.session=session;mocks.key='testnet';recordSubmission({hash,kind:'pay',invoiceId:`0x${'A'.repeat(64)}`,account:session.account,state:'submitted'});await render(<TestnetPayScreen invoiceId={id}/>);expect(button('Review test payment').disabled).toBe(true);expect(text()).toContain('A hash is not payment proof');});
+- it('keeps simulation visibly distinct and never requests wallet access',async()=>{await render(<TestnetDashboard/>);await click('Use offline simulation');expect(text()).toContain('Offline demo mode');expect(text()).toContain('separate from the live');expect(mocks.provider).not.toHaveBeenCalled();});
++ it('links to the stable offline simulation route without requesting wallet access',async()=>{await render(<TestnetDashboard/>);expect(host.querySelector('a[href="#/demo"]')?.textContent).toContain('Use offline simulation');expect(mocks.provider).not.toHaveBeenCalled();});
+  it('verifies receipts without a wallet and does not fabricate verified settlement',async()=>{mocks.verify.mockResolvedValue({invoice,hash,result:{status:'UNVERIFIED_ARC_EVIDENCE',message:'Native settlement evidence still pending.',verified:false,paymentLogIndex:0,blockHash:hash,verifiedAt:0}});await render(<TestnetReceiptScreen invoiceId={id} txHash={hash}/>);await click('Verify from chain');expect(text()).toContain('settlement evidence incomplete');expect(mocks.provider).not.toHaveBeenCalled();});
+  it('does not render stale receipt results on a newer route',async()=>{const pending=deferred<unknown>();mocks.verify.mockReturnValueOnce(pending.promise).mockReturnValue(new Promise(()=>{}));await render(<TestnetReceiptScreen invoiceId={id} txHash={hash}/>);await render(<TestnetReceiptScreen invoiceId={`0x${'c'.repeat(64)}`}/>);await act(async()=>pending.resolve({invoice,hash,result:{status:'PENDING',message:'STALE RESULT',verified:false,paymentLogIndex:null,blockHash:null,verifiedAt:0}}));expect(text()).not.toContain('STALE RESULT');});
+ });
++
++
++describe('SHARE-01 current-invoice clipboard feedback (mocked clipboard)', () => {
++ const secondId: Hex = `0x${'c'.repeat(64)}`;
++ const clipboard = vi.fn<(value: string) => Promise<void>>();
++ async function create(target = invoice) {
++  mocks.confirmCreated.mockResolvedValueOnce(target);
++  await click('Review invoice'); await click('Open wallet');
++ }
++ beforeEach(() => {
++  mocks.session = session; mocks.key = 'copy-session';
++  mocks.wait.mockResolvedValue({ transactionHash: hash, from: session.account, to: action.to, status: 'success' });
++  clipboard.mockReset().mockResolvedValue(undefined);
++  Object.defineProperty(navigator, 'clipboard', { configurable: true, value: { writeText: clipboard } });
++ });
++ it('does not inherit A success when B is created; successful B copies exactly B URL', async () => {
++  await render(<TestnetDashboard />); await create(); await click('Copy payment link');
++  expect(text()).toContain('Link copied');
++  await create({ ...invoice, invoiceId: secondId });
++  expect(text()).not.toContain('Link copied');
++  await click('Copy payment link');
++  expect(clipboard).toHaveBeenLastCalledWith(`${window.location.href.split('#')[0]}#/pay/${ARC_TESTNET.id}/${TESTNET_DEPLOYMENT.deploymentId}/${secondId}`);
++  expect(text()).toContain('Link copied');
++ });
++ it('ignores a late A copy success after creating B', async () => {
++  const late = deferred<void>(); clipboard.mockReturnValueOnce(late.promise);
++  await render(<TestnetDashboard />); await create(); await click('Copy payment link');
++  await create({ ...invoice, invoiceId: secondId }); await act(async () => late.resolve());
++  expect(text()).not.toContain('Link copied');
++ });
++ it('clears prior success when B copy fails and on a failed retry of B', async () => {
++  await render(<TestnetDashboard />); await create(); await click('Copy payment link');
++  await create({ ...invoice, invoiceId: secondId }); clipboard.mockRejectedValueOnce(Error('denied'));
++  await act(async () => { (button('Copy payment link') ?? button('Link copied')).click(); }); expect(text()).not.toContain('Link copied'); expect(text()).toContain('Clipboard access was unavailable');
++  await click('Copy payment link'); expect(text()).toContain('Link copied');
++  clipboard.mockRejectedValueOnce(Error('denied')); await click('Link copied'); expect(text()).not.toContain('Link copied');
++ });
++ it('ignores late clipboard results after account switch or unmount', async () => {
++  const late = deferred<void>(); clipboard.mockReturnValueOnce(late.promise);
++  await render(<TestnetDashboard />); await create(); await click('Copy payment link');
++  mocks.key = 'other-account'; mocks.session = { ...session, connectionVersion: 2 };
++  await render(<TestnetDashboard />); await act(async () => late.resolve()); expect(text()).not.toContain('Link copied');
++  await create(); const last = deferred<void>(); clipboard.mockReturnValueOnce(last.promise); await click('Copy payment link');
++  await render(<p>Other page</p>); await act(async () => last.resolve()); expect(text()).toBe('Other page');
++ });
++ it('ignores an older success after a newer copy attempt failed', async () => {
++  const late = deferred<void>(); clipboard.mockReturnValueOnce(late.promise);
++  await render(<TestnetDashboard />); await create(); await click('Copy payment link');
++  clipboard.mockRejectedValueOnce(Error('denied')); await click('Copy payment link');
++  await act(async () => late.resolve()); expect(text()).not.toContain('Link copied');
++ });
++});
+--- baseline/src/arcproof/__tests__/unknownRequestIdentity.test.ts
++++ candidate/src/arcproof/__tests__/unknownRequestIdentity.test.ts
+@@ -0,0 +1,77 @@
++/* eslint-disable typescript/require-await -- Offline callback mocks. */
++import { beforeEach, afterEach, expect, it, vi } from 'vitest';
++import type { PublicClient } from 'viem';
++import { ARC_TESTNET, TESTNET_DEPLOYMENT } from '../testnet';
++import { memoryStorage, memoryLocks } from './fixtures/safeBrowser';
++import type { IntentInput } from '../walletIntents';
++const hash = `0x${'a'.repeat(64)}` as const;
++const otherHash = `0x${'b'.repeat(64)}` as const;
++const input: IntentInput = { chainId: ARC_TESTNET.id, deploymentId: TESTNET_DEPLOYMENT.deploymentId, kind: 'pay', invoiceId: hash, account: `0x${'1'.repeat(40)}`, to: TESTNET_DEPLOYMENT.contractAddress, data: '0x12345678', value: '1' };
++beforeEach(() => { vi.resetModules(); vi.stubGlobal('localStorage', memoryStorage()); vi.stubGlobal('navigator', { locks: memoryLocks() }); });
++afterEach(() => vi.unstubAllGlobals());
++it.each(['included', 'reverted'] as const)('a matching candidate %s never identifies a hashless original payment', async outcome => {
++  const m = await import('../walletIntents');
++  await expect(m.runWalletIntent(input, async mark => { mark(); throw Error('transport unknown'); })).rejects.toThrow('unknown');
++  const original = { ...m.getWalletIntents()[0] };
++  const verify = vi.fn(async () => outcome);
++  await expect(m.recoverWalletIntent(original.operationId, hash, verify)).rejects.toThrow('hashless');
++  expect(verify).not.toHaveBeenCalled();
++  expect(m.getWalletIntents()[0]).toEqual(original);
++  const send = vi.fn(async () => hash);
++  await expect(m.runWalletIntent(input, send)).rejects.toThrow('unresolved');
++  expect(send).not.toHaveBeenCalled();
++});
++it.each(['pay', 'create'] as const)('preserves a durable requesting %s after reload', async kind => {
++  const original = { ...input, kind, operationId: '11111111-1111-4111-8111-111111111111', state: 'requesting' };
++  localStorage.setItem(`arcproof:${input.chainId}:${input.deploymentId}:intent:${original.operationId}`, JSON.stringify(original));
++  const m = await import('../walletIntents');
++  await expect(m.recoverWalletIntent(original.operationId, hash, async () => 'included')).rejects.toThrow('hashless');
++  expect(m.getWalletIntents()[0]).toEqual(original);
++});
++it.each(['included', 'reverted'] as const)('known exact hash can still become %s', async outcome => {
++  const m = await import('../walletIntents');
++  await m.runWalletIntent(input, async mark => { mark(); return hash; });
++  const original = m.getWalletIntents()[0];
++  const verify = vi.fn(async () => outcome);
++  await expect(m.recoverWalletIntent(original.operationId, otherHash, verify)).rejects.toThrow('different hash');
++  expect(verify).not.toHaveBeenCalled();
++  await expect(m.recoverWalletIntent(original.operationId, hash, verify)).resolves.toBe(outcome);
++  expect(m.getWalletIntents()[0]).toMatchObject({ hash, state: outcome });
++});
++it('service never runs candidate RPC validation or releases an original hashless request', async () => {
++  const m = await import('../walletIntents');
++  const submissions = await import('../submissions');
++  const request = submissions.beginSubmission('pay', input.account, input.invoiceId);
++  request.uncertain();
++  await expect(m.runWalletIntent(input, async mark => { mark(); throw Error('unknown'); })).rejects.toThrow();
++  const original = { ...m.getWalletIntents()[0] };
++  const client = { getChainId: vi.fn(async () => ARC_TESTNET.id) };
++  const service = await import('../testnetClient');
++  await expect(service.recoverUnknownSubmission(client as unknown as PublicClient, original.operationId, hash)).rejects.toThrow('hashless');
++  expect(client.getChainId).not.toHaveBeenCalled();
++  expect(m.getWalletIntents()[0]).toEqual(original);
++  expect(submissions.getSubmissions()).toEqual([]);
++  expect(() => submissions.beginSubmission('pay', input.account, input.invoiceId)).toThrow('unresolved');
++});
++it('independent successful invoice verification leaves the original hashless request and duplicate guard untouched (synthetic fixture)', async () => {
++  const { observedPaymentFixture } = await import('./fixtures/observedPayment');
++  const fixture = observedPaymentFixture();
++  const m = await import('../walletIntents');
++  const candidateInput: IntentInput = { ...input, invoiceId: fixture.invoiceId, account: fixture.payer, data: fixture.tx.input, value: fixture.amount.toString() };
++  await expect(m.runWalletIntent(candidateInput, async mark => { mark(); throw Error('unknown'); })).rejects.toThrow();
++  const original = { ...m.getWalletIntents()[0] };
++  const client = {
++    getChainId: () => fixture.rpc.getChainId(), getCode: () => fixture.rpc.getContractCode(fixture.contract),
++    readContract: () => Promise.resolve(fixture.invoice), getTransaction: () => Promise.resolve(fixture.tx),
++    getTransactionReceipt: () => Promise.resolve(fixture.receipt), getBlock: () => Promise.resolve(fixture.block),
++  } as unknown as PublicClient;
++  const { verifyTestnetReceipt } = await import('../testnetClient');
++  const result = await verifyTestnetReceipt(client, fixture.invoiceId, fixture.txHash);
++  expect(result.result.verified).toBe(true);
++  expect(m.getWalletIntents()[0]).toEqual(original);
++  const send = vi.fn(async () => hash);
++  await expect(m.runWalletIntent(candidateInput, send)).rejects.toThrow('unresolved');
++  expect(send).not.toHaveBeenCalled();
++  const { getSubmissions } = await import('../submissions');
++  expect(getSubmissions()).toEqual([]);
++});
+--- baseline/src/arcproof/__tests__/unknownRequestUi.test.tsx
++++ candidate/src/arcproof/__tests__/unknownRequestUi.test.tsx
+@@ -0,0 +1,60 @@
++// @vitest-environment jsdom
++/* eslint-disable typescript/require-await -- React act uses promise callbacks. */
++import React, { act } from 'react';
++import { createRoot, type Root } from 'react-dom/client';
++import { beforeEach, afterEach, expect, it, vi } from 'vitest';
++import type { WalletIntent } from '../walletIntents';
++import type { Submission } from '../submissions';
++import { ARC_TESTNET, TESTNET_DEPLOYMENT } from '../testnet';
++const mocks = vi.hoisted(() => ({ intents: [] as WalletIntent[], submissions: [] as Submission[], recover: vi.fn() }));
++vi.mock('connectkit', () => ({ ConnectKitButton: () => null }));
++vi.mock('../walletIntents', () => ({ useWalletIntents: () => mocks.intents }));
++vi.mock('../submissions', () => ({ useSubmissions: () => mocks.submissions, useSubmissionRequests: () => [] }));
++vi.mock('../testnetClient', () => ({ recoverUnknownSubmission: mocks.recover, reconcileSubmission: vi.fn(), errorMessage: (e: Error) => e.message, testnetClient: {} }));
++import { Layout } from '../../components/arcproof/Layout';
++const hash = `0x${'a'.repeat(64)}` as const;
++const intent: WalletIntent = { operationId: '11111111-1111-4111-8111-111111111111', chainId: ARC_TESTNET.id, deploymentId: TESTNET_DEPLOYMENT.deploymentId, kind: 'pay', invoiceId: hash, account: `0x${'1'.repeat(40)}`, to: TESTNET_DEPLOYMENT.contractAddress, data: '0x12345678', value: '1', state: 'uncertain' };
++let host: HTMLDivElement, root: Root;
++beforeEach(() => {
++  (globalThis as typeof globalThis & { IS_REACT_ACT_ENVIRONMENT: boolean }).IS_REACT_ACT_ENVIRONMENT = true;
++  mocks.intents = []; mocks.submissions = []; vi.clearAllMocks();
++  host = document.createElement('div'); document.body.append(host); root = createRoot(host);
++});
++afterEach(() => { act(() => root.unmount()); host.remove(); });
++async function render() { await act(async () => { root.render(<Layout activeTab="verify" hideWallet onTabChange={() => {}}><p>Receipt</p></Layout>); }); }
++it('hashless payment offers separate receipt verification, never a request recovery claim', async () => {
++  mocks.intents = [intent]; await render();
++  const aside = host.querySelector('aside')!;
++  expect(aside.textContent).toContain('does not identify or resolve this original request');
++  expect([...aside.querySelectorAll('button')].some(b => b.textContent?.includes('Recover'))).toBe(false);
++  const link = aside.querySelector<HTMLAnchorElement>('a[href^="#/receipt/"]')!;
++  expect(link.getAttribute('href')).toBe(`#/receipt/${ARC_TESTNET.id}/${TESTNET_DEPLOYMENT.deploymentId}/${hash}`);
++  expect(mocks.recover).not.toHaveBeenCalled();
++});
++it('hashless creation has no candidate recovery control', async () => {
++  mocks.intents = [{ ...intent, kind: 'create', invoiceId: undefined }]; await render();
++  expect(host.querySelector('aside input')).toBeNull();
++  expect(host.querySelector('aside')?.textContent).toContain('remains unresolved');
++});
++it('known saved hash recovery retains an explicit non-settlement message', async () => {
++  mocks.intents = [{ ...intent, hash, state: 'submitted' }]; mocks.recover.mockResolvedValue('included'); await render();
++  const button = [...host.querySelectorAll('aside button')].find(b => b.textContent?.includes('Recover')) as HTMLButtonElement;
++  await act(async () => { button.click(); });
++  expect(mocks.recover).toHaveBeenCalledWith({}, intent.operationId, hash);
++  expect(host.textContent).toContain('Known saved hash status: included');
++  expect(host.textContent).toContain('not verified settlement');
++});
++it('shows every unresolved saved transaction outside collapsed completed history', async () => {
++  mocks.submissions = [
++    { hash, kind: 'pay', account: intent.account, state: 'included' },
++    { hash: `0x${'b'.repeat(64)}`, kind: 'pay', account: intent.account, state: 'submitted' },
++    { hash: `0x${'c'.repeat(64)}`, kind: 'create', account: intent.account, state: 'submitted' },
++  ];
++  await render();
++  const aside = host.querySelector('aside')!;
++  const submitted = [...aside.querySelectorAll('a')].filter(a => a.textContent !== hash);
++  expect(submitted).toHaveLength(2);
++  for (const link of submitted) expect(link.closest('details')).toBeNull();
++  const history = aside.querySelector('details')!;
++  expect(history.textContent).toContain(hash); expect(history.open).toBe(false);
++});
+--- baseline/src/arcproof/__tests__/walletBootstrap.test.ts
++++ candidate/src/arcproof/__tests__/walletBootstrap.test.ts
+@@ -0,0 +1,10 @@
++import { readFileSync } from 'node:fs';
++import { describe, expect, it } from 'vitest';
++
++describe('wallet bootstrap safety wiring (static source guard)', () => {
++  it('explicitly disables the provider default reconnect while retaining manual connect provider', () => {
++    const source = readFileSync(new URL('../../main.tsx', import.meta.url), 'utf8');
++    expect(source).toMatch(/<WagmiProvider\s+config=\{config\}\s+reconnectOnMount=\{false\}>/);
++    expect(source).toContain('<ConnectKitProvider>');
++  });
++});
+--- baseline/src/arcproof/__tests__/walletIntents.test.ts
++++ candidate/src/arcproof/__tests__/walletIntents.test.ts
+@@ -30,15 +30,17 @@
+   it('fails closed before send when durable write fails', async () => { vi.spyOn(localStorage, 'setItem').mockImplementation(() => { throw new Error('quota'); }); const m = await import('../walletIntents'); const send = vi.fn(async () => hash); await expect(m.runWalletIntent(input, send)).rejects.toThrow('quota'); expect(send).not.toHaveBeenCalled(); });
+   it('never releases a corrupt saved intent', async () => { localStorage.setItem(`arcproof:${ARC_TESTNET.id}:${TESTNET_DEPLOYMENT.deploymentId}:intent:bad`, '{}'); const m = await import('../walletIntents'); const send = vi.fn(async () => hash); await expect(m.runWalletIntent(input, send)).rejects.toThrow('unreadable'); expect(send).not.toHaveBeenCalled(); });
+   it('releases explicit rejection but keeps generic ambiguous errors', async () => { const m = await import('../walletIntents'); await expect(m.runWalletIntent(input, async (mark, reject) => { mark(); reject(); throw new Error('explicit rejection'); })).rejects.toThrow(); expect(m.getWalletIntents()[0].state).toBe('cancelled'); await expect(m.runWalletIntent(input, async (mark) => { mark(); return hash; })).resolves.toBe(hash); });
+-  it('readonly payment recovery cannot clear mismatched or unknown status results', async () => {
++  // SEC-R01: a matching successful payment is no longer evidence of the original unknown request.
++  it('readonly candidate payment recovery never resolves a hashless original request', async () => {
+     const m = await import('../walletIntents'); const payment: IntentInput = { ...input, kind: 'pay', invoiceId: hash };
+     await expect(m.runWalletIntent(payment, async (mark) => { mark(); throw new Error('unknown'); })).rejects.toThrow();
+-    const id = m.getWalletIntents()[0].operationId;
+-    await expect(m.recoverWalletIntent(id, hash, async () => { throw new Error('wrong identity'); })).rejects.toThrow('wrong identity');
+-    expect(m.getWalletIntents()[0].state).toBe('uncertain');
+-    await expect(m.recoverWalletIntent(id, hash, async () => 'reverted')).rejects.toThrow('older matching');
+-    expect(m.getWalletIntents()[0].state).toBe('uncertain');
+-    await expect(m.recoverWalletIntent(id, hash, async () => 'included')).resolves.toBe('included');
++    const original = { ...m.getWalletIntents()[0] };
++    for (const outcome of ['included', 'reverted'] as const) {
++      const verify = vi.fn(async () => outcome);
++      await expect(m.recoverWalletIntent(original.operationId, hash, verify)).rejects.toThrow('hashless');
++      expect(verify).not.toHaveBeenCalled();
++      expect(m.getWalletIntents()[0]).toEqual(original);
++    }
+   });
+   it('never unlocks a hashless creation using an older identical call', async () => {
+     const m = await import('../walletIntents'); await expect(m.runWalletIntent(input, async (mark) => { mark(); throw new Error('unknown'); })).rejects.toThrow();
+--- baseline/src/arcproof/buildIdentity.ts
++++ candidate/src/arcproof/buildIdentity.ts
+@@ -0,0 +1,23 @@
++/** Build labels are provenance, never a settlement or deployment attestation. */
++export interface BuildIdentity {
++  sourceCommit: string | null;
++  verifiedBaseCommit: string | null;
++  sourceSnapshotSha256: string | null;
++  builtAtUTC: string | null;
++  sourceState: 'candidate' | 'unknown';
++}
++declare const __ARCPROOF_BUILD_IDENTITY__: unknown;
++export function normalizeBuildIdentity(value: unknown): BuildIdentity {
++  const raw = value && typeof value === 'object' ? value as Record<string, unknown> : {};
++  const hex = (value: unknown, length: number) => typeof value === 'string' && new RegExp(`^[0-9a-f]{${length}}$`).test(value) ? value : null;
++  return {
++    // A materialized or modified source tree cannot prove a commit identity.
++    sourceCommit: null,
++    verifiedBaseCommit: hex(raw.verifiedBaseCommit, 40),
++    sourceSnapshotSha256: hex(raw.sourceSnapshotSha256, 64),
++    builtAtUTC: typeof raw.builtAtUTC === 'string' && /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z$/.test(raw.builtAtUTC) && Number.isFinite(Date.parse(raw.builtAtUTC)) ? raw.builtAtUTC : null,
++    sourceState: hex(raw.sourceSnapshotSha256, 64) ? 'candidate' : 'unknown',
++  };
++}
++export const BUILD_IDENTITY = normalizeBuildIdentity(typeof __ARCPROOF_BUILD_IDENTITY__ === 'undefined' ? null : __ARCPROOF_BUILD_IDENTITY__);
++export const identityLabel = (value: string | null) => value ?? 'Unknown';
+--- baseline/src/arcproof/routes.ts
++++ candidate/src/arcproof/routes.ts
+@@ -0,0 +1,30 @@
++/** URL state is the navigation authority; malformed requests never become a wallet entry. */
++export type NavTab = 'dashboard' | 'verify' | 'evidence' | 'demo';
++export interface HashRoute {
++  screen: NavTab | 'pay' | 'receipt' | 'invalid';
++  chainId?: number;
++  deploymentId?: string;
++  invoiceId?: `0x${string}`;
++  txHash?: string;
++}
++export function parseHash(hash: string): HashRoute {
++  const path = hash.startsWith('#') ? hash.slice(1) : hash;
++  if (path === '' || path === '/') return { screen: 'verify' };
++  if (path === '/invoices') return { screen: 'dashboard' };
++  if (path === '/verify' || path === '/evidence' || path === '/demo') return { screen: path.slice(1) as NavTab };
++  const question = path.indexOf('?');
++  const pathname = question < 0 ? path : path.slice(0, question);
++  const params = new URLSearchParams(question < 0 ? '' : path.slice(question + 1));
++  const parts = pathname.split('/');
++  if (parts[0] === '' && (parts[1] === 'pay' || parts[1] === 'receipt')) {
++    const chainId = /^[0-9]+$/.test(parts[2] ?? '') ? Number(parts[2]) : NaN;
++    return {
++      screen: parts[1],
++      chainId: Number.isSafeInteger(chainId) ? chainId : undefined,
++      deploymentId: parts[3],
++      invoiceId: (parts.length === 5 ? parts[4] : undefined) as `0x${string}` | undefined,
++      txHash: params.has('tx') ? (params.getAll('tx').length === 1 ? params.get('tx')! : '') : undefined,
++    };
++  }
++  return { screen: 'invalid' };
++}
+--- baseline/src/arcproof/testnetClient.ts
++++ candidate/src/arcproof/testnetClient.ts
+@@ -391,7 +391,9 @@
+   return state;
+ }
+ 
+-/** Recover only the exact saved call. Replacement/cancellation and cross-device recovery are deliberately unsupported. */
++/** Recover only an original returned hash. Matching hashless calls are not request identity.
++ * Independent invoice verification uses verifyTestnetReceipt and never settles wallet intents.
++ * Replacement/cancellation and cross-device recovery are deliberately unsupported. */
+ export async function recoverUnknownSubmission(client: PublicClient, operationId: string, hash: Hex, expectedState?: 'included' | 'reverted') {
+   let matchedIntent: import('./walletIntents').WalletIntent | undefined;
+   const state = await recoverWalletIntent(operationId, hash, async (intent) => {
+@@ -413,7 +415,7 @@
+     matchedIntent = intent;
+     return state;
+   });
+-  if (matchedIntent) {
++  if (matchedIntent?.hash && matchedIntent.hash.toLowerCase() === hash.toLowerCase()) {
+     recordSubmission({ hash, kind: matchedIntent.kind, account: matchedIntent.account, invoiceId: matchedIntent.invoiceId, state });
+     releaseRecoveredRequest(matchedIntent.kind, matchedIntent.account, matchedIntent.invoiceId);
+   }
+--- baseline/src/arcproof/walletIntents.ts
++++ candidate/src/arcproof/walletIntents.ts
+@@ -105,9 +105,12 @@
+     const intent = readAll().find((row) => row.operationId === operationId);
+     if (!intent || !unresolved(intent)) throw new Error('No unresolved saved intent found.');
+     if (intent.hash && intent.hash.toLowerCase() !== hash.toLowerCase()) throw new Error('This intent already has a different hash. Replacement recovery is not supported here.');
+-    if (!intent.hash && intent.kind === 'create') throw new Error('A hashless creation cannot be uniquely bound without its wallet nonce. Keep it unresolved; manual investigation is required.');
++    // Equal sender, calldata, value and receipt status identify a call, not the
++    // original wallet request. Without its returned hash (or unique request
++    // evidence we do not collect), even a successful matching payment is not
++    // authority to settle this intent or release its duplicate-send guard.
++    if (!intent.hash) throw new Error('A hashless request cannot be uniquely bound without its wallet nonce or original request identity. It remains unresolved. Verify a matching invoice payment separately; that does not resolve this request.');
+     const state = await verify(intent);
+-    if (!intent.hash && state === 'reverted') throw new Error('An older matching reverted call cannot identify this unknown request. Keep it unresolved; manual investigation is required.');
+     write({ ...intent, hash, state });
+     return state;
+   });
+--- baseline/src/components/arcproof/DashboardScreen.tsx
++++ candidate/src/components/arcproof/DashboardScreen.tsx
+@@ -96,8 +96,8 @@
+ 
+         {/* Amount */}
+         <div className="space-y-1">
+-          <label htmlFor="invoice-amount" className="text-xs font-medium text-stone-500 uppercase tracking-wider">
+-            Amount (USDC, max 1.000000)
++          <label htmlFor="invoice-amount" className="text-xs font-medium text-stone-600 uppercase tracking-wider">
++            Amount (test USDC, max 1.000000)
+           </label>
+           <div className="flex items-center gap-2">
+             <input
+@@ -106,11 +106,11 @@
+               onChange={(e) => handleAmountChange(e.target.value)}
+               placeholder="0.20"
+               className={[
+-                'flex-1 border rounded-lg px-3 py-2 text-sm font-mono bg-stone-50 focus:outline-none focus:ring-2',
+-                amountError ? 'border-red-300 focus:ring-red-200' : 'border-stone-200 focus:ring-teal-200',
++                'flex-1 border rounded-lg px-3 py-2 text-base font-mono bg-stone-50 focus:outline-none focus:ring-2',
++                amountError ? 'border-red-300 focus:ring-red-200' : 'border-stone-500 focus:ring-teal-200',
+               ].join(' ')}
+             />
+-            <span className="text-sm text-stone-400 shrink-0">USDC</span>
++            <span className="text-sm text-stone-600 shrink-0">test USDC</span>
+           </div>
+           {amountError && (
+             <p className="text-xs text-red-600 flex items-center gap-1">
+@@ -118,7 +118,7 @@
+             </p>
+           )}
+           {parsedAmount !== null && !amountError && (
+-            <p className="text-xs text-stone-400 font-mono">
++            <p className="text-xs text-stone-600 font-mono">
+               {parsedAmount.toString()} native units (18 dec)
+             </p>
+           )}
+@@ -126,7 +126,7 @@
+ 
+         {/* Expiry */}
+         <div className="space-y-1">
+-          <label htmlFor="invoice-expiry" className="text-xs font-medium text-stone-500 uppercase tracking-wider">
++          <label htmlFor="invoice-expiry" className="text-xs font-medium text-stone-600 uppercase tracking-wider">
+             Expires in (hours, max 168)
+           </label>
+           <input
+@@ -135,16 +135,16 @@
+             max={168}
+             value={lifetimeHours}
+             onChange={(e) => setLifetimeHours(Math.min(168, Math.max(1, Number(e.target.value))))}
+-            className="w-32 border border-stone-200 rounded-lg px-3 py-2 text-sm bg-stone-50 focus:outline-none focus:ring-2 focus:ring-teal-200"
++            className="w-32 border border-stone-500 rounded-lg px-3 py-2 text-base bg-stone-50 focus:outline-none focus:ring-2 focus:ring-teal-200"
+           />
+-          <p className="text-xs text-stone-400">
++          <p className="text-xs text-stone-600">
+             Expires: {new Date(expirySeconds * 1000).toLocaleString()}
+           </p>
+         </div>
+ 
+         {/* Title (optional, unbound) */}
+         <div className="space-y-1">
+-          <label htmlFor="invoice-title" className="text-xs font-medium text-stone-500 uppercase tracking-wider">
++          <label htmlFor="invoice-title" className="text-xs font-medium text-stone-600 uppercase tracking-wider">
+             Title (optional, unbound plain text &mdash; not stored on chain)
+           </label>
+           <input
+@@ -153,23 +153,23 @@
+             onChange={(e) => handleTitleChange(e.target.value)}
+             maxLength={240}
+             placeholder="e.g. Design consultation"
+-            className="w-full border border-stone-200 rounded-lg px-3 py-2 text-sm bg-stone-50 focus:outline-none focus:ring-2 focus:ring-teal-200"
++            className="w-full border border-stone-500 rounded-lg px-3 py-2 text-base bg-stone-50 focus:outline-none focus:ring-2 focus:ring-teal-200"
+           />
+-          <p className="text-xs text-stone-400">
++          <p className="text-xs text-stone-600">
+             {countCodepoints(title)}/{MAX_TITLE_CODEPOINTS} code points. Not proof; not stored onchain. No customer PII.
+           </p>
+           {titleError && <p className="text-xs text-red-600">{titleError}</p>}
+         </div>
+ 
+         {/* termsHash fixed */}
+-        <p className="text-xs text-stone-400">
++        <p className="text-xs text-stone-600">
+           Terms hash: <span className="font-mono">bytes32(0)</span> (P0 only; nonzero hash protocol not implemented)
+         </p>
+ 
+         <button
+           onClick={handleCreate}
+           disabled={!parsedAmount || !!amountError || !!titleError}
+-          className="w-full bg-teal-600 hover:bg-teal-700 disabled:bg-stone-200 disabled:text-stone-400 text-white rounded-lg py-2.5 text-sm font-medium transition-colors"
++          className="w-full bg-teal-700 hover:bg-teal-800 disabled:bg-stone-200 disabled:text-stone-600 text-white rounded-lg py-2.5 text-sm font-medium transition-colors"
+         >
+           Create invoice (offline demo — no signing)
+         </button>
+@@ -183,7 +183,7 @@
+           <h2 className="font-semibold text-stone-900 text-base">
+             Invoice history
+             {Number(demoNonce) > 0 && (
+-              <span className="ml-2 text-xs font-normal text-stone-400">
++              <span className="ml-2 text-xs font-normal text-stone-600">
+                 {demoNonce.toString()} invoices (demo)
+               </span>
+             )}
+@@ -193,19 +193,19 @@
+         {Number(demoNonce) === 0 ? (
+           <div className="bg-white rounded-xl border border-stone-200 p-10 text-center">
+             <FileText size={32} className="mx-auto text-stone-300 mb-3" />
+-            <p className="text-stone-500 text-sm">No invoices yet.</p>
+-            <p className="text-stone-400 text-xs mt-1">Create your first invoice above.</p>
++            <p className="text-stone-600 text-sm">No invoices yet.</p>
++            <p className="text-stone-600 text-xs mt-1">Create your first invoice above.</p>
+           </div>
+         ) : (
+           <>
+             <div className="space-y-2">
+               {invoiceIds.map(({ nonce, invoiceId }) => (
+-                <div key={invoiceId} className="bg-white rounded-lg border border-stone-200 px-4 py-3 flex items-center justify-between gap-4">
++                <div key={invoiceId} className="bg-white rounded-lg border border-stone-200 px-4 py-3 flex flex-wrap items-center justify-between gap-4">
+                   <div className="min-w-0">
+-                    <p className="text-xs text-stone-400 font-mono truncate">{invoiceId}</p>
+-                    <p className="text-xs text-stone-500 mt-0.5">Nonce {nonce.toString()}</p>
++                    <p className="text-xs text-stone-600 font-mono truncate">{invoiceId}</p>
++                    <p className="text-xs text-stone-600 mt-0.5">Nonce {nonce.toString()}</p>
+                   </div>
+-                  <span className="shrink-0 px-2 py-0.5 rounded-full text-xs bg-stone-100 text-stone-500">
++                  <span className="shrink-0 px-2 py-0.5 rounded-full text-xs bg-stone-100 text-stone-600">
+                     demo
+                   </span>
+                   <button className="text-sm border rounded px-2 py-1" onClick={() => setExampleReceipt({ invoiceId, amount: demoAmounts[Number(nonce)] })}>View simulated receipt</button>
+@@ -223,7 +223,7 @@
+                 >
+                   Previous
+                 </button>
+-                <span className="text-xs text-stone-400">
++                <span className="text-xs text-stone-600">
+                   Page {page + 1} of {totalPages}
+                 </span>
+                 <button
+--- baseline/src/components/arcproof/DemoReceipt.tsx
++++ candidate/src/components/arcproof/DemoReceipt.tsx
+@@ -14,13 +14,13 @@
+  function download(kind: 'json' | 'csv') {
+   const data = kind === 'json' ? exportReceiptsJson([record]) : exportReceiptsCsv([record]);
+   const url = URL.createObjectURL(new Blob([data], {type: kind === 'json' ? 'application/json' : 'text/csv'}));
+-  const link = document.createElement('a'); link.href = url; link.download = `arcproof-SIMULATED-${invoiceId.slice(0,10)}.${kind}`; link.click(); URL.revokeObjectURL(url);
++  const link = document.createElement('a'); link.href = url; link.download = `arcproof-SIMULATED-${invoiceId.slice(0,10)}.${kind}`; document.body.appendChild(link); link.click(); link.remove(); setTimeout(() => URL.revokeObjectURL(url), 1000);
+  }
+- return <section aria-label="Simulated receipt" className="rounded-xl border border-amber-300 bg-amber-50 p-5 space-y-3">
++ return <section aria-label="Simulated receipt" className="rounded-xl border border-dashed border-stone-500 bg-stone-50 text-stone-700 p-5 space-y-3">
+   <h3 className="font-semibold">DEMO — simulated receipt, not payment proof</h3>
+   <p className="text-sm">Offline fixture only. No payment occurred, no wallet was connected, and no transaction was sent. This is not a tax invoice.</p>
+   <p className="font-mono break-all text-sm">Invoice fixture: {invoiceId}</p>
+-  <p className="text-sm">Example amount: {record.amountDisplay} USDC</p>
++  <p className="text-sm">Example amount: {record.amountDisplay} test USDC</p>
+   <p className="font-mono break-all text-sm">Fixture merchant: {record.merchant}</p>
+   <p className="text-sm">Payer, transaction, payment time, block, and event index: unavailable (null). Verification: SIMULATED_NOT_VERIFIED.</p>
+   <div className="flex flex-wrap gap-3">
+--- baseline/src/components/arcproof/EvidenceScreen.tsx
++++ candidate/src/components/arcproof/EvidenceScreen.tsx
+@@ -1,10 +1,6 @@
+-/**
+- * EvidenceScreen.tsx — Provenance, test results, and limitations.
+- * Shows actual G1 data: 69 tests passing, independent review pending.
+- * Never claims all 28 acceptance IDs passed; never claims Arc-specific
+- * tests (T25/T26) have run. Honest about HOLD status.
+- */
++/** Historical results and current build provenance. No implicit fresh-run claims. */
+ import React from 'react';
++import { BUILD_IDENTITY, identityLabel } from '../../arcproof/buildIdentity';
+ import { ARC_TESTNET, TESTNET_DEPLOYMENT, DEPLOYMENT_TX, explorerTx } from '../../arcproof/testnet';
+ import { CheckCircle, Clock, AlertCircle } from 'lucide-react';
+ 
+@@ -42,12 +38,12 @@
+   { id: 'T23', description: 'Receipt recovery and RPC conflict handling', status: 'not_run', note: 'Paid-block hash recovery and saved-transaction reconciliation implemented. Real-chain recovery and second-endpoint conflict acceptance remain not run.' },
+   { id: 'T24', description: 'Nonce pagination, integer strings, export dedupe, untrusted flags (Vitest)', status: 'pass' },
+   { id: 'T25', description: 'Arc native-USDC system Transfer event at official emitter', status: 'not_run', note: 'Official native emitter reference identified; genuine payment receipt evidence is still required. Anvil does not prove Arc log behaviour.' },
+-  { id: 'T26', description: 'Arc committed-block finality and receipt verification on real chain', status: 'not_run', note: 'Deployment checked; genuine payment/finality acceptance not run.' },
++  { id: 'T26', description: 'Arc committed-block finality and receipt verification on real chain', status: 'not_run', note: 'Historical deployment check only; fresh genuine payment/finality acceptance not run.' },
+ ];
+ 
+ function StatusIcon({ status }: { status: 'pass' | 'pending' | 'not_run' }) {
+   if (status === 'pass') return <CheckCircle size={14} className="text-teal-600 shrink-0" />;
+-  if (status === 'not_run') return <AlertCircle size={14} className="text-stone-400 shrink-0" />;
++  if (status === 'not_run') return <AlertCircle size={14} className="text-stone-600 shrink-0" />;
+   return <Clock size={14} className="text-amber-500 shrink-0" />;
+ }
+ 
+@@ -63,33 +59,49 @@
+ 
+         <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+           {[
+-            { label: 'Forge tests', value: '73 (69 Studio + 4 supplemental)' },
+-            { label: 'Local testing', value: 'Offline unit / DOM coverage only' },
+-            { label: 'Deployment', value: 'Arc Testnet checked' },
++            { label: 'Historical Forge', value: '73 (69 Studio + 4 supplemental)' },
++            { label: 'Historical project suite', value: '391 tests (overlapping suites not added)' },
++            { label: 'Current build tests', value: 'Unknown — no result attached' },
+             { label: 'Grant eligibility', value: 'HOLD' },
+           ].map(({ label, value }) => (
+             <div key={label} className="bg-stone-50 rounded-lg p-3">
+-              <p className="text-xs text-stone-400 font-medium">{label}</p>
++              <p className="text-xs text-stone-600 font-medium">{label}</p>
+               <p className="text-sm font-semibold text-stone-800 mt-0.5">{value}</p>
+             </div>
+           ))}
+         </div>
+ 
+         <div className="text-xs text-stone-500 space-y-1">
+-          <p><strong>Source review:</strong> Independent review in progress; frontend results are local unit coverage, not full acceptance or live-wallet evidence. G1: 69 Studio-export tests plus 4 native supplemental tests, 73 independently passed.</p>
+-          <p className="break-all"><strong>Checked testnet deployment:</strong> <a className="underline" href={`${ARC_TESTNET.blockExplorers.default.url}/address/${TESTNET_DEPLOYMENT.contractAddress}?tab=contract`} target="_blank" rel="noreferrer">{TESTNET_DEPLOYMENT.contractAddress}</a>. Full runtime matched the reviewed artifact. <a className="underline" href={explorerTx(DEPLOYMENT_TX)} target="_blank" rel="noreferrer">Deployment transaction</a>. Source publication and payment acceptance are not claimed.</p>
++          <p><strong>Historical evidence only:</strong> The repository records 73 Forge tests and a 391-test project run. These are prior logs, not a rerun of this candidate; suite counts overlap and must not be added. An independent review or model opinion is not security certification.</p>
++          <p className="break-all"><strong>Historical testnet deployment:</strong> <a className="underline" href={`${ARC_TESTNET.blockExplorers.default.url}/address/${TESTNET_DEPLOYMENT.contractAddress}?tab=contract`} target="_blank" rel="noreferrer">{TESTNET_DEPLOYMENT.contractAddress}</a>. Repository records report runtime matching on 2026-10-20. <a className="underline" href={explorerTx(DEPLOYMENT_TX)} target="_blank" rel="noreferrer">Deployment transaction</a>. No fresh RPC read, payment acceptance, source publication, or host-version match is implied.</p>
+           <p><strong>Grant:</strong> Eligibility HOLD. Free prototype development authorized for testnet/local scope per 2026-10-20 directive. Do not claim grant eligibility established.</p>
+           <p><strong>Atomic forwarding:</strong> The contract passes funds directly to the merchant atomically. This is not custody. It does touch funds. It is not a claim of escrow-free operation — the contract's execution touches and routes value.</p>
+         </div>
+       </div>
+ 
+-      {/* Test matrix */}
++      <section aria-label="Build identity" className="bg-white rounded-xl border border-stone-200 p-5 space-y-3">
++        <h3 className="font-semibold">Current candidate build identity</h3>
++        <dl className="text-sm space-y-2 break-all">
++          <div><dt>Source commit SHA</dt><dd>{identityLabel(BUILD_IDENTITY.sourceCommit)}</dd></div>
++          <div><dt>Verified base commit (not current source)</dt><dd>{identityLabel(BUILD_IDENTITY.verifiedBaseCommit)}</dd></div>
++          <div><dt>Candidate source snapshot SHA-256</dt><dd>{identityLabel(BUILD_IDENTITY.sourceSnapshotSha256)}</dd></div>
++          <div><dt>Build UTC</dt><dd>{identityLabel(BUILD_IDENTITY.builtAtUTC)}</dd></div>
++          <div><dt>Environment / chain</dt><dd>Arc Testnet / {ARC_TESTNET.id}; mainnet disabled</dd></div>
++          <div><dt>Manifest deployment identity</dt><dd>{TESTNET_DEPLOYMENT.deploymentId}</dd></div>
++          <div><dt>Expected contract runtime keccak256</dt><dd>{TESTNET_DEPLOYMENT.runtimeCodeHash}</dd></div>
++        </dl>
++        <p className="text-sm">The candidate hash identifies declared build inputs, not a committed source SHA. Build time is not verification time. Current tests, live network acceptance, and independent host-to-artifact matching remain Unknown unless accompanied by separate version-bound logs.</p>
++        <a className="underline text-sm" href={`${import.meta.env.BASE_URL}build-provenance.json`}>Download production build provenance (generated during build)</a>
++        <p className="text-xs">The provenance file records input and emitted bundle hashes. It is unavailable in a development server and is not proof that a remote host serves these bytes. Offline demo data remains SIMULATED_NOT_VERIFIED.</p>
++      </section>
++
++      {/* Historical test matrix */}
+       <div className="bg-white rounded-xl border border-stone-200 shadow-sm overflow-hidden">
+         <div className="px-5 py-3 border-b border-stone-100 flex items-center justify-between">
+-          <h3 className="font-medium text-stone-800 text-sm">Test matrix</h3>
++          <h3 className="font-medium text-stone-800 text-sm">Historical test matrix, not current acceptance</h3>
+           <div className="flex gap-3 text-xs text-stone-500">
+-            <span className="flex items-center gap-1"><CheckCircle size={12} className="text-teal-600" /> {passCount} passed</span>
+-            <span className="flex items-center gap-1"><AlertCircle size={12} className="text-stone-400" /> {notRunCount} not run</span>
++            <span className="flex items-center gap-1"><CheckCircle size={12} className="text-teal-600" /> {passCount} historically recorded</span>
++            <span className="flex items-center gap-1"><AlertCircle size={12} className="text-stone-600" /> {notRunCount} not run</span>
+           </div>
+         </div>
+         <div className="divide-y divide-stone-100">
+@@ -102,7 +114,7 @@
+                   <span className="text-xs text-stone-700">{t.description}</span>
+                 </div>
+                 {t.note && (
+-                  <p className="text-xs text-stone-400 mt-0.5">{t.note}</p>
++                  <p className="text-xs text-stone-600 mt-0.5">{t.note}</p>
+                 )}
+               </div>
+             </div>
+@@ -115,8 +127,8 @@
+         <h3 className="font-medium text-stone-800 text-sm">Known limitations (P0)</h3>
+         <ul className="text-xs text-stone-600 space-y-1.5 list-disc list-outside ml-4">
+           <li>Only the checked Arc Testnet deployment is configured. Mainnet remains disabled; the user alone approves testnet wallet requests.</li>
+-          <li>Arc native-USDC system Transfer and finality evidence (T25/T26) are not verified against a genuine payment receipt. Official native events use 18 decimals at 0xfffffffffffffffffffffffffffffffffffffffe, not the 6-decimal ERC-20 path.</li>
+-          <li>Receipt verifier compares runtime keccak256 against the supplied manifest. Real network evidence is still unavailable.</li>
++          <li>Fresh candidate-bound Arc native-USDC system Transfer and finality acceptance (T25/T26) is not attached to this build. Historical controlled observations do not establish current acceptance. Official native events use 18 decimals at 0xfffffffffffffffffffffffffffffffffffffffe, not the 6-decimal ERC-20 path.</li>
++          <li>Receipt verifier compares runtime keccak256 against the supplied manifest. No fresh network result is attached to this build.</li>
+           <li>P0 UI only supports ordinary EOA wallets. Other account types are explicitly unsupported.</li>
+           <li>No nonzero termsHash protocol in P0. Historical paid invoices with nonzero hash are readable but payment blocked in UI.</li>
+           <li>Saved transaction locators and read-only status refresh are implemented. Storage is best-effort; actual browser-wallet recovery is not yet accepted.</li>
+--- baseline/src/components/arcproof/Layout.tsx
++++ candidate/src/components/arcproof/Layout.tsx
+@@ -5,17 +5,18 @@
+  */
+ import React, { useState } from 'react';
+ import { useSubmissions, useSubmissionRequests, type Submission } from '../../arcproof/submissions';
+-import { explorerTx } from '../../arcproof/testnet';
++import { ARC_TESTNET, TESTNET_DEPLOYMENT, explorerTx } from '../../arcproof/testnet';
+ import { useWalletIntents, type WalletIntent } from '../../arcproof/walletIntents';
+ import { isBytes32 } from '../../arcproof/testnet';
+ import { recoverUnknownSubmission, reconcileSubmission, errorMessage, testnetClient } from '../../arcproof/testnetClient';
+ import { ConnectKitButton } from 'connectkit';
+ import { StudioAttribution } from './StudioAttribution';
+ 
+-type NavTab = 'dashboard' | 'verify' | 'evidence';
++type NavTab = 'dashboard' | 'verify' | 'evidence' | 'demo';
+ 
+ interface LayoutProps {
+   hideWallet?: boolean;
++  hideSavedActivity?: boolean;
+   activeTab: NavTab;
+   onTabChange: (tab: NavTab) => void;
+   children: React.ReactNode;
+@@ -46,11 +47,14 @@
+   { id: 'dashboard', label: 'Invoices' },
+   { id: 'verify', label: 'Verify receipt' },
+   { id: 'evidence', label: 'Evidence' },
++  { id: 'demo', label: 'Offline demo' },
+ ];
+ 
+ function SavedTransactions() {
+   const submissions = useSubmissions();
+   const requests = useSubmissionRequests();
++  const pending = submissions.filter((item) => item.state === 'submitted');
++  const history = submissions.filter((item) => item.state !== 'submitted');
+   const intents = useWalletIntents().filter((item) => ['requesting', 'uncertain', 'submitted'].includes(item.state));
+   const [recoveryHashes, setRecoveryHashes] = useState<Record<string, string>>({});
+   const [busy, setBusy] = useState<string | null>(null);
+@@ -71,30 +75,33 @@
+     if (!isBytes32(hash)) { setMessage('Enter the full transaction hash from wallet history.'); return; }
+     if (busy) return;
+     setBusy(intent.operationId); setMessage('');
+-    try { const state = await recoverUnknownSubmission(testnetClient, intent.operationId, hash); setMessage(`Exact saved request recovered: ${state}. This is not verified settlement; no transaction was sent.`); }
++    try { const state = await recoverUnknownSubmission(testnetClient, intent.operationId, hash); setMessage(`Known saved hash status: ${state}. This is not verified settlement; no transaction was sent.`); }
+     catch (error) { setMessage(errorMessage(error)); }
+     finally { setBusy(null); }
+   }
+   if (!submissions.length && !requests.length && !intents.length) return null;
+   return <aside className="mb-5 rounded-lg border border-amber-200 bg-amber-50 p-3 text-xs text-amber-900" aria-label="Saved wallet transactions">
+     {requests.length > 0 && intents.length === 0 && <p role="status">A wallet request is outstanding or its outcome is uncertain. Do not refresh this page or submit again until you have checked your wallet activity. The request lock does not survive a reload or coordinate other tabs; no automatic resend will occur.</p>}
+-    {intents.length > 0 && <p role="status">A saved wallet request is unresolved. Do not submit again. Its durable guard survives reload in this browser and coordinates same-origin tabs while storage remains available. Check wallet history and recover the exact request below; no automatic resend or timeout release occurs.</p>}
++    {intents.length > 0 && <p role="status">A saved wallet request is unresolved. Do not submit again. Its durable guard survives reload in this browser and coordinates same-origin tabs while storage remains available. Only a known saved hash can be recovered below; hashless requests remain unresolved; no automatic resend or timeout release occurs.</p>}
+     {intents.map((intent) => <div key={intent.operationId} className="my-2 border border-amber-300 p-2">
+       <p className="break-all">{intent.kind} · {intent.state} · {intent.account}</p>
+-      <label className="block">Transaction hash from wallet history
++      {(intent.hash || intent.kind === 'pay') && <label className="block">{intent.hash ? 'Original saved transaction hash' : 'Candidate payment hash for independent verification (optional)'}
+         <input autoCapitalize="none" spellCheck={false} aria-describedby={message ? 'recovery-message' : undefined} className="block w-full border p-1" value={recoveryHashes[intent.operationId] ?? intent.hash ?? ''} onChange={(event) => setRecoveryHashes((old) => ({ ...old, [intent.operationId]: event.target.value }))} />
+-      </label>
+-      <button type="button" className="underline disabled:opacity-50" disabled={busy !== null} onClick={() => { void recover(intent); }}>Recover this request (read only)</button>
+-      <p>Hashless creation cannot be uniquely recovered here without wallet nonce evidence. A reverted hash cannot unlock a hashless request. Keep it unresolved for manual review. Replacement/cancellation and cross-device recovery are unsupported; do not clear storage to retry.</p>
++      </label>}
++      {intent.hash ? <button type="button" className="underline disabled:opacity-50" disabled={busy !== null} onClick={() => { void recover(intent); }}>Recover known hash (read only)</button> : <>
++        <p>This hashless request remains unresolved. A matching payment, successful or reverted, does not identify or resolve this original request. Do not resend or clear storage.</p>
++        {intent.kind === 'pay' && intent.invoiceId && <a className="underline" href={`#/receipt/${ARC_TESTNET.id}/${TESTNET_DEPLOYMENT.deploymentId}/${intent.invoiceId}${isBytes32(recoveryHashes[intent.operationId] ?? '') ? `?tx=${recoveryHashes[intent.operationId]}` : ''}`}>Verify invoice payment separately (read only)</a>}
++      </>}
++      <p>Replacement/cancellation and cross-device recovery are unsupported. Original request identity requires manual investigation; no automatic resend or timeout release occurs.</p>
+     </div>)}
+     <p>Saved hashes are unverified locators. Check status before another request. Browser storage is best-effort.</p>
+-    {submissions[0] && row(submissions[0])}
+-    {submissions.length > 1 && <details><summary className="cursor-pointer py-2">Older saved transactions ({submissions.length - 1})</summary>{submissions.slice(1).map(row)}</details>}
++    {pending.length > 0 && <section aria-label="Unresolved saved transactions"><p>Unresolved saved transactions ({pending.length})</p>{pending.map(row)}</section>}
++    {history.length > 0 && <details><summary className="cursor-pointer py-2">Completed transaction history ({history.length}) · not verified settlement</summary>{history.map(row)}</details>}
+     {message && <p id="recovery-message" role="status" className="mt-2">{message}</p>}
+   </aside>;
+ }
+ 
+-export function Layout({ activeTab, onTabChange, children, hideWallet = false }: LayoutProps) {
++export function Layout({ activeTab, onTabChange, children, hideWallet = false, hideSavedActivity = false }: LayoutProps) {
+   return (
+     <div className="min-h-dvh flex flex-col bg-stone-50 font-sans">
+       <a className="skip-link" href="#main-content" onClick={(event) => { event.preventDefault(); document.getElementById('main-content')?.focus(); }}>Skip to main content</a>
+@@ -140,7 +147,7 @@
+ 
+       {/* Content */}
+       <main id="main-content" tabIndex={-1} className="flex-1 min-w-0 max-w-5xl mx-auto w-full px-4 py-6">
+-        <SavedTransactions />
++        {!hideSavedActivity && <SavedTransactions />}
+         {children}
+       </main>
+ 
+@@ -149,6 +156,7 @@
+         <div className="footer-metadata max-w-5xl mx-auto px-4 py-3 text-sm text-stone-600 flex flex-wrap gap-x-4 gap-y-1">
+           <span>ArcProof prototype &mdash; G1 reviewed, not audited</span>
+           <span>Grant eligibility: HOLD</span>
++          <a className="underline" href="#/evidence">Build identity and evidence</a>
+           <span>Checked testnet deployment · live payment acceptance pending</span>
+         </div>
+         <div className="max-w-5xl mx-auto px-4 pb-4"><StudioAttribution /></div>
+--- baseline/src/components/arcproof/ReceiptFacts.tsx
++++ candidate/src/components/arcproof/ReceiptFacts.tsx
+@@ -23,8 +23,41 @@
+   // Schema version describes the envelope, not how its values were obtained.
+   const observedFacts = record.factsBasis === 'identity_bound_rpc_observation';
+   const legacyFacts = record.factsBasis === 'legacy_caller_supplied';
++  const identityIds = ['chain', 'runtime_code', 'receipt_identity', 'transaction_identity', 'payment_event', 'invoice_state', 'event_and_value', 'payment_block'];
++  const identityChecks = identityIds.map(id => record.checks?.find(check => check.id === id));
++  const identitySummary = identityChecks.every(check => check?.status === 'passed') ? 'Passed' :
++    identityChecks.filter(check => check && check.status !== 'passed').map(check => `${check!.id.replace(/_/g, ' ')}: ${check!.status.replace(/_/g, ' ')}`).join('; ') ||
++    'Not established by the available individual checks.';
+   const factLabel = observedFacts ? 'Observed' : legacyFacts ? 'Legacy caller-supplied' : 'Unattributed';
+   return <>
++    {!observedFacts && <p className="text-sm text-amber-900" data-receipt-field="factsBasis">
++      {legacyFacts ? 'Legacy caller-supplied values: provenance is not established by an identity-bound RPC snapshot.' : 'Provenance unavailable: these values have no established identity-bound RPC observation basis.'}
++    </p>}
++    {hasDiagnostics && <p className="text-sm font-semibold">{factLabel} invoice amount</p>}
++    <p className="receipt-amount font-semibold break-words" data-receipt-field="amountDisplay">{record.amountDisplay === null ? 'Unknown amount' : `${record.amountDisplay} test USDC`}</p>
++    <dl className="space-y-3 text-sm">
++      <div><dt className="font-semibold">Merchant</dt><dd className="font-mono break-all" data-receipt-field="merchant">{record.merchant ?? 'Unknown'}</dd></div>
++      <div><dt className="font-semibold">Payer</dt><dd className="font-mono break-all" data-receipt-field="payer">{record.payer ?? 'Unknown'}</dd></div>
++      <div><dt className="font-semibold">Payment time (UTC)</dt><dd data-receipt-field="paidAt">{paidAt}</dd></div>
++      <div><dt className="font-semibold">{factLabel} transaction fee (separate from invoice amount; not settlement proof)</dt><dd data-receipt-field="gasFeeNative">{fee}</dd></div>
++    </dl>
++    {record.controlled_demo && <p className="rounded-lg bg-amber-50 border border-amber-200 p-3 text-sm">controlled_demo · Controlled self-demo: payer and merchant are the same wallet. Not customer revenue or a two-wallet acceptance test.</p>}
++    <section className="text-sm space-y-2" aria-label="Evidence summary">
++      <h4 className="font-semibold">Evidence checked</h4>
++      <p>Invoice and transaction match: {identitySummary}</p>
++    <div className="text-sm space-y-1">
++      <p>Native settlement: {evidence ? `payer → contract (log ${evidence.payerToContractLogIndex}); contract → merchant (log ${evidence.contractToMerchantLogIndex})` : 'Not verified; two transfer legs are not established.'}</p>
++      <p>Finality: {evidence ? `checked finalized block ${evidence.finalizedBlockNumber}` : 'Not established by this result.'}</p>
++    </div>
++    </section>
++    <div className="text-sm space-y-2" aria-label="Next step">
++      <h4 className="font-semibold">Next step</h4>
++      <p>{evidence ? 'Share the verification link or export this record for independent checking. This verifies on-chain payment only, not delivery, legal identity, refunds, or revenue.' : 'Payment is not verified. Review the missing or failed checks below, check wallet history, and verify again when evidence is available. Do not resend an unresolved payment.'}</p>
++      {!evidence && record.message && <p className="text-amber-900">{record.message}</p>}
++    </div>
++    <p className="text-sm text-stone-600" data-receipt-field="csvImportNotice">{RECEIPT_CSV_IMPORT_NOTICE}</p>
++    <details className="text-sm break-all space-y-3 receipt-details">
++      <summary className="cursor-pointer py-2 font-semibold">Evidence details and raw receipt</summary>
+     {hasDiagnostics && <section className="space-y-2 text-sm" aria-label="Verification diagnostics">
+       <p className="font-semibold">Verification reason: <span data-receipt-field="reasonCode">{record.reasonCode ?? record.verificationStatus}</span></p>
+       <p data-receipt-field="message">{record.message ?? 'No diagnostic message available.'}</p>
+@@ -45,30 +78,11 @@
+         </ul>
+       </details>}
+     </section>}
+-    {!observedFacts && <p className="text-sm text-amber-900" data-receipt-field="factsBasis">
+-      {legacyFacts ? 'Legacy caller-supplied values: provenance is not established by an identity-bound RPC snapshot.' : 'Provenance unavailable: these values have no established identity-bound RPC observation basis.'}
+-    </p>}
+-    {hasDiagnostics && <p className="text-sm font-semibold">{factLabel} invoice amount</p>}
+-    <p className="text-2xl font-semibold break-words" data-receipt-field="amountDisplay">{record.amountDisplay === null ? 'Unknown amount' : `${record.amountDisplay} test USDC`}</p>
+-    <dl className="space-y-3 text-sm">
+-      <div><dt className="font-semibold">Merchant</dt><dd className="font-mono break-all" data-receipt-field="merchant">{record.merchant ?? 'Unknown'}</dd></div>
+-      <div><dt className="font-semibold">Payer</dt><dd className="font-mono break-all" data-receipt-field="payer">{record.payer ?? 'Unknown'}</dd></div>
+-      <div><dt className="font-semibold">Payment time (UTC)</dt><dd data-receipt-field="paidAt">{paidAt}</dd></div>
+-      <div><dt className="font-semibold">{factLabel} transaction fee (separate from invoice amount; not settlement proof)</dt><dd data-receipt-field="gasFeeNative">{fee}</dd></div>
+-    </dl>
+     {hasDiagnostics && <dl className="space-y-2 text-sm break-all" aria-label={`${factLabel} receipt inclusion`}>
+       <div><dt className="font-semibold">{factLabel} transaction block</dt><dd data-receipt-field="observedBlockNumber">{record.observedReceipt?.blockNumber ?? 'Unknown'}</dd></div>
+       <div><dt className="font-semibold">{factLabel} block hash</dt><dd data-receipt-field="observedBlockHash">{record.observedReceipt?.blockHash ?? 'Unknown'}</dd></div>
+       <div><dt className="font-semibold">Fact provenance</dt><dd>{record.factsBasis?.replace(/_/g, ' ') ?? 'Unknown'}</dd></div>
+     </dl>}
+-    {record.controlled_demo && <p className="rounded-lg bg-amber-50 border border-amber-200 p-3 text-sm">controlled_demo · Controlled self-demo: payer and merchant are the same wallet. Not customer revenue or a two-wallet acceptance test.</p>}
+-    <div className="text-sm space-y-1">
+-      <p>Native settlement: {evidence ? `payer → contract (log ${evidence.payerToContractLogIndex}); contract → merchant (log ${evidence.contractToMerchantLogIndex})` : 'Not verified; two transfer legs are not established.'}</p>
+-      <p>Finality: {evidence ? `checked finalized block ${evidence.finalizedBlockNumber}` : 'Not established by this result.'}</p>
+-    </div>
+-    <p className="text-sm text-stone-600" data-receipt-field="csvImportNotice">{RECEIPT_CSV_IMPORT_NOTICE}</p>
+-    <details className="text-xs break-all space-y-2 receipt-details">
+-      <summary className="cursor-pointer py-2 font-semibold">Raw receipt details</summary>
+       <dl className="space-y-2">
+         <div><dt>Chain / deployment</dt><dd>{record.chainId} / {record.deploymentId}</dd></div>
+         <div><dt>Contract</dt><dd>{record.contract}</dd></div>
+--- baseline/src/components/arcproof/TestnetScreens.tsx
++++ candidate/src/components/arcproof/TestnetScreens.tsx
+@@ -3,7 +3,6 @@
+ import { formatUnits, type Hex } from 'viem';
+ import { ConnectKitButton } from 'connectkit';
+ import { ReceiptFacts } from './ReceiptFacts';
+-import { DashboardScreen } from './DashboardScreen';
+ import { AtomicForwardingWarning } from './Layout';
+ import { formatAmountDisplay } from '../../arcproof/amountParser';
+ import { ARC_TESTNET, TESTNET_DEPLOYMENT, ZERO_TERMS, explorerTx, isBytes32 } from '../../arcproof/testnet';
+@@ -17,9 +16,9 @@
+ import { recordSubmission, updateSubmission, useSubmissions } from '../../arcproof/submissions';
+ import { buildReceiptExport, exportReceiptsJson, exportReceiptsCsv } from '../../arcproof/exportUtils';
+ 
+-const panel = 'bg-white border border-stone-200 rounded-xl p-5 space-y-3';
++const panel = 'arcproof-panel bg-white border border-stone-200 rounded-xl p-5 space-y-3';
+ const button = 'rounded-lg px-4 py-2 bg-teal-700 text-white disabled:bg-stone-200 disabled:text-stone-500';
+-const input = 'w-full rounded-lg border border-stone-300 px-3 py-2 font-mono text-sm';
++const input = 'w-full rounded-lg border border-stone-500 px-3 py-2 font-mono text-base';
+ const route = (kind: 'pay' | 'receipt', id: Hex, tx?: Hex) =>
+   `#/${kind}/${ARC_TESTNET.id}/${TESTNET_DEPLOYMENT.deploymentId}/${id}${tx ? `?tx=${tx}` : ''}`;
+ 
+@@ -32,8 +31,15 @@
+ function Review({ action, busy, confirm, cancel }: {
+   action: PreparedAction; busy: boolean; confirm: () => void; cancel: () => void;
+ }) {
++  const title = useRef<HTMLHeadingElement>(null);
++  const returnFocus = useRef<HTMLElement | null>(null);
++  useEffect(() => {
++    returnFocus.current = document.activeElement instanceof HTMLElement ? document.activeElement : null;
++    title.current?.focus();
++  }, []);
++  function cancelReview() { cancel(); returnFocus.current?.focus(); }
+   return <section className={`${panel} border-teal-300`} aria-label="Review testnet transaction">
+-    <h3 className="font-semibold">Review {action.kind === 'create' ? 'invoice creation' : 'test payment'}</h3>
++    <h3 ref={title} tabIndex={-1} className="font-semibold">Review {action.kind === 'create' ? 'invoice creation' : 'test payment'}</h3>
+     <p>Network: Arc Testnet (5042002)</p>
+     <p>Invoice amount: {formatAmountDisplay(action.amountNative)} test USDC</p>
+     <p className="break-all">From: <span className="font-mono">{action.session.account}</span></p>
+@@ -48,7 +54,7 @@
+     <p className="text-sm text-stone-600">Only click below when you are ready to inspect and approve in your wallet. A submitted transaction cannot be cancelled here.</p>
+     <div className="flex flex-wrap gap-3">
+       <button type="button" className={button} disabled={busy} onClick={confirm}>{busy ? 'Waiting for wallet / network…' : 'Open wallet to approve'}</button>
+-      <button type="button" className="border rounded-lg px-4 py-2" disabled={busy} onClick={cancel}>Cancel review</button>
++      <button type="button" className="border rounded-lg px-4 py-2" disabled={busy} onClick={cancelReview}>Cancel review</button>
+     </div>
+   </section>;
+ }
+@@ -83,7 +89,6 @@
+ 
+ function TestnetDashboardSession({ wallet }: { wallet: ReturnType<typeof useTestnetWallet> }) {
+   const operation = useSafeOperation(wallet.sessionKey);
+-  const [offline, setOffline] = useState(false);
+   const [amount, setAmount] = useState('0.20');
+   const [hours, setHours] = useState(24);
+   const [action, setAction] = useState<PreparedAction | null>(null);
+@@ -93,7 +98,15 @@
+   const [history, setHistory] = useState<LoadedInvoice[]>([]);
+   const [nextNonce, setNextNonce] = useState(0n);
+   const [page, setPage] = useState(0);
+-  const [copied, setCopied] = useState(false);
++  const [copiedInvoiceId, setCopiedInvoiceId] = useState<Hex | null>(null);
++  const copyVersion = useRef(0);
++  const currentInvoiceId = useRef<Hex | null>(null);
++  useEffect(() => () => { copyVersion.current += 1; currentInvoiceId.current = null; }, []);
++  function invalidateCopy() {
++    copyVersion.current += 1;
++    currentInvoiceId.current = null;
++    setCopiedInvoiceId(null);
++  }
+   const canUseWallet = wallet.session?.chainId === ARC_TESTNET.id;
+ 
+   async function refreshHistory(targetPage = page) {
+@@ -110,6 +123,7 @@
+   async function review() {
+     const op = operation.start();
+     if (!op || !wallet.session) { op?.finish(); return; }
++    invalidateCopy();
+     setBusy(true); setError(''); setAction(null); setCreated(null);
+     try {
+       const prepared = await prepareCreate(testnetClient, wallet.session, amount, hours);
+@@ -138,32 +152,33 @@
+       }
+       const invoice = await confirmCreatedInvoice(testnetClient, action, hash);
+       updateSubmission(hash, 'included');
+-      if (op.current()) { setCreated(invoice); setHistory((old) => [invoice, ...old.filter((x) => x.invoiceId !== invoice.invoiceId)]); }
++      if (op.current()) { invalidateCopy(); currentInvoiceId.current = invoice.invoiceId; setCreated(invoice); setHistory((old) => [invoice, ...old.filter((x) => x.invoiceId !== invoice.invoiceId)]); }
+     } catch (e) {
+       if (op.current()) { setAction(null); setError(`${errorMessage(e)}${hash ? ' The submitted hash is saved. Inspect it before any new action.' : ' If your wallet may have submitted a transaction, inspect its history before trying again.'}`); }
+     } finally { op.finish(); if (op.current()) setBusy(false); }
+   }
+ 
+   async function copyLink(id: Hex) {
++    if (currentInvoiceId.current !== id) return;
++    const token = ++copyVersion.current;
++    setCopiedInvoiceId(null); setError('');
++    const current = () => copyVersion.current === token && currentInvoiceId.current === id;
+     try {
+       await navigator.clipboard.writeText(`${window.location.href.split('#')[0]}${route('pay', id)}`);
+-      setCopied(true);
+-    } catch { setError('Clipboard access was unavailable. Open the payment link and copy its browser address.'); }
+-  }
+-
+-  if (offline) return <div className="space-y-4">
+-    <button className="underline text-sm" onClick={() => setOffline(false)}>Back to live testnet</button>
+-    <DashboardScreen />
+-  </div>;
+-
+-  return <div className="max-w-xl mx-auto space-y-5">
++      if (current()) setCopiedInvoiceId(id);
++    } catch {
++      if (current()) setError('Clipboard access was unavailable. Open the payment link and copy its browser address.');
++    }
++  }
++
++  return <div className="max-w-2xl mx-auto space-y-5">
+     <form className={panel} aria-label="Create testnet invoice" aria-busy={busy} onSubmit={(event) => {
+       event.preventDefault();
+       if (!busy && canUseWallet && !action) void review();
+     }}>
+       <div className="flex justify-between items-center gap-3 flex-wrap">
+         <h2 className="font-semibold text-lg">Create a testnet invoice</h2>
+-        <button type="button" className="underline text-sm" disabled={busy} onClick={() => setOffline(true)}>Use offline simulation instead</button>
++        <a className="underline text-sm" href="#/demo">Use offline simulation instead</a>
+       </div>
+       {!wallet.session && <p>Connect an ordinary EOA wallet using the button above. No signature is needed to read invoices.</p>}
+       {wallet.session && !canUseWallet && <p className="text-amber-800">Switch to Arc Testnet (5042002) in your wallet. Mainnet and other networks cannot create or pay here.</p>}
+@@ -183,7 +198,7 @@
+       <p>{formatAmountDisplay(created.amountNative)} test USDC · unpaid unless the chain now reports otherwise</p>
+       <div className="flex gap-3 flex-wrap">
+         <a className="underline" href={route('pay', created.invoiceId)}>Open payment page</a>
+-        <button className="underline" onClick={() => void copyLink(created.invoiceId)}>{copied ? 'Link copied' : 'Copy payment link'}</button>
++        <button className="underline" onClick={() => void copyLink(created.invoiceId)}>{copiedInvoiceId === created.invoiceId ? `Link copied for invoice …${created.invoiceId.slice(-4)}` : 'Copy payment link'}</button>
+       </div>
+     </section>}
+     <section className={panel}>
+@@ -268,14 +283,15 @@
+ 
+   const canPay = !!invoice && !invoice.paid && invoice.termsHash === ZERO_TERMS &&
+     wallet.session?.chainId === ARC_TESTNET.id && !pending;
+-  return <div className="max-w-xl mx-auto space-y-4">
++  return <div className="max-w-2xl mx-auto space-y-4">
+     <section className={panel}>
++      <p className="text-sm font-semibold text-stone-600">Arc Testnet · test USDC only</p>
+       <h2 className="font-semibold text-lg">Testnet payment request</h2>
+       <p className="text-xs font-mono break-all">{invoiceId}</p>
+       {invoice ? <>
+-        <p className="text-xl font-semibold">{formatAmountDisplay(invoice.amountNative)} test USDC</p>
++        <p className="receipt-amount font-semibold">{formatAmountDisplay(invoice.amountNative)} test USDC</p>
+         <p className="break-all">Merchant: <span className="font-mono text-sm">{invoice.merchant}</span></p>
+-        <p>Expires: {new Date(Number(invoice.expiresAt) * 1000).toLocaleString()}</p>
++        <p>Expires: {new Date(Number(invoice.expiresAt) * 1000).toISOString()} (UTC)</p>
+         <p role="status">{invoice.paid ? 'Paid according to contract state. Verify the receipt independently below.' : 'Unpaid according to contract state. Fresh block time and terms are checked before signing.'}</p>
+         {invoice.termsHash !== ZERO_TERMS && <p className="text-amber-800">Unsupported attached terms. This page is read-only and will not request a payment.</p>}
+       </> : <p>Invoice amount, recipient and expiry are unavailable until trusted chain data loads.</p>}
+@@ -302,6 +318,7 @@
+   const [copied, setCopied] = useState(false);
+   const [verified, setVerified] = useState<Awaited<ReturnType<typeof verifyTestnetReceipt>> | null>(null);
+   const sequence = useRef(0);
++  const receiptCopyVersion = useRef(0);
+   const activeRequest = useRef<number | null>(null);
+   function edit(field: 'id' | 'tx', value: string) {
+     sequence.current += 1; activeRequest.current = null;
+@@ -351,16 +368,18 @@
+   async function copyVerificationLink() {
+     if (!verified || !isBytes32(verified.invoice.invoiceId) || !isBytes32(verified.hash)) return;
+     const token = sequence.current;
++    const copyToken = ++receiptCopyVersion.current;
++    setCopied(false); setError('');
+     const base = new URL(window.location.href);
+     base.search = ''; base.hash = route('receipt', verified.invoice.invoiceId, verified.hash);
+     try {
+       await navigator.clipboard.writeText(base.href);
+-      if (sequence.current === token) setCopied(true);
++      if (sequence.current === token && receiptCopyVersion.current === copyToken) setCopied(true);
+     } catch {
+-      if (sequence.current === token) setError('Clipboard access was unavailable. Use the verification link below and copy its browser address.');
++      if (sequence.current === token && receiptCopyVersion.current === copyToken) setError('Clipboard access was unavailable. Use the verification link below and copy its browser address.');
+     }
+   }
+-  return <div className="max-w-xl mx-auto space-y-4 receipt-page">
++  return <div className="max-w-2xl mx-auto space-y-4 receipt-page">
+     <form className={`${panel} print:hidden`} onSubmit={(event) => { event.preventDefault(); void verify(); }}>
+       <h2 className="font-semibold text-lg">Verify a testnet receipt</h2>
+       <p className="text-sm">Read-only verification: no wallet or signature required. Network and contract come only from the checked manifest, never from imported receipt flags.</p>
+@@ -375,9 +394,9 @@
+     </form>
+     {error && <p id="receipt-error" role="alert" className="rounded-lg bg-amber-50 p-3 text-sm text-amber-900 break-words">{error}</p>}
+     {verified && record && <section className={panel} aria-label="Receipt result">
++      <p className="text-sm font-semibold text-stone-600">Arc Testnet · test USDC only · Not mainnet</p>
+       <div role="status" aria-live="polite">
+         <h3 className={`font-semibold ${success ? 'text-teal-800' : 'text-amber-900'}`}>{success ? 'Verified testnet payment' : verified.result.status === 'UNVERIFIED_ARC_EVIDENCE' ? 'Standard checks passed; settlement evidence incomplete' : `Not verified: ${verified.result.status}`}</h3>
+-        <p className="text-sm break-words">{verified.result.message}</p>
+       </div>
+       {!success && <p className="text-sm text-amber-900">The following are observed invoice/receipt fields, not verified payment proof.</p>}
+       <ReceiptFacts record={record} />
+--- baseline/src/index.css
++++ candidate/src/index.css
+@@ -10,6 +10,9 @@
+   margin: 0;
+   font-family: system-ui, sans-serif;
+   min-height: 100dvh;
++  background: #f7f7f2;
++  color: #1c1917;
++  line-height: 1.5;
+ }
+ 
+ @media print {
+@@ -20,12 +23,13 @@
+   }
+   body:has(.receipt-page) .studio-attribution { position: static !important; width: fit-content; margin: 1rem; box-shadow: none !important; }
+   .receipt-page { max-width: none; }
+-  .receipt-page section { break-inside: avoid; box-shadow: none; }
++  .receipt-page section { break-inside: auto; box-shadow: none; }
+   .receipt-page a { overflow-wrap: anywhere; }
+ }
+ 
+ /* Normal-flow attribution cannot cover form fields or receipt evidence. */
+ .studio-attribution {
++  min-height: 2.75rem;
+   display: inline-flex;
+   align-items: center;
+   gap: 0.5rem;
+@@ -61,3 +65,20 @@
+   .receipt-page .receipt-details { break-inside: auto; }
+   .receipt-page .receipt-details > :not(summary) { display: block !important; }
+ }
++
++/* Evidence stays readable without adding a new visual system. */
++.arcproof-panel { padding: 1.5rem; }
++.receipt-amount { font-size: 2.5rem; line-height: 1.2; overflow-wrap: anywhere; }
++main a { min-height: 2.75rem; display: inline-flex; align-items: center; overflow-wrap: anywhere; }
++main .receipt-details { overflow-wrap: anywhere; }
++@media (max-width: 639px) {
++  .arcproof-panel { padding: 1rem; }
++  .receipt-amount { font-size: 2rem; line-height: 1.25; }
++  main button { max-width: 100%; white-space: normal; }
++  main input { font-size: 1rem; }
++}
++@media print {
++  .receipt-page details > :not(summary) { display: block !important; }
++  .receipt-page details, .receipt-page dl { break-inside: auto; }
++  .receipt-page dt { break-after: avoid; }
++}
+--- baseline/src/main.tsx
++++ candidate/src/main.tsx
+@@ -26,7 +26,7 @@
+ 
+ createRoot(document.getElementById('root')!).render(
+   <StrictMode>
+-    <WagmiProvider config={config}>
++    <WagmiProvider config={config} reconnectOnMount={false}>
+       <QueryClientProvider client={queryClient}>
+         <ConnectKitProvider>
+           <App />
+--- baseline/vite.config.ts
++++ candidate/vite.config.ts
+@@ -2,15 +2,70 @@
+ import { defineConfig } from 'vite'
+ import react from '@vitejs/plugin-react'
+ import path from 'path'
++import { createHash } from 'node:crypto'
++import { readFileSync, readdirSync, existsSync, writeFileSync } from 'node:fs'
+ import { nodePolyfills } from 'vite-plugin-node-polyfills'
+ 
++// Hash declared source/config inputs, not a synthetic local Git HEAD or node_modules.
++// The output manifest additionally hashes every emitted bundle asset except itself.
++function sourceSnapshot() {
++  const files: string[] = [];
++  function walk(relative: string) {
++    const absolute = path.resolve(__dirname, relative);
++    if (!existsSync(absolute)) return;
++    for (const entry of readdirSync(absolute, { withFileTypes: true })) {
++      if (entry.isSymbolicLink()) throw new Error(`Build input symlink not supported: ${relative}/${entry.name}`);
++      const child = `${relative}/${entry.name}`;
++      if (entry.isDirectory()) walk(child); else if (entry.isFile()) files.push(child);
++    }
++  }
++  for (const directory of ['src', 'public', 'contracts', 'scripts']) walk(directory);
++  for (const file of ['package.json', 'bun.lock', 'index.html', 'vite.config.ts', 'tsconfig.json', 'postcss.config.js', 'tailwind.config.js', 'tailwind.config.ts', 'foundry.toml', 'remappings.txt']) {
++    if (existsSync(path.resolve(__dirname, file))) files.push(file);
++  }
++  const records = files.sort().map(file => ({ path: file, sha256: createHash('sha256').update(readFileSync(path.resolve(__dirname, file))).digest('hex') }));
++  return { records, sha256: createHash('sha256').update(JSON.stringify(records)).digest('hex') };
++}
++const snapshot = sourceSnapshot();
++const buildIdentity = {
++  sourceCommit: null,
++  verifiedBaseCommit: /^[0-9a-f]{40}$/.test(process.env.ARCPROOF_VERIFIED_BASE_SHA ?? '') ? process.env.ARCPROOF_VERIFIED_BASE_SHA : null,
++  sourceSnapshotSha256: snapshot.sha256,
++  builtAtUTC: new Date().toISOString(),
++  sourceState: 'candidate',
++};
++
+ export default defineConfig({
++  define: { __ARCPROOF_BUILD_IDENTITY__: JSON.stringify(buildIdentity) },
+   test: {
+     environment: 'node',
+     include: ['src/**/*.test.ts', 'src/**/*.test.tsx'],
+     globals: false,
+   },
+-  plugins: [react(), nodePolyfills({
++  plugins: [{
++    name: 'arcproof-build-provenance',
++    // Some Vite plugins still transform outputs after generateBundle. Re-hash the
++    // actual written bytes, not an intermediate chunk, before declaring identity.
++    writeBundle(options, bundle) {
++      const directory = path.resolve(__dirname, options.dir ?? 'dist');
++      const manifestPath = path.join(directory, 'build-provenance.json');
++      const manifest = JSON.parse(readFileSync(manifestPath, 'utf8'));
++      manifest.outputs = Object.keys(bundle).filter(file => file !== 'build-provenance.json').sort().map(file => ({
++        path: file, sha256: createHash('sha256').update(readFileSync(path.join(directory, file))).digest('hex'),
++      }));
++      writeFileSync(manifestPath, JSON.stringify(manifest, null, 2));
++    },
++    generateBundle(_options, bundle) {
++      const outputs = Object.entries(bundle).sort(([a], [b]) => a.localeCompare(b)).map(([file, output]) => ({
++        path: file,
++        sha256: createHash('sha256').update(output.type === 'chunk' ? output.code : output.source).digest('hex'),
++      }));
++      this.emitFile({ type: 'asset', fileName: 'build-provenance.json', source: JSON.stringify({
++        ...buildIdentity, schema: 'arcproof-build-provenance-v1', sourceInputs: snapshot.records, outputs,
++        limits: 'Candidate input and generated bundle hashes only. Excludes this manifest, copied public assets, installed dependency bytes, and toolchain binaries. Not a Git commit, live host readback, test result, or chain attestation.',
++      }, null, 2) });
++    },
++  }, react(), nodePolyfills({
+     // Bundle inspection needs only the existing browser Buffer/process globals.
+     // Do not alias every Node core module (crypto/fs/stream/etc.) by default.
+     include: ['buffer', 'process'],

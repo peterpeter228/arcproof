@@ -1,0 +1,27 @@
+{
+  "source": "https://rpc.mainnet.arc.io",
+  "documentation": "https://docs.arc.io/arc/references/rpc-endpoints.md",
+  "startedAt": "2026-10-21T16:32:56.279935+00:00",
+  "request": [
+    {
+      "jsonrpc": "2.0",
+      "id": "chain-id",
+      "method": "eth_chainId",
+      "params": []
+    },
+    {
+      "jsonrpc": "2.0",
+      "id": "finalized-header",
+      "method": "eth_getBlockByNumber",
+      "params": [
+        "finalized",
+        false
+      ]
+    }
+  ],
+  "scope": "Single mainnet metadata batch, distinct from prior testnet verification. No transactions or account reads.",
+  "httpStatus": 403,
+  "error": "HTTP Error 403: Forbidden",
+  "body": "error code: 1010\n",
+  "finishedAt": "2026-10-21T16:33:01.295226+00:00"
+}

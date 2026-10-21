@@ -1,0 +1,483 @@
+{
+  "candidate": "NEW reconstructed candidate; no prior test claims inherited",
+  "runAtExecutorClock": "2026-10-21T16:17:11.027Z",
+  "executorClockNote": "Executor wall clock was observed approximately nine hours ahead of authoritative clock tool. Do not treat it as authoritative UTC.",
+  "scope": "injected offline mocks only; not actual browser, wallet, RPC, payment, finality or audit evidence",
+  "networkAttempts": 0,
+  "passed": 114,
+  "failed": 0,
+  "results": [
+    {
+      "name": "identity: empty production manifest, testnet-only frozen identity and exact full runtime",
+      "status": "passed"
+    },
+    {
+      "name": "create: successful action uses refreshed lower gas/price and exact chain/value",
+      "status": "passed"
+    },
+    {
+      "name": "create: prevents signing after wrong current chain",
+      "status": "passed"
+    },
+    {
+      "name": "create: prevents signing after changed account",
+      "status": "passed"
+    },
+    {
+      "name": "create: prevents signing after changed connection version",
+      "status": "passed"
+    },
+    {
+      "name": "create: prevents signing after disconnected",
+      "status": "passed"
+    },
+    {
+      "name": "create: prevents signing after changed RPC chain",
+      "status": "passed"
+    },
+    {
+      "name": "create: prevents signing after changed runtime",
+      "status": "passed"
+    },
+    {
+      "name": "create: prevents signing after changed deployment",
+      "status": "passed"
+    },
+    {
+      "name": "create: prevents signing after changed target",
+      "status": "passed"
+    },
+    {
+      "name": "create: prevents signing after expired review",
+      "status": "passed"
+    },
+    {
+      "name": "create: prevents signing after payer now has code",
+      "status": "passed"
+    },
+    {
+      "name": "create: prevents signing after wallet actual chain changed",
+      "status": "passed"
+    },
+    {
+      "name": "create: prevents signing after wallet actual account changed",
+      "status": "passed"
+    },
+    {
+      "name": "create: prevents signing after higher gas",
+      "status": "passed"
+    },
+    {
+      "name": "create: prevents signing after higher gas price",
+      "status": "passed"
+    },
+    {
+      "name": "create: prevents signing after higher gas but lower fee",
+      "status": "passed"
+    },
+    {
+      "name": "create: prevents signing after higher gas price but lower fee",
+      "status": "passed"
+    },
+    {
+      "name": "create: prevents signing after insufficient balance",
+      "status": "passed"
+    },
+    {
+      "name": "create: prevents signing after context invalidated during simulation",
+      "status": "passed"
+    },
+    {
+      "name": "create: prevents signing after review expires during preflight",
+      "status": "passed"
+    },
+    {
+      "name": "pay: successful action uses refreshed lower gas/price and exact chain/value",
+      "status": "passed"
+    },
+    {
+      "name": "pay: prevents signing after wrong current chain",
+      "status": "passed"
+    },
+    {
+      "name": "pay: prevents signing after changed account",
+      "status": "passed"
+    },
+    {
+      "name": "pay: prevents signing after changed connection version",
+      "status": "passed"
+    },
+    {
+      "name": "pay: prevents signing after disconnected",
+      "status": "passed"
+    },
+    {
+      "name": "pay: prevents signing after changed RPC chain",
+      "status": "passed"
+    },
+    {
+      "name": "pay: prevents signing after changed runtime",
+      "status": "passed"
+    },
+    {
+      "name": "pay: prevents signing after changed deployment",
+      "status": "passed"
+    },
+    {
+      "name": "pay: prevents signing after changed target",
+      "status": "passed"
+    },
+    {
+      "name": "pay: prevents signing after expired review",
+      "status": "passed"
+    },
+    {
+      "name": "pay: prevents signing after payer now has code",
+      "status": "passed"
+    },
+    {
+      "name": "pay: prevents signing after wallet actual chain changed",
+      "status": "passed"
+    },
+    {
+      "name": "pay: prevents signing after wallet actual account changed",
+      "status": "passed"
+    },
+    {
+      "name": "pay: prevents signing after higher gas",
+      "status": "passed"
+    },
+    {
+      "name": "pay: prevents signing after higher gas price",
+      "status": "passed"
+    },
+    {
+      "name": "pay: prevents signing after higher gas but lower fee",
+      "status": "passed"
+    },
+    {
+      "name": "pay: prevents signing after higher gas price but lower fee",
+      "status": "passed"
+    },
+    {
+      "name": "pay: prevents signing after insufficient balance",
+      "status": "passed"
+    },
+    {
+      "name": "pay: prevents signing after context invalidated during simulation",
+      "status": "passed"
+    },
+    {
+      "name": "pay: prevents signing after review expires during preflight",
+      "status": "passed"
+    },
+    {
+      "name": "pay: action-time already paid",
+      "status": "passed"
+    },
+    {
+      "name": "pay: action-time invoice expires",
+      "status": "passed"
+    },
+    {
+      "name": "pay: action-time nonzero terms",
+      "status": "passed"
+    },
+    {
+      "name": "pay: action-time merchant changes",
+      "status": "passed"
+    },
+    {
+      "name": "pay: action-time amount changes",
+      "status": "passed"
+    },
+    {
+      "name": "pay: action-time amount above cap",
+      "status": "passed"
+    },
+    {
+      "name": "pay: action-time amount sub-quantum",
+      "status": "passed"
+    },
+    {
+      "name": "pay: action-time merchant now has code",
+      "status": "passed"
+    },
+    {
+      "name": "pay: action-time changed calldata",
+      "status": "passed"
+    },
+    {
+      "name": "pay: action-time changed value",
+      "status": "passed"
+    },
+    {
+      "name": "pay: action-time changed payment chain",
+      "status": "passed"
+    },
+    {
+      "name": "pay: action-time changed payment deployment",
+      "status": "passed"
+    },
+    {
+      "name": "create: action-time expired invoice",
+      "status": "passed"
+    },
+    {
+      "name": "create: action-time expiry exceeds seven days",
+      "status": "passed"
+    },
+    {
+      "name": "create: action-time nonzero value",
+      "status": "passed"
+    },
+    {
+      "name": "create: action-time amount above cap",
+      "status": "passed"
+    },
+    {
+      "name": "create: action-time sub-quantum amount",
+      "status": "passed"
+    },
+    {
+      "name": "create: action-time changed calldata",
+      "status": "passed"
+    },
+    {
+      "name": "repeat-submit: only one wallet send while first wallet request unresolved",
+      "status": "passed"
+    },
+    {
+      "name": "uncertain wallet result: invalid hash blocks same-invoice retry and another payer",
+      "status": "passed"
+    },
+    {
+      "name": "uncertain wallet result: transport error blocks retry without resending",
+      "status": "passed"
+    },
+    {
+      "name": "explicit wallet rejection: code 4001 releases request lease",
+      "status": "passed"
+    },
+    {
+      "name": "returned hash retained after context disappears and storage quota fails",
+      "status": "passed"
+    },
+    {
+      "name": "case-insensitive payment lease and hash deduplication",
+      "status": "passed"
+    },
+    {
+      "name": "retention: every unresolved hash survives 60 completed insertions",
+      "status": "passed"
+    },
+    {
+      "name": "receipt: coherent fixture remains UNVERIFIED_ARC_EVIDENCE / verified false",
+      "status": "passed"
+    },
+    {
+      "name": "receipt: rejects mismatched receipt replacement",
+      "status": "passed"
+    },
+    {
+      "name": "receipt: rejects mismatched transaction replacement",
+      "status": "passed"
+    },
+    {
+      "name": "receipt: rejects mismatched receipt sender",
+      "status": "passed"
+    },
+    {
+      "name": "receipt: rejects mismatched transaction sender",
+      "status": "passed"
+    },
+    {
+      "name": "receipt: rejects mismatched receipt target",
+      "status": "passed"
+    },
+    {
+      "name": "receipt: rejects mismatched transaction target",
+      "status": "passed"
+    },
+    {
+      "name": "receipt: rejects mismatched transaction chain",
+      "status": "passed"
+    },
+    {
+      "name": "receipt: rejects mismatched transaction value",
+      "status": "passed"
+    },
+    {
+      "name": "receipt: rejects mismatched transaction invoice",
+      "status": "passed"
+    },
+    {
+      "name": "receipt: rejects mismatched event transaction hash",
+      "status": "passed"
+    },
+    {
+      "name": "receipt: rejects mismatched event duplicate",
+      "status": "passed"
+    },
+    {
+      "name": "receipt: rejects mismatched event sender",
+      "status": "passed"
+    },
+    {
+      "name": "receipt: rejects mismatched event amount",
+      "status": "passed"
+    },
+    {
+      "name": "receipt: rejects mismatched event malformed",
+      "status": "passed"
+    },
+    {
+      "name": "receipt: rejects mismatched event invalid log index",
+      "status": "passed"
+    },
+    {
+      "name": "receipt: rejects mismatched receipt block hash",
+      "status": "passed"
+    },
+    {
+      "name": "receipt: rejects mismatched invoice paid block",
+      "status": "passed"
+    },
+    {
+      "name": "receipt: rejects mismatched invoice paid time",
+      "status": "passed"
+    },
+    {
+      "name": "receipt: rejects mismatched reverted receipt",
+      "status": "passed"
+    },
+    {
+      "name": "receipt recovery: queries exactly paid block and bound invoice; rejects multiple results",
+      "status": "passed"
+    },
+    {
+      "name": "receipt export: returned invoice is the same read snapshot checked by verifier",
+      "status": "passed"
+    },
+    {
+      "name": "saved receipt: reconciliation binds exact transaction/function/invoice without signing",
+      "status": "passed"
+    },
+    {
+      "name": "saved receipt: refuses mismatched receipt hash",
+      "status": "passed"
+    },
+    {
+      "name": "saved receipt: refuses mismatched transaction hash",
+      "status": "passed"
+    },
+    {
+      "name": "saved receipt: refuses mismatched sender",
+      "status": "passed"
+    },
+    {
+      "name": "saved receipt: refuses mismatched target",
+      "status": "passed"
+    },
+    {
+      "name": "saved receipt: refuses mismatched chain",
+      "status": "passed"
+    },
+    {
+      "name": "saved receipt: refuses mismatched invoice",
+      "status": "passed"
+    },
+    {
+      "name": "saved receipt: refuses mismatched function",
+      "status": "passed"
+    },
+    {
+      "name": "saved receipt: explicit reverted receipt releases repeat-payment registry lock",
+      "status": "passed"
+    },
+    {
+      "name": "receipt: fails closed on inconsistent log blockHash",
+      "status": "passed"
+    },
+    {
+      "name": "receipt: fails closed on inconsistent log blockNumber",
+      "status": "passed"
+    },
+    {
+      "name": "receipt: fails closed on inconsistent removed log",
+      "status": "passed"
+    },
+    {
+      "name": "creation read-back: binds transaction, exact event, derived ID and immutable terms",
+      "status": "passed"
+    },
+    {
+      "name": "creation read-back: rejects replaced receipt",
+      "status": "passed"
+    },
+    {
+      "name": "creation read-back: rejects replaced transaction",
+      "status": "passed"
+    },
+    {
+      "name": "creation read-back: rejects wrong transaction input",
+      "status": "passed"
+    },
+    {
+      "name": "creation read-back: rejects wrong transaction value",
+      "status": "passed"
+    },
+    {
+      "name": "creation read-back: rejects wrong transaction sender",
+      "status": "passed"
+    },
+    {
+      "name": "creation read-back: rejects wrong transaction chain",
+      "status": "passed"
+    },
+    {
+      "name": "creation read-back: rejects wrong event transaction",
+      "status": "passed"
+    },
+    {
+      "name": "creation read-back: rejects wrong event blockHash",
+      "status": "passed"
+    },
+    {
+      "name": "creation read-back: rejects wrong event blockNumber",
+      "status": "passed"
+    },
+    {
+      "name": "creation read-back: rejects duplicate creation event",
+      "status": "passed"
+    },
+    {
+      "name": "creation read-back: rejects changed read-back terms",
+      "status": "passed"
+    },
+    {
+      "name": "creation read-back: rejects removed creation log",
+      "status": "passed"
+    },
+    {
+      "name": "network isolation: no global fetch attempted",
+      "status": "passed"
+    }
+  ],
+  "sha256": {
+    "src/arcproof/testnet.ts": "729b3325f1b1574b9a9ea9c5e96061cd9228b25959c6ebd56b574313cc81c811",
+    "src/arcproof/testnetClient.ts": "65afd96d3a57c120d1ebf8eb327d90ee33b6285f73d9d81d0ac5ae5f7150b281",
+    "src/arcproof/useTestnetWallet.ts": "d512b3bcb1512604eaa9d5dd516b774807bcf82e54cebdcac15b23c80b61a1b6",
+    "src/arcproof/submissions.ts": "84dd624fc1a600dc90544f733fa697dd61ea9c7a0711cac76dfc33f09471e3ef",
+    "src/arcproof/preparedPayment.ts": "ed79c737cb2b4f503ec79aaeac1e659c86ca4144bc0343ebdd1e8a54a69421b5",
+    "src/arcproof/receiptVerifier.ts": "0c600345477339bf838bc07e44c44490d58fd0600822592447a2b466ba669599",
+    "src/arcproof/manifest.ts": "c65ef5a548db9454c838b5ce154b811403bbd96b91aebedfb585db587c533357",
+    "src/arcproof/arcproofAbi.ts": "9fd157cf47bfb185fe2f3740b54ee0ef09b0386dde6d7bd0cf0d6531e75621f7",
+    "src/arcproof/exportUtils.ts": "0417715ac3657d718bd106a450e9cd65b55ca3e731de6bc3670646ed0f270552",
+    "src/components/arcproof/TestnetScreens.tsx": "1df19f40552c4513d0ec1b30019a35e7e7ab3a02c13d306d3cb33dee873415d4",
+    "src/App.tsx": "9928b64c127c2664d45d30f71a88ef0afe4509825961032e2e05b65e1385f297",
+    "src/config.ts": "d49482737e8e8e3d347b886e9b740093ebb27ba0714805bba52d988c0c739432",
+    "evidence/g1/ArcProofInvoices.artifact.json": "278fe52ed5901c6ebf054a42275dd11917dcc8edebd992bbd1fd24ef09bec53b",
+    "qa/new-independent-review/service-probes.ts": "c48652de629d1308792911cd066d0fa63c98f251fe9b82175ddaca7d303338f3"
+  }
+}

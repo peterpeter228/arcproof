@@ -23,8 +23,43 @@ export function ReceiptFacts({ record }: { record: ReceiptExportRecord }) {
   // Schema version describes the envelope, not how its values were obtained.
   const observedFacts = record.factsBasis === 'identity_bound_rpc_observation';
   const legacyFacts = record.factsBasis === 'legacy_caller_supplied';
+  const identityIds = ['chain', 'runtime_code', 'receipt_identity', 'transaction_identity', 'payment_event', 'invoice_state', 'event_and_value', 'payment_block'];
+  const identityChecks = identityIds.map(id => record.checks?.find(check => check.id === id));
+  const identitySummary = identityChecks.every(check => check?.status === 'passed') ? 'Passed' :
+    identityIds.flatMap((id, index) => {
+      const check = identityChecks[index];
+      return check?.status === 'passed' ? [] : [`${id.replace(/_/g, ' ')}: ${check ? check.status.replace(/_/g, ' ') : 'not recorded'}`];
+    }).join('; ');
   const factLabel = observedFacts ? 'Observed' : legacyFacts ? 'Legacy caller-supplied' : 'Unattributed';
   return <>
+    {!observedFacts && <p className="text-sm text-amber-900" data-receipt-field="factsBasis">
+      {legacyFacts ? 'Legacy caller-supplied values: provenance is not established by an identity-bound RPC snapshot.' : 'Provenance unavailable: these values have no established identity-bound RPC observation basis.'}
+    </p>}
+    {hasDiagnostics && <p className="text-sm font-semibold">{factLabel} invoice amount</p>}
+    <p className="receipt-amount font-semibold break-words" data-receipt-field="amountDisplay">{record.amountDisplay === null ? 'Unknown amount' : `${record.amountDisplay} test USDC`}</p>
+    <dl className="space-y-3 text-sm">
+      <div><dt className="font-semibold">Merchant</dt><dd className="font-mono break-all" data-receipt-field="merchant">{record.merchant ?? 'Unknown'}</dd></div>
+      <div><dt className="font-semibold">Payer</dt><dd className="font-mono break-all" data-receipt-field="payer">{record.payer ?? 'Unknown'}</dd></div>
+      <div><dt className="font-semibold">Payment time (UTC)</dt><dd data-receipt-field="paidAt">{paidAt}</dd></div>
+      <div><dt className="font-semibold">{factLabel} transaction fee (separate from invoice amount; not settlement proof)</dt><dd data-receipt-field="gasFeeNative">{fee}</dd></div>
+    </dl>
+    {record.controlled_demo && <p className="rounded-lg bg-amber-50 border border-amber-200 p-3 text-sm">controlled_demo · Controlled self-demo: payer and merchant are the same wallet. Not customer revenue or a two-wallet acceptance test.</p>}
+    <section className="text-sm space-y-2" aria-label="Evidence summary">
+      <h4 className="font-semibold">Evidence checked</h4>
+      <p>Invoice and transaction match: {identitySummary}</p>
+    <div className="text-sm space-y-1">
+      <p>Native settlement: {evidence ? `payer → contract (log ${evidence.payerToContractLogIndex}); contract → merchant (log ${evidence.contractToMerchantLogIndex})` : 'Not verified; two transfer legs are not established.'}</p>
+      <p>Finality: {evidence ? `checked finalized block ${evidence.finalizedBlockNumber}` : 'Not established by this result.'}</p>
+    </div>
+    </section>
+    <div className="text-sm space-y-2" aria-label="Next step">
+      <h4 className="font-semibold">Next step</h4>
+      <p>{evidence ? 'Share the verification link or export this record for independent checking. This verifies on-chain payment only, not delivery, legal identity, refunds, or revenue.' : 'Payment is not verified. Review the missing or failed checks below, check wallet history, and verify again when evidence is available. Do not resend an unresolved payment.'}</p>
+      {!evidence && record.message && <p className="text-amber-900">{record.message}</p>}
+    </div>
+    <p className="text-sm text-stone-600" data-receipt-field="csvImportNotice">{RECEIPT_CSV_IMPORT_NOTICE}</p>
+    <details className="text-sm break-all space-y-3 receipt-details">
+      <summary className="cursor-pointer py-2 font-semibold">Evidence details and raw receipt</summary>
     {hasDiagnostics && <section className="space-y-2 text-sm" aria-label="Verification diagnostics">
       <p className="font-semibold">Verification reason: <span data-receipt-field="reasonCode">{record.reasonCode ?? record.verificationStatus}</span></p>
       <p data-receipt-field="message">{record.message ?? 'No diagnostic message available.'}</p>
@@ -45,30 +80,11 @@ export function ReceiptFacts({ record }: { record: ReceiptExportRecord }) {
         </ul>
       </details>}
     </section>}
-    {!observedFacts && <p className="text-sm text-amber-900" data-receipt-field="factsBasis">
-      {legacyFacts ? 'Legacy caller-supplied values: provenance is not established by an identity-bound RPC snapshot.' : 'Provenance unavailable: these values have no established identity-bound RPC observation basis.'}
-    </p>}
-    {hasDiagnostics && <p className="text-sm font-semibold">{factLabel} invoice amount</p>}
-    <p className="text-2xl font-semibold break-words" data-receipt-field="amountDisplay">{record.amountDisplay === null ? 'Unknown amount' : `${record.amountDisplay} test USDC`}</p>
-    <dl className="space-y-3 text-sm">
-      <div><dt className="font-semibold">Merchant</dt><dd className="font-mono break-all" data-receipt-field="merchant">{record.merchant ?? 'Unknown'}</dd></div>
-      <div><dt className="font-semibold">Payer</dt><dd className="font-mono break-all" data-receipt-field="payer">{record.payer ?? 'Unknown'}</dd></div>
-      <div><dt className="font-semibold">Payment time (UTC)</dt><dd data-receipt-field="paidAt">{paidAt}</dd></div>
-      <div><dt className="font-semibold">{factLabel} transaction fee (separate from invoice amount; not settlement proof)</dt><dd data-receipt-field="gasFeeNative">{fee}</dd></div>
-    </dl>
     {hasDiagnostics && <dl className="space-y-2 text-sm break-all" aria-label={`${factLabel} receipt inclusion`}>
       <div><dt className="font-semibold">{factLabel} transaction block</dt><dd data-receipt-field="observedBlockNumber">{record.observedReceipt?.blockNumber ?? 'Unknown'}</dd></div>
       <div><dt className="font-semibold">{factLabel} block hash</dt><dd data-receipt-field="observedBlockHash">{record.observedReceipt?.blockHash ?? 'Unknown'}</dd></div>
       <div><dt className="font-semibold">Fact provenance</dt><dd>{record.factsBasis?.replace(/_/g, ' ') ?? 'Unknown'}</dd></div>
     </dl>}
-    {record.controlled_demo && <p className="rounded-lg bg-amber-50 border border-amber-200 p-3 text-sm">controlled_demo · Controlled self-demo: payer and merchant are the same wallet. Not customer revenue or a two-wallet acceptance test.</p>}
-    <div className="text-sm space-y-1">
-      <p>Native settlement: {evidence ? `payer → contract (log ${evidence.payerToContractLogIndex}); contract → merchant (log ${evidence.contractToMerchantLogIndex})` : 'Not verified; two transfer legs are not established.'}</p>
-      <p>Finality: {evidence ? `checked finalized block ${evidence.finalizedBlockNumber}` : 'Not established by this result.'}</p>
-    </div>
-    <p className="text-sm text-stone-600" data-receipt-field="csvImportNotice">{RECEIPT_CSV_IMPORT_NOTICE}</p>
-    <details className="text-xs break-all space-y-2 receipt-details">
-      <summary className="cursor-pointer py-2 font-semibold">Raw receipt details</summary>
       <dl className="space-y-2">
         <div><dt>Chain / deployment</dt><dd>{record.chainId} / {record.deploymentId}</dd></div>
         <div><dt>Contract</dt><dd>{record.contract}</dd></div>

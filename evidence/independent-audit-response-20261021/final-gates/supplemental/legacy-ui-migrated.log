@@ -1,0 +1,9 @@
+
+ RUN  v4.1.12 /workspace/scratch/c01bd6fe117d/arcproof-current
+
+
+ Test Files  1 passed (1)
+      Tests  6 passed (6)
+   Start at  01:18:52
+   Duration  2.30s (transform 350ms, setup 0ms, import 772ms, tests 123ms, environment 869ms)
+

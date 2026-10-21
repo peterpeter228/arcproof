@@ -1,0 +1,14 @@
+{
+  "source": "https://rpc.testnet.arc.io",
+  "startedAt": "2026-10-21T16:02:27.187266+00:00",
+  "request": {
+    "jsonrpc": "2.0",
+    "id": "payment-receipt",
+    "method": "eth_getTransactionReceipt",
+    "params": [
+      "0x0987c87540b6701be5fe047c55a7ac1b9277fda7dd989f31c8ea3ccd25350ace"
+    ]
+  },
+  "error": "HTTP Error 403: Forbidden",
+  "finishedAt": "2026-10-21T16:02:30.322629+00:00"
+}

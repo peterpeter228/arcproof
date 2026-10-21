@@ -1,0 +1,3 @@
+66ba49466cff1c95fe4434a9a40661b8cd2e43bdfb12c3e2ede17918651f6c7d  arcproof-review-oct21/rules/ROUND2_ELIGIBILITY_MATRIX_20261021.md
+2e1690d24495532575f901f3389c957a96dffea00d2403af4bcf0d1359a00b58  arcproof-review-oct21/rules/official-round2-extraction.json
+db72f5ac2b44fe4157de4ed90f9cd89d41746f17033532f390142c543e0afcc1  arcproof-review-oct21/rules/qa-and-platform-terms-extraction.json

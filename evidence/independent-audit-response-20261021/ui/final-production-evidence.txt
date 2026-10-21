@@ -1,0 +1,192 @@
+Browser tab: 2, Title: "ArcProof — Prototype", URL: "http://127.0.0.1:5174/#/evidence".
+1 AXWebArea ArcProof — Prototype, URL: 127.0.0.1:5174/#/evidence
+	2 container root
+		3 link Description: Skip to main content, Value: 127.0.0.1:5174/#main-content
+		4 text Arc Testnet (5042002) · test USDC, no monetary value · mainnet disabled · not audited
+		5 container
+			6 heading ArcProof, Value: 1
+				7 text ArcProof
+			8 container Main navigation
+				9 button Invoices
+				10 button Verify receipt
+				11 button Evidence
+				12 button Offline demo
+		13 container main-content
+			14 heading Project evidence, Value: 2
+				15 text Project evidence
+			16 text Historical Forge
+			17 text 73 (69 Studio + 4 supplemental)
+			18 text Historical project suite
+			19 text 391 tests (overlapping suites not added)
+			20 text Current build tests
+			21 text Unknown — no result attached
+			22 text Grant eligibility
+			23 text HOLD
+			24 container
+				25 text Historical evidence only:  The repository records 73 Forge tests and a 391-test project run. These are prior logs, not a rerun of this candidate; suite counts overlap and must not be added. An independent review or model opinion is not security certification.
+			26 container
+				27 text Historical testnet deployment:
+				28 link Description: 0x3Dcd2bDD924BCC384Cb39e9e12038e00fde0FA30, Value: explorer.testnet.arc.io/address/0x3Dcd2bDD924BCC384Cb39e9e12038e00fde0FA30?tab=contract
+				29 text . Repository records report runtime matching on 2026-10-20. 
+				30 link Description: Deployment transaction, Value: explorer.testnet.arc.io/tx/0x2e43459e213e993b2290749e5549f993d63db1af6e1d8feab2fcca94917db535
+				31 text . No fresh RPC read, payment acceptance, source publication, or host-version match is implied.
+			32 container
+				33 text Grant:  Eligibility HOLD. Free prototype development authorized for testnet/local scope per 2026-10-20 directive. Do not claim grant eligibility established.
+			34 container
+				35 text Atomic forwarding:  The contract passes funds directly to the merchant atomically. This is not custody. It does touch funds. It is not a claim of escrow-free operation — the contract's execution touches and routes value.
+			36 container Build identity
+				37 heading Current candidate build identity, Value: 3
+					38 text Current candidate build identity
+				39 definition list
+					40 container Source commit SHA
+						41 text Source commit SHA
+					42 text Unknown
+					43 container Verified base commit (not current source)
+						44 text Verified base commit (not current source)
+					45 text 94a84c44b02d52a827bed42fc9f9a5d414619b7d
+					46 container Candidate source snapshot SHA-256
+						47 text Candidate source snapshot SHA-256
+					48 text c81e72ee9e0821528f31ae2bd7212e675f97ee979d154b8b1863218b043534b5
+					49 container Build UTC
+						50 text Build UTC
+					51 text 2026-10-21T16:29:16.767Z
+					52 container Environment / chain
+						53 text Environment / chain
+					54 container
+						55 text Arc Testnet /  5042002 ; mainnet disabled
+					56 container Manifest deployment identity
+						57 text Manifest deployment identity
+					58 text 0xdba9a4da8a5b2a834b451f595653dd3cb4c3e51addb2d8df8e0b18312f382d2d
+					59 container Expected contract runtime keccak256
+						60 text Expected contract runtime keccak256
+					61 text 0xa36ede95ccce8289224d3bbabe3a2445a888c44e763a04ac4b6f4f2f03dd344c
+				62 text The candidate hash identifies declared build inputs, not a committed source SHA. Build time is not verification time. Current tests, live network acceptance, and independent host-to-artifact matching remain Unknown unless accompanied by separate version-bound logs.
+				63 link Description: Download production build provenance (generated during build), Value: 127.0.0.1:5174/build-provenance.json
+				64 text The provenance file records input and emitted bundle hashes. It is unavailable in a development server and is not proof that a remote host serves these bytes. Offline demo data remains SIMULATED_NOT_VERIFIED.
+			65 heading Historical test matrix, not current acceptance, Value: 3
+				66 text Historical test matrix, not current acceptance
+			67 image
+			68 text 23
+			69 text  historically recorded
+			70 image
+			71 text 4
+			72 text  not run
+			73 image
+			74 text T01
+			75 text Valid creation and emitted data
+			76 image
+			77 text T02
+			78 text Amount validation (zero/min/max/over-cap/precision)
+			79 image
+			80 text T03
+			81 text Expiry boundaries (past/equal/future/7d/over 7d)
+			82 image
+			83 text T04
+			84 text ID derivation (nonce0/multi-merchant/two deployments/chain IDs)
+			85 image
+			86 text T05
+			87 text Immutable fields, no setter/cancel/edit ABI
+			88 image
+			89 text T06
+			90 text Unknown ID: getInvoice reverts, payInvoice reverts
+			91 image
+			92 text T07
+			93 text Exact payment: paidAt/paidBlockNumber/event/balances
+			94 image
+			95 text T08
+			96 text Wrong amounts and prefunded contract balance
+			97 image
+			98 text T09
+			99 text Expiry boundary for payment (expiresAt-1/exact/+1)
+			100 image
+			101 text T10
+			102 text Repeat payments (same/different payer)
+			103 image
+			104 text T11
+			105 text Same-invoice reentry (caught and uncaught)
+			106 image
+			107 text T12
+			108 text Cross-invoice, createInvoice reentry, shared guard, selector
+			109 image
+			110 text T13
+			111 text Rejecting/gas-exhausting receiver: exact error + full rollback
+			112 image
+			113 text T14
+			114 text Direct value/wrong selector/value-on-create reject
+			115 image
+			116 text T15
+			117 text Prefunded balances untouched; forced balance mutation reverts BALANCE_MISMATCH
+			118 image
+			119 text T16
+			120 text Fuzz: values/time/actors/adversarial sequences/multi-merchant
+			121 text 5 fuzz tests, 256 runs each
+			122 image
+			123 text T17
+			124 text Callable surface / OZ version evidence / dependency inspection
+			125 image
+			126 text I01–I09
+			127 text Acceptance tests (end-to-end, once-only, failed calls, independence)
+			128 text 10 tests in ArcProofAcceptance.t.sol
+			129 image
+			130 text T18
+			131 text Amount parser: exact boundaries and invalid strings (Vitest)
+			132 image
+			133 text T19
+			134 text Manifest: tampering, unknown deployment, isolation, terms gate (Vitest)
+			135 image
+			136 text T20
+			137 text PreparedPayment: explicit fields, context validation (Vitest)
+			138 image
+			139 text T21
+			140 text Wallet rejection, timeout, and no auto-rebroadcast
+			141 text Dedicated adapter and lifecycle guards implemented; real-wallet acceptance is still not run.
+			142 image
+			143 text T22
+			144 text Receipt verifier: forged receipts, wrong chain/contract/emitter (Vitest)
+			145 image
+			146 text T23
+			147 text Receipt recovery and RPC conflict handling
+			148 text Paid-block hash recovery and saved-transaction reconciliation implemented. Real-chain recovery and second-endpoint conflict acceptance remain not run.
+			149 image
+			150 text T24
+			151 text Nonce pagination, integer strings, export dedupe, untrusted flags (Vitest)
+			152 image
+			153 text T25
+			154 text Arc native-USDC system Transfer event at official emitter
+			155 text Official native emitter reference identified; genuine payment receipt evidence is still required. Anvil does not prove Arc log behaviour.
+			156 image
+			157 text T26
+			158 text Arc committed-block finality and receipt verification on real chain
+			159 text Historical deployment check only; fresh genuine payment/finality acceptance not run.
+			160 heading Known limitations (P0), Value: 3
+				161 text Known limitations (P0)
+			162 content list
+				163 container
+					164 AXListMarker • 
+					165 text Only the checked Arc Testnet deployment is configured. Mainnet remains disabled; the user alone approves testnet wallet requests.
+				166 container
+					167 AXListMarker • 
+					168 text Fresh candidate-bound Arc native-USDC system Transfer and finality acceptance (T25/T26) is not attached to this build. Historical controlled observations do not establish current acceptance. Official native events use 18 decimals at 0xfffffffffffffffffffffffffffffffffffffffe, not the 6-decimal ERC-20 path.
+				169 container
+					170 AXListMarker • 
+					171 text Receipt verifier compares runtime keccak256 against the supplied manifest. No fresh network result is attached to this build.
+				172 container
+					173 AXListMarker • 
+					174 text P0 UI only supports ordinary EOA wallets. Other account types are explicitly unsupported.
+				175 container
+					176 AXListMarker • 
+					177 text No nonzero termsHash protocol in P0. Historical paid invoices with nonzero hash are readable but payment blocked in UI.
+				178 container
+					179 AXListMarker • 
+					180 text Saved transaction locators and read-only status refresh are implemented. Storage is best-effort; actual browser-wallet recovery is not yet accepted.
+				181 container
+					182 AXListMarker • 
+					183 text Offline fixture requests and simulated exports do not send transactions or establish chain evidence. No backend, database, login service, or LLM at runtime.
+		184 container
+			185 text ArcProof prototype — G1 reviewed, not audited Grant eligibility: HOLD
+			186 link Description: Build identity and evidence, Value: 127.0.0.1:5174/#/evidence
+			187 text Checked testnet deployment · live payment acceptance pending
+			188 link Description: Built with Arc Studio, Value: studio.arc.io/
+		189 container Notifications alt+T
+
+The focused UI element is 1 AXWebArea ArcProof — Prototype, URL: 127.0.0.1:5174/#/evidence

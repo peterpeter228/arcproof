@@ -1,0 +1,1 @@
+$ oxlint --type-aware src scripts; s=$?; oxlint .; exit $((s>0?s:$?))

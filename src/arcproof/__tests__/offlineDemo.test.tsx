@@ -21,6 +21,7 @@ it('creates a clearly marked offline fixture without a connected wallet or signi
   expect(host.textContent).toContain('SIMULATED_NOT_VERIFIED');
   expect(host.textContent).toContain('No payment occurred');
   expect(host.textContent).toContain('Export simulated JSON');
-  expect(host.textContent).toContain('Example amount: 0.20 USDC');
+  expect(host.textContent).toContain('Example amount: 0.20 test USDC');
+  expect(host.textContent).toMatch(/Expires: \d{4}-\d{2}-\d{2}T[^ ]+Z \(UTC\)/);
  } finally { act(()=>root.unmount()); }
 });

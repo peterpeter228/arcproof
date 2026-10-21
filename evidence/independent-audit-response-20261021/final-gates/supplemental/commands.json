@@ -1,0 +1,66 @@
+[
+  {
+    "name": "adversarial",
+    "command": "bun run vitest run --config qa/native-settlement-review/vitest.config.ts",
+    "startUtc": "2026-10-21T16:17:02.712023+00:00",
+    "endUtc": "2026-10-21T16:17:05.143239+00:00",
+    "exit": 0,
+    "log": "adversarial.log"
+  },
+  {
+    "name": "current-ui",
+    "command": "bun run vitest run --config qa/new-independent-review/vitest.config.ts",
+    "startUtc": "2026-10-21T16:17:05.143793+00:00",
+    "endUtc": "2026-10-21T16:17:08.695280+00:00",
+    "exit": 1,
+    "log": "current-ui.log"
+  },
+  {
+    "name": "quality",
+    "command": "bun run vitest run --config qa/quality-gates/vitest.config.ts",
+    "startUtc": "2026-10-21T16:17:08.695819+00:00",
+    "endUtc": "2026-10-21T16:17:10.283410+00:00",
+    "exit": 0,
+    "log": "quality.log"
+  },
+  {
+    "name": "service",
+    "command": "bun qa/new-independent-review/service-probes.ts",
+    "startUtc": "2026-10-21T16:17:10.283869+00:00",
+    "endUtc": "2026-10-21T16:17:11.057371+00:00",
+    "exit": 0,
+    "log": "service.log"
+  },
+  {
+    "name": "legacy-safety",
+    "command": "bun reviewer-tests/reviewer-safety.ts",
+    "startUtc": "2026-10-21T16:17:11.057794+00:00",
+    "endUtc": "2026-10-21T16:17:11.223759+00:00",
+    "exit": 0,
+    "log": "legacy-safety.log"
+  },
+  {
+    "name": "legacy-ui",
+    "command": "bun run vitest run --config qa/quality-gates/vitest.legacy.config.ts",
+    "startUtc": "2026-10-21T16:17:11.224834+00:00",
+    "endUtc": "2026-10-21T16:17:14.398098+00:00",
+    "exit": 1,
+    "log": "legacy-ui.log"
+  },
+  {
+    "name": "helper-types",
+    "command": "bun run tsc -p qa/new-independent-review/tsconfig.quality.json --noEmit",
+    "startUtc": "2026-10-21T16:17:14.399411+00:00",
+    "endUtc": "2026-10-21T16:17:16.702082+00:00",
+    "exit": 0,
+    "log": "helper-types.log"
+  },
+  {
+    "name": "security-http",
+    "command": "node --test qa/debug-security/boundary.test.mjs",
+    "startUtc": "2026-10-21T16:17:16.702670+00:00",
+    "endUtc": "2026-10-21T16:17:50.894846+00:00",
+    "exit": 0,
+    "log": "security-http.log"
+  }
+]

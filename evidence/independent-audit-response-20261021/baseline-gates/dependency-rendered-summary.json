@@ -1,0 +1,47 @@
+{
+  "braces": {
+    "modules": 0,
+    "renderedModules": 0,
+    "renderedBytes": 0
+  },
+  "postcss-selector-parser": {
+    "modules": 0,
+    "renderedModules": 0,
+    "renderedBytes": 0
+  },
+  "elliptic": {
+    "modules": 0,
+    "renderedModules": 0,
+    "renderedBytes": 0
+  },
+  "decode-uri-component": {
+    "modules": 0,
+    "renderedModules": 0,
+    "renderedBytes": 0
+  },
+  "query-string": {
+    "modules": 0,
+    "renderedModules": 0,
+    "renderedBytes": 0
+  },
+  "uuid": {
+    "modules": 0,
+    "renderedModules": 0,
+    "renderedBytes": 0
+  },
+  "@walletconnect": {
+    "modules": 68,
+    "renderedModules": 68,
+    "renderedBytes": 775912
+  },
+  "@reown": {
+    "modules": 318,
+    "renderedModules": 316,
+    "renderedBytes": 1110668
+  },
+  "@metamask": {
+    "modules": 0,
+    "renderedModules": 0,
+    "renderedBytes": 0
+  }
+}

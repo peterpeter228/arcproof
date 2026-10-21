@@ -1,0 +1,15 @@
+{
+  "source": "https://rpc.testnet.arc.io",
+  "startedAt": "2026-10-21T16:02:39.287250+00:00",
+  "request": {
+    "jsonrpc": "2.0",
+    "id": "finalized-block",
+    "method": "eth_getBlockByNumber",
+    "params": [
+      "finalized",
+      false
+    ]
+  },
+  "error": "HTTP Error 403: Forbidden",
+  "finishedAt": "2026-10-21T16:02:42.890751+00:00"
+}

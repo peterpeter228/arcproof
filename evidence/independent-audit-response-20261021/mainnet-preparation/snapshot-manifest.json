@@ -1,0 +1,407 @@
+{
+  "stage": "G1_LOCAL_PASSED_G2_GENERATING",
+  "studioProjectUrl": "https://studio.arc.io/app/2dbdda0d-1b70-408b-ae23-cccb8a4b8753?thread=12185290-60f7-4446-9e99-5ca51e8c30b0",
+  "stableExportCapturedAt": "2026-10-20T04:27:55Z",
+  "g2StartedAt": "2026-10-20T04:29:20Z",
+  "scope": "Solidity source and local tests only",
+  "localTests": {
+    "exported": 69,
+    "nativeAdditional": 4,
+    "passed": 73,
+    "failed": 0,
+    "skipped": 0,
+    "fuzzSeed": "0x1234"
+  },
+  "sourceSha256": "8699071d250c834cd1166ece0d4001b7de95af7562796e19305ce2812635e25b",
+  "sourceMatchesReviewedExport": true,
+  "liveSigningEnabled": false,
+  "deploymentPerformed": false,
+  "files": [
+    {
+      "path": "foundry.toml",
+      "bytes": 638,
+      "sha256": "2deb4217c39b7b62fbc9f9c844bea76b9b00f1a48cb422f174bf80e6ba155b10"
+    },
+    {
+      "path": "remappings.txt",
+      "bytes": 93,
+      "sha256": "7db29ab99ec9f13cfd2dc2c9c746f77e57f85c17c6186a15204e1dfdcfadd29c"
+    },
+    {
+      "path": ".foundry-version",
+      "bytes": 7,
+      "sha256": "b59269d636da76a16dca895a43085d37114d105ca9f933cb45d3ec23fdfe0845"
+    },
+    {
+      "path": ".bun-version",
+      "bytes": 7,
+      "sha256": "56b0485099b6c5427d3b68c042fd05b632d5e52e924c5064473389812227164c"
+    },
+    {
+      "path": "package.json",
+      "bytes": 1738,
+      "sha256": "7226475eff7d87fb23c78453e4a5fc2a1c29a122aa8090d9c9f7b97698439079"
+    },
+    {
+      "path": "bun.lock",
+      "bytes": 270041,
+      "sha256": "308c8831c6e1efc13fe0194bdce22b4f4a15dc6614c4a7c21252dcf0d2d38ace"
+    },
+    {
+      "path": "vite.config.ts",
+      "bytes": 937,
+      "sha256": "58bfc87c2e88182c01c24d362e85ff51b9cfed76bf16d274a821df623bb68ae2"
+    },
+    {
+      "path": "tailwind.config.js",
+      "bytes": 238,
+      "sha256": "96e72908328954920bc0840fa575f9114863576deb3cab9ec61951a3181650dd"
+    },
+    {
+      "path": "tsconfig.json",
+      "bytes": 1247,
+      "sha256": "83c5d5d611eb4e1c4a4350829e46111577c6bc7d9fb06cfb961817aad721a147"
+    },
+    {
+      "path": ".oxlintrc.json",
+      "bytes": 3095,
+      "sha256": "5f1d92cb882c4bb23420d87082a9d5f1bef8d9bbbab5587bf8a49b70464da7ff"
+    },
+    {
+      "path": "postcss.config.js",
+      "bytes": 81,
+      "sha256": "f0156321fafa19749b38a82ea29e7b1786a1f727b67372ef40cc66de0ed898fb"
+    },
+    {
+      "path": "index.html",
+      "bytes": 446,
+      "sha256": "437b77b557964ff649c5e5ddb1a604bbf1650af4f5634c0f6e09610bc49bf595"
+    },
+    {
+      "path": "ArcProofInvoices.abi.json",
+      "bytes": 5711,
+      "sha256": "745476dbf5c166ceb32fab85f5346b204258b7991a5c5b1541e8002d0cb75fa5"
+    },
+    {
+      "path": "contracts/ArcProofInvoices.sol",
+      "bytes": 8249,
+      "sha256": "8699071d250c834cd1166ece0d4001b7de95af7562796e19305ce2812635e25b"
+    },
+    {
+      "path": "src/App.tsx",
+      "bytes": 126,
+      "sha256": "728a89a659a143e0f7470fe5cf0cf8d3196cb9fa11c54b01ff2da6a1145e5dce"
+    },
+    {
+      "path": "src/config.ts",
+      "bytes": 688,
+      "sha256": "596382b44e51f54fb0045aefbf334b5e96dc801d09179e69d6dd1a5934e6caa4"
+    },
+    {
+      "path": "src/console-capture.ts",
+      "bytes": 6976,
+      "sha256": "ab682e27bfb8efb8b1084ab91ff604baee9b2128892a8036dc0584d82733d3ce"
+    },
+    {
+      "path": "src/index.css",
+      "bytes": 175,
+      "sha256": "7b91475d7bf624dc71cb2721f52df36b382913523f67a7677ab2d42a220e5039"
+    },
+    {
+      "path": "src/main.tsx",
+      "bytes": 3628,
+      "sha256": "a0ab75e5c47174ac3a52c5ed986f58ecae43295457b842ea2ca51d86eb688563"
+    },
+    {
+      "path": "src/onchain-facts.ts",
+      "bytes": 16223,
+      "sha256": "c7c314ada2f6be684dcd24c703fee3fec68f8bc0a2c7c9d1bcf3633c33199abd"
+    },
+    {
+      "path": "src/onchain-money.ts",
+      "bytes": 12033,
+      "sha256": "1ac379552459f345f429d85b6d3f9f5f052be0c62ab630c6b111ea6f7a78af4f"
+    },
+    {
+      "path": "src/onchain-wait.ts",
+      "bytes": 6155,
+      "sha256": "e6b89dcf266213adea50cd35dd761aa8adfc4fb121dd90c702fb635d98bb1577"
+    },
+    {
+      "path": "src/tracing.ts",
+      "bytes": 15123,
+      "sha256": "3ed5452d5abd6057c818e3362be325c3f1566523927e496e49e0eaf1bafd64b8"
+    },
+    {
+      "path": "src/vite-env.d.ts",
+      "bytes": 38,
+      "sha256": "65996936fbb042915f7b74a200fcdde7e410f32a669b1ab9597cfaa4b0faddb5"
+    },
+    {
+      "path": "lib/forge-std/src/Base.sol",
+      "bytes": 2248,
+      "sha256": "76b05dda37981797d3d403f29fc6cad79b46e2fc11da47d649ff13acb69158b2"
+    },
+    {
+      "path": "lib/forge-std/src/Config.sol",
+      "bytes": 2659,
+      "sha256": "850649e2ede6e0e1384ba00eba1335a7af7e97643c731a4587335c0f51f67041"
+    },
+    {
+      "path": "lib/forge-std/src/LibVariable.sol",
+      "bytes": 17987,
+      "sha256": "0b789ace36e54d1746d08b9b161f5ab4c2fa55c8d30808421349ae33f703c797"
+    },
+    {
+      "path": "lib/forge-std/src/Script.sol",
+      "bytes": 896,
+      "sha256": "cfb5be01f4ddbc037a3502dac3d487d629a4c8b58aa9e2ec48c9fa1b334d96ec"
+    },
+    {
+      "path": "lib/forge-std/src/StdAssertions.sol",
+      "bytes": 58829,
+      "sha256": "203de35565c3d68b6599f84e88068f79c23b53a80d18c46056e85d4c5f48613c"
+    },
+    {
+      "path": "lib/forge-std/src/StdChains.sol",
+      "bytes": 16053,
+      "sha256": "981b7ce12f4bc3193c7914c68f51be74d1d03c33732db894f5d36ad8025ab4f5"
+    },
+    {
+      "path": "lib/forge-std/src/StdCheats.sol",
+      "bytes": 39150,
+      "sha256": "988843996b3e8ebab594c659fba9502bab437220f84e7ded9a9e3f6e730d358e"
+    },
+    {
+      "path": "lib/forge-std/src/StdConfig.sol",
+      "bytes": 30147,
+      "sha256": "bc9e89ad0fab53103f8301322739aaafc32a0cccb571132ee7f54f10b6a2feb5"
+    },
+    {
+      "path": "lib/forge-std/src/StdConstants.sol",
+      "bytes": 1882,
+      "sha256": "17dfd996881264de1e6af6697a3dc7a56ae8ff0717e4cb4f1685bd7fb3a45147"
+    },
+    {
+      "path": "lib/forge-std/src/StdError.sol",
+      "bytes": 1915,
+      "sha256": "c1f7271f11a44628810ef6beb2da0c43add131ff9cfcac4d7acd633c269ccf7d"
+    },
+    {
+      "path": "lib/forge-std/src/StdInvariant.sol",
+      "bytes": 7264,
+      "sha256": "7d3a62087c7d06766e99f8e4f4e50997b0ff8730fb304986f2c4cd895a67fbbd"
+    },
+    {
+      "path": "lib/forge-std/src/StdJson.sol",
+      "bytes": 14443,
+      "sha256": "556494110d1e791ce0992bf22c2ac6df5e614122659a97cd1269a8d9dce139c0"
+    },
+    {
+      "path": "lib/forge-std/src/StdMath.sol",
+      "bytes": 2938,
+      "sha256": "7224cea66fc06c7a9d303084cccb14eaedffe4b21b3f9695d06dc590d2894d7d"
+    },
+    {
+      "path": "lib/forge-std/src/StdStorage.sol",
+      "bytes": 21884,
+      "sha256": "8835d2e5de9ceca2a4988a212916216de052634584f832d5364dc8c42d460113"
+    },
+    {
+      "path": "lib/forge-std/src/StdStyle.sol",
+      "bytes": 17505,
+      "sha256": "903ea6f4e4aa31e416b5043abecc09ced41dc78c9ce9dabb5c745337ee13139d"
+    },
+    {
+      "path": "lib/forge-std/src/StdToml.sol",
+      "bytes": 14097,
+      "sha256": "682e9c74bd02de5df7be595d27fa44eeaf0a5d96ad5c2db507065386d35eb433"
+    },
+    {
+      "path": "lib/forge-std/src/StdUtils.sol",
+      "bytes": 11980,
+      "sha256": "52d713d886305184e7ed3b3a2e5941ea1440f071d9c9a4d6fea618135e1d3f67"
+    },
+    {
+      "path": "lib/forge-std/src/Test.sol",
+      "bytes": 1075,
+      "sha256": "2e69383110d088b4c413edf79bb71f9d05e4791625fb7fa53429d34440ea50dd"
+    },
+    {
+      "path": "lib/forge-std/src/Vm.sol",
+      "bytes": 140362,
+      "sha256": "ad4bc58d4a2cfdb45c6439fe977a7ad390fd83e3e7485ec4597458a278993eeb"
+    },
+    {
+      "path": "lib/forge-std/src/console.sol",
+      "bytes": 71039,
+      "sha256": "894dc6e40fe62d887df6243112d8c775df2db60babc3024ee04a5564b90af64d"
+    },
+    {
+      "path": "lib/forge-std/src/console2.sol",
+      "bytes": 131,
+      "sha256": "62d8ccbd118fec4f99c5e847322d6ca0d7fbe6a0a16e5a26b0590869fcd69357"
+    },
+    {
+      "path": "lib/forge-std/src/interfaces/IERC1155.sol",
+      "bytes": 7626,
+      "sha256": "d10916158da2bbecc56364cda787da303b57313d478c150b1c79ac05d3b2936c"
+    },
+    {
+      "path": "lib/forge-std/src/interfaces/IERC165.sol",
+      "bytes": 559,
+      "sha256": "d9bea769cd3aa52c5dfbfe7b447a63b00ab22baaa4f9d2af789f44553078a27b"
+    },
+    {
+      "path": "lib/forge-std/src/interfaces/IERC20.sol",
+      "bytes": 2089,
+      "sha256": "cb4bf7f4c0bc513e2c82f251a84e67d2e950cef12e570f40a0d4880b2e25fc9f"
+    },
+    {
+      "path": "lib/forge-std/src/interfaces/IERC4626.sol",
+      "bytes": 11982,
+      "sha256": "5b9da91e1215dc84a606c06f636b34582aec6cdf35ae828dce3852f727d9278e"
+    },
+    {
+      "path": "lib/forge-std/src/interfaces/IERC6909.sol",
+      "bytes": 3503,
+      "sha256": "44ef6ba5ab803241ed5992f35606820322e2df5947da488870c78f2181d97840"
+    },
+    {
+      "path": "lib/forge-std/src/interfaces/IERC721.sol",
+      "bytes": 9063,
+      "sha256": "2e6e000940bf5278cf64f170ac839682667368a5aee7222b312e255ec8eda275"
+    },
+    {
+      "path": "lib/forge-std/src/interfaces/IERC7540.sol",
+      "bytes": 6712,
+      "sha256": "5b9e0d90816f47628b2023351c84e9b8d8667f685c98234742be99dc8eaf2fb6"
+    },
+    {
+      "path": "lib/forge-std/src/interfaces/IERC7575.sol",
+      "bytes": 12605,
+      "sha256": "15163bc29d96c6b905b53da06e243fbd2ae6b7c8984b8306ff4c9b0716ec055b"
+    },
+    {
+      "path": "lib/forge-std/src/interfaces/IMulticall3.sol",
+      "bytes": 2141,
+      "sha256": "890a5b361034daa6006b3ba2275e743cd6197c4d81e3df5732cdce731d3c0868"
+    },
+    {
+      "path": "lib/forge-std/src/safeconsole.sol",
+      "bytes": 408927,
+      "sha256": "fd74d8ed377e1470217cd6dce7699dcbc4e79b3893f17ae2a298c0e7e4418181"
+    },
+    {
+      "path": "lib/forge-std/LICENSE-APACHE",
+      "bytes": 10897,
+      "sha256": "50b6bf8bdb63265ce14953b480b7aaa0271e78f56843b99c184abd3ae5048cd7"
+    },
+    {
+      "path": "lib/forge-std/LICENSE-MIT",
+      "bytes": 1073,
+      "sha256": "6d185dfe089d4de346d391fc5997fbd4739bad1d6556010413c10f420d704ecc"
+    },
+    {
+      "path": "lib/forge-std/README.md",
+      "bytes": 11150,
+      "sha256": "257d2c692f847b166ba32bec7a15d3c426fa8ae7a5244b2d752b96443af83e42"
+    },
+    {
+      "path": "lib/forge-std/package.json",
+      "bytes": 517,
+      "sha256": "d76d7594be85fdbffe91ed3918eaf1fb67ec9b00f453482f97c011408b024b70"
+    },
+    {
+      "path": "contracts/test/ArcProofAcceptance.t.sol",
+      "bytes": 17075,
+      "sha256": "b493a925b6b6e46380521d52d3dc5491b95c00806ce467061a22ba4d847cede5"
+    },
+    {
+      "path": "contracts/test/ArcProofInvoices.t.sol",
+      "bytes": 54721,
+      "sha256": "389e730e3bdd10a77680955ac51aae32437eb2545946273eb97e18da4019563a"
+    },
+    {
+      "path": "contracts/test/IndependentBalanceReview.t.sol",
+      "bytes": 1748,
+      "sha256": "5fb0fb41bb4edd48668efa01846ac7504cb7e6a7f6fa18ffcae315ad14a00935"
+    },
+    {
+      "path": "contracts/test/IndependentReentrancyReview.t.sol",
+      "bytes": 2696,
+      "sha256": "d88c4033cfdf0fc7e286c35aeb72ac607a27e945bb999b8136cc84b77486fb1d"
+    },
+    {
+      "path": "contracts/test/IndependentReturnDataReview.t.sol",
+      "bytes": 1651,
+      "sha256": "99a7ae0b80115e973a066c06ff7efbd01494dc8a4e94ce14449dc900a38a7fec"
+    },
+    {
+      "path": "evidence/g1/ArcProofInvoices.artifact.json",
+      "bytes": 33054,
+      "sha256": "278fe52ed5901c6ebf054a42275dd11917dcc8edebd992bbd1fd24ef09bec53b"
+    },
+    {
+      "path": "evidence/g1/studio-test-results.txt",
+      "bytes": 8605,
+      "sha256": "7fb5b60f2944212cd1701a513c1b843f3e873dfd5e6dce36b588ec9e3d905ce4"
+    },
+    {
+      "path": "docs/studio-provenance/G1_ORIGINAL_AGENTS.md",
+      "bytes": 4159,
+      "sha256": "8f9e47d7243d729230c1fc8f68ac2d98afc03218eac0e9a8510b899f3fdf42de"
+    },
+    {
+      "path": "evidence/g1/independent/REVIEW.md",
+      "bytes": 5648,
+      "sha256": "5b56c772db1f4872a67daaf1f6706dd646715b9a05696a99a6a9b051cbbe51f1"
+    },
+    {
+      "path": "evidence/g1/independent/final-forge.log",
+      "bytes": 5699,
+      "sha256": "ea1905713128f835cbed3bb97f375bf638e3437d04620f227066e5f412eb45ed"
+    },
+    {
+      "path": "evidence/g1/independent/final-forge.exit",
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    {
+      "path": "evidence/g1/independent/artifact-coherence.json",
+      "bytes": 1089,
+      "sha256": "9713720dd9af09fc8e5250bbeb025e50d476114d815864c12fb05754aa104240"
+    },
+    {
+      "path": "tools/g1-review/package.json",
+      "bytes": 169,
+      "sha256": "c2a51f694e85532d7a1cb9ec4d8cd8e2ffe1685c7acb423996b8900d09f5a28b"
+    },
+    {
+      "path": "tools/g1-review/package-lock.json",
+      "bytes": 7604,
+      "sha256": "bc78867a5c985be64f58010078881a84b592ced7ede40d9a8bd6c45ecef7ac9e"
+    },
+    {
+      "path": "evidence/g1/independent/solc-wrapper.original.txt",
+      "bytes": 519,
+      "sha256": "3b5460a08e8a694b37264ab953578a7ace5d09310579b0243dfb5597bda2079a"
+    },
+    {
+      "path": "tools/g1-review/solc-wrapper.cjs",
+      "bytes": 466,
+      "sha256": "7e5af83d78543fe57b221dac1e09f30a7ecc3fb7c2d8391a84d969387e37291f"
+    },
+    {
+      "path": ".gitignore",
+      "bytes": 103,
+      "sha256": "9f709cd4346ccd8e6dd16340ba18ac31a766a25f4b8704b9f1c427dc8e1cdbd3"
+    },
+    {
+      "path": "docs/G1_REPRODUCIBILITY.md",
+      "bytes": 2817,
+      "sha256": "41c9316679ad6651fd70466c7d253ce5aa663ed868c34dfda92b04ef8f18b7d7"
+    }
+  ]
+}
+

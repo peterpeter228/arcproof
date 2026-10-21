@@ -1,0 +1,103 @@
+{
+  "kind": "actual_verifier_offline_captured_transport_failure_replay",
+  "classification": "controlled_demo",
+  "liveVerificationStatus": "blocked",
+  "result": {
+    "status": "PENDING",
+    "message": "Could not determine chain ID from RPC",
+    "paymentLogIndex": null,
+    "blockHash": null,
+    "verifiedAt": 1792598627841,
+    "verified": false,
+    "reasonCode": "PENDING",
+    "checks": [
+      {
+        "id": "chain",
+        "status": "unavailable",
+        "reasonCode": "PENDING",
+        "message": "Could not determine chain ID from RPC"
+      },
+      {
+        "id": "runtime_code",
+        "status": "not_run",
+        "reasonCode": null,
+        "message": null
+      },
+      {
+        "id": "receipt_identity",
+        "status": "not_run",
+        "reasonCode": null,
+        "message": null
+      },
+      {
+        "id": "transaction_identity",
+        "status": "not_run",
+        "reasonCode": null,
+        "message": null
+      },
+      {
+        "id": "payment_event",
+        "status": "not_run",
+        "reasonCode": null,
+        "message": null
+      },
+      {
+        "id": "invoice_state",
+        "status": "not_run",
+        "reasonCode": null,
+        "message": null
+      },
+      {
+        "id": "event_and_value",
+        "status": "not_run",
+        "reasonCode": null,
+        "message": null
+      },
+      {
+        "id": "payment_block",
+        "status": "not_run",
+        "reasonCode": null,
+        "message": null
+      },
+      {
+        "id": "settlement_policy",
+        "status": "not_run",
+        "reasonCode": null,
+        "message": null
+      },
+      {
+        "id": "provenance",
+        "status": "not_run",
+        "reasonCode": null,
+        "message": null
+      },
+      {
+        "id": "native_transfers",
+        "status": "not_run",
+        "reasonCode": null,
+        "message": null
+      },
+      {
+        "id": "finality",
+        "status": "not_run",
+        "reasonCode": null,
+        "message": null
+      }
+    ],
+    "readStartedAt": 1792598627841,
+    "readCompletedAt": 1792598627841,
+    "source": {
+      "kind": "rpc",
+      "label": "Offline replay of captured HTTP403 from https://rpc.testnet.arc.io, not a fresh successful RPC read"
+    },
+    "observationScope": {
+      "chainId": 5042002,
+      "deploymentId": "0xdba9a4da8a5b2a834b451f595653dd3cb4c3e51addb2d8df8e0b18312f382d2d",
+      "contract": "0x3Dcd2bDD924BCC384Cb39e9e12038e00fde0FA30",
+      "invoiceId": "0x7d20865f026a9e1e2477c203c1d7e9170b0c095b903b9ff27c15c624ec1c985e",
+      "transactionHash": "0x0987c87540b6701be5fe047c55a7ac1b9277fda7dd989f31c8ea3ccd25350ace"
+    },
+    "observedReceipt": null,
+    "observedInvoice": null
+  }
+}

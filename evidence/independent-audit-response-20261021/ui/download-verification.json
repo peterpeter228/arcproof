@@ -1,0 +1,9 @@
+{
+  "status": "passed",
+  "scope": "actual Chromium download bytes, JSON/CSV match for fixture fields; not spreadsheet application acceptance",
+  "invoiceId": "0x52599e566fb42fb089c45b92b3e755a17101ca986c3f4cd947482421cf748d83",
+  "sha256": {
+    "production-simulated.json": "337289a23ea910db140254a76d70e7f70b52cdd21a35a4c2e4007182694993e8",
+    "production-simulated.csv": "d336c4062760561bae641a39daf87df3131d77498edc851585aab59bc1db5382"
+  }
+}

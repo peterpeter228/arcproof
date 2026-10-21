@@ -1,0 +1,73 @@
+{
+  "recordedAtUtc": "2026-10-21T16:05:18.627859+00:00",
+  "baselineCommit": "94a84c44b02d52a827bed42fc9f9a5d414619b7d",
+  "hashAlgorithm": "SHA-256",
+  "scope": "Security-owned source/test snapshot; not a whole-project build identity.",
+  "files": [
+    {
+      "path": "src/arcproof/walletIntents.ts",
+      "sha256": "6b69f9ea10cee4f6b41ea27660400cfea042cab4267e3d9b0227fed3de720ac6",
+      "baselineSha256": "3e7199b133bc7e0b5d91e4327d1db1aeee2dd269317cdac345afeb3e8d7faedc"
+    },
+    {
+      "path": "src/arcproof/testnetClient.ts",
+      "sha256": "65afd96d3a57c120d1ebf8eb327d90ee33b6285f73d9d81d0ac5ae5f7150b281",
+      "baselineSha256": "a9aebd2e1130c5d948a40bc99dc3c7e655ecb09723132b17c73307cfb2c65f48"
+    },
+    {
+      "path": "src/components/arcproof/Layout.tsx",
+      "sha256": "6e86806a23d1cc99e0eaa2da0378e321203577dd5e3659c245fa973af02e59a5",
+      "baselineSha256": "fb69e87add109f89cb9af8b48c2a0f5619cbee0ea340513609f390903972dfe8"
+    },
+    {
+      "path": "src/arcproof/__tests__/walletIntents.test.ts",
+      "sha256": "dbbf158cac289e99da63926b1e3335356df1f40bb86ab6d621e4b91d21bdc820",
+      "baselineSha256": "47283db89c187e7138669b3a0ca3c07487992b6b63a2357da0d21ceba5651e03"
+    },
+    {
+      "path": "src/arcproof/__tests__/testnetClient.test.ts",
+      "sha256": "57d96bb30f15cb1cca87440e0193f22fdbb16b01673d824bf0645523ec6b6163",
+      "baselineSha256": "eb4d38721b7d7805d58c90442f1e197e29ee144ee752c4e8e69d303c0df84ac3"
+    },
+    {
+      "path": "src/arcproof/__tests__/unknownRequestIdentity.test.ts",
+      "sha256": "9b21fd2071f1e30caa2f3093dc6989475ef9b84dc4565ae914d663205af0ca67",
+      "baselineSha256": null
+    },
+    {
+      "path": "src/arcproof/__tests__/unknownRequestUi.test.tsx",
+      "sha256": "7c26b57e7584e686d858e315e195fe9e56df31ffe8c437cb593274bec9356425",
+      "baselineSha256": null
+    }
+  ],
+  "evidenceFiles": [
+    {
+      "path": "REPORT.md",
+      "sha256": "36c0b0443761132a4dbbc89c5f11a129084ce96a556d68a483104910a0ffffcc"
+    },
+    {
+      "path": "green-initial-11.log",
+      "sha256": "5e5d39e53d4f41ebf6d681d106d20af1e47aff09d3ee1cda75ccc494d242c640"
+    },
+    {
+      "path": "green-targeted-95.log",
+      "sha256": "96c1f257b67b796c096f88b062dcecf8cd2b678d71cc864ec8978d136749336b"
+    },
+    {
+      "path": "red-before-fix.log",
+      "sha256": "fe8e3e4f8bba2b30508380325b6065bef32920f0ec1228f448d431510af473f4"
+    },
+    {
+      "path": "red-probe-unknownRequestIdentity.test.ts.txt",
+      "sha256": "e9f6d0411ff236e6bd737c7cfdca2f957c9ffebf392a24263355b54c63969a09"
+    },
+    {
+      "path": "red-probe-unknownRequestUi.test.tsx.txt",
+      "sha256": "213dc45e122ddd42bf8273f622d0e7301f43693c559c15a728b5c4ebb46828aa"
+    },
+    {
+      "path": "toolchain-and-static-checks.log",
+      "sha256": "23bac0a4c850a45bfefa16270c42e86a9ab70c3dd967967590eb37477118ce2e"
+    }
+  ]
+}

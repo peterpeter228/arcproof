@@ -1,0 +1,14 @@
+{
+  "arcproof-baseline/node_modules/@walletconnect/utils/dist/index.es.js.map": [
+    {
+      "source": "../src/misc.ts",
+      "line": 514,
+      "text": "export function uuidv4() {"
+    },
+    {
+      "source": "../src/uri.ts",
+      "line": 19,
+      "text": "export function parseUri(str: string): EngineTypes.UriParameters {"
+    }
+  ]
+}

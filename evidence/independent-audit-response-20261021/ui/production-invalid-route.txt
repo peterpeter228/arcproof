@@ -1,0 +1,37 @@
+Browser tab: 2, Title: "ArcProof — Prototype", URL: "http://127.0.0.1:5174/#/pay/1/unknown/0x123".
+1 AXWebArea ArcProof — Prototype, URL: 127.0.0.1:5174/#/pay/1/unknown/0x123
+	2 container root
+		3 link Description: Skip to main content, Value: 127.0.0.1:5174/#main-content
+		4 text Arc Testnet (5042002) · test USDC, no monetary value · mainnet disabled · not audited
+		5 container
+			6 heading ArcProof, Value: 1
+				7 text ArcProof
+			8 container Main navigation
+				9 button Invoices
+				10 button Verify receipt
+				11 button Evidence
+				12 button Offline demo
+		40 container Unavailable request
+			41 heading Request unavailable, Value: 2
+				42 text Request unavailable
+			43 text Unsupported network. Only the checked Arc Testnet deployment is available.
+			44 text No wallet is needed. Nothing is being submitted or awaited. URL parameters cannot authorize a new contract.
+			45 definition list
+				46 container Requested chain
+					47 text Requested chain
+				48 text 1
+				49 container Requested deployment (not verified)
+					50 text Requested deployment (not verified)
+				51 text unknown
+				52 container Requested invoice (not verified)
+					53 text Requested invoice (not verified)
+				54 text 0x123
+			55 link Description: Return to ArcProof, Value: 127.0.0.1:5174/#
+		34 container
+			35 text ArcProof prototype — G1 reviewed, not audited Grant eligibility: HOLD
+			36 link Description: Build identity and evidence, Value: 127.0.0.1:5174/#/evidence
+			37 text Checked testnet deployment · live payment acceptance pending
+			38 link Description: Built with Arc Studio, Value: studio.arc.io/
+		39 container Notifications alt+T
+
+The focused UI element is 1 AXWebArea ArcProof — Prototype, URL: 127.0.0.1:5174/#/pay/1/unknown/0x123

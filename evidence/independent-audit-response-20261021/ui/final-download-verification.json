@@ -1,0 +1,9 @@
+{
+  "status": "passed",
+  "sourceSnapshot": "c81e72ee9e0821528f31ae2bd7212e675f97ee979d154b8b1863218b043534b5",
+  "scope": "actual Chromium final production download bytes; not spreadsheet acceptance",
+  "sha256": {
+    "final-production-simulated.json": "337289a23ea910db140254a76d70e7f70b52cdd21a35a4c2e4007182694993e8",
+    "final-production-simulated.csv": "d336c4062760561bae641a39daf87df3131d77498edc851585aab59bc1db5382"
+  }
+}

@@ -1,0 +1,235 @@
+
+ RUN  v4.1.12 /workspace/scratch/c01bd6fe117d/arcproof-current
+
+ ❯ src/arcproof/__tests__/unknownRequestIdentity.test.ts (7 tests | 4 failed) 515ms
+   × a matching candidate included never identifies a hashless original payment 154ms
+   × a matching candidate reverted never identifies a hashless original payment 11ms
+   × preserves a durable requesting pay after reload 6ms
+   × service never runs candidate RPC validation or releases an original hashless request 304ms
+ ❯ src/arcproof/__tests__/unknownRequestUi.test.tsx (4 tests | 4 failed) 135ms
+   × hashless payment offers separate receipt verification, never a request recovery claim 72ms
+   × hashless creation has no candidate recovery control 16ms
+   × known saved hash recovery retains an explicit non-settlement message 29ms
+   × shows every unresolved saved transaction outside collapsed completed history 17ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 8 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  src/arcproof/__tests__/unknownRequestIdentity.test.ts > a matching candidate included never identifies a hashless original payment
+AssertionError: promise resolved "'included'" instead of rejecting
+
+- Expected:
+Error {
+  "message": "rejected promise",
+}
+
++ Received:
+"included"
+
+ ❯ src/arcproof/__tests__/unknownRequestIdentity.test.ts:17:73
+     15|   const original = { ...m.getWalletIntents()[0] };
+     16|   const verify = vi.fn(async () => outcome);
+     17|   await expect(m.recoverWalletIntent(original.operationId, hash, verif…
+       |                                                                         ^
+     18|   expect(verify).not.toHaveBeenCalled();
+     19|   expect(m.getWalletIntents()[0]).toEqual(original);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/8]⎯
+
+ FAIL  src/arcproof/__tests__/unknownRequestIdentity.test.ts > a matching candidate reverted never identifies a hashless original payment
+AssertionError: expected [Function] to throw error including 'hashless' but got 'An older matching reverted call canno…'
+
+Expected: "hashless"
+Received: "An older matching reverted call cannot identify this unknown request. Keep it unresolved; manual investigation is required."
+
+ ❯ src/arcproof/__tests__/unknownRequestIdentity.test.ts:17:73
+     15|   const original = { ...m.getWalletIntents()[0] };
+     16|   const verify = vi.fn(async () => outcome);
+     17|   await expect(m.recoverWalletIntent(original.operationId, hash, verif…
+       |                                                                         ^
+     18|   expect(verify).not.toHaveBeenCalled();
+     19|   expect(m.getWalletIntents()[0]).toEqual(original);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/8]⎯
+
+ FAIL  src/arcproof/__tests__/unknownRequestIdentity.test.ts > preserves a durable requesting pay after reload
+AssertionError: promise resolved "'included'" instead of rejecting
+
+- Expected:
+Error {
+  "message": "rejected promise",
+}
+
++ Received:
+"included"
+
+ ❯ src/arcproof/__tests__/unknownRequestIdentity.test.ts:28:89
+     26|   localStorage.setItem(`arcproof:${input.chainId}:${input.deploymentId…
+     27|   const m = await import('../walletIntents');
+     28|   await expect(m.recoverWalletIntent(original.operationId, hash, async…
+       |                                                                                         ^
+     29|   expect(m.getWalletIntents()[0]).toEqual(original);
+     30| });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/8]⎯
+
+ FAIL  src/arcproof/__tests__/unknownRequestIdentity.test.ts > service never runs candidate RPC validation or releases an original hashless request
+AssertionError: expected [Function] to throw error including 'hashless' but got 'client.getCode is not a function'
+
+Expected: "hashless"
+Received: "client.getCode is not a function"
+
+ ❯ src/arcproof/__tests__/unknownRequestIdentity.test.ts:50:111
+     48|   const client = { getChainId: vi.fn(async () => ARC_TESTNET.id) };
+     49|   const service = await import('../testnetClient');
+     50|   await expect(service.recoverUnknownSubmission(client as unknown as P…
+       |                                                                                                               ^
+     51|   expect(client.getChainId).not.toHaveBeenCalled();
+     52|   expect(m.getWalletIntents()[0]).toEqual(original);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/8]⎯
+
+ FAIL  src/arcproof/__tests__/unknownRequestUi.test.tsx > hashless payment offers separate receipt verification, never a request recovery claim
+AssertionError: expected 'A saved wallet request is unresolved.…' to contain 'does not identify or resolve this ori…'
+
+Expected: "does not identify or resolve this original request"
+Received: "A saved wallet request is unresolved. Do not submit again. Its durable guard survives reload in this browser and coordinates same-origin tabs while storage remains available. Check wallet history and recover the exact request below; no automatic resend or timeout release occurs.pay · uncertain · 0x1111111111111111111111111111111111111111Transaction hash from wallet historyRecover this request (read only)Hashless creation cannot be uniquely recovered here without wallet nonce evidence. A reverted hash cannot unlock a hashless request. Keep it unresolved for manual review. Replacement/cancellation and cross-device recovery are unsupported; do not clear storage to retry.Saved hashes are unverified locators. Check status before another request. Browser storage is best-effort."
+
+ ❯ src/arcproof/__tests__/unknownRequestUi.test.tsx:27:29
+     25|   mocks.intents = [intent]; await render();
+     26|   const aside = host.querySelector('aside')!;
+     27|   expect(aside.textContent).toContain('does not identify or resolve th…
+       |                             ^
+     28|   expect([...aside.querySelectorAll('button')].some(b => b.textContent…
+     29|   const link = aside.querySelector<HTMLAnchorElement>('a[href^="#/rece…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/8]⎯
+
+ FAIL  src/arcproof/__tests__/unknownRequestUi.test.tsx > hashless creation has no candidate recovery control
+AssertionError: expected <input …(4)></input> to be null
+
+- Expected:
+null
+
++ Received:
+<input
+  autocapitalize="none"
+  class="block w-full border p-1"
+  spellcheck="false"
+  value=""
+/>
+
+ ❯ src/arcproof/__tests__/unknownRequestUi.test.tsx:35:45
+     33| it('hashless creation has no candidate recovery control', async () => {
+     34|   mocks.intents = [{ ...intent, kind: 'create', invoiceId: undefined }…
+     35|   expect(host.querySelector('aside input')).toBeNull();
+       |                                             ^
+     36|   expect(host.querySelector('aside')?.textContent).toContain('remains …
+     37| });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[6/8]⎯
+
+ FAIL  src/arcproof/__tests__/unknownRequestUi.test.tsx > known saved hash recovery retains an explicit non-settlement message
+AssertionError: expected 'Skip to main contentArc Testnet (5042…' to contain 'Known saved hash status: included'
+
+Expected: "Known saved hash status: included"
+Received: "Skip to main contentArc Testnet (5042002) · test USDC, no monetary value · mainnet disabled · not auditedArcProofInvoicesVerify receiptEvidenceA saved wallet request is unresolved. Do not submit again. Its durable guard survives reload in this browser and coordinates same-origin tabs while storage remains available. Check wallet history and recover the exact request below; no automatic resend or timeout release occurs.pay · submitted · 0x1111111111111111111111111111111111111111Transaction hash from wallet historyRecover this request (read only)Hashless creation cannot be uniquely recovered here without wallet nonce evidence. A reverted hash cannot unlock a hashless request. Keep it unresolved for manual review. Replacement/cancellation and cross-device recovery are unsupported; do not clear storage to retry.Saved hashes are unverified locators. Check status before another request. Browser storage is best-effort.Exact saved request recovered: included. This is not verified settlement; no transaction was sent.ReceiptArcProof prototype — G1 reviewed, not auditedGrant eligibility: HOLDChecked testnet deployment · live payment acceptance pendingBuilt with Arc Studio"
+
+ ❯ src/arcproof/__tests__/unknownRequestUi.test.tsx:43:28
+     41|   await act(async () => { button.click(); });
+     42|   expect(mocks.recover).toHaveBeenCalledWith({}, intent.operationId, h…
+     43|   expect(host.textContent).toContain('Known saved hash status: include…
+       |                            ^
+     44|   expect(host.textContent).toContain('not verified settlement');
+     45| });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[7/8]⎯
+
+ FAIL  src/arcproof/__tests__/unknownRequestUi.test.tsx > shows every unresolved saved transaction outside collapsed completed history
+AssertionError: expected <details>…(3)</details> to be null
+
+- Expected:
+null
+
++ Received:
+<details>
+  <summary
+    class="cursor-pointer py-2"
+  >
+    Older saved transactions (
+    2
+    )
+  </summary>
+  <div
+    class="space-y-1 border-b border-amber-200 py-2 last:border-0"
+  >
+    <p
+      class="break-all"
+    >
+      <strong>
+        pay
+         · 
+        submitted
+      </strong>
+      : 
+      <a
+        class="underline"
+        href="https://explorer.testnet.arc.io/tx/0xbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+        rel="noreferrer"
+        target="_blank"
+      >
+        0xbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+      </a>
+    </p>
+    <button
+      class="underline disabled:opacity-50"
+      type="button"
+    >
+      Refresh saved status
+    </button>
+  </div>
+  <div
+    class="space-y-1 border-b border-amber-200 py-2 last:border-0"
+  >
+    <p
+      class="break-all"
+    >
+      <strong>
+        create
+         · 
+        submitted
+      </strong>
+      : 
+      <a
+        class="underline"
+        href="https://explorer.testnet.arc.io/tx/0xcccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+        rel="noreferrer"
+        target="_blank"
+      >
+        0xcccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
+      </a>
+    </p>
+    <button
+      class="underline disabled:opacity-50"
+      type="button"
+    >
+      Refresh saved status
+    </button>
+  </div>
+</details>
+
+ ❯ src/arcproof/__tests__/unknownRequestUi.test.tsx:56:65
+     54|   const submitted = [...aside.querySelectorAll('a')].filter(a => a.tex…
+     55|   expect(submitted).toHaveLength(2);
+     56|   for (const link of submitted) expect(link.closest('details')).toBeNu…
+       |                                                                 ^
+     57|   const history = aside.querySelector('details')!;
+     58|   expect(history.textContent).toContain(hash); expect(history.open).to…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[8/8]⎯
+
+
+ Test Files  2 failed (2)
+      Tests  8 failed | 3 passed (11)
+   Start at  01:00:45
+   Duration  2.02s (transform 636ms, setup 0ms, import 1.27s, tests 651ms, environment 920ms)
+

@@ -1,0 +1,115 @@
+{
+  "recordedAt": "2026-10-21T16:05:10.455005+00:00",
+  "status": "blocked",
+  "classification": "controlled_demo",
+  "scope": "Fresh read-only verification of the pre-existing same-wallet testnet transaction and deployment; no signing, transaction broadcast, deployment or runtime edits.",
+  "transaction": "0x0987c87540b6701be5fe047c55a7ac1b9277fda7dd989f31c8ea3ccd25350ace",
+  "contract": "0x3Dcd2bDD924BCC384Cb39e9e12038e00fde0FA30",
+  "sourcesRead": [
+    "https://docs.arc.io/arc/references/rpc-endpoints.md",
+    "https://docs.arc.io/arc/concepts/deterministic-finality.md",
+    "https://docs.arc.io/arc/references/usdc-system-events.md",
+    "https://docs.arc.io/arc/references/evm-differences.md"
+  ],
+  "documentationFindings": [
+    "Official docs list chain ID 5042002 and both attempted anonymous testnet RPC URLs.",
+    "Arc finality is deterministic at committed block inclusion; this does not establish that the observed transaction is committed without live evidence.",
+    "Native EIP-7708 Transfer emitter is 0xfffffffffffffffffffffffffffffffffffffffe with 18 decimals; ERC20 USDC emitter is 0x3600000000000000000000000000000000000000 with 6 decimals.",
+    "Native transfers and ERC20 mirror events must not be double-counted; gas and block rewards are not native Transfer logs."
+  ],
+  "attemptedPrimaryMethods": [
+    "eth_chainId",
+    "eth_getTransactionByHash",
+    "eth_getTransactionReceipt (payment and deployment)",
+    "eth_getCode",
+    "eth_getBlockByNumber(finalized)"
+  ],
+  "primaryResult": "All six capture calls returned HTTP403. One bounded diagnostic request identified Cloudflare error1010. No challenge solving or access circumvention attempted.",
+  "alternateResult": "Officially documented dRPC eth_chainId returned HTTP403/error1010. Initial execution was denied by reviewer for missing documentation visibility; outcome checked (no output file), official saved endpoint table supplied, one retry permitted and performed. No further provider attempts.",
+  "rawChainDataObtained": false,
+  "runtimeVerification": "blocked",
+  "receiptVerification": "blocked",
+  "finalityVerification": "blocked",
+  "latestBlockUsedAsFinality": false,
+  "actualVerifier": "Actual receiptVerifier.ts executed offline with captured chain-read failure; PENDING, verified=false, all downstream checks not_run. This is fail-closed logic evidence, not live settlement evidence.",
+  "historicalEvidence": "Existing normalized browser observation remains historical controlled_demo; not two-wallet acceptance, income, or proof of delivery.",
+  "nextStep": "Repeat the bounded read-only verifier only from a supported reachable environment; do not weaken finalized-header policy or substitute reconstructed fixture data.",
+  "policyNotes": "No credentials, wallets, signing or network writes were used.",
+  "files": [
+    {
+      "path": "alternate-chain-id.json",
+      "sha256": "5f6ab4ea647ac20531fa43a23decf777add8455accea171f3273986b904ad919",
+      "bytes": 420
+    },
+    {
+      "path": "capture.py",
+      "sha256": "808464db9dca0fd7edbdfc55d7d4d394b0cd20d736c8da5a6d77eefe1f52473f",
+      "bytes": 1635
+    },
+    {
+      "path": "chain-id.json",
+      "sha256": "0781a58757e397a50eabee88254bef4c69dbf19d464af424828db3b06ce7be1e",
+      "bytes": 297
+    },
+    {
+      "path": "deployment-receipt.json",
+      "sha256": "8f444a53faaa2f35b09cdea52dd3497945052fdd0e675d5ea7029cfc617b66df",
+      "bytes": 401
+    },
+    {
+      "path": "deterministic-finality.json",
+      "sha256": "1940adfda4bb3b3a9f87ee595b79355e6abc74a21adf5dc2fc88816a3fd088fc",
+      "bytes": 7904
+    },
+    {
+      "path": "evm-differences.json",
+      "sha256": "5abb63780797ec5964139d7b9dc0278867ef644de5626c2e6f4202e3adeaf981",
+      "bytes": 15414
+    },
+    {
+      "path": "finalized-block.json",
+      "sha256": "dfbda18382e596a6ebda11f8db06b1d3f146c9e52b481a588545f556ec2eac57",
+      "bytes": 349
+    },
+    {
+      "path": "payment-receipt.json",
+      "sha256": "b47b089ff194852a7004e5582bff81af8e697d3509b7c4a55fa23928852265b8",
+      "bytes": 398
+    },
+    {
+      "path": "payment-transaction.json",
+      "sha256": "b605a9e576579c7153c3eb281da6466348926758abcd00941f421d7e4c3e1bab",
+      "bytes": 401
+    },
+    {
+      "path": "rpc-endpoints.json",
+      "sha256": "61b69181ff4ea2785b0e1b5c47f84129845e2b40456f91498c7d6c0d849ea13d",
+      "bytes": 11000
+    },
+    {
+      "path": "runtime.json",
+      "sha256": "bea4d1f2856c586db3764b495a3d80c42b7bf1bc2cca28389efc4a1689416012",
+      "bytes": 368
+    },
+    {
+      "path": "usdc-system-events.json",
+      "sha256": "182a77dd0b5ef41ae83a852d69ae6def5b6ac6b4f62cb1faecef6f32a0e66f8f",
+      "bytes": 11503
+    },
+    {
+      "path": "verifier-failure-replay.json",
+      "sha256": "f363f43da269e089cf856d2b41eb58ca3be19fbcff826057658a5092d51ff4ed",
+      "bytes": 2694
+    },
+    {
+      "path": "verifier-failure-replay.log",
+      "sha256": "5b45a8aad8c971d95813c08b7a142e59263d5704005921722f5db4e1cddd37ed",
+      "bytes": 2695
+    },
+    {
+      "path": "verify-captured-failure.ts",
+      "sha256": "a66006edd486398f78cb45f7b60aaec356256e57c4f8cb3d975a6955ced3e807",
+      "bytes": 1456
+    }
+  ]
+}

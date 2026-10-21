@@ -1,0 +1,144 @@
+vite v6.4.4 building for production...
+transforming...
+../arcproof-baseline/node_modules/@base-org/account/node_modules/ox/_esm/core/Address.js (6:21): A comment
+
+"/*#__PURE__*/"
+
+in "../arcproof-baseline/node_modules/@base-org/account/node_modules/ox/_esm/core/Address.js" contains an annotation that Rollup cannot interpret due to the position of the comment. The comment will be removed to avoid issues.
+../arcproof-baseline/node_modules/@base-org/account/node_modules/ox/_esm/core/Base64.js (6:27): A comment
+
+"/*#__PURE__*/"
+
+in "../arcproof-baseline/node_modules/@base-org/account/node_modules/ox/_esm/core/Base64.js" contains an annotation that Rollup cannot interpret due to the position of the comment. The comment will be removed to avoid issues.
+../arcproof-baseline/node_modules/porto/node_modules/ox/_esm/core/Base64.js (6:27): A comment
+
+"/*#__PURE__*/"
+
+in "../arcproof-baseline/node_modules/porto/node_modules/ox/_esm/core/Base64.js" contains an annotation that Rollup cannot interpret due to the position of the comment. The comment will be removed to avoid issues.
+../arcproof-baseline/node_modules/@coinbase/wallet-sdk/node_modules/ox/_esm/core/Address.js (6:21): A comment
+
+"/*#__PURE__*/"
+
+in "../arcproof-baseline/node_modules/@coinbase/wallet-sdk/node_modules/ox/_esm/core/Address.js" contains an annotation that Rollup cannot interpret due to the position of the comment. The comment will be removed to avoid issues.
+../arcproof-baseline/node_modules/@coinbase/wallet-sdk/node_modules/ox/_esm/core/Base64.js (6:27): A comment
+
+"/*#__PURE__*/"
+
+in "../arcproof-baseline/node_modules/@coinbase/wallet-sdk/node_modules/ox/_esm/core/Base64.js" contains an annotation that Rollup cannot interpret due to the position of the comment. The comment will be removed to avoid issues.
+../arcproof-baseline/node_modules/@base-org/account/node_modules/ox/_esm/core/internal/cursor.js (2:21): A comment
+
+"/*#__PURE__*/"
+
+in "../arcproof-baseline/node_modules/@base-org/account/node_modules/ox/_esm/core/internal/cursor.js" contains an annotation that Rollup cannot interpret due to the position of the comment. The comment will be removed to avoid issues.
+../arcproof-baseline/node_modules/zod/v4/core/util.js (400:0): A comment
+
+"// Wrapped in a `@__PURE__` IIFE: esbuild never tree-shakes a top-level initializer that contains a member access on `Number`, so the bare object literal survived into every bundle."
+
+in "../arcproof-baseline/node_modules/zod/v4/core/util.js" contains an annotation that Rollup cannot interpret due to the position of the comment. The comment will be removed to avoid issues.
+../arcproof-baseline/node_modules/@coinbase/wallet-sdk/node_modules/ox/_esm/core/internal/cursor.js (2:21): A comment
+
+"/*#__PURE__*/"
+
+in "../arcproof-baseline/node_modules/@coinbase/wallet-sdk/node_modules/ox/_esm/core/internal/cursor.js" contains an annotation that Rollup cannot interpret due to the position of the comment. The comment will be removed to avoid issues.
+../arcproof-baseline/node_modules/zod/v4/core/regexes.js (74:0): A comment
+
+"/** Anchors a pattern source. The interpolation lives here rather than at the call site because
+ * esbuild will not drop a `@__PURE__` call whose own argument interpolates a variable, but it
+ * will drop `anchor(dateSource)`. Keeping it inline pinned `date` into every bundle. */"
+
+in "../arcproof-baseline/node_modules/zod/v4/core/regexes.js" contains an annotation that Rollup cannot interpret due to the position of the comment. The comment will be removed to avoid issues.
+✓ 6428 modules transformed.
+rendering chunks...
+computing gzip size...
+../../../../tmp/arcproof-public-probe-sTvihe/dist/index.html                                        0.89 kB │ gzip:   0.48 kB
+../../../../tmp/arcproof-public-probe-sTvihe/dist/build-provenance.json                            24.37 kB │ gzip:   9.06 kB
+../../../../tmp/arcproof-public-probe-sTvihe/dist/assets/index-BNRZKz5L.css                        17.24 kB │ gzip:   4.07 kB
+../../../../tmp/arcproof-public-probe-sTvihe/dist/assets/cursor--H5MtkhQ.js                         0.26 kB │ gzip:   0.22 kB
+../../../../tmp/arcproof-public-probe-sTvihe/dist/assets/chevron-left-BCmPIydj.js                   0.40 kB │ gzip:   0.28 kB
+../../../../tmp/arcproof-public-probe-sTvihe/dist/assets/chevron-top-CeEBVebb.js                    0.40 kB │ gzip:   0.28 kB
+../../../../tmp/arcproof-public-probe-sTvihe/dist/assets/external-link-CI0BCocM.js                  0.40 kB │ gzip:   0.28 kB
+../../../../tmp/arcproof-public-probe-sTvihe/dist/assets/chevron-bottom-BgT85wwB.js                 0.40 kB │ gzip:   0.28 kB
+../../../../tmp/arcproof-public-probe-sTvihe/dist/assets/chevron-right-DRgwic7w.js                  0.40 kB │ gzip:   0.27 kB
+../../../../tmp/arcproof-public-probe-sTvihe/dist/assets/arrow-top-CGWv1Khb.js                      0.41 kB │ gzip:   0.29 kB
+../../../../tmp/arcproof-public-probe-sTvihe/dist/assets/arrow-bottom-DOIR6c2B.js                   0.41 kB │ gzip:   0.29 kB
+../../../../tmp/arcproof-public-probe-sTvihe/dist/assets/arrow-left-BcBhLqhy.js                     0.41 kB │ gzip:   0.29 kB
+../../../../tmp/arcproof-public-probe-sTvihe/dist/assets/arrow-right-EIIUYb1C.js                    0.42 kB │ gzip:   0.29 kB
+../../../../tmp/arcproof-public-probe-sTvihe/dist/assets/off-DfvnBiMI.js                            0.43 kB │ gzip:   0.29 kB
+../../../../tmp/arcproof-public-probe-sTvihe/dist/assets/search-RumMTwiU.js                         0.44 kB │ gzip:   0.30 kB
+../../../../tmp/arcproof-public-probe-sTvihe/dist/assets/close-PH5LBbM7.js                          0.44 kB │ gzip:   0.29 kB
+../../../../tmp/arcproof-public-probe-sTvihe/dist/assets/all-wallets-CE3VXAOh.js                    0.45 kB │ gzip:   0.26 kB
+../../../../tmp/arcproof-public-probe-sTvihe/dist/assets/filters-CK37NXJl.js                        0.45 kB │ gzip:   0.28 kB
+../../../../tmp/arcproof-public-probe-sTvihe/dist/assets/info-circle-BqIIruyz.js                    0.47 kB │ gzip:   0.30 kB
+../../../../tmp/arcproof-public-probe-sTvihe/dist/assets/more-DEk4jcwX.js                           0.49 kB │ gzip:   0.31 kB
+../../../../tmp/arcproof-public-probe-sTvihe/dist/assets/refresh-Csfmy2d4.js                        0.49 kB │ gzip:   0.32 kB
+../../../../tmp/arcproof-public-probe-sTvihe/dist/assets/warning-circle-5MNNnA5f.js                 0.50 kB │ gzip:   0.31 kB
+../../../../tmp/arcproof-public-probe-sTvihe/dist/assets/coinPlaceholder-BcG8YZBd.js                0.50 kB │ gzip:   0.35 kB
+../../../../tmp/arcproof-public-probe-sTvihe/dist/assets/compass-CMkWfMaD.js                        0.52 kB │ gzip:   0.34 kB
+../../../../tmp/arcproof-public-probe-sTvihe/dist/assets/swapVertical-1bDerfXK.js                   0.55 kB │ gzip:   0.34 kB
+../../../../tmp/arcproof-public-probe-sTvihe/dist/assets/swapHorizontal-iYs6P-wX.js                 0.55 kB │ gzip:   0.33 kB
+../../../../tmp/arcproof-public-probe-sTvihe/dist/assets/x-C1Vo0UKM.js                              0.57 kB │ gzip:   0.39 kB
+../../../../tmp/arcproof-public-probe-sTvihe/dist/assets/cursor-transparent-Do9Q_nPV.js             0.58 kB │ gzip:   0.35 kB
+../../../../tmp/arcproof-public-probe-sTvihe/dist/assets/twitterIcon-ClEV1H3F.js                    0.58 kB │ gzip:   0.38 kB
+../../../../tmp/arcproof-public-probe-sTvihe/dist/assets/mobile-Xi2UQQX_.js                         0.59 kB │ gzip:   0.32 kB
+../../../../tmp/arcproof-public-probe-sTvihe/dist/assets/checkmark-bold-ByVlKK1m.js                 0.65 kB │ gzip:   0.43 kB
+../../../../tmp/arcproof-public-probe-sTvihe/dist/assets/etherscan-BGQPC6ai.js                      0.70 kB │ gzip:   0.45 kB
+../../../../tmp/arcproof-public-probe-sTvihe/dist/assets/checkmark-B25e5zZA.js                      0.71 kB │ gzip:   0.47 kB
+../../../../tmp/arcproof-public-probe-sTvihe/dist/assets/help-circle-Cb9dO8cQ.js                    0.71 kB │ gzip:   0.43 kB
+../../../../tmp/arcproof-public-probe-sTvihe/dist/assets/wallet-CQiE7v5S.js                         0.72 kB │ gzip:   0.42 kB
+../../../../tmp/arcproof-public-probe-sTvihe/dist/assets/plus-DZSz1Mrx.js                           0.76 kB │ gzip:   0.42 kB
+../../../../tmp/arcproof-public-probe-sTvihe/dist/assets/verify-filled-Dap18efe.js                  0.77 kB │ gzip:   0.47 kB
+../../../../tmp/arcproof-public-probe-sTvihe/dist/assets/add-CTuNynFF.js                            0.77 kB │ gzip:   0.43 kB
+../../../../tmp/arcproof-public-probe-sTvihe/dist/assets/google-BhXFxGm6.js                         0.81 kB │ gzip:   0.45 kB
+../../../../tmp/arcproof-public-probe-sTvihe/dist/assets/three-dots-Bly9Iskt.js                     0.84 kB │ gzip:   0.41 kB
+../../../../tmp/arcproof-public-probe-sTvihe/dist/assets/clock-DwqxtKgl.js                          0.84 kB │ gzip:   0.47 kB
+../../../../tmp/arcproof-public-probe-sTvihe/dist/assets/disconnect-C5QBSbp4.js                     0.89 kB │ gzip:   0.50 kB
+../../../../tmp/arcproof-public-probe-sTvihe/dist/assets/twitch-CvL8axyV.js                         0.90 kB │ gzip:   0.50 kB
+../../../../tmp/arcproof-public-probe-sTvihe/dist/assets/bank-CfncczJx.js                           0.94 kB │ gzip:   0.52 kB
+../../../../tmp/arcproof-public-probe-sTvihe/dist/assets/apple-CO8YoOJE.js                          0.96 kB │ gzip:   0.53 kB
+../../../../tmp/arcproof-public-probe-sTvihe/dist/assets/play-store-CW4QVTyJ.js                     1.01 kB │ gzip:   0.52 kB
+../../../../tmp/arcproof-public-probe-sTvihe/dist/assets/farcaster-CsZSVx1t.js                      1.02 kB │ gzip:   0.53 kB
+../../../../tmp/arcproof-public-probe-sTvihe/dist/assets/arrow-bottom-circle-BM9WUToF.js            1.13 kB │ gzip:   0.53 kB
+../../../../tmp/arcproof-public-probe-sTvihe/dist/assets/github-BgXtn-7V.js                         1.13 kB │ gzip:   0.60 kB
+../../../../tmp/arcproof-public-probe-sTvihe/dist/assets/swapHorizontalBold-CdhGXIp1.js             1.16 kB │ gzip:   0.61 kB
+../../../../tmp/arcproof-public-probe-sTvihe/dist/assets/app-store-D3mdG8L5.js                      1.20 kB │ gzip:   0.67 kB
+../../../../tmp/arcproof-public-probe-sTvihe/dist/assets/mail-DVKMBAnv.js                           1.21 kB │ gzip:   0.65 kB
+../../../../tmp/arcproof-public-probe-sTvihe/dist/assets/facebook-BBuhsdup.js                       1.23 kB │ gzip:   0.64 kB
+../../../../tmp/arcproof-public-probe-sTvihe/dist/assets/wallet-placeholder-mJSaulT1.js             1.26 kB │ gzip:   0.59 kB
+../../../../tmp/arcproof-public-probe-sTvihe/dist/assets/desktop-D-9jUiJm.js                        1.27 kB │ gzip:   0.64 kB
+../../../../tmp/arcproof-public-probe-sTvihe/dist/assets/discord-CCW6Q8tz.js                        1.30 kB │ gzip:   0.65 kB
+../../../../tmp/arcproof-public-probe-sTvihe/dist/assets/swapHorizontalMedium-SWsU-K_z.js           1.30 kB │ gzip:   0.68 kB
+../../../../tmp/arcproof-public-probe-sTvihe/dist/assets/recycle-horizontal-BjXaduy7.js             1.35 kB │ gzip:   0.70 kB
+../../../../tmp/arcproof-public-probe-sTvihe/dist/assets/extension-DLNnc0mS.js                      1.43 kB │ gzip:   0.69 kB
+../../../../tmp/arcproof-public-probe-sTvihe/dist/assets/telegram-CpdM5lbw.js                       1.45 kB │ gzip:   0.84 kB
+../../../../tmp/arcproof-public-probe-sTvihe/dist/assets/swapHorizontalRoundedBold-Cxx0U2vS.js      1.46 kB │ gzip:   0.77 kB
+../../../../tmp/arcproof-public-probe-sTvihe/dist/assets/verify-BZ7Rf-gU.js                         1.47 kB │ gzip:   0.71 kB
+../../../../tmp/arcproof-public-probe-sTvihe/dist/assets/qr-code-BVzUMCm7.js                        1.52 kB │ gzip:   0.52 kB
+../../../../tmp/arcproof-public-probe-sTvihe/dist/assets/browser-BSOYqvGa.js                        1.58 kB │ gzip:   0.78 kB
+../../../../tmp/arcproof-public-probe-sTvihe/dist/assets/network-placeholder-BoqmVYzf.js            1.65 kB │ gzip:   0.73 kB
+../../../../tmp/arcproof-public-probe-sTvihe/dist/assets/id-DV9CBNQ_.js                             1.75 kB │ gzip:   0.81 kB
+../../../../tmp/arcproof-public-probe-sTvihe/dist/assets/nftPlaceholder-DWfb0buT.js                 1.75 kB │ gzip:   0.87 kB
+../../../../tmp/arcproof-public-probe-sTvihe/dist/assets/info-DLrnrCKU.js                           2.26 kB │ gzip:   1.14 kB
+../../../../tmp/arcproof-public-probe-sTvihe/dist/assets/exclamation-triangle-dIT7HInJ.js           2.42 kB │ gzip:   1.13 kB
+../../../../tmp/arcproof-public-probe-sTvihe/dist/assets/send-DLirc-bP.js                           2.42 kB │ gzip:   1.27 kB
+../../../../tmp/arcproof-public-probe-sTvihe/dist/assets/card-DowgaADj.js                           2.59 kB │ gzip:   1.17 kB
+../../../../tmp/arcproof-public-probe-sTvihe/dist/assets/chrome-store-DM0H9l1Y.js                   2.59 kB │ gzip:   1.01 kB
+../../../../tmp/arcproof-public-probe-sTvihe/dist/assets/reown-logo-DOtTG9U8.js                     2.60 kB │ gzip:   1.06 kB
+../../../../tmp/arcproof-public-probe-sTvihe/dist/assets/lightbulb-B_6tYjGS.js                      2.72 kB │ gzip:   1.22 kB
+../../../../tmp/arcproof-public-probe-sTvihe/dist/assets/ccip-sZWOCyZg.js                           3.04 kB │ gzip:   1.39 kB
+../../../../tmp/arcproof-public-probe-sTvihe/dist/assets/image-DMFUghoZ.js                          3.49 kB │ gzip:   1.50 kB
+../../../../tmp/arcproof-public-probe-sTvihe/dist/assets/copy-B6AgyXV6.js                           3.82 kB │ gzip:   1.47 kB
+../../../../tmp/arcproof-public-probe-sTvihe/dist/assets/walletconnect-CPeYjEPh.js                  4.06 kB │ gzip:   1.66 kB
+../../../../tmp/arcproof-public-probe-sTvihe/dist/assets/index-95YOkRlk.js                         38.52 kB │ gzip:   9.38 kB
+../../../../tmp/arcproof-public-probe-sTvihe/dist/assets/w3m-modal-BULpdNFO.js                     40.06 kB │ gzip:   9.39 kB
+../../../../tmp/arcproof-public-probe-sTvihe/dist/assets/index-DrAshLsx-DgalRUnB.js                41.11 kB │ gzip:  12.78 kB
+../../../../tmp/arcproof-public-probe-sTvihe/dist/assets/basic-DazkYPnY.js                        143.14 kB │ gzip:  33.11 kB
+../../../../tmp/arcproof-public-probe-sTvihe/dist/assets/index.es-DY3Nty6Y.js                     400.77 kB │ gzip: 115.22 kB
+../../../../tmp/arcproof-public-probe-sTvihe/dist/assets/core-C4vJdN65.js                         484.67 kB │ gzip: 132.18 kB
+../../../../tmp/arcproof-public-probe-sTvihe/dist/assets/index-BWe21kU-.js                      1,474.83 kB │ gzip: 458.98 kB
+
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rollupOptions.output.manualChunks to improve chunking: https://rollupjs.org/configuration-options/#output-manualchunks
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+✓ built in 28.52s
+PASS: copied public asset included; all 85 actual output hashes match.

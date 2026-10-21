@@ -1,0 +1,113 @@
+{
+  "height": 507,
+  "ratio": 1.5,
+  "samples": [
+    {
+      "background": "rgb(255, 255, 255)",
+      "contrast": 17.48834208978778,
+      "foreground": "rgb(28, 25, 23)",
+      "height": 48,
+      "text": "Skip to main content"
+    },
+    {
+      "background": "rgb(255, 251, 235)",
+      "contrast": 8.74845105788553,
+      "foreground": "rgb(120, 53, 15)",
+      "height": 40,
+      "text": "Arc Testnet (5042002) · test USDC, no monetary value · mainnet disabled · not audited"
+    },
+    {
+      "background": "rgb(255, 255, 255)",
+      "contrast": 17.48834208978778,
+      "foreground": "rgb(28, 25, 23)",
+      "height": 28,
+      "text": "ArcProof"
+    },
+    {
+      "background": "rgb(255, 255, 255)",
+      "contrast": 7.629256919887909,
+      "foreground": "rgb(87, 83, 78)",
+      "height": 44,
+      "text": "Invoices"
+    },
+    {
+      "background": "rgb(240, 253, 250)",
+      "contrast": 5.247958176634682,
+      "foreground": "rgb(15, 118, 110)",
+      "height": 44,
+      "text": "Verify receipt"
+    },
+    {
+      "background": "rgb(255, 255, 255)",
+      "contrast": 7.629256919887909,
+      "foreground": "rgb(87, 83, 78)",
+      "height": 44,
+      "text": "Evidence"
+    },
+    {
+      "background": "rgb(255, 255, 255)",
+      "contrast": 7.629256919887909,
+      "foreground": "rgb(87, 83, 78)",
+      "height": 44,
+      "text": "Offline demo"
+    },
+    {
+      "background": "rgb(255, 255, 255)",
+      "contrast": 17.48834208978778,
+      "foreground": "rgb(28, 25, 23)",
+      "height": 28,
+      "text": "Verify a testnet receipt"
+    },
+    {
+      "background": "rgb(255, 255, 255)",
+      "contrast": 17.48834208978778,
+      "foreground": "rgb(28, 25, 23)",
+      "height": 80,
+      "text": "Read-only verification: no wallet or signature required. Network and contract come only from the che"
+    },
+    {
+      "background": "rgb(255, 255, 255)",
+      "contrast": 17.48834208978778,
+      "foreground": "rgb(28, 25, 23)",
+      "height": 16,
+      "text": "0x3Dcd2bDD924BCC384Cb39e9e12038e00fde0FA30"
+    },
+    {
+      "background": "rgb(255, 255, 255)",
+      "contrast": 17.48834208978778,
+      "foreground": "rgb(28, 25, 23)",
+      "height": 20,
+      "text": "Invoice ID"
+    },
+    {
+      "background": "rgb(255, 255, 255)",
+      "contrast": 17.48834208978778,
+      "foreground": "rgb(28, 25, 23)",
+      "height": 20,
+      "text": "Payment transaction hash (optional)"
+    },
+    {
+      "background": "rgb(255, 255, 255)",
+      "contrast": 7.629256919887909,
+      "foreground": "rgb(87, 83, 78)",
+      "height": 60,
+      "text": "Without a hash, recovery searches only the invoice’s recorded paid block. Ambiguous evidence stays u"
+    },
+    {
+      "background": "rgb(255, 255, 255)",
+      "contrast": 7.629256919887909,
+      "foreground": "rgb(87, 83, 78)",
+      "height": 20,
+      "text": "Build identity and evidence"
+    },
+    {
+      "background": "rgb(255, 255, 255)",
+      "contrast": 12.908432420525529,
+      "foreground": "rgb(27, 49, 88)",
+      "height": 44,
+      "text": "Built with Arc Studio"
+    }
+  ],
+  "scrollWidth": 375,
+  "width": 375
+}

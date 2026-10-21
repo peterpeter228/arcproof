@@ -96,8 +96,8 @@ export function DashboardScreen() {
 
         {/* Amount */}
         <div className="space-y-1">
-          <label htmlFor="invoice-amount" className="text-xs font-medium text-stone-500 uppercase tracking-wider">
-            Amount (USDC, max 1.000000)
+          <label htmlFor="invoice-amount" className="text-xs font-medium text-stone-600 uppercase tracking-wider">
+            Amount (test USDC, max 1.000000)
           </label>
           <div className="flex items-center gap-2">
             <input
@@ -106,11 +106,11 @@ export function DashboardScreen() {
               onChange={(e) => handleAmountChange(e.target.value)}
               placeholder="0.20"
               className={[
-                'flex-1 border rounded-lg px-3 py-2 text-sm font-mono bg-stone-50 focus:outline-none focus:ring-2',
-                amountError ? 'border-red-300 focus:ring-red-200' : 'border-stone-200 focus:ring-teal-200',
+                'flex-1 border rounded-lg px-3 py-2 text-base font-mono bg-stone-50 focus:outline-none focus:ring-2',
+                amountError ? 'border-red-300 focus:ring-red-200' : 'border-stone-500 focus:ring-teal-200',
               ].join(' ')}
             />
-            <span className="text-sm text-stone-400 shrink-0">USDC</span>
+            <span className="text-sm text-stone-600 shrink-0">test USDC</span>
           </div>
           {amountError && (
             <p className="text-xs text-red-600 flex items-center gap-1">
@@ -118,7 +118,7 @@ export function DashboardScreen() {
             </p>
           )}
           {parsedAmount !== null && !amountError && (
-            <p className="text-xs text-stone-400 font-mono">
+            <p className="text-xs text-stone-600 font-mono">
               {parsedAmount.toString()} native units (18 dec)
             </p>
           )}
@@ -126,7 +126,7 @@ export function DashboardScreen() {
 
         {/* Expiry */}
         <div className="space-y-1">
-          <label htmlFor="invoice-expiry" className="text-xs font-medium text-stone-500 uppercase tracking-wider">
+          <label htmlFor="invoice-expiry" className="text-xs font-medium text-stone-600 uppercase tracking-wider">
             Expires in (hours, max 168)
           </label>
           <input
@@ -135,16 +135,16 @@ export function DashboardScreen() {
             max={168}
             value={lifetimeHours}
             onChange={(e) => setLifetimeHours(Math.min(168, Math.max(1, Number(e.target.value))))}
-            className="w-32 border border-stone-200 rounded-lg px-3 py-2 text-sm bg-stone-50 focus:outline-none focus:ring-2 focus:ring-teal-200"
+            className="w-32 border border-stone-500 rounded-lg px-3 py-2 text-base bg-stone-50 focus:outline-none focus:ring-2 focus:ring-teal-200"
           />
-          <p className="text-xs text-stone-400">
-            Expires: {new Date(expirySeconds * 1000).toLocaleString()}
+          <p className="text-xs text-stone-600">
+            Expires: {new Date(expirySeconds * 1000).toISOString()} (UTC)
           </p>
         </div>
 
         {/* Title (optional, unbound) */}
         <div className="space-y-1">
-          <label htmlFor="invoice-title" className="text-xs font-medium text-stone-500 uppercase tracking-wider">
+          <label htmlFor="invoice-title" className="text-xs font-medium text-stone-600 uppercase tracking-wider">
             Title (optional, unbound plain text &mdash; not stored on chain)
           </label>
           <input
@@ -153,23 +153,23 @@ export function DashboardScreen() {
             onChange={(e) => handleTitleChange(e.target.value)}
             maxLength={240}
             placeholder="e.g. Design consultation"
-            className="w-full border border-stone-200 rounded-lg px-3 py-2 text-sm bg-stone-50 focus:outline-none focus:ring-2 focus:ring-teal-200"
+            className="w-full border border-stone-500 rounded-lg px-3 py-2 text-base bg-stone-50 focus:outline-none focus:ring-2 focus:ring-teal-200"
           />
-          <p className="text-xs text-stone-400">
+          <p className="text-xs text-stone-600">
             {countCodepoints(title)}/{MAX_TITLE_CODEPOINTS} code points. Not proof; not stored onchain. No customer PII.
           </p>
           {titleError && <p className="text-xs text-red-600">{titleError}</p>}
         </div>
 
         {/* termsHash fixed */}
-        <p className="text-xs text-stone-400">
+        <p className="text-xs text-stone-600">
           Terms hash: <span className="font-mono">bytes32(0)</span> (P0 only; nonzero hash protocol not implemented)
         </p>
 
         <button
           onClick={handleCreate}
           disabled={!parsedAmount || !!amountError || !!titleError}
-          className="w-full bg-teal-600 hover:bg-teal-700 disabled:bg-stone-200 disabled:text-stone-400 text-white rounded-lg py-2.5 text-sm font-medium transition-colors"
+          className="w-full bg-teal-700 hover:bg-teal-800 disabled:bg-stone-200 disabled:text-stone-600 text-white rounded-lg py-2.5 text-sm font-medium transition-colors"
         >
           Create invoice (offline demo — no signing)
         </button>
@@ -183,7 +183,7 @@ export function DashboardScreen() {
           <h2 className="font-semibold text-stone-900 text-base">
             Invoice history
             {Number(demoNonce) > 0 && (
-              <span className="ml-2 text-xs font-normal text-stone-400">
+              <span className="ml-2 text-xs font-normal text-stone-600">
                 {demoNonce.toString()} invoices (demo)
               </span>
             )}
@@ -193,19 +193,19 @@ export function DashboardScreen() {
         {Number(demoNonce) === 0 ? (
           <div className="bg-white rounded-xl border border-stone-200 p-10 text-center">
             <FileText size={32} className="mx-auto text-stone-300 mb-3" />
-            <p className="text-stone-500 text-sm">No invoices yet.</p>
-            <p className="text-stone-400 text-xs mt-1">Create your first invoice above.</p>
+            <p className="text-stone-600 text-sm">No invoices yet.</p>
+            <p className="text-stone-600 text-xs mt-1">Create your first invoice above.</p>
           </div>
         ) : (
           <>
             <div className="space-y-2">
               {invoiceIds.map(({ nonce, invoiceId }) => (
-                <div key={invoiceId} className="bg-white rounded-lg border border-stone-200 px-4 py-3 flex items-center justify-between gap-4">
+                <div key={invoiceId} className="bg-white rounded-lg border border-stone-200 px-4 py-3 flex flex-wrap items-center justify-between gap-4">
                   <div className="min-w-0">
-                    <p className="text-xs text-stone-400 font-mono truncate">{invoiceId}</p>
-                    <p className="text-xs text-stone-500 mt-0.5">Nonce {nonce.toString()}</p>
+                    <p className="text-xs text-stone-600 font-mono truncate">{invoiceId}</p>
+                    <p className="text-xs text-stone-600 mt-0.5">Nonce {nonce.toString()}</p>
                   </div>
-                  <span className="shrink-0 px-2 py-0.5 rounded-full text-xs bg-stone-100 text-stone-500">
+                  <span className="shrink-0 px-2 py-0.5 rounded-full text-xs bg-stone-100 text-stone-600">
                     demo
                   </span>
                   <button className="text-sm border rounded px-2 py-1" onClick={() => setExampleReceipt({ invoiceId, amount: demoAmounts[Number(nonce)] })}>View simulated receipt</button>
@@ -223,7 +223,7 @@ export function DashboardScreen() {
                 >
                   Previous
                 </button>
-                <span className="text-xs text-stone-400">
+                <span className="text-xs text-stone-600">
                   Page {page + 1} of {totalPages}
                 </span>
                 <button

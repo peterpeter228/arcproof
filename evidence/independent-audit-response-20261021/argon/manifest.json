@@ -1,0 +1,432 @@
+{
+  "baselineCommit": "94a84c44b02d52a827bed42fc9f9a5d414619b7d",
+  "candidateCommit": null,
+  "sourceRoot": "arcproof-current",
+  "purpose": "Frozen patched candidate review; NOT transmitted",
+  "keysAccessed": false,
+  "networkCallsMade": 0,
+  "selectedFiles": [
+    {
+      "relativePath": "contracts/ArcProofInvoices.sol",
+      "bytes": 8249,
+      "sha256": "8699071d250c834cd1166ece0d4001b7de95af7562796e19305ce2812635e25b",
+      "baselineSha256": "8699071d250c834cd1166ece0d4001b7de95af7562796e19305ce2812635e25b",
+      "state": "unchanged"
+    },
+    {
+      "relativePath": "docs/BUILD_IDENTITY_AND_READONLY_ROUTES.md",
+      "bytes": 4760,
+      "sha256": "719316f50bf82596cdb5979b8ccd217b4e1c92db8a92f595ff2539c865609dc0",
+      "baselineSha256": null,
+      "state": "new"
+    },
+    {
+      "relativePath": "package.json",
+      "bytes": 1451,
+      "sha256": "13c703de6950bb5c6f0a91958c0cb0b1bcd417b56dbea327d857ada649e94dc3",
+      "baselineSha256": "13c703de6950bb5c6f0a91958c0cb0b1bcd417b56dbea327d857ada649e94dc3",
+      "state": "unchanged"
+    },
+    {
+      "relativePath": "src/App.tsx",
+      "bytes": 3814,
+      "sha256": "9928b64c127c2664d45d30f71a88ef0afe4509825961032e2e05b65e1385f297",
+      "baselineSha256": "00a2b7a9079127217cc1f1cbfde57a714a305c706aff610ccc67421ac4335082",
+      "state": "changed"
+    },
+    {
+      "relativePath": "src/arcproof/__tests__/buildIdentity.test.ts",
+      "bytes": 1329,
+      "sha256": "4363670a51380c357ce037c87208edbbc17609e2f2fd4198f6f57e32b42f8de2",
+      "baselineSha256": null,
+      "state": "new"
+    },
+    {
+      "relativePath": "src/arcproof/__tests__/fixtures/safeBrowser.ts",
+      "bytes": 816,
+      "sha256": "5b9aae97c717d9475d17636d60e46d537372317a51e0991aba668accbcfc14a0",
+      "baselineSha256": "5b9aae97c717d9475d17636d60e46d537372317a51e0991aba668accbcfc14a0",
+      "state": "unchanged"
+    },
+    {
+      "relativePath": "src/arcproof/__tests__/offlineDemo.test.tsx",
+      "bytes": 1460,
+      "sha256": "1a52d5add10ecebb9db5f54e5464636376c83bf4ca4a41ccdaeb81aa399538a9",
+      "baselineSha256": "af99fbab18fbd563fe9514d51d2bf0821f2fca445f007eb3d5b4a15fc4d6dfa2",
+      "state": "changed"
+    },
+    {
+      "relativePath": "src/arcproof/__tests__/readonlyRoutes.test.tsx",
+      "bytes": 6180,
+      "sha256": "c8565c6749a1ffc1ec4b341f72b8e77e070e3d447f8925c12ce709d382a1ecd7",
+      "baselineSha256": null,
+      "state": "new"
+    },
+    {
+      "relativePath": "src/arcproof/__tests__/receiptClarity.test.tsx",
+      "bytes": 15933,
+      "sha256": "830e7380951456b8bb429dc744bd8f21575ec21653829a427ae65832d7bed0d1",
+      "baselineSha256": "453ae83937ecd61bd4a3d2cf34589f0371b5447b25c4e65db02caf20662e8295",
+      "state": "changed"
+    },
+    {
+      "relativePath": "src/arcproof/__tests__/receiptDiagnosticsUi.test.tsx",
+      "bytes": 9449,
+      "sha256": "4a0720d0a354d346004534f3087a38622774fb179358743d83f50af94483a737",
+      "baselineSha256": "5595779c99ab7edbc2ee9c2285bf31b1333d8fc9f4b887fd8e7b9f0e44ab2803",
+      "state": "changed"
+    },
+    {
+      "relativePath": "src/arcproof/__tests__/testnetClient.test.ts",
+      "bytes": 23636,
+      "sha256": "57d96bb30f15cb1cca87440e0193f22fdbb16b01673d824bf0645523ec6b6163",
+      "baselineSha256": "eb4d38721b7d7805d58c90442f1e197e29ee144ee752c4e8e69d303c0df84ac3",
+      "state": "changed"
+    },
+    {
+      "relativePath": "src/arcproof/__tests__/testnetUi.test.tsx",
+      "bytes": 13737,
+      "sha256": "e7d72719e1fe949adaea08c5ba710f8fc0c6f5d98e04718cb08ec1cad9b457a0",
+      "baselineSha256": "b98d1e77c14f2dac3cb60b8e14639531004d3b99d09ed1853316ab043b509377",
+      "state": "changed"
+    },
+    {
+      "relativePath": "src/arcproof/__tests__/uiSemantics.test.tsx",
+      "bytes": 9831,
+      "sha256": "681bb0bd5ee82540a6d84245bfd413164b95d51145742dbcc707ddb68282b962",
+      "baselineSha256": "681bb0bd5ee82540a6d84245bfd413164b95d51145742dbcc707ddb68282b962",
+      "state": "unchanged"
+    },
+    {
+      "relativePath": "src/arcproof/__tests__/unknownRequestIdentity.test.ts",
+      "bytes": 5427,
+      "sha256": "9b21fd2071f1e30caa2f3093dc6989475ef9b84dc4565ae914d663205af0ca67",
+      "baselineSha256": null,
+      "state": "new"
+    },
+    {
+      "relativePath": "src/arcproof/__tests__/unknownRequestUi.test.tsx",
+      "bytes": 4296,
+      "sha256": "7c26b57e7584e686d858e315e195fe9e56df31ffe8c437cb593274bec9356425",
+      "baselineSha256": null,
+      "state": "new"
+    },
+    {
+      "relativePath": "src/arcproof/__tests__/walletBootstrap.test.ts",
+      "bytes": 513,
+      "sha256": "c7c54ae36f4b3ef6aa00cdc548e463f964b1e23e6c80291890f4effe93bfe7d8",
+      "baselineSha256": null,
+      "state": "new"
+    },
+    {
+      "relativePath": "src/arcproof/__tests__/walletIntents.test.ts",
+      "bytes": 7464,
+      "sha256": "dbbf158cac289e99da63926b1e3335356df1f40bb86ab6d621e4b91d21bdc820",
+      "baselineSha256": "47283db89c187e7138669b3a0ca3c07487992b6b63a2357da0d21ceba5651e03",
+      "state": "changed"
+    },
+    {
+      "relativePath": "src/arcproof/amountParser.ts",
+      "bytes": 3413,
+      "sha256": "af1b21797cecb5dbbb8dbfd31ee4d407cbda64c48a3daddcb22cec8fa1214796",
+      "baselineSha256": "af1b21797cecb5dbbb8dbfd31ee4d407cbda64c48a3daddcb22cec8fa1214796",
+      "state": "unchanged"
+    },
+    {
+      "relativePath": "src/arcproof/arcSettlement.ts",
+      "bytes": 1735,
+      "sha256": "47a04fd31c27c4fd444a1e68463a2e1a3426cfdd2a8dc3c0cfcff8b75c891fc9",
+      "baselineSha256": "47a04fd31c27c4fd444a1e68463a2e1a3426cfdd2a8dc3c0cfcff8b75c891fc9",
+      "state": "unchanged"
+    },
+    {
+      "relativePath": "src/arcproof/arcproofAbi.ts",
+      "bytes": 4053,
+      "sha256": "9fd157cf47bfb185fe2f3740b54ee0ef09b0386dde6d7bd0cf0d6531e75621f7",
+      "baselineSha256": "9fd157cf47bfb185fe2f3740b54ee0ef09b0386dde6d7bd0cf0d6531e75621f7",
+      "state": "unchanged"
+    },
+    {
+      "relativePath": "src/arcproof/buildIdentity.ts",
+      "bytes": 1379,
+      "sha256": "24088a2bb487f48cb575e313ede7e0b0598e5ec17eb771c5cda3f57a9125a6e9",
+      "baselineSha256": null,
+      "state": "new"
+    },
+    {
+      "relativePath": "src/arcproof/exportUtils.ts",
+      "bytes": 12705,
+      "sha256": "0417715ac3657d718bd106a450e9cd65b55ca3e731de6bc3670646ed0f270552",
+      "baselineSha256": "0417715ac3657d718bd106a450e9cd65b55ca3e731de6bc3670646ed0f270552",
+      "state": "unchanged"
+    },
+    {
+      "relativePath": "src/arcproof/invoiceId.ts",
+      "bytes": 1607,
+      "sha256": "99f5263b31f2440ff9cd55129df084f7684c687cdfbf81b981d9db6426e1f298",
+      "baselineSha256": "99f5263b31f2440ff9cd55129df084f7684c687cdfbf81b981d9db6426e1f298",
+      "state": "unchanged"
+    },
+    {
+      "relativePath": "src/arcproof/manifest.ts",
+      "bytes": 3236,
+      "sha256": "c65ef5a548db9454c838b5ce154b811403bbd96b91aebedfb585db587c533357",
+      "baselineSha256": "c65ef5a548db9454c838b5ce154b811403bbd96b91aebedfb585db587c533357",
+      "state": "unchanged"
+    },
+    {
+      "relativePath": "src/arcproof/offlineFixture.ts",
+      "bytes": 324,
+      "sha256": "8af3f84549997523e20ac99c49d875c2060b059fcf2cc52d734714ca083ac68d",
+      "baselineSha256": "8af3f84549997523e20ac99c49d875c2060b059fcf2cc52d734714ca083ac68d",
+      "state": "unchanged"
+    },
+    {
+      "relativePath": "src/arcproof/preparedPayment.ts",
+      "bytes": 6551,
+      "sha256": "ed79c737cb2b4f503ec79aaeac1e659c86ca4144bc0343ebdd1e8a54a69421b5",
+      "baselineSha256": "ed79c737cb2b4f503ec79aaeac1e659c86ca4144bc0343ebdd1e8a54a69421b5",
+      "state": "unchanged"
+    },
+    {
+      "relativePath": "src/arcproof/receiptStatus.ts",
+      "bytes": 263,
+      "sha256": "73d96ac7761e4824978a6399de2b9dcab4bb8d8e552c76f0e5bd08ab292a5906",
+      "baselineSha256": "73d96ac7761e4824978a6399de2b9dcab4bb8d8e552c76f0e5bd08ab292a5906",
+      "state": "unchanged"
+    },
+    {
+      "relativePath": "src/arcproof/receiptVerifier.ts",
+      "bytes": 27850,
+      "sha256": "0c600345477339bf838bc07e44c44490d58fd0600822592447a2b466ba669599",
+      "baselineSha256": "0c600345477339bf838bc07e44c44490d58fd0600822592447a2b466ba669599",
+      "state": "unchanged"
+    },
+    {
+      "relativePath": "src/arcproof/routes.ts",
+      "bytes": 1441,
+      "sha256": "ac933ea34f556f85ee6c93f0c5d486dbddb34e8f50a908ed63b125183cb2a8f7",
+      "baselineSha256": null,
+      "state": "new"
+    },
+    {
+      "relativePath": "src/arcproof/submissions.ts",
+      "bytes": 5187,
+      "sha256": "84dd624fc1a600dc90544f733fa697dd61ea9c7a0711cac76dfc33f09471e3ef",
+      "baselineSha256": "84dd624fc1a600dc90544f733fa697dd61ea9c7a0711cac76dfc33f09471e3ef",
+      "state": "unchanged"
+    },
+    {
+      "relativePath": "src/arcproof/testnet.ts",
+      "bytes": 2481,
+      "sha256": "729b3325f1b1574b9a9ea9c5e96061cd9228b25959c6ebd56b574313cc81c811",
+      "baselineSha256": "729b3325f1b1574b9a9ea9c5e96061cd9228b25959c6ebd56b574313cc81c811",
+      "state": "unchanged"
+    },
+    {
+      "relativePath": "src/arcproof/testnetClient.ts",
+      "bytes": 26165,
+      "sha256": "65afd96d3a57c120d1ebf8eb327d90ee33b6285f73d9d81d0ac5ae5f7150b281",
+      "baselineSha256": "a9aebd2e1130c5d948a40bc99dc3c7e655ecb09723132b17c73307cfb2c65f48",
+      "state": "changed"
+    },
+    {
+      "relativePath": "src/arcproof/useTestnetWallet.ts",
+      "bytes": 3569,
+      "sha256": "d512b3bcb1512604eaa9d5dd516b774807bcf82e54cebdcac15b23c80b61a1b6",
+      "baselineSha256": "d512b3bcb1512604eaa9d5dd516b774807bcf82e54cebdcac15b23c80b61a1b6",
+      "state": "unchanged"
+    },
+    {
+      "relativePath": "src/arcproof/walletIntents.ts",
+      "bytes": 7729,
+      "sha256": "6b69f9ea10cee4f6b41ea27660400cfea042cab4267e3d9b0227fed3de720ac6",
+      "baselineSha256": "3e7199b133bc7e0b5d91e4327d1db1aeee2dd269317cdac345afeb3e8d7faedc",
+      "state": "changed"
+    },
+    {
+      "relativePath": "src/components/arcproof/DashboardScreen.tsx",
+      "bytes": 10094,
+      "sha256": "e0c07b6a7afdb46c1da3cf120e4047e90c7e6ec350ff8b9ad5ec3ab62aeeee99",
+      "baselineSha256": "225ae1a00b99408775e215aa94de93dfdd7fb8c80414de490dc3590f1b64fbcb",
+      "state": "changed"
+    },
+    {
+      "relativePath": "src/components/arcproof/DemoReceipt.tsx",
+      "bytes": 2418,
+      "sha256": "b7ac625a9066dc67f0a90b2f42a5dea1fa742ffa78ff5ba070dcd510fed9701d",
+      "baselineSha256": "6099a1b803f5484190534d31a82ce6c47b154f6df578cd2fa6618915584167dd",
+      "state": "changed"
+    },
+    {
+      "relativePath": "src/components/arcproof/EvidenceScreen.tsx",
+      "bytes": 11644,
+      "sha256": "087ad68bf288e488cafdc6af9082bdc84db5a7e95bfa0a0c41581e43a8974c72",
+      "baselineSha256": "26518dc075693a23f1d361535677a8f5adbae751981149673048ba81b0e9089a",
+      "state": "changed"
+    },
+    {
+      "relativePath": "src/components/arcproof/Layout.tsx",
+      "bytes": 10073,
+      "sha256": "6e86806a23d1cc99e0eaa2da0378e321203577dd5e3659c245fa973af02e59a5",
+      "baselineSha256": "fb69e87add109f89cb9af8b48c2a0f5619cbee0ea340513609f390903972dfe8",
+      "state": "changed"
+    },
+    {
+      "relativePath": "src/components/arcproof/PayScreen.tsx",
+      "bytes": 280,
+      "sha256": "d43bbc66b429ca22f7eba52e9d689559e8ad7ed75707907a5476fe347977b6ad",
+      "baselineSha256": "d43bbc66b429ca22f7eba52e9d689559e8ad7ed75707907a5476fe347977b6ad",
+      "state": "unchanged"
+    },
+    {
+      "relativePath": "src/components/arcproof/ReceiptFacts.tsx",
+      "bytes": 8420,
+      "sha256": "d121cf133262ca2d7daa04069195282c985908b3955999f0ee3c22266fbf9ea4",
+      "baselineSha256": "6b88ccb832d3d52c7145dc0c6f9b628785aef26378774fb250f34540163c81a0",
+      "state": "changed"
+    },
+    {
+      "relativePath": "src/components/arcproof/ReceiptScreen.tsx",
+      "bytes": 285,
+      "sha256": "075e395630b1e7819a89cb11b70638abf0c09f11c29478d09b24a8ef003809ac",
+      "baselineSha256": "075e395630b1e7819a89cb11b70638abf0c09f11c29478d09b24a8ef003809ac",
+      "state": "unchanged"
+    },
+    {
+      "relativePath": "src/components/arcproof/StudioAttribution.tsx",
+      "bytes": 1357,
+      "sha256": "b38e1f84992c4cd16d3be891bb880d383c04589bca80b0b2427ed967363487fd",
+      "baselineSha256": "b38e1f84992c4cd16d3be891bb880d383c04589bca80b0b2427ed967363487fd",
+      "state": "unchanged"
+    },
+    {
+      "relativePath": "src/components/arcproof/TestnetScreens.tsx",
+      "bytes": 27398,
+      "sha256": "c93c0046cb1a517c7eedf7f0f1d4dbd08a48ca9914efde74a77eeb568fe7a356",
+      "baselineSha256": "67816d310510537ddaca0095f1de135aca19697805c34d8b218fc4f9be96b0a3",
+      "state": "changed"
+    },
+    {
+      "relativePath": "src/components/arcproof/UnavailableRequest.tsx",
+      "bytes": 1974,
+      "sha256": "4dc5a62f23a53c48a13b09b3bd7a816858bdf5d1c78abe8838d7f23489dfa1ab",
+      "baselineSha256": "4dc5a62f23a53c48a13b09b3bd7a816858bdf5d1c78abe8838d7f23489dfa1ab",
+      "state": "unchanged"
+    },
+    {
+      "relativePath": "src/config.ts",
+      "bytes": 453,
+      "sha256": "d49482737e8e8e3d347b886e9b740093ebb27ba0714805bba52d988c0c739432",
+      "baselineSha256": "d49482737e8e8e3d347b886e9b740093ebb27ba0714805bba52d988c0c739432",
+      "state": "unchanged"
+    },
+    {
+      "relativePath": "src/index.css",
+      "bytes": 2614,
+      "sha256": "143c9e7913565f3b7d4c870b45f6084af1d9a0605d27d2a69aa2212f599844bf",
+      "baselineSha256": "c2bfed6550eb52084d4134f8516a8f57a164c4dc978640670fd821b6ad1c5ac6",
+      "state": "changed"
+    },
+    {
+      "relativePath": "src/main.tsx",
+      "bytes": 1675,
+      "sha256": "8a3d4271be438ffbf1969d70bc94cd28d1d8364460e51ec1111779858ef1d616",
+      "baselineSha256": "56c27060b86200f522289be89eb5173633fa2afcebca64d1e4d78cca468a1b5e",
+      "state": "changed"
+    },
+    {
+      "relativePath": "tailwind.config.js",
+      "bytes": 445,
+      "sha256": "89fb56ad842b5e646175064d17bffe93e2b7a16ce2804d887243a36f63acfd1b",
+      "baselineSha256": "89fb56ad842b5e646175064d17bffe93e2b7a16ce2804d887243a36f63acfd1b",
+      "state": "unchanged"
+    },
+    {
+      "relativePath": "vite.config.ts",
+      "bytes": 4998,
+      "sha256": "b37c31f3fe8f09746cdb6e75de113e572f2c16665223fca7619599aceebe47a0",
+      "baselineSha256": "3fbc4f5d68235bab353d932d6c58a3a0124ab4e0c47fa66b09d71b8bc38ecd52",
+      "state": "changed"
+    }
+  ],
+  "selectedFileCount": 49,
+  "sourceBytes": 312161,
+  "testEvidence": [
+    {
+      "name": "arcproof-integrated-tests.log",
+      "bytes": 243,
+      "sha256": "8bb1b506b850b607d5d760bcc329dd076d768364223a83cbc2bd64efd2631455",
+      "source": "/tmp/arcproof-integrated-tests.log"
+    },
+    {
+      "name": "arcproof-secr01-targeted.log",
+      "bytes": 237,
+      "sha256": "96c1f257b67b796c096f88b062dcecf8cd2b678d71cc864ec8978d136749336b",
+      "source": "/tmp/arcproof-secr01-targeted.log"
+    },
+    {
+      "name": "arcproof-secr01-green.log",
+      "bytes": 237,
+      "sha256": "5e5d39e53d4f41ebf6d681d106d20af1e47aff09d3ee1cda75ccc494d242c640",
+      "source": "/tmp/arcproof-secr01-green.log"
+    },
+    {
+      "name": "arcproof-entry-tests.log",
+      "bytes": 237,
+      "sha256": "cf775739a507ee72e4d1412650bf2e4a043da362225eca539a9fcc8ad076bb48",
+      "source": "/tmp/arcproof-entry-tests.log"
+    },
+    {
+      "name": "arcproof-ui-after.log",
+      "bytes": 237,
+      "sha256": "a3c8a8d7f781e70eb4a16d5d6afa97a3aac08af9fe3f247755d7d29906621133",
+      "source": "/tmp/arcproof-ui-after.log"
+    },
+    {
+      "name": "arcproof-secr01-red.log",
+      "bytes": 11331,
+      "sha256": "fe8e3e4f8bba2b30508380325b6065bef32920f0ec1228f448d431510af473f4",
+      "source": "/tmp/arcproof-secr01-red.log"
+    },
+    {
+      "name": "arcproof-share-before.log",
+      "bytes": 7601,
+      "sha256": "96aa228f09ae9a6d63a3d35cc34e700162a2cf9da4555cea74784992b5d741c7",
+      "source": "/tmp/arcproof-share-before.log"
+    },
+    {
+      "name": "candidate-final-project-tests.log",
+      "bytes": 243,
+      "sha256": "11837cf65abcf7f9fb77b4cc07145fb1b1a6ed54c4f6976885d74e8c33feecb6",
+      "source": "arcproof-current/evidence/independent-audit-response-20261021/candidate-gates/project-tests.log"
+    }
+  ],
+  "secretScan": {
+    "private_key_pem": 0,
+    "credential_assignment": 0,
+    "bearer_secret": 0,
+    "provider_key": 0,
+    "email": 0,
+    "private_repo_owner": 0
+  },
+  "excluded": [
+    "real observed-payment fixture",
+    "credentials",
+    "full conversation",
+    "raw live RPC/user wallet data"
+  ],
+  "freezeVerification": true,
+  "request.json": {
+    "bytes": 425412,
+    "sha256": "559dc50a3a77b5d9e498ffd68b241ae3adcd5eeac067f850c207f5455d83b6a9"
+  },
+  "review-prompt.txt": {
+    "bytes": 417104,
+    "sha256": "327507e5cd45b8fca579543f1607fd2d25990f516155716817f1ff6b1cceae17"
+  },
+  "candidate.patch": {
+    "bytes": 102652,
+    "sha256": "42cbceef27d1b955c31b8fc27e93c25f5c6cb67a2a9ddcda4da2181068f71077"
+  }
+}

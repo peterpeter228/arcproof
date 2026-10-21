@@ -1,0 +1,37 @@
+[
+  {
+    "name": "check",
+    "command": [
+      "bun",
+      "run",
+      "check"
+    ],
+    "start_utc": "2026-10-21T16:07:39.736280+00:00",
+    "end_utc": "2026-10-21T16:07:51.453967+00:00",
+    "exit_code": 0
+  },
+  {
+    "name": "project-tests",
+    "command": [
+      "node",
+      "node_modules/vitest/vitest.mjs",
+      "run"
+    ],
+    "start_utc": "2026-10-21T16:07:51.454951+00:00",
+    "end_utc": "2026-10-21T16:07:59.713603+00:00",
+    "exit_code": 0
+  },
+  {
+    "name": "build",
+    "command": [
+      "bun",
+      "x",
+      "--no-install",
+      "vite",
+      "build"
+    ],
+    "start_utc": "2026-10-21T16:07:59.714060+00:00",
+    "end_utc": "2026-10-21T16:08:27.910357+00:00",
+    "exit_code": 0
+  }
+]

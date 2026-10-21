@@ -30,15 +30,17 @@ describe('Durable wallet dispatch guards with offline shared-storage/shared-lock
   it('fails closed before send when durable write fails', async () => { vi.spyOn(localStorage, 'setItem').mockImplementation(() => { throw new Error('quota'); }); const m = await import('../walletIntents'); const send = vi.fn(async () => hash); await expect(m.runWalletIntent(input, send)).rejects.toThrow('quota'); expect(send).not.toHaveBeenCalled(); });
   it('never releases a corrupt saved intent', async () => { localStorage.setItem(`arcproof:${ARC_TESTNET.id}:${TESTNET_DEPLOYMENT.deploymentId}:intent:bad`, '{}'); const m = await import('../walletIntents'); const send = vi.fn(async () => hash); await expect(m.runWalletIntent(input, send)).rejects.toThrow('unreadable'); expect(send).not.toHaveBeenCalled(); });
   it('releases explicit rejection but keeps generic ambiguous errors', async () => { const m = await import('../walletIntents'); await expect(m.runWalletIntent(input, async (mark, reject) => { mark(); reject(); throw new Error('explicit rejection'); })).rejects.toThrow(); expect(m.getWalletIntents()[0].state).toBe('cancelled'); await expect(m.runWalletIntent(input, async (mark) => { mark(); return hash; })).resolves.toBe(hash); });
-  it('readonly payment recovery cannot clear mismatched or unknown status results', async () => {
+  // SEC-R01: a matching successful payment is no longer evidence of the original unknown request.
+  it('readonly candidate payment recovery never resolves a hashless original request', async () => {
     const m = await import('../walletIntents'); const payment: IntentInput = { ...input, kind: 'pay', invoiceId: hash };
     await expect(m.runWalletIntent(payment, async (mark) => { mark(); throw new Error('unknown'); })).rejects.toThrow();
-    const id = m.getWalletIntents()[0].operationId;
-    await expect(m.recoverWalletIntent(id, hash, async () => { throw new Error('wrong identity'); })).rejects.toThrow('wrong identity');
-    expect(m.getWalletIntents()[0].state).toBe('uncertain');
-    await expect(m.recoverWalletIntent(id, hash, async () => 'reverted')).rejects.toThrow('older matching');
-    expect(m.getWalletIntents()[0].state).toBe('uncertain');
-    await expect(m.recoverWalletIntent(id, hash, async () => 'included')).resolves.toBe('included');
+    const original = { ...m.getWalletIntents()[0] };
+    for (const outcome of ['included', 'reverted'] as const) {
+      const verify = vi.fn(async () => outcome);
+      await expect(m.recoverWalletIntent(original.operationId, hash, verify)).rejects.toThrow('hashless');
+      expect(verify).not.toHaveBeenCalled();
+      expect(m.getWalletIntents()[0]).toEqual(original);
+    }
   });
   it('never unlocks a hashless creation using an older identical call', async () => {
     const m = await import('../walletIntents'); await expect(m.runWalletIntent(input, async (mark) => { mark(); throw new Error('unknown'); })).rejects.toThrow();

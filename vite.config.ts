@@ -2,15 +2,50 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import path from 'path'
+import { createHash } from 'node:crypto'
+import { readFileSync, writeFileSync } from 'node:fs'
+import { sourceSnapshot, outputSnapshot } from './scripts/buildProvenance'
 import { nodePolyfills } from 'vite-plugin-node-polyfills'
 
+// Declared inputs include the two evidence fixtures imported by tests, not logs.
+const snapshot = sourceSnapshot(__dirname);
+const buildIdentity = {
+  sourceCommit: null,
+  verifiedBaseCommit: /^[0-9a-f]{40}$/.test(process.env.ARCPROOF_VERIFIED_BASE_SHA ?? '') ? process.env.ARCPROOF_VERIFIED_BASE_SHA : null,
+  sourceSnapshotSha256: snapshot.sha256,
+  builtAtUTC: new Date().toISOString(),
+  sourceState: 'candidate',
+};
+
 export default defineConfig({
+  define: { __ARCPROOF_BUILD_IDENTITY__: JSON.stringify(buildIdentity) },
   test: {
     environment: 'node',
     include: ['src/**/*.test.ts', 'src/**/*.test.tsx'],
     globals: false,
   },
-  plugins: [react(), nodePolyfills({
+  plugins: [{
+    name: 'arcproof-build-provenance',
+    // Some Vite plugins still transform outputs after generateBundle. Re-hash the
+    // actual written bytes, not an intermediate chunk, before declaring identity.
+    writeBundle(options) {
+      const directory = path.resolve(__dirname, options.dir ?? 'dist');
+      const manifestPath = path.join(directory, 'build-provenance.json');
+      const manifest = JSON.parse(readFileSync(manifestPath, 'utf8'));
+      manifest.outputs = outputSnapshot(directory);
+      writeFileSync(manifestPath, JSON.stringify(manifest, null, 2));
+    },
+    generateBundle(_options, bundle) {
+      const outputs = Object.entries(bundle).sort(([a], [b]) => a.localeCompare(b)).map(([file, output]) => ({
+        path: file,
+        sha256: createHash('sha256').update(output.type === 'chunk' ? output.code : output.source).digest('hex'),
+      }));
+      this.emitFile({ type: 'asset', fileName: 'build-provenance.json', source: JSON.stringify({
+        ...buildIdentity, schema: 'arcproof-build-provenance-v1', sourceInputs: snapshot.records, outputs,
+        limits: 'Candidate declared-input and final output-file hashes (including copied public assets). Excludes this root manifest, installed dependency bytes, and toolchain binaries. Not a Git commit, live host readback, test result, or chain attestation.',
+      }, null, 2) });
+    },
+  }, react(), nodePolyfills({
     // Bundle inspection needs only the existing browser Buffer/process globals.
     // Do not alias every Node core module (crypto/fs/stream/etc.) by default.
     include: ['buffer', 'process'],

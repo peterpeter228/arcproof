@@ -1,0 +1,26 @@
+
+ RUN  v4.1.12 /workspace/scratch/c01bd6fe117d/arcproof-current
+
+ ❯ reviewer-tests/reviewer-ui.test.tsx (6 tests | 1 failed) 202ms
+     × offline demo creates a clearly simulated receipt without wallet access 42ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  reviewer-tests/reviewer-ui.test.tsx > Independent rendered DOM guard checks > offline demo creates a clearly simulated receipt without wallet access
+AssertionError: expected 'Offline demo mode — separate from the…' to contain '0.20 USDC'
+
+Expected: "0.20 USDC"
+Received: "Offline demo mode — separate from the live testnet deployment. Invoice creation below demonstrates the ID derivation and UI flow only; no transaction is sent. No wallet is needed. The fixed demo merchant and contract are fixtures, not deployed addresses.Notice: This contract uses atomic forwarding — funds are passed directly to the merchant in the same transaction. The contract is not a custodian, escrow, or intermediary, but it does touch funds. It is not audited, not production-ready, and provides no escrow, delivery proof, or refund mechanism.Create invoiceAmount (test USDC, max 1.000000)test USDC200000000000000000 native units (18 dec)Expires in (hours, max 168)Expires: 2026-10-22T16:17:14.000Z (UTC)Title (optional, unbound plain text — not stored on chain)0/80 code points. Not proof; not stored onchain. No customer PII.Terms hash: bytes32(0) (P0 only; nonzero hash protocol not implemented)Create invoice (offline demo — no signing)DEMO — simulated receipt, not payment proofOffline fixture only. No payment occurred, no wallet was connected, and no transaction was sent. This is not a tax invoice.Invoice fixture: 0x52599e566fb42fb089c45b92b3e755a17101ca986c3f4cd947482421cf748d83Example amount: 0.20 test USDCFixture merchant: 0x0000000000000000000000000000000000000002Payer, transaction, payment time, block, and event index: unavailable (null). Verification: SIMULATED_NOT_VERIFIED.Export simulated JSONExport simulated CSVClose exampleInvoice history1 invoices (demo)0x52599e566fb42fb089c45b92b3e755a17101ca986c3f4cd947482421cf748d83Nonce 0demoView simulated receipt"
+
+ ❯ reviewer-tests/reviewer-ui.test.tsx:19:650
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  1 failed | 5 passed (6)
+   Start at  01:17:11
+   Duration  2.72s (transform 439ms, setup 0ms, import 1.18s, tests 202ms, environment 811ms)
+
+error: "vitest" exited with code 1

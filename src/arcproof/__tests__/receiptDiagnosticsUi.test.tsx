@@ -102,3 +102,34 @@ it('does not invent an RPC observation basis for an older record without provena
   expect(host.textContent).not.toContain('Observed transaction fee');
   expect(field('amountDisplay')).toBe(`${record.amountDisplay} test USDC`);
 });
+
+it('places amount and parties before evidence, next step, and collapsed full diagnostics', () => {
+  render(recordFor(diagnostic()));
+  const amount = host.querySelector('[data-receipt-field="amountDisplay"]')!;
+  const merchant = host.querySelector('[data-receipt-field="merchant"]')!;
+  const evidence = host.querySelector('[aria-label="Evidence summary"]')!;
+  const next = host.querySelector('[aria-label="Next step"]')!;
+  const details = host.querySelector('details.receipt-details')!;
+  for (const [before, after] of [[amount, merchant], [merchant, evidence], [evidence, next], [next, details]]) {
+    expect(before.compareDocumentPosition(after) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
+  }
+  expect(details.hasAttribute('open')).toBe(false);
+  expect(details.querySelector('[data-receipt-field="reasonCode"]')?.textContent).toBe('UNVERIFIED_FINALITY');
+  expect(next.textContent).toContain('Do not resend');
+});
+it.each(['unavailable', 'not_run', 'failed'] as const)('preserves %s identity checks without promotion in the summary', status => {
+  const record = recordFor(diagnostic());
+  record.checks = [{ id: 'receipt_identity', status, reasonCode: null, message: 'Incomplete identity evidence' }];
+  render(record);
+  expect(host.querySelector('[aria-label="Evidence summary"]')?.textContent).toContain(status.replace(/_/g, ' '));
+  expect(host.querySelector('[aria-label="Evidence summary"]')?.textContent).not.toContain('passed');
+});
+
+it('names missing identity checks without converting a partial list to passed', () => {
+ const record = recordFor(diagnostic());
+ record.checks = [{ id: 'receipt_identity', status: 'passed', reasonCode: null, message: null }];
+ render(record);
+ const summary = host.querySelector('[aria-label="Evidence summary"]')?.textContent;
+ expect(summary).toContain('chain: not recorded'); expect(summary).toContain('invoice state: not recorded');
+ expect(summary).not.toContain('Invoice and transaction match: Passed');
+});

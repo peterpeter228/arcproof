@@ -1,10 +1,6 @@
-/**
- * EvidenceScreen.tsx — Provenance, test results, and limitations.
- * Shows actual G1 data: 69 tests passing, independent review pending.
- * Never claims all 28 acceptance IDs passed; never claims Arc-specific
- * tests (T25/T26) have run. Honest about HOLD status.
- */
+/** Historical results and current build provenance. No implicit fresh-run claims. */
 import React from 'react';
+import { BUILD_IDENTITY, identityLabel } from '../../arcproof/buildIdentity';
 import { ARC_TESTNET, TESTNET_DEPLOYMENT, DEPLOYMENT_TX, explorerTx } from '../../arcproof/testnet';
 import { CheckCircle, Clock, AlertCircle } from 'lucide-react';
 
@@ -42,12 +38,12 @@ const FORGE_TESTS: TestRow[] = [
   { id: 'T23', description: 'Receipt recovery and RPC conflict handling', status: 'not_run', note: 'Paid-block hash recovery and saved-transaction reconciliation implemented. Real-chain recovery and second-endpoint conflict acceptance remain not run.' },
   { id: 'T24', description: 'Nonce pagination, integer strings, export dedupe, untrusted flags (Vitest)', status: 'pass' },
   { id: 'T25', description: 'Arc native-USDC system Transfer event at official emitter', status: 'not_run', note: 'Official native emitter reference identified; genuine payment receipt evidence is still required. Anvil does not prove Arc log behaviour.' },
-  { id: 'T26', description: 'Arc committed-block finality and receipt verification on real chain', status: 'not_run', note: 'Deployment checked; genuine payment/finality acceptance not run.' },
+  { id: 'T26', description: 'Arc committed-block finality and receipt verification on real chain', status: 'not_run', note: 'Historical deployment check only; fresh genuine payment/finality acceptance not run.' },
 ];
 
 function StatusIcon({ status }: { status: 'pass' | 'pending' | 'not_run' }) {
   if (status === 'pass') return <CheckCircle size={14} className="text-teal-600 shrink-0" />;
-  if (status === 'not_run') return <AlertCircle size={14} className="text-stone-400 shrink-0" />;
+  if (status === 'not_run') return <AlertCircle size={14} className="text-stone-600 shrink-0" />;
   return <Clock size={14} className="text-amber-500 shrink-0" />;
 }
 
@@ -63,33 +59,49 @@ export function EvidenceScreen() {
 
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
           {[
-            { label: 'Forge tests', value: '73 (69 Studio + 4 supplemental)' },
-            { label: 'Local testing', value: 'Offline unit / DOM coverage only' },
-            { label: 'Deployment', value: 'Arc Testnet checked' },
+            { label: 'Historical Forge', value: '73 (69 Studio + 4 supplemental)' },
+            { label: 'Historical project suite', value: '391 tests (overlapping suites not added)' },
+            { label: 'Current build tests', value: 'Unknown — no result attached' },
             { label: 'Grant eligibility', value: 'HOLD' },
           ].map(({ label, value }) => (
             <div key={label} className="bg-stone-50 rounded-lg p-3">
-              <p className="text-xs text-stone-400 font-medium">{label}</p>
+              <p className="text-xs text-stone-600 font-medium">{label}</p>
               <p className="text-sm font-semibold text-stone-800 mt-0.5">{value}</p>
             </div>
           ))}
         </div>
 
         <div className="text-xs text-stone-500 space-y-1">
-          <p><strong>Source review:</strong> Independent review in progress; frontend results are local unit coverage, not full acceptance or live-wallet evidence. G1: 69 Studio-export tests plus 4 native supplemental tests, 73 independently passed.</p>
-          <p className="break-all"><strong>Checked testnet deployment:</strong> <a className="underline" href={`${ARC_TESTNET.blockExplorers.default.url}/address/${TESTNET_DEPLOYMENT.contractAddress}?tab=contract`} target="_blank" rel="noreferrer">{TESTNET_DEPLOYMENT.contractAddress}</a>. Full runtime matched the reviewed artifact. <a className="underline" href={explorerTx(DEPLOYMENT_TX)} target="_blank" rel="noreferrer">Deployment transaction</a>. Source publication and payment acceptance are not claimed.</p>
+          <p><strong>Historical evidence only:</strong> The repository records 73 Forge tests and a 391-test project run. These are prior logs, not a rerun of this candidate; suite counts overlap and must not be added. An independent review or model opinion is not security certification.</p>
+          <p className="break-all"><strong>Historical testnet deployment:</strong> <a className="underline" href={`${ARC_TESTNET.blockExplorers.default.url}/address/${TESTNET_DEPLOYMENT.contractAddress}?tab=contract`} target="_blank" rel="noreferrer">{TESTNET_DEPLOYMENT.contractAddress}</a>. Repository records report runtime matching on 2026-10-20. <a className="underline" href={explorerTx(DEPLOYMENT_TX)} target="_blank" rel="noreferrer">Deployment transaction</a>. No fresh RPC read, payment acceptance, source publication, or host-version match is implied.</p>
           <p><strong>Grant:</strong> Eligibility HOLD. Free prototype development authorized for testnet/local scope per 2026-10-20 directive. Do not claim grant eligibility established.</p>
           <p><strong>Atomic forwarding:</strong> The contract passes funds directly to the merchant atomically. This is not custody. It does touch funds. It is not a claim of escrow-free operation — the contract's execution touches and routes value.</p>
         </div>
       </div>
 
-      {/* Test matrix */}
+      <section aria-label="Build identity" className="bg-white rounded-xl border border-stone-200 p-5 space-y-3">
+        <h3 className="font-semibold">Current candidate build identity</h3>
+        <dl className="text-sm space-y-2 break-all">
+          <div><dt>Source commit SHA</dt><dd>{identityLabel(BUILD_IDENTITY.sourceCommit)}</dd></div>
+          <div><dt>Verified base commit (not current source)</dt><dd>{identityLabel(BUILD_IDENTITY.verifiedBaseCommit)}</dd></div>
+          <div><dt>Candidate source snapshot SHA-256</dt><dd>{identityLabel(BUILD_IDENTITY.sourceSnapshotSha256)}</dd></div>
+          <div><dt>Build UTC</dt><dd>{identityLabel(BUILD_IDENTITY.builtAtUTC)}</dd></div>
+          <div><dt>Environment / chain</dt><dd>Arc Testnet / {ARC_TESTNET.id}; mainnet disabled</dd></div>
+          <div><dt>Manifest deployment identity</dt><dd>{TESTNET_DEPLOYMENT.deploymentId}</dd></div>
+          <div><dt>Expected contract runtime keccak256</dt><dd>{TESTNET_DEPLOYMENT.runtimeCodeHash}</dd></div>
+        </dl>
+        <p className="text-sm">The candidate hash identifies declared build inputs, not a committed source SHA. Build time is not verification time. Current tests, live network acceptance, and independent host-to-artifact matching remain Unknown unless accompanied by separate version-bound logs.</p>
+        <a className="underline text-sm" href={`${import.meta.env.BASE_URL}build-provenance.json`}>Download production build provenance (generated during build)</a>
+        <p className="text-xs">The provenance file records input and emitted bundle hashes. It is unavailable in a development server and is not proof that a remote host serves these bytes. Offline demo data remains SIMULATED_NOT_VERIFIED.</p>
+      </section>
+
+      {/* Historical test matrix */}
       <div className="bg-white rounded-xl border border-stone-200 shadow-sm overflow-hidden">
         <div className="px-5 py-3 border-b border-stone-100 flex items-center justify-between">
-          <h3 className="font-medium text-stone-800 text-sm">Test matrix</h3>
+          <h3 className="font-medium text-stone-800 text-sm">Historical test matrix, not current acceptance</h3>
           <div className="flex gap-3 text-xs text-stone-500">
-            <span className="flex items-center gap-1"><CheckCircle size={12} className="text-teal-600" /> {passCount} passed</span>
-            <span className="flex items-center gap-1"><AlertCircle size={12} className="text-stone-400" /> {notRunCount} not run</span>
+            <span className="flex items-center gap-1"><CheckCircle size={12} className="text-teal-600" /> {passCount} historically recorded</span>
+            <span className="flex items-center gap-1"><AlertCircle size={12} className="text-stone-600" /> {notRunCount} not run</span>
           </div>
         </div>
         <div className="divide-y divide-stone-100">
@@ -102,7 +114,7 @@ export function EvidenceScreen() {
                   <span className="text-xs text-stone-700">{t.description}</span>
                 </div>
                 {t.note && (
-                  <p className="text-xs text-stone-400 mt-0.5">{t.note}</p>
+                  <p className="text-xs text-stone-600 mt-0.5">{t.note}</p>
                 )}
               </div>
             </div>
@@ -115,8 +127,8 @@ export function EvidenceScreen() {
         <h3 className="font-medium text-stone-800 text-sm">Known limitations (P0)</h3>
         <ul className="text-xs text-stone-600 space-y-1.5 list-disc list-outside ml-4">
           <li>Only the checked Arc Testnet deployment is configured. Mainnet remains disabled; the user alone approves testnet wallet requests.</li>
-          <li>Arc native-USDC system Transfer and finality evidence (T25/T26) are not verified against a genuine payment receipt. Official native events use 18 decimals at 0xfffffffffffffffffffffffffffffffffffffffe, not the 6-decimal ERC-20 path.</li>
-          <li>Receipt verifier compares runtime keccak256 against the supplied manifest. Real network evidence is still unavailable.</li>
+          <li>Fresh candidate-bound Arc native-USDC system Transfer and finality acceptance (T25/T26) is not attached to this build. Historical controlled observations do not establish current acceptance. Official native events use 18 decimals at 0xfffffffffffffffffffffffffffffffffffffffe, not the 6-decimal ERC-20 path.</li>
+          <li>Receipt verifier compares runtime keccak256 against the supplied manifest. No fresh network result is attached to this build.</li>
           <li>P0 UI only supports ordinary EOA wallets. Other account types are explicitly unsupported.</li>
           <li>No nonzero termsHash protocol in P0. Historical paid invoices with nonzero hash are readable but payment blocked in UI.</li>
           <li>Saved transaction locators and read-only status refresh are implemented. Storage is best-effort; actual browser-wallet recovery is not yet accepted.</li>

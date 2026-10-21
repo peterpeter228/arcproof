@@ -1,0 +1,15 @@
+{
+  "source": "https://rpc.drpc.testnet.arc.io",
+  "documentation": "https://docs.arc.io/arc/references/rpc-endpoints.md",
+  "startedAt": "2026-10-21T16:03:25.208076+00:00",
+  "request": {
+    "jsonrpc": "2.0",
+    "id": 1,
+    "method": "eth_chainId",
+    "params": []
+  },
+  "httpStatus": 403,
+  "error": "HTTP Error 403: Forbidden",
+  "body": "error code: 1010\n",
+  "finishedAt": "2026-10-21T16:03:31.700467+00:00"
+}

@@ -1,0 +1,34 @@
+[
+  {
+    "name": "current-ui-migrated",
+    "command": "bun run vitest run --config qa/new-independent-review/vitest.config.ts",
+    "startUtc": "2026-10-21T16:18:48.138720+00:00",
+    "endUtc": "2026-10-21T16:18:52.183049+00:00",
+    "exit": 0,
+    "log": "current-ui-migrated.log"
+  },
+  {
+    "name": "legacy-ui-migrated",
+    "command": "bun run vitest run --config qa/quality-gates/vitest.legacy.config.ts",
+    "startUtc": "2026-10-21T16:18:52.183632+00:00",
+    "endUtc": "2026-10-21T16:18:54.987821+00:00",
+    "exit": 0,
+    "log": "legacy-ui-migrated.log"
+  },
+  {
+    "name": "whole-lint-migrated",
+    "command": "bun run lint",
+    "startUtc": "2026-10-21T16:18:54.988437+00:00",
+    "endUtc": "2026-10-21T16:18:57.871165+00:00",
+    "exit": 0,
+    "log": "whole-lint-migrated.log"
+  },
+  {
+    "name": "helper-types-migrated",
+    "command": "bun run tsc -p qa/new-independent-review/tsconfig.quality.json --noEmit",
+    "startUtc": "2026-10-21T16:18:57.877165+00:00",
+    "endUtc": "2026-10-21T16:18:59.515228+00:00",
+    "exit": 0,
+    "log": "helper-types-migrated.log"
+  }
+]

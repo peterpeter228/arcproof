@@ -207,3 +207,15 @@ describe('Independent integration: complete route identity', () => {
     expect(mocks.wallet).not.toHaveBeenCalled(); expect(mocks.send).not.toHaveBeenCalled();
   });
 });
+
+it('clears receipt-copy success before a failed retry and ignores older clipboard results', async () => {
+  await render(<TestnetReceiptScreen invoiceId={id} txHash={hash} />);
+  await click('Copy verification link'); expect(text()).toContain('Verification link copied');
+  mocks.clipboard.mockRejectedValueOnce(Error('clipboard blocked'));
+  await click('Verification link copied'); expect(text()).not.toContain('Verification link copied');
+  expect(text()).toContain('Clipboard access was unavailable');
+  const old = deferred<void>(); mocks.clipboard.mockReturnValueOnce(old.promise);
+  await click('Copy verification link'); mocks.clipboard.mockRejectedValueOnce(Error('newer copy failed'));
+  await click('Copy verification link'); await act(async () => old.resolve());
+  expect(text()).not.toContain('Verification link copied');
+});

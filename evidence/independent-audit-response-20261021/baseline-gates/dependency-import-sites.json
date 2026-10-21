@@ -1,0 +1,272 @@
+[
+  {
+    "package": "@metamask/sdk",
+    "source": "../../../src/provider/extensionProviderHelpers/handleUuid.ts",
+    "lines": [
+      "import { v4 as uuidv4 } from 'uuid';",
+      "storedUuid = uuidv4();"
+    ]
+  },
+  {
+    "package": "@metamask/sdk",
+    "source": "../../../src/sdk.ts",
+    "lines": [
+      "import { v4 as uuidv4 } from 'uuid';",
+      "anonId = uuidv4();",
+      "const newId = uuidv4();",
+      "return uuidv4();",
+      "const newId = uuidv4();",
+      "return uuidv4();"
+    ]
+  },
+  {
+    "package": "@metamask/sdk",
+    "source": "../../../src/provider/extensionProviderHelpers/handleUuid.ts",
+    "lines": [
+      "import { v4 as uuidv4 } from 'uuid';",
+      "storedUuid = uuidv4();"
+    ]
+  },
+  {
+    "package": "@metamask/sdk",
+    "source": "../../../src/sdk.ts",
+    "lines": [
+      "import { v4 as uuidv4 } from 'uuid';",
+      "anonId = uuidv4();",
+      "const newId = uuidv4();",
+      "return uuidv4();",
+      "const newId = uuidv4();",
+      "return uuidv4();"
+    ]
+  },
+  {
+    "package": "@metamask/sdk",
+    "source": "../../../src/provider/extensionProviderHelpers/handleUuid.ts",
+    "lines": [
+      "import { v4 as uuidv4 } from 'uuid';",
+      "storedUuid = uuidv4();"
+    ]
+  },
+  {
+    "package": "@metamask/sdk",
+    "source": "../../../src/sdk.ts",
+    "lines": [
+      "import { v4 as uuidv4 } from 'uuid';",
+      "anonId = uuidv4();",
+      "const newId = uuidv4();",
+      "return uuidv4();",
+      "const newId = uuidv4();",
+      "return uuidv4();"
+    ]
+  },
+  {
+    "package": "@metamask/sdk",
+    "source": "../../../src/provider/extensionProviderHelpers/handleUuid.ts",
+    "lines": [
+      "import { v4 as uuidv4 } from 'uuid';",
+      "storedUuid = uuidv4();"
+    ]
+  },
+  {
+    "package": "@metamask/sdk",
+    "source": "../../../src/sdk.ts",
+    "lines": [
+      "import { v4 as uuidv4 } from 'uuid';",
+      "anonId = uuidv4();",
+      "const newId = uuidv4();",
+      "return uuidv4();",
+      "const newId = uuidv4();",
+      "return uuidv4();"
+    ]
+  },
+  {
+    "package": "@metamask/sdk",
+    "source": "../../../src/provider/extensionProviderHelpers/handleUuid.ts",
+    "lines": [
+      "import { v4 as uuidv4 } from 'uuid';",
+      "storedUuid = uuidv4();"
+    ]
+  },
+  {
+    "package": "@metamask/sdk",
+    "source": "../../../src/sdk.ts",
+    "lines": [
+      "import { v4 as uuidv4 } from 'uuid';",
+      "anonId = uuidv4();",
+      "const newId = uuidv4();",
+      "return uuidv4();",
+      "const newId = uuidv4();",
+      "return uuidv4();"
+    ]
+  },
+  {
+    "package": "@metamask/sdk",
+    "source": "../../../src/provider/extensionProviderHelpers/handleUuid.ts",
+    "lines": [
+      "import { v4 as uuidv4 } from 'uuid';",
+      "storedUuid = uuidv4();"
+    ]
+  },
+  {
+    "package": "@metamask/sdk",
+    "source": "../../../src/sdk.ts",
+    "lines": [
+      "import { v4 as uuidv4 } from 'uuid';",
+      "anonId = uuidv4();",
+      "const newId = uuidv4();",
+      "return uuidv4();",
+      "const newId = uuidv4();",
+      "return uuidv4();"
+    ]
+  },
+  {
+    "package": "@metamask/sdk-communication-layer",
+    "source": "../../../src/services/SocketService/ChannelManager/createChannel.ts",
+    "lines": [
+      "import { v4 as uuidv4 } from 'uuid';",
+      "const channelId = uuidv4();"
+    ]
+  },
+  {
+    "package": "@metamask/sdk-communication-layer",
+    "source": "../../../src/services/RemoteCommunication/ConnectionManager/disconnect.ts",
+    "lines": [
+      "import { v4 as uuidv4 } from 'uuid';",
+      "state.channelId = uuidv4();"
+    ]
+  },
+  {
+    "package": "@metamask/sdk-communication-layer",
+    "source": "../../../src/services/RemoteCommunication/ConnectionManager/connectToChannel.ts",
+    "lines": [
+      "import { validate } from 'uuid';"
+    ]
+  },
+  {
+    "package": "@metamask/sdk-communication-layer",
+    "source": "../../../src/services/RemoteCommunication/ConnectionManager/rejectChannel.ts",
+    "lines": [
+      "import { validate } from 'uuid';"
+    ]
+  },
+  {
+    "package": "@metamask/sdk-communication-layer",
+    "source": "../../../src/services/SocketService/ChannelManager/createChannel.ts",
+    "lines": [
+      "import { v4 as uuidv4 } from 'uuid';",
+      "const channelId = uuidv4();"
+    ]
+  },
+  {
+    "package": "@metamask/sdk-communication-layer",
+    "source": "../../../src/services/RemoteCommunication/ConnectionManager/disconnect.ts",
+    "lines": [
+      "import { v4 as uuidv4 } from 'uuid';",
+      "state.channelId = uuidv4();"
+    ]
+  },
+  {
+    "package": "@metamask/sdk-communication-layer",
+    "source": "../../../src/services/RemoteCommunication/ConnectionManager/connectToChannel.ts",
+    "lines": [
+      "import { validate } from 'uuid';"
+    ]
+  },
+  {
+    "package": "@metamask/sdk-communication-layer",
+    "source": "../../../src/services/RemoteCommunication/ConnectionManager/rejectChannel.ts",
+    "lines": [
+      "import { validate } from 'uuid';"
+    ]
+  },
+  {
+    "package": "@metamask/sdk-communication-layer",
+    "source": "../../../src/services/SocketService/ChannelManager/createChannel.ts",
+    "lines": [
+      "import { v4 as uuidv4 } from 'uuid';",
+      "const channelId = uuidv4();"
+    ]
+  },
+  {
+    "package": "@metamask/sdk-communication-layer",
+    "source": "../../../src/services/RemoteCommunication/ConnectionManager/disconnect.ts",
+    "lines": [
+      "import { v4 as uuidv4 } from 'uuid';",
+      "state.channelId = uuidv4();"
+    ]
+  },
+  {
+    "package": "@metamask/sdk-communication-layer",
+    "source": "../../../src/services/RemoteCommunication/ConnectionManager/connectToChannel.ts",
+    "lines": [
+      "import { validate } from 'uuid';"
+    ]
+  },
+  {
+    "package": "@metamask/sdk-communication-layer",
+    "source": "../../../src/services/RemoteCommunication/ConnectionManager/rejectChannel.ts",
+    "lines": [
+      "import { validate } from 'uuid';"
+    ]
+  },
+  {
+    "package": "@metamask/sdk-communication-layer",
+    "source": "../../../src/services/SocketService/ChannelManager/createChannel.ts",
+    "lines": [
+      "import { v4 as uuidv4 } from 'uuid';",
+      "const channelId = uuidv4();"
+    ]
+  },
+  {
+    "package": "@metamask/sdk-communication-layer",
+    "source": "../../../src/services/RemoteCommunication/ConnectionManager/disconnect.ts",
+    "lines": [
+      "import { v4 as uuidv4 } from 'uuid';",
+      "state.channelId = uuidv4();"
+    ]
+  },
+  {
+    "package": "@metamask/sdk-communication-layer",
+    "source": "../../../src/services/RemoteCommunication/ConnectionManager/connectToChannel.ts",
+    "lines": [
+      "import { validate } from 'uuid';"
+    ]
+  },
+  {
+    "package": "@metamask/sdk-communication-layer",
+    "source": "../../../src/services/RemoteCommunication/ConnectionManager/rejectChannel.ts",
+    "lines": [
+      "import { validate } from 'uuid';"
+    ]
+  },
+  {
+    "package": "@metamask/sdk-communication-layer",
+    "source": "../../../src/services/SocketService/ChannelManager/createChannel.ts",
+    "lines": [
+      "import { v4 as uuidv4 } from 'uuid';",
+      "const channelId = uuidv4();"
+    ]
+  },
+  {
+    "package": "@metamask/sdk-communication-layer",
+    "source": "../../../src/services/RemoteCommunication/ConnectionManager/disconnect.ts",
+    "lines": [
+      "import { v4 as uuidv4 } from 'uuid';",
+      "state.channelId = uuidv4();"
+    ]
+  },
+  {
+    "package": "@metamask/sdk-communication-layer",
+    "source": "../../../src/services/RemoteCommunication/ConnectionManager/connectToChannel.ts",
+    "lines": [
+      "import { validate } from 'uuid';"
+    ]
+  },
+  {
+    "package": "@metamask/sdk-communication-layer",
+    "source": "../../../src/services/RemoteCommunication/ConnectionManager/rejectChannel.ts",
+    "lines": [
+      "import { validate } from 'uuid';"
+    ]
+  }
+]

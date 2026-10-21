@@ -1,0 +1,8 @@
+{
+  "src/components/arcproof/TestnetScreens.tsx": "1df19f40552c4513d0ec1b30019a35e7e7ab3a02c13d306d3cb33dee873415d4",
+  "src/components/arcproof/ReceiptFacts.tsx": "5ed3311affb0044ea68a059c7d002a3b8180206b814dd1dd737f1dfc61453e37",
+  "src/components/arcproof/DashboardScreen.tsx": "41961894a15204cf46c40624381d2a2139d266b77f2a47d1cae6b6ae72571452",
+  "src/components/arcproof/DemoReceipt.tsx": "b7ac625a9066dc67f0a90b2f42a5dea1fa742ffa78ff5ba070dcd510fed9701d",
+  "src/index.css": "bf6c1976273249455cb5cd919447e50c23bc38560fb8e0d9f4e0693b89d08506",
+  "src/arcproof/__tests__/footerTargetSize.test.ts": "1399040966b296b3c25cd7757c3663ed0c3a30be1a9d4dd3d4bdc5d8145c0cad"
+}

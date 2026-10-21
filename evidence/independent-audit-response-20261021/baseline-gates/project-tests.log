@@ -1,0 +1,9 @@
+
+ RUN  v4.1.12 /workspace/scratch/c01bd6fe117d/arcproof-baseline
+
+
+ Test Files  19 passed (19)
+      Tests  391 passed (391)
+   Start at  01:00:38
+   Duration  5.02s (transform 3.99s, setup 0ms, import 13.56s, tests 3.32s, environment 6.22s)
+

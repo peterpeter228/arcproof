@@ -1,0 +1,23 @@
+{
+  "url": "https://studio.arc.io/app/2dbdda0d-1b70-408b-ae23-cccb8a4b8753?thread=12185290-60f7-4446-9e99-5ca51e8c30b0",
+  "title": "Studio - Idea to App in Minutes",
+  "status": "read_only_project_inspected",
+  "observation": "Existing session opened project ArcProof Smart Contract Developer. Legal Notice acknowledged once after checking prior explicit Studio terms/use approval. No login, prompt, project edit, build, wallet action, deployment, publication, or source synchronization performed.",
+  "sourceVersionVerified": false,
+  "noticeText": "By using Arc Studio, you acknowledge that you are interacting with an artificial intelligence (\"AI\") system, not a human. Arc Studio is intended for use on testnet environments only. You are solely responsible for verifying and testing all code before using it in production. AI responses may be inaccurate. Circle is not liable for errors or outcomes. Do not share personal data, sensitive or confidential information. You are responsible for complying with all applicable laws relating to your use or deployment of any output generated through Arc Studio. Usage may be monitored for analytics and troubleshooting purposes.",
+  "noticeLinks": [],
+  "visibleNoticeVersion": null,
+  "visibleNoticeDate": null,
+  "comparison": "Parent checked prior explicit Studio terms/use approval and assessed this AI/testnet informational risk acknowledgment as covered; no new linked agreement, credential grant, fee or financial account action appeared.",
+  "visibleProjectName": "ArcProof Smart Contract Developer",
+  "visibleStatusLabel": "Stopped",
+  "statusLabelCaveat": "Visible label only, not proof that application or deployment is stopped.",
+  "previewObservation": "DOM snapshot exposed embedded app preview with Create a testnet invoice as the entry, Connect Wallet, Use offline simulation instead, and no build identity footer. This differs from final c81e72ee read-only-default candidate. Exact Studio source SHA is unknown.",
+  "screenshotCaveat": "Subsequent cropped mini-preview screenshot shows Connecting to sandbox, not the rendered app. Use the earlier DOM observation for UI mismatch, not this transient screenshot.",
+  "chronology": [
+    "Initial signed-in shell and notice observed; acknowledgment initially paused for scope clarification.",
+    "Exact notice text, no links, no date/version inspected.",
+    "Prior approval checked by parent; existing notice acknowledged once.",
+    "Project/chat and embedded preview DOM inspected read-only; current source SHA not established."
+  ]
+}

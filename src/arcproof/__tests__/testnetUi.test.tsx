@@ -63,7 +63,84 @@ describe('New-candidate rendered controls with mocked wallet/RPC, not real brows
  it('shows unknown invoice read errors without enabling payment',async()=>{mocks.session=session;mocks.key='testnet';mocks.load.mockRejectedValue(Error('Unknown invoice'));await render(<TestnetPayScreen invoiceId={id}/>);expect(button('Review test payment').disabled).toBe(true);expect(text()).toContain('Unknown invoice');});
  it('loads a request without a wallet but does not enable paying',async()=>{await render(<TestnetPayScreen invoiceId={id}/>);expect(text()).toContain('0.20 test USDC');expect(button('Review test payment').disabled).toBe(true);expect(mocks.provider).not.toHaveBeenCalled();});
  it('blocks a saved pending payment using alternate ID casing',async()=>{mocks.session=session;mocks.key='testnet';recordSubmission({hash,kind:'pay',invoiceId:`0x${'A'.repeat(64)}`,account:session.account,state:'submitted'});await render(<TestnetPayScreen invoiceId={id}/>);expect(button('Review test payment').disabled).toBe(true);expect(text()).toContain('A hash is not payment proof');});
- it('keeps simulation visibly distinct and never requests wallet access',async()=>{await render(<TestnetDashboard/>);await click('Use offline simulation');expect(text()).toContain('Offline demo mode');expect(text()).toContain('separate from the live');expect(mocks.provider).not.toHaveBeenCalled();});
+ it('links to the stable offline simulation route without requesting wallet access',async()=>{await render(<TestnetDashboard/>);expect(host.querySelector('a[href="#/demo"]')?.textContent).toContain('Use offline simulation');expect(mocks.provider).not.toHaveBeenCalled();});
  it('verifies receipts without a wallet and does not fabricate verified settlement',async()=>{mocks.verify.mockResolvedValue({invoice,hash,result:{status:'UNVERIFIED_ARC_EVIDENCE',message:'Native settlement evidence still pending.',verified:false,paymentLogIndex:0,blockHash:hash,verifiedAt:0}});await render(<TestnetReceiptScreen invoiceId={id} txHash={hash}/>);await click('Verify from chain');expect(text()).toContain('settlement evidence incomplete');expect(mocks.provider).not.toHaveBeenCalled();});
  it('does not render stale receipt results on a newer route',async()=>{const pending=deferred<unknown>();mocks.verify.mockReturnValueOnce(pending.promise).mockReturnValue(new Promise(()=>{}));await render(<TestnetReceiptScreen invoiceId={id} txHash={hash}/>);await render(<TestnetReceiptScreen invoiceId={`0x${'c'.repeat(64)}`}/>);await act(async()=>pending.resolve({invoice,hash,result:{status:'PENDING',message:'STALE RESULT',verified:false,paymentLogIndex:null,blockHash:null,verifiedAt:0}}));expect(text()).not.toContain('STALE RESULT');});
+});
+
+
+describe('SHARE-01 current-invoice clipboard feedback (mocked clipboard)', () => {
+ const secondId: Hex = `0x${'c'.repeat(64)}`;
+ const clipboard = vi.fn<(value: string) => Promise<void>>();
+ async function create(target = invoice) {
+  mocks.confirmCreated.mockResolvedValueOnce(target);
+  await click('Review invoice'); await click('Open wallet');
+ }
+ beforeEach(() => {
+  mocks.session = session; mocks.key = 'copy-session';
+  mocks.wait.mockResolvedValue({ transactionHash: hash, from: session.account, to: action.to, status: 'success' });
+  clipboard.mockReset().mockResolvedValue(undefined);
+  Object.defineProperty(navigator, 'clipboard', { configurable: true, value: { writeText: clipboard } });
+ });
+ it('does not inherit A success when B is created; successful B copies exactly B URL', async () => {
+  await render(<TestnetDashboard />); await create(); await click('Copy payment link');
+  expect(text()).toContain('Link copied');
+  await create({ ...invoice, invoiceId: secondId });
+  expect(text()).not.toContain('Link copied');
+  await click('Copy payment link');
+  expect(clipboard).toHaveBeenLastCalledWith(`${window.location.href.split('#')[0]}#/pay/${ARC_TESTNET.id}/${TESTNET_DEPLOYMENT.deploymentId}/${secondId}`);
+  expect(text()).toContain('Link copied');
+ });
+ it('ignores a late A copy success after creating B', async () => {
+  const late = deferred<void>(); clipboard.mockReturnValueOnce(late.promise);
+  await render(<TestnetDashboard />); await create(); await click('Copy payment link');
+  await create({ ...invoice, invoiceId: secondId }); await act(async () => late.resolve());
+  expect(text()).not.toContain('Link copied');
+ });
+ it('clears prior success when B copy fails and on a failed retry of B', async () => {
+  await render(<TestnetDashboard />); await create(); await click('Copy payment link');
+  await create({ ...invoice, invoiceId: secondId }); clipboard.mockRejectedValueOnce(Error('denied'));
+  await act(async () => { (button('Copy payment link') ?? button('Link copied')).click(); }); expect(text()).not.toContain('Link copied'); expect(text()).toContain('Clipboard access was unavailable');
+  await click('Copy payment link'); expect(text()).toContain('Link copied');
+  clipboard.mockRejectedValueOnce(Error('denied')); await click('Link copied'); expect(text()).not.toContain('Link copied');
+ });
+ it('ignores late clipboard results after account switch or unmount', async () => {
+  const late = deferred<void>(); clipboard.mockReturnValueOnce(late.promise);
+  await render(<TestnetDashboard />); await create(); await click('Copy payment link');
+  mocks.key = 'other-account'; mocks.session = { ...session, connectionVersion: 2 };
+  await render(<TestnetDashboard />); await act(async () => late.resolve()); expect(text()).not.toContain('Link copied');
+  await create(); const last = deferred<void>(); clipboard.mockReturnValueOnce(last.promise); await click('Copy payment link');
+  await render(<p>Other page</p>); await act(async () => last.resolve()); expect(text()).toBe('Other page');
+ });
+ it('strips unrelated page query parameters from the copied payment URL', async () => {
+  const original = window.location.href;
+  window.history.replaceState(null, '', '/?private_context=discard#/invoices');
+  try {
+   await render(<TestnetDashboard />); await create(); await click('Copy payment link');
+   expect(clipboard).toHaveBeenLastCalledWith(`${window.location.origin}/#/pay/${ARC_TESTNET.id}/${TESTNET_DEPLOYMENT.deploymentId}/${id}`);
+  } finally { window.history.replaceState(null, '', original); }
+ });
+ it('ignores an older success after a newer copy attempt failed', async () => {
+  const late = deferred<void>(); clipboard.mockReturnValueOnce(late.promise);
+  await render(<TestnetDashboard />); await create(); await click('Copy payment link');
+  clipboard.mockRejectedValueOnce(Error('denied')); await click('Copy payment link');
+  await act(async () => late.resolve()); expect(text()).not.toContain('Link copied');
+ });
+});
+
+it('moves keyboard focus to review and restores its re-enabled trigger under StrictMode', async () => {
+ mocks.session = session; mocks.key = 'focus-session';
+ await render(<React.StrictMode><TestnetDashboard /></React.StrictMode>);
+ const trigger = button('Review invoice'); trigger.focus();
+ await click('Review invoice');
+ expect(document.activeElement?.textContent).toBe('Review invoice creation');
+ await click('Cancel review');
+ expect(trigger.disabled).toBe(false); expect(document.activeElement).toBe(trigger);
+});
+
+it('labels review expiry in explicit UTC rather than browser locale', async () => {
+ mocks.session = session; mocks.key = 'utc-session';
+ await render(<TestnetDashboard />); await click('Review invoice');
+ expect(host.querySelector('[aria-label="Review testnet transaction"]')?.textContent)
+  .toContain(`Expiry: ${new Date(Number(action.expiresAt) * 1000).toISOString()} (UTC)`);
 });

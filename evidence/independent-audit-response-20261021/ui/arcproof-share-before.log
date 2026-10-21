@@ -1,0 +1,81 @@
+
+ RUN  v4.1.12 /workspace/scratch/c01bd6fe117d/arcproof-current
+
+ ❯ src/arcproof/__tests__/testnetUi.test.tsx (20 tests | 4 failed | 15 skipped) 322ms
+     × does not inherit A success when B is created; successful B copies exactly B URL 215ms
+     × ignores a late A copy success after creating B 32ms
+     × clears prior success when B copy fails and on a failed retry of B 29ms
+     × ignores an older success after a newer copy attempt failed 10ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 4 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  src/arcproof/__tests__/testnetUi.test.tsx > SHARE-01 current-invoice clipboard feedback (mocked clipboard) > does not inherit A success when B is created; successful B copies exactly B URL
+AssertionError: expected 'Create a testnet invoiceUse offline s…' not to contain 'Link copied'
+
+Expected: "Link copied"
+Received: "Create a testnet invoiceUse offline simulation insteadAmount (test USDC, maximum 1)Expires in (whole hours, 1–168)The connected wallet is the merchant. Terms hash is always zero. No customer information is written on chain.Review invoice creationInvoice created on Arc Testnet0xcccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc0.20 test USDC · unpaid unless the chain now reports otherwiseOpen payment pageLink copiedOn-chain invoice historyLoad / refresh historyLoaded from merchant nonce and read-back state, not local demo data. This also recovers invoices after refresh.0xcccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc0.20 test USDC · Unpaid according to contractOpen payment page0xaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa0.20 test USDC · Unpaid according to contractOpen payment pagePreviousPage 1Next"
+
+ ❯ src/arcproof/__tests__/testnetUi.test.tsx:89:22
+     87|   expect(text()).toContain('Link copied');
+     88|   await create({ ...invoice, invoiceId: secondId });
+     89|   expect(text()).not.toContain('Link copied');
+       |                      ^
+     90|   await click('Copy payment link');
+     91|   expect(clipboard).toHaveBeenLastCalledWith(`${window.location.href.s…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/4]⎯
+
+ FAIL  src/arcproof/__tests__/testnetUi.test.tsx > SHARE-01 current-invoice clipboard feedback (mocked clipboard) > ignores a late A copy success after creating B
+AssertionError: expected 'Create a testnet invoiceUse offline s…' not to contain 'Link copied'
+
+Expected: "Link copied"
+Received: "Create a testnet invoiceUse offline simulation insteadAmount (test USDC, maximum 1)Expires in (whole hours, 1–168)The connected wallet is the merchant. Terms hash is always zero. No customer information is written on chain.Review invoice creationInvoice created on Arc Testnet0xcccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc0.20 test USDC · unpaid unless the chain now reports otherwiseOpen payment pageLink copiedOn-chain invoice historyLoad / refresh historyLoaded from merchant nonce and read-back state, not local demo data. This also recovers invoices after refresh.0xcccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc0.20 test USDC · Unpaid according to contractOpen payment page0xaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa0.20 test USDC · Unpaid according to contractOpen payment pagePreviousPage 1Next"
+
+ ❯ src/arcproof/__tests__/testnetUi.test.tsx:98:22
+     96|   await render(<TestnetDashboard />); await create(); await click('Cop…
+     97|   await create({ ...invoice, invoiceId: secondId }); await act(async (…
+     98|   expect(text()).not.toContain('Link copied');
+       |                      ^
+     99|  });
+    100|  it('clears prior success when B copy fails and on a failed retry of B…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/4]⎯
+
+ FAIL  src/arcproof/__tests__/testnetUi.test.tsx > SHARE-01 current-invoice clipboard feedback (mocked clipboard) > clears prior success when B copy fails and on a failed retry of B
+AssertionError: expected 'Create a testnet invoiceUse offline s…' not to contain 'Link copied'
+
+Expected: "Link copied"
+Received: "Create a testnet invoiceUse offline simulation insteadAmount (test USDC, maximum 1)Expires in (whole hours, 1–168)The connected wallet is the merchant. Terms hash is always zero. No customer information is written on chain.Review invoice creationClipboard access was unavailable. Open the payment link and copy its browser address.Invoice created on Arc Testnet0xcccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc0.20 test USDC · unpaid unless the chain now reports otherwiseOpen payment pageLink copiedOn-chain invoice historyLoad / refresh historyLoaded from merchant nonce and read-back state, not local demo data. This also recovers invoices after refresh.0xcccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc0.20 test USDC · Unpaid according to contractOpen payment page0xaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa0.20 test USDC · Unpaid according to contractOpen payment pagePreviousPage 1Next"
+
+ ❯ src/arcproof/__tests__/testnetUi.test.tsx:103:114
+    101|   await render(<TestnetDashboard />); await create(); await click('Cop…
+    102|   await create({ ...invoice, invoiceId: secondId }); clipboard.mockRej…
+    103|   await act(async () => { (button('Copy payment link') ?? button('Link…
+       |                                                                                                                  ^
+    104|   await click('Copy payment link'); expect(text()).toContain('Link cop…
+    105|   clipboard.mockRejectedValueOnce(Error('denied')); await click('Link …
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/4]⎯
+
+ FAIL  src/arcproof/__tests__/testnetUi.test.tsx > SHARE-01 current-invoice clipboard feedback (mocked clipboard) > ignores an older success after a newer copy attempt failed
+AssertionError: expected 'Create a testnet invoiceUse offline s…' not to contain 'Link copied'
+
+Expected: "Link copied"
+Received: "Create a testnet invoiceUse offline simulation insteadAmount (test USDC, maximum 1)Expires in (whole hours, 1–168)The connected wallet is the merchant. Terms hash is always zero. No customer information is written on chain.Review invoice creationClipboard access was unavailable. Open the payment link and copy its browser address.Invoice created on Arc Testnet0xaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa0.20 test USDC · unpaid unless the chain now reports otherwiseOpen payment pageLink copiedOn-chain invoice historyLoad / refresh historyLoaded from merchant nonce and read-back state, not local demo data. This also recovers invoices after refresh.0xaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa0.20 test USDC · Unpaid according to contractOpen payment pagePreviousPage 1Next"
+
+ ❯ src/arcproof/__tests__/testnetUi.test.tsx:119:61
+    117|   await render(<TestnetDashboard />); await create(); await click('Cop…
+    118|   clipboard.mockRejectedValueOnce(Error('denied')); await click('Copy …
+    119|   await act(async () => late.resolve()); expect(text()).not.toContain(…
+       |                                                             ^
+    120|  });
+    121| });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/4]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  4 failed | 1 passed | 15 skipped (20)
+   Start at  01:03:02
+   Duration  4.54s (transform 1.69s, setup 0ms, import 2.76s, tests 322ms, environment 943ms)
+

@@ -13,39 +13,11 @@ import { TestnetDashboard, TestnetPayScreen, TestnetReceiptScreen } from './comp
 import { TESTNET_MANIFEST, isBytes32 } from './arcproof/testnet';
 import { resolveDeployment } from './arcproof/manifest';
 
-type NavTab = 'dashboard' | 'verify' | 'evidence';
-
-interface HashRoute {
-  screen: 'pay' | 'receipt' | null;
-  chainId?: number;
-  deploymentId?: string;
-  invoiceId?: `0x${string}`;
-  txHash?: string;
-}
-
-function parseHash(hash: string): HashRoute {
-  // Remove leading #
-  const path = hash.startsWith('#') ? hash.slice(1) : hash;
-  const [pathname, search] = path.split('?');
-  const params = new URLSearchParams(search ?? '');
-  const parts = pathname.split('/').filter(Boolean);
-
-  // Keep malformed payment/receipt routes on a read-only error page, not the wallet dashboard.
-  if (parts[0] === 'pay' || parts[0] === 'receipt') {
-    return {
-      screen: parts[0],
-      chainId: parts[1] && /^[0-9]+$/.test(parts[1]) ? Number(parts[1]) : undefined,
-      deploymentId: parts[2],
-      invoiceId: (parts.length === 4 ? parts[3] : undefined) as `0x${string}` | undefined,
-      txHash: params.has('tx') ? (params.getAll('tx').length === 1 ? params.get('tx')! : '') : undefined,
-    };
-  }
-  return { screen: null };
-}
+import { DashboardScreen } from './components/arcproof/DashboardScreen';
+import { parseHash, type HashRoute, type NavTab } from './arcproof/routes';
 
 export default function App() {
   const [route, setRoute] = useState<HashRoute>(() => parseHash(window.location.hash));
-  const [activeTab, setActiveTab] = useState<NavTab>('dashboard');
 
   useEffect(() => {
     function onHashChange() {
@@ -56,18 +28,14 @@ export default function App() {
   }, []);
 
   function handleTabChange(tab: NavTab) {
-    setActiveTab(tab);
-    // Clear hash route when navigating via tab
-    if (route.screen) {
-      window.location.hash = '';
-      setRoute({ screen: null });
-    }
+    window.location.hash = tab === 'dashboard' ? '/invoices' : `/${tab}`;
+    setRoute(parseHash(window.location.hash));
   }
 
   // Determine what to render
   let content: React.ReactNode;
-  let effectiveTab: NavTab = activeTab;
-  let hideWallet = activeTab === 'verify';
+  let effectiveTab: NavTab = route.screen === 'dashboard' ? 'dashboard' : route.screen === 'demo' ? 'demo' : route.screen === 'evidence' ? 'evidence' : 'verify';
+  let hideWallet = true;
 
   if (route.screen === 'pay') {
     const deployment = resolveDeployment(TESTNET_MANIFEST, route.chainId!, route.deploymentId!);
@@ -93,12 +61,19 @@ export default function App() {
     effectiveTab = 'verify';
     hideWallet = true;
   } else {
-    switch (activeTab) {
+    switch (route.screen) {
       case 'dashboard':
+        hideWallet = false;
         content = <TestnetDashboard />;
         break;
       case 'verify':
         content = <TestnetReceiptScreen />;
+        break;
+      case 'demo':
+        content = <DashboardScreen />;
+        break;
+      case 'invalid':
+        content = <section role="alert"><h2>Unavailable route</h2><p>This link is not recognized. No wallet action or chain request was made.</p><a href="#/verify">Open read-only verification</a></section>;
         break;
       case 'evidence':
         content = <EvidenceScreen />;
@@ -107,7 +82,7 @@ export default function App() {
   }
 
   return (
-    <Layout activeTab={effectiveTab} onTabChange={handleTabChange} hideWallet={hideWallet}>
+    <Layout activeTab={effectiveTab} onTabChange={handleTabChange} hideWallet={hideWallet} hideSavedActivity={route.screen === 'demo'}>
       {content}
     </Layout>
   );

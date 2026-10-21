@@ -82,7 +82,7 @@ describe('Recovery status and durable intent regression probes (mock RPC only)',
   const f=fixture(),a=await preparePay(f.client,f.session,f.invoice.invoiceId);f.request.mockImplementation(async({method})=>{if(method==='eth_sendTransaction')throw Object.assign(new Error('ambiguous'),{cause:{code:4001}});return method==='eth_chainId'?toHex(ARC_TESTNET.id):[f.session.account];});
   await expect(sendPreparedAction(f.client,f.wallet,a,()=>f.session)).rejects.toBeDefined();await expect(sendPreparedAction(f.client,f.wallet,a,()=>f.session)).rejects.toThrow('unresolved');
  });
- it('recovery binds full saved call, keeps mismatched hashes locked and sends zero wallet calls', async () => {
+ it('hashless matching candidates never resolve the original request or send wallet calls', async () => {
   const f=fixture(),a=await preparePay(f.client,f.session,f.invoice.invoiceId);
   f.request.mockImplementation(async({method})=>{if(method==='eth_sendTransaction')throw Error('timeout');return method==='eth_chainId'?toHex(ARC_TESTNET.id):[f.session.account];});
   await expect(sendPreparedAction(f.client,f.wallet,a,()=>f.session)).rejects.toThrow('timeout');
@@ -91,9 +91,13 @@ describe('Recovery status and durable intent regression probes (mock RPC only)',
   f.rpc.getTransaction.mockResolvedValue({...tx,blockHash,blockNumber:12n,transactionIndex:0,value:a.value+1n});
   f.rpc.getTransactionReceipt.mockResolvedValue({...rc,blockHash,blockNumber:12n,transactionIndex:0,status:'success'});
   const calls=f.request.mock.calls.length;
-  await expect(recoverUnknownSubmission(f.client,op.operationId,f.hash)).rejects.toThrow('does not match');expect(getWalletIntents().find(x=>x.operationId===op.operationId)?.state).toBe('uncertain');
+  await expect(recoverUnknownSubmission(f.client,op.operationId,f.hash)).rejects.toThrow('hashless');expect(getWalletIntents().find(x=>x.operationId===op.operationId)?.state).toBe('uncertain');
   f.rpc.getTransaction.mockResolvedValue({...tx,blockHash,blockNumber:12n,transactionIndex:0,value:a.value});
-  await expect(recoverUnknownSubmission(f.client,op.operationId,f.hash)).resolves.toBe('included');expect(f.request.mock.calls.length).toBe(calls);
+  // SEC-R01: equal calldata/value and successful inclusion cannot identify a missing original hash.
+  await expect(recoverUnknownSubmission(f.client,op.operationId,f.hash)).rejects.toThrow('hashless');
+  expect(getWalletIntents().find(x=>x.operationId===op.operationId)).toMatchObject({state:'uncertain'});
+  expect(getWalletIntents().find(x=>x.operationId===op.operationId)?.hash).toBeUndefined();
+  expect(f.request.mock.calls.length).toBe(calls);
  });
 });
 

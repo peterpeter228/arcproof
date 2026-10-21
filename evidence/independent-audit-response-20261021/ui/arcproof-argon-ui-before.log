@@ -1,0 +1,91 @@
+
+ RUN  v4.1.12 /workspace/scratch/c01bd6fe117d/arcproof-current
+
+ ❯ src/arcproof/__tests__/receiptDiagnosticsUi.test.tsx (14 tests | 1 failed) 289ms
+   × names missing identity checks without converting a partial list to passed 24ms
+ ❯ src/arcproof/__tests__/offlineDemo.test.tsx (1 test | 1 failed) 111ms
+   × creates a clearly marked offline fixture without a connected wallet or signing 108ms
+ ❯ src/arcproof/__tests__/testnetUi.test.tsx (23 tests | 2 failed) 891ms
+     × strips unrelated page query parameters from the copied payment URL 25ms
+   × labels review expiry in explicit UTC rather than browser locale 18ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 4 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  src/arcproof/__tests__/offlineDemo.test.tsx > creates a clearly marked offline fixture without a connected wallet or signing
+AssertionError: expected 'Offline demo mode — separate from the…' to match /Expires: \d{4}-\d{2}-\d{2}T[^ ]+Z \(U…/
+
+- Expected:
+/Expires: \d{4}-\d{2}-\d{2}T[^ ]+Z \(UTC\)/
+
++ Received:
+"Offline demo mode — separate from the live testnet deployment. Invoice creation below demonstrates the ID derivation and UI flow only; no transaction is sent. No wallet is needed. The fixed demo merchant and contract are fixtures, not deployed addresses.Notice: This contract uses atomic forwarding — funds are passed directly to the merchant in the same transaction. The contract is not a custodian, escrow, or intermediary, but it does touch funds. It is not audited, not production-ready, and provides no escrow, delivery proof, or refund mechanism.Create invoiceAmount (test USDC, max 1.000000)test USDC200000000000000000 native units (18 dec)Expires in (hours, max 168)Expires: 10/23/2026, 1:13:28 AMTitle (optional, unbound plain text — not stored on chain)0/80 code points. Not proof; not stored onchain. No customer PII.Terms hash: bytes32(0) (P0 only; nonzero hash protocol not implemented)Create invoice (offline demo — no signing)DEMO — simulated receipt, not payment proofOffline fixture only. No payment occurred, no wallet was connected, and no transaction was sent. This is not a tax invoice.Invoice fixture: 0x52599e566fb42fb089c45b92b3e755a17101ca986c3f4cd947482421cf748d83Example amount: 0.20 test USDCFixture merchant: 0x0000000000000000000000000000000000000002Payer, transaction, payment time, block, and event index: unavailable (null). Verification: SIMULATED_NOT_VERIFIED.Export simulated JSONExport simulated CSVClose exampleInvoice history1 invoices (demo)0x52599e566fb42fb089c45b92b3e755a17101ca986c3f4cd947482421cf748d83Nonce 0demoView simulated receipt"
+
+ ❯ src/arcproof/__tests__/offlineDemo.test.tsx:25:28
+     23|   expect(host.textContent).toContain('Export simulated JSON');
+     24|   expect(host.textContent).toContain('Example amount: 0.20 test USDC');
+     25|   expect(host.textContent).toMatch(/Expires: \d{4}-\d{2}-\d{2}T[^ ]+Z …
+       |                            ^
+     26|  } finally { act(()=>root.unmount()); }
+     27| });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/4]⎯
+
+ FAIL  src/arcproof/__tests__/receiptDiagnosticsUi.test.tsx > names missing identity checks without converting a partial list to passed
+AssertionError: expected 'Evidence checkedInvoice and transacti…' to contain 'chain: not recorded'
+
+Expected: "chain: not recorded"
+Received: "Evidence checkedInvoice and transaction match: Not established by the available individual checks.Native settlement: Not verified; two transfer legs are not established.Finality: Not established by this result."
+
+ ❯ src/arcproof/__tests__/receiptDiagnosticsUi.test.tsx:133:18
+    131|  render(record);
+    132|  const summary = host.querySelector('[aria-label="Evidence summary"]')…
+    133|  expect(summary).toContain('chain: not recorded'); expect(summary).toC…
+       |                  ^
+    134|  expect(summary).not.toContain('Invoice and transaction match: Passed'…
+    135| });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/4]⎯
+
+ FAIL  src/arcproof/__tests__/testnetUi.test.tsx > SHARE-01 current-invoice clipboard feedback (mocked clipboard) > strips unrelated page query parameters from the copied payment URL
+AssertionError: expected last "vi.fn()" call to have been called with [ Array(1) ]
+
+- Expected
++ Received
+
+  [
+-   "http://localhost:3000/#/pay/5042002/0xdba9a4da8a5b2a834b451f595653dd3cb4c3e51addb2d8df8e0b18312f382d2d/0xaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
++   "http://localhost:3000/?private_context=discard#/pay/5042002/0xdba9a4da8a5b2a834b451f595653dd3cb4c3e51addb2d8df8e0b18312f382d2d/0xaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  ]
+
+ ❯ src/arcproof/__tests__/testnetUi.test.tsx:120:22
+    118|   try {
+    119|    await render(<TestnetDashboard />); await create(); await click('Co…
+    120|    expect(clipboard).toHaveBeenLastCalledWith(`${window.location.origi…
+       |                      ^
+    121|   } finally { window.history.replaceState(null, '', original); }
+    122|  });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/4]⎯
+
+ FAIL  src/arcproof/__tests__/testnetUi.test.tsx > labels review expiry in explicit UTC rather than browser locale
+AssertionError: expected 'Review invoice creationNetwork: Arc T…' to contain 'Expiry: 2033-05-18T03:33:20.000Z (UTC)'
+
+Expected: "Expiry: 2033-05-18T03:33:20.000Z (UTC)"
+Received: "Review invoice creationNetwork: Arc Testnet (5042002)Invoice amount: 0.20 test USDCFrom: 0x8888888888888888888888888888888888888888Contract: 0x3Dcd2bDD924BCC384Cb39e9e12038e00fde0FA30Transaction value: 0 test USDCEstimated fee allowance: 0.0000000000000001 test USDC. The wallet shows final fee details.Expiry: 5/18/2033, 12:33:20 PM · No attached terms.Notice: This contract uses atomic forwarding — funds are passed directly to the merchant in the same transaction. The contract is not a custodian, escrow, or intermediary, but it does touch funds. It is not audited, not production-ready, and provides no escrow, delivery proof, or refund mechanism.Only click below when you are ready to inspect and approve in your wallet. A submitted transaction cannot be cancelled here.Open wallet to approveCancel review"
+
+ ❯ src/arcproof/__tests__/testnetUi.test.tsx:145:4
+    143|  await render(<TestnetDashboard />); await click('Review invoice');
+    144|  expect(host.querySelector('[aria-label="Review testnet transaction"]'…
+    145|   .toContain(`Expiry: ${new Date(Number(action.expiresAt) * 1000).toIS…
+       |    ^
+    146| });
+    147|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/4]⎯
+
+
+ Test Files  3 failed (3)
+      Tests  4 failed | 34 passed (38)
+   Start at  01:13:22
+   Duration  7.26s (transform 2.35s, setup 0ms, import 9.07s, tests 1.29s, environment 7.94s)
+

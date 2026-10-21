@@ -1,0 +1,16 @@
+{
+  "observedAtUTC": "2026-10-21T16:09:46.515190+00:00",
+  "scope": "Independent review source hashes. Files may change after this record; no Git commit claimed.",
+  "files": {
+    "src/App.tsx": "9928b64c127c2664d45d30f71a88ef0afe4509825961032e2e05b65e1385f297",
+    "src/main.tsx": "8a3d4271be438ffbf1969d70bc94cd28d1d8364460e51ec1111779858ef1d616",
+    "src/config.ts": "d49482737e8e8e3d347b886e9b740093ebb27ba0714805bba52d988c0c739432",
+    "src/arcproof/routes.ts": "ac933ea34f556f85ee6c93f0c5d486dbddb34e8f50a908ed63b125183cb2a8f7",
+    "src/arcproof/buildIdentity.ts": "24088a2bb487f48cb575e313ede7e0b0598e5ec17eb771c5cda3f57a9125a6e9",
+    "src/arcproof/walletIntents.ts": "6b69f9ea10cee4f6b41ea27660400cfea042cab4267e3d9b0227fed3de720ac6",
+    "src/arcproof/testnetClient.ts": "65afd96d3a57c120d1ebf8eb327d90ee33b6285f73d9d81d0ac5ae5f7150b281",
+    "src/components/arcproof/TestnetScreens.tsx": "c93c0046cb1a517c7eedf7f0f1d4dbd08a48ca9914efde74a77eeb568fe7a356",
+    "src/components/arcproof/Layout.tsx": "6e86806a23d1cc99e0eaa2da0378e321203577dd5e3659c245fa973af02e59a5",
+    "vite.config.ts": "b37c31f3fe8f09746cdb6e75de113e572f2c16665223fca7619599aceebe47a0"
+  }
+}

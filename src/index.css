@@ -10,6 +10,9 @@ body {
   margin: 0;
   font-family: system-ui, sans-serif;
   min-height: 100dvh;
+  background: #f7f7f2;
+  color: #1c1917;
+  line-height: 1.5;
 }
 
 @media print {
@@ -20,12 +23,13 @@ body {
   }
   body:has(.receipt-page) .studio-attribution { position: static !important; width: fit-content; margin: 1rem; box-shadow: none !important; }
   .receipt-page { max-width: none; }
-  .receipt-page section { break-inside: avoid; box-shadow: none; }
+  .receipt-page section { break-inside: auto; box-shadow: none; }
   .receipt-page a { overflow-wrap: anywhere; }
 }
 
 /* Normal-flow attribution cannot cover form fields or receipt evidence. */
 .studio-attribution {
+  min-height: 2.75rem;
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
@@ -60,4 +64,27 @@ input { min-width: 0; max-width: 100%; }
   body:has(.receipt-page) main { padding: 0; }
   .receipt-page .receipt-details { break-inside: auto; }
   .receipt-page .receipt-details > :not(summary) { display: block !important; }
+}
+
+/* Evidence stays readable without adding a new visual system. */
+.arcproof-panel { padding: 1.5rem; }
+.receipt-amount { font-size: 2.5rem; line-height: 1.2; overflow-wrap: anywhere; }
+main a { min-height: 2.75rem; display: inline-flex; align-items: center; overflow-wrap: anywhere; }
+main .receipt-details { overflow-wrap: anywhere; }
+@media (max-width: 639px) {
+  .arcproof-panel { padding: 1rem; }
+  .receipt-amount { font-size: 2rem; line-height: 1.25; }
+  main button { max-width: 100%; white-space: normal; }
+  main input { font-size: 1rem; }
+}
+@media print {
+  .receipt-page details > :not(summary) { display: block !important; }
+  .receipt-page details, .receipt-page dl { break-inside: auto; }
+  .receipt-page dt { break-after: avoid; }
+}
+/* Footer navigation is actionable, so it shares the 44px target size. */
+.app-footer a {
+  min-height: 2.75rem;
+  display: inline-flex;
+  align-items: center;
 }

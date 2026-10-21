@@ -1,0 +1,56 @@
+{
+  "record_kind": "tool-result excerpts and bounded observations, not a synthetic browser pass",
+  "attempts": [
+    {
+      "action": "Playwright launch /usr/bin/chromium chromiumSandbox:true",
+      "outcome": "blocked_before_navigation",
+      "evidence": "process_singleton_posix.cc:297 socket() failed: Operation not permitted (1); SIGABRT"
+    },
+    {
+      "action": "supported exec escalation",
+      "outcome": "failed_before_browser_start",
+      "evidence": "bwrap: Can't create file at /home/agent/.codex/sessions: Read-only file system"
+    },
+    {
+      "action": "cua.createBrowserTab(cdp,http://127.0.0.1:5173)",
+      "outcome": "uncertain_timeout",
+      "evidence": "timed out awaiting tools/call after 300s"
+    },
+    {
+      "action": "read-only cua.listTabs(cdp)",
+      "outcome": "timeout",
+      "evidence": "timed out awaiting tools/call after 300s"
+    },
+    {
+      "action": "one documented js_reset then cua.getState",
+      "outcome": "recovered",
+      "evidence": "Existing tab 2 was about:blank; reused, no duplicate create."
+    },
+    {
+      "action": "goto sandbox Vite listener",
+      "outcome": "connection_refused",
+      "evidence": "net::ERR_CONNECTION_REFUSED; ready text alone did not establish reachability."
+    },
+    {
+      "action": "cloud native terminal explicit Node Vite; then production preview5174",
+      "outcome": "rendered_actual_app",
+      "evidence": "Production identity de48e3fa8ea70e47c710acd45541ab22565f527755f307ceace5f34cbc1ecc78, build2026-10-21T16:15:27.065Z observed."
+    },
+    {
+      "action": "native DevTools shortcut for responsive sizing",
+      "outcome": "explicit_policy_denial_respected",
+      "evidence": "Organization forbids developer tools on this page. No DevTools/CDP/device-emulation bypass attempted."
+    },
+    {
+      "action": "native browser zoom and OS frame resize",
+      "outcome": "passed_bounded",
+      "evidence": "Observed1188x761,769x760,500x760 CSS pixels;375x507 at150% native zoom;594x380 at200% native zoom. Not mobile device emulation and not exact768/1440 acceptance."
+    },
+    {
+      "action": "Ctrl+P and standard browser menu attempt",
+      "outcome": "not_run_no_print_dialog",
+      "evidence": "No print dialog or PDF produced; reason not independently established. No print bypass."
+    }
+  ],
+  "capture_limit": "tab.screenshot(fullPage) at DPR1.5 or2 produced cropped raster. Raw files retained, but use production-native-* screenshots plus DOM width metrics for zoom claims."
+}

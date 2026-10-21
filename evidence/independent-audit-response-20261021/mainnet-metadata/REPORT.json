@@ -1,0 +1,43 @@
+{
+  "recordedAt": "2026-10-21T16:33:21.893082+00:00",
+  "scope": "NET-01 mainnet readiness metadata only",
+  "status": "blocked",
+  "documentationStatus": "passed",
+  "documented": {
+    "chainId": 5042,
+    "anonymousPrimaryRpc": "https://rpc.mainnet.arc.io",
+    "explorer": "https://explorer.arc.io",
+    "nativeCurrency": "USDC",
+    "nativeDecimals": 18,
+    "nativeTransferEmitter": "0xffffFFFfFFffffffffffffffFfFFFfffFFFfFFfE",
+    "transferTopic0": "0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef",
+    "erc20Usdc": "0x3600000000000000000000000000000000000000",
+    "erc20Decimals": 6,
+    "finality": "Deterministic upon block commit according to official documentation; not independently established here."
+  },
+  "observed": {
+    "httpStatus": 403,
+    "body": "error code: 1010\n",
+    "chainId": null,
+    "finalizedHeader": null,
+    "mainnetEmitterObserved": false
+  },
+  "probe": {
+    "requests": 1,
+    "methodCount": 2,
+    "methods": [
+      "eth_chainId",
+      "eth_getBlockByNumber(finalized,false)"
+    ],
+    "retryCount": 0,
+    "accountsRead": false,
+    "credentialsUsed": false,
+    "walletOrTransactionActions": false
+  },
+  "conclusion": "Official configuration metadata recorded; runtime readiness remains blocked. No mainnet chain identity, finality, deployed contract, payment, or settlement has been verified. Current application remains testnet-only. This probe does not authorize mainnet writes.",
+  "sourceFiles": [
+    "official-source-extracts.json",
+    "raw-probe.json"
+  ],
+  "nextStep": "A permitted reachable environment would be needed to independently observe mainnet metadata. No endpoint switching, header modification, proxying, or retries performed."
+}
