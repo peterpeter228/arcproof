@@ -1,3 +1,21 @@
+## 2026-10-21 私有主网准备阶段
+
+当前代码增加固定网络构建与主网关闭状态，生产部署清单仍为空。它不是已部署的主网产品，也不证明参赛硬门槛完成。462 项本地测试/29 文件、lint、类型检查、testnet/mainnet 两种构建与非法网络配置拒绝测试通过。真实浏览器、Studio持久快照与最终复审状态以 [本阶段记录](docs/PRIVATE_MAINNET_PHASE_20261021.md) 及 [分层报告](evidence/private-mainnet-20261021/REPORT.json) 为准；不能把本地构建通过等同于上线。
+
+构建选择在启动进程前设置，不能由 URL、导入文件或浏览器缓存切换：
+
+```sh
+bun install --frozen-lockfile --ignore-scripts
+bun run check
+bun x vitest run
+VITE_ARCPROOF_NETWORK=testnet bun x vite build
+VITE_ARCPROOF_NETWORK=mainnet bun x vite build
+```
+
+默认 testnet；mainnet 仅有明确的只读未配置状态、离线演示与历史证据，关闭钱包自动发现与连接存储。不创建主网占位合约，不迁移或清空测试网未知请求。工时旧18小时上限已由用户对本阶段明确取消，其他安全门槛不变。
+
+---
+
 > 最新私有候选：独立审查的请求恢复、分享、只读入口、收据与构建证据修补已实施，Argon 建议已逐项核实。当前仍非参赛/主网就绪。请先读 [当前实施记录](docs/INDEPENDENT_AUDIT_RESPONSE_20261021.md) 和 [当前状态](STATUS.md)，不要将下方历史测试/部署记录当作本次发布证明。
 
 > 2026-10-21 UTC 交付记录：本轮源码、测试及文档已提交至私有 main：[648acc3](https://github.com/peterpeter228/arcproof/commit/648acc3cc1678fa682bc5833161e66ace1ff2603)。完整475文件树及215个变更文件内容已回读匹配。下方“尚未推送”等文字属于交付前历史快照，不是当前发布状态。本次补记仅修改 README 与 STATUS，运行代码、依赖和测试内容不变，未重新运行测试，也未更新 Studio、部署或启用 CI。

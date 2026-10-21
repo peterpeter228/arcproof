@@ -539,7 +539,7 @@ export async function verifyReceipt(
   return {
     ...diagnostics('VERIFIED', 'All verification checks passed.'),
     status: 'VERIFIED',
-    message: 'Arc Testnet payment verified against RPC data: exact native 18-decimal transfer legs, InvoicePaid, ' +
+    message: 'Arc native payment verified against RPC data: exact native 18-decimal transfer legs, InvoicePaid, ' +
       'transaction/state/block binding and finalized-header policy passed. Not an independent consensus proof, revenue or proof of delivery.',
     paymentLogIndex, blockHash: receipt.blockHash, verifiedAt: now, verified: true,
     blockNumber: receipt.blockNumber.toString(),

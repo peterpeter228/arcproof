@@ -1,0 +1,77 @@
+{
+  "baseline": "4deb74cce889ca122ef33903d27c2be10a1c437e",
+  "files": [
+    {
+      "path": "docs/NET01_PRIVATE_READINESS_DESIGN.md",
+      "originalSha256": "a4097a098ccbf6c4f27ad811cc73a57a4fe54fbe3b0c96328fd7a5340e03b7fb",
+      "sanitized": false
+    },
+    {
+      "path": "src/arcproof/arcSettlement.ts",
+      "originalSha256": "47a04fd31c27c4fd444a1e68463a2e1a3426cfdd2a8dc3c0cfcff8b75c891fc9",
+      "sanitized": false
+    },
+    {
+      "path": "src/arcproof/manifest.ts",
+      "originalSha256": "c65ef5a548db9454c838b5ce154b811403bbd96b91aebedfb585db587c533357",
+      "sanitized": false
+    },
+    {
+      "path": "src/arcproof/testnet.ts",
+      "originalSha256": "729b3325f1b1574b9a9ea9c5e96061cd9228b25959c6ebd56b574313cc81c811",
+      "sanitized": true
+    },
+    {
+      "path": "src/arcproof/testnetClient.ts",
+      "originalSha256": "65afd96d3a57c120d1ebf8eb327d90ee33b6285f73d9d81d0ac5ae5f7150b281",
+      "sanitized": false
+    },
+    {
+      "path": "src/arcproof/walletIntents.ts",
+      "originalSha256": "6b69f9ea10cee4f6b41ea27660400cfea042cab4267e3d9b0227fed3de720ac6",
+      "sanitized": false
+    },
+    {
+      "path": "src/arcproof/preparedPayment.ts",
+      "originalSha256": "ed79c737cb2b4f503ec79aaeac1e659c86ca4144bc0343ebdd1e8a54a69421b5",
+      "sanitized": false
+    },
+    {
+      "path": "src/arcproof/useTestnetWallet.ts",
+      "originalSha256": "d512b3bcb1512604eaa9d5dd516b774807bcf82e54cebdcac15b23c80b61a1b6",
+      "sanitized": false
+    },
+    {
+      "path": "src/arcproof/exportUtils.ts",
+      "originalSha256": "0417715ac3657d718bd106a450e9cd65b55ca3e731de6bc3670646ed0f270552",
+      "sanitized": false
+    },
+    {
+      "path": "src/arcproof/receiptVerifier.ts",
+      "originalSha256": "0c600345477339bf838bc07e44c44490d58fd0600822592447a2b466ba669599",
+      "sanitized": false
+    },
+    {
+      "path": "src/App.tsx",
+      "originalSha256": "9928b64c127c2664d45d30f71a88ef0afe4509825961032e2e05b65e1385f297",
+      "sanitized": false
+    },
+    {
+      "path": "src/arcproof/routes.ts",
+      "originalSha256": "ac933ea34f556f85ee6c93f0c5d486dbddb34e8f50a908ed63b125183cb2a8f7",
+      "sanitized": false
+    },
+    {
+      "path": "src/config.ts",
+      "originalSha256": "d49482737e8e8e3d347b886e9b740093ebb27ba0714805bba52d988c0c739432",
+      "sanitized": false
+    },
+    {
+      "path": "src/components/arcproof/TestnetScreens.tsx",
+      "originalSha256": "1df19f40552c4513d0ec1b30019a35e7e7ab3a02c13d306d3cb33dee873415d4",
+      "sanitized": false
+    }
+  ],
+  "requestSha256": "11f42d8f253f6815c9b49406ba96fdf08f4518eb3c87e36e593a0e7ea41801a1",
+  "bytes": 143907
+}

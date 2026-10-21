@@ -1,0 +1,147 @@
+vite v6.4.4 building for production...
+
+(!) outDir /workspace/shared/arcproof-phase2-builds/mainnet is not inside project root and will not be emptied.
+Use --emptyOutDir to override.
+
+transforming...
+node_modules/@base-org/account/node_modules/ox/_esm/core/Address.js (6:21): A comment
+
+"/*#__PURE__*/"
+
+in "node_modules/@base-org/account/node_modules/ox/_esm/core/Address.js" contains an annotation that Rollup cannot interpret due to the position of the comment. The comment will be removed to avoid issues.
+node_modules/@base-org/account/node_modules/ox/_esm/core/Base64.js (6:27): A comment
+
+"/*#__PURE__*/"
+
+in "node_modules/@base-org/account/node_modules/ox/_esm/core/Base64.js" contains an annotation that Rollup cannot interpret due to the position of the comment. The comment will be removed to avoid issues.
+node_modules/@coinbase/wallet-sdk/node_modules/ox/_esm/core/Address.js (6:21): A comment
+
+"/*#__PURE__*/"
+
+in "node_modules/@coinbase/wallet-sdk/node_modules/ox/_esm/core/Address.js" contains an annotation that Rollup cannot interpret due to the position of the comment. The comment will be removed to avoid issues.
+node_modules/@coinbase/wallet-sdk/node_modules/ox/_esm/core/Base64.js (6:27): A comment
+
+"/*#__PURE__*/"
+
+in "node_modules/@coinbase/wallet-sdk/node_modules/ox/_esm/core/Base64.js" contains an annotation that Rollup cannot interpret due to the position of the comment. The comment will be removed to avoid issues.
+node_modules/porto/node_modules/ox/_esm/core/Base64.js (6:27): A comment
+
+"/*#__PURE__*/"
+
+in "node_modules/porto/node_modules/ox/_esm/core/Base64.js" contains an annotation that Rollup cannot interpret due to the position of the comment. The comment will be removed to avoid issues.
+node_modules/@base-org/account/node_modules/ox/_esm/core/internal/cursor.js (2:21): A comment
+
+"/*#__PURE__*/"
+
+in "node_modules/@base-org/account/node_modules/ox/_esm/core/internal/cursor.js" contains an annotation that Rollup cannot interpret due to the position of the comment. The comment will be removed to avoid issues.
+node_modules/@coinbase/wallet-sdk/node_modules/ox/_esm/core/internal/cursor.js (2:21): A comment
+
+"/*#__PURE__*/"
+
+in "node_modules/@coinbase/wallet-sdk/node_modules/ox/_esm/core/internal/cursor.js" contains an annotation that Rollup cannot interpret due to the position of the comment. The comment will be removed to avoid issues.
+node_modules/zod/v4/core/util.js (400:0): A comment
+
+"// Wrapped in a `@__PURE__` IIFE: esbuild never tree-shakes a top-level initializer that contains a member access on `Number`, so the bare object literal survived into every bundle."
+
+in "node_modules/zod/v4/core/util.js" contains an annotation that Rollup cannot interpret due to the position of the comment. The comment will be removed to avoid issues.
+node_modules/zod/v4/core/regexes.js (74:0): A comment
+
+"/** Anchors a pattern source. The interpolation lives here rather than at the call site because
+ * esbuild will not drop a `@__PURE__` call whose own argument interpolates a variable, but it
+ * will drop `anchor(dateSource)`. Keeping it inline pinned `date` into every bundle. */"
+
+in "node_modules/zod/v4/core/regexes.js" contains an annotation that Rollup cannot interpret due to the position of the comment. The comment will be removed to avoid issues.
+✓ 6430 modules transformed.
+rendering chunks...
+computing gzip size...
+../arcproof-phase2-builds/mainnet/index.html                                        0.89 kB │ gzip:   0.47 kB
+../arcproof-phase2-builds/mainnet/build-provenance.json                            25.39 kB │ gzip:   9.40 kB
+../arcproof-phase2-builds/mainnet/assets/index-CmjD2Rin.css                        17.44 kB │ gzip:   4.10 kB
+../arcproof-phase2-builds/mainnet/assets/cursor-DFIQV2AB.js                         0.26 kB │ gzip:   0.22 kB
+../arcproof-phase2-builds/mainnet/assets/chevron-left-B5Ol_wEG.js                   0.40 kB │ gzip:   0.28 kB
+../arcproof-phase2-builds/mainnet/assets/chevron-top-BnBEKke9.js                    0.40 kB │ gzip:   0.28 kB
+../arcproof-phase2-builds/mainnet/assets/external-link-DAIIiZMv.js                  0.40 kB │ gzip:   0.28 kB
+../arcproof-phase2-builds/mainnet/assets/chevron-bottom-UD3EETvX.js                 0.40 kB │ gzip:   0.28 kB
+../arcproof-phase2-builds/mainnet/assets/chevron-right-BI7f2wzK.js                  0.40 kB │ gzip:   0.27 kB
+../arcproof-phase2-builds/mainnet/assets/arrow-top-DBKti2pl.js                      0.41 kB │ gzip:   0.29 kB
+../arcproof-phase2-builds/mainnet/assets/arrow-bottom-tG4hCS0I.js                   0.41 kB │ gzip:   0.29 kB
+../arcproof-phase2-builds/mainnet/assets/arrow-left-DFw7uExw.js                     0.41 kB │ gzip:   0.29 kB
+../arcproof-phase2-builds/mainnet/assets/arrow-right-DANurCEr.js                    0.42 kB │ gzip:   0.29 kB
+../arcproof-phase2-builds/mainnet/assets/off-BhBg55fl.js                            0.43 kB │ gzip:   0.29 kB
+../arcproof-phase2-builds/mainnet/assets/search-DD2TQEjp.js                         0.44 kB │ gzip:   0.30 kB
+../arcproof-phase2-builds/mainnet/assets/close-CDllTr-q.js                          0.44 kB │ gzip:   0.29 kB
+../arcproof-phase2-builds/mainnet/assets/all-wallets-DAriA6OQ.js                    0.45 kB │ gzip:   0.26 kB
+../arcproof-phase2-builds/mainnet/assets/filters-IabbE7l9.js                        0.45 kB │ gzip:   0.28 kB
+../arcproof-phase2-builds/mainnet/assets/info-circle-CuIp-9XL.js                    0.47 kB │ gzip:   0.30 kB
+../arcproof-phase2-builds/mainnet/assets/more-DZLJtoL8.js                           0.49 kB │ gzip:   0.31 kB
+../arcproof-phase2-builds/mainnet/assets/refresh-C-ugUp9X.js                        0.49 kB │ gzip:   0.32 kB
+../arcproof-phase2-builds/mainnet/assets/warning-circle-CId3TcOT.js                 0.50 kB │ gzip:   0.31 kB
+../arcproof-phase2-builds/mainnet/assets/coinPlaceholder-Bpb0-vXc.js                0.50 kB │ gzip:   0.35 kB
+../arcproof-phase2-builds/mainnet/assets/compass-DupGDq35.js                        0.52 kB │ gzip:   0.34 kB
+../arcproof-phase2-builds/mainnet/assets/swapVertical-Che5F4cT.js                   0.55 kB │ gzip:   0.34 kB
+../arcproof-phase2-builds/mainnet/assets/swapHorizontal-B8BVoolx.js                 0.55 kB │ gzip:   0.33 kB
+../arcproof-phase2-builds/mainnet/assets/x-B-OuhQPm.js                              0.57 kB │ gzip:   0.39 kB
+../arcproof-phase2-builds/mainnet/assets/cursor-transparent-CdgYiPpX.js             0.58 kB │ gzip:   0.35 kB
+../arcproof-phase2-builds/mainnet/assets/twitterIcon-CT712FJl.js                    0.58 kB │ gzip:   0.38 kB
+../arcproof-phase2-builds/mainnet/assets/mobile-mTWYHE8z.js                         0.59 kB │ gzip:   0.32 kB
+../arcproof-phase2-builds/mainnet/assets/checkmark-bold-B91jbUJg.js                 0.65 kB │ gzip:   0.43 kB
+../arcproof-phase2-builds/mainnet/assets/etherscan-DDEgn2Wi.js                      0.70 kB │ gzip:   0.45 kB
+../arcproof-phase2-builds/mainnet/assets/checkmark-UALvz6Ed.js                      0.71 kB │ gzip:   0.47 kB
+../arcproof-phase2-builds/mainnet/assets/help-circle-C5xgPabj.js                    0.71 kB │ gzip:   0.43 kB
+../arcproof-phase2-builds/mainnet/assets/wallet-CglwnH2-.js                         0.72 kB │ gzip:   0.42 kB
+../arcproof-phase2-builds/mainnet/assets/plus-BBNmDzzd.js                           0.76 kB │ gzip:   0.42 kB
+../arcproof-phase2-builds/mainnet/assets/verify-filled-CCPInlcA.js                  0.77 kB │ gzip:   0.47 kB
+../arcproof-phase2-builds/mainnet/assets/add-BHTFrR36.js                            0.77 kB │ gzip:   0.43 kB
+../arcproof-phase2-builds/mainnet/assets/google-DSyB9CI0.js                         0.81 kB │ gzip:   0.45 kB
+../arcproof-phase2-builds/mainnet/assets/three-dots-BWzXOKB5.js                     0.84 kB │ gzip:   0.41 kB
+../arcproof-phase2-builds/mainnet/assets/clock-DTbrGOCX.js                          0.84 kB │ gzip:   0.47 kB
+../arcproof-phase2-builds/mainnet/assets/disconnect--bDMYRV3.js                     0.89 kB │ gzip:   0.50 kB
+../arcproof-phase2-builds/mainnet/assets/twitch-pI37cGYa.js                         0.90 kB │ gzip:   0.50 kB
+../arcproof-phase2-builds/mainnet/assets/bank-BMh5l9x7.js                           0.94 kB │ gzip:   0.52 kB
+../arcproof-phase2-builds/mainnet/assets/apple-CPQv26dG.js                          0.96 kB │ gzip:   0.53 kB
+../arcproof-phase2-builds/mainnet/assets/play-store-CF10_Kt0.js                     1.01 kB │ gzip:   0.52 kB
+../arcproof-phase2-builds/mainnet/assets/farcaster-DO1Jab_2.js                      1.02 kB │ gzip:   0.53 kB
+../arcproof-phase2-builds/mainnet/assets/arrow-bottom-circle-DFtKHOVE.js            1.13 kB │ gzip:   0.53 kB
+../arcproof-phase2-builds/mainnet/assets/github-BIGGwQCp.js                         1.13 kB │ gzip:   0.60 kB
+../arcproof-phase2-builds/mainnet/assets/swapHorizontalBold-BW89bVDS.js             1.16 kB │ gzip:   0.62 kB
+../arcproof-phase2-builds/mainnet/assets/app-store-CQYmUome.js                      1.20 kB │ gzip:   0.67 kB
+../arcproof-phase2-builds/mainnet/assets/mail-CY--9gpk.js                           1.21 kB │ gzip:   0.65 kB
+../arcproof-phase2-builds/mainnet/assets/facebook-C_2oWKpO.js                       1.23 kB │ gzip:   0.64 kB
+../arcproof-phase2-builds/mainnet/assets/wallet-placeholder-C8quzRUa.js             1.26 kB │ gzip:   0.59 kB
+../arcproof-phase2-builds/mainnet/assets/desktop-CKx867wX.js                        1.27 kB │ gzip:   0.64 kB
+../arcproof-phase2-builds/mainnet/assets/discord-EXTwrA7C.js                        1.30 kB │ gzip:   0.65 kB
+../arcproof-phase2-builds/mainnet/assets/swapHorizontalMedium-BR9bp2h0.js           1.30 kB │ gzip:   0.68 kB
+../arcproof-phase2-builds/mainnet/assets/recycle-horizontal-CFgVnL39.js             1.35 kB │ gzip:   0.70 kB
+../arcproof-phase2-builds/mainnet/assets/extension-DxlDBX5c.js                      1.43 kB │ gzip:   0.69 kB
+../arcproof-phase2-builds/mainnet/assets/telegram-BRhCWC8E.js                       1.45 kB │ gzip:   0.84 kB
+../arcproof-phase2-builds/mainnet/assets/swapHorizontalRoundedBold-sl5Y-UeK.js      1.46 kB │ gzip:   0.77 kB
+../arcproof-phase2-builds/mainnet/assets/verify-Cj-wE0Up.js                         1.47 kB │ gzip:   0.71 kB
+../arcproof-phase2-builds/mainnet/assets/qr-code-D8FVfPEY.js                        1.52 kB │ gzip:   0.52 kB
+../arcproof-phase2-builds/mainnet/assets/browser-01I54oXN.js                        1.58 kB │ gzip:   0.78 kB
+../arcproof-phase2-builds/mainnet/assets/network-placeholder-B2bHMPib.js            1.65 kB │ gzip:   0.73 kB
+../arcproof-phase2-builds/mainnet/assets/id-CJ6NDgbn.js                             1.75 kB │ gzip:   0.80 kB
+../arcproof-phase2-builds/mainnet/assets/nftPlaceholder-D2ibq8-R.js                 1.75 kB │ gzip:   0.87 kB
+../arcproof-phase2-builds/mainnet/assets/info-h73dCfWI.js                           2.26 kB │ gzip:   1.14 kB
+../arcproof-phase2-builds/mainnet/assets/exclamation-triangle-CI1KcVzJ.js           2.42 kB │ gzip:   1.13 kB
+../arcproof-phase2-builds/mainnet/assets/send-CzxtHlqO.js                           2.42 kB │ gzip:   1.27 kB
+../arcproof-phase2-builds/mainnet/assets/card-D2Q5umc6.js                           2.59 kB │ gzip:   1.17 kB
+../arcproof-phase2-builds/mainnet/assets/chrome-store-DS-hPMul.js                   2.59 kB │ gzip:   1.01 kB
+../arcproof-phase2-builds/mainnet/assets/reown-logo-BnCej49b.js                     2.60 kB │ gzip:   1.06 kB
+../arcproof-phase2-builds/mainnet/assets/lightbulb-DVgVa3vV.js                      2.72 kB │ gzip:   1.21 kB
+../arcproof-phase2-builds/mainnet/assets/ccip-CsQKRDDE.js                           3.04 kB │ gzip:   1.39 kB
+../arcproof-phase2-builds/mainnet/assets/image-B2TVJ44W.js                          3.49 kB │ gzip:   1.51 kB
+../arcproof-phase2-builds/mainnet/assets/copy-D7tWWMEA.js                           3.82 kB │ gzip:   1.47 kB
+../arcproof-phase2-builds/mainnet/assets/walletconnect-CrQrDe3G.js                  4.06 kB │ gzip:   1.66 kB
+../arcproof-phase2-builds/mainnet/assets/index-DrgklnLm.js                         38.52 kB │ gzip:   9.37 kB
+../arcproof-phase2-builds/mainnet/assets/w3m-modal-DeAraXXE.js                     40.06 kB │ gzip:   9.39 kB
+../arcproof-phase2-builds/mainnet/assets/index-DrAshLsx-C5apQiWQ.js                41.11 kB │ gzip:  12.78 kB
+../arcproof-phase2-builds/mainnet/assets/basic-udN1VQe4.js                        143.14 kB │ gzip:  33.11 kB
+../arcproof-phase2-builds/mainnet/assets/index.es-_CbNDB1a.js                     400.77 kB │ gzip: 115.22 kB
+../arcproof-phase2-builds/mainnet/assets/core-89sU0Gv6.js                         484.67 kB │ gzip: 132.18 kB
+../arcproof-phase2-builds/mainnet/assets/index-UNlf6eYl.js                      1,482.99 kB │ gzip: 461.34 kB
+
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rollupOptions.output.manualChunks to improve chunking: https://rollupjs.org/configuration-options/#output-manualchunks
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+✓ built in 15.17s

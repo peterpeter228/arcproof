@@ -1,0 +1,30 @@
+
+ RUN  v4.1.12 /workspace/shared/arcproof-phase2
+
+ ❯ src/arcproof/__tests__/T24_exportUtils.test.ts (27 tests | 1 failed) 38ms
+     × fixture mode set correctly 10ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  src/arcproof/__tests__/T24_exportUtils.test.ts > T24 — buildReceiptExport integer strings > fixture mode set correctly
+AssertionError: expected 'unknown' to be 'fixture' // Object.is equality
+
+Expected: "fixture"
+Received: "unknown"
+
+ ❯ src/arcproof/__tests__/T24_exportUtils.test.ts:111:26
+    109|     const fixture = buildReceiptExport(DEP, '0xabc', null,
+    110|       200_000_000_000_000_000n, null, null, null, null, { ...RESULT_OK…
+    111|     expect(fixture.mode).toBe('fixture');
+       |                          ^
+    112|   });
+    113| });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed | 26 passed (27)
+      Tests  1 failed | 447 passed (448)
+   Start at  07:51:19
+   Duration  5.45s (transform 3.00s, setup 0ms, import 14.33s, tests 4.43s, environment 9.18s)
+

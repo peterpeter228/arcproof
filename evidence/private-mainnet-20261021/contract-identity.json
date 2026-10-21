@@ -1,0 +1,32 @@
+{
+  "baseCommit": "4deb74cce889ca122ef33903d27c2be10a1c437e",
+  "files": [
+    {
+      "path": "contracts/ArcProofInvoices.sol",
+      "gitBlobSha": "0ff25b92632458c8e528fa87a27c6af9a4710aaa"
+    },
+    {
+      "path": "contracts/test/ArcProofAcceptance.t.sol",
+      "gitBlobSha": "cbd32772dd19390f8d676001651a2810a8772cd6"
+    },
+    {
+      "path": "contracts/test/ArcProofInvoices.t.sol",
+      "gitBlobSha": "29b075d42c9445e1175eb5ff3d7ac2154a857be7"
+    },
+    {
+      "path": "contracts/test/IndependentBalanceReview.t.sol",
+      "gitBlobSha": "c7f4936c13d5523a1734e9d746bd7ee1ea38d129"
+    },
+    {
+      "path": "contracts/test/IndependentReentrancyReview.t.sol",
+      "gitBlobSha": "b2888d028409e81f420bfd3eafe6c5b5b0426e63"
+    },
+    {
+      "path": "contracts/test/IndependentReturnDataReview.t.sol",
+      "gitBlobSha": "4544ad9d750b8d2af2408e06be2352825b792ba4"
+    }
+  ],
+  "changed": false,
+  "testsThisPhase": "NOT_RERUN",
+  "limit": "Exact source identity only; historical Forge results are not fresh test execution."
+}

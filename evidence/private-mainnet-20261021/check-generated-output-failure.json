@@ -1,0 +1,24 @@
+{
+  "cause": "Custom outDir names dist-testnet/dist-mainnet were not covered by existing lint exclusions; generated dependency bundles were linted. Moved generated output outside source tree; source rules not weakened.",
+  "rawLogSha256": "30fb86193238153af97843b383e9f32b51c43c2d61d47d0e5d2dc01ec7c67a8e",
+  "bytes": 1635884,
+  "firstLines": [
+    "$ bash scripts/check.sh",
+    "$ oxlint --type-aware src scripts; s=$?; oxlint .; exit $((s>0?s:$?))",
+    "dist-mainnet/assets/index-CQBHNB_m.js:54:102: warning eslint(no-unused-vars): Parameter 'e' is declared but never used. Unused parameters should start with a '_'. help: Consider removing this parameter.",
+    "dist-mainnet/assets/index-CQBHNB_m.js:9:909: error eslint(no-unused-expressions): Expected expression to be used help: Consider using this expression or removing it",
+    "dist-mainnet/assets/index-CQBHNB_m.js:13:358: error eslint(no-unused-expressions): Expected expression to be used help: Consider using this expression or removing it",
+    "dist-mainnet/assets/index-CQBHNB_m.js:13:529: error eslint(no-unused-expressions): Expected expression to be used help: Consider using this expression or removing it",
+    "dist-mainnet/assets/index-CQBHNB_m.js:23:238: error eslint(no-unused-expressions): Expected expression to be used help: Consider using this expression or removing it",
+    "dist-mainnet/assets/index-CQBHNB_m.js:54:151: error eslint(no-unused-expressions): Expected expression to be used help: Consider using this expression or removing it",
+    "dist-mainnet/assets/index-CQBHNB_m.js:58:81: error eslint(no-unused-expressions): Expected expression to be used help: Consider using this expression or removing it",
+    "dist-mainnet/assets/index-CQBHNB_m.js:58:177: error eslint(no-unused-expressions): Expected expression to be used help: Consider using this expression or removing it",
+    "dist-mainnet/assets/index-CQBHNB_m.js:58:335: error eslint(no-unused-expressions): Expected expression to be used help: Consider using this expression or removing it",
+    "dist-mainnet/assets/index-CQBHNB_m.js:58:367: error eslint(no-unused-expressions): Expected expression to be used help: Consider using this expression or removing it"
+  ],
+  "lastLines": [
+    "error: script \"lint\" exited with code 1",
+    "$ tsc --noEmit",
+    "error: script \"check\" exited with code 1"
+  ]
+}

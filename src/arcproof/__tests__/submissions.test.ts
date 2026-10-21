@@ -1,4 +1,7 @@
-import { describe, it, expect } from 'vitest';
+import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
+import { memoryStorage } from './fixtures/safeBrowser';
+beforeEach(() => { vi.stubGlobal('localStorage', memoryStorage()); });
+afterEach(() => { vi.unstubAllGlobals(); });
 import { beginSubmission, getSubmissions, recordSubmission, updateSubmission } from '../submissions';
 import type { Hex, Address } from 'viem';
 let n=1000;

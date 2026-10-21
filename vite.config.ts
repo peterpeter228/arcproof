@@ -7,9 +7,14 @@ import { readFileSync, writeFileSync } from 'node:fs'
 import { sourceSnapshot, outputSnapshot } from './scripts/buildProvenance'
 import { nodePolyfills } from 'vite-plugin-node-polyfills'
 
+// Network selection is a strict build input, not runtime URL/storage configuration.
+const networkKey = process.env.VITE_ARCPROOF_NETWORK ?? 'testnet';
+if (networkKey !== 'testnet' && networkKey !== 'mainnet') throw new Error('Unsupported VITE_ARCPROOF_NETWORK; use testnet or mainnet.');
+
 // Declared inputs include the two evidence fixtures imported by tests, not logs.
 const snapshot = sourceSnapshot(__dirname);
 const buildIdentity = {
+  networkKey,
   sourceCommit: null,
   verifiedBaseCommit: /^[0-9a-f]{40}$/.test(process.env.ARCPROOF_VERIFIED_BASE_SHA ?? '') ? process.env.ARCPROOF_VERIFIED_BASE_SHA : null,
   sourceSnapshotSha256: snapshot.sha256,
@@ -18,7 +23,7 @@ const buildIdentity = {
 };
 
 export default defineConfig({
-  define: { __ARCPROOF_BUILD_IDENTITY__: JSON.stringify(buildIdentity) },
+  define: { __ARCPROOF_BUILD_IDENTITY__: JSON.stringify(buildIdentity), 'import.meta.env.VITE_ARCPROOF_NETWORK': JSON.stringify(networkKey) },
   test: {
     environment: 'node',
     include: ['src/**/*.test.ts', 'src/**/*.test.tsx'],

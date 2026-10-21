@@ -1,0 +1,10 @@
+$ vitest run src/arcproof/__tests__/networkPolicy.test.ts src/arcproof/__tests__/walletIntents.test.ts src/arcproof/__tests__/testnetClient.test.ts src/arcproof/__tests__/submissions.test.ts
+
+ RUN  v4.1.12 /workspace/shared/arcproof-phase2
+
+
+ Test Files  4 passed (4)
+      Tests  93 passed (93)
+   Start at  07:56:14
+   Duration  1.04s (transform 656ms, setup 0ms, import 1.96s, tests 332ms, environment 1ms)
+

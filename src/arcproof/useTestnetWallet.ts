@@ -1,7 +1,8 @@
-import { useEffect, useState, useSyncExternalStore } from 'react';
+import { useEffect, useMemo, useSyncExternalStore } from 'react';
 import { useConfig } from 'wagmi';
 import { getAccount, watchAccount } from '@wagmi/core';
 import type { Session, WalletRequest } from './testnetClient';
+import { TESTNET_CONTEXT, assertTrustedContext, assertWritesEnabled, type NetworkContext } from './networkPolicy';
 
 interface ObservableProvider extends WalletRequest {
   on?: (event: string, handler: (...args: unknown[]) => void) => void;
@@ -9,7 +10,7 @@ interface ObservableProvider extends WalletRequest {
 }
 
 /** External store makes invalidation synchronous, including before React rerenders. */
-function sessionStore() {
+function sessionStore(context: NetworkContext) {
   let snapshot: { session: Session | null; key: string } = { session: null, key: 'disconnected:0' };
   let version = 0;
   const listeners = new Set<() => void>();
@@ -20,7 +21,7 @@ function sessionStore() {
       version += 1;
       snapshot = {
         session: account.isConnected && account.address && account.chainId
-          ? { account: account.address, chainId: account.chainId, connectionVersion: version } : null,
+          ? { account: account.address, chainId: account.chainId, connectionVersion: version, networkKey: context.key, deploymentId: context.deployment?.deploymentId } : null,
         key: `${account.status}:${account.address ?? ''}:${account.chainId ?? ''}:${account.connector?.uid ?? ''}:${version}`,
       };
       listeners.forEach((listener) => listener());
@@ -33,12 +34,14 @@ function sessionStore() {
   };
 }
 
-export function useTestnetWallet() {
+export function useNetworkWallet(context: NetworkContext) {
+  assertTrustedContext(context);
   const config = useConfig();
-  const [store] = useState(sessionStore);
+  const store = useMemo(() => sessionStore(context), [context]);
   const state = useSyncExternalStore(store.subscribe, store.getSnapshot, store.getSnapshot);
 
   useEffect(() => {
+    if (!context.writesEnabled || !context.deployment) return;
     let provider: ObservableProvider | undefined;
     let generation = 0;
     const invalidate = () => {
@@ -66,21 +69,26 @@ export function useTestnetWallet() {
     update(getAccount(config));
     const stop = watchAccount(config, { onChange: update });
     return () => { generation += 1; detach(); stop(); store.invalidate(); };
-  }, [config, store]);
+  }, [config, context, store]);
 
   return {
     session: state.session,
     sessionKey: state.key,
     getSession: () => {
+      if (!context.writesEnabled || !context.deployment) return null;
       const session = store.getSnapshot().session;
       const account = getAccount(config);
       return session && account.isConnected && account.address?.toLowerCase() === session.account.toLowerCase() &&
         account.chainId === session.chainId ? session : null;
     },
     getProvider: async (): Promise<WalletRequest> => {
+      assertWritesEnabled(context);
       const account = getAccount(config);
-      if (!account.connector || !store.getSnapshot().session) throw new Error('Connect an ordinary EOA wallet first.');
+      if (!account.connector || !store.getSnapshot().session || account.chainId !== context.chain.id) throw new Error('Connect an ordinary EOA wallet first.');
       return await account.connector.getProvider() as WalletRequest;
     },
   };
 }
+
+/** Legacy testnet-only hook; mainnet routes must never mount it. */
+export function useTestnetWallet() { return useNetworkWallet(TESTNET_CONTEXT); }

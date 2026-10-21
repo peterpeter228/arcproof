@@ -1,0 +1,42 @@
+Browser tab: 7, Title: "ArcProof — Prototype", URL: "http://127.0.0.1:4174/#/demo".
+0 AXWebArea ArcProof — Prototype, URL: 127.0.0.1:4174/#/demo
+	1 container root
+		2 link Description: Skip to main content, Value: 127.0.0.1:4174/#main-content
+		3 text Arc Mainnet (5042) · real USDC · no trusted deployment · all sends disabled · not audited
+		4 container
+			5 heading ArcProof, Value: 1
+				6 text ArcProof
+			7 container Main navigation
+				8 button Invoices
+				9 button Verify receipt
+				10 button Evidence
+				11 button Offline demo
+		28 container main-content
+			29 container
+				30 text Offline demo mode  — separate from the live testnet deployment. Invoice creation below demonstrates the ID derivation and UI flow only; no transaction is sent. No wallet is needed. The fixed demo merchant and contract are fixtures, not deployed addresses.
+			31 container
+				32 text Notice:  This contract uses atomic forwarding — funds are passed directly to the merchant in the same transaction. The contract is not a custodian, escrow, or intermediary, but it does touch funds. It is not audited, not production-ready, and provides no escrow, delivery proof, or refund mechanism.
+			33 container
+				34 heading Create invoice, Value: 2
+					35 text Create invoice
+				36 text AMOUNT (TEST USDC, MAX 1.000000)
+				37 text field (settable) AMOUNT (TEST USDC, MAX 1.000000), Value: 0.20, ID: invoice-amount
+				38 text test USDC 200000000000000000  native units (18 dec) EXPIRES IN (HOURS, MAX 168)
+				39 stepper (settable, integer) EXPIRES IN (HOURS, MAX 168), Value: 24, ID: invoice-expiry
+				40 text Expires:  2026-10-22T23:36:02.000Z  (UTC) TITLE (OPTIONAL, UNBOUND PLAIN TEXT — NOT STORED ON CHAIN)
+				41 text field (settable) TITLE (OPTIONAL, UNBOUND PLAIN TEXT — NOT STORED ON CHAIN), ID: invoice-title
+				42 text 0 / 80  code points. Not proof; not stored onchain. No customer PII. Terms hash:  bytes32(0)  (P0 only; nonzero hash protocol not implemented)
+				43 button Create invoice (offline demo — no signing)
+			44 container
+				45 heading Invoice history, Value: 2
+					46 text Invoice history
+				47 image
+				48 text No invoices yet. Create your first invoice above.
+		22 container
+			23 text ArcProof prototype — G1 reviewed, not audited Grant eligibility: HOLD
+			24 link Description: Build identity and evidence, Value: 127.0.0.1:4174/#/evidence
+			25 text Checked testnet deployment · live payment acceptance pending
+			26 link Description: Built with Arc Studio, Value: studio.arc.io/
+		27 container Notifications alt+T
+
+The focused UI element is 11 button Offline demo

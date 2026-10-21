@@ -1,0 +1,97 @@
+{
+  "schema": "arcproof-studio-private-sync-v1",
+  "recordedAtUTC": "2026-10-21T23:19:30.078213+00:00",
+  "projectUrl": "https://studio.arc.io/app/2dbdda0d-1b70-408b-ae23-cccb8a4b8753?thread=12185290-60f7-4446-9e99-5ca51e8c30b0",
+  "candidateSourceSha256": "e8f83ed0b8fc9b4f621f9cef4839e5b739e529693fd925e962247dd5c3e3c626",
+  "packetSha256": "ec0eb492c861274c9619043ca0d666604a8f066edf7d253e6fc411604d72e684",
+  "appliedAtUTC": "2026-10-21T23:12:23Z",
+  "changedFiles": 62,
+  "verifiedInputs": 87,
+  "preservedUnlistedFiles": true,
+  "wholeWorkspaceEquivalent": false,
+  "sourceSync": "verified_live_and_refreshed_download",
+  "readbackFile": "studio-sync-readback-after-refresh.json",
+  "staleExportResolved": "Download before browser page reload used stale snapshot. Reload then Download Code independently matched all87 expected hashes. No Studio agent/checkpoint invoked. This verifies exported source at that time, not indefinite sandbox retention.",
+  "studioTests": {
+    "frozenInstall": "bun install --frozen-lockfile --ignore-scripts",
+    "vitest": {
+      "command": "bun x vitest run",
+      "passed": 461,
+      "failed": 0,
+      "durationSeconds": 8.15,
+      "evidence": "studio-tests-cropped.png"
+    },
+    "typecheck": {
+      "command": "bun run typecheck",
+      "exitCode": 0
+    },
+    "fullLint": "not_run_in_studio_preserved_helpers_not_removed"
+  },
+  "browserChecks": [
+    {
+      "case": "Readonly testnet Verify default and no wallet bootstrap",
+      "result": "pass"
+    },
+    {
+      "case": "Malformed invoice ID submitted",
+      "result": "pass",
+      "actual": "Invoice ID and optional transaction hash must each contain32bytes."
+    },
+    {
+      "case": "Offline amount2 exceeds1testUSDC",
+      "result": "pass",
+      "actual": "Amount must not exceed1USDC; create disabled."
+    },
+    {
+      "case": "Offline0.20 invoice creation",
+      "result": "pass",
+      "actual": "One demo invoice in history."
+    },
+    {
+      "case": "View simulated receipt",
+      "result": "pass",
+      "actual": "SIMULATED_NOT_VERIFIED; payer/tx/time/block/event index null; no wallet or transaction."
+    },
+    {
+      "case": "Evidence route",
+      "result": "pass",
+      "actual": "Source candidate provenance limitations; historical tests not current acceptance; mainnet disabled."
+    }
+  ],
+  "notRun": [
+    "Mainnet actual browser panel; no supported network restart control used. Local mainnet build/unit tests owned by parent.",
+    "Real wallet, payment, mainnet chain acceptance, deployment, publication."
+  ],
+  "safety": {
+    "deployment": false,
+    "walletSignature": false,
+    "transaction": false,
+    "publicPublication": false,
+    "studioAgentInvoked": false,
+    "newCredentials": false
+  },
+  "failuresRecovered": [
+    "Initial large chunk staging failed before source mutation.",
+    "Initial os.replace failed cross-device before source mutation; all62old hashes confirmed before same-filesystem retry.",
+    "Old installed Vitest mismatched frozen package; frozen ignore-scripts install corrected; typecheck and461tests passed."
+  ],
+  "rawExportsSensitive": "Raw zip includes.env and runtime logs. Do not commit, share, or send to Argon. Only sanitized manifest/report and cropped screenshots are distributable.",
+  "studioRenderedIdentity": {
+    "network": "testnet",
+    "sourceCommit": null,
+    "verifiedBaseCommit": null,
+    "candidateSourceSnapshotSha256": "fd6b1741abc8216e3e1d46ba2fa7196a7ba0090bf54796f1eb6246a74299586a",
+    "builtAtUTC": "2026-10-21T23:12:24.594Z",
+    "interpretation": "Studio preserved extras alter the full declared-input snapshot. All 87 allowlisted candidate inputs independently match the downloaded export, but whole workspace identity is not equal to the parent candidate."
+  },
+  "screenshots": [
+    "studio-tests-cropped.png",
+    "studio-verify-final-cropped.png",
+    "studio-evidence-final-cropped.png",
+    "studio-identity-final-cropped.png"
+  ],
+  "renderedSnapshotSha256": "fd6b1741abc8216e3e1d46ba2fa7196a7ba0090bf54796f1eb6246a74299586a",
+  "renderedSourceCommit": null,
+  "renderedBaseCommit": null,
+  "renderedIdentityExplanation": "Preserved extra Studio input files change whole-workspace snapshot; 87 allowlisted inputs independently match candidate. No exact full artifact equivalence claim."
+}

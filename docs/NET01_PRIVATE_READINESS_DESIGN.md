@@ -1,3 +1,5 @@
+> 2026-10-21 后续实施注：本文原始基线及 DESIGN_ONLY 状态是上一阶段历史快照，保留不改写。当前授权实施从远端 `4deb74cce889ca122ef33903d27c2be10a1c437e` 恢复，当前事实以 [本阶段记录](PRIVATE_MAINNET_PHASE_20261021.md) 为准。新增 submissions.ts 隔离与 wagmi 自动发现关闭纳入实现范围。
+
 # NET-01 private release-readiness design
 2026-10-21 UTC. DESIGN ONLY. Baseline 94a84c44b02d52a827bed42fc9f9a5d414619b7d, frozen code in ../argon-plan/frozen-source; official requirements in ../rules/ROUND2_ELIGIBILITY_MATRIX_20261021.md. No implementation, login, terms acceptance, publication, deployment, wallet or financial action.
 

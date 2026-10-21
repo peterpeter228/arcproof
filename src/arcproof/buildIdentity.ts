@@ -1,5 +1,6 @@
 /** Build labels are provenance, never a settlement or deployment attestation. */
 export interface BuildIdentity {
+  networkKey: 'testnet' | 'mainnet' | null;
   sourceCommit: string | null;
   verifiedBaseCommit: string | null;
   sourceSnapshotSha256: string | null;
@@ -12,6 +13,7 @@ export function normalizeBuildIdentity(value: unknown): BuildIdentity {
   const hex = (value: unknown, length: number) => typeof value === 'string' && new RegExp(`^[0-9a-f]{${length}}$`).test(value) ? value : null;
   return {
     // A materialized or modified source tree cannot prove a commit identity.
+    networkKey: raw.networkKey === 'testnet' || raw.networkKey === 'mainnet' ? raw.networkKey : null,
     sourceCommit: null,
     verifiedBaseCommit: hex(raw.verifiedBaseCommit, 40),
     sourceSnapshotSha256: hex(raw.sourceSnapshotSha256, 64),

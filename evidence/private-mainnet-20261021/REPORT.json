@@ -1,0 +1,117 @@
+{
+  "schema": "arcproof-private-mainnet-phase-v1",
+  "updatedAtUTC": "2026-10-21T23:41:17.536827+00:00",
+  "baseCommit": "4deb74cce889ca122ef33903d27c2be10a1c437e",
+  "candidateSourceSnapshotSha256": "8df6b66d77c12e99b268a19c0ed6f88f33336b24c177fb0fdda88834ba631432",
+  "state": "TESTED_REVIEWED_PRIVATE_CANDIDATE_REMOTE_READBACK_PENDING",
+  "authorization": {
+    "reference": "Sentinel_f512248b01208191a4f4cc252be831fd",
+    "legacy18HourCapRemovedForThisPhase": true,
+    "studioExistingProjectPrivateSync": true,
+    "privateMainnetAdaptation": true,
+    "argonCallsApproved": 2,
+    "deploy": false,
+    "sign": false,
+    "transfer": false,
+    "publish": false
+  },
+  "checks": {
+    "fullProject": {
+      "tests": 462,
+      "files": 29,
+      "result": "PASS",
+      "log": "project-tests-browser-fix.log"
+    },
+    "lintTypes": "PASS",
+    "testnetBuild": "PASS",
+    "mainnetBuild": "PASS",
+    "invalidBuildSelectorsRejected": 4,
+    "buildOutputHashes": {
+      "testnet": 84,
+      "mainnet": 84,
+      "mismatches": 0
+    },
+    "independentFocused": 46,
+    "independentRoutes": 17,
+    "contractTests": "NOT_RERUN_THIS_PHASE; exact contract source unchanged from verified base; historic73 not current run",
+    "lintTypesLog": "check-final-browser-fix.log",
+    "buildReadback": "build-readback-browser-fix.json",
+    "invalidBuildSelectorLog": "invalid-build-selectors-browser-fix.json",
+    "mainnetRealBrowser": {
+      "result": "PASS_BOUNDED",
+      "sourceSnapshotSha256": "8df6b66d77c12e99b268a19c0ed6f88f33336b24c177fb0fdda88834ba631432",
+      "report": "mainnet-browser-final/report.md",
+      "noLiveWalletOrChainAcceptance": true
+    },
+    "toolchain": {
+      "node": "v24.19.0",
+      "bun": "1.3.14"
+    }
+  },
+  "safety": {
+    "productionManifestEntries": 0,
+    "mainnetWritesEnabled": false,
+    "unknownTestnetIntentsPreserved": true,
+    "noWalletConnectionMainnetBootstrap": "PASS_MOCK_PROVIDER",
+    "noLiveMainnetAcceptanceClaim": true
+  },
+  "studio": {
+    "state": "FINAL87_MATCH_AND_STARTUP_IDENTITY_REFRESHED",
+    "wholeWorkspaceExactMatch": false,
+    "reason": "Preserved Studio-only generated artifacts/helpers; allowlisted source match must be separately verified.",
+    "applyDispatchedAtUTC": "2026-10-21T23:01:18Z",
+    "noBlindRetry": true,
+    "applyCompletedAtUTC": "2026-10-21T23:12:23Z",
+    "liveSandboxAppliedPaths": 62,
+    "liveSandboxMatchedAllowlistPaths": 87,
+    "exportMatchedPaths": 87,
+    "exportMissingPaths": 0,
+    "privatePreview": "PASS: read-only default, invalid invoice validation, invalid offline amount rejected, valid simulated invoice/history/receipt, evidence navigation",
+    "firstAttemptFailure": "Cross-device atomic replace failed before writes; actual readback confirmed62 old hashes,0 candidate; same-filesystem retry then succeeded.",
+    "exportDifferentPaths": 0,
+    "exportSha256": "0a880b4f7352363c810c0671fea4df40b8975821f3ff8a77e7e16d2b5d829d17",
+    "studioTests": 462,
+    "studioTypecheckExit": 0,
+    "mainnetRealBrowser": "PASS_SEPARATE_LOCAL_PRODUCTION_BUILD",
+    "resolution": "Ordinary Studio page reload refreshed stale client-side export. Fresh Download Code matches all87 allowlisted inputs. No Studio AI agent/checkpoint/deploy action.",
+    "readback": "studio-browser-fix-readback.json",
+    "renderedWholeWorkspaceSnapshotSha256": "556de0955f9aee7186664aadd72c51bc6e82339d24747779bf64d6b694cfd845",
+    "sourceCommitInPreview": null,
+    "baseCommitInPreview": null,
+    "browserEvidence": "studio-browser-fix-report.json",
+    "followupAppliedPaths": 2,
+    "renderedWholeWorkspaceInputs": 146
+  },
+  "argon": {
+    "initial": "HTTP200_REVIEW_RECEIVED_AND_TRIAGED",
+    "final": "HTTP200_REVIEW_RECEIVED_AND_INDEPENDENTLY_TRIAGED",
+    "requestedModel": "gemini-4-argon-high",
+    "returnedInitialModelVersion": "gemini-4-argon",
+    "cost": null,
+    "returnedFinalModelVersion": "gemini-4-argon",
+    "completedCalls": 2,
+    "finalRequestId": "488a7dd5-071a-42d0-8d1b-ca38cff5c9cf",
+    "finalInputSha256": "660c8ede1ec506303c25a604a46cf79b7f8d996e588e362067f684141f18ddff",
+    "finalReceipt": "argon-final-receipt.json",
+    "finalTriage": "argon-final-triage.md",
+    "professionalAudit": false
+  },
+  "remotePersistence": "PENDING",
+  "remaining": [
+    "Nonforce expected_sha commit and readback",
+    "Mainnet deployment/two-wallet/live finality/native system event evidence NOT_RUN and outside this phase",
+    "No public release/submission/award/payment claim"
+  ],
+  "initialFailuresPreserved": [
+    "One tightened fixture classifier assertion required updating legacy test to registered fixture plus unknown negative case",
+    "Old submission unit tests needed explicit memoryStorage after fail-closed missing-storage protection",
+    "Generated custom outDir files were linted; moved output outside source tree without weakening lint rules",
+    "Browser-fix check runner initially omitted Bun PATH; rerun with explicit tool path passed. No source lint relaxation."
+  ],
+  "browserFinding": {
+    "finding": "Mainnet current candidate Evidence identity hard-coded testnet chain/deployment/runtime",
+    "fix": "Selected immutable BUILD_NETWORK context; empty mainnet registry displays None/Unknown without fallback",
+    "regression": "mainnetReadonlyUi.test.tsx: reports mainnet identity without borrowing historical testnet manifest",
+    "status": "FIXED_LOCAL_TESTS_STUDIO_SYNC_AND_ACTUAL_MAINNET_BROWSER_RECHECK_PASS"
+  }
+}

@@ -4,6 +4,7 @@
  * No emojis, no invented data, no marketing copy.
  */
 import React, { useState } from 'react';
+import { BUILD_NETWORK } from '../../arcproof/networkPolicy';
 import { useSubmissions, useSubmissionRequests, type Submission } from '../../arcproof/submissions';
 import { ARC_TESTNET, TESTNET_DEPLOYMENT, explorerTx } from '../../arcproof/testnet';
 import { useWalletIntents, type WalletIntent } from '../../arcproof/walletIntents';
@@ -26,7 +27,7 @@ export function PrototypeBanner() {
   return (
     <div className="w-full bg-amber-50 border-b border-amber-200 py-2 px-4 text-center">
       <p className="text-sm font-medium text-amber-900">
-        Arc Testnet (5042002) · test USDC, no monetary value · mainnet disabled · not audited
+        {BUILD_NETWORK.key === 'testnet' ? 'Arc Testnet (5042002) · test USDC, no monetary value · mainnet disabled · not audited' : 'Arc Mainnet (5042) · real USDC · no trusted deployment · all sends disabled · not audited'}
       </p>
     </div>
   );

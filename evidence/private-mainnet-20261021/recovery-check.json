@@ -1,0 +1,22 @@
+{
+  "base": "4deb74cce889ca122ef33903d27c2be10a1c437e",
+  "restoration": "453 exact verified reused blobs +38 priority blobs verified before edits +212 evidence blobs verified",
+  "sameNow": 689,
+  "changedNow": [
+    "src/App.tsx",
+    "src/arcproof/__tests__/T24_exportUtils.test.ts",
+    "src/arcproof/arcSettlement.ts",
+    "src/arcproof/buildIdentity.ts",
+    "src/arcproof/exportUtils.ts",
+    "src/arcproof/receiptVerifier.ts",
+    "src/arcproof/submissions.ts",
+    "src/arcproof/testnetClient.ts",
+    "src/arcproof/useTestnetWallet.ts",
+    "src/arcproof/walletIntents.ts",
+    "src/components/arcproof/EvidenceScreen.tsx",
+    "src/components/arcproof/Layout.tsx",
+    "src/config.ts",
+    "vite.config.ts"
+  ],
+  "missing": []
+}

@@ -11,7 +11,7 @@ import {
   type ReceiptExportRecord,
 } from '../exportUtils';
 import { deriveInvoiceIds } from '../invoiceId';
-import type { DeploymentRecord } from '../manifest';
+import { FIXTURE_MANIFEST, type DeploymentRecord } from '../manifest';
 import type { VerificationResult } from '../receiptVerifier';
 
 const CHAIN_ID = 2482601649;
@@ -105,10 +105,13 @@ describe('T24 — buildReceiptExport integer strings', () => {
       1729382400n, 1000n, RESULT_OK, false);
     expect(r.paymentLogIndex).toBe(5);
   });
-  it('fixture mode set correctly', () => {
+  it('fixture flag cannot bless an unregistered deployment', () => {
     const fixture = buildReceiptExport(DEP, '0xabc', null,
       200_000_000_000_000_000n, null, null, null, null, { ...RESULT_OK, status: 'PENDING', verified: false }, true);
-    expect(fixture.mode).toBe('fixture');
+    expect(fixture.mode).toBe('unknown');
+    const trustedFixture = buildReceiptExport(FIXTURE_MANIFEST[0], '0xabc', null,
+      200_000_000_000_000_000n, null, null, null, null, { ...RESULT_OK, status: 'PENDING', verified: false }, true);
+    expect(trustedFixture.mode).toBe('fixture');
   });
 });
 

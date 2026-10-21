@@ -1,0 +1,30 @@
+{
+  "checkedAtUTC": "2026-10-21T23:29:24.498012+00:00",
+  "sourceSnapshotSha256": "8df6b66d77c12e99b268a19c0ed6f88f33336b24c177fb0fdda88834ba631432",
+  "cases": [
+    {
+      "selector": "",
+      "exitCode": 1,
+      "rejectedByAllowlist": true,
+      "output": "failed to load config from /workspace/shared/arcproof-phase2/vite.config.ts\nerror during build:\nError: Unsupported VITE_ARCPROOF_NETWORK; use testnet or mainnet.\n    at file:///workspace/shared/arcproof-phase2/node_modules/.vite-temp/vite.config.ts.timestamp-1792625363852-538b22d84ee5d.mjs:51:65\n    at ModuleJob.run (node:internal/modules/esm/module_job:439:25)\n    at async node:internal/modules/esm/loader:643:26\n    at async loadConfigFromBundledFile (file:///workspace/shared/arcproof-phase2/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:49778:15)\n    at async bundleAndLoadConfigFile (file:///workspace/shared/arcproof-phase2/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:49621:22)\n    at async loadConfigFromFile (file:///workspace/shared/arcproof-phase2/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:49584:44)\n    at async resolveConfig (file:///workspace/shared/arcproof-phase2/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:49079:24)\n    at async createBuilder (file:///workspace/shared/arcproof-phase2/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:47054:18)\n    at async CAC.<anonymous> (file:///workspace/shared/arcproof-phase2/node_modules/vite/dist/node/cli.js:862:23)\n"
+    },
+    {
+      "selector": "invalid",
+      "exitCode": 1,
+      "rejectedByAllowlist": true,
+      "output": "failed to load config from /workspace/shared/arcproof-phase2/vite.config.ts\nerror during build:\nError: Unsupported VITE_ARCPROOF_NETWORK; use testnet or mainnet.\n    at file:///workspace/shared/arcproof-phase2/node_modules/.vite-temp/vite.config.ts.timestamp-1792625364054-6814a6b2f30668.mjs:51:65\n    at ModuleJob.run (node:internal/modules/esm/module_job:439:25)\n    at async node:internal/modules/esm/loader:643:26\n    at async loadConfigFromBundledFile (file:///workspace/shared/arcproof-phase2/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:49778:15)\n    at async bundleAndLoadConfigFile (file:///workspace/shared/arcproof-phase2/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:49621:22)\n    at async loadConfigFromFile (file:///workspace/shared/arcproof-phase2/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:49584:44)\n    at async resolveConfig (file:///workspace/shared/arcproof-phase2/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:49079:24)\n    at async createBuilder (file:///workspace/shared/arcproof-phase2/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:47054:18)\n    at async CAC.<anonymous> (file:///workspace/shared/arcproof-phase2/node_modules/vite/dist/node/cli.js:862:23)\n"
+    },
+    {
+      "selector": "mainnet ",
+      "exitCode": 1,
+      "rejectedByAllowlist": true,
+      "output": "failed to load config from /workspace/shared/arcproof-phase2/vite.config.ts\nerror during build:\nError: Unsupported VITE_ARCPROOF_NETWORK; use testnet or mainnet.\n    at file:///workspace/shared/arcproof-phase2/node_modules/.vite-temp/vite.config.ts.timestamp-1792625364267-52d80de050e71.mjs:51:65\n    at ModuleJob.run (node:internal/modules/esm/module_job:439:25)\n    at async node:internal/modules/esm/loader:643:26\n    at async loadConfigFromBundledFile (file:///workspace/shared/arcproof-phase2/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:49778:15)\n    at async bundleAndLoadConfigFile (file:///workspace/shared/arcproof-phase2/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:49621:22)\n    at async loadConfigFromFile (file:///workspace/shared/arcproof-phase2/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:49584:44)\n    at async resolveConfig (file:///workspace/shared/arcproof-phase2/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:49079:24)\n    at async createBuilder (file:///workspace/shared/arcproof-phase2/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:47054:18)\n    at async CAC.<anonymous> (file:///workspace/shared/arcproof-phase2/node_modules/vite/dist/node/cli.js:862:23)\n"
+    },
+    {
+      "selector": "https://untrusted.invalid",
+      "exitCode": 1,
+      "rejectedByAllowlist": true,
+      "output": "failed to load config from /workspace/shared/arcproof-phase2/vite.config.ts\nerror during build:\nError: Unsupported VITE_ARCPROOF_NETWORK; use testnet or mainnet.\n    at file:///workspace/shared/arcproof-phase2/node_modules/.vite-temp/vite.config.ts.timestamp-1792625364462-1ff2c00763dbb8.mjs:51:65\n    at ModuleJob.run (node:internal/modules/esm/module_job:439:25)\n    at async node:internal/modules/esm/loader:643:26\n    at async loadConfigFromBundledFile (file:///workspace/shared/arcproof-phase2/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:49778:15)\n    at async bundleAndLoadConfigFile (file:///workspace/shared/arcproof-phase2/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:49621:22)\n    at async loadConfigFromFile (file:///workspace/shared/arcproof-phase2/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:49584:44)\n    at async resolveConfig (file:///workspace/shared/arcproof-phase2/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:49079:24)\n    at async createBuilder (file:///workspace/shared/arcproof-phase2/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:47054:18)\n    at async CAC.<anonymous> (file:///workspace/shared/arcproof-phase2/node_modules/vite/dist/node/cli.js:862:23)\n"
+    }
+  ]
+}

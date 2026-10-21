@@ -1,0 +1,22 @@
+{
+  "checkedAtUTC": "2026-10-21T22:59:19.327566+00:00",
+  "builds": [
+    {
+      "mode": "testnet",
+      "networkKey": "testnet",
+      "sourceSnapshotSha256": "e8f83ed0b8fc9b4f621f9cef4839e5b739e529693fd925e962247dd5c3e3c626",
+      "outputs": 84,
+      "mismatches": [],
+      "manifestSha256": "903ff0dc1e0d6634363e5a8103c850528e140db3a4052aec5589b8518dc8669f"
+    },
+    {
+      "mode": "mainnet",
+      "networkKey": "mainnet",
+      "sourceSnapshotSha256": "e8f83ed0b8fc9b4f621f9cef4839e5b739e529693fd925e962247dd5c3e3c626",
+      "outputs": 84,
+      "mismatches": [],
+      "manifestSha256": "a4d1d832d29416b844da318d77fdc161f898d019cf97bea4d9a8526fc41c2f38"
+    }
+  ],
+  "limits": "Local output files only. Not Studio host bytes, production deployment or live chain acceptance."
+}

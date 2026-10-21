@@ -1,6 +1,7 @@
 /** Historical results and current build provenance. No implicit fresh-run claims. */
 import React from 'react';
 import { BUILD_IDENTITY, identityLabel } from '../../arcproof/buildIdentity';
+import { BUILD_NETWORK } from '../../arcproof/networkPolicy';
 import { ARC_TESTNET, TESTNET_DEPLOYMENT, DEPLOYMENT_TX, explorerTx } from '../../arcproof/testnet';
 import { CheckCircle, Clock, AlertCircle } from 'lucide-react';
 
@@ -82,13 +83,14 @@ export function EvidenceScreen() {
       <section aria-label="Build identity" className="bg-white rounded-xl border border-stone-200 p-5 space-y-3">
         <h3 className="font-semibold">Current candidate build identity</h3>
         <dl className="text-sm space-y-2 break-all">
+          <div><dt>Fixed build network</dt><dd>{identityLabel(BUILD_IDENTITY.networkKey)}</dd></div>
           <div><dt>Source commit SHA</dt><dd>{identityLabel(BUILD_IDENTITY.sourceCommit)}</dd></div>
           <div><dt>Verified base commit (not current source)</dt><dd>{identityLabel(BUILD_IDENTITY.verifiedBaseCommit)}</dd></div>
           <div><dt>Candidate source snapshot SHA-256</dt><dd>{identityLabel(BUILD_IDENTITY.sourceSnapshotSha256)}</dd></div>
           <div><dt>Build UTC</dt><dd>{identityLabel(BUILD_IDENTITY.builtAtUTC)}</dd></div>
-          <div><dt>Environment / chain</dt><dd>Arc Testnet / {ARC_TESTNET.id}; mainnet disabled</dd></div>
-          <div><dt>Manifest deployment identity</dt><dd>{TESTNET_DEPLOYMENT.deploymentId}</dd></div>
-          <div><dt>Expected contract runtime keccak256</dt><dd>{TESTNET_DEPLOYMENT.runtimeCodeHash}</dd></div>
+          <div><dt>Environment / chain</dt><dd>{BUILD_NETWORK.label} / {BUILD_NETWORK.chain.id}; {BUILD_NETWORK.writesEnabled ? 'testnet only; mainnet disabled' : 'all wallet actions disabled'}</dd></div>
+          <div><dt>Manifest deployment identity</dt><dd>{BUILD_NETWORK.deployment?.deploymentId ?? 'None (no trusted deployment)'}</dd></div>
+          <div><dt>Expected contract runtime keccak256</dt><dd>{BUILD_NETWORK.deployment?.runtimeCodeHash ?? 'Unknown (no trusted deployment)'}</dd></div>
         </dl>
         <p className="text-sm">The candidate hash identifies declared build inputs, not a committed source SHA. Build time is not verification time. Current tests, live network acceptance, and independent host-to-artifact matching remain Unknown unless accompanied by separate version-bound logs.</p>
         <a className="underline text-sm" href={`${import.meta.env.BASE_URL}build-provenance.json`}>Download production build provenance (generated during build)</a>

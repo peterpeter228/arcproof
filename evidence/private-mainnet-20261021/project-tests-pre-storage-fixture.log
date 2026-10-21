@@ -1,0 +1,112 @@
+
+ RUN  v4.1.12 /workspace/shared/arcproof-phase2
+
+ ❯ src/arcproof/__tests__/submissions.test.ts (10 tests | 7 failed) 36ms
+     × blocks repeated payment requests before the wallet returns 18ms
+     × normalizes invoice casing in request leases 1ms
+     × blocks another payer on the same outstanding invoice 1ms
+     × releases an explicit rejected request only when finished 0ms
+     × retains an uncertain wallet outcome lock 0ms
+     × locks account-scoped creation across request repetitions 0ms
+     × allows review after a specifically reconciled reverted payment 5ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 7 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  src/arcproof/__tests__/submissions.test.ts > Centralized wallet submission registry (offline) > blocks repeated payment requests before the wallet returns
+Error: Saved submissions are unreadable. New sends are disabled; inspect wallet history without deleting old records.
+ ❯ beginSubmission2 src/arcproof/submissions.ts:69:33
+     67|     assertWritesEnabled(context);
+     68|     refreshFromStorage();
+     69|     if (storageReadError) throw new Error(storageReadError);
+       |                                 ^
+     70|     const normalizedId = invoiceId?.toLowerCase();
+     71|     const scope = kind === 'pay' ? `pay:${normalizedId ?? ''}` : `crea…
+ ❯ src/arcproof/__tests__/submissions.test.ts:8:104
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/7]⎯
+
+ FAIL  src/arcproof/__tests__/submissions.test.ts > Centralized wallet submission registry (offline) > normalizes invoice casing in request leases
+Error: Saved submissions are unreadable. New sends are disabled; inspect wallet history without deleting old records.
+ ❯ beginSubmission2 src/arcproof/submissions.ts:69:33
+     67|     assertWritesEnabled(context);
+     68|     refreshFromStorage();
+     69|     if (storageReadError) throw new Error(storageReadError);
+       |                                 ^
+     70|     const normalizedId = invoiceId?.toLowerCase();
+     71|     const scope = kind === 'pay' ? `pay:${normalizedId ?? ''}` : `crea…
+ ❯ src/arcproof/__tests__/submissions.test.ts:9:108
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/7]⎯
+
+ FAIL  src/arcproof/__tests__/submissions.test.ts > Centralized wallet submission registry (offline) > blocks another payer on the same outstanding invoice
+Error: Saved submissions are unreadable. New sends are disabled; inspect wallet history without deleting old records.
+ ❯ beginSubmission2 src/arcproof/submissions.ts:69:33
+     67|     assertWritesEnabled(context);
+     68|     refreshFromStorage();
+     69|     if (storageReadError) throw new Error(storageReadError);
+       |                                 ^
+     70|     const normalizedId = invoiceId?.toLowerCase();
+     71|     const scope = kind === 'pay' ? `pay:${normalizedId ?? ''}` : `crea…
+ ❯ src/arcproof/__tests__/submissions.test.ts:10:98
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/7]⎯
+
+ FAIL  src/arcproof/__tests__/submissions.test.ts > Centralized wallet submission registry (offline) > releases an explicit rejected request only when finished
+Error: Saved submissions are unreadable. New sends are disabled; inspect wallet history without deleting old records.
+ ❯ beginSubmission2 src/arcproof/submissions.ts:69:33
+     67|     assertWritesEnabled(context);
+     68|     refreshFromStorage();
+     69|     if (storageReadError) throw new Error(storageReadError);
+       |                                 ^
+     70|     const normalizedId = invoiceId?.toLowerCase();
+     71|     const scope = kind === 'pay' ? `pay:${normalizedId ?? ''}` : `crea…
+ ❯ src/arcproof/__tests__/submissions.test.ts:11:102
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/7]⎯
+
+ FAIL  src/arcproof/__tests__/submissions.test.ts > Centralized wallet submission registry (offline) > retains an uncertain wallet outcome lock
+Error: Saved submissions are unreadable. New sends are disabled; inspect wallet history without deleting old records.
+ ❯ beginSubmission2 src/arcproof/submissions.ts:69:33
+     67|     assertWritesEnabled(context);
+     68|     refreshFromStorage();
+     69|     if (storageReadError) throw new Error(storageReadError);
+       |                                 ^
+     70|     const normalizedId = invoiceId?.toLowerCase();
+     71|     const scope = kind === 'pay' ? `pay:${normalizedId ?? ''}` : `crea…
+ ❯ src/arcproof/__tests__/submissions.test.ts:12:86
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/7]⎯
+
+ FAIL  src/arcproof/__tests__/submissions.test.ts > Centralized wallet submission registry (offline) > locks account-scoped creation across request repetitions
+Error: Saved submissions are unreadable. New sends are disabled; inspect wallet history without deleting old records.
+ ❯ beginSubmission2 src/arcproof/submissions.ts:69:33
+     67|     assertWritesEnabled(context);
+     68|     refreshFromStorage();
+     69|     if (storageReadError) throw new Error(storageReadError);
+       |                                 ^
+     70|     const normalizedId = invoiceId?.toLowerCase();
+     71|     const scope = kind === 'pay' ? `pay:${normalizedId ?? ''}` : `crea…
+ ❯ src/arcproof/__tests__/submissions.test.ts:13:86
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[6/7]⎯
+
+ FAIL  src/arcproof/__tests__/submissions.test.ts > Centralized wallet submission registry (offline) > allows review after a specifically reconciled reverted payment
+AssertionError: expected [Function] to not throw an error but 'Error: Saved submissions are unreadab…' was thrown
+
+- Expected:
+undefined
+
++ Received:
+"Error: Saved submissions are unreadable. New sends are disabled; inspect wallet history without deleting old records."
+
+ ❯ src/arcproof/__tests__/submissions.test.ts:16:272
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[7/7]⎯
+
+
+ Test Files  1 failed | 28 passed (29)
+      Tests  7 failed | 452 passed (459)
+   Start at  22:55:06
+   Duration  6.34s (transform 4.06s, setup 0ms, import 19.04s, tests 8.45s, environment 11.08s)
+

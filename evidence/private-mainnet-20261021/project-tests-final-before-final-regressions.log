@@ -1,0 +1,9 @@
+
+ RUN  v4.1.12 /workspace/shared/arcproof-phase2
+
+
+ Test Files  29 passed (29)
+      Tests  459 passed (459)
+   Start at  22:55:28
+   Duration  5.58s (transform 2.81s, setup 0ms, import 14.17s, tests 6.22s, environment 10.76s)
+

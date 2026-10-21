@@ -12,6 +12,7 @@
 import type { VerificationResult, VerificationDiagnostics } from './receiptVerifier';
 import type { DeploymentRecord } from './manifest';
 import { formatAmountDisplay } from './amountParser';
+import { classifyDeployment } from './networkPolicy';
 
 export interface ReceiptExportRecord {
   /** New builders emit these; optional only for compatibility with legacy records. */
@@ -50,8 +51,8 @@ export interface ReceiptExportRecord {
   paidBlockNumber: string | null;
   blockHash: string | null;
   verificationStatus: string;
-  /** 'fixture' | 'testnet' | 'unknown' */
-  mode: 'fixture' | 'testnet' | 'unknown';
+  /** Network identity requires the application's exact trusted deployment record. */
+  mode: 'fixture' | 'testnet' | 'mainnet' | 'unknown';
   amountDisplay: string | null;
   controlled_demo?: boolean;
   settlementEvidence?: VerificationResult['settlementEvidence'];
@@ -213,6 +214,9 @@ export function buildReceiptExport(
   const scopeMatches = !hasDiagnostics || !!scope && scope.chainId === deployment.chainId &&
     scope.deploymentId === deployment.deploymentId && same(scope.contract, deployment.contractAddress) &&
     same(scope.invoiceId, invoiceId) && same(scope.transactionHash, txHash);
+  const classified = classifyDeployment(deployment);
+  const mode = !scopeMatches ? 'unknown' : classified === 'fixture' ? (isFixture ? 'fixture' : 'unknown')
+    : classified === 'mainnet' ? (hasDiagnostics && result.status === 'VERIFIED' && result.verified ? 'mainnet' : 'unknown') : classified;
   const observedReceipt = scopeMatches ? result.observedReceipt ?? null : null;
   const observedInvoice = scopeMatches ? result.observedInvoice ?? null : null;
   const verified = scopeMatches && result.status === 'VERIFIED' && result.verified;
@@ -253,7 +257,7 @@ export function buildReceiptExport(
     blockHash: hasDiagnostics ? observedReceipt?.blockHash ?? null : result.blockHash,
     verificationStatus: status,
     ...(evidence ? { settlementEvidence: evidence } : {}),
-    mode: isFixture ? 'fixture' : 'testnet',
+    mode,
     controlled_demo: !!factPayer && !!factMerchant && factPayer.toLowerCase() === factMerchant.toLowerCase(),
     amountDisplay: amount === null ? null : formatAmountDisplay(BigInt(amount)),
   };

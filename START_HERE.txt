@@ -1,3 +1,5 @@
+2026-10-21 当前阶段说明：用户已明确取消本阶段无法核对的18小时上限，授权既有Studio私有同步和私有主网适配；仍不部署、不签名、不转账、不公开。先读 AGENTS.md 顶部最新范围与 docs/PRIVATE_MAINNET_PHASE_20261021.md。下文历史18小时限制不覆盖该后续授权。
+
 请按本包执行 ArcProof 项目。你是唯一 Root，负责进度、独立验收和交付，不要再把选项目或技术路线交还给我选择。
 
 先阅读 AGENTS.md、STATUS.md 和 docs/01_VERIFIED_REVIEW.md、docs/02_PRODUCT_PRD.md、docs/CONTRACT_SPEC.md、docs/TEST_MATRIX.md、docs/03_DOT_EXECUTION.md。

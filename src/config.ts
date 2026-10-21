@@ -4,13 +4,15 @@
  */
 
 import { http, createConfig } from 'wagmi'
-import { ARC_TESTNET } from './arcproof/testnet'
+import { BUILD_NETWORK } from './arcproof/networkPolicy'
 import { injected } from 'wagmi/connectors'
 
 export const config = createConfig({
-  chains: [ARC_TESTNET], // Dedicated testnet build. No mainnet/ENS transport.
-  connectors: [injected()],
+  chains: [BUILD_NETWORK.chain], // Fixed allowlisted build network; no URL-selected transport.
+  connectors: BUILD_NETWORK.writesEnabled ? [injected()] : [],
+  multiInjectedProviderDiscovery: BUILD_NETWORK.writesEnabled,
+  storage: BUILD_NETWORK.writesEnabled ? undefined : null,
   transports: {
-    [ARC_TESTNET.id]: http(ARC_TESTNET.rpcUrls.default.http[0]),
+    [BUILD_NETWORK.chain.id]: http(BUILD_NETWORK.chain.rpcUrls.default.http[0], { retryCount: 0, timeout: 15_000 }),
   },
 })

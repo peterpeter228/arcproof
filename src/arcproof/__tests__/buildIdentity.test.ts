@@ -9,6 +9,11 @@ describe('candidate provenance is never substituted for a source commit', () => 
   it('rejects malformed identities and timestamps', () => {
     expect(normalizeBuildIdentity({ sourceCommit: 'a'.repeat(40), verifiedBaseCommit: 'HEAD', sourceSnapshotSha256: 'latest', builtAtUTC: '2026-99-99T00:00:00.000Z' })).toEqual(normalizeBuildIdentity(null));
   });
+  it('binds an allowlisted fixed network without inferring live acceptance', () => {
+    expect(normalizeBuildIdentity({ networkKey: 'mainnet' }).networkKey).toBe('mainnet');
+    expect(normalizeBuildIdentity({ networkKey: 'https://untrusted.rpc' }).networkKey).toBeNull();
+    expect(normalizeBuildIdentity({ networkKey: 'mainnet' }).sourceCommit).toBeNull();
+  });
   it('keeps verified base distinct from modified candidate input identity', () => {
     const identity = normalizeBuildIdentity({ sourceCommit: 'a'.repeat(40), verifiedBaseCommit: 'b'.repeat(40), sourceSnapshotSha256: 'c'.repeat(64), builtAtUTC: '2026-10-21T12:34:56.000Z' });
     expect(identity.sourceCommit).toBeNull(); expect(identity.verifiedBaseCommit).toBe('b'.repeat(40)); expect(identity.sourceState).toBe('candidate'); expect(identity.sourceSnapshotSha256).toBe('c'.repeat(64));

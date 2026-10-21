@@ -1,0 +1,28 @@
+{
+  "testnet": {
+    "manifestSha256": "0353c485587368c529031d541717678d3a11e9b2d59ebb76c518189e2f952280",
+    "identity": {
+      "networkKey": "testnet",
+      "sourceCommit": null,
+      "verifiedBaseCommit": "4deb74cce889ca122ef33903d27c2be10a1c437e",
+      "sourceSnapshotSha256": "8df6b66d77c12e99b268a19c0ed6f88f33336b24c177fb0fdda88834ba631432",
+      "builtAtUTC": "2026-10-21T23:26:45.118Z",
+      "sourceState": "candidate"
+    },
+    "outputCount": 84,
+    "mismatches": []
+  },
+  "mainnet": {
+    "manifestSha256": "44d745e7e141b8a7b57fbd3b88f3f9168b52f3088bd1f73bbeb1d55d3b82cdb3",
+    "identity": {
+      "networkKey": "mainnet",
+      "sourceCommit": null,
+      "verifiedBaseCommit": "4deb74cce889ca122ef33903d27c2be10a1c437e",
+      "sourceSnapshotSha256": "8df6b66d77c12e99b268a19c0ed6f88f33336b24c177fb0fdda88834ba631432",
+      "builtAtUTC": "2026-10-21T23:27:02.757Z",
+      "sourceState": "candidate"
+    },
+    "outputCount": 84,
+    "mismatches": []
+  }
+}

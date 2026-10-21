@@ -1,0 +1,4 @@
+$ bash scripts/check.sh
+timeout: failed to run command ‘bun’: No such file or directory
+timeout: failed to run command ‘bun’: No such file or directory
+error: script "check" exited with code 1

@@ -62,6 +62,12 @@ describe('ENTRY-01 actual root rendering, offline DOM only', () => {
     expect(host.textContent).not.toContain('OLD_ROUTE_FAILURE');
     expect(calls.verify).toHaveBeenCalledTimes(2); expect(calls.wallet).not.toHaveBeenCalled(); expect(calls.send).not.toHaveBeenCalled();
   });
+  it('rejects duplicate or malformed payment tx query before wallet hooks', () => {
+    const invoice = `0x${'a'.repeat(64)}`, tx = `0x${'b'.repeat(64)}`;
+    mount(`#/pay/5042002/${TESTNET_DEPLOYMENT.deploymentId}/${invoice}?tx=${tx}&tx=${tx}`);
+    expect(host.textContent).toContain('Invalid transaction hash');
+    expect(host.textContent).not.toContain('Connect wallet'); assertNoActions();
+  });
   it('rejects malformed tx for a known deployment before mounting verification', () => {
     const invoice = `0x${'a'.repeat(64)}`;
     mount(`#/receipt/5042002/${TESTNET_DEPLOYMENT.deploymentId}/${invoice}?tx=bad`);

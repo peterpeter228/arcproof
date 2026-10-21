@@ -1,0 +1,59 @@
+{
+  "schema": "arcproof-studio-browser-fix-v1",
+  "recordedAtUTC": "2026-10-21T23:32:24.754188+00:00",
+  "projectUrl": "https://studio.arc.io/app/2dbdda0d-1b70-408b-ae23-cccb8a4b8753?thread=12185290-60f7-4446-9e99-5ca51e8c30b0",
+  "packetSha256": "c8ee8f480b1ab4409d589316d4b258013c3ad1986eb7c1bc31b44ce7aa7827d5",
+  "candidateSourceSnapshotSha256": "8df6b66d77c12e99b268a19c0ed6f88f33336b24c177fb0fdda88834ba631432",
+  "changedFiles": 2,
+  "exportReadback": {
+    "matched": 87,
+    "different": 0,
+    "missing": 0,
+    "evidence": "studio-browser-fix-readback.json"
+  },
+  "studioTests": {
+    "testFiles": 29,
+    "passed": 462,
+    "failed": 0,
+    "typecheckExitCode": 0,
+    "screenshot": "studio-browser-fix-tests-cropped.png"
+  },
+  "renderedEvidence": {
+    "fixedNetwork": "testnet",
+    "environmentChain": "Arc Testnet / 5042002; testnet only; mainnet disabled",
+    "sourceCommit": null,
+    "verifiedBaseCommit": null,
+    "displayedStartupSourceSnapshotSha256": "fd6b1741abc8216e3e1d46ba2fa7196a7ba0090bf54796f1eb6246a74299586a",
+    "displayedStartupBuildUTC": "2026-10-21T23:12:24.594Z",
+    "screenshot": "studio-browser-fix-evidence-cropped.png"
+  },
+  "currentExportDeclaredInputs": {
+    "sha256": "556de0955f9aee7186664aadd72c51bc6e82339d24747779bf64d6b694cfd845",
+    "count": 146
+  },
+  "limits": [
+    "Historical HMR startup metadata staleness was reproduced and corrected with a content-preserving config touch. Current displayed hash matches the independently exported 146-input workspace snapshot. Future HMR may again require normal watcher metadata refresh; this is not production host attestation.",
+    "Preserved Studio extras alter whole-workspace identity relative to parent candidate.",
+    "This Studio browser remains testnet. Parent owns separate mainnet browser results.",
+    "No deployment, signature, transfer, publication, Studio AI agent or new credentials."
+  ],
+  "safeArtifacts": [
+    "studio-browser-fix-readback.json",
+    "studio-browser-fix-report.json",
+    "studio-browser-fix-tests-cropped.png",
+    "studio-browser-fix-evidence-cropped.png",
+    "studio-browser-fix-refreshed-identity-cropped.png"
+  ],
+  "doNotShare": "Raw export contains .env/runtime logs; raw screenshots contain account context. Do not commit or send to Argon.",
+  "metadataRefresh": {
+    "action": "Content-preserving touch of existing vite.config.ts; rely only on normal watcher",
+    "performedAtUTC": "2026-10-21T23:33:55.838071Z",
+    "contentHashUnchanged": true,
+    "contentSha256": "875d5eac007487c9632ed76cc8a99303ce0cd22e01c46895efc46eb68743830a",
+    "result": "Normal existing Vite watcher refreshed metadata successfully",
+    "observedSourceSnapshotSha256": "556de0955f9aee7186664aadd72c51bc6e82339d24747779bf64d6b694cfd845",
+    "observedBuildUTC": "2026-10-21T23:33:55.957Z",
+    "matchesExportedDeclaredInputs": true,
+    "screenshot": "studio-browser-fix-refreshed-identity-cropped.png"
+  }
+}

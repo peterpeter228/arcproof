@@ -10,7 +10,9 @@ import { PayScreen } from './components/arcproof/PayScreen';
 import { ReceiptScreen } from './components/arcproof/ReceiptScreen';
 import { EvidenceScreen } from './components/arcproof/EvidenceScreen';
 import { TestnetDashboard, TestnetPayScreen, TestnetReceiptScreen } from './components/arcproof/TestnetScreens';
-import { TESTNET_MANIFEST, isBytes32 } from './arcproof/testnet';
+import { isBytes32 } from './arcproof/testnet';
+import { BUILD_NETWORK } from './arcproof/networkPolicy';
+import { NetworkUnavailable } from './components/arcproof/NetworkUnavailable';
 import { resolveDeployment } from './arcproof/manifest';
 
 import { DashboardScreen } from './components/arcproof/DashboardScreen';
@@ -37,19 +39,24 @@ export default function App() {
   let effectiveTab: NavTab = route.screen === 'dashboard' ? 'dashboard' : route.screen === 'demo' ? 'demo' : route.screen === 'evidence' ? 'evidence' : 'verify';
   let hideWallet = true;
 
-  if (route.screen === 'pay') {
-    const deployment = resolveDeployment(TESTNET_MANIFEST, route.chainId!, route.deploymentId!);
-    hideWallet = !(deployment && route.invoiceId && isBytes32(route.invoiceId));
+  if (BUILD_NETWORK.key === 'mainnet' && route.screen !== 'demo' && route.screen !== 'evidence' && route.screen !== 'invalid') {
+    content = <NetworkUnavailable routeChainId={route.chainId} routeDeploymentId={route.deploymentId} />;
+    hideWallet = true;
+  } else if (route.screen === 'pay') {
+    const deployment = resolveDeployment(BUILD_NETWORK.manifest, route.chainId!, route.deploymentId!);
+    const validPay = deployment && route.invoiceId && isBytes32(route.invoiceId) && (route.txHash === undefined || isBytes32(route.txHash));
+    hideWallet = !validPay;
     content = (
-      deployment && route.invoiceId && isBytes32(route.invoiceId) ? <TestnetPayScreen key={`${route.chainId}:${route.deploymentId}:${route.invoiceId}`} invoiceId={route.invoiceId} /> : <PayScreen
+      validPay ? <TestnetPayScreen key={`${route.chainId}:${route.deploymentId}:${route.invoiceId}`} invoiceId={route.invoiceId!} /> : <PayScreen
         chainId={route.chainId}
         deploymentId={route.deploymentId}
         invoiceId={route.invoiceId}
+        txHash={route.txHash}
       />
     );
     effectiveTab = 'dashboard'; // no specific tab
   } else if (route.screen === 'receipt') {
-    const deployment = resolveDeployment(TESTNET_MANIFEST, route.chainId!, route.deploymentId!);
+    const deployment = resolveDeployment(BUILD_NETWORK.manifest, route.chainId!, route.deploymentId!);
     content = (
       deployment && route.invoiceId && isBytes32(route.invoiceId) && (route.txHash === undefined || isBytes32(route.txHash)) ? <TestnetReceiptScreen key={`${route.chainId}:${route.deploymentId}:${route.invoiceId}:${route.txHash ?? ""}`} invoiceId={route.invoiceId} txHash={route.txHash} /> : <ReceiptScreen
         chainId={route.chainId}
@@ -82,7 +89,7 @@ export default function App() {
   }
 
   return (
-    <Layout activeTab={effectiveTab} onTabChange={handleTabChange} hideWallet={hideWallet} hideSavedActivity={route.screen === 'demo'}>
+    <Layout activeTab={effectiveTab} onTabChange={handleTabChange} hideWallet={hideWallet} hideSavedActivity={route.screen === 'demo' || BUILD_NETWORK.key === 'mainnet'}>
       {content}
     </Layout>
   );

@@ -1,0 +1,19 @@
+{
+  "requested_model": "gemini-4-argon-high",
+  "provider": "api.xiaoyiapi.xyz",
+  "started_at_utc": "2026-10-21T22:47:16.030650+00:00",
+  "request_bytes": 143907,
+  "automatic_retry": false,
+  "request_sha256": "11f42d8f253f6815c9b49406ba96fdf08f4518eb3c87e36e593a0e7ea41801a1",
+  "approval_message_id": "Sentinel_f512248b01208191a4f4cc252be831fd",
+  "http_status": 200,
+  "request_id": "b2fd0b72-b758-4c59-996e-0703f178e6db",
+  "duration_seconds": 69.454,
+  "model_version": "gemini-4-argon",
+  "usage": {
+    "promptTokenCount": 37902,
+    "candidatesTokenCount": 4262,
+    "totalTokenCount": 42164
+  },
+  "review_characters": 16128
+}
