@@ -17,7 +17,8 @@ export function parseHash(hash: string): HashRoute {
   const params = new URLSearchParams(question < 0 ? '' : path.slice(question + 1));
   const parts = pathname.split('/');
   if (parts[0] === '' && (parts[1] === 'pay' || parts[1] === 'receipt')) {
-    const chainId = /^[0-9]+$/.test(parts[2] ?? '') ? Number(parts[2]) : NaN;
+    // Canonical decimal only: leading zeros are a different link, not the same chain.
+    const chainId = /^[1-9][0-9]*$/.test(parts[2] ?? '') ? Number(parts[2]) : NaN;
     return {
       screen: parts[1],
       chainId: Number.isSafeInteger(chainId) ? chainId : undefined,

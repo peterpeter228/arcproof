@@ -219,16 +219,19 @@ export function buildReceiptExport(
     : classified === 'mainnet' ? (hasDiagnostics && result.status === 'VERIFIED' && result.verified ? 'mainnet' : 'unknown') : classified;
   const observedReceipt = scopeMatches ? result.observedReceipt ?? null : null;
   const observedInvoice = scopeMatches ? result.observedInvoice ?? null : null;
-  const verified = scopeMatches && result.status === 'VERIFIED' && result.verified;
+  // A verifier result can only certify a deployment the application itself trusts.
+  const untrustedTarget = scopeMatches && mode === 'unknown' && result.status === 'VERIFIED';
+  const verified = scopeMatches && mode !== 'unknown' && result.status === 'VERIFIED' && result.verified;
   const evidence = verified ? result.settlementEvidence ?? null : null;
-  const status = scopeMatches ? result.status : 'PENDING';
-  const message = scopeMatches ? result.message : 'Verification result belongs to another request; no observations exported.';
+  const status = !scopeMatches ? 'PENDING' : untrustedTarget ? 'UNKNOWN_DEPLOYMENT' : result.status;
+  const message = !scopeMatches ? 'Verification result belongs to another request; no observations exported.'
+    : untrustedTarget ? 'Deployment is not in the trusted registry; verification evidence is not exported.' : result.message;
   const amount = hasDiagnostics ? observedInvoice?.amountNative ?? null : amountNative?.toString() ?? null;
   const factPayer = hasDiagnostics ? observedInvoice?.payer ?? null : payer;
   const factMerchant = hasDiagnostics ? observedInvoice?.merchant ?? null : merchant;
   return {
     schemaVersion: '1.2',
-    reasonCode: scopeMatches ? result.reasonCode ?? result.status : 'PENDING',
+    reasonCode: !scopeMatches ? 'PENDING' : untrustedTarget ? 'UNKNOWN_DEPLOYMENT' : result.reasonCode ?? result.status,
     message,
     checks: scopeMatches ? result.checks ?? [] : [{ id: 'export_scope', status: 'failed', reasonCode: 'PENDING', message }],
     readStartedAt: scopeMatches ? result.readStartedAt ?? null : null,

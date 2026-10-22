@@ -1,5 +1,6 @@
 import { formatUnits } from 'viem';
 import { RECEIPT_CSV_IMPORT_NOTICE, type ReceiptExportRecord } from '../../arcproof/exportUtils';
+import { receiptCurrencyLabel } from '../../arcproof/receiptCurrency';
 
 function readTime(milliseconds: number | null | undefined): string {
   if (milliseconds == null || !Number.isSafeInteger(milliseconds)) return 'Unknown';
@@ -9,6 +10,7 @@ function readTime(milliseconds: number | null | undefined): string {
 
 /** Display and downloads share this exact record. Unknown is not zero. */
 export function ReceiptFacts({ record }: { record: ReceiptExportRecord }) {
+  const currency = receiptCurrencyLabel(record);
   let paidAt = 'Unknown';
   if (record.paidAt && /^\d+$/.test(record.paidAt)) {
     const milliseconds = Number(record.paidAt) * 1000;
@@ -17,7 +19,7 @@ export function ReceiptFacts({ record }: { record: ReceiptExportRecord }) {
     }
   }
   const fee = record.gasFeeNative != null && /^\d+$/.test(record.gasFeeNative)
-    ? `${formatUnits(BigInt(record.gasFeeNative), 18)} test USDC` : 'Unknown (not available from this receipt)';
+    ? `${formatUnits(BigInt(record.gasFeeNative), 18)} ${currency}` : 'Unknown (not available from this receipt)';
   const evidence = record.verificationVerified === false ? undefined : record.verifiedEvidence ?? record.settlementEvidence;
   const hasDiagnostics = record.schemaVersion === '1.2';
   // Schema version describes the envelope, not how its values were obtained.
@@ -36,7 +38,7 @@ export function ReceiptFacts({ record }: { record: ReceiptExportRecord }) {
       {legacyFacts ? 'Legacy caller-supplied values: provenance is not established by an identity-bound RPC snapshot.' : 'Provenance unavailable: these values have no established identity-bound RPC observation basis.'}
     </p>}
     {hasDiagnostics && <p className="text-sm font-semibold">{factLabel} invoice amount</p>}
-    <p className="receipt-amount font-semibold break-words" data-receipt-field="amountDisplay">{record.amountDisplay === null ? 'Unknown amount' : `${record.amountDisplay} test USDC`}</p>
+    <p className="receipt-amount font-semibold break-words" data-receipt-field="amountDisplay">{record.amountDisplay === null ? 'Unknown amount' : `${record.amountDisplay} ${currency}`}</p>
     <dl className="space-y-3 text-sm">
       <div><dt className="font-semibold">Merchant</dt><dd className="font-mono break-all" data-receipt-field="merchant">{record.merchant ?? 'Unknown'}</dd></div>
       <div><dt className="font-semibold">Payer</dt><dd className="font-mono break-all" data-receipt-field="payer">{record.payer ?? 'Unknown'}</dd></div>

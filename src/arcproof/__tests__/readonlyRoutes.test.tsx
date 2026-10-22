@@ -44,7 +44,7 @@ describe('ENTRY-01 actual root rendering, offline DOM only', () => {
   it('starts empty routes in read-only verification rather than the wallet dashboard', () => {
     mount('#'); expect(host.textContent).not.toContain('Connect wallet'); assertNoActions();
   });
-  it.each(['#/nonsense', '#/pay', '#/pay/1/unknown/0x1234', '#/receipt/5042002/unknown/0x1234', '#/pay//5042002/anything/id', '#/demo/extra'])('fails closed for %s', hash => {
+  it.each(['#/nonsense', '#/pay', '#/pay/1/unknown/0x1234', '#/receipt/5042002/unknown/0x1234', '#/pay//5042002/anything/id', '#/demo/extra', `#/pay/0005042002/${TESTNET_DEPLOYMENT.deploymentId}/0x${'a'.repeat(64)}`])('fails closed for %s', hash => {
     mount(hash); expect(host.textContent).toMatch(/unavailable/i); expect(host.textContent).not.toContain('Connect wallet'); assertNoActions();
   });
   it('remounts receipt identity and discards late prior-route failures', async () => {
