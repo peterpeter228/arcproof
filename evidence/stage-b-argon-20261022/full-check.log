@@ -1,0 +1,9 @@
+$ bash scripts/check.sh
+$ oxlint --type-aware src scripts; s=$?; oxlint .; exit $((s>0?s:$?))
+src/arcproof/__tests__/argonExportDiagnostics.test.ts:40:9: error typescript(no-unsafe-assignment): Unsafe assignment of an any value. help: Assigned value has type `any`, so the target is also inferred as `any`. Use a safely typed value or `unknown`, and narrow it before use.
+src/arcproof/__tests__/argonExportDiagnostics.test.ts:40:57: error typescript(no-unsafe-member-access): Unsafe member access [0] on an `any` value.
+src/arcproof/__tests__/argonExportDiagnostics.test.ts:41:15: error typescript(no-unsafe-member-access): Unsafe member access .verifiedAt on an `any` value.
+src/arcproof/__tests__/argonExportDiagnostics.test.ts:42:15: error typescript(no-unsafe-member-access): Unsafe member access .amountNative on an `any` value.
+error: script "lint" exited with code 1
+$ tsc --noEmit
+error: script "check" exited with code 1

@@ -13,6 +13,7 @@ import {
 import { deriveInvoiceIds } from '../invoiceId';
 import { FIXTURE_MANIFEST, type DeploymentRecord } from '../manifest';
 import type { VerificationResult } from '../receiptVerifier';
+import { TESTNET_DEPLOYMENT } from '../testnet';
 
 const CHAIN_ID = 2482601649;
 const CONTRACT = '0xaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa' as `0x${string}`;
@@ -70,9 +71,10 @@ describe('T24 — nonce pagination', () => {
 });
 
 describe('T24 — buildReceiptExport integer strings', () => {
+  // Formatting controls use a trusted deployment; unknown targets redact payment facts.
   it('amountNative is a string, not a number', () => {
     const r = buildReceiptExport(
-      DEP, '0xabc', '0xdeadbeef',
+      TESTNET_DEPLOYMENT, '0xabc', '0xdeadbeef',
       200_000_000_000_000_000n,
       '0x1111111111111111111111111111111111111111',
       '0x2222222222222222222222222222222222222222',
@@ -83,7 +85,7 @@ describe('T24 — buildReceiptExport integer strings', () => {
     expect(r.amountNative).toBe('200000000000000000');
   });
   it('paidAt is a string', () => {
-    const r = buildReceiptExport(DEP, '0xabc', '0xdeadbeef',
+    const r = buildReceiptExport(TESTNET_DEPLOYMENT, '0xabc', '0xdeadbeef',
       200_000_000_000_000_000n, '0x1111111111111111111111111111111111111111',
       '0x2222222222222222222222222222222222222222',
       1729382400n, 1000n, RESULT_OK, false);
@@ -91,7 +93,7 @@ describe('T24 — buildReceiptExport integer strings', () => {
     expect(r.paidAt).toBe('1729382400');
   });
   it('paidBlockNumber is a string', () => {
-    const r = buildReceiptExport(DEP, '0xabc', '0xdeadbeef',
+    const r = buildReceiptExport(TESTNET_DEPLOYMENT, '0xabc', '0xdeadbeef',
       200_000_000_000_000_000n, '0x1111111111111111111111111111111111111111',
       '0x2222222222222222222222222222222222222222',
       1729382400n, 1000n, RESULT_OK, false);
@@ -99,7 +101,7 @@ describe('T24 — buildReceiptExport integer strings', () => {
     expect(r.paidBlockNumber).toBe('1000');
   });
   it('paymentLogIndex is stored as number', () => {
-    const r = buildReceiptExport(DEP, '0xabc', '0xdeadbeef',
+    const r = buildReceiptExport(TESTNET_DEPLOYMENT, '0xabc', '0xdeadbeef',
       200_000_000_000_000_000n, '0x1111111111111111111111111111111111111111',
       '0x2222222222222222222222222222222222222222',
       1729382400n, 1000n, RESULT_OK, false);
@@ -117,7 +119,7 @@ describe('T24 — buildReceiptExport integer strings', () => {
 
 describe('T24 — exportReceiptsJson', () => {
   it('produces valid JSON', () => {
-    const r = buildReceiptExport(DEP, '0xabc', null,
+    const r = buildReceiptExport(TESTNET_DEPLOYMENT, '0xabc', null,
       200_000_000_000_000_000n, null, null, null, null,
       { ...RESULT_OK, paymentLogIndex: null, blockHash: null }, false);
     const json = exportReceiptsJson([r]);
@@ -126,7 +128,7 @@ describe('T24 — exportReceiptsJson', () => {
     expect(parsed).toBeDefined();
   });
   it('importedVerified is always false in export', () => {
-    const r = buildReceiptExport(DEP, '0xabc', null,
+    const r = buildReceiptExport(TESTNET_DEPLOYMENT, '0xabc', null,
       200_000_000_000_000_000n, null, null, null, null,
       { ...RESULT_OK, paymentLogIndex: null, blockHash: null }, false);
     const json = exportReceiptsJson([r]);
@@ -134,7 +136,7 @@ describe('T24 — exportReceiptsJson', () => {
     expect(parsed[0].importedVerified).toBe(false);
   });
   it('amountNative remains a string in JSON (no number coercion)', () => {
-    const r = buildReceiptExport(DEP, '0xabc', null,
+    const r = buildReceiptExport(TESTNET_DEPLOYMENT, '0xabc', null,
       200_000_000_000_000_000n, null, null, null, null,
       { ...RESULT_OK, paymentLogIndex: null, blockHash: null }, false);
     const json = exportReceiptsJson([r]);
@@ -209,7 +211,7 @@ describe('T24 — exportReceiptsCsv', () => {
   it('REGRESSION: amountNative integer string is NOT tab-prefixed', () => {
     // Bug: if csvCell were used for amountNative, a value like '2e+17' or a tab-prefixed
     // string would corrupt the numeric export. Fix: csvNumericCell emits pure digits verbatim.
-    const r = buildReceiptExport(DEP, '0xabc', null,
+    const r = buildReceiptExport(TESTNET_DEPLOYMENT, '0xabc', null,
       200_000_000_000_000_000n, null, null, null, null,
       { ...RESULT_OK, paymentLogIndex: null, blockHash: null }, false);
     const csv = exportReceiptsCsv([r]);
@@ -223,7 +225,7 @@ describe('T24 — exportReceiptsCsv', () => {
   });
 
   it('paidAt integer string is NOT tab-prefixed', () => {
-    const r = buildReceiptExport(DEP, '0xabc', null,
+    const r = buildReceiptExport(TESTNET_DEPLOYMENT, '0xabc', null,
       200_000_000_000_000_000n, null, null, 1729382400n, 1000n,
       { ...RESULT_OK, paymentLogIndex: null, blockHash: null }, false);
     const csv = exportReceiptsCsv([r]);
@@ -232,7 +234,7 @@ describe('T24 — exportReceiptsCsv', () => {
   });
 
   it('paidBlockNumber integer string is NOT tab-prefixed', () => {
-    const r = buildReceiptExport(DEP, '0xabc', null,
+    const r = buildReceiptExport(TESTNET_DEPLOYMENT, '0xabc', null,
       200_000_000_000_000_000n, null, null, 1729382400n, 1000n,
       { ...RESULT_OK, paymentLogIndex: null, blockHash: null }, false);
     const csv = exportReceiptsCsv([r]);
@@ -241,7 +243,7 @@ describe('T24 — exportReceiptsCsv', () => {
   });
 
   it('large integer in amountNative stays as exact string (no exponential notation)', () => {
-    const r = buildReceiptExport(DEP, '0xabc', null,
+    const r = buildReceiptExport(TESTNET_DEPLOYMENT, '0xabc', null,
       200_000_000_000_000_000n, null, null, null, null,
       { ...RESULT_OK, paymentLogIndex: null, blockHash: null }, false);
     const csv = exportReceiptsCsv([r]);

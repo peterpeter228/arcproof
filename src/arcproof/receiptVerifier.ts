@@ -460,6 +460,7 @@ export async function verifyReceipt(
   if (!/^0x[0-9a-fA-F]{40}$/.test(onchain.payer) || !/^0x[0-9a-fA-F]{40}$/.test(onchain.merchant) ||
       addrEq(onchain.payer, zeroAddress) || addrEq(onchain.merchant, zeroAddress) ||
       addrEq(onchain.payer, deployment.contractAddress) || addrEq(onchain.merchant, deployment.contractAddress) ||
+      onchain.expiresAt <= 0n || onchain.expiresAt > 8_640_000_000_000n ||
       onchain.paidAt >= onchain.expiresAt)
     return fail('WRONG_EVENT_DATA', 'Paid invoice has an impossible sender, recipient or expiry relationship.');
 

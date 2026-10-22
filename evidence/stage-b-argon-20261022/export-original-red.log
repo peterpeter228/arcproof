@@ -1,0 +1,554 @@
+
+ RUN  v4.1.12 /workspace/scratch/c01bd6fe117d/arcproof-stage-b-20261022/source
+
+ ❯ src/arcproof/__tests__/argonExportDiagnostics.test.ts (22 tests | 19 failed) 39ms
+     × unknown deployment redacts VERIFIED 13ms
+     × unknown deployment redacts UNVERIFIED_FINALITY 2ms
+     × unknown deployment redacts INVOICE_NOT_PAID 1ms
+     × unknown deployment redacts FAILED 1ms
+     × unknown deployment redacts PENDING 1ms
+     × registered fixture redacts populated diagnostics 2ms
+     × fixture without flag redacts populated diagnostics 2ms
+     × trusted identity marked synthetic redacts populated diagnostics 1ms
+     × unknown synthetic redacts populated diagnostics 2ms
+     × legacy fallback cannot restore blocked payment facts ({"deploymentId":"0xdba9a4da8a5b2a834b451f595653dd3cb4c3e51addb2d8df8e0b18312f382d2d","chainId":5042002,"contractAddress":"0x9999999999999999999999999999999999999999","runtimeCodeHash":"0xa36ede95ccce8289224d3bbabe3a2445a888c44e763a04ac4b6f4f2f03dd344c","label":"ArcProof testnet prototype","settlementPolicy":{"id":"arc-testnet-native-eip7708-finalized-v1","chainId":5042002,"emitter":"0xfffffffffffffffffffffffffffffffffffffffe","decimals":18,"finality":"rpc-finalized-header"},"deployedAt":"2026-10-20T09:48:47Z"}, false) 1ms
+     × legacy fallback cannot restore blocked payment facts ({"deploymentId":"fixture-arc-testnet-001","chainId":2482601649,"contractAddress":"0x0000000000000000000000000000000000000001","runtimeCodeHash":"0x0000000000000000000000000000000000000000000000000000000000000001","label":"ArcProof fixture (DEMO ONLY — not deployed)","deployedAt":null}, true) 1ms
+     × legacy fallback cannot restore blocked payment facts ({"deploymentId":"0xdba9a4da8a5b2a834b451f595653dd3cb4c3e51addb2d8df8e0b18312f382d2d","chainId":5042002,"contractAddress":"0x3Dcd2bDD924BCC384Cb39e9e12038e00fde0FA30","runtimeCodeHash":"0xa36ede95ccce8289224d3bbabe3a2445a888c44e763a04ac4b6f4f2f03dd344c","label":"ArcProof testnet prototype","settlementPolicy":{"id":"arc-testnet-native-eip7708-finalized-v1","chainId":5042002,"emitter":"0xfffffffffffffffffffffffffffffffffffffffe","decimals":18,"finality":"rpc-finalized-header"},"deployedAt":"2026-10-20T09:48:47Z"}, true) 1ms
+     × rejects "invalid" rather than throwing or certifying it 1ms
+     × rejects "0.20" rather than throwing or certifying it 0ms
+     × rejects "" rather than throwing or certifying it 1ms
+     × rejects " " rather than throwing or certifying it 0ms
+     × rejects "-1" rather than throwing or certifying it 0ms
+     × rejects "0x10" rather than throwing or certifying it 0ms
+     × rejects "+1" rather than throwing or certifying it 0ms
+
+⎯⎯⎯⎯⎯⎯ Failed Tests 19 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  src/arcproof/__tests__/argonExportDiagnostics.test.ts > Argon ADV01/02: export trust boundaries cover populated diagnostics and legacy inputs > unknown deployment redacts VERIFIED
+AssertionError: expected { schemaVersion: '1.2', …(33) } to match object { verificationVerified: false, …(19) }
+(14 matching properties omitted from actual)
+
+- Expected
++ Received
+
+  {
+-   "amountDisplay": null,
+-   "amountNative": null,
+-   "blockHash": null,
+-   "blockNumber": null,
+-   "controlled_demo": false,
+-   "factsBasis": "unavailable",
+-   "gasFeeNative": null,
+-   "merchant": null,
+-   "observationScope": null,
+-   "observedInvoice": null,
+-   "observedReceipt": null,
+-   "paidAt": null,
+-   "paidBlockNumber": null,
+-   "payer": null,
+-   "paymentLogIndex": null,
+-   "readCompletedAt": null,
+-   "readStartedAt": null,
+-   "source": null,
++   "amountDisplay": "0.20",
++   "amountNative": "200000000000000000",
++   "blockHash": "0xdddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
++   "blockNumber": "55",
++   "controlled_demo": true,
++   "factsBasis": "identity_bound_rpc_observation",
++   "gasFeeNative": "21000",
++   "merchant": "0x1111111111111111111111111111111111111111",
++   "observationScope": {
++     "chainId": 5042002,
++     "contract": "0x9999999999999999999999999999999999999999",
++     "deploymentId": "0xdba9a4da8a5b2a834b451f595653dd3cb4c3e51addb2d8df8e0b18312f382d2d",
++     "invoiceId": "0xaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
++     "transactionHash": "0xbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
++   },
++   "observedInvoice": {
++     "amountNative": "200000000000000000",
++     "merchant": "0x1111111111111111111111111111111111111111",
++     "paidAt": "1700000000",
++     "paidBlockNumber": "55",
++     "payer": "0x1111111111111111111111111111111111111111",
++   },
++   "observedReceipt": {
++     "blockHash": "0xdddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
++     "blockNumber": "55",
++     "blockTimestamp": "1700000000",
++     "effectiveGasPrice": "1",
++     "from": "0x1111111111111111111111111111111111111111",
++     "gasFeeNative": "21000",
++     "gasUsed": "21000",
++     "paymentLogIndex": 2,
++     "status": "success",
++     "to": "0x9999999999999999999999999999999999999999",
++     "transactionHash": "0xbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
++     "transactionIndex": 0,
++   },
++   "paidAt": "1700000000",
++   "paidBlockNumber": "55",
++   "payer": "0x1111111111111111111111111111111111111111",
++   "paymentLogIndex": 2,
++   "readCompletedAt": 1000,
++   "readStartedAt": 900,
++   "source": {
++     "kind": "rpc",
++     "label": "Synthetic diagnostic source",
++   },
+    "verificationVerified": false,
+    "verifiedEvidence": null,
+  }
+
+ ❯ expectNoFacts src/arcproof/__tests__/argonExportDiagnostics.test.ts:33:18
+     31| }
+     32| function expectNoFacts(record: ReceiptExportRecord) {
+     33|   expect(record).toMatchObject({ verificationVerified: false, verified…
+       |                  ^
+     34|     observedReceipt: null, observedInvoice: null, amountNative: null, …
+     35|     paidAt: null, paidBlockNumber: null, blockNumber: null, blockHash:…
+ ❯ src/arcproof/__tests__/argonExportDiagnostics.test.ts:51:5
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/19]⎯
+
+ FAIL  src/arcproof/__tests__/argonExportDiagnostics.test.ts > Argon ADV01/02: export trust boundaries cover populated diagnostics and legacy inputs > unknown deployment redacts UNVERIFIED_FINALITY
+AssertionError: expected 'UNVERIFIED_FINALITY' to be 'UNKNOWN_DEPLOYMENT' // Object.is equality
+
+Expected: "UNKNOWN_DEPLOYMENT"
+Received: "UNVERIFIED_FINALITY"
+
+ ❯ src/arcproof/__tests__/argonExportDiagnostics.test.ts:49:39
+     47|   it.each<VerificationStatus>(['VERIFIED', 'UNVERIFIED_FINALITY', 'INV…
+     48|     const record = exported(unknown, resultFor(unknown, status));
+     49|     expect(record.verificationStatus).toBe('UNKNOWN_DEPLOYMENT');
+       |                                       ^
+     50|     expect(record.reasonCode).toBe('UNKNOWN_DEPLOYMENT');
+     51|     expectNoFacts(record);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/19]⎯
+
+ FAIL  src/arcproof/__tests__/argonExportDiagnostics.test.ts > Argon ADV01/02: export trust boundaries cover populated diagnostics and legacy inputs > unknown deployment redacts INVOICE_NOT_PAID
+AssertionError: expected 'INVOICE_NOT_PAID' to be 'UNKNOWN_DEPLOYMENT' // Object.is equality
+
+Expected: "UNKNOWN_DEPLOYMENT"
+Received: "INVOICE_NOT_PAID"
+
+ ❯ src/arcproof/__tests__/argonExportDiagnostics.test.ts:49:39
+     47|   it.each<VerificationStatus>(['VERIFIED', 'UNVERIFIED_FINALITY', 'INV…
+     48|     const record = exported(unknown, resultFor(unknown, status));
+     49|     expect(record.verificationStatus).toBe('UNKNOWN_DEPLOYMENT');
+       |                                       ^
+     50|     expect(record.reasonCode).toBe('UNKNOWN_DEPLOYMENT');
+     51|     expectNoFacts(record);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/19]⎯
+
+ FAIL  src/arcproof/__tests__/argonExportDiagnostics.test.ts > Argon ADV01/02: export trust boundaries cover populated diagnostics and legacy inputs > unknown deployment redacts FAILED
+AssertionError: expected 'FAILED' to be 'UNKNOWN_DEPLOYMENT' // Object.is equality
+
+Expected: "UNKNOWN_DEPLOYMENT"
+Received: "FAILED"
+
+ ❯ src/arcproof/__tests__/argonExportDiagnostics.test.ts:49:39
+     47|   it.each<VerificationStatus>(['VERIFIED', 'UNVERIFIED_FINALITY', 'INV…
+     48|     const record = exported(unknown, resultFor(unknown, status));
+     49|     expect(record.verificationStatus).toBe('UNKNOWN_DEPLOYMENT');
+       |                                       ^
+     50|     expect(record.reasonCode).toBe('UNKNOWN_DEPLOYMENT');
+     51|     expectNoFacts(record);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/19]⎯
+
+ FAIL  src/arcproof/__tests__/argonExportDiagnostics.test.ts > Argon ADV01/02: export trust boundaries cover populated diagnostics and legacy inputs > unknown deployment redacts PENDING
+AssertionError: expected 'PENDING' to be 'UNKNOWN_DEPLOYMENT' // Object.is equality
+
+Expected: "UNKNOWN_DEPLOYMENT"
+Received: "PENDING"
+
+ ❯ src/arcproof/__tests__/argonExportDiagnostics.test.ts:49:39
+     47|   it.each<VerificationStatus>(['VERIFIED', 'UNVERIFIED_FINALITY', 'INV…
+     48|     const record = exported(unknown, resultFor(unknown, status));
+     49|     expect(record.verificationStatus).toBe('UNKNOWN_DEPLOYMENT');
+       |                                       ^
+     50|     expect(record.reasonCode).toBe('UNKNOWN_DEPLOYMENT');
+     51|     expectNoFacts(record);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/19]⎯
+
+ FAIL  src/arcproof/__tests__/argonExportDiagnostics.test.ts > Argon ADV01/02: export trust boundaries cover populated diagnostics and legacy inputs > registered fixture redacts populated diagnostics
+ FAIL  src/arcproof/__tests__/argonExportDiagnostics.test.ts > Argon ADV01/02: export trust boundaries cover populated diagnostics and legacy inputs > fixture without flag redacts populated diagnostics
+AssertionError: expected { schemaVersion: '1.2', …(33) } to match object { verificationVerified: false, …(19) }
+(14 matching properties omitted from actual)
+
+- Expected
++ Received
+
+  {
+-   "amountDisplay": null,
+-   "amountNative": null,
+-   "blockHash": null,
+-   "blockNumber": null,
+-   "controlled_demo": false,
+-   "factsBasis": "unavailable",
+-   "gasFeeNative": null,
+-   "merchant": null,
+-   "observationScope": null,
+-   "observedInvoice": null,
+-   "observedReceipt": null,
+-   "paidAt": null,
+-   "paidBlockNumber": null,
+-   "payer": null,
+-   "paymentLogIndex": null,
+-   "readCompletedAt": null,
+-   "readStartedAt": null,
+-   "source": null,
++   "amountDisplay": "0.20",
++   "amountNative": "200000000000000000",
++   "blockHash": "0xdddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
++   "blockNumber": "55",
++   "controlled_demo": true,
++   "factsBasis": "identity_bound_rpc_observation",
++   "gasFeeNative": "21000",
++   "merchant": "0x1111111111111111111111111111111111111111",
++   "observationScope": {
++     "chainId": 2482601649,
++     "contract": "0x0000000000000000000000000000000000000001",
++     "deploymentId": "fixture-arc-testnet-001",
++     "invoiceId": "0xaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
++     "transactionHash": "0xbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
++   },
++   "observedInvoice": {
++     "amountNative": "200000000000000000",
++     "merchant": "0x1111111111111111111111111111111111111111",
++     "paidAt": "1700000000",
++     "paidBlockNumber": "55",
++     "payer": "0x1111111111111111111111111111111111111111",
++   },
++   "observedReceipt": {
++     "blockHash": "0xdddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
++     "blockNumber": "55",
++     "blockTimestamp": "1700000000",
++     "effectiveGasPrice": "1",
++     "from": "0x1111111111111111111111111111111111111111",
++     "gasFeeNative": "21000",
++     "gasUsed": "21000",
++     "paymentLogIndex": 2,
++     "status": "success",
++     "to": "0x0000000000000000000000000000000000000001",
++     "transactionHash": "0xbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
++     "transactionIndex": 0,
++   },
++   "paidAt": "1700000000",
++   "paidBlockNumber": "55",
++   "payer": "0x1111111111111111111111111111111111111111",
++   "paymentLogIndex": 2,
++   "readCompletedAt": 1000,
++   "readStartedAt": 900,
++   "source": {
++     "kind": "rpc",
++     "label": "Synthetic diagnostic source",
++   },
+    "verificationVerified": false,
+    "verifiedEvidence": null,
+  }
+
+ ❯ expectNoFacts src/arcproof/__tests__/argonExportDiagnostics.test.ts:33:18
+     31| }
+     32| function expectNoFacts(record: ReceiptExportRecord) {
+     33|   expect(record).toMatchObject({ verificationVerified: false, verified…
+       |                  ^
+     34|     observedReceipt: null, observedInvoice: null, amountNative: null, …
+     35|     paidAt: null, paidBlockNumber: null, blockNumber: null, blockHash:…
+ ❯ src/arcproof/__tests__/argonExportDiagnostics.test.ts:61:5
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[6/19]⎯
+
+ FAIL  src/arcproof/__tests__/argonExportDiagnostics.test.ts > Argon ADV01/02: export trust boundaries cover populated diagnostics and legacy inputs > trusted identity marked synthetic redacts populated diagnostics
+AssertionError: expected { schemaVersion: '1.2', …(33) } to match object { verificationVerified: false, …(19) }
+(14 matching properties omitted from actual)
+
+- Expected
++ Received
+
+  {
+-   "amountDisplay": null,
+-   "amountNative": null,
+-   "blockHash": null,
+-   "blockNumber": null,
+-   "controlled_demo": false,
+-   "factsBasis": "unavailable",
+-   "gasFeeNative": null,
+-   "merchant": null,
+-   "observationScope": null,
+-   "observedInvoice": null,
+-   "observedReceipt": null,
+-   "paidAt": null,
+-   "paidBlockNumber": null,
+-   "payer": null,
+-   "paymentLogIndex": null,
+-   "readCompletedAt": null,
+-   "readStartedAt": null,
+-   "source": null,
++   "amountDisplay": "0.20",
++   "amountNative": "200000000000000000",
++   "blockHash": "0xdddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
++   "blockNumber": "55",
++   "controlled_demo": true,
++   "factsBasis": "identity_bound_rpc_observation",
++   "gasFeeNative": "21000",
++   "merchant": "0x1111111111111111111111111111111111111111",
++   "observationScope": {
++     "chainId": 5042002,
++     "contract": "0x3Dcd2bDD924BCC384Cb39e9e12038e00fde0FA30",
++     "deploymentId": "0xdba9a4da8a5b2a834b451f595653dd3cb4c3e51addb2d8df8e0b18312f382d2d",
++     "invoiceId": "0xaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
++     "transactionHash": "0xbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
++   },
++   "observedInvoice": {
++     "amountNative": "200000000000000000",
++     "merchant": "0x1111111111111111111111111111111111111111",
++     "paidAt": "1700000000",
++     "paidBlockNumber": "55",
++     "payer": "0x1111111111111111111111111111111111111111",
++   },
++   "observedReceipt": {
++     "blockHash": "0xdddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
++     "blockNumber": "55",
++     "blockTimestamp": "1700000000",
++     "effectiveGasPrice": "1",
++     "from": "0x1111111111111111111111111111111111111111",
++     "gasFeeNative": "21000",
++     "gasUsed": "21000",
++     "paymentLogIndex": 2,
++     "status": "success",
++     "to": "0x3Dcd2bDD924BCC384Cb39e9e12038e00fde0FA30",
++     "transactionHash": "0xbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
++     "transactionIndex": 0,
++   },
++   "paidAt": "1700000000",
++   "paidBlockNumber": "55",
++   "payer": "0x1111111111111111111111111111111111111111",
++   "paymentLogIndex": 2,
++   "readCompletedAt": 1000,
++   "readStartedAt": 900,
++   "source": {
++     "kind": "rpc",
++     "label": "Synthetic diagnostic source",
++   },
+    "verificationVerified": false,
+    "verifiedEvidence": null,
+  }
+
+ ❯ expectNoFacts src/arcproof/__tests__/argonExportDiagnostics.test.ts:33:18
+     31| }
+     32| function expectNoFacts(record: ReceiptExportRecord) {
+     33|   expect(record).toMatchObject({ verificationVerified: false, verified…
+       |                  ^
+     34|     observedReceipt: null, observedInvoice: null, amountNative: null, …
+     35|     paidAt: null, paidBlockNumber: null, blockNumber: null, blockHash:…
+ ❯ src/arcproof/__tests__/argonExportDiagnostics.test.ts:61:5
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[7/19]⎯
+
+ FAIL  src/arcproof/__tests__/argonExportDiagnostics.test.ts > Argon ADV01/02: export trust boundaries cover populated diagnostics and legacy inputs > unknown synthetic redacts populated diagnostics
+AssertionError: expected { schemaVersion: '1.2', …(33) } to match object { verificationVerified: false, …(19) }
+(14 matching properties omitted from actual)
+
+- Expected
++ Received
+
+  {
+-   "amountDisplay": null,
+-   "amountNative": null,
+-   "blockHash": null,
+-   "blockNumber": null,
+-   "controlled_demo": false,
+-   "factsBasis": "unavailable",
+-   "gasFeeNative": null,
+-   "merchant": null,
+-   "observationScope": null,
+-   "observedInvoice": null,
+-   "observedReceipt": null,
+-   "paidAt": null,
+-   "paidBlockNumber": null,
+-   "payer": null,
+-   "paymentLogIndex": null,
+-   "readCompletedAt": null,
+-   "readStartedAt": null,
+-   "source": null,
++   "amountDisplay": "0.20",
++   "amountNative": "200000000000000000",
++   "blockHash": "0xdddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
++   "blockNumber": "55",
++   "controlled_demo": true,
++   "factsBasis": "identity_bound_rpc_observation",
++   "gasFeeNative": "21000",
++   "merchant": "0x1111111111111111111111111111111111111111",
++   "observationScope": {
++     "chainId": 5042002,
++     "contract": "0x9999999999999999999999999999999999999999",
++     "deploymentId": "0xdba9a4da8a5b2a834b451f595653dd3cb4c3e51addb2d8df8e0b18312f382d2d",
++     "invoiceId": "0xaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
++     "transactionHash": "0xbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
++   },
++   "observedInvoice": {
++     "amountNative": "200000000000000000",
++     "merchant": "0x1111111111111111111111111111111111111111",
++     "paidAt": "1700000000",
++     "paidBlockNumber": "55",
++     "payer": "0x1111111111111111111111111111111111111111",
++   },
++   "observedReceipt": {
++     "blockHash": "0xdddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
++     "blockNumber": "55",
++     "blockTimestamp": "1700000000",
++     "effectiveGasPrice": "1",
++     "from": "0x1111111111111111111111111111111111111111",
++     "gasFeeNative": "21000",
++     "gasUsed": "21000",
++     "paymentLogIndex": 2,
++     "status": "success",
++     "to": "0x9999999999999999999999999999999999999999",
++     "transactionHash": "0xbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
++     "transactionIndex": 0,
++   },
++   "paidAt": "1700000000",
++   "paidBlockNumber": "55",
++   "payer": "0x1111111111111111111111111111111111111111",
++   "paymentLogIndex": 2,
++   "readCompletedAt": 1000,
++   "readStartedAt": 900,
++   "source": {
++     "kind": "rpc",
++     "label": "Synthetic diagnostic source",
++   },
+    "verificationVerified": false,
+    "verifiedEvidence": null,
+  }
+
+ ❯ expectNoFacts src/arcproof/__tests__/argonExportDiagnostics.test.ts:33:18
+     31| }
+     32| function expectNoFacts(record: ReceiptExportRecord) {
+     33|   expect(record).toMatchObject({ verificationVerified: false, verified…
+       |                  ^
+     34|     observedReceipt: null, observedInvoice: null, amountNative: null, …
+     35|     paidAt: null, paidBlockNumber: null, blockNumber: null, blockHash:…
+ ❯ src/arcproof/__tests__/argonExportDiagnostics.test.ts:61:5
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[8/19]⎯
+
+ FAIL  src/arcproof/__tests__/argonExportDiagnostics.test.ts > Argon ADV01/02: export trust boundaries cover populated diagnostics and legacy inputs > legacy fallback cannot restore blocked payment facts ({"deploymentId":"0xdba9a4da8a5b2a834b451f595653dd3cb4c3e51addb2d8df8e0b18312f382d2d","chainId":5042002,"contractAddress":"0x9999999999999999999999999999999999999999","runtimeCodeHash":"0xa36ede95ccce8289224d3bbabe3a2445a888c44e763a04ac4b6f4f2f03dd344c","label":"ArcProof testnet prototype","settlementPolicy":{"id":"arc-testnet-native-eip7708-finalized-v1","chainId":5042002,"emitter":"0xfffffffffffffffffffffffffffffffffffffffe","decimals":18,"finality":"rpc-finalized-header"},"deployedAt":"2026-10-20T09:48:47Z"}, false)
+ FAIL  src/arcproof/__tests__/argonExportDiagnostics.test.ts > Argon ADV01/02: export trust boundaries cover populated diagnostics and legacy inputs > legacy fallback cannot restore blocked payment facts ({"deploymentId":"fixture-arc-testnet-001","chainId":2482601649,"contractAddress":"0x0000000000000000000000000000000000000001","runtimeCodeHash":"0x0000000000000000000000000000000000000000000000000000000000000001","label":"ArcProof fixture (DEMO ONLY — not deployed)","deployedAt":null}, true)
+ FAIL  src/arcproof/__tests__/argonExportDiagnostics.test.ts > Argon ADV01/02: export trust boundaries cover populated diagnostics and legacy inputs > legacy fallback cannot restore blocked payment facts ({"deploymentId":"0xdba9a4da8a5b2a834b451f595653dd3cb4c3e51addb2d8df8e0b18312f382d2d","chainId":5042002,"contractAddress":"0x3Dcd2bDD924BCC384Cb39e9e12038e00fde0FA30","runtimeCodeHash":"0xa36ede95ccce8289224d3bbabe3a2445a888c44e763a04ac4b6f4f2f03dd344c","label":"ArcProof testnet prototype","settlementPolicy":{"id":"arc-testnet-native-eip7708-finalized-v1","chainId":5042002,"emitter":"0xfffffffffffffffffffffffffffffffffffffffe","decimals":18,"finality":"rpc-finalized-header"},"deployedAt":"2026-10-20T09:48:47Z"}, true)
+AssertionError: expected { schemaVersion: '1.2', …(33) } to match object { verificationVerified: false, …(19) }
+(14 matching properties omitted from actual)
+
+- Expected
++ Received
+
+  {
+-   "amountDisplay": null,
+-   "amountNative": null,
+-   "blockHash": null,
+-   "blockNumber": null,
+-   "controlled_demo": false,
+-   "factsBasis": "unavailable",
+-   "gasFeeNative": null,
+-   "merchant": null,
++   "amountDisplay": "0.20",
++   "amountNative": "200000000000000000",
++   "blockHash": "0xdddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
++   "blockNumber": "55",
++   "controlled_demo": true,
++   "factsBasis": "legacy_caller_supplied",
++   "gasFeeNative": "21000",
++   "merchant": "0x1111111111111111111111111111111111111111",
+    "observationScope": null,
+    "observedInvoice": null,
+    "observedReceipt": null,
+-   "paidAt": null,
+-   "paidBlockNumber": null,
+-   "payer": null,
+-   "paymentLogIndex": null,
+-   "readCompletedAt": null,
+-   "readStartedAt": null,
+-   "source": null,
++   "paidAt": "1700000000",
++   "paidBlockNumber": "55",
++   "payer": "0x1111111111111111111111111111111111111111",
++   "paymentLogIndex": 2,
++   "readCompletedAt": 1000,
++   "readStartedAt": 900,
++   "source": {
++     "kind": "rpc",
++     "label": "Synthetic diagnostic source",
++   },
+    "verificationVerified": false,
+    "verifiedEvidence": null,
+  }
+
+ ❯ expectNoFacts src/arcproof/__tests__/argonExportDiagnostics.test.ts:33:18
+     31| }
+     32| function expectNoFacts(record: ReceiptExportRecord) {
+     33|   expect(record).toMatchObject({ verificationVerified: false, verified…
+       |                  ^
+     34|     observedReceipt: null, observedInvoice: null, amountNative: null, …
+     35|     paidAt: null, paidBlockNumber: null, blockNumber: null, blockHash:…
+ ❯ src/arcproof/__tests__/argonExportDiagnostics.test.ts:66:5
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[9/19]⎯
+
+ FAIL  src/arcproof/__tests__/argonExportDiagnostics.test.ts > Argon ADV05: malformed diagnostic amounts fail closed without BigInt coercion > rejects "invalid" rather than throwing or certifying it
+SyntaxError: Cannot convert invalid to a BigInt
+ ❯ buildReceiptExport src/arcproof/exportUtils.ts:269:65
+    267|     mode,
+    268|     controlled_demo: !!factPayer && !!factMerchant && factPayer.toLowe…
+    269|     amountDisplay: amount === null ? null : formatAmountDisplay(BigInt…
+       |                                                                 ^
+    270|   };
+    271| }
+ ❯ exported src/arcproof/__tests__/argonExportDiagnostics.test.ts:30:10
+ ❯ src/arcproof/__tests__/argonExportDiagnostics.test.ts:101:20
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[10/19]⎯
+
+ FAIL  src/arcproof/__tests__/argonExportDiagnostics.test.ts > Argon ADV05: malformed diagnostic amounts fail closed without BigInt coercion > rejects "0.20" rather than throwing or certifying it
+SyntaxError: Cannot convert 0.20 to a BigInt
+ ❯ buildReceiptExport src/arcproof/exportUtils.ts:269:65
+    267|     mode,
+    268|     controlled_demo: !!factPayer && !!factMerchant && factPayer.toLowe…
+    269|     amountDisplay: amount === null ? null : formatAmountDisplay(BigInt…
+       |                                                                 ^
+    270|   };
+    271| }
+ ❯ exported src/arcproof/__tests__/argonExportDiagnostics.test.ts:30:10
+ ❯ src/arcproof/__tests__/argonExportDiagnostics.test.ts:101:20
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[11/19]⎯
+
+ FAIL  src/arcproof/__tests__/argonExportDiagnostics.test.ts > Argon ADV05: malformed diagnostic amounts fail closed without BigInt coercion > rejects "" rather than throwing or certifying it
+ FAIL  src/arcproof/__tests__/argonExportDiagnostics.test.ts > Argon ADV05: malformed diagnostic amounts fail closed without BigInt coercion > rejects " " rather than throwing or certifying it
+ FAIL  src/arcproof/__tests__/argonExportDiagnostics.test.ts > Argon ADV05: malformed diagnostic amounts fail closed without BigInt coercion > rejects "-1" rather than throwing or certifying it
+ FAIL  src/arcproof/__tests__/argonExportDiagnostics.test.ts > Argon ADV05: malformed diagnostic amounts fail closed without BigInt coercion > rejects "0x10" rather than throwing or certifying it
+ FAIL  src/arcproof/__tests__/argonExportDiagnostics.test.ts > Argon ADV05: malformed diagnostic amounts fail closed without BigInt coercion > rejects "+1" rather than throwing or certifying it
+AssertionError: expected 'VERIFIED' to be 'WRONG_EVENT_DATA' // Object.is equality
+
+Expected: "WRONG_EVENT_DATA"
+Received: "VERIFIED"
+
+ ❯ src/arcproof/__tests__/argonExportDiagnostics.test.ts:102:39
+    100|     result.observedInvoice!.amountNative = amount;
+    101|     const record = exported(TESTNET_DEPLOYMENT, result);
+    102|     expect(record.verificationStatus).toBe('WRONG_EVENT_DATA');
+       |                                       ^
+    103|     expect(record.verificationVerified).toBe(false);
+    104|     expect(record.amountNative).toBeNull(); expect(record.amountDispla…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[12/19]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  19 failed | 3 passed (22)
+   Start at  13:50:51
+   Duration  741ms (transform 177ms, setup 0ms, import 395ms, tests 39ms, environment 0ms)
+

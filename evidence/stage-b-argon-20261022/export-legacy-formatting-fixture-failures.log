@@ -1,0 +1,114 @@
+
+ RUN  v4.1.12 /workspace/scratch/c01bd6fe117d/arcproof-stage-b-20261022/source
+
+ ❯ src/arcproof/__tests__/T24_exportUtils.test.ts (27 tests | 5 failed) 43ms
+     × amountNative remains a string in JSON (no number coercion) 9ms
+     × REGRESSION: amountNative integer string is NOT tab-prefixed 6ms
+     × paidAt integer string is NOT tab-prefixed 1ms
+     × paidBlockNumber integer string is NOT tab-prefixed 1ms
+     × large integer in amountNative stays as exact string (no exponential notation) 2ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 5 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  src/arcproof/__tests__/T24_exportUtils.test.ts > T24 — exportReceiptsJson > amountNative remains a string in JSON (no number coercion)
+AssertionError: expected 'object' to be 'string' // Object.is equality
+
+Expected: "string"
+Received: "object"
+
+ ❯ src/arcproof/__tests__/T24_exportUtils.test.ts:144:43
+    142|     const json = exportReceiptsJson([r]);
+    143|     const parsed = JSON.parse(json) as { amountNative: unknown }[];
+    144|     expect(typeof parsed[0].amountNative).toBe('string');
+       |                                           ^
+    145|   });
+    146| });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/5]⎯
+
+ FAIL  src/arcproof/__tests__/T24_exportUtils.test.ts > T24 — exportReceiptsCsv > REGRESSION: amountNative integer string is NOT tab-prefixed
+AssertionError: expected 'chainId,deploymentId,contract,invoice…' to contain '200000000000000000'
+
+- Expected
++ Received
+
+- 200000000000000000
++ chainId,deploymentId,contract,invoiceId,transactionHash,paymentLogIndex,amountNative,amountDisplay,payer,merchant,paidAt,paidBlockNumber,blockHash,verificationStatus,mode,controlled_demo,settlementPolicy,nativeEmitter,nativeDecimals,payerToContractLogIndex,contractToMerchantLogIndex,finalizedBlockNumber,finalizedBlockHash,schemaVersion,contractAddress,txHash,blockNumber,gasFeeNative,verifiedAt,reasonCode,message,factsBasis,verificationVerified,source,readStartedAt,readCompletedAt,observedReceiptStatus,observedGasUsed,observedEffectiveGasPrice,observedBlockTimestamp,checks
++ 2482601649,dep-001,0xaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa,0xabc,,,,,,,,,,UNKNOWN_DEPLOYMENT,unknown,false,,,,,,,,1.2,0xaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa,,,,,UNKNOWN_DEPLOYMENT,Deployment is not in the trusted registry; verification evidence is not exported.,unavailable,false,,,,,,,,[]
+
+ ❯ src/arcproof/__tests__/T24_exportUtils.test.ts:219:17
+    217|     const csv = exportReceiptsCsv([r]);
+    218|     // Must contain the exact integer string
+    219|     expect(csv).toContain('200000000000000000');
+       |                 ^
+    220|     // Must NOT contain a tab before the integer
+    221|     expect(csv).not.toContain('\t200000000000000000');
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/5]⎯
+
+ FAIL  src/arcproof/__tests__/T24_exportUtils.test.ts > T24 — exportReceiptsCsv > paidAt integer string is NOT tab-prefixed
+AssertionError: expected 'chainId,deploymentId,contract,invoice…' to contain '1729382400'
+
+- Expected
++ Received
+
+- 1729382400
++ chainId,deploymentId,contract,invoiceId,transactionHash,paymentLogIndex,amountNative,amountDisplay,payer,merchant,paidAt,paidBlockNumber,blockHash,verificationStatus,mode,controlled_demo,settlementPolicy,nativeEmitter,nativeDecimals,payerToContractLogIndex,contractToMerchantLogIndex,finalizedBlockNumber,finalizedBlockHash,schemaVersion,contractAddress,txHash,blockNumber,gasFeeNative,verifiedAt,reasonCode,message,factsBasis,verificationVerified,source,readStartedAt,readCompletedAt,observedReceiptStatus,observedGasUsed,observedEffectiveGasPrice,observedBlockTimestamp,checks
++ 2482601649,dep-001,0xaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa,0xabc,,,,,,,,,,UNKNOWN_DEPLOYMENT,unknown,false,,,,,,,,1.2,0xaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa,,,,,UNKNOWN_DEPLOYMENT,Deployment is not in the trusted registry; verification evidence is not exported.,unavailable,false,,,,,,,,[]
+
+ ❯ src/arcproof/__tests__/T24_exportUtils.test.ts:232:17
+    230|       { ...RESULT_OK, paymentLogIndex: null, blockHash: null }, false);
+    231|     const csv = exportReceiptsCsv([r]);
+    232|     expect(csv).toContain('1729382400');
+       |                 ^
+    233|     expect(csv).not.toContain('\t1729382400');
+    234|   });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/5]⎯
+
+ FAIL  src/arcproof/__tests__/T24_exportUtils.test.ts > T24 — exportReceiptsCsv > paidBlockNumber integer string is NOT tab-prefixed
+AssertionError: expected 'chainId,deploymentId,contract,invoice…' to contain '1000'
+
+- Expected
++ Received
+
+- 1000
++ chainId,deploymentId,contract,invoiceId,transactionHash,paymentLogIndex,amountNative,amountDisplay,payer,merchant,paidAt,paidBlockNumber,blockHash,verificationStatus,mode,controlled_demo,settlementPolicy,nativeEmitter,nativeDecimals,payerToContractLogIndex,contractToMerchantLogIndex,finalizedBlockNumber,finalizedBlockHash,schemaVersion,contractAddress,txHash,blockNumber,gasFeeNative,verifiedAt,reasonCode,message,factsBasis,verificationVerified,source,readStartedAt,readCompletedAt,observedReceiptStatus,observedGasUsed,observedEffectiveGasPrice,observedBlockTimestamp,checks
++ 2482601649,dep-001,0xaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa,0xabc,,,,,,,,,,UNKNOWN_DEPLOYMENT,unknown,false,,,,,,,,1.2,0xaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa,,,,,UNKNOWN_DEPLOYMENT,Deployment is not in the trusted registry; verification evidence is not exported.,unavailable,false,,,,,,,,[]
+
+ ❯ src/arcproof/__tests__/T24_exportUtils.test.ts:241:17
+    239|       { ...RESULT_OK, paymentLogIndex: null, blockHash: null }, false);
+    240|     const csv = exportReceiptsCsv([r]);
+    241|     expect(csv).toContain('1000');
+       |                 ^
+    242|     expect(csv).not.toContain('\t1000');
+    243|   });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/5]⎯
+
+ FAIL  src/arcproof/__tests__/T24_exportUtils.test.ts > T24 — exportReceiptsCsv > large integer in amountNative stays as exact string (no exponential notation)
+AssertionError: expected 'chainId,deploymentId,contract,invoice…' to contain '200000000000000000'
+
+- Expected
++ Received
+
+- 200000000000000000
++ chainId,deploymentId,contract,invoiceId,transactionHash,paymentLogIndex,amountNative,amountDisplay,payer,merchant,paidAt,paidBlockNumber,blockHash,verificationStatus,mode,controlled_demo,settlementPolicy,nativeEmitter,nativeDecimals,payerToContractLogIndex,contractToMerchantLogIndex,finalizedBlockNumber,finalizedBlockHash,schemaVersion,contractAddress,txHash,blockNumber,gasFeeNative,verifiedAt,reasonCode,message,factsBasis,verificationVerified,source,readStartedAt,readCompletedAt,observedReceiptStatus,observedGasUsed,observedEffectiveGasPrice,observedBlockTimestamp,checks
++ 2482601649,dep-001,0xaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa,0xabc,,,,,,,,,,UNKNOWN_DEPLOYMENT,unknown,false,,,,,,,,1.2,0xaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa,,,,,UNKNOWN_DEPLOYMENT,Deployment is not in the trusted registry; verification evidence is not exported.,unavailable,false,,,,,,,,[]
+
+ ❯ src/arcproof/__tests__/T24_exportUtils.test.ts:250:17
+    248|       { ...RESULT_OK, paymentLogIndex: null, blockHash: null }, false);
+    249|     const csv = exportReceiptsCsv([r]);
+    250|     expect(csv).toContain('200000000000000000');
+       |                 ^
+    251|     expect(csv).not.toContain('2e+17');
+    252|   });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/5]⎯
+
+
+ Test Files  1 failed | 3 passed (4)
+      Tests  5 failed | 87 passed (92)
+   Start at  13:51:19
+   Duration  990ms (transform 611ms, setup 0ms, import 2.12s, tests 155ms, environment 0ms)
+

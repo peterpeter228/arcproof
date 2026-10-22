@@ -1,0 +1,76 @@
+{
+  "candidate_head": "d97cc2b1b9abe79e06427ab91dd7ab983ee698dd",
+  "source_snapshot": "d647cc2f5249f256e944ac217a057ba0d094614913e65a25bea6721c634f2941",
+  "request_sha256": "c5b2c70e4d75fa58c43261e6c0bd57bfe3fc6a89107c3429c79aa0c1ae5cdabe",
+  "request_bytes": 128745,
+  "files": [
+    {
+      "path": "src/arcproof/exportUtils.ts",
+      "original_sha256": "0ca2e4094a1424797f2c70ee7691782c2d6733bbd9f91fcd3db91d58a9c15c6a",
+      "sanitized_sha256": "0ca2e4094a1424797f2c70ee7691782c2d6733bbd9f91fcd3db91d58a9c15c6a"
+    },
+    {
+      "path": "src/arcproof/receiptVerifier.ts",
+      "original_sha256": "61fdf29e8bf60e03f108fd7a2b57494eef3719dcbf11a872d78e96a093ba0220",
+      "sanitized_sha256": "3411af4f0b08ded2527541bf318dd12aea32f733facdc9b403ea032638757cf5"
+    },
+    {
+      "path": "src/arcproof/networkPolicy.ts",
+      "original_sha256": "1d1900503dab157258ef007417c8fe9cdb82277cece1434ec1e84b1deef4ba42",
+      "sanitized_sha256": "1d1900503dab157258ef007417c8fe9cdb82277cece1434ec1e84b1deef4ba42"
+    },
+    {
+      "path": "src/arcproof/routes.ts",
+      "original_sha256": "3a7bd314c59448b030471296c92ec3c1c04d437204ed527c5bee83b916c9b366",
+      "sanitized_sha256": "3a7bd314c59448b030471296c92ec3c1c04d437204ed527c5bee83b916c9b366"
+    },
+    {
+      "path": "src/arcproof/testnetClient.ts",
+      "original_sha256": "84f3f3c065c478ced0daacc992cbe314fb629bce295b11ee5e8fb9ca40078dc4",
+      "sanitized_sha256": "84f3f3c065c478ced0daacc992cbe314fb629bce295b11ee5e8fb9ca40078dc4"
+    },
+    {
+      "path": "src/arcproof/receiptCurrency.ts",
+      "original_sha256": "b459165b59f387f1d19ebceef7edf271c59cd968cb4fbff5e1c9d67a86d12364",
+      "sanitized_sha256": "b459165b59f387f1d19ebceef7edf271c59cd968cb4fbff5e1c9d67a86d12364"
+    },
+    {
+      "path": "src/arcproof/__tests__/fixtureExportBoundary.test.tsx",
+      "original_sha256": "79355301acb6a36d5cbe2fc85d6d622f00f2978a6427290d74255d0942b11e87",
+      "sanitized_sha256": "79355301acb6a36d5cbe2fc85d6d622f00f2978a6427290d74255d0942b11e87"
+    },
+    {
+      "path": "src/arcproof/__tests__/finalReviewRegressions.test.tsx",
+      "original_sha256": "64d6432fbcd36b6ac5fab1852e120698e59e6fcbaa2718ed433a11bc28e4325f",
+      "sanitized_sha256": "a87565d0da0a7b361e4d84c98fe19522c4344b98910733c45d3d08f34ce07225"
+    },
+    {
+      "path": "src/components/arcproof/HomeScreen.tsx",
+      "original_sha256": "e26f19a9fa36c68fc1d4f09db2d9d5132112c8f3ee47af44c85236cf34b971da",
+      "sanitized_sha256": "e26f19a9fa36c68fc1d4f09db2d9d5132112c8f3ee47af44c85236cf34b971da"
+    },
+    {
+      "path": "contracts/ArcProofInvoices.sol",
+      "original_sha256": "8699071d250c834cd1166ece0d4001b7de95af7562796e19305ce2812635e25b",
+      "sanitized_sha256": "8699071d250c834cd1166ece0d4001b7de95af7562796e19305ce2812635e25b"
+    },
+    {
+      "path": "src/config.ts",
+      "original_sha256": "4646557b0882e7f68b0f41ca2c5aecb8e2d12104dcb9d9b1eb66f33909826b35",
+      "sanitized_sha256": "4646557b0882e7f68b0f41ca2c5aecb8e2d12104dcb9d9b1eb66f33909826b35"
+    },
+    {
+      "path": "src/arcproof/manifest.ts",
+      "original_sha256": "c65ef5a548db9454c838b5ce154b811403bbd96b91aebedfb585db587c533357",
+      "sanitized_sha256": "a933b7c987220f9001a98926cd100fa1bda7c1c15dda0ead1d010deae790747e"
+    },
+    {
+      "path": "src/arcproof/arcSettlement.ts",
+      "original_sha256": "48be72c58c3422c317895fbc7aede5c014778850c5c37c9ed60a9d23774707dd",
+      "sanitized_sha256": "30d46811549b6bd935573b061e52a8178e5d357a34b95f55514c0b56ed8095a4"
+    }
+  ],
+  "address_redactions": 3,
+  "no_address_mapping_saved": true,
+  "purpose": "One authorized Argon independent pre-merge review; no execution instructions from response"
+}
