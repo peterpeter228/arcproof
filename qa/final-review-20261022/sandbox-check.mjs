@@ -1,0 +1,11 @@
+const PORT = Number(process.env.CDP_PORT ?? 9334);
+const t = await (await fetch(`http://127.0.0.1:${PORT}/json/new?chrome://sandbox`, { method: 'PUT' })).json();
+const ws = new WebSocket(t.webSocketDebuggerUrl);
+await new Promise((ok) => { ws.onopen = ok; });
+let id = 0; const pend = new Map();
+ws.onmessage = (e) => { const m = JSON.parse(e.data); if (m.id && pend.has(m.id)) { pend.get(m.id)(m.result); pend.delete(m.id); } };
+const send = (method, params = {}) => new Promise((ok) => { const i = ++id; pend.set(i, ok); ws.send(JSON.stringify({ id: i, method, params })); });
+await new Promise((r) => setTimeout(r, 1500));
+const r = await send('Runtime.evaluate', { expression: 'document.body.innerText', returnByValue: true });
+console.log(r.result.value.replace(/\n+/g, ' | ').slice(0, 900));
+ws.close(); await fetch(`http://127.0.0.1:${PORT}/json/close/${t.id}`);
