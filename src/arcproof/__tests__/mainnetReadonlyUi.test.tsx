@@ -36,6 +36,16 @@ describe('fixed mainnet build is inert without a production deployment', () => {
     expect(host.textContent).not.toContain('Connect wallet');
     for (const fn of Object.values(calls)) expect(fn).not.toHaveBeenCalled();
   });
+  it.each(['#', '#/'])('shows the static overview on mainnet without enabling any action: %s', hash => {
+    window.history.replaceState(null, '', hash); act(() => root.render(<App />));
+    expect(host.textContent).toContain('not enabled on Arc Mainnet in this build');
+    expect(host.textContent).toContain('Not deployed. Creating, paying and verifying are disabled.');
+    expect(host.querySelector('main a[href="#/invoices"]')).toBeNull();
+    expect(host.textContent).not.toContain('Connect wallet');
+    expect(host.textContent).not.toContain('test USDC with no monetary value');
+    for (const fn of Object.values(calls)) expect(fn).not.toHaveBeenCalled();
+    expect(localStorage.length).toBe(1);
+  });
   it('reports mainnet identity without borrowing the historical testnet manifest', () => {
     window.history.replaceState(null, '', '#/evidence'); act(() => root.render(<App />));
     const identity = host.querySelector('[aria-label="Build identity"]')?.textContent;

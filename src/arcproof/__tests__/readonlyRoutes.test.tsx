@@ -44,6 +44,19 @@ describe('ENTRY-01 actual root rendering, offline DOM only', () => {
   it('starts empty routes in read-only verification rather than the wallet dashboard', () => {
     mount('#'); expect(host.textContent).not.toContain('Connect wallet'); assertNoActions();
   });
+  it.each(['#', '#/'])('opens the static overview for %s with wallet-free next steps', hash => {
+    mount(hash);
+    expect(host.querySelector('main h2')?.textContent).toContain('Let anyone verify it from one link');
+    expect(host.querySelector('nav [aria-current="page"]')?.textContent).toBe('Overview');
+    expect(host.querySelector('main a[href="#/demo"]')?.textContent).toContain('no wallet');
+    expect(host.querySelector('main a[href="#/verify"]')).not.toBeNull();
+    expect(host.textContent).toContain('test USDC with no monetary value');
+    expect(host.textContent).not.toContain('Connect wallet'); assertNoActions();
+    const overview = [...host.querySelectorAll('nav button')].find(button => button.textContent === 'Try demo')!;
+    act(() => (overview as HTMLButtonElement).click());
+    expect(window.location.hash).toBe('#/demo'); expect(host.textContent).toContain('Offline demo mode'); assertNoActions();
+    expect(document.title).toBe('Offline demo · ArcProof');
+  });
   it.each(['#/nonsense', '#/pay', '#/pay/1/unknown/0x1234', '#/receipt/5042002/unknown/0x1234', '#/pay//5042002/anything/id', '#/demo/extra', `#/pay/0005042002/${TESTNET_DEPLOYMENT.deploymentId}/0x${'a'.repeat(64)}`])('fails closed for %s', hash => {
     mount(hash); expect(host.textContent).toMatch(/unavailable/i); expect(host.textContent).not.toContain('Connect wallet'); assertNoActions();
   });

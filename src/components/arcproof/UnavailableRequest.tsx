@@ -18,15 +18,15 @@ export function UnavailableRequest({ chainId, deploymentId, invoiceId, txHash }:
         : !isBytes32(invoiceId) ? 'Invalid invoice ID. It must contain exactly 32 bytes.'
           : txHash !== undefined && !isBytes32(txHash) ? 'Invalid transaction hash. It must contain exactly 32 bytes.'
             : 'Unsupported request. No verification or payment has been attempted.';
-  return <section className="max-w-xl mx-auto rounded-xl border border-amber-200 bg-amber-50 p-5 space-y-3" aria-label="Unavailable request">
+  return <section className="ap-card max-w-xl mx-auto border-amber-200 p-5 space-y-3" aria-label="Unavailable request">
     <h2 className="font-semibold text-lg">Request unavailable</h2>
-    <p role="status">{reason}</p>
+    <p role="status" className="rounded-lg bg-amber-50 p-3 text-amber-900">{reason}</p>
     <p className="text-sm">No wallet is needed. Nothing is being submitted or awaited. URL parameters cannot authorize a new contract.</p>
     <dl className="text-sm break-all space-y-2">
-      <div><dt>Requested chain</dt><dd>{Number.isSafeInteger(chainId) ? chainId : 'Missing or invalid'}</dd></div>
-      <div><dt>Requested deployment (not verified)</dt><dd>{deploymentId || 'Missing'}</dd></div>
-      <div><dt>Requested invoice (not verified)</dt><dd>{invoiceId || 'Missing'}</dd></div>
+      <div><dt className="ap-field-label">Requested chain</dt><dd>{Number.isSafeInteger(chainId) ? chainId : 'Missing or invalid'}</dd></div>
+      <div><dt className="ap-field-label">Requested deployment (not verified)</dt><dd className="font-mono">{deploymentId || 'Missing'}</dd></div>
+      <div><dt className="ap-field-label">Requested invoice (not verified)</dt><dd className="font-mono">{invoiceId || 'Missing'}</dd></div>
     </dl>
-    <a className="inline-block underline py-2" href="#">Return to ArcProof</a>
+    <a className="ap-btn-secondary" href="#">Return to ArcProof</a>
   </section>;
 }

@@ -48,39 +48,58 @@ function StatusIcon({ status }: { status: 'pass' | 'pending' | 'not_run' }) {
   return <Clock size={14} className="text-amber-500 shrink-0" />;
 }
 
+// Version-bound wording: update together with a dated evidence run, never from this page.
+const HISTORICAL_PROJECT_SUITE = '485 tests in 31 files recorded on 2026-10-22 in run final-review-20261022T022241Z (earlier: 462 tests on 2026-10-21)';
+const HISTORICAL_PROJECT_SUITE_SHORT = '485 tests (2026-10-22, overlapping suites not added)';
+
 export function EvidenceScreen() {
   const passCount = FORGE_TESTS.filter((t) => t.status === 'pass').length;
   const notRunCount = FORGE_TESTS.filter((t) => t.status === 'not_run').length;
 
   return (
-    <div className="max-w-3xl mx-auto space-y-6">
-      {/* Summary card */}
-      <div className="bg-white rounded-xl border border-stone-200 shadow-sm p-5 space-y-4">
-        <h2 className="font-semibold text-stone-900 text-base">Project evidence</h2>
+    <div className="max-w-4xl mx-auto space-y-6">
+      <header className="space-y-2">
+        <p className="ap-kicker">Evidence</p>
+        <h2 className="font-display text-2xl font-semibold tracking-tight text-stone-900">Project evidence</h2>
+        <p className="max-w-2xl text-sm leading-relaxed text-stone-700">What has been shown so far, what has not, and exactly which build you are looking at. Recorded results are historical logs, not a rerun by this page.</p>
+      </header>
 
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-          {[
-            { label: 'Historical Forge', value: '73 (69 Studio + 4 supplemental)' },
-            { label: 'Historical project suite', value: '391 tests (overlapping suites not added)' },
-            { label: 'Current build tests', value: 'Unknown — no result attached' },
-            { label: 'Grant eligibility', value: 'HOLD' },
-          ].map(({ label, value }) => (
-            <div key={label} className="bg-stone-50 rounded-lg p-3">
-              <p className="text-xs text-stone-600 font-medium">{label}</p>
-              <p className="text-sm font-semibold text-stone-800 mt-0.5">{value}</p>
-            </div>
-          ))}
-        </div>
-
-        <div className="text-xs text-stone-500 space-y-1">
-          <p><strong>Historical evidence only:</strong> The repository records 73 Forge tests and a 391-test project run. These are prior logs, not a rerun of this candidate; suite counts overlap and must not be added. An independent review or model opinion is not security certification.</p>
-          <p className="break-all"><strong>Historical testnet deployment:</strong> <a className="underline" href={`${ARC_TESTNET.blockExplorers.default.url}/address/${TESTNET_DEPLOYMENT.contractAddress}?tab=contract`} target="_blank" rel="noreferrer">{TESTNET_DEPLOYMENT.contractAddress}</a>. Repository records report runtime matching on 2026-10-20. <a className="underline" href={explorerTx(DEPLOYMENT_TX)} target="_blank" rel="noreferrer">Deployment transaction</a>. No fresh RPC read, payment acceptance, source publication, or host-version match is implied.</p>
-          <p><strong>Grant:</strong> Eligibility HOLD. Free prototype development authorized for testnet/local scope per 2026-10-20 directive. Do not claim grant eligibility established.</p>
-          <p><strong>Atomic forwarding:</strong> The contract passes funds directly to the merchant atomically. This is not custody. It does touch funds. It is not a claim of escrow-free operation — the contract's execution touches and routes value.</p>
-        </div>
+      <div className="grid gap-4 md:grid-cols-2">
+        <section className="ap-card p-5 space-y-3" aria-labelledby="evidence-recorded">
+          <h3 id="evidence-recorded" className="font-semibold text-stone-900">Recorded so far</h3>
+          <ul className="space-y-2 text-sm text-stone-700">
+            <li><strong className="text-stone-900">Contract tests:</strong> 73 Forge tests recorded (69 Studio + 4 supplemental), including reentrancy, exact amount, expiry and one-time payment. Historical, not rerun for this build.</li>
+            <li className="break-words"><strong className="text-stone-900">Testnet deployment:</strong> <a className="ap-inline-link underline" href={`${ARC_TESTNET.blockExplorers.default.url}/address/${TESTNET_DEPLOYMENT.contractAddress}?tab=contract`} target="_blank" rel="noreferrer">contract on Arc Testnet</a>, runtime code matched the reviewed artifact on 2026-10-20 (<a className="ap-inline-link underline" href={explorerTx(DEPLOYMENT_TX)} target="_blank" rel="noreferrer">deployment transaction</a>).</li>
+            <li><strong className="text-stone-900">App test suite:</strong> {HISTORICAL_PROJECT_SUITE}. Overlapping suites are not added together.</li>
+          </ul>
+        </section>
+        <section className="ap-card border-amber-200 p-5 space-y-3" aria-labelledby="evidence-missing">
+          <h3 id="evidence-missing" className="font-semibold text-stone-900">Not yet shown</h3>
+          <ul className="space-y-2 text-sm text-stone-700">
+            <li><strong className="text-stone-900">Mainnet:</strong> no ArcProof contract on Arc Mainnet and no real-USDC payment yet.</li>
+            <li><strong className="text-stone-900">Live payment acceptance:</strong> a fresh two-wallet testnet payment verified end-to-end by this build (T25/T26) has not been run.</li>
+            <li><strong className="text-stone-900">Audit:</strong> none. Independent and model reviews are not security certification.</li>
+            <li><strong className="text-stone-900">Grant eligibility:</strong> HOLD — not established.</li>
+          </ul>
+        </section>
       </div>
 
-      <section aria-label="Build identity" className="bg-white rounded-xl border border-stone-200 p-5 space-y-3">
+      <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+        {[
+          { label: 'Historical Forge', value: '73 (69 Studio + 4 supplemental)' },
+          { label: 'Historical project suite', value: HISTORICAL_PROJECT_SUITE_SHORT },
+          { label: 'Current build tests', value: 'Unknown — no result attached' },
+          { label: 'Grant eligibility', value: 'HOLD' },
+        ].map(({ label, value }) => (
+          <div key={label} className="ap-card p-3">
+            <p className="text-xs text-stone-600 font-medium">{label}</p>
+            <p className="text-sm font-semibold text-stone-800 mt-0.5">{value}</p>
+          </div>
+        ))}
+      </div>
+      <p className="text-xs text-stone-600"><strong>Atomic forwarding:</strong> the contract passes funds directly to the merchant in the same transaction. It is not custody or escrow, but its execution does touch and route value.</p>
+
+      <section aria-label="Build identity" className="ap-card p-5 space-y-3">
         <h3 className="font-semibold">Current candidate build identity</h3>
         <dl className="text-sm space-y-2 break-all">
           <div><dt>Fixed build network</dt><dd>{identityLabel(BUILD_IDENTITY.networkKey)}</dd></div>
@@ -98,21 +117,21 @@ export function EvidenceScreen() {
       </section>
 
       {/* Historical test matrix */}
-      <div className="bg-white rounded-xl border border-stone-200 shadow-sm overflow-hidden">
-        <div className="px-5 py-3 border-b border-stone-100 flex items-center justify-between">
+      <details className="ap-card overflow-hidden">
+        <summary className="px-5 py-3 border-b border-stone-100 flex flex-wrap items-center justify-between gap-2 cursor-pointer">
           <h3 className="font-medium text-stone-800 text-sm">Historical test matrix, not current acceptance</h3>
-          <div className="flex gap-3 text-xs text-stone-500">
+          <div className="flex gap-3 text-xs text-stone-600">
             <span className="flex items-center gap-1"><CheckCircle size={12} className="text-teal-600" /> {passCount} historically recorded</span>
             <span className="flex items-center gap-1"><AlertCircle size={12} className="text-stone-600" /> {notRunCount} not run</span>
           </div>
-        </div>
+        </summary>
         <div className="divide-y divide-stone-100">
           {FORGE_TESTS.map((t) => (
             <div key={t.id} className="px-5 py-2.5 flex items-start gap-3">
               <StatusIcon status={t.status} />
               <div className="min-w-0 flex-1">
                 <div className="flex items-center gap-2 flex-wrap">
-                  <span className="font-mono text-xs text-stone-500 shrink-0">{t.id}</span>
+                  <span className="font-mono text-xs text-stone-600 shrink-0">{t.id}</span>
                   <span className="text-xs text-stone-700">{t.description}</span>
                 </div>
                 {t.note && (
@@ -122,12 +141,12 @@ export function EvidenceScreen() {
             </div>
           ))}
         </div>
-      </div>
+      </details>
 
       {/* Limitations */}
-      <div className="bg-white rounded-xl border border-stone-200 shadow-sm p-5 space-y-3">
-        <h3 className="font-medium text-stone-800 text-sm">Known limitations (P0)</h3>
-        <ul className="text-xs text-stone-600 space-y-1.5 list-disc list-outside ml-4">
+      <div className="ap-card p-5 space-y-3">
+        <h3 className="font-medium text-stone-800 text-sm">Known limitations of this prototype</h3>
+        <ul className="text-sm text-stone-700 space-y-1.5 list-disc list-outside ml-4">
           <li>Only the checked Arc Testnet deployment is configured. Mainnet remains disabled; the user alone approves testnet wallet requests.</li>
           <li>Fresh candidate-bound Arc native-USDC system Transfer and finality acceptance (T25/T26) is not attached to this build. Historical controlled observations do not establish current acceptance. Official native events use 18 decimals at 0xfffffffffffffffffffffffffffffffffffffffe, not the 6-decimal ERC-20 path.</li>
           <li>Receipt verifier compares runtime keccak256 against the supplied manifest. No fresh network result is attached to this build.</li>

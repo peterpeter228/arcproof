@@ -38,7 +38,7 @@ export function ReceiptFacts({ record }: { record: ReceiptExportRecord }) {
       {legacyFacts ? 'Legacy caller-supplied values: provenance is not established by an identity-bound RPC snapshot.' : 'Provenance unavailable: these values have no established identity-bound RPC observation basis.'}
     </p>}
     {hasDiagnostics && <p className="text-sm font-semibold">{factLabel} invoice amount</p>}
-    <p className="receipt-amount font-semibold break-words" data-receipt-field="amountDisplay">{record.amountDisplay === null ? 'Unknown amount' : `${record.amountDisplay} ${currency}`}</p>
+    <p className={`receipt-amount font-semibold break-words tabular ${evidence ? 'text-stone-900' : 'receipt-amount-unverified'}`} data-receipt-field="amountDisplay">{record.amountDisplay === null ? 'Unknown amount' : `${record.amountDisplay} ${currency}`}</p>
     <dl className="space-y-3 text-sm">
       <div><dt className="font-semibold">Merchant</dt><dd className="font-mono break-all" data-receipt-field="merchant">{record.merchant ?? 'Unknown'}</dd></div>
       <div><dt className="font-semibold">Payer</dt><dd className="font-mono break-all" data-receipt-field="payer">{record.payer ?? 'Unknown'}</dd></div>

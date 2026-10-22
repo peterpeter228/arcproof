@@ -2,6 +2,7 @@ import { receiptStatus } from '../../arcproof/receiptStatus';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { formatUnits, type Hex } from 'viem';
 import { ConnectKitButton } from 'connectkit';
+import { AlertTriangle, CheckCircle2 } from 'lucide-react';
 import { ReceiptFacts } from './ReceiptFacts';
 import { AtomicForwardingWarning } from './Layout';
 import { formatAmountDisplay } from '../../arcproof/amountParser';
@@ -16,9 +17,9 @@ import { useTestnetWallet } from '../../arcproof/useTestnetWallet';
 import { recordSubmission, updateSubmission, useSubmissions } from '../../arcproof/submissions';
 import { buildReceiptExport, exportReceiptsJson, exportReceiptsCsv } from '../../arcproof/exportUtils';
 
-const panel = 'arcproof-panel bg-white border border-stone-200 rounded-xl p-5 space-y-3';
-const button = 'rounded-lg px-4 py-2 bg-teal-700 text-white disabled:bg-stone-200 disabled:text-stone-500';
-const input = 'w-full rounded-lg border border-stone-500 px-3 py-2 font-mono text-base';
+const panel = 'arcproof-panel ap-card p-5 space-y-3';
+const button = 'ap-btn-primary';
+const input = 'w-full rounded-lg border border-stone-500 bg-white px-3 py-2 font-mono text-base [&[aria-invalid=true]]:border-red-600 [&[aria-invalid=true]]:bg-red-50';
 const route = (kind: 'pay' | 'receipt', id: Hex, tx?: Hex) =>
   `#/${kind}/${ARC_TESTNET.id}/${TESTNET_DEPLOYMENT.deploymentId}/${id}${tx ? `?tx=${tx}` : ''}`;
 
@@ -62,7 +63,7 @@ function Review({ action, busy, confirm, cancel }: {
     <p className="text-sm text-stone-600">Only click below when you are ready to inspect and approve in your wallet. A submitted transaction cannot be cancelled here.</p>
     <div className="flex flex-wrap gap-3">
       <button type="button" className={button} disabled={busy} onClick={confirm}>{busy ? 'Waiting for wallet / network…' : 'Open wallet to approve'}</button>
-      <button type="button" className="border rounded-lg px-4 py-2" disabled={busy} onClick={cancelReview}>Cancel review</button>
+      <button type="button" className="ap-btn-secondary" disabled={busy} onClick={cancelReview}>Cancel review</button>
     </div>
   </section>;
 }
@@ -223,10 +224,10 @@ function TestnetDashboardSession({ wallet }: { wallet: ReturnType<typeof useTest
         <p>{formatAmountDisplay(invoice.amountNative)} test USDC · {invoice.paid ? 'Paid according to contract; verify receipt' : 'Unpaid according to contract'}</p>
         <a className="underline text-sm" href={route(invoice.paid ? 'receipt' : 'pay', invoice.invoiceId)}>{invoice.paid ? 'Verify payment receipt' : 'Open payment page'}</a>
       </div>)}
-      <div className="flex gap-3 text-sm">
-        <button disabled={busy || page === 0} className="underline disabled:text-stone-300" onClick={() => void refreshHistory(page - 1)}>Previous</button>
+      <div className="flex items-center gap-3 text-sm">
+        <button disabled={busy || page === 0} className="px-2 underline disabled:cursor-not-allowed disabled:text-stone-500 disabled:no-underline" onClick={() => void refreshHistory(page - 1)}>Previous</button>
         <span>Page {page + 1}</span>
-        <button disabled={busy || BigInt((page + 1) * 20) >= nextNonce} className="underline disabled:text-stone-300" onClick={() => void refreshHistory(page + 1)}>Next</button>
+        <button disabled={busy || BigInt((page + 1) * 20) >= nextNonce} className="px-2 underline disabled:cursor-not-allowed disabled:text-stone-500 disabled:no-underline" onClick={() => void refreshHistory(page + 1)}>Next</button>
       </div>
     </section>
   </div>;
@@ -340,7 +341,9 @@ function TestnetReceiptFields({ invoiceId, txHash }: { invoiceId?: Hex; txHash?:
     const token = ++sequence.current;
     activeRequest.current = token; setBusy(true); setError(''); setVerified(null); setCopied(false);
     try {
-      if (!isBytes32(targetId) || (targetTx && !isBytes32(targetTx))) throw new Error('Invoice ID and optional transaction hash must each contain 32 bytes.');
+      // Name the field that is wrong; both rules stay the same 32-byte check.
+      if (!isBytes32(targetId)) throw new Error('Invoice ID must be 0x followed by 64 hexadecimal characters (32 bytes).');
+      if (targetTx && !isBytes32(targetTx)) throw new Error('Payment transaction hash must be 0x followed by 64 hexadecimal characters (32 bytes), or left empty.');
       const result = await verifyTestnetReceipt(testnetClient, targetId, (targetTx || undefined) as Hex | undefined);
       if (sequence.current === token) setVerified(result);
     } catch (e) { if (sequence.current === token) setError(errorMessage(e)); }
@@ -391,9 +394,10 @@ function TestnetReceiptFields({ invoiceId, txHash }: { invoiceId?: Hex; txHash?:
   }
   return <div className="max-w-2xl mx-auto space-y-4 receipt-page">
     <form className={`${panel} print:hidden`} onSubmit={(event) => { event.preventDefault(); void verify(); }}>
+      <p className="ap-kicker">Read-only · no wallet needed</p>
       <h2 className="font-semibold text-lg">Verify a testnet receipt</h2>
-      <p className="text-sm">Read-only verification: no wallet or signature required. Network and contract come only from the checked manifest, never from imported receipt flags.</p>
-      <p className="text-xs font-mono break-all">{TESTNET_DEPLOYMENT.contractAddress}</p>
+      <p className="text-sm">Paste the invoice ID from a receipt or payment link. ArcProof re-reads Arc Testnet and only says “Verified” when contract code, invoice state, payment event, both USDC transfer legs and finality all check out. Network and contract come only from the checked manifest, never from imported receipt flags.</p>
+      <p className="text-xs text-stone-600 break-all">Checked contract: <span className="font-mono">{TESTNET_DEPLOYMENT.contractAddress}</span></p>
       <label htmlFor="live-receipt-id" className="block text-sm">Invoice ID</label>
       <input id="live-receipt-id" aria-invalid={!!error && !isBytes32(id)} autoCapitalize="none" spellCheck={false} className={input} value={id} aria-describedby={error ? 'receipt-error' : undefined} onChange={(e) => edit('id', e.target.value)} />
       <label htmlFor="live-receipt-tx" className="block text-sm">Payment transaction hash (optional)</label>
@@ -405,19 +409,23 @@ function TestnetReceiptFields({ invoiceId, txHash }: { invoiceId?: Hex; txHash?:
     {error && <p id="receipt-error" role="alert" className="rounded-lg bg-amber-50 p-3 text-sm text-amber-900 break-words">{error}</p>}
     {verified && record && <section className={panel} aria-label="Receipt result">
       <p className="text-sm font-semibold text-stone-600">Arc Testnet · test USDC only · Not mainnet</p>
-      <div role="status" aria-live="polite">
-        <h3 className={`font-semibold ${success ? 'text-teal-800' : 'text-amber-900'}`}>{success ? 'Verified testnet payment' : verified.result.status === 'UNVERIFIED_ARC_EVIDENCE' ? 'Standard checks passed; settlement evidence incomplete' : `Not verified: ${verified.result.status}`}</h3>
+      <div role="status" aria-live="polite" className={`flex items-start gap-3 rounded-lg border p-3 ${success ? 'border-teal-300 bg-teal-50' : 'border-amber-300 bg-amber-50'}`}>
+        {success ? <CheckCircle2 size={22} className="mt-0.5 shrink-0 text-teal-700" aria-hidden /> : <AlertTriangle size={22} className="mt-0.5 shrink-0 text-amber-700" aria-hidden />}
+        <div>
+          <h3 className={`text-lg font-semibold ${success ? 'text-teal-900' : 'text-amber-900'}`}>{success ? 'Verified testnet payment' : verified.result.status === 'UNVERIFIED_ARC_EVIDENCE' ? 'Standard checks passed; settlement evidence incomplete' : `Not verified: ${verified.result.status}`}</h3>
+          <p className={`text-sm ${success ? 'text-teal-900' : 'text-amber-900'}`}>{success ? 'All identity, native settlement and finality checks passed for this invoice and transaction.' : 'Do not treat this as payment proof. Details of each check are below.'}</p>
+        </div>
       </div>
       {!success && <p className="text-sm text-amber-900">The following are observed invoice/receipt fields, not verified payment proof.</p>}
       <ReceiptFacts record={record} />
       <p className="text-sm">Testnet evidence only, not revenue, a tax invoice, or proof of delivery. Imported verification flags are never trusted.</p>
       <a className="block font-mono text-xs break-all underline" href={explorerTx(verified.hash)} target="_blank" rel="noreferrer">Transaction: {verified.hash}</a>
-      <div className="flex flex-wrap gap-3 text-sm print:hidden">
-        <button className="underline py-2" onClick={() => void copyVerificationLink()}>{copied ? 'Verification link copied' : 'Copy verification link'}</button>
-        <a className="underline py-2" href={route('receipt', verified.invoice.invoiceId, verified.hash)}>Open verification link</a>
-        <button className="underline py-2" onClick={() => download('json')}>Export testnet JSON</button>
-        <button className="underline py-2" onClick={() => download('csv')}>Export testnet CSV</button>
-        <button className="underline py-2" onClick={() => window.print()}>Print</button>
+      <div className="flex flex-wrap gap-2 print:hidden">
+        <button type="button" className="ap-btn-secondary" onClick={() => void copyVerificationLink()}>{copied ? 'Verification link copied' : 'Copy verification link'}</button>
+        <a className="ap-btn-secondary" href={route('receipt', verified.invoice.invoiceId, verified.hash)}>Open verification link</a>
+        <button type="button" className="ap-btn-secondary" onClick={() => download('json')}>Export testnet JSON</button>
+        <button type="button" className="ap-btn-secondary" onClick={() => download('csv')}>Export testnet CSV</button>
+        <button type="button" className="ap-btn-secondary" onClick={() => window.print()}>Print</button>
       </div>
     </section>}
   </div>;

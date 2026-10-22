@@ -2,6 +2,34 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ArcProof design system: 8px rhythm, one accent, receipt "tear line" motif.
+   Status colour is never decoration: teal = verified/primary action only,
+   amber = caution/simulated, red = failure. */
+@layer components {
+  .ap-card { @apply rounded-xl border border-stone-200 bg-white shadow-[0_1px_2px_rgba(28,25,23,0.05)]; }
+  .ap-kicker { @apply text-xs font-semibold uppercase tracking-[0.08em] text-teal-800; }
+  .ap-btn { @apply inline-flex items-center justify-center gap-2 rounded-lg px-4 py-2 text-sm font-semibold transition-colors; min-height: 2.75rem; }
+  .ap-btn-primary { @apply ap-btn bg-teal-700 text-white hover:bg-teal-800 disabled:bg-stone-200 disabled:text-stone-600; }
+  .ap-btn-secondary { @apply ap-btn border border-stone-300 bg-white text-stone-900 hover:bg-stone-50 disabled:text-stone-500; }
+  .ap-link { @apply font-medium text-teal-800 underline underline-offset-2 hover:text-teal-900; }
+  .ap-chip { @apply inline-flex items-center gap-1.5 rounded-full border px-2.5 py-0.5 text-xs font-semibold; }
+  .ap-chip-caution { @apply ap-chip border-amber-300 bg-amber-50 text-amber-900; }
+  .ap-chip-neutral { @apply ap-chip border-stone-300 bg-stone-50 text-stone-700; }
+  .ap-chip-ok { @apply ap-chip border-teal-300 bg-teal-50 text-teal-900; }
+  .ap-stamp { @apply inline-block rounded border-2 border-dashed border-amber-700 px-2 py-0.5 text-xs font-bold uppercase tracking-[0.12em] text-amber-900; }
+  .ap-serial { @apply font-mono text-xs text-stone-600; font-variant-numeric: tabular-nums; }
+  .ap-field-label { @apply text-xs font-semibold uppercase tracking-[0.06em] text-stone-600; }
+}
+.tabular { font-variant-numeric: tabular-nums; }
+/* Receipt tear line with side notches; purely decorative. */
+.ap-tear { position: relative; border-top: 2px dashed #d6d3d1; margin: 0 -1.25rem; }
+.ap-tear::before, .ap-tear::after { content: ''; position: absolute; top: -9px; width: 16px; height: 16px; border-radius: 9999px; background: #f7f7f2; border: 1px solid #e7e5e4; }
+.ap-tear::before { left: -9px; }
+.ap-tear::after { right: -9px; }
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition: none !important; animation: none !important; scroll-behavior: auto !important; }
+}
+
 * {
   box-sizing: border-box;
 }
@@ -69,7 +97,11 @@ input { min-width: 0; max-width: 100%; }
 /* Evidence stays readable without adding a new visual system. */
 .arcproof-panel { padding: 1.5rem; }
 .receipt-amount { font-size: 2.5rem; line-height: 1.2; overflow-wrap: anywhere; }
+/* An unverified amount is an observation: keep it readable but visually secondary. */
+.receipt-amount.receipt-amount-unverified { font-size: 1.75rem; color: #44403c; }
 main a { min-height: 2.75rem; display: inline-flex; align-items: center; overflow-wrap: anywhere; }
+/* Links inside a sentence keep text flow (WCAG 2.5.8 inline exception). */
+main a.ap-inline-link { display: inline; min-height: 0; }
 main .receipt-details { overflow-wrap: anywhere; }
 @media (max-width: 639px) {
   .arcproof-panel { padding: 1rem; }
