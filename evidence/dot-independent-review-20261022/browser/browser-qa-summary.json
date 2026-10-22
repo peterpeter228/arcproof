@@ -205,6 +205,6 @@
     }
   ],
   "networkCaveat": "Original mainnet port 4198 had an extra test-only Content-Security-Policy connect-src 'none'; form-action 'none'; frame-src 'none'. No CSP violation was observed. This guard is not production configuration and is not a full request trace. Fixed mainnet port 4200 had ordinary Python static server headers.",
-  "screenshotCaveat": "Full-page screenshot API at 300% zoom produced cropped images. Do not use original-narrow-*.png or fixed-demo-narrow.png as visual proof. Native screenshots fixed-demo-narrow-*-native.png show correct visible narrow rendering; JSON metrics support no-overflow claim.",
+  "screenshotCaveat": "Full-page screenshot API at 300% zoom produced cropped images. Do not use original-narrow-*.jpg or fixed-demo-narrow.jpg as visual proof. Native screenshots fixed-demo-narrow-*-native.jpg show correct visible narrow rendering; JSON metrics support no-overflow claim.",
   "recommendation": "Accept the tested read-only/demo browser scope for revised candidate. This is not mainnet, real-payment, fresh T25/T26 or full mobile/device acceptance."
 }
