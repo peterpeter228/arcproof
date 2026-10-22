@@ -1,8 +1,8 @@
 {
   "schemaVersion": "1.0",
   "project": "ArcProof",
-  "artifactRole": "live_partial_effort_ledger",
-  "note": "G0 started. Import/review effort recorded; other parallel tasks pending Root aggregation. No application implementation or cash activity.",
+  "artifactRole": "historical_partial_effort_ledger_with_stage_b_checkpoint",
+  "note": "Historical recorded totals remain unverified as an aggregate. The old 18-hour cap does not govern this authorized stage; no unlimited budget or new paid service permission is implied.",
   "project_started_at": "2026-10-20T03:04:27Z",
   "accountingTimezone": "Asia/Shanghai",
   "engineering": {
@@ -207,5 +207,61 @@
     "capCompliance": "unknown",
     "newCashSpend": 0,
     "note": "Historical ledger is incomplete. Earlier numeric totals are not a current full-project aggregate; root must reconcile parallel effort."
+  },
+  "stageBCheckpoint": {
+    "recordedAt": "2026-10-22T05:22:00Z",
+    "status": "SYNC_AND_TESTS_VERIFIED_BROWSER_ACCEPTANCE_PARTIAL",
+    "approvedCandidate": "83968f11f6791b56d6c74e958e3c6f486cb02087",
+    "mergeCommit": "9b8bee11d205d6d056c7ddc8c42e02dd0f904849",
+    "sourceSnapshot": "8752073c7c83c227fc642c71deafd6583c9e69e82d490e3d43b7ed340a1a50a7",
+    "sourceInputs": 95,
+    "studioFullBuildSnapshot": "508d55726cff7fb09f505678822d61eed848bac165f1d925a039115053f7fb2a",
+    "studioFullBuildInputs": 160,
+    "actualStudioTests": {
+      "vitest": {
+        "passed": 521,
+        "files": 34
+      },
+      "forge": {
+        "passed": 73,
+        "suites": 5,
+        "failed": 0,
+        "skipped": 0
+      },
+      "check": "PASS",
+      "testnetBuild": "PASS",
+      "mainnetBuild": "PASS"
+    },
+    "exportSourceMatches": 95,
+    "envPreserved": true,
+    "evidenceDirectory": "evidence/stage-b-sync-20261022",
+    "report": "docs/DOT_STAGE_B_COMPLETION_20261022.md",
+    "authorityNote": "This checkpoint supersedes historical current-stage labels only. Historical test matrix items and original effort observations are retained and are not retroactively marked passed or measured.",
+    "restrictions": [
+      "No deployment",
+      "No wallet signatures",
+      "No transfers",
+      "No public release",
+      "No contest submission"
+    ],
+    "eligibilityVerified": false,
+    "mainnetAcceptance": "NOT_RUN",
+    "paymentDate": null,
+    "effort": {
+      "engineeringHours": null,
+      "reason": "No reliable consolidated active-labor accounting; wall-clock time is not engineering labor.",
+      "old18HourCapApplicable": false,
+      "newPaidServices": false,
+      "argonCalls": 1,
+      "argonActualCost": null
+    },
+    "previewIdentity": "MATCHES_STUDIO_BUILD_INPUTS",
+    "browserAcceptance": {
+      "boundedFunctionalChecks": "PASS",
+      "jsonDownload": "UNVERIFIED_TIMEOUT_NO_FILE_OBSERVED",
+      "desktopVisual": "RECOVERED_AND_OBSERVED",
+      "completeResponsiveVisualRegression": "NOT_RUN",
+      "connectionStability": "RECONNECTED_CURRENT_PREVIEW_OPEN"
+    }
   }
 }

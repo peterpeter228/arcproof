@@ -1,0 +1,59 @@
+{
+  "previewUrl": "https://iey5ybn9nw77nh2tywaxu.preview.studio.arc.io/",
+  "before": {
+    "sourceSnapshot": "556de0955f9aee7186664aadd72c51bc6e82339d24747779bf64d6b694cfd845",
+    "builtAtUTC": "2026-10-21T23:33:55.957Z"
+  },
+  "recovery": "Normal Studio reload and preview Refresh preserved stale startup identity. Mtime-only touch vite.config.ts triggered ordinary Vite config reload; no source bytes or security settings changed.",
+  "after": {
+    "sourceSnapshot": "508d55726cff7fb09f505678822d61eed848bac165f1d925a039115053f7fb2a",
+    "builtAtUTC": "2026-10-22T05:10:43.384Z",
+    "network": "testnet",
+    "sourceCommit": null,
+    "verifiedBaseCommit": null
+  },
+  "checks": [
+    {
+      "case": "demo amount 1.000001",
+      "result": "PASS: Amount must not exceed 1 USDC; creation disabled"
+    },
+    {
+      "case": "offline 0.20 invoice",
+      "result": "PASS: simulated receipt, SIMULATED_NOT_VERIFIED, payer/transaction/payment time/block/event index null; no wallet or transaction"
+    },
+    {
+      "case": "malformed verifier ID invalid",
+      "result": "PASS: Invoice ID must be 0x followed by 64 hexadecimal characters (32 bytes)."
+    },
+    {
+      "case": "simulated JSON download",
+      "result": "UNVERIFIED: clicked once; download observation timed out; no new local file found; no retry"
+    }
+  ],
+  "limitations": [
+    "Bounded desktop embedded-preview QA only; no wallet connection, signing, transfer, deployment, publication, or live two-wallet acceptance.",
+    "Direct preview URL restricted to Studio; respected without bypass.",
+    "Development preview source identity matches Studio production build input snapshot, not proof of identical emitted production bytes.",
+    "Screenshot overview is private and contains existing account email in Studio sidebar. Do not publish it.",
+    "Initial simplified styling and reconnecting were recovered by ordinary reopen and mtime-only stylesheet pipeline invalidation. Desktop visual check only, not comprehensive responsive/accessibility acceptance."
+  ],
+  "screenshots": [
+    "preview-connecting.png",
+    "preview-recovered-overview.png"
+  ],
+  "styleRecovery": {
+    "atUTC": "2026-10-22T05:19:06Z",
+    "diagnosis": "Stale development Tailwind class coverage, not intended layout or total CSS failure. Loaded CSS omitted ap-card/ap-btn-primary; heading expected classes computed 16px. Studio production CSS contained ap-btn-primary and text-3xl.",
+    "action": "Mtime-only touch tailwind.config.js postcss.config.js src/index.css. No source byte/security/deployment changes.",
+    "beforeStyleChars": 25796,
+    "afterStyleChars": 34499,
+    "afterApCard": true,
+    "afterApBtnPrimary": true,
+    "headingAfterPx": 30,
+    "visualResult": "Recovered styled desktop overview, clean screenshot; preview reconnected.",
+    "source95PostRecoveryMismatches": 0,
+    "previewSnapshotUnchanged": true
+  },
+  "downloadFollowup": "Inspected local downloads once at05:17UTC: only three prior Code ZIPs; no receipt JSON. No repeated click; JSON outcome remains unverified.",
+  "privateScreenshotOmitted": true
+}

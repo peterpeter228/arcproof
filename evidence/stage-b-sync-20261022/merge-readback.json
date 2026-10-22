@@ -1,0 +1,55 @@
+{
+  "mainRef": {
+    "ref": "refs/heads/main",
+    "node_id": "REF_kwDOVQWwv69yZWZzL2hlYWRzL21haW4",
+    "url": "https://api.github.com/repos/peterpeter228/arcproof/git/refs/heads/main",
+    "object": {
+      "sha": "9b8bee11d205d6d056c7ddc8c42e02dd0f904849",
+      "type": "commit",
+      "url": "https://api.github.com/repos/peterpeter228/arcproof/git/commits/9b8bee11d205d6d056c7ddc8c42e02dd0f904849"
+    }
+  },
+  "merge": {
+    "sha": "9b8bee11d205d6d056c7ddc8c42e02dd0f904849",
+    "node_id": "C_kwDOVQWwv9oAKDliOGJlZTExZDIwNWQ2ZDA1NmM3ZGRjOGM0MmUwMmRkMGY5MDQ4NDk",
+    "url": "https://api.github.com/repos/peterpeter228/arcproof/git/commits/9b8bee11d205d6d056c7ddc8c42e02dd0f904849",
+    "html_url": "https://github.com/peterpeter228/arcproof/commit/9b8bee11d205d6d056c7ddc8c42e02dd0f904849",
+    "author": {
+      "name": "ssfdsgfg",
+      "email": "22089258+peterpeter228@users.noreply.github.com",
+      "date": "2026-10-22T05:00:31Z"
+    },
+    "committer": {
+      "name": "GitHub",
+      "email": "noreply@github.com",
+      "date": "2026-10-22T05:00:31Z"
+    },
+    "tree": {
+      "sha": "990e8c0caafcd11b1f383851f9a311e9a3ce330e",
+      "url": "https://api.github.com/repos/peterpeter228/arcproof/git/trees/990e8c0caafcd11b1f383851f9a311e9a3ce330e"
+    },
+    "message": "Merge reviewed private ArcProof candidate after Argon triage\n\nApproved private Stage B only. Final reviewed source snapshot 8752073c7c83c227fc642c71deafd6583c9e69e82d490e3d43b7ed340a1a50a7, 521 tests and both builds passed. Studio final sync/Forge still to be verified. No deployment, signing, transfer, publication or competition submission.",
+    "parents": [
+      {
+        "sha": "8f748d3052be163f2c039790a73a4238c25b5869",
+        "url": "https://api.github.com/repos/peterpeter228/arcproof/git/commits/8f748d3052be163f2c039790a73a4238c25b5869",
+        "html_url": "https://github.com/peterpeter228/arcproof/commit/8f748d3052be163f2c039790a73a4238c25b5869"
+      },
+      {
+        "sha": "83968f11f6791b56d6c74e958e3c6f486cb02087",
+        "url": "https://api.github.com/repos/peterpeter228/arcproof/git/commits/83968f11f6791b56d6c74e958e3c6f486cb02087",
+        "html_url": "https://github.com/peterpeter228/arcproof/commit/83968f11f6791b56d6c74e958e3c6f486cb02087"
+      }
+    ]
+  },
+  "pr": {
+    "number": 1,
+    "state": "closed",
+    "merged": true,
+    "merged_at": "2026-10-22T05:00:32Z",
+    "head": "83968f11f6791b56d6c74e958e3c6f486cb02087",
+    "base": "8f748d3052be163f2c039790a73a4238c25b5869",
+    "merge_commit_sha": "9b8bee11d205d6d056c7ddc8c42e02dd0f904849",
+    "url": "https://github.com/peterpeter228/arcproof/pull/1"
+  }
+}

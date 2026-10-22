@@ -1,0 +1,7 @@
+$ bash scripts/check.sh
+$ oxlint --type-aware src scripts; s=$?; oxlint .; exit $((s>0?s:$?))
+Found 0 warnings and 0 errors.
+Finished in 1.7s on 82 files with 57 rules using 4 threads.
+Found 0 warnings and 0 errors.
+Finished in 957ms on 85 files with 34 rules using 4 threads.
+$ tsc --noEmit

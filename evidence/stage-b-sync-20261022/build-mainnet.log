@@ -1,0 +1,147 @@
+vite v6.4.4 building for production...
+
+(!) outDir /tmp/dot-stage-b-20261022/build-mainnet is not inside project root and will not be emptied.
+Use --emptyOutDir to override.
+
+transforming...
+node_modules/@base-org/account/node_modules/ox/_esm/core/Address.js (6:21): A comment
+
+"/*#__PURE__*/"
+
+in "node_modules/@base-org/account/node_modules/ox/_esm/core/Address.js" contains an annotation that Rollup cannot interpret due to the position of the comment. The comment will be removed to avoid issues.
+node_modules/@base-org/account/node_modules/ox/_esm/core/Base64.js (6:27): A comment
+
+"/*#__PURE__*/"
+
+in "node_modules/@base-org/account/node_modules/ox/_esm/core/Base64.js" contains an annotation that Rollup cannot interpret due to the position of the comment. The comment will be removed to avoid issues.
+node_modules/@coinbase/wallet-sdk/node_modules/ox/_esm/core/Address.js (6:21): A comment
+
+"/*#__PURE__*/"
+
+in "node_modules/@coinbase/wallet-sdk/node_modules/ox/_esm/core/Address.js" contains an annotation that Rollup cannot interpret due to the position of the comment. The comment will be removed to avoid issues.
+node_modules/@coinbase/wallet-sdk/node_modules/ox/_esm/core/Base64.js (6:27): A comment
+
+"/*#__PURE__*/"
+
+in "node_modules/@coinbase/wallet-sdk/node_modules/ox/_esm/core/Base64.js" contains an annotation that Rollup cannot interpret due to the position of the comment. The comment will be removed to avoid issues.
+node_modules/porto/node_modules/ox/_esm/core/Base64.js (6:27): A comment
+
+"/*#__PURE__*/"
+
+in "node_modules/porto/node_modules/ox/_esm/core/Base64.js" contains an annotation that Rollup cannot interpret due to the position of the comment. The comment will be removed to avoid issues.
+node_modules/@base-org/account/node_modules/ox/_esm/core/internal/cursor.js (2:21): A comment
+
+"/*#__PURE__*/"
+
+in "node_modules/@base-org/account/node_modules/ox/_esm/core/internal/cursor.js" contains an annotation that Rollup cannot interpret due to the position of the comment. The comment will be removed to avoid issues.
+node_modules/@coinbase/wallet-sdk/node_modules/ox/_esm/core/internal/cursor.js (2:21): A comment
+
+"/*#__PURE__*/"
+
+in "node_modules/@coinbase/wallet-sdk/node_modules/ox/_esm/core/internal/cursor.js" contains an annotation that Rollup cannot interpret due to the position of the comment. The comment will be removed to avoid issues.
+node_modules/porto/node_modules/zod/v4/core/util.js (400:0): A comment
+
+"// Wrapped in a `@__PURE__` IIFE: esbuild never tree-shakes a top-level initializer that contains a member access on `Number`, so the bare object literal survived into every bundle."
+
+in "node_modules/porto/node_modules/zod/v4/core/util.js" contains an annotation that Rollup cannot interpret due to the position of the comment. The comment will be removed to avoid issues.
+node_modules/porto/node_modules/zod/v4/core/regexes.js (74:0): A comment
+
+"/** Anchors a pattern source. The interpolation lives here rather than at the call site because
+ * esbuild will not drop a `@__PURE__` call whose own argument interpolates a variable, but it
+ * will drop `anchor(dateSource)`. Keeping it inline pinned `date` into every bundle. */"
+
+in "node_modules/porto/node_modules/zod/v4/core/regexes.js" contains an annotation that Rollup cannot interpret due to the position of the comment. The comment will be removed to avoid issues.
+✓ 6485 modules transformed.
+rendering chunks...
+computing gzip size...
+../../../tmp/dot-stage-b-20261022/build-mainnet/index.html                                        1.02 kB │ gzip:   0.60 kB
+../../../tmp/dot-stage-b-20261022/build-mainnet/build-provenance.json                            37.12 kB │ gzip:  13.06 kB
+../../../tmp/dot-stage-b-20261022/build-mainnet/assets/index-CIibkDux.css                        24.37 kB │ gzip:   5.15 kB
+../../../tmp/dot-stage-b-20261022/build-mainnet/assets/cursor-B7oslT2K.js                         0.26 kB │ gzip:   0.22 kB
+../../../tmp/dot-stage-b-20261022/build-mainnet/assets/chevron-left-ZrrHyIK0.js                   0.40 kB │ gzip:   0.28 kB
+../../../tmp/dot-stage-b-20261022/build-mainnet/assets/chevron-top-eFwXbZ16.js                    0.40 kB │ gzip:   0.28 kB
+../../../tmp/dot-stage-b-20261022/build-mainnet/assets/external-link-Br8xgJi5.js                  0.40 kB │ gzip:   0.28 kB
+../../../tmp/dot-stage-b-20261022/build-mainnet/assets/chevron-bottom-B_t2a5Uc.js                 0.40 kB │ gzip:   0.28 kB
+../../../tmp/dot-stage-b-20261022/build-mainnet/assets/chevron-right-Z2MF0fz2.js                  0.40 kB │ gzip:   0.27 kB
+../../../tmp/dot-stage-b-20261022/build-mainnet/assets/arrow-top-BNV7C_aJ.js                      0.41 kB │ gzip:   0.28 kB
+../../../tmp/dot-stage-b-20261022/build-mainnet/assets/arrow-bottom-4-dz7oRo.js                   0.41 kB │ gzip:   0.29 kB
+../../../tmp/dot-stage-b-20261022/build-mainnet/assets/arrow-left-DstFs8aI.js                     0.41 kB │ gzip:   0.29 kB
+../../../tmp/dot-stage-b-20261022/build-mainnet/assets/arrow-right-CuRxXAnb.js                    0.42 kB │ gzip:   0.29 kB
+../../../tmp/dot-stage-b-20261022/build-mainnet/assets/off-Cp4xLiTk.js                            0.43 kB │ gzip:   0.29 kB
+../../../tmp/dot-stage-b-20261022/build-mainnet/assets/search-CNvsoN_i.js                         0.44 kB │ gzip:   0.30 kB
+../../../tmp/dot-stage-b-20261022/build-mainnet/assets/close-hxwXYtM7.js                          0.44 kB │ gzip:   0.29 kB
+../../../tmp/dot-stage-b-20261022/build-mainnet/assets/all-wallets-nLfWokNb.js                    0.45 kB │ gzip:   0.26 kB
+../../../tmp/dot-stage-b-20261022/build-mainnet/assets/filters-83DNO93n.js                        0.45 kB │ gzip:   0.28 kB
+../../../tmp/dot-stage-b-20261022/build-mainnet/assets/info-circle-CclAleNZ.js                    0.47 kB │ gzip:   0.30 kB
+../../../tmp/dot-stage-b-20261022/build-mainnet/assets/more-R-StRxoE.js                           0.49 kB │ gzip:   0.31 kB
+../../../tmp/dot-stage-b-20261022/build-mainnet/assets/refresh-BFixbtGn.js                        0.49 kB │ gzip:   0.32 kB
+../../../tmp/dot-stage-b-20261022/build-mainnet/assets/warning-circle-DX6PVk5q.js                 0.50 kB │ gzip:   0.31 kB
+../../../tmp/dot-stage-b-20261022/build-mainnet/assets/coinPlaceholder-B0RzMhao.js                0.50 kB │ gzip:   0.35 kB
+../../../tmp/dot-stage-b-20261022/build-mainnet/assets/compass-WJ4wfXWS.js                        0.52 kB │ gzip:   0.34 kB
+../../../tmp/dot-stage-b-20261022/build-mainnet/assets/swapVertical-GYdvIXh9.js                   0.55 kB │ gzip:   0.34 kB
+../../../tmp/dot-stage-b-20261022/build-mainnet/assets/swapHorizontal-CTIuWKrl.js                 0.55 kB │ gzip:   0.33 kB
+../../../tmp/dot-stage-b-20261022/build-mainnet/assets/x-CQJFByl3.js                              0.57 kB │ gzip:   0.39 kB
+../../../tmp/dot-stage-b-20261022/build-mainnet/assets/cursor-transparent-CzNJgshM.js             0.58 kB │ gzip:   0.35 kB
+../../../tmp/dot-stage-b-20261022/build-mainnet/assets/twitterIcon-Rms4x8UU.js                    0.58 kB │ gzip:   0.38 kB
+../../../tmp/dot-stage-b-20261022/build-mainnet/assets/mobile-Tybb4nYd.js                         0.59 kB │ gzip:   0.32 kB
+../../../tmp/dot-stage-b-20261022/build-mainnet/assets/checkmark-bold-BL4pmXA5.js                 0.65 kB │ gzip:   0.43 kB
+../../../tmp/dot-stage-b-20261022/build-mainnet/assets/etherscan-BR28t_HJ.js                      0.70 kB │ gzip:   0.45 kB
+../../../tmp/dot-stage-b-20261022/build-mainnet/assets/checkmark-Cv4_YSDZ.js                      0.71 kB │ gzip:   0.47 kB
+../../../tmp/dot-stage-b-20261022/build-mainnet/assets/help-circle-DxlLjuv4.js                    0.71 kB │ gzip:   0.43 kB
+../../../tmp/dot-stage-b-20261022/build-mainnet/assets/wallet-CGmBfrCR.js                         0.72 kB │ gzip:   0.42 kB
+../../../tmp/dot-stage-b-20261022/build-mainnet/assets/plus-bIKr8sWq.js                           0.76 kB │ gzip:   0.42 kB
+../../../tmp/dot-stage-b-20261022/build-mainnet/assets/verify-filled-ClgidYEa.js                  0.77 kB │ gzip:   0.47 kB
+../../../tmp/dot-stage-b-20261022/build-mainnet/assets/add-CDY8uBno.js                            0.77 kB │ gzip:   0.43 kB
+../../../tmp/dot-stage-b-20261022/build-mainnet/assets/google-Cn5Lxt3q.js                         0.81 kB │ gzip:   0.45 kB
+../../../tmp/dot-stage-b-20261022/build-mainnet/assets/three-dots-Cnw-osu5.js                     0.84 kB │ gzip:   0.41 kB
+../../../tmp/dot-stage-b-20261022/build-mainnet/assets/clock-C7YjuJnA.js                          0.84 kB │ gzip:   0.47 kB
+../../../tmp/dot-stage-b-20261022/build-mainnet/assets/disconnect-fm9RGWe3.js                     0.89 kB │ gzip:   0.51 kB
+../../../tmp/dot-stage-b-20261022/build-mainnet/assets/twitch-zSM_99zw.js                         0.90 kB │ gzip:   0.50 kB
+../../../tmp/dot-stage-b-20261022/build-mainnet/assets/bank-CSVSEhdL.js                           0.94 kB │ gzip:   0.52 kB
+../../../tmp/dot-stage-b-20261022/build-mainnet/assets/apple-BxYPNrXh.js                          0.96 kB │ gzip:   0.53 kB
+../../../tmp/dot-stage-b-20261022/build-mainnet/assets/play-store-COM8JWdL.js                     1.01 kB │ gzip:   0.52 kB
+../../../tmp/dot-stage-b-20261022/build-mainnet/assets/farcaster-BhCk9lR-.js                      1.02 kB │ gzip:   0.53 kB
+../../../tmp/dot-stage-b-20261022/build-mainnet/assets/arrow-bottom-circle-HEAPdZ4F.js            1.13 kB │ gzip:   0.53 kB
+../../../tmp/dot-stage-b-20261022/build-mainnet/assets/github-B43VHHgd.js                         1.13 kB │ gzip:   0.60 kB
+../../../tmp/dot-stage-b-20261022/build-mainnet/assets/swapHorizontalBold-D086GCFo.js             1.16 kB │ gzip:   0.61 kB
+../../../tmp/dot-stage-b-20261022/build-mainnet/assets/app-store-Beq-0gQd.js                      1.20 kB │ gzip:   0.67 kB
+../../../tmp/dot-stage-b-20261022/build-mainnet/assets/mail-BdoTioeH.js                           1.21 kB │ gzip:   0.65 kB
+../../../tmp/dot-stage-b-20261022/build-mainnet/assets/facebook-D5HSXXYx.js                       1.23 kB │ gzip:   0.64 kB
+../../../tmp/dot-stage-b-20261022/build-mainnet/assets/wallet-placeholder-BaIvi5a9.js             1.26 kB │ gzip:   0.59 kB
+../../../tmp/dot-stage-b-20261022/build-mainnet/assets/desktop-CPx4KlsP.js                        1.27 kB │ gzip:   0.64 kB
+../../../tmp/dot-stage-b-20261022/build-mainnet/assets/discord-C_20iCG8.js                        1.30 kB │ gzip:   0.65 kB
+../../../tmp/dot-stage-b-20261022/build-mainnet/assets/swapHorizontalMedium-DssKd-m9.js           1.30 kB │ gzip:   0.68 kB
+../../../tmp/dot-stage-b-20261022/build-mainnet/assets/recycle-horizontal-andkhXeY.js             1.35 kB │ gzip:   0.70 kB
+../../../tmp/dot-stage-b-20261022/build-mainnet/assets/extension-D1X0otzE.js                      1.43 kB │ gzip:   0.69 kB
+../../../tmp/dot-stage-b-20261022/build-mainnet/assets/telegram-BnWJLLHD.js                       1.45 kB │ gzip:   0.84 kB
+../../../tmp/dot-stage-b-20261022/build-mainnet/assets/swapHorizontalRoundedBold-CQXLk7V6.js      1.46 kB │ gzip:   0.77 kB
+../../../tmp/dot-stage-b-20261022/build-mainnet/assets/verify-D-6lTfn1.js                         1.47 kB │ gzip:   0.71 kB
+../../../tmp/dot-stage-b-20261022/build-mainnet/assets/qr-code-CyxwWhnb.js                        1.52 kB │ gzip:   0.53 kB
+../../../tmp/dot-stage-b-20261022/build-mainnet/assets/browser-84zk4dy7.js                        1.58 kB │ gzip:   0.78 kB
+../../../tmp/dot-stage-b-20261022/build-mainnet/assets/network-placeholder-C-KeVgXP.js            1.65 kB │ gzip:   0.73 kB
+../../../tmp/dot-stage-b-20261022/build-mainnet/assets/id-D1lb-f6i.js                             1.75 kB │ gzip:   0.81 kB
+../../../tmp/dot-stage-b-20261022/build-mainnet/assets/nftPlaceholder-BaMfeVaU.js                 1.75 kB │ gzip:   0.87 kB
+../../../tmp/dot-stage-b-20261022/build-mainnet/assets/info-CXF4lALO.js                           2.26 kB │ gzip:   1.14 kB
+../../../tmp/dot-stage-b-20261022/build-mainnet/assets/exclamation-triangle-DWGIUaIA.js           2.42 kB │ gzip:   1.13 kB
+../../../tmp/dot-stage-b-20261022/build-mainnet/assets/send-C8E8BTGY.js                           2.42 kB │ gzip:   1.27 kB
+../../../tmp/dot-stage-b-20261022/build-mainnet/assets/card-BBNETmV2.js                           2.59 kB │ gzip:   1.17 kB
+../../../tmp/dot-stage-b-20261022/build-mainnet/assets/chrome-store-DWMQsMDX.js                   2.59 kB │ gzip:   1.01 kB
+../../../tmp/dot-stage-b-20261022/build-mainnet/assets/reown-logo-sACv3Q8Z.js                     2.60 kB │ gzip:   1.06 kB
+../../../tmp/dot-stage-b-20261022/build-mainnet/assets/lightbulb-BBAtMg11.js                      2.72 kB │ gzip:   1.22 kB
+../../../tmp/dot-stage-b-20261022/build-mainnet/assets/ccip-CXN5TQML.js                           3.04 kB │ gzip:   1.39 kB
+../../../tmp/dot-stage-b-20261022/build-mainnet/assets/image-Bg4jx3hJ.js                          3.49 kB │ gzip:   1.51 kB
+../../../tmp/dot-stage-b-20261022/build-mainnet/assets/copy-DIcmXgZz.js                           3.82 kB │ gzip:   1.47 kB
+../../../tmp/dot-stage-b-20261022/build-mainnet/assets/walletconnect-D-WDzHWW.js                  4.06 kB │ gzip:   1.66 kB
+../../../tmp/dot-stage-b-20261022/build-mainnet/assets/index-DSzKCfuH.js                         38.52 kB │ gzip:   9.38 kB
+../../../tmp/dot-stage-b-20261022/build-mainnet/assets/w3m-modal-CoiALW_P.js                     40.06 kB │ gzip:   9.39 kB
+../../../tmp/dot-stage-b-20261022/build-mainnet/assets/index-DrAshLsx-CUNArg1d.js                41.11 kB │ gzip:  12.78 kB
+../../../tmp/dot-stage-b-20261022/build-mainnet/assets/basic-ClAqHecF.js                        143.14 kB │ gzip:  33.11 kB
+../../../tmp/dot-stage-b-20261022/build-mainnet/assets/index.es-DSKwt6Ny.js                     400.77 kB │ gzip: 115.21 kB
+../../../tmp/dot-stage-b-20261022/build-mainnet/assets/core-CyCg2BCs.js                         484.67 kB │ gzip: 132.18 kB
+../../../tmp/dot-stage-b-20261022/build-mainnet/assets/index-DU75K_pB.js                      1,502.70 kB │ gzip: 466.22 kB
+
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rollupOptions.output.manualChunks to improve chunking: https://rollupjs.org/configuration-options/#output-manualchunks
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+✓ built in 17.39s

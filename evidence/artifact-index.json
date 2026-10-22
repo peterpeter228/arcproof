@@ -1,6 +1,6 @@
 {
-  "stage": "NATIVE_SETTLEMENT_CANDIDATE_READY_FOR_PARENT_REVIEW",
-  "nextStage": "PARENT_REVIEW_THEN_AUTHORIZED_STUDIO_READONLY_ACCEPTANCE",
+  "stage": "SYNC_AND_TESTS_VERIFIED_BROWSER_ACCEPTANCE_PARTIAL",
+  "nextStage": "STABLE_PREVIEW_VISUAL_AND_DOWNLOAD_REGRESSION",
   "sourceSnapshot": "Studio 052720 plus verified final2 native source",
   "basePatchSha256": "1197b674362cabba796f8ebf9925dff12f4a614748dd330704417bcdcb1fecf3",
   "responsivePatchSha256": "95e04b41742de63ef4dd7911a40afd08153003f0f8d6ad246f1663600308db09",
@@ -635,5 +635,54 @@
     "realBrowser": "blocked",
     "flowRecovery": "partial",
     "historicalFieldsBelowNotFreshAcceptance": true
-  }
+  },
+  "stageBCheckpoint": {
+    "recordedAt": "2026-10-22T05:22:00Z",
+    "status": "SYNC_AND_TESTS_VERIFIED_BROWSER_ACCEPTANCE_PARTIAL",
+    "approvedCandidate": "83968f11f6791b56d6c74e958e3c6f486cb02087",
+    "mergeCommit": "9b8bee11d205d6d056c7ddc8c42e02dd0f904849",
+    "sourceSnapshot": "8752073c7c83c227fc642c71deafd6583c9e69e82d490e3d43b7ed340a1a50a7",
+    "sourceInputs": 95,
+    "studioFullBuildSnapshot": "508d55726cff7fb09f505678822d61eed848bac165f1d925a039115053f7fb2a",
+    "studioFullBuildInputs": 160,
+    "actualStudioTests": {
+      "vitest": {
+        "passed": 521,
+        "files": 34
+      },
+      "forge": {
+        "passed": 73,
+        "suites": 5,
+        "failed": 0,
+        "skipped": 0
+      },
+      "check": "PASS",
+      "testnetBuild": "PASS",
+      "mainnetBuild": "PASS"
+    },
+    "exportSourceMatches": 95,
+    "envPreserved": true,
+    "evidenceDirectory": "evidence/stage-b-sync-20261022",
+    "report": "docs/DOT_STAGE_B_COMPLETION_20261022.md",
+    "authorityNote": "This checkpoint supersedes historical current-stage labels only. Historical test matrix items and original effort observations are retained and are not retroactively marked passed or measured.",
+    "restrictions": [
+      "No deployment",
+      "No wallet signatures",
+      "No transfers",
+      "No public release",
+      "No contest submission"
+    ],
+    "eligibilityVerified": false,
+    "mainnetAcceptance": "NOT_RUN",
+    "paymentDate": null,
+    "previewIdentity": "MATCHES_STUDIO_BUILD_INPUTS",
+    "browserAcceptance": {
+      "boundedFunctionalChecks": "PASS",
+      "jsonDownload": "UNVERIFIED_TIMEOUT_NO_FILE_OBSERVED",
+      "desktopVisual": "RECOVERED_AND_OBSERVED",
+      "completeResponsiveVisualRegression": "NOT_RUN",
+      "connectionStability": "RECONNECTED_CURRENT_PREVIEW_OPEN"
+    }
+  },
+  "historicalIndexNote": "Original files/sourceSnapshot fields describe prior checkpoint inventory. stageBCheckpoint references the current independently verified source and evidence; do not mix full Studio build snapshot with the approved clean-source subset."
 }

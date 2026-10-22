@@ -1,0 +1,13 @@
+{
+  "stage": "after preview config reload and bounded UI QA",
+  "sourceInputs": 95,
+  "mismatches": [],
+  "envPreserved": true,
+  "viteConfigSha256": "875d5eac007487c9632ed76cc8a99303ce0cd22e01c46895efc46eb68743830a",
+  "postStyleRecovery": {
+    "atUTC": "2026-10-22T05:20:54Z",
+    "approvedInputs": 95,
+    "mismatches": 0,
+    "method": "Live Studio SHA256 comparison against pinned approved sync allowlist; all95 match after mtime-only recovery."
+  }
+}

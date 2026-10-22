@@ -1,9 +1,9 @@
 {
   "schemaVersion": "1.0",
   "project": "ArcProof",
-  "artifactRole": "unexecuted_test_record_template",
+  "artifactRole": "historical_matrix_template_with_actual_stage_b_run",
   "matrixPath": "../docs/TEST_MATRIX.md",
-  "note": "28项均为待执行验收。编写矩阵、检查JSON格式或阅读文档不算运行应用测试；不填伪造的命令输出、tx hash或passed状态。",
+  "note": "The original 28-item matrix below is historical/unexecuted as recorded. Current actual command results are separately recorded in stageBCheckpoint and linked logs; they do not certify wallet, mainnet or every historical matrix item.",
   "runStartedAt": null,
   "runFinishedAt": null,
   "codeCommit": null,
@@ -456,5 +456,53 @@
     "realBrowser": "blocked",
     "flowRecovery": "partial",
     "historicalFieldsBelowNotFreshAcceptance": true
+  },
+  "stageBCheckpoint": {
+    "recordedAt": "2026-10-22T05:22:00Z",
+    "status": "SYNC_AND_TESTS_VERIFIED_BROWSER_ACCEPTANCE_PARTIAL",
+    "approvedCandidate": "83968f11f6791b56d6c74e958e3c6f486cb02087",
+    "mergeCommit": "9b8bee11d205d6d056c7ddc8c42e02dd0f904849",
+    "sourceSnapshot": "8752073c7c83c227fc642c71deafd6583c9e69e82d490e3d43b7ed340a1a50a7",
+    "sourceInputs": 95,
+    "studioFullBuildSnapshot": "508d55726cff7fb09f505678822d61eed848bac165f1d925a039115053f7fb2a",
+    "studioFullBuildInputs": 160,
+    "actualStudioTests": {
+      "vitest": {
+        "passed": 521,
+        "files": 34
+      },
+      "forge": {
+        "passed": 73,
+        "suites": 5,
+        "failed": 0,
+        "skipped": 0
+      },
+      "check": "PASS",
+      "testnetBuild": "PASS",
+      "mainnetBuild": "PASS"
+    },
+    "exportSourceMatches": 95,
+    "envPreserved": true,
+    "evidenceDirectory": "evidence/stage-b-sync-20261022",
+    "report": "docs/DOT_STAGE_B_COMPLETION_20261022.md",
+    "authorityNote": "This checkpoint supersedes historical current-stage labels only. Historical test matrix items and original effort observations are retained and are not retroactively marked passed or measured.",
+    "restrictions": [
+      "No deployment",
+      "No wallet signatures",
+      "No transfers",
+      "No public release",
+      "No contest submission"
+    ],
+    "eligibilityVerified": false,
+    "mainnetAcceptance": "NOT_RUN",
+    "paymentDate": null,
+    "previewIdentity": "MATCHES_STUDIO_BUILD_INPUTS",
+    "browserAcceptance": {
+      "boundedFunctionalChecks": "PASS",
+      "jsonDownload": "UNVERIFIED_TIMEOUT_NO_FILE_OBSERVED",
+      "desktopVisual": "RECOVERED_AND_OBSERVED",
+      "completeResponsiveVisualRegression": "NOT_RUN",
+      "connectionStability": "RECONNECTED_CURRENT_PREVIEW_OPEN"
+    }
   }
 }

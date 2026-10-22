@@ -1,11 +1,11 @@
 {
   "schemaVersion": "1.0",
   "project": "ArcProof",
-  "artifactRole": "live_g0_checkpoint",
+  "artifactRole": "historical_gates_with_current_stage_b_checkpoint",
   "preparedOn": "2026-10-20",
   "note": "Imported planning pack verified; current official-rule research is partial. No G0 pass or implementation authorization inferred.",
   "project_started_at": "2026-10-20T03:04:27Z",
-  "currentStage": "NATIVE_SETTLEMENT_CANDIDATE_READY_FOR_PARENT_REVIEW",
+  "currentStage": "SYNC_AND_TESTS_VERIFIED_BROWSER_ACCEPTANCE_PARTIAL",
   "g0_status": "blocked",
   "g0_pass": false,
   "grantEngineeringAllowed": false,
@@ -225,7 +225,7 @@
     "applicationCommit": null,
     "studioProjectUrl": "https://studio.arc.io/app/2dbdda0d-1b70-408b-ae23-cccb8a4b8753?thread=12185290-60f7-4446-9e99-5ca51e8c30b0"
   },
-  "nextAction": "Review new candidate, persist authorized private source, and verify in supported Studio preview before user wallet actions.",
+  "nextAction": "Close receipt JSON browser-download acceptance and complete responsive visual regression in the existing Studio; no deployment or signing.",
   "repository": {
     "url": "https://github.com/peterpeter228/arcproof",
     "visibility": "private",
@@ -295,5 +295,53 @@
     "realBrowser": "blocked",
     "flowRecovery": "partial",
     "historicalFieldsBelowNotFreshAcceptance": true
+  },
+  "stageBCheckpoint": {
+    "recordedAt": "2026-10-22T05:22:00Z",
+    "status": "SYNC_AND_TESTS_VERIFIED_BROWSER_ACCEPTANCE_PARTIAL",
+    "approvedCandidate": "83968f11f6791b56d6c74e958e3c6f486cb02087",
+    "mergeCommit": "9b8bee11d205d6d056c7ddc8c42e02dd0f904849",
+    "sourceSnapshot": "8752073c7c83c227fc642c71deafd6583c9e69e82d490e3d43b7ed340a1a50a7",
+    "sourceInputs": 95,
+    "studioFullBuildSnapshot": "508d55726cff7fb09f505678822d61eed848bac165f1d925a039115053f7fb2a",
+    "studioFullBuildInputs": 160,
+    "actualStudioTests": {
+      "vitest": {
+        "passed": 521,
+        "files": 34
+      },
+      "forge": {
+        "passed": 73,
+        "suites": 5,
+        "failed": 0,
+        "skipped": 0
+      },
+      "check": "PASS",
+      "testnetBuild": "PASS",
+      "mainnetBuild": "PASS"
+    },
+    "exportSourceMatches": 95,
+    "envPreserved": true,
+    "evidenceDirectory": "evidence/stage-b-sync-20261022",
+    "report": "docs/DOT_STAGE_B_COMPLETION_20261022.md",
+    "authorityNote": "This checkpoint supersedes historical current-stage labels only. Historical test matrix items and original effort observations are retained and are not retroactively marked passed or measured.",
+    "restrictions": [
+      "No deployment",
+      "No wallet signatures",
+      "No transfers",
+      "No public release",
+      "No contest submission"
+    ],
+    "eligibilityVerified": false,
+    "mainnetAcceptance": "NOT_RUN",
+    "paymentDate": null,
+    "previewIdentity": "MATCHES_STUDIO_BUILD_INPUTS",
+    "browserAcceptance": {
+      "boundedFunctionalChecks": "PASS",
+      "jsonDownload": "UNVERIFIED_TIMEOUT_NO_FILE_OBSERVED",
+      "desktopVisual": "RECOVERED_AND_OBSERVED",
+      "completeResponsiveVisualRegression": "NOT_RUN",
+      "connectionStability": "RECONNECTED_CURRENT_PREVIEW_OPEN"
+    }
   }
 }

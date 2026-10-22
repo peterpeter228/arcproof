@@ -1,0 +1,109 @@
+$ vitest run
+
+[1m[30m[46m RUN [49m[39m[22m [36mv4.1.12 [39m[90m/home/user/app[39m
+
+[90mstdout[2m | src/security/debug-capture.test.ts[2m > [22m[2mthe application has no parent-frame capture bridge[2m > [22m[2mdoes not install or enable capture: untrusted parent
+[22m[39msynthetic debug regression value
+synthetic debug regression value
+synthetic debug regression value
+
+[90mstderr[2m | src/security/debug-capture.test.ts[2m > [22m[2mthe application has no parent-frame capture bridge[2m > [22m[2mdoes not install or enable capture: untrusted parent
+[22m[39msynthetic debug regression value
+synthetic debug regression value
+
+[90mstdout[2m | src/security/debug-capture.test.ts[2m > [22m[2mthe application has no parent-frame capture bridge[2m > [22m[2mdoes not install or enable capture: opaque parent
+[22m[39msynthetic debug regression value
+synthetic debug regression value
+synthetic debug regression value
+
+[90mstderr[2m | src/security/debug-capture.test.ts[2m > [22m[2mthe application has no parent-frame capture bridge[2m > [22m[2mdoes not install or enable capture: opaque parent
+[22m[39msynthetic debug regression value
+synthetic debug regression value
+
+[90mstdout[2m | src/security/debug-capture.test.ts[2m > [22m[2mthe application has no parent-frame capture bridge[2m > [22m[2mdoes not install or enable capture: missing origin
+[22m[39msynthetic debug regression value
+synthetic debug regression value
+synthetic debug regression value
+
+[90mstderr[2m | src/security/debug-capture.test.ts[2m > [22m[2mthe application has no parent-frame capture bridge[2m > [22m[2mdoes not install or enable capture: missing origin
+[22m[39msynthetic debug regression value
+synthetic debug regression value
+
+[90mstdout[2m | src/security/debug-capture.test.ts[2m > [22m[2mthe application has no parent-frame capture bridge[2m > [22m[2mdoes not install or enable capture: wildcard origin
+[22m[39msynthetic debug regression value
+synthetic debug regression value
+synthetic debug regression value
+
+[90mstderr[2m | src/security/debug-capture.test.ts[2m > [22m[2mthe application has no parent-frame capture bridge[2m > [22m[2mdoes not install or enable capture: wildcard origin
+[22m[39msynthetic debug regression value
+synthetic debug regression value
+
+[90mstdout[2m | src/security/debug-capture.test.ts[2m > [22m[2mthe application has no parent-frame capture bridge[2m > [22m[2mdoes not install or enable capture: wrong source
+[22m[39msynthetic debug regression value
+synthetic debug regression value
+synthetic debug regression value
+
+[90mstderr[2m | src/security/debug-capture.test.ts[2m > [22m[2mthe application has no parent-frame capture bridge[2m > [22m[2mdoes not install or enable capture: wrong source
+[22m[39msynthetic debug regression value
+synthetic debug regression value
+
+[90mstdout[2m | src/security/debug-capture.test.ts[2m > [22m[2mthe application has no parent-frame capture bridge[2m > [22m[2mdoes not install or enable capture: Studio-looking parent (not authorization)
+[22m[39msynthetic debug regression value
+synthetic debug regression value
+synthetic debug regression value
+
+[90mstderr[2m | src/security/debug-capture.test.ts[2m > [22m[2mthe application has no parent-frame capture bridge[2m > [22m[2mdoes not install or enable capture: Studio-looking parent (not authorization)
+[22m[39msynthetic debug regression value
+synthetic debug regression value
+
+[90mstdout[2m | src/security/debug-capture.test.ts[2m > [22m[2mthe application has no parent-frame capture bridge[2m > [22m[2mdoes not install or enable capture: same-origin parent
+[22m[39msynthetic debug regression value
+synthetic debug regression value
+synthetic debug regression value
+
+[90mstderr[2m | src/security/debug-capture.test.ts[2m > [22m[2mthe application has no parent-frame capture bridge[2m > [22m[2mdoes not install or enable capture: same-origin parent
+[22m[39msynthetic debug regression value
+synthetic debug regression value
+
+ [32m✓[39m src/security/debug-capture.test.ts [2m([22m[2m7 tests[22m[2m)[22m[33m 531[2mms[22m[39m
+     [33m[2m✓[22m[39m does not install or enable capture: untrusted parent [33m 454[2mms[22m[39m
+ [32m✓[39m src/arcproof/__tests__/mainnetWalletBootstrap.test.ts [2m([22m[2m2 tests[22m[2m)[22m[33m 1161[2mms[22m[39m
+     [33m[2m✓[22m[39m ignores EIP-6963 discovery, provider announcements and wallet connect events [33m 1155[2mms[22m[39m
+ [32m✓[39m src/arcproof/__tests__/testnetUi.test.tsx [2m([22m[2m23 tests[22m[2m)[22m[33m 573[2mms[22m[39m
+ [32m✓[39m src/arcproof/__tests__/receiptClarity.test.tsx [2m([22m[2m25 tests[22m[2m)[22m[33m 389[2mms[22m[39m
+ [32m✓[39m src/arcproof/__tests__/uiSemantics.test.tsx [2m([22m[2m9 tests[22m[2m)[22m[32m 208[2mms[22m[39m
+ [32m✓[39m src/arcproof/__tests__/readonlyRoutes.test.tsx [2m([22m[2m20 tests[22m[2m)[22m[33m 439[2mms[22m[39m
+ [32m✓[39m src/arcproof/__tests__/testnetClient.test.ts [2m([22m[2m64 tests[22m[2m)[22m[32m 191[2mms[22m[39m
+ [32m✓[39m src/arcproof/__tests__/exportObservations.test.ts [2m([22m[2m32 tests[22m[2m)[22m[32m 45[2mms[22m[39m
+ [32m✓[39m src/arcproof/__tests__/T24_exportUtils.test.ts [2m([22m[2m27 tests[22m[2m)[22m[32m 18[2mms[22m[39m
+ [32m✓[39m src/arcproof/__tests__/receiptDiagnosticsUi.test.tsx [2m([22m[2m14 tests[22m[2m)[22m[32m 144[2mms[22m[39m
+ [32m✓[39m src/arcproof/__tests__/intentInputValidation.test.ts [2m([22m[2m8 tests[22m[2m)[22m[32m 32[2mms[22m[39m
+ [32m✓[39m src/arcproof/__tests__/fixtureExportBoundary.test.tsx [2m([22m[2m11 tests[22m[2m)[22m[32m 28[2mms[22m[39m
+ [32m✓[39m src/arcproof/__tests__/T19_manifest.test.ts [2m([22m[2m18 tests[22m[2m)[22m[32m 23[2mms[22m[39m
+ [32m✓[39m src/arcproof/__tests__/T22_receiptVerifier.test.ts [2m([22m[2m29 tests[22m[2m)[22m[32m 16[2mms[22m[39m
+ [32m✓[39m src/arcproof/__tests__/nativeSettlement.test.ts [2m([22m[2m56 tests[22m[2m)[22m[32m 79[2mms[22m[39m
+ [32m✓[39m src/arcproof/__tests__/finalReviewRegressions.test.tsx [2m([22m[2m12 tests[22m[2m)[22m[32m 19[2mms[22m[39m
+ [32m✓[39m src/arcproof/__tests__/unknownRequestIdentity.test.ts [2m([22m[2m8 tests[22m[2m)[22m[32m 62[2mms[22m[39m
+ [32m✓[39m src/arcproof/__tests__/mainnetReadonlyUi.test.tsx [2m([22m[2m10 tests[22m[2m)[22m[32m 178[2mms[22m[39m
+ [32m✓[39m src/arcproof/__tests__/walletIntents.test.ts [2m([22m[2m12 tests[22m[2m)[22m[32m 46[2mms[22m[39m
+ [32m✓[39m src/arcproof/__tests__/submissions.test.ts [2m([22m[2m10 tests[22m[2m)[22m[32m 17[2mms[22m[39m
+ [32m✓[39m src/arcproof/__tests__/T18_amountParser.test.ts [2m([22m[2m30 tests[22m[2m)[22m[32m 10[2mms[22m[39m
+ [32m✓[39m src/arcproof/__tests__/networkPolicy.test.ts [2m([22m[2m9 tests[22m[2m)[22m[32m 20[2mms[22m[39m
+ [32m✓[39m src/arcproof/__tests__/offlineDemo.test.tsx [2m([22m[2m2 tests[22m[2m)[22m[32m 102[2mms[22m[39m
+ [32m✓[39m src/arcproof/__tests__/T20_preparedPayment.test.ts [2m([22m[2m22 tests[22m[2m)[22m[32m 14[2mms[22m[39m
+ [32m✓[39m src/arcproof/__tests__/argonExportDiagnostics.test.ts [2m([22m[2m22 tests[22m[2m)[22m[32m 26[2mms[22m[39m
+ [32m✓[39m src/arcproof/__tests__/buildProvenance.test.ts [2m([22m[2m3 tests[22m[2m)[22m[32m 16[2mms[22m[39m
+ [32m✓[39m src/arcproof/__tests__/testnetIdentity.test.ts [2m([22m[2m12 tests[22m[2m)[22m[32m 16[2mms[22m[39m
+ [32m✓[39m src/arcproof/__tests__/buildIdentity.test.ts [2m([22m[2m4 tests[22m[2m)[22m[32m 5[2mms[22m[39m
+ [32m✓[39m src/arcproof/__tests__/nativeRepair.test.ts [2m([22m[2m8 tests[22m[2m)[22m[32m 10[2mms[22m[39m
+ [32m✓[39m src/arcproof/__tests__/argonVerifierBounds.test.ts [2m([22m[2m3 tests[22m[2m)[22m[32m 10[2mms[22m[39m
+ [32m✓[39m src/arcproof/__tests__/receiptCurrency.test.ts [2m([22m[2m3 tests[22m[2m)[22m[32m 4[2mms[22m[39m
+ [32m✓[39m src/arcproof/__tests__/unknownRequestUi.test.tsx [2m([22m[2m4 tests[22m[2m)[22m[32m 104[2mms[22m[39m
+ [32m✓[39m src/arcproof/__tests__/footerTargetSize.test.ts [2m([22m[2m1 test[22m[2m)[22m[32m 3[2mms[22m[39m
+ [32m✓[39m src/arcproof/__tests__/walletBootstrap.test.ts [2m([22m[2m1 test[22m[2m)[22m[32m 3[2mms[22m[39m
+
+[2m Test Files [22m [1m[32m34 passed[39m[22m[90m (34)[39m
+[2m      Tests [22m [1m[32m521 passed[39m[22m[90m (521)[39m
+[2m   Start at [22m 05:05:24
+[2m   Duration [22m 9.16s[2m (transform 1.50s, setup 0ms, import 10.01s, tests 4.54s, environment 7.45s)[22m
+
