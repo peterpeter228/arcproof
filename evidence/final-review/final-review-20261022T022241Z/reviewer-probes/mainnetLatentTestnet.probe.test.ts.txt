@@ -1,0 +1,30 @@
+// @vitest-environment jsdom
+import { describe, expect, it, vi } from 'vitest';
+import { memoryLocks } from '../__tests__/fixtures/safeBrowser';
+vi.mock('../networkPolicy', async () => {
+  const actual = await vi.importActual<typeof import('../networkPolicy')>('../networkPolicy');
+  return { ...actual, BUILD_NETWORK: actual.MAINNET_CONTEXT };
+});
+describe('PROBE mainnet build still constructs a write-enabled testnet service', () => {
+  it('testnet client/stores exist and testnet write guards pass under BUILD_NETWORK=mainnet', async () => {
+    const fetchSpy = vi.spyOn(globalThis, 'fetch');
+    const policy = await import('../networkPolicy');
+    expect(policy.BUILD_NETWORK.key).toBe('mainnet');
+    const svc = await import('../testnetClient');
+    const url = (svc.testnetService.client.transport as { url?: string }).url;
+    console.log('testnet client url in mainnet build:', url);
+    expect(url).toBe('https://rpc.testnet.arc.io');
+    expect(() => policy.assertWritesEnabled(policy.TESTNET_CONTEXT)).not.toThrow();
+    // A testnet wallet intent can still be persisted from the mainnet bundle if any code path calls it.
+    Object.defineProperty(navigator, 'locks', { value: memoryLocks(), configurable: true });
+    localStorage.clear();
+    const { runWalletIntent } = await import('../walletIntents');
+    const d = policy.TESTNET_CONTEXT.deployment!;
+    await expect(runWalletIntent({ chainId: d.chainId, deploymentId: d.deploymentId, kind: 'create', account: ('0x' + '1'.repeat(40)) as `0x${string}`,
+      to: d.contractAddress, data: '0x00', value: '0' }, async () => { throw new Error('stop before wallet'); })).rejects.toThrow('stop before wallet');
+    const keys = Object.keys(localStorage);
+    console.log('localStorage keys written from mainnet build:', keys);
+    expect(keys.some((k) => k.startsWith('arcproof:5042002:'))).toBe(true);
+    expect(fetchSpy).not.toHaveBeenCalled();
+  });
+});

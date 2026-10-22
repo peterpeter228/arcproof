@@ -1,6 +1,6 @@
 ## 2026-10-22 UTC 最终审查与界面完善（分支 final-review-20261022，未合并 main）
 
-基于 `8f748d3` 独立重建基线：462 项测试、lint/types、两种网络构建通过。修复 7 个低危问题（FR-01…07，先写红测再修复），新增免钱包 Overview 首页和统一设计系统，重做离线演示与收据结论显示。最终结果：485 项测试/31 个文件、check、testnet/mainnet 构建、4 种非法网络参数拒绝均通过；沙箱开启的真实 Chrome 浏览器验收 23/23 通过，外部请求为 0。源码快照 `8df6b66d…1432` → `b3bf6b03…8a67`。合约未改动，Forge 本轮未运行（本机无 Foundry），依赖审计因网络超时 BLOCKED。
+基于 `8f748d3` 独立重建基线：462 项测试、lint/types、两种网络构建通过。修复 7 个低危问题（FR-01…07；FR-01…04 有修复前红测，FR-06/07 有撤掉修复即失败的证据，FR-05 仅有审查探针复现、无红测），新增免钱包 Overview 首页和统一设计系统，重做离线演示与收据结论显示。最终结果：485 项测试/31 个文件、check、testnet/mainnet 构建、4 种非法网络参数拒绝均通过；沙箱开启的真实 Chrome 浏览器验收 23/23 通过，外部请求为 0。源码快照 `8df6b66d…1432` → `b3bf6b03…8a67`。合约未改动，Forge 本轮未运行（本机无 Foundry），依赖审计因网络超时 BLOCKED。
 
 未部署、未签名、未转账、未公开、未提交、未同步 Studio。主网部署、真实 USDC 交易、公开应用和仓库、视频仍是参赛硬门槛，资格解释待确认。见 [最终报告](docs/FINAL_REVIEW_AND_IMPROVEMENT_REPORT.md)、[参赛就绪表](docs/SUBMISSION_READINESS.md)、[评委演示指南](docs/JUDGE_DEMO_GUIDE.md) 和 `evidence/final-review/final-review-20261022T022241Z/REPORT.json`。以下内容为历史记录。
 

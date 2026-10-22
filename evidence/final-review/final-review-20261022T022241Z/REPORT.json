@@ -67,13 +67,22 @@
    "status": "FAIL (expected red)",
    "count": "7 failed / 12",
    "log": "logs/05-regressions-red.log",
-   "note": "FR-05 currency case already passed because the label fix landed before the test was written; its original reproduction is the reviewer probe recorded in the final report."
+   "note": "The 7 failures are FR-01 (2), FR-02 (1), FR-03 (3) and FR-04 (1). FR-05 was fixed before its test was written, so it never failed; its reproduction on 8f748d3 is the reviewer probe only (reviewer-probes/labelsAndExport.probe.test.tsx.txt). FR-06 and FR-07 tests were written with or after the fix; their failure without the fix is in logs/09 and logs/08."
   },
   {
    "id": "regressions-after-fix",
    "status": "PASS",
    "count": "12/12",
    "log": "logs/06-regressions-green.log"
+  },
+  {
+   "id": "fr06-fr07-without-fix",
+   "status": "FAIL (expected)",
+   "detail": "Fix reverted in a scratch worktree at the then-current HEAD; each targeted test fails.",
+   "log": [
+    "logs/09-fr06-without-fix.log",
+    "logs/08-fr07-without-fix.log"
+   ]
   },
   {
    "id": "fix-commit-standalone",
@@ -292,5 +301,8 @@
  },
  "notDone": [
   "No deployment, signing, transfer, publication, submission, Studio change, paid model call or Argon call was made in this run."
+ ],
+ "corrections": [
+  "Commit 49253ea message says every finding was reproduced with a failing test before the fix; that holds for FR-01..FR-04 only. See docs/FINAL_REVIEW_AND_IMPROVEMENT_REPORT.md section 4."
  ]
 }

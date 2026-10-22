@@ -35,9 +35,18 @@
 - 链参数已用 docs.arc.io 核对：Mainnet `5042`、`https://rpc.mainnet.arc.io`、`https://explorer.arc.io`，与代码一致。
 - 混合工具链能否算 “built in Arc Studio”：**资格待确认**，已备好询问草稿，但不会代为发出。
 
-## 4. 已修复的问题（每项都先写了失败的测试再修复）
+## 4. 已修复的问题
 
-复现记录：`logs/05-regressions-red.log`（12 项中 7 项失败）→ `logs/06-regressions-green.log`（12/12 通过）。修复提交 `49253ea` 在独立 git worktree 中单独验证：480 项测试和 check 全部通过。
+每项的复现方式并不相同，下面如实区分：
+
+| ID | 在 `8f748d3` 上的复现 | 回归测试的红→绿证据 |
+|---|---|---|
+| FR-01、FR-02、FR-03、FR-04 | 安全审查子任务的探针（`reviewer-probes/`），加上我写的回归测试 | 修复前失败（`logs/05-regressions-red.log`：12 项中 7 项失败，正好是这四项的 7 个用例），修复后通过（`logs/06-regressions-green.log`） |
+| FR-05 | 只有审查探针：`labelsAndExport.probe.test.tsx` 在 HEAD 上渲染出 2 处 “test USDC” | **没有红测**：修复先于测试完成，测试从未在修复前失败过 |
+| FR-06 | 审查列为“可能”（自比较），无可利用路径 | 测试写在修复之后；撤掉修复后该测试失败（`logs/09-fr06-without-fix.log`） |
+| FR-07 | 审查列为“可能”，由我读代码确认 | 测试与修复同时写；撤掉修复后该测试失败（`logs/08-fr07-without-fix.log`，2026-10-22 补做） |
+
+更正：已推送的提交 `49253ea` 的说明写了 “each reproduced on 8f748d3 with a failing test before the fix”，对 FR-05、FR-06、FR-07 不成立，以本表为准。已推送的历史不会重写。修复提交 `49253ea` 在独立 git worktree 中单独验证：480 项测试和 check 全部通过（仅有控制台输出，未存日志）。
 
 | ID | 位置 | 复现 | 影响 | 修复 | 回归测试 |
 |---|---|---|---|---|---|
@@ -116,7 +125,7 @@
 | 锁定安装 | PASS | `logs/01-install.log` |
 | lint（oxlint type-aware + 全仓库）+ tsc | PASS | `logs/02`（基线）、`logs/12`（最终） |
 | 单元/集成（vitest） | PASS 485/485，31 个文件（基线 462/29） | `logs/03`、`logs/13` |
-| 回归红→绿 | 7 项失败 → 12/12 通过 | `logs/05`、`logs/06` |
+| 回归红→绿 | FR-01…04：7 项失败 → 12/12 通过；FR-06、FR-07：撤掉修复后失败；FR-05：无红测 | `logs/05`、`logs/06`、`logs/08`、`logs/09`、`reviewer-probes/` |
 | testnet / mainnet 构建 | PASS | `logs/10-*`、`build/build-provenance-*.json`（各 84 个产物哈希） |
 | 非法网络选择（`''`、`' '`、`Mainnet`、`devnet`） | PASS（全部退出码 1） | `logs/11-invalid-selectors.log` |
 | 真实浏览器验收 | PASS 23/23 | `browser/browser-acceptance.json` |
