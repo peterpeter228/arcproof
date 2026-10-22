@@ -1,0 +1,89 @@
+{
+  "schema": "arcproof-submission-materials-state/v1",
+  "prepared_on_utc": "2026-10-22",
+  "scope": "Materials-only worksheet. Not the engineering release state or evidence of deployment/submission.",
+  "baseline": {
+    "commit": "cd579e567457ff8acf0fe041a5cff3df07c344c0",
+    "source_snapshot_sha256": "8752073c7c83c227fc642c71deafd6583c9e69e82d490e3d43b7ed340a1a50a7",
+    "status": "Historical baseline only; no final-candidate acceptance is inherited."
+  },
+  "known_references": {
+    "repository_url": "https://github.com/peterpeter228/arcproof",
+    "studio_project_url": null,
+    "builder_profile_candidate_url": "https://github.com/peterpeter228",
+    "event_url": "https://dorahacks.io/hackathon/arc-microgrants-2/detail",
+    "event_id": 2444,
+    "existing_workflow_question_url": "https://dorahacks.io/discussion/1562181",
+    "studio_reference_handling": "Owner-held reference omitted from public material; not missing historical provenance."
+  },
+  "current_candidate": {
+    "source_commit": null,
+    "source_snapshot_sha256": "54f45d85f8453dee7c7af415647f74a00d2bdd9daaab5729ff1f46a1c68e6e43",
+    "build_outputs_manifest": "evidence/final-handoff-20261022/build-mainnet-provenance.json",
+    "studio_sync_evidence": null,
+    "studio_export_comparison": null,
+    "testnet_acceptance_evidence": null,
+    "professional_audit": null
+  },
+  "mainnet": {
+    "chain_id": 5042,
+    "contract_address": null,
+    "deployment_id": null,
+    "deployment_transaction_hash": null,
+    "observed_runtime_hash": null,
+    "runtime_matches_frozen_artifact": null,
+    "invoice_id": null,
+    "creation_transaction_hash": null,
+    "payment_transaction_hash": null,
+    "payment_initiating_app_commit": null,
+    "payment_amount_usdc": null,
+    "verification_status": "not_run",
+    "verified_at_utc": null,
+    "operator_controlled": null,
+    "distinct_addresses": null
+  },
+  "publication": {
+    "app_url": null,
+    "receipt_url": null,
+    "video_url": null,
+    "final_source_commit_url": null,
+    "anonymous_link_acceptance": "not_run",
+    "host_output_hash_verification": "not_run",
+    "first_party_license": null,
+    "copyright_holder": null
+  },
+  "submission": {
+    "official_deadline_utc": "2026-11-02T04:59:00Z",
+    "official_deadline_asia_shanghai": "2026-11-02T12:59:00+08:00",
+    "rules_rechecked_at_utc": "2026-10-22T16:19:45Z",
+    "owner_public_name": null,
+    "prior_circle_arc_funding_answer": null,
+    "work_rights_confirmed": null,
+    "personal_eligibility_confirmed": null,
+    "mixed_workflow_organizer_approval": null,
+    "organizer_response_url": null,
+    "existing_build_id": null,
+    "build_id": null,
+    "build_url": null,
+    "event_submission_state": null,
+    "submitted_at_utc": null,
+    "confirmation_evidence": null,
+    "field_readback": "not_run"
+  },
+  "proposal_only": {
+    "sample_principal_usdc": "0.20",
+    "sample_principal_native18": "200000000000000000",
+    "sample_lifetime_hours": 24,
+    "proposed_first_party_license": "MIT",
+    "approved_principal_limit_usdc": null,
+    "approved_gas_limit_usdc": null,
+    "is_authorization": false
+  },
+  "limits": [
+    "Unknown evidence remains null. Do not populate with mock, fixture, testnet or projected values.",
+    "Public reference URLs do not themselves prove anonymous final-candidate acceptance.",
+    "Different wallet addresses do not establish independent customers or revenue.",
+    "Missing final source commit must not be filled with the baseline commit for a dirty or later candidate.",
+    "This worksheet does not clear or alter any permission record."
+  ]
+}

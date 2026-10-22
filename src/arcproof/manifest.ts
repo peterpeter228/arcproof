@@ -9,6 +9,7 @@
  */
 
 import type { ArcSettlementPolicy } from './arcSettlement';
+import { OFFLINE_FIXTURE_DEPLOYMENT } from './offlineFixture';
 
 export interface DeploymentRecord {
   /** Trusted application settlement policy. Absent/unsupported policies fail closed. */
@@ -47,6 +48,7 @@ export const FIXTURE_MANIFEST: readonly DeploymentRecord[] = [
     label: 'ArcProof fixture (DEMO ONLY — not deployed)',
     deployedAt: null,
   },
+  OFFLINE_FIXTURE_DEPLOYMENT,
 ];
 
 /** Resolve a deployment by (chainId, deploymentId) from a given manifest. Returns null if not found. */

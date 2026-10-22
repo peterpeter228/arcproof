@@ -15,8 +15,10 @@ export interface WalletIntent {
   value: string;
   state: 'requesting' | 'uncertain' | 'submitted' | 'included' | 'reverted' | 'cancelled';
   hash?: Hex;
+  /** Only assigned from this process's original callback when persistence fails. Never read as authority from storage. */
+  hashPersistence?: 'memory-only';
 }
-export type IntentInput = Omit<WalletIntent, 'operationId' | 'state' | 'hash'>;
+export type IntentInput = Omit<WalletIntent, 'operationId' | 'state' | 'hash' | 'hashPersistence'>;
 const stores = new WeakMap<NetworkContext, WalletIntentStore>();
 export type WalletIntentStore = ReturnType<typeof buildWalletIntentStore>;
 export function createWalletIntentStore(context: NetworkContext): WalletIntentStore {
@@ -32,6 +34,7 @@ function buildWalletIntentStore(context: NetworkContext) {
   const lockName = `${prefix}wallet-dispatch`;
   const listeners = new Set<() => void>();
   let snapshot: readonly WalletIntent[] = [];
+  const memoryOnly = new Map<string, WalletIntent>();
   function valid(value: unknown): value is WalletIntent {
     if (!value || typeof value !== 'object') return false;
     const v = value as Partial<WalletIntent>;
@@ -52,12 +55,13 @@ function buildWalletIntentStore(context: NetworkContext) {
       if (!key?.startsWith(prefix)) continue;
       const row: unknown = JSON.parse(localStorage.getItem(key) ?? 'null');
       if (!valid(row) || key !== prefix + row.operationId) throw new Error('Saved wallet intent is unreadable. New sends are disabled; inspect wallet history.');
-      rows.push(row);
+      const { hashPersistence: _untrustedMemoryLabel, ...saved } = row;
+      rows.push(saved);
     }
     return rows;
   }
   function notify(rows: readonly WalletIntent[]) { snapshot = rows; listeners.forEach((listener) => listener()); }
-  function refresh() { try { notify(readAll()); } catch { /* Read-only UI remains usable; dispatch performs a strict read. */ } }
+  function refresh() { try { const saved = readAll(); notify([...saved.filter(row => !memoryOnly.has(row.operationId)), ...memoryOnly.values()]); } catch { /* Read-only UI remains usable; dispatch performs a strict read. */ } }
   function write(row: WalletIntent) {
     const serialized = JSON.stringify(row);
     localStorage.setItem(prefix + row.operationId, serialized);
@@ -99,8 +103,10 @@ function buildWalletIntentStore(context: NetworkContext) {
         const hash = await send(() => { write(intent); attempted = true; }, () => { explicitlyRejected = true; });
         intent.hash = hash; intent.state = 'submitted';
         try { write(intent); } catch {
-          notify([...snapshot.filter((row) => row.operationId !== intent.operationId), intent]);
-          throw new Error(`Transaction hash ${hash} returned but persistence failed. Save this hash and recover the outstanding intent; do not resend.`);
+          const retained: WalletIntent = { ...intent, hashPersistence: 'memory-only' };
+          memoryOnly.set(intent.operationId, retained);
+          notify([...snapshot.filter((row) => row.operationId !== intent.operationId), retained]);
+          throw new Error(`Transaction hash ${hash} returned but persistence failed. Save this memory-only hash for Explorer or independent read-only verification. The durable request remains unresolved; do not reload, clear storage or resend.`);
         }
         return hash;
       } catch (error) {
@@ -136,8 +142,8 @@ function buildWalletIntentStore(context: NetworkContext) {
   }
   function getWalletIntents() { return snapshot; }
   function useWalletIntents() { return useSyncExternalStore((listener) => { listeners.add(listener); return () => { listeners.delete(listener); }; }, getWalletIntents, getWalletIntents); }
-  if (typeof window !== 'undefined' && BUILD_NETWORK === context) window.addEventListener('storage', (event) => { if (event.key === null || event.key.startsWith(prefix)) refresh(); });
-  if (BUILD_NETWORK === context) refresh();
+  if (typeof window !== 'undefined' && BUILD_NETWORK.key === context.key) window.addEventListener('storage', (event) => { if (event.key === null || event.key.startsWith(prefix)) refresh(); });
+  if (BUILD_NETWORK.key === context.key) refresh();
 
 return { runWalletIntent, recoverWalletIntent, findUnresolvedWalletIntent, getWalletIntents, useWalletIntents };
 }

@@ -11,12 +11,9 @@ import { exportReceiptsJson, type ReceiptExportRecord } from '../exportUtils';
 import { OFFLINE_FIXTURE } from '../offlineFixture';
 import { deriveInvoiceId } from '../invoiceId';
 const mocks = vi.hoisted(() => ({ verify: vi.fn(), wallet: vi.fn(), send: vi.fn(), clipboard: vi.fn<(value: string) => Promise<void>>(), blobs: [] as Blob[] }));
-vi.mock('../useTestnetWallet', () => ({ useTestnetWallet: mocks.wallet }));
+vi.mock('../useTestnetWallet', () => ({ useNetworkWallet: mocks.wallet }));
 vi.mock('connectkit', () => ({ ConnectKitButton: () => <button>Connect wallet</button> }));
-vi.mock('../testnetClient', async () => ({
-  ...await vi.importActual<typeof import('../testnetClient')>('../testnetClient'),
-  verifyTestnetReceipt: mocks.verify, sendPreparedAction: mocks.send, testnetClient: {},
-}));
+vi.mock('../testnetClient', async () => { const original = await vi.importActual<typeof import('../testnetClient')>('../testnetClient'); const client = {}; return { ...original, verifyTestnetReceipt: mocks.verify, sendPreparedAction: mocks.send, testnetClient: client, getNetworkService: (context: import('../networkPolicy').NetworkContext) => ({ ...original.getNetworkService(context), client, verifyNetworkReceipt: mocks.verify, sendPreparedAction: mocks.send }) }; });
 // The real Layout has its own wallet controls; route tests isolate the selected page.
 vi.mock('../../components/arcproof/Layout', () => ({
   Layout: ({ children, hideWallet }: { children: React.ReactNode; hideWallet?: boolean }) => <main>{!hideWallet && <button>Connect wallet</button>}{children}</main>,
@@ -81,14 +78,14 @@ describe('Receipt UI, mocked read-only RPC (not browser acceptance)', () => {
   it('auto-verifies a valid deep link once under StrictMode without wallet hooks or sends', async () => {
     await render(<StrictMode><TestnetReceiptScreen invoiceId={id} txHash={hash} /></StrictMode>);
     expect(mocks.verify).toHaveBeenCalledTimes(1);
-    expect(mocks.verify).toHaveBeenCalledWith({}, id, hash);
+    expect(mocks.verify).toHaveBeenCalledWith({}, id, hash, { signal: expect.any(AbortSignal) as unknown });
     expect(text()).toContain('Verified testnet payment');
     expect(mocks.wallet).not.toHaveBeenCalled(); expect(mocks.send).not.toHaveBeenCalled();
   });
   it('auto-recovers without a hash, but an empty manual form never reads', async () => {
     await render(<TestnetReceiptScreen />); expect(mocks.verify).not.toHaveBeenCalled();
     await render(<TestnetReceiptScreen invoiceId={id} />);
-    expect(mocks.verify).toHaveBeenCalledWith({}, id, undefined);
+    expect(mocks.verify).toHaveBeenCalledWith({}, id, undefined, { signal: expect.any(AbortSignal) as unknown });
   });
   it('uses the exported record for visible amount, parties, UTC time and precise fee', async () => {
     await render(<TestnetReceiptScreen invoiceId={id} txHash={hash} />); await click('Export testnet JSON');
@@ -128,7 +125,7 @@ describe('Receipt UI, mocked read-only RPC (not browser acceptance)', () => {
     expect(text()).not.toContain('Verified testnet payment'); expect(text()).not.toContain('Verification link copied');
     expect(mocks.verify).toHaveBeenCalledTimes(1);
     await act(async () => { host.querySelector('form')!.dispatchEvent(new Event('submit', { bubbles: true, cancelable: true })); });
-    expect(mocks.verify).toHaveBeenLastCalledWith({}, nextId, hash);
+    expect(mocks.verify).toHaveBeenLastCalledWith({}, nextId, hash, { signal: expect.any(AbortSignal) as unknown });
   });
   it('allows new input while reading and ignores the old result and old finalizer', async () => {
     const old = deferred<unknown>(), fresh = deferred<unknown>();
@@ -158,9 +155,11 @@ describe('Receipt UI, mocked read-only RPC (not browser acceptance)', () => {
   it('exports offline fixture domain matching its derived invoice ID without proof fields', async () => {
     await render(<DashboardScreen />); await click('Create invoice'); await click('View simulated receipt'); await click('Export simulated JSON');
     const [record] = JSON.parse(await readBlob(mocks.blobs[0])) as ReceiptExportRecord[];
-    expect(record.invoiceId).toBe(deriveInvoiceId(record.chainId, record.contract as Hex, record.merchant as Hex, 0n));
+    expect(record.invoiceId).toBe(deriveInvoiceId(record.chainId, record.contract as Hex, OFFLINE_FIXTURE.merchant, 0n));
     expect(record.verificationStatus).toBe('SIMULATED_NOT_VERIFIED'); expect(record.mode).toBe('fixture');
     expect(record.transactionHash).toBeNull(); expect(record.payer).toBeNull(); expect(record.paidAt).toBeNull();
+    expect(record.merchant).toBeNull(); expect(record.amountNative).toBeNull(); expect(record.amountDisplay).toBeNull();
+    expect(record.schemaVersion).toBe('1.2'); expect(record.verificationVerified).toBe(false);
     expect(exportReceiptsJson([record])).not.toContain('"verified": true');
     expect(mocks.wallet).not.toHaveBeenCalled(); expect(mocks.send).not.toHaveBeenCalled();
   });
@@ -200,7 +199,7 @@ describe('Independent integration: complete route identity', () => {
     });
     expect(host.querySelector<HTMLInputElement>('#live-receipt-tx')?.value).toBe(nextHash);
     expect(text()).not.toContain('Verified testnet payment'); expect(text()).not.toContain('Export testnet JSON');
-    expect(mocks.verify).toHaveBeenLastCalledWith({}, id, nextHash);
+    expect(mocks.verify).toHaveBeenLastCalledWith({}, id, nextHash, { signal: expect.any(AbortSignal) as unknown });
     await act(async () => { pending.resolve({invoice,hash:nextHash,result}); });
     await click('Export testnet JSON');
     expect((JSON.parse(await readBlob(mocks.blobs[0])) as ReceiptExportRecord[])[0].transactionHash).toBe(nextHash);

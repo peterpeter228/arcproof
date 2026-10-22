@@ -3,7 +3,8 @@
  * access: it only explains the product and links to the existing screens.
  */
 import { ArrowRight, FileCheck2, ShieldCheck, Wallet } from 'lucide-react';
-import { BUILD_NETWORK } from '../../arcproof/networkPolicy';
+import { BUILD_NETWORK, networkStage } from '../../arcproof/networkPolicy';
+import { MainnetSampleEntry } from './MainnetSampleEntry';
 
 const STEPS = [
   {
@@ -33,6 +34,7 @@ const CHECKS = [
 
 export function HomeScreen() {
   const mainnet = BUILD_NETWORK.key === 'mainnet';
+  const stage = networkStage(BUILD_NETWORK);
   return (
     <div className="space-y-10 sm:space-y-12">
       <section className="grid items-start gap-8 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,1fr)]" aria-labelledby="home-title">
@@ -50,9 +52,10 @@ export function HomeScreen() {
             <a className="ap-btn-primary" href="#/demo">Try the demo — no wallet <ArrowRight size={16} aria-hidden /></a>
             <a className="ap-btn-secondary" href="#/verify">Verify a receipt</a>
           </div>
+          <MainnetSampleEntry />
           <p className="text-sm text-stone-600">
             {mainnet
-              ? 'Creating and paying invoices is not enabled on Arc Mainnet in this build: there is no trusted mainnet deployment yet.'
+              ? stage === 'U0' ? 'Arc Mainnet has no trusted deployment in this build. Chain reads and wallet actions are disabled.' : stage === 'R1' ? 'Arc Mainnet receipt verification is read-only. Creating and paying remain disabled until release acceptance.' : 'Arc Mainnet is enabled for this release. Real USDC and network fees are involved; review every wallet request.'
               : <>Have a wallet on Arc Testnet? <a className="ap-link ap-inline-link" href="#/invoices">Create a testnet invoice</a> with test USDC.</>}
           </p>
         </div>
@@ -69,11 +72,11 @@ export function HomeScreen() {
             </div>
             <div className="grid grid-cols-[7.5rem_minmax(0,1fr)] gap-3">
               <dt className="ap-field-label pt-0.5">Contract</dt>
-              <dd>{mainnet ? 'Not deployed. Creating, paying and verifying are disabled.' : `Deployed on testnet ${BUILD_NETWORK.deployment?.deployedAt?.slice(0, 10) ?? '(unknown date)'}. Mainnet not enabled.`}</dd>
+              <dd>{stage === 'U0' ? 'Not deployed. Creating, paying and verifying are disabled.' : `Trusted ${BUILD_NETWORK.key} deployment ${BUILD_NETWORK.deployment?.deployedAt?.slice(0, 10) ?? '(unknown date)'}. ${stage === 'R1' ? 'Read-only verification; writes disabled.' : 'Wallet actions require your approval.'}`}</dd>
             </div>
             <div className="grid grid-cols-[7.5rem_minmax(0,1fr)] gap-3">
               <dt className="ap-field-label pt-0.5">Wallet</dt>
-              <dd>{mainnet ? 'Never requested in this build' : 'Only for creating or paying; verifying is read-only'}</dd>
+              <dd>{stage !== 'W2' ? 'Never requested in this read-only build' : 'Only for creating or paying; verifying is read-only'}</dd>
             </div>
             <div className="grid grid-cols-[7.5rem_minmax(0,1fr)] gap-3">
               <dt className="ap-field-label pt-0.5">Demo data</dt>
@@ -121,7 +124,7 @@ export function HomeScreen() {
             <li>Delivery of goods or services</li>
             <li>A tax invoice, or the legal identity of either party</li>
             <li>Escrow, refunds or dispute handling (none exist)</li>
-            <li>Revenue: a self-payment from one wallet is labelled controlled_demo</li>
+            <li>Customer revenue or independent parties: controlled_demo identifies same-address self-payment only; two addresses can still have the same operator</li>
           </ul>
         </div>
       </section>

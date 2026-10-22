@@ -1,0 +1,10 @@
+$ vitest run src/arcproof/__tests__/unknownRequestIdentity.test.ts
+
+ RUN  v4.1.12 /workspace/scratch/c01bd6fe117d/arcproof-final-20261022
+
+
+ Test Files  1 passed (1)
+      Tests  9 passed (9)
+   Start at  01:23:05
+   Duration  1.43s (transform 453ms, setup 0ms, import 406ms, tests 658ms, environment 0ms)
+

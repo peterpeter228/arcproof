@@ -1,3 +1,4 @@
+import { MainnetSampleEntry } from './MainnetSampleEntry';
 import { BUILD_NETWORK, TESTNET_CONTEXT } from '../../arcproof/networkPolicy';
 
 /** No provider, storage, RPC or wallet hooks: unconfigured mainnet is inert. */
@@ -10,6 +11,7 @@ export function NetworkUnavailable({ routeChainId, routeDeploymentId }: { routeC
     <p>{BUILD_NETWORK.label} ({BUILD_NETWORK.chain.id}) uses real USDC. This private build has no accepted mainnet contract. Creation, payment, wallet connection and receipt verification are disabled.</p>
     <p>Choosing a network does not prove deployment or settlement. A testnet address, imported receipt or URL cannot enable mainnet operations.</p>
     <p className="text-sm text-stone-600">Saved testnet requests are left untouched. Reopen the testnet build to inspect them; do not clear storage or resend an uncertain request.</p>
+    <MainnetSampleEntry />
     <div className="flex flex-wrap gap-3"><a className="ap-btn-primary" href="#/demo">Try the isolated offline demo</a><a className="ap-btn-secondary" href="#/">What ArcProof does</a></div>
     <p className="text-sm text-stone-600">Not deployed, not audited, not production-ready. No real funds were moved by this preview.</p>
   </section>;

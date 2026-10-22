@@ -1,0 +1,166 @@
+$ vitest run src/arcproof/__tests__/demoExportFallback.test.tsx src/arcproof/__tests__/buildProvenance.test.ts
+
+ RUN  v4.1.12 /workspace/scratch/c01bd6fe117d/arcproof-final-20261022
+
+ ❯ src/arcproof/__tests__/buildProvenance.test.ts (6 tests | 2 failed) 37ms
+     × ignores root and nested Foundry/Vite generated outputs 16ms
+     × binds checked-in contract test dependencies and the root ABI 3ms
+Error: sandbox
+    at URL.<anonymous> (/workspace/scratch/c01bd6fe117d/arcproof-final-20261022/src/arcproof/__tests__/demoExportFallback.test.tsx:69:69)
+    at URL.Mock (file:///workspace/scratch/c01bd6fe117d/arcproof-final-20261022/node_modules/@vitest/spy/dist/index.js:332:34)
+    at download (/workspace/scratch/c01bd6fe117d/arcproof-final-20261022/src/components/arcproof/DemoReceipt.tsx:30:19)
+    at onClick (/workspace/scratch/c01bd6fe117d/arcproof-final-20261022/src/components/arcproof/DemoReceipt.tsx:57:68)
+    at HTMLUnknownElement.callCallback (/workspace/scratch/c01bd6fe117d/arcproof-final-20261022/node_modules/react-dom/cjs/react-dom.development.js:4164:14)
+    at HTMLUnknownElement.callTheUserObjectsOperation (/workspace/scratch/c01bd6fe117d/arcproof-final-20261022/node_modules/jsdom/lib/generated/idl/EventListener.js:26:30)
+    at innerInvokeEventListeners (/workspace/scratch/c01bd6fe117d/arcproof-final-20261022/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:378:16)
+    at invokeEventListeners (/workspace/scratch/c01bd6fe117d/arcproof-final-20261022/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:320:3)
+    at HTMLUnknownElementImpl._dispatch (/workspace/scratch/c01bd6fe117d/arcproof-final-20261022/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:269:9)
+    at HTMLUnknownElementImpl.dispatchEvent (/workspace/scratch/c01bd6fe117d/arcproof-final-20261022/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:137:17)
+ ❯ src/arcproof/__tests__/demoExportFallback.test.tsx (4 tests | 4 failed) 232ms
+     × registers the same offline identity without creating a production deployment 149ms
+     × downloads the public builder record with all observed fact fields null, not UI sample values 33ms
+     × uses byte-identical JSON/CSV in download, clipboard and selectable readonly fallback 15ms
+     × keeps all export text selectable when both download and Clipboard API fail 30ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 6 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  src/arcproof/__tests__/buildProvenance.test.ts > declared source scopes exclude generated files, not executable inputs > ignores root and nested Foundry/Vite generated outputs
+AssertionError: expected '49167339924e854666481f4c0c8763e28dbfd…' to be 'a6947ca69530c0c8a13f3cae2d5af346e761e…' // Object.is equality
+
+Expected: "a6947ca69530c0c8a13f3cae2d5af346e761ee30591c131c01470661aabfc341"
+Received: "49167339924e854666481f4c0c8763e28dbfd8dc39cf23b1453c89c3ecf8867e"
+
+ ❯ src/arcproof/__tests__/buildProvenance.test.ts:47:41
+     45|     put('contracts/Main.sol', 'contract Main {}'); const initial = sou…
+     46|     for (const file of ['contracts/out/Main.sol/Main.json', 'contracts…
+     47|     expect(sourceSnapshot(root).sha256).toBe(initial);
+       |                                         ^
+     48|   }));
+     49|   it('includes Studio runtime instrumentation and deployment scripts r…
+ ❯ temporaryTree src/arcproof/__tests__/buildProvenance.test.ts:10:9
+ ❯ src/arcproof/__tests__/buildProvenance.test.ts:43:70
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/6]⎯
+
+ FAIL  src/arcproof/__tests__/buildProvenance.test.ts > declared source scopes exclude generated files, not executable inputs > binds checked-in contract test dependencies and the root ABI
+AssertionError: expected 'bc40b40cd2cf81f93e3426db98457ee796aa4…' not to be 'bc40b40cd2cf81f93e3426db98457ee796aa4…' // Object.is equality
+ ❯ src/arcproof/__tests__/buildProvenance.test.ts:58:131
+     56|     for (const file of EVIDENCE_INPUTS) put(file, '{}');
+     57|     for (const file of ['lib/forge-std/src/Test.sol', 'lib/forge-std/p…
+     58|       const before = sourceSnapshot(root).sha256; put(file, 'declared …
+       |                                                                                                                                   ^
+     59|     }
+     60|   }));
+ ❯ temporaryTree src/arcproof/__tests__/buildProvenance.test.ts:10:9
+ ❯ src/arcproof/__tests__/buildProvenance.test.ts:55:76
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/6]⎯
+
+ FAIL  src/arcproof/__tests__/demoExportFallback.test.tsx > Actual DemoReceipt export actions preserve the Schema 1.2 synthetic boundary > registers the same offline identity without creating a production deployment
+AssertionError: expected undefined to be defined
+ ❯ src/arcproof/__tests__/demoExportFallback.test.tsx:40:21
+     38|   it('registers the same offline identity without creating a productio…
+     39|     const fixture = FIXTURE_MANIFEST.find(row => row.deploymentId === …
+     40|     expect(fixture).toBeDefined(); expect(classifyDeployment(fixture!)…
+       |                     ^
+     41|     expect(PRODUCTION_MANIFEST.some(row => row.deploymentId === OFFLIN…
+     42|   });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/6]⎯
+
+ FAIL  src/arcproof/__tests__/demoExportFallback.test.tsx > Actual DemoReceipt export actions preserve the Schema 1.2 synthetic boundary > downloads the public builder record with all observed fact fields null, not UI sample values
+AssertionError: expected { chainId: 5042002, …(15) } to match object { schemaVersion: '1.2', …(9) }
+(10 matching properties omitted from actual)
+
+- Expected
++ Received
+
+  {
+    "chainId": 5042002,
+-   "contractAddress": "0x0000000000000000000000000000000000000001",
+    "deploymentId": "offline-fixture",
+    "importedVerified": false,
+    "invoiceId": "0xaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "mode": "fixture",
+-   "schemaVersion": "1.2",
+    "verificationStatus": "SIMULATED_NOT_VERIFIED",
+-   "verificationVerified": false,
+-   "verifiedEvidence": null,
+  }
+
+ ❯ src/arcproof/__tests__/demoExportFallback.test.tsx:46:20
+     44|     act(() => button('Export simulated JSON').click());
+     45|     const [record] = JSON.parse(await readBlob(blobs[0]));
+     46|     expect(record).toMatchObject({ schemaVersion: '1.2', mode: 'fixtur…
+       |                    ^
+     47|       deploymentId: OFFLINE_FIXTURE.deploymentId, invoiceId: id, contr…
+     48|       verificationVerified: false, verificationStatus: 'SIMULATED_NOT_…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/6]⎯
+
+ FAIL  src/arcproof/__tests__/demoExportFallback.test.tsx > Actual DemoReceipt export actions preserve the Schema 1.2 synthetic boundary > uses byte-identical JSON/CSV in download, clipboard and selectable readonly fallback
+TypeError: Cannot read properties of undefined (reading 'click')
+ ❯ src/arcproof/__tests__/demoExportFallback.test.tsx:61:52
+     59|       act(() => button(`Export simulated ${kind}`).click());
+     60|       const downloaded = await readBlob(blobs.at(-1)!);
+     61|       await act(async () => { button(`Copy ${kind}`).click(); });
+       |                                                    ^
+     62|       expect(clipboard).toHaveBeenLastCalledWith(downloaded);
+     63|       expect(host.querySelector<HTMLTextAreaElement>(`textarea[aria-la…
+ ❯ act node_modules/react/cjs/react.development.js:2512:16
+ ❯ src/arcproof/__tests__/demoExportFallback.test.tsx:61:13
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/6]⎯
+
+ FAIL  src/arcproof/__tests__/demoExportFallback.test.tsx > Actual DemoReceipt export actions preserve the Schema 1.2 synthetic boundary > keeps all export text selectable when both download and Clipboard API fail
+TypeError: Cannot read properties of undefined (reading 'click')
+ ❯ src/arcproof/__tests__/demoExportFallback.test.tsx:72:47
+     70|     clipboard.mockRejectedValue(new Error('denied'));
+     71|     act(() => button('Export simulated JSON').click());
+     72|     await act(async () => { button('Copy JSON').click(); });
+       |                                               ^
+     73|     expect(host.textContent).toContain('select');
+     74|     const text = host.querySelector<HTMLTextAreaElement>('textarea[ari…
+ ❯ act node_modules/react/cjs/react.development.js:2512:16
+ ❯ src/arcproof/__tests__/demoExportFallback.test.tsx:72:11
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[6/6]⎯
+
+⎯⎯⎯⎯⎯⎯ Unhandled Errors ⎯⎯⎯⎯⎯⎯
+
+Vitest caught 1 unhandled error during the test run.
+This might cause false positive tests. Resolve unhandled errors to make sure your tests are not affected.
+
+⎯⎯⎯⎯⎯ Uncaught Exception ⎯⎯⎯⎯⎯
+Error: sandbox
+ ❯ URL.<anonymous> src/arcproof/__tests__/demoExportFallback.test.tsx:69:69
+     67|   });
+     68|   it('keeps all export text selectable when both download and Clipboar…
+     69|     vi.mocked(URL.createObjectURL).mockImplementation(() => { throw ne…
+       |                                                                     ^
+     70|     clipboard.mockRejectedValue(new Error('denied'));
+     71|     act(() => button('Export simulated JSON').click());
+ ❯ URL.Mock node_modules/@vitest/spy/dist/index.js:332:34
+ ❯ download src/components/arcproof/DemoReceipt.tsx:30:19
+ ❯ onClick src/components/arcproof/DemoReceipt.tsx:57:68
+ ❯ HTMLUnknownElement.callCallback node_modules/react-dom/cjs/react-dom.development.js:4164:14
+ ❯ HTMLUnknownElement.callTheUserObjectsOperation node_modules/jsdom/lib/generated/idl/EventListener.js:26:30
+ ❯ innerInvokeEventListeners node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:378:16
+ ❯ invokeEventListeners node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:320:3
+ ❯ HTMLUnknownElementImpl._dispatch node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:269:9
+ ❯ HTMLUnknownElementImpl.dispatchEvent node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:137:17
+
+This error originated in "src/arcproof/__tests__/demoExportFallback.test.tsx" test file. It doesn't mean the error was thrown inside the file itself, but while it was running.
+The latest test that might've caused the error is "keeps all export text selectable when both download and Clipboard API fail". It might mean one of the following:
+- The error was thrown, while Vitest was running this test.
+- If the error occurred after the test had been completed, this was the last documented test before it was thrown.
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯
+
+
+ Test Files  2 failed (2)
+      Tests  6 failed | 4 passed (10)
+     Errors  1 error
+   Start at  01:20:59
+   Duration  2.29s (transform 277ms, setup 0ms, import 761ms, tests 269ms, environment 1.10s)
+
+error: script "test" exited with code 1

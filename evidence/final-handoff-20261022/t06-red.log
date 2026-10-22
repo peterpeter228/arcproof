@@ -1,0 +1,39 @@
+$ vitest run src/arcproof/__tests__/unknownRequestIdentity.test.ts
+
+ RUN  v4.1.12 /workspace/scratch/c01bd6fe117d/arcproof-final-20261022
+
+ ❯ src/arcproof/__tests__/unknownRequestIdentity.test.ts (9 tests | 1 failed) 787ms
+   × retains the actual callback hash as memory-only after post-send persistence fails, never unlocks, and loses it on reload 39ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  src/arcproof/__tests__/unknownRequestIdentity.test.ts > retains the actual callback hash as memory-only after post-send persistence fails, never unlocks, and loses it on reload
+AssertionError: expected { chainId: 5042002, …(10) } to match object { …(3) }
+(9 matching properties omitted from actual)
+
+- Expected
++ Received
+
+  {
+    "hash": "0xaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+-   "hashPersistence": "memory-only",
+    "state": "submitted",
+  }
+
+ ❯ src/arcproof/__tests__/unknownRequestIdentity.test.ts:88:20
+     86|   await expect(m.runWalletIntent(input, send)).rejects.toThrow('persis…
+     87|   const retained = m.getWalletIntents()[0];
+     88|   expect(retained).toMatchObject({ hash, hashPersistence: 'memory-only…
+       |                    ^
+     89|   const persisted = JSON.parse(localStorage.getItem(`arcproof:${input.…
+     90|   expect(persisted.hash).toBeUndefined();
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  1 failed | 8 passed (9)
+   Start at  01:22:05
+   Duration  1.95s (transform 792ms, setup 0ms, import 661ms, tests 787ms, environment 0ms)
+
+error: script "test" exited with code 1

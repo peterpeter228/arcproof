@@ -1,0 +1,16 @@
+[
+  {
+    "endpoint": "https://rpc.mainnet.arc.io",
+    "method": "eth_chainId",
+    "wallet_used": false,
+    "http": 403,
+    "status": "blocked_or_unavailable_reason_unknown"
+  },
+  {
+    "endpoint": "https://rpc.testnet.arc.network",
+    "method": "eth_chainId",
+    "wallet_used": false,
+    "http": 503,
+    "status": "blocked_or_unavailable_reason_unknown"
+  }
+]

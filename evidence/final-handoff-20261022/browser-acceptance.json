@@ -1,0 +1,60 @@
+{
+  "schema": "arcproof-browser-acceptance/v1",
+  "observed_at_utc": "2026-10-22T16:36:30Z",
+  "environment": "Cloud Chrome, frozen local Vite production artifacts. No wallet installed or signing performed.",
+  "testnet_source_snapshot_sha256": "60f7cdc132faf154016bf210729bf0d5638f230ed5dd53fa91d5207dbd0264d3",
+  "mainnet_source_snapshot_sha256": "54f45d85f8453dee7c7af415647f74a00d2bdd9daaab5729ff1f46a1c68e6e43",
+  "snapshot_difference": "Only receiptClarity.test.tsx changed between these builds; runtime inputs identical. Final testnet build is separately recorded.",
+  "passed": [
+    "Home and demo navigation without wallet",
+    "Offline 0.20 invoice and clearly simulated receipt",
+    "Amount above1.00 cap disabled in development preview",
+    "Actual production JSON download and CSV download",
+    "Downloaded JSON/CSV bytes match complete selectable fallback and immediate clipboard copy",
+    "Schema1.2 null payment facts, no verification promotion",
+    "375/768/1440 fixed-width iframe receipt layout, no internal horizontal overflow",
+    "Invalid invoice string reports localvalidation error",
+    "Unknown route unavailable",
+    "Real mainnet U0 verify/create unavailable, zero wallet buttons",
+    "Home mainnet sample explicitly unavailable"
+  ],
+  "viewport_observations": [
+    {
+      "iframe_width": 375,
+      "document_client_width": 360,
+      "scroll_width": 360
+    },
+    {
+      "iframe_width": 768,
+      "document_client_width": 753,
+      "scroll_width": 753
+    },
+    {
+      "iframe_width": 1440,
+      "document_client_width": 1440,
+      "scroll_width": 1440
+    }
+  ],
+  "limitations": [
+    "Iframe viewport CSS checks are not native-mobile device or touch testing.",
+    "Browser denial of clipboard/download not forced; denied-path tests are automated synthetic tests.",
+    "R1/W2 mainnet registry paths tested synthetically, not actual deployed mainnet.",
+    "Actual two-wallet testnet acceptance, Studio synchronization and public-host acceptance not run.",
+    "No professional security audit."
+  ],
+  "download_paths": "Actual downloads copied as browser-demo.json/.csv. No public data/credentials in synthetic exports.",
+  "attempt_notes": [
+    "Initial development-preview download was invalidated by HMR; no success claimed from it. Stable production export subsequently passed.",
+    "Earlier delayed clipboard read did not match; immediate same-action reads for JSON and CSV both matched."
+  ],
+  "final_matching_snapshot_json_regression": {
+    "source_snapshot_sha256": "54f45d85f8453dee7c7af415647f74a00d2bdd9daaab5729ff1f46a1c68e6e43",
+    "download_fallback_clipboard_equal": true,
+    "artifact": "browser-final-json.json"
+  },
+  "screenshots": {
+    "publication_status": "not included in the public branch",
+    "retained_locally": true,
+    "count": 7
+  }
+}

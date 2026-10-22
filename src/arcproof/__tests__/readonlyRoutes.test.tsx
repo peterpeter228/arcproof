@@ -6,8 +6,8 @@ import { parseHash } from '../routes';
 import { TESTNET_DEPLOYMENT } from '../testnet';
 const calls = vi.hoisted(() => ({ wallet: vi.fn(), load: vi.fn(), verify: vi.fn(), send: vi.fn(), prepare: vi.fn() }));
 vi.mock('connectkit', () => ({ ConnectKitButton: () => <button>Connect wallet</button> }));
-vi.mock('../useTestnetWallet', () => ({ useTestnetWallet: () => ({ session: null, sessionKey: 'none', getSession: () => null, getProvider: calls.wallet }) }));
-vi.mock('../testnetClient', async () => ({ ...await vi.importActual<typeof import('../testnetClient')>('../testnetClient'), loadInvoice: calls.load, verifyTestnetReceipt: calls.verify, sendPreparedAction: calls.send, prepareCreate: calls.prepare, preparePay: calls.prepare }));
+vi.mock('../useTestnetWallet', () => ({ useNetworkWallet: () => ({ session: null, sessionKey: 'none', getSession: () => null, getProvider: calls.wallet }) }));
+vi.mock('../testnetClient', async () => { const original = await vi.importActual<typeof import('../testnetClient')>('../testnetClient'); return { ...original, getNetworkService: (context: import('../networkPolicy').NetworkContext) => ({ ...original.getNetworkService(context), loadInvoice: calls.load, verifyNetworkReceipt: calls.verify, sendPreparedAction: calls.send, prepareCreate: calls.prepare, preparePay: calls.prepare }) }; });
 import App from '../../App';
 let root: Root, host: HTMLDivElement;
 function navigate(hash: string) {

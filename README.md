@@ -1,75 +1,59 @@
-## 2026-10-22 最终审查分支
+# ArcProof
 
-分支 `final-review-20261022` 新增免钱包首页（`#/`）、统一界面和 7 项低危修复；485 项测试与真实浏览器验收 23/23 通过。仍未部署主网，也不满足参赛硬门槛。先读 [最终报告](docs/FINAL_REVIEW_AND_IMPROVEMENT_REPORT.md) 和 [参赛就绪表](docs/SUBMISSION_READINESS.md)。
+**Fixed USDC invoices. Pay once. Re-verify the receipt without a wallet.**
 
----
+ArcProof creates immutable invoice terms on Arc, forwards the exact payment to the merchant in the same transaction, and lets anyone check the receipt against chain data rather than trusting a screenshot.
 
-## 2026-10-21 私有主网准备阶段
+**Unaudited prototype · maximum 1 USDC per invoice · no escrow, refunds or platform fee.** Unexpected pre-existing contract balances cannot be recovered. A verified payment is not proof of delivery, legal identity, customer revenue or a tax invoice.
 
-当前代码增加固定网络构建与主网关闭状态，生产部署清单仍为空。它不是已部署的主网产品，也不证明参赛硬门槛完成。462 项本地测试/29 文件、lint、类型检查、testnet/mainnet 两种构建与非法网络配置拒绝测试通过。真实浏览器、Studio持久快照与最终复审状态以 [本阶段记录](docs/PRIVATE_MAINNET_PHASE_20261021.md) 及 [分层报告](evidence/private-mainnet-20261021/REPORT.json) 为准；不能把本地构建通过等同于上线。
+## Try and inspect
 
-构建选择在启动进程前设置，不能由 URL、导入文件或浏览器缓存切换：
+| Material | Current state |
+| --- | --- |
+| Live mainnet application | Not yet available |
+| Re-verify a mainnet sample | Not yet available; offline fixtures are not payment evidence |
+| Arc Studio project (owner-held reference) | Original project; final-candidate synchronization pending |
+| Mainnet contract and transaction | Not deployed for this candidate |
+| Walkthrough video | [Real-footage outline](docs/final-delivery-20261022/VIDEO_OUTLINE.md); recording pending |
+| Engineering status | [STATUS.md](STATUS.md) and [release status](evidence/release-status.json) |
+| Contest materials | [Draft delivery pack](docs/final-delivery-20261022/README.md), not a submission receipt |
+
+The current mainnet registry is empty and mainnet wallet actions remain disabled. The code distinguishes unconfigured (U0), trusted read-only (R1), and explicitly enabled (W2) contexts; supporting those states is not authorization to deploy or move funds.
+
+## What a verified receipt checks
+
+1. Trusted deployment and reviewed runtime code.
+2. Paid invoice state and identity.
+3. Exact transaction and `InvoicePaid` event binding.
+4. Native USDC payer → contract → merchant transfer legs, at 18 decimals.
+5. Finalized and canonical block consistency.
+
+Missing or contradictory evidence stays unverified. RPC checks are not an independent consensus proof. Imported JSON cannot confer verification. Offline JSON/CSV explicitly retain null payment facts, even when the page shows example inputs.
+
+## Run locally
 
 ```sh
-bun install --frozen-lockfile --ignore-scripts
+bun install --frozen-lockfile
 bun run check
-bun x vitest run
+bun run test
+forge test
+VITE_ARCPROOF_NETWORK=testnet bun run dev
 VITE_ARCPROOF_NETWORK=testnet bun x vite build
 VITE_ARCPROOF_NETWORK=mainnet bun x vite build
 ```
 
-默认 testnet；mainnet 仅有明确的只读未配置状态、离线演示与历史证据，关闭钱包自动发现与连接存储。不创建主网占位合约，不迁移或清空测试网未知请求。工时旧18小时上限已由用户对本阶段明确取消，其他安全门槛不变。
+Use the checked-in lockfile. Foundry requires solc 0.8.28, Paris EVM and optimizer 200 as recorded in `foundry.toml`. There is no `bun run build` alias. The scaffold aliases `deploy:self`, `compass:deploy` and `fetch:abi` refer to Studio-environment scripts that are absent from a clean checkout; they are **not supported deployment commands here**. No private key belongs in the app or repository.
 
----
+## Scope and provenance
 
-> 最新私有候选：独立审查的请求恢复、分享、只读入口、收据与构建证据修补已实施，Argon 建议已逐项核实。当前仍非参赛/主网就绪。请先读 [当前实施记录](docs/INDEPENDENT_AUDIT_RESPONSE_20261021.md) 和 [当前状态](STATUS.md)，不要将下方历史测试/部署记录当作本次发布证明。
+Contracts and the initial app originated in Arc Studio, with external review and hardening subsequently synchronized back to the same project. Latest candidate synchronization must be separately verified. Mixed Studio/external workflow eligibility remains unresolved; product documentation is not organizer approval. See [current rules](docs/final-delivery-20261022/RULES_AND_ELIGIBILITY.md).
 
-> 2026-10-21 UTC 交付记录：本轮源码、测试及文档已提交至私有 main：[648acc3](https://github.com/peterpeter228/arcproof/commit/648acc3cc1678fa682bc5833161e66ace1ff2603)。完整475文件树及215个变更文件内容已回读匹配。下方“尚未推送”等文字属于交付前历史快照，不是当前发布状态。本次补记仅修改 README 与 STATUS，运行代码、依赖和测试内容不变，未重新运行测试，也未更新 Studio、部署或启用 CI。
+A repository-wide license has not been granted. See [licensing boundary](docs/LICENSING_BOUNDARY.md) and [release license review](docs/final-delivery-20261022/LICENSE_REVIEW.md).
 
-# ArcProof 发票直付原型与核验证据
+- [中文运行说明](RUN_中文.md)
+- [Contract specification](docs/CONTRACT_SPEC.md)
+- [Receipt export format](docs/RECEIPT_EXPORT_FORMAT.md)
+- [Submission readiness](docs/SUBMISSION_READINESS.md)
+- [Dated engineering history](https://github.com/peterpeter228/arcproof/blob/cd579e567457ff8acf0fe041a5cff3df07c344c0/README.md)
 
-当前第二轮私有本地候选基于已回读的 main 提交42e9ac9d46f7769b9fa428e27511edd66e76c1c9；本轮尚未推送、更新 Studio 或部署。恢复入口：[STATUS.md](STATUS.md)，运行入口：[RUN_中文.md](RUN_中文.md)。
-
-Argon 复审及独立复现修复后391项项目、137项对抗、24项现行UI、114项服务、26项底层安全、6项旧版UI及1项独立存储缺陷回归通过；计数有重叠，不相加当覆盖率。全仓库lint已为0，类型检查、只读check、构建和10项安全边界检查通过。历史124/122项诊断及旧失败日志保留。
-
-已修复确认成功后持久请求状态未自动结清、旧调用方数据来源标签及无效哈希读取顺序；外部模型意见不等于正式审计。schema1.2区分观察数据和已核验结算；工具依赖更新且移除未使用SDK。依赖审计仍有5条记录、可选peer冲突和较宽的钱包包；没有宣称依赖全无漏洞。真实浏览器、CSV表格往返、双钱包及主网验收仍未完成，Studio当前版本未知。全部16项审查问题及边界见[闭环矩阵](docs/AUDIT_CLOSURE_MATRIX.md)。
-
-原始规划和生成来源仍保留。免费原型工作独立于未闭合的 Grant G0；测试网自测不是主网、收入、审计或参赛资格证明。以下索引包含历史规划，具体当前状态以 STATUS.md 和有日期的证据为准。
-
-## 修复与证据边界索引
-
-[16 项审查关闭矩阵](docs/AUDIT_CLOSURE_MATRIX.md) · [质量门禁与历史失败范围](docs/QUALITY_GATES.md) · [源码与素材许可边界](docs/LICENSING_BOUNDARY.md)。具体当前计数和合并版本以最新 STATUS 检查点及对应报告为准；历史计数不升级为当前结果。
-
-## 文件索引
-
-| 文件 | 用途 |
-| --- | --- |
-| START_HERE.txt | 可直接交给 dot 的完整启动指令 |
-| AGENTS.md | 执行约束、固定范围、授权与证据规则 |
-| STATUS.md | 当前状态、版本边界和历史检查点 |
-| docs/01_VERIFIED_REVIEW.md | 逐项核实、选择理由与现金经济 |
-| docs/02_PRODUCT_PRD.md | 详细功能、交互、架构、数据和阶段计划 |
-| docs/CONTRACT_SPEC.md | 合约函数、事件、状态、不变量和收据验证 |
-| docs/TEST_MATRIX.md | 28 项分层验收要求，不以本地测试数替代真实链路验收 |
-| docs/03_DOT_EXECUTION.md | 云端/本地、Studio、并行任务、恢复和交接 |
-| docs/04_BUSINESS_VALIDATION.md | 99/299 美元报价试验、付费信号与停止条件 |
-| docs/05_SUBMISSION_PACK.md | G0检查表、英文材料模板与视频分镜 |
-| docs/06_SCANNER_RULES.md | 供 Muse 采用的核实规则建议，未实际同步 |
-| docs/SOURCES.md | 来源、证据范围与未闭合事实 |
-| prompts/ARC_STUDIO_PROTOTYPE_BUILD.txt | 当前有效的免费 Studio 原型构建提示 |
-| prompts/ARC_STUDIO_BUILD.txt | 旧启动提示归档，不用于当前构建 |
-| prompts/ARC_STUDIO_REVIEW.txt | 独立审查提示，禁止以生成者自述代替证据 |
-| evidence/gate.json | G0与现金筛选状态，未知值保留null |
-| evidence/deployments.json | 测试网/主网部署记录模板，无虚构地址 |
-| evidence/test-results.json | 历史分层测试记录；最新基线见 evidence/g4-baseline-20261021 |
-| evidence/receipt.example.json | 未执行收据模板，不能用作实际付款证明 |
-| evidence/effort-ledger.json | 工时、费用及收入分账模板 |
-| evidence/artifact-index.json | 本包文件哈希和用途，不证明应用已经运行 |
-
-完整顺序阅读版本另附 ArcProof_Complete_PRD_2026-10-20.md，便于审阅；实施时本目录中的模块化文档为修改对象。不要同时修改两份产生分叉，完整版本由模块文件重建。
-
-## 明确的选择
-
-主选 ArcProof 是 Grant 与支付集成作品实验。当前没有证据把它称为最高概率赚钱项目；若目标严格是10天内到账，本轮未核实到合格的fast_cash开发机会。Grant G0 未闭合不阻止用户后续已授权的免费原型；真钱、公开发布、提交及其他未授权动作仍受限。
-
-P0原子转付会触及资金，但不保管待释放用户本金；单张上限1USDC，没有owner、升级、提款、抽成、退款或仲裁。它不是可直接用来处理大额商户资金的已审计服务。
+Engineering readiness, actual network acceptance, public availability and competition submission are separate milestones. No award probability or payment date is promised.

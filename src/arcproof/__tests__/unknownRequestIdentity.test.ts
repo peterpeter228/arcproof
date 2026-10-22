@@ -75,3 +75,28 @@ it('independent successful invoice verification leaves the original hashless req
   const { getSubmissions } = await import('../submissions');
   expect(getSubmissions()).toEqual([]);
 });
+it('retains the actual callback hash as memory-only after post-send persistence fails, never unlocks, and loses it on reload', async () => {
+  const m = await import('../walletIntents');
+  const originalSet = localStorage.setItem.bind(localStorage);
+  vi.spyOn(localStorage, 'setItem').mockImplementation((key, value) => {
+    const parsed: unknown = JSON.parse(value);
+    if (key.includes(':intent:') && parsed && typeof parsed === 'object' && 'hash' in parsed && parsed.hash) throw Error('post-callback storage denied');
+    originalSet(key, value);
+  });
+  const send = vi.fn(async (mark: () => void) => { mark(); return hash; });
+  await expect(m.runWalletIntent(input, send)).rejects.toThrow('persistence failed');
+  const retained = m.getWalletIntents()[0];
+  expect(retained).toMatchObject({ hash, hashPersistence: 'memory-only', state: 'submitted' });
+  const persisted: unknown = JSON.parse(localStorage.getItem(`arcproof:${input.chainId}:${input.deploymentId}:intent:${retained.operationId}`)!);
+  expect(persisted).not.toHaveProperty('hash');
+  expect(persisted).toMatchObject({ state: 'requesting' });
+  await expect(m.runWalletIntent(input, send)).rejects.toThrow('unresolved');
+  expect(send).toHaveBeenCalledTimes(1);
+  await expect(m.recoverWalletIntent(retained.operationId, hash, vi.fn())).rejects.toThrow('hashless');
+  vi.resetModules();
+  const reloaded = await import('../walletIntents');
+  expect(reloaded.getWalletIntents()[0].hash).toBeUndefined();
+  await expect(reloaded.recoverWalletIntent(retained.operationId, hash, vi.fn())).rejects.toThrow('hashless');
+  await expect(reloaded.runWalletIntent(input, send)).rejects.toThrow('unresolved');
+  expect(send).toHaveBeenCalledTimes(1);
+});

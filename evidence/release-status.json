@@ -1,0 +1,80 @@
+{
+  "schema": "arcproof-release-state/v1",
+  "updated_at_utc": "2026-10-22T16:45:27Z",
+  "baseline_commit": "cd579e567457ff8acf0fe041a5cff3df07c344c0",
+  "candidate": {
+    "source_commit": null,
+    "source_snapshot_sha256": "54f45d85f8453dee7c7af415647f74a00d2bdd9daaab5729ff1f46a1c68e6e43",
+    "source_input_count": 148,
+    "dirty_tree": true,
+    "status": "local_functional_candidate_not_release_accepted",
+    "vitest": {
+      "tests": 559,
+      "files": 41,
+      "passed": true
+    },
+    "forge": {
+      "tests": 73,
+      "suites": 5,
+      "passed": true
+    },
+    "lint_types": "passed",
+    "testnet_build": "passed",
+    "mainnet_disabled_build": "passed",
+    "outputs_readback": {
+      "testnet": 84,
+      "mainnet": 84,
+      "mismatches": 0
+    },
+    "actual_browser": "bounded_offline_and_U0_passed",
+    "dependency_audit": "five_known_advisories_triaged_no_new_dependency_change_not_clean"
+  },
+  "milestones": {
+    "T00": "local_baseline_read",
+    "T01": "passed",
+    "T02": "implemented_and_synthetically_tested_U0_browser_passed",
+    "T03": "passed_including_browser_download",
+    "T04": "passed_scoped_input_output_hashes",
+    "T05": "passed_synthetic_read_retry_tests",
+    "T06": "passed_synthetic_storage_failure_tests",
+    "T07": "bounded_browser_passed",
+    "T08": "materials_prepared_license_unapproved",
+    "C1_freeze": "not_accepted",
+    "C2_public_app": "not_run",
+    "C3_submission": "not_run"
+  },
+  "studio": {
+    "final_candidate_sync": "not_run",
+    "export_comparison": "not_run"
+  },
+  "testnet_acceptance": {
+    "two_wallet_create_pay_verify": "not_run"
+  },
+  "mainnet": {
+    "stage": "U0",
+    "trusted_deployments": 0,
+    "writes_enabled": false,
+    "deployment_transaction": null,
+    "payment_transaction": null,
+    "receipt_url": null
+  },
+  "public_release": {
+    "app_url": null,
+    "video_url": null,
+    "source_commit_url": null,
+    "source_branch_authorization": "new_review_branch_only_no_merge_no_automatic_deploy"
+  },
+  "reviews": {
+    "argon_current": "outcome_uncertain_no_response_record_no_retry",
+    "professional_security_audit": "not_performed",
+    "organizer_mixed_workflow_approval": null,
+    "first_party_license": null
+  },
+  "next_action": "Public new review branch authorized; publish with fresh remote SHA and verify committed bytes. Do not merge or deploy.",
+  "evidence_directory": "final-handoff-20261022",
+  "scope_limits": [
+    "No deployment, signing, transfer, public hosting, outreach or submission.",
+    "Functional test results are not eligibility approval or winning probability.",
+    "No imported private conversation text or credentials in this record."
+  ]
+}

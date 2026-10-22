@@ -1,4 +1,5 @@
 import { formatUnits } from 'viem';
+import { VerificationFactGroups } from './VerificationFactGroups';
 import { RECEIPT_CSV_IMPORT_NOTICE, type ReceiptExportRecord } from '../../arcproof/exportUtils';
 import { receiptCurrencyLabel } from '../../arcproof/receiptCurrency';
 
@@ -48,6 +49,7 @@ export function ReceiptFacts({ record }: { record: ReceiptExportRecord }) {
     {record.controlled_demo && <p className="rounded-lg bg-amber-50 border border-amber-200 p-3 text-sm">controlled_demo · Controlled self-demo: payer and merchant are the same wallet. Not customer revenue or a two-wallet acceptance test.</p>}
     <section className="text-sm space-y-2" aria-label="Evidence summary">
       <h4 className="font-semibold">Evidence checked</h4>
+      <VerificationFactGroups checks={record.checks} />
       <p>Invoice and transaction match: {identitySummary}</p>
     <div className="text-sm space-y-1">
       <p>Native settlement: {evidence ? `payer → contract (log ${evidence.payerToContractLogIndex}); contract → merchant (log ${evidence.contractToMerchantLogIndex})` : 'Not verified; two transfer legs are not established.'}</p>
@@ -71,8 +73,8 @@ export function ReceiptFacts({ record }: { record: ReceiptExportRecord }) {
         <div><dt>Read completed (UTC)</dt><dd data-receipt-field="readCompletedAt">{readTime(record.readCompletedAt)}</dd></div>
       </dl>
       <p>{observedFacts ? 'RPC observations are not settlement or finality proof.' : 'These supplied fields are not identity-bound RPC observations.'} A successful transaction status alone does not verify the payment.</p>
-      {record.checks && record.checks.length > 0 && <details>
-        <summary className="cursor-pointer font-semibold py-2">Individual verification checks</summary>
+      {record.checks && record.checks.length > 0 && <section>
+        <h5 className="font-semibold py-2">Individual verification checks</h5>
         <ul className="space-y-2">
           {record.checks.map((check) => <li key={check.id} className="break-words">
             <span className="font-semibold">{check.id.replace(/_/g, ' ')}: {check.status.replace(/_/g, ' ')}</span>
@@ -80,7 +82,7 @@ export function ReceiptFacts({ record }: { record: ReceiptExportRecord }) {
             {check.message && <p>{check.message}</p>}
           </li>)}
         </ul>
-      </details>}
+      </section>}
     </section>}
     {hasDiagnostics && <dl className="space-y-2 text-sm break-all" aria-label={`${factLabel} receipt inclusion`}>
       <div><dt className="font-semibold">{factLabel} transaction block</dt><dd data-receipt-field="observedBlockNumber">{record.observedReceipt?.blockNumber ?? 'Unknown'}</dd></div>

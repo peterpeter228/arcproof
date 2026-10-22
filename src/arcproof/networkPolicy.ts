@@ -2,6 +2,7 @@
 import { defineChain, type Chain, type Hex } from 'viem';
 import { ARC_TESTNET, TESTNET_DEPLOYMENT, TESTNET_MANIFEST } from './testnet';
 import { FIXTURE_MANIFEST, PRODUCTION_MANIFEST, type DeploymentRecord } from './manifest';
+import { MAINNET_RELEASE_POLICY } from './networkReleasePolicy';
 import { ARC_MAINNET_SETTLEMENT_POLICY, ARC_TESTNET_SETTLEMENT_POLICY, isSupportedSettlementPolicy, type ArcSettlementPolicy } from './arcSettlement';
 
 function deepFreeze<T>(value: T): T {
@@ -28,14 +29,53 @@ export interface NetworkContext {
   readonly settlementPolicy: ArcSettlementPolicy;
   readonly writesEnabled: boolean;
 }
-export const TESTNET_CONTEXT: NetworkContext = deepFreeze({
+/** Only this module can register contexts. Copies, JSON and caller-built objects are rejected. */
+const trustedContexts = new WeakSet<NetworkContext>();
+const deploymentContexts = new Map<string, NetworkContext>();
+function registerNetwork(base: Omit<NetworkContext, 'deployment' | 'writesEnabled'>, activeId: string | null, writesAccepted: boolean): NetworkContext {
+  const active = base.manifest.find(row => row.deploymentId === activeId) ?? base.manifest[0] ?? null;
+  // An explicitly selected but absent active deployment must not silently enable another one.
+  const writeId = activeId && base.manifest.some(row => row.deploymentId === activeId) ? activeId : null;
+  const make = (deployment: DeploymentRecord | null): NetworkContext => {
+    const context = deepFreeze({ ...base, deployment, writesEnabled: !!deployment && writesAccepted && deployment.deploymentId === writeId });
+    trustedContexts.add(context);
+    if (deployment) deploymentContexts.set(`${base.key}:${deployment.deploymentId}`, context);
+    return context;
+  };
+  for (const row of base.manifest) {
+    if (row.chainId !== base.chain.id || !row.deployedAt || !isSupportedSettlementPolicy(row.settlementPolicy, base.chain.id) || row.settlementPolicy?.id !== base.settlementPolicy.id ||
+        !/^0x[0-9a-fA-F]{40}$/.test(row.contractAddress) || /^0x0{40}$/i.test(row.contractAddress) || !/^0x[0-9a-fA-F]{64}$/.test(row.runtimeCodeHash) ||
+        deploymentContexts.has(`${base.key}:${row.deploymentId}`)) throw new Error('Invalid closed deployment registry.');
+    make(row);
+  }
+  return active ? deploymentContexts.get(`${base.key}:${active.deploymentId}`)! : make(null);
+}
+export const TESTNET_CONTEXT = registerNetwork({
   key: 'testnet', chain: ARC_TESTNET, label: 'Arc Testnet', manifest: TESTNET_MANIFEST,
-  deployment: TESTNET_DEPLOYMENT, settlementPolicy: ARC_TESTNET_SETTLEMENT_POLICY, writesEnabled: true,
-});
-export const MAINNET_CONTEXT: NetworkContext = deepFreeze({
+  settlementPolicy: ARC_TESTNET_SETTLEMENT_POLICY,
+}, TESTNET_DEPLOYMENT.deploymentId, true);
+export const MAINNET_CONTEXT = registerNetwork({
   key: 'mainnet', chain: ARC_MAINNET, label: 'Arc Mainnet', manifest: PRODUCTION_MANIFEST,
-  deployment: null, settlementPolicy: ARC_MAINNET_SETTLEMENT_POLICY, writesEnabled: false,
-});
+  settlementPolicy: ARC_MAINNET_SETTLEMENT_POLICY,
+}, MAINNET_RELEASE_POLICY.activeDeploymentId, MAINNET_RELEASE_POLICY.writesAccepted);
+/** Resolve locators only within the build network's closed registry. Old deployments stay read-only. */
+export function getDeploymentContext(context: NetworkContext, chainId: number, deploymentId: string): NetworkContext | null {
+  assertTrustedContext(context);
+  if (chainId !== context.chain.id) return null;
+  return deploymentContexts.get(`${context.key}:${deploymentId}`) ?? null;
+}
+export function networkStage(context: NetworkContext): 'U0' | 'R1' | 'W2' {
+  assertTrustedContext(context);
+  return !context.deployment ? 'U0' : context.writesEnabled ? 'W2' : 'R1';
+}
+export function networkCurrency(context: NetworkContext): string {
+  assertTrustedContext(context);
+  return context.key === 'testnet' ? 'test USDC' : 'USDC';
+}
+export function canWriteContext(context: NetworkContext): boolean {
+  assertTrustedContext(context);
+  return context === BUILD_NETWORK && networkStage(context) === 'W2';
+}
 /** No arbitrary RPC, address or imported manifest configuration is accepted. */
 export function getNetworkContext(key: unknown): NetworkContext {
   if (key === 'testnet') return TESTNET_CONTEXT;
@@ -44,11 +84,11 @@ export function getNetworkContext(key: unknown): NetworkContext {
 }
 export const BUILD_NETWORK = getNetworkContext(import.meta.env.VITE_ARCPROOF_NETWORK ?? 'testnet');
 export function assertTrustedContext(context: NetworkContext): void {
-  if (context !== TESTNET_CONTEXT && context !== MAINNET_CONTEXT) throw new Error('Untrusted network context.');
+  if (!trustedContexts.has(context)) throw new Error('Untrusted network context.');
 }
 export function requireTrustedDeployment(context: NetworkContext): DeploymentRecord {
   assertTrustedContext(context);
-  if (!context.deployment) throw new Error('No trusted mainnet deployment. Mainnet reads, preparation and sends are disabled.');
+  if (!context.deployment) throw new Error(`No trusted ${context.key} deployment. Network reads, preparation and sends are disabled.`);
   assertContextDeployment(context, context.deployment);
   return context.deployment;
 }
@@ -69,7 +109,7 @@ export function assertWritesEnabled(context: NetworkContext): void {
 export function assertWritesEnabledFor(context: NetworkContext, build: NetworkContext): void {
   assertTrustedContext(context);
   assertTrustedContext(build);
-  if (!context.writesEnabled) throw new Error('Mainnet wallet actions are disabled: no trusted deployment or release acceptance.');
+  if (!context.writesEnabled) throw new Error('Wallet actions are disabled: no trusted active deployment or release acceptance.');
   if (context !== build) throw new Error('Wallet actions are limited to this build network.');
   requireTrustedDeployment(context);
 }

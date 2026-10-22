@@ -1,0 +1,365 @@
+{
+  "schema": "arcproof-direct-dependency-license-inventory/v1",
+  "observed_on_utc": "2026-10-22",
+  "basis": "Installed direct package metadata and top-level license/notice files; not a full transitive or distribution-specific license review.",
+  "package_json_sha256": "13c703de6950bb5c6f0a91958c0cb0b1bcd417b56dbea327d857ada649e94dc3",
+  "bun_lock_sha256": "6f213340418484d065886c56b9d34cda9c29ce22f73e6a9bd58b2696180385ff",
+  "entries": [
+    {
+      "name": "@openzeppelin/contracts",
+      "scope": "dependencies",
+      "declared_range": "5.1.0",
+      "installed_version": "5.1.0",
+      "declared_license": "MIT",
+      "license_files": []
+    },
+    {
+      "name": "@tanstack/react-query",
+      "scope": "dependencies",
+      "declared_range": "^5.62.7",
+      "installed_version": "5.104.2",
+      "declared_license": "MIT",
+      "license_files": [
+        {
+          "path": "node_modules/@tanstack/react-query/LICENSE",
+          "sha256": "a405ee70c632bb938acb7ac5f210e814409b3760ea9d2329d8ed8ffcfd11a0e7"
+        }
+      ]
+    },
+    {
+      "name": "@web3icons/react",
+      "scope": "dependencies",
+      "declared_range": "^4.0.0",
+      "installed_version": "4.1.24",
+      "declared_license": "MIT",
+      "license_files": []
+    },
+    {
+      "name": "clsx",
+      "scope": "dependencies",
+      "declared_range": "^2.1.1",
+      "installed_version": "2.1.1",
+      "declared_license": "MIT",
+      "license_files": [
+        {
+          "path": "node_modules/clsx/license",
+          "sha256": "9a9edad7baae52622bddf3c15b2ef8a33d2c89f2d25408ad13e8a7481c6b0c97"
+        }
+      ]
+    },
+    {
+      "name": "connectkit",
+      "scope": "dependencies",
+      "declared_range": "^1.9.2",
+      "installed_version": "1.9.2",
+      "declared_license": "BSD-2-Clause license",
+      "license_files": []
+    },
+    {
+      "name": "framer-motion",
+      "scope": "dependencies",
+      "declared_range": "^11.15.0",
+      "installed_version": "11.18.2",
+      "declared_license": "MIT",
+      "license_files": [
+        {
+          "path": "node_modules/framer-motion/LICENSE.md",
+          "sha256": "5ff46083b88563822b0560dd6221ab89d2f74bc97a52d4c97a75020fd62c6f32"
+        }
+      ]
+    },
+    {
+      "name": "lucide-react",
+      "scope": "dependencies",
+      "declared_range": "^0.468.0",
+      "installed_version": "0.468.0",
+      "declared_license": "ISC",
+      "license_files": [
+        {
+          "path": "node_modules/lucide-react/LICENSE",
+          "sha256": "1e7290b35280a048667bbf0ebabac1c7fd52a75300e8b2946ac165715997f2bc"
+        }
+      ]
+    },
+    {
+      "name": "react",
+      "scope": "dependencies",
+      "declared_range": "^18.3.1",
+      "installed_version": "18.3.1",
+      "declared_license": "MIT",
+      "license_files": [
+        {
+          "path": "node_modules/react/LICENSE",
+          "sha256": "52412d7bc7ce4157ea628bbaacb8829e0a9cb3c58f57f99176126bc8cf2bfc85"
+        }
+      ]
+    },
+    {
+      "name": "react-dom",
+      "scope": "dependencies",
+      "declared_range": "^18.3.1",
+      "installed_version": "18.3.1",
+      "declared_license": "MIT",
+      "license_files": [
+        {
+          "path": "node_modules/react-dom/LICENSE",
+          "sha256": "52412d7bc7ce4157ea628bbaacb8829e0a9cb3c58f57f99176126bc8cf2bfc85"
+        }
+      ]
+    },
+    {
+      "name": "sonner",
+      "scope": "dependencies",
+      "declared_range": "^1.7.1",
+      "installed_version": "1.7.4",
+      "declared_license": "MIT",
+      "license_files": [
+        {
+          "path": "node_modules/sonner/LICENSE.md",
+          "sha256": "da9201378c36ffd81f51ad0b305f3f0981e90bc558789210ad65d1161eec3b7d"
+        }
+      ]
+    },
+    {
+      "name": "tailwind-merge",
+      "scope": "dependencies",
+      "declared_range": "^2.6.0",
+      "installed_version": "2.6.1",
+      "declared_license": "MIT",
+      "license_files": [
+        {
+          "path": "node_modules/tailwind-merge/LICENSE.md",
+          "sha256": "d4c70c7ce38cea8778f0aed3fc0bef0a9dbd27f13bd8b6773cbd6d37941971e5"
+        }
+      ]
+    },
+    {
+      "name": "viem",
+      "scope": "dependencies",
+      "declared_range": "^2.56.3",
+      "installed_version": "2.57.5",
+      "declared_license": "MIT",
+      "license_files": [
+        {
+          "path": "node_modules/viem/LICENSE",
+          "sha256": "091d17ae5f625ffeb381e7109daaf6c492dd32502d612d8ecd24e2ddf6d16b74"
+        }
+      ]
+    },
+    {
+      "name": "wagmi",
+      "scope": "dependencies",
+      "declared_range": "^2.19.5",
+      "installed_version": "2.19.5",
+      "declared_license": "MIT",
+      "license_files": [
+        {
+          "path": "node_modules/wagmi/LICENSE",
+          "sha256": "e7f5360a60628940fee8653802d7221d2b9575e26268be2a3a2fdbc04aa84321"
+        }
+      ]
+    },
+    {
+      "name": "@types/node",
+      "scope": "devDependencies",
+      "declared_range": "^24.0.0",
+      "installed_version": "24.19.2",
+      "declared_license": "MIT",
+      "license_files": [
+        {
+          "path": "node_modules/@types/node/LICENSE",
+          "sha256": "c2cfccb812fe482101a8f04597dfc5a9991a6b2748266c47ac91b6a5aae15383"
+        }
+      ]
+    },
+    {
+      "name": "@types/react",
+      "scope": "devDependencies",
+      "declared_range": "^18.3.12",
+      "installed_version": "18.3.31",
+      "declared_license": "MIT",
+      "license_files": [
+        {
+          "path": "node_modules/@types/react/LICENSE",
+          "sha256": "c2cfccb812fe482101a8f04597dfc5a9991a6b2748266c47ac91b6a5aae15383"
+        }
+      ]
+    },
+    {
+      "name": "@types/react-dom",
+      "scope": "devDependencies",
+      "declared_range": "^18.3.1",
+      "installed_version": "18.3.7",
+      "declared_license": "MIT",
+      "license_files": [
+        {
+          "path": "node_modules/@types/react-dom/LICENSE",
+          "sha256": "c2cfccb812fe482101a8f04597dfc5a9991a6b2748266c47ac91b6a5aae15383"
+        }
+      ]
+    },
+    {
+      "name": "@vitejs/plugin-react",
+      "scope": "devDependencies",
+      "declared_range": "^4.3.4",
+      "installed_version": "4.7.0",
+      "declared_license": "MIT",
+      "license_files": [
+        {
+          "path": "node_modules/@vitejs/plugin-react/LICENSE",
+          "sha256": "29b68325fe026047d13e187b44c33b2acacf7dc647dec4583702e59f235e13b5"
+        }
+      ]
+    },
+    {
+      "name": "autoprefixer",
+      "scope": "devDependencies",
+      "declared_range": "^10.4.20",
+      "installed_version": "10.6.1",
+      "declared_license": "MIT",
+      "license_files": [
+        {
+          "path": "node_modules/autoprefixer/LICENSE",
+          "sha256": "5be1f3465bba68a626777f984878814aaf35e7ef8e9fd314d469bcf887050fb8"
+        }
+      ]
+    },
+    {
+      "name": "jsdom",
+      "scope": "devDependencies",
+      "declared_range": "^30.1.3",
+      "installed_version": "30.1.3",
+      "declared_license": "MIT",
+      "license_files": [
+        {
+          "path": "node_modules/jsdom/LICENSE.txt",
+          "sha256": "242d37e7cab25cbafc36cc973ee88f9345fddf066afe4f72b7ac3d9ad4e24cce"
+        }
+      ]
+    },
+    {
+      "name": "oxlint",
+      "scope": "devDependencies",
+      "declared_range": "^1.80.0",
+      "installed_version": "1.88.0",
+      "declared_license": "MIT",
+      "license_files": [
+        {
+          "path": "node_modules/oxlint/LICENSE",
+          "sha256": "95ced5ecf1133fbf41d409b5555c86c344f83f3b019926057ddbc07cfdcc27b3"
+        }
+      ]
+    },
+    {
+      "name": "oxlint-tsgolint",
+      "scope": "devDependencies",
+      "declared_range": "^7.0.2001",
+      "installed_version": "7.0.2004",
+      "declared_license": "MIT",
+      "license_files": [
+        {
+          "path": "node_modules/oxlint-tsgolint/LICENSE",
+          "sha256": "c211cc5336d2d47f21322aca35c8149699de621edc447294b617048d05a745ce"
+        }
+      ]
+    },
+    {
+      "name": "postcss",
+      "scope": "devDependencies",
+      "declared_range": "^8.4.49",
+      "installed_version": "8.5.30",
+      "declared_license": "MIT",
+      "license_files": [
+        {
+          "path": "node_modules/postcss/LICENSE",
+          "sha256": "5be1f3465bba68a626777f984878814aaf35e7ef8e9fd314d469bcf887050fb8"
+        }
+      ]
+    },
+    {
+      "name": "tailwindcss",
+      "scope": "devDependencies",
+      "declared_range": "^3.4.17",
+      "installed_version": "3.4.19",
+      "declared_license": "MIT",
+      "license_files": [
+        {
+          "path": "node_modules/tailwindcss/LICENSE",
+          "sha256": "60e0b68c0f35c078eef3a5d29419d0b03ff84ec1df9c3f9d6e39a519a5ae7985"
+        }
+      ]
+    },
+    {
+      "name": "typescript",
+      "scope": "devDependencies",
+      "declared_range": "~7.0.2",
+      "installed_version": "7.0.2",
+      "declared_license": "Apache-2.0",
+      "license_files": [
+        {
+          "path": "node_modules/typescript/LICENSE",
+          "sha256": "a7d00bfd54525bc694b6e32f64c7ebcf5e6b7ae3657be5cc12767bce74654a47"
+        },
+        {
+          "path": "node_modules/typescript/NOTICE.txt",
+          "sha256": "f5c708b59114507b8b27b48181b6883d106bbca0c1634bbee45b5e344237b66b"
+        }
+      ]
+    },
+    {
+      "name": "vite",
+      "scope": "devDependencies",
+      "declared_range": "6.4.4",
+      "installed_version": "6.4.4",
+      "declared_license": "MIT",
+      "license_files": [
+        {
+          "path": "node_modules/vite/LICENSE.md",
+          "sha256": "008938a3441801ca3960f8e3ccb4c0738e7996442a53063141d57d3769a7344d"
+        }
+      ]
+    },
+    {
+      "name": "vite-plugin-node-polyfills",
+      "scope": "devDependencies",
+      "declared_range": "0.24.0",
+      "installed_version": "0.24.0",
+      "declared_license": "MIT",
+      "license_files": [
+        {
+          "path": "node_modules/vite-plugin-node-polyfills/LICENSE",
+          "sha256": "9edf87dae590dfa1a9e632dfb78246d4edfaea403455b018ec1c858df09c23f5"
+        }
+      ]
+    },
+    {
+      "name": "vitest",
+      "scope": "devDependencies",
+      "declared_range": "4.1.12",
+      "installed_version": "4.1.12",
+      "declared_license": "MIT",
+      "license_files": [
+        {
+          "path": "node_modules/vitest/LICENSE.md",
+          "sha256": "881d660c26831481b697e39724d4a35c9f86e07b67156d4aeb693a0b39910435"
+        }
+      ]
+    }
+  ],
+  "vendored_notices": [
+    {
+      "path": "lib/forge-std/LICENSE-APACHE",
+      "sha256": "50b6bf8bdb63265ce14953b480b7aaa0271e78f56843b99c184abd3ae5048cd7"
+    },
+    {
+      "path": "lib/forge-std/LICENSE-MIT",
+      "sha256": "6d185dfe089d4de346d391fc5997fbd4739bad1d6556010413c10f420d704ecc"
+    }
+  ],
+  "first_party_license_grant": null,
+  "remaining": [
+    "Determine actual shipped transitive dependencies and preserve applicable notices.",
+    "Resolve missing packaged license texts for @openzeppelin/contracts, @web3icons/react and connectkit against exact upstream versions before redistribution.",
+    "Review generated scaffold, branding and media rights separately."
+  ]
+}

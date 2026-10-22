@@ -56,7 +56,7 @@ function buildSubmissionStore(context: NetworkContext) {
   }
   // Storage is a locator only. Restored records remain visibly unverified and never
   // authorize signing. Memory survives navigation even when persistence is denied.
-  let snapshot: readonly Submission[] = BUILD_NETWORK === context ? fromStorage() : [];
+  let snapshot: readonly Submission[] = BUILD_NETWORK.key === context.key ? fromStorage() : [];
   const listeners = new Set<() => void>();
   interface WalletSubmissionRequest { scope: string; state: 'requesting' | 'uncertain' }
   let requests: readonly WalletSubmissionRequest[] = [];
@@ -105,7 +105,7 @@ function buildSubmissionStore(context: NetworkContext) {
     const scope = kind === 'pay' ? `pay:${invoiceId?.toLowerCase() ?? ''}` : `create:${account.toLowerCase()}`;
     emitRequests(requests.filter((row) => row.scope !== scope));
   }
-  if (typeof window !== 'undefined' && BUILD_NETWORK === context) window.addEventListener('storage', (event) => { if (event.key === null || event.key.startsWith(key)) { refreshFromStorage(); listeners.forEach((listener) => listener()); } });
+  if (typeof window !== 'undefined' && BUILD_NETWORK.key === context.key) window.addEventListener('storage', (event) => { if (event.key === null || event.key.startsWith(key)) { refreshFromStorage(); listeners.forEach((listener) => listener()); } });
   function getSubmissions() { return snapshot; }
   function useSubmissions() {
     return useSyncExternalStore(

@@ -1,0 +1,108 @@
+{
+  "schema": "arcproof-official-rules-observation/v1",
+  "observed_at_utc": "2026-10-22T16:19:45Z",
+  "method": "Anonymous live page retrieval (maxAge 0) and parsed public __NUXT_DATA__/JSON-LD; no login, posting or form mutation.",
+  "event": {
+    "url": "https://dorahacks.io/hackathon/arc-microgrants-2/detail",
+    "http_status": 200,
+    "id": 2444,
+    "slug": "arc-microgrants-2",
+    "title": "Arc Microgrants: Built with Arc Studio",
+    "timeline_start": 1792069200,
+    "timeline_end": 1793595540,
+    "deadline_utc": "2026-11-02T04:59:00.000Z",
+    "deadline_asia_shanghai": "2026-11-02T12:59:00+08:00",
+    "json_ld_end_date": "2026-11-02T04:59:00.000Z",
+    "is_extended": false,
+    "is_published": true,
+    "mandatory_git_repo_link": true,
+    "mandatory_video_link_global": false,
+    "custom_submission_fields": [
+      {
+        "id": 2,
+        "question": "Your name, alias, or team name",
+        "required": true
+      },
+      {
+        "id": 5,
+        "question": "Arc Studio project URL (https://studio.arc.io/app/…)",
+        "required": true
+      },
+      {
+        "id": 6,
+        "question": "Link to your live app",
+        "required": true
+      },
+      {
+        "id": 7,
+        "question": "Contract address(es) and one example transaction hash, with a link on explorer.arc.io",
+        "required": true
+      },
+      {
+        "id": 8,
+        "question": "Public repo",
+        "required": true
+      },
+      {
+        "id": 9,
+        "question": "Video walkthrough showing the build in Arc Studio and the mainnet transaction",
+        "required": true
+      },
+      {
+        "id": 10,
+        "question": "What does your project do, and how did you use Arc Studio to build it?",
+        "required": true
+      },
+      {
+        "id": 11,
+        "question": "Have you received a Circle or Arc grant, bounty, or prize for this project?$mode:single$option:Yes$option:No",
+        "required": true
+      }
+    ]
+  },
+  "discussion": {
+    "url": "https://dorahacks.io/discussion/1562181",
+    "http_status": 200,
+    "id": 1562181,
+    "event_id": 2444,
+    "title": "Studio origin with external review synced back to same Studio project?",
+    "comments_count": 0,
+    "answered": false,
+    "organizer_reply_observed": false,
+    "author_verified_as_project_owner": null,
+    "workflow_eligibility_approved": null,
+    "note": "The visible question asks about Studio origin followed by external hardening and same-project synchronization. It says written guidance will precede mainnet deployment and submission. Public authorship is not authorization evidence."
+  },
+  "internal_target": {
+    "deadline_asia_shanghai": "2026-11-01T07:59:00+08:00",
+    "official": false
+  },
+  "sources": [
+    {
+      "url": "https://docs.arc.io/ai/arc-studio-cli",
+      "observed_on_utc": "2026-10-22",
+      "scope": "External coding-agent workflow, file round-trip and app targeting. Not a contest eligibility ruling."
+    },
+    {
+      "url": "https://www.arc.io/blog/introducing-arc-studio-the-onchain-coding-agent",
+      "observed_on_utc": "2026-10-22",
+      "scope": "Export/review and user-operated mainnet boundary. Not a contest eligibility ruling."
+    },
+    {
+      "url": "https://docs.arc.io/arc/references/connect-to-arc",
+      "observed_on_utc": "2026-10-22",
+      "scope": "Published network parameters, not a live RPC acceptance result."
+    },
+    {
+      "url": "https://docs.arc.io/arc/references/usdc-system-events",
+      "observed_on_utc": "2026-10-22",
+      "scope": "Published native/ERC-20 event distinction, not evidence of a project payment."
+    }
+  ],
+  "limitations": [
+    "Fields were read from public page data, not an authenticated final submission form. Recheck the visible final form before submission.",
+    "No claim about personal sanctions/restricted-jurisdiction eligibility, previous funding or ownership rights.",
+    "No claim of current mainnet deployment, payment, public app, video or actual submission.",
+    "Product-supported external editing does not prove that the organizer accepts this project's mixed-origin workflow."
+  ]
+}

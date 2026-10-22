@@ -1,0 +1,10 @@
+$ vitest run
+
+ RUN  v4.1.12 /workspace/scratch/c01bd6fe117d/arcproof-final-20261022
+
+
+ Test Files  41 passed (41)
+      Tests  559 passed (559)
+   Start at  01:30:27
+   Duration  14.57s (transform 8.72s, setup 0ms, import 40.16s, tests 20.46s, environment 24.55s)
+

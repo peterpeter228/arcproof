@@ -1,0 +1,120 @@
+{
+  "schema": "arcproof-evidence-files/v1",
+  "files": [
+    {
+      "path": "arcproof-t03-t04-red.log",
+      "sha256": "0faac042d07bec0e657be700c9ddd1b91f11bb45885fdcc43eab90da4ff97629",
+      "bytes": 11073
+    },
+    {
+      "path": "arcproof-t07-red.log",
+      "sha256": "a9f6f0f86da5cdacb6c766dd1ebd6d95ed02d631a2157f8b5942ebf9996738cc",
+      "bytes": 12928
+    },
+    {
+      "path": "browser-acceptance.json",
+      "sha256": "f328713d22e8e53ab459432ddd065ca0505f39ee9c40fc89386accdacafc75a6",
+      "bytes": 2828
+    },
+    {
+      "path": "browser-clipboard.csv",
+      "sha256": "640f129827e2b7ba3a05f61d7ee5a7882c6d0f7c756a7b6fcbef8f1f6dd377e8",
+      "bytes": 969
+    },
+    {
+      "path": "browser-clipboard.json",
+      "sha256": "8fd3cd4a1cc9f58954367cd4c684e1ee60fccf28f88ebace026e843d772c9d8f",
+      "bytes": 1194
+    },
+    {
+      "path": "browser-demo.csv",
+      "sha256": "640f129827e2b7ba3a05f61d7ee5a7882c6d0f7c756a7b6fcbef8f1f6dd377e8",
+      "bytes": 969
+    },
+    {
+      "path": "browser-demo.json",
+      "sha256": "8fd3cd4a1cc9f58954367cd4c684e1ee60fccf28f88ebace026e843d772c9d8f",
+      "bytes": 1194
+    },
+    {
+      "path": "browser-fallback.json",
+      "sha256": "0b2c07688947b30be6d9048502cd3a9c765f97a960200dca3184d6f35c51a781",
+      "bytes": 2406
+    },
+    {
+      "path": "browser-final-json.json",
+      "sha256": "8fd3cd4a1cc9f58954367cd4c684e1ee60fccf28f88ebace026e843d772c9d8f",
+      "bytes": 1194
+    },
+    {
+      "path": "build-mainnet-provenance.json",
+      "sha256": "d7626d269d60d0dcf54a66986c2686b63c33ecaa61cb70857b5f35235120a79e",
+      "bytes": 62907
+    },
+    {
+      "path": "build-mainnet.log",
+      "sha256": "c0ab3afb222a4b0bceae803d33cfaeca0526f04ac164344c27031b5723cff9db",
+      "bytes": 10646
+    },
+    {
+      "path": "build-testnet-provenance.json",
+      "sha256": "a4645f3cec81a8dd3473e19064d1b23411425e2ed9e60429ddb71a763d6a6cea",
+      "bytes": 62907
+    },
+    {
+      "path": "build-testnet.log",
+      "sha256": "14f8bbc2a88fd5d0498768d936d745d108a202fb7447cb06dffa2b2a206f8ca2",
+      "bytes": 10646
+    },
+    {
+      "path": "check.log",
+      "sha256": "6204ce3a7817e9026f30843877807166826b6bf72e97c22dbc87dfb2c76702aa",
+      "bytes": 109
+    },
+    {
+      "path": "dependency-audit.json",
+      "sha256": "8214d3b15cf993f56b9cd29efef9f94e95367a72d8fa8bec2724b10a14635767",
+      "bytes": 1676
+    },
+    {
+      "path": "forge.log",
+      "sha256": "74314084d8746fea5f8430abf7a552b81698b1933a78faf86853aab41cea6021",
+      "bytes": 6399
+    },
+    {
+      "path": "lint-baseline.log",
+      "sha256": "b41e0cf4dff2466a6da1ee432e922c39b25989dda5e008dd69be329ebdb2baf0",
+      "bytes": 603
+    },
+    {
+      "path": "lint-override.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "rpc-readonly.json",
+      "sha256": "968d6fc2cf3bdb5e227c085182f29fe6b4f16593a7e448c11b70419f65f3a802",
+      "bytes": 369
+    },
+    {
+      "path": "runtime-rebuild.json",
+      "sha256": "a0f18600ddae6b217d32cf44563996cca6f2957e201e5c6db9874664adb9d147",
+      "bytes": 571
+    },
+    {
+      "path": "t06-green.log",
+      "sha256": "a5b64931f3233dbb6240c25f88a39e06cc54fdf545e6f843e7d60179da16df5d",
+      "bytes": 307
+    },
+    {
+      "path": "t06-red.log",
+      "sha256": "1c561ac2dd5a770fabff94fa6765c66fb24aeed8d52bf76443609de4023634b8",
+      "bytes": 1657
+    },
+    {
+      "path": "vitest-full.log",
+      "sha256": "96c30229a3dedda22cdab22ebdde7fbf287e65d614982ebecd6ca63ef33d930e",
+      "bytes": 265
+    }
+  ]
+}

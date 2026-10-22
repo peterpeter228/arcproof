@@ -6,30 +6,28 @@ import { AlertTriangle, CheckCircle2 } from 'lucide-react';
 import { ReceiptFacts } from './ReceiptFacts';
 import { AtomicForwardingWarning } from './Layout';
 import { formatAmountDisplay } from '../../arcproof/amountParser';
-import { ARC_TESTNET, TESTNET_DEPLOYMENT, ZERO_TERMS, explorerTx, isBytes32 } from '../../arcproof/testnet';
-import {
-  testnetClient, loadHistory, loadInvoice, prepareCreate, preparePay, sendPreparedAction,
-  confirmCreatedInvoice, confirmSubmittedOutcome, checkBroadcast, rememberPaymentHash, errorMessage, verifyTestnetReceipt,
-  assertReceiptMatches,
-  type PreparedAction, type LoadedInvoice,
-} from '../../arcproof/testnetClient';
-import { useTestnetWallet } from '../../arcproof/useTestnetWallet';
-import { recordSubmission, updateSubmission, useSubmissions } from '../../arcproof/submissions';
-import { buildReceiptExport, exportReceiptsJson, exportReceiptsCsv } from '../../arcproof/exportUtils';
+import { ZERO_TERMS, isBytes32 } from '../../arcproof/testnet';
+import { BUILD_NETWORK, canWriteContext, networkCurrency, networkExplorerTx, requireTrustedDeployment, type NetworkContext } from '../../arcproof/networkPolicy';
+import { getNetworkService, type PreparedAction, type LoadedInvoice } from '../../arcproof/testnetClient';
+import { useNetworkWallet } from '../../arcproof/useTestnetWallet';
+import { ReceiptExportActions } from './ReceiptExportActions';
+import { MainnetSampleEntry } from './MainnetSampleEntry';
+import { buildReceiptExport } from '../../arcproof/exportUtils';
 
 const panel = 'arcproof-panel ap-card p-5 space-y-3';
 const button = 'ap-btn-primary';
 const input = 'w-full rounded-lg border border-stone-500 bg-white px-3 py-2 font-mono text-base [&[aria-invalid=true]]:border-red-600 [&[aria-invalid=true]]:bg-red-50';
-const route = (kind: 'pay' | 'receipt', id: Hex, tx?: Hex) =>
-  `#/${kind}/${ARC_TESTNET.id}/${TESTNET_DEPLOYMENT.deploymentId}/${id}${tx ? `?tx=${tx}` : ''}`;
+const route = (context: NetworkContext, kind: 'pay' | 'receipt', id: Hex, tx?: Hex) =>
+  `#/${kind}/${context.chain.id}/${requireTrustedDeployment(context).deploymentId}/${id}${tx ? `?tx=${tx}` : ''}`;
 
-function TransactionNotice({ hash }: { hash: Hex }) {
+function TransactionNotice({ hash, context }: { hash: Hex; context: NetworkContext }) {
   return <div className="rounded-lg bg-amber-50 p-3 text-sm break-words" role="status">
     Transaction submitted. A hash is not payment proof. Do not automatically resend.
-    <a className="block font-mono underline break-all mt-1" href={explorerTx(hash)} target="_blank" rel="noreferrer">{hash}</a>
+    <a className="block font-mono underline break-all mt-1" href={networkExplorerTx(context, hash)} target="_blank" rel="noreferrer">{hash}</a>
   </div>;
 }
-function Review({ action, busy, confirm, cancel }: {
+function Review({ action, busy, confirm, cancel, context }: {
+  context: NetworkContext;
   action: PreparedAction; busy: boolean; confirm: () => void; cancel: () => void;
 }) {
   const title = useRef<HTMLHeadingElement>(null);
@@ -47,15 +45,15 @@ function Review({ action, busy, confirm, cancel }: {
     };
   }, []);
   function cancelReview() { restoreOnCancel.current = true; cancel(); }
-  return <section className={`${panel} border-teal-300`} aria-label="Review testnet transaction">
-    <h3 ref={title} tabIndex={-1} className="font-semibold">Review {action.kind === 'create' ? 'invoice creation' : 'test payment'}</h3>
-    <p>Network: Arc Testnet (5042002)</p>
-    <p>Invoice amount: {formatAmountDisplay(action.amountNative)} test USDC</p>
+  return <section className={`${panel} border-teal-300`} aria-label={`Review ${context.key} transaction`}>
+    <h3 ref={title} tabIndex={-1} className="font-semibold">Review {action.kind === 'create' ? 'invoice creation' : context.key === 'testnet' ? 'test payment' : 'payment'}</h3>
+    <p>Network: {context.label} ({context.chain.id})</p>
+    <p>Invoice amount: {formatAmountDisplay(action.amountNative)} {networkCurrency(context)}</p>
     <p className="break-all">From: <span className="font-mono">{action.session.account}</span></p>
     {action.payment && <p className="break-all">Merchant: <span className="font-mono">{action.payment.invoiceSnapshot.merchant}</span></p>}
     <p className="break-all">Contract: <span className="font-mono">{action.to}</span></p>
-    <p>Transaction value: {formatUnits(action.value, 18)} test USDC</p>
-    <p>Estimated fee allowance: {formatUnits(action.feeEstimate, 18)} test USDC. The wallet shows final fee details.</p>
+    <p>Transaction value: {formatUnits(action.value, 18)} {networkCurrency(context)}</p>
+    <p>Estimated fee allowance: {formatUnits(action.feeEstimate, 18)} {networkCurrency(context)}. The wallet shows final fee details.</p>
     <p>Expiry: {new Date(Number(action.expiresAt) * 1000).toISOString()} (UTC) · No attached terms.</p>
     {action.payment && action.session.account.toLowerCase() === action.payment.invoiceSnapshot.merchant.toLowerCase() &&
       <p className="text-amber-800">Payer and merchant are the same wallet. This is a controlled self-demo, not revenue or a two-wallet acceptance test.</p>}
@@ -91,12 +89,22 @@ function useSafeOperation(sessionKey: string) {
   };
 }
 
-export function TestnetDashboard() {
-  const wallet = useTestnetWallet();
-  return <TestnetDashboardSession key={wallet.sessionKey} wallet={wallet} />;
+export function TestnetDashboard({ context = BUILD_NETWORK }: { context?: NetworkContext }) {
+  if (!canWriteContext(context)) return <ReadOnlyNotice context={context} />;
+  return <NetworkDashboardWallet key={`${context.key}:${context.deployment?.deploymentId}`} context={context} />;
+}
+function ReadOnlyNotice({ context }: { context: NetworkContext }) {
+  return <section className={panel}><h2>Creation and payment are disabled</h2><p>{context.label} is read-only for this deployment. No wallet is discovered or connected.</p><a className="ap-link" href="#/verify">Verify a receipt without a wallet</a></section>;
+}
+function NetworkDashboardWallet({ context }: { context: NetworkContext }) {
+  const wallet = useNetworkWallet(context);
+  return <TestnetDashboardSession key={wallet.sessionKey} wallet={wallet} context={context} />;
 }
 
-function TestnetDashboardSession({ wallet }: { wallet: ReturnType<typeof useTestnetWallet> }) {
+function TestnetDashboardSession({ wallet, context }: { wallet: ReturnType<typeof useNetworkWallet>; context: NetworkContext }) {
+  const service = getNetworkService(context);
+  const { client: testnetClient, loadHistory, prepareCreate, sendPreparedAction, assertReceiptMatches, confirmSubmittedOutcome, confirmCreatedInvoice, errorMessage } = service;
+  const { recordSubmission, updateSubmission } = service.submissions;
   const operation = useSafeOperation(wallet.sessionKey);
   const [amount, setAmount] = useState('0.20');
   const [hours, setHours] = useState(24);
@@ -116,7 +124,7 @@ function TestnetDashboardSession({ wallet }: { wallet: ReturnType<typeof useTest
     currentInvoiceId.current = null;
     setCopiedInvoiceId(null);
   }
-  const canUseWallet = wallet.session?.chainId === ARC_TESTNET.id;
+  const canUseWallet = wallet.session?.chainId === context.chain.id;
 
   async function refreshHistory(targetPage = page) {
     const op = operation.start();
@@ -174,7 +182,7 @@ function TestnetDashboardSession({ wallet }: { wallet: ReturnType<typeof useTest
     const current = () => copyVersion.current === token && currentInvoiceId.current === id;
     try {
       const link = new URL(window.location.href);
-      link.search = ''; link.hash = route('pay', id);
+      link.search = ''; link.hash = route(context, 'pay', id);
       await navigator.clipboard.writeText(link.href);
       if (current()) setCopiedInvoiceId(id);
     } catch {
@@ -183,17 +191,17 @@ function TestnetDashboardSession({ wallet }: { wallet: ReturnType<typeof useTest
   }
 
   return <div className="max-w-2xl mx-auto space-y-5">
-    <form className={panel} aria-label="Create testnet invoice" aria-busy={busy} onSubmit={(event) => {
+    <form className={panel} aria-label={`Create ${context.key} invoice`} aria-busy={busy} onSubmit={(event) => {
       event.preventDefault();
       if (!busy && canUseWallet && !action) void review();
     }}>
       <div className="flex justify-between items-center gap-3 flex-wrap">
-        <h2 className="font-semibold text-lg">Create a testnet invoice</h2>
+        <h2 className="font-semibold text-lg">Create a {context.key} invoice</h2>
         <a className="underline text-sm" href="#/demo">Use offline simulation instead</a>
       </div>
       {!wallet.session && <p>Connect an ordinary EOA wallet using the button above. No signature is needed to read invoices.</p>}
-      {wallet.session && !canUseWallet && <p className="text-amber-800">Switch to Arc Testnet (5042002) in your wallet. Mainnet and other networks cannot create or pay here.</p>}
-      <label className="block text-sm" htmlFor="testnet-amount">Amount (test USDC, maximum 1)</label>
+      {wallet.session && !canUseWallet && <p className="text-amber-800">Switch to {context.label} ({context.chain.id}) in your wallet. Other networks cannot create or pay here.</p>}
+      <label className="block text-sm" htmlFor="testnet-amount">Amount ({networkCurrency(context)}, maximum 1)</label>
       <input id="testnet-amount" inputMode="decimal" aria-describedby={error ? 'create-error create-context' : 'create-context'} className={input} value={amount} disabled={busy || !!action} onChange={(e) => setAmount(e.target.value)} />
       <label className="block text-sm" htmlFor="testnet-expiry">Expires in (whole hours, 1–168)</label>
       <input id="testnet-expiry" inputMode="numeric" aria-describedby={error ? 'create-error' : undefined} type="number" min={1} max={168} className={input} value={hours} disabled={busy || !!action} onChange={(e) => setHours(Number(e.target.value))} />
@@ -201,14 +209,14 @@ function TestnetDashboardSession({ wallet }: { wallet: ReturnType<typeof useTest
       <button type="submit" className={button} disabled={busy || !canUseWallet || !!action}>{busy ? 'Checking…' : 'Review invoice creation'}</button>
       {busy && <p role="status" className="text-sm">Checking invoice creation. No automatic resubmission.</p>}
     </form>
-    {action && <Review action={action} busy={busy} confirm={() => void confirm()} cancel={() => setAction(null)} />}
+    {action && <Review context={context} action={action} busy={busy} confirm={() => void confirm()} cancel={() => setAction(null)} />}
     {error && <p id="create-error" role="alert" className="rounded-lg bg-red-50 p-3 text-sm text-red-800 break-words">{error}</p>}
     {created && <section className={panel}>
-      <h3 className="font-semibold" role="status">Invoice created on Arc Testnet</h3>
+      <h3 className="font-semibold" role="status">Invoice created on {context.label}</h3>
       <p className="font-mono break-all text-xs">{created.invoiceId}</p>
-      <p>{formatAmountDisplay(created.amountNative)} test USDC · unpaid unless the chain now reports otherwise</p>
+      <p>{formatAmountDisplay(created.amountNative)} {networkCurrency(context)} · unpaid unless the chain now reports otherwise</p>
       <div className="flex gap-3 flex-wrap">
-        <a className="underline" href={route('pay', created.invoiceId)}>Open payment page</a>
+        <a className="underline" href={route(context, 'pay', created.invoiceId)}>Open payment page</a>
         <button className="underline" onClick={() => void copyLink(created.invoiceId)}>{copiedInvoiceId === created.invoiceId ? `Link copied for invoice …${created.invoiceId.slice(-4)}` : 'Copy payment link'}</button>
       </div>
     </section>}
@@ -221,8 +229,8 @@ function TestnetDashboardSession({ wallet }: { wallet: ReturnType<typeof useTest
       {history.length === 0 && <p className="text-sm text-stone-500">No invoices loaded. Connect the merchant wallet, then load history.</p>}
       {history.map((invoice) => <div key={invoice.invoiceId} className="border-t pt-3 space-y-1">
         <p className="text-xs font-mono break-all">{invoice.invoiceId}</p>
-        <p>{formatAmountDisplay(invoice.amountNative)} test USDC · {invoice.paid ? 'Paid according to contract; verify receipt' : 'Unpaid according to contract'}</p>
-        <a className="underline text-sm" href={route(invoice.paid ? 'receipt' : 'pay', invoice.invoiceId)}>{invoice.paid ? 'Verify payment receipt' : 'Open payment page'}</a>
+        <p>{formatAmountDisplay(invoice.amountNative)} {networkCurrency(context)} · {invoice.paid ? 'Paid according to contract; verify receipt' : 'Unpaid according to contract'}</p>
+        <a className="underline text-sm" href={route(context, invoice.paid ? 'receipt' : 'pay', invoice.invoiceId)}>{invoice.paid ? 'Verify payment receipt' : 'Open payment page'}</a>
       </div>)}
       <div className="flex items-center gap-3 text-sm">
         <button disabled={busy || page === 0} className="px-2 underline disabled:cursor-not-allowed disabled:text-stone-500 disabled:no-underline" onClick={() => void refreshHistory(page - 1)}>Previous</button>
@@ -233,12 +241,24 @@ function TestnetDashboardSession({ wallet }: { wallet: ReturnType<typeof useTest
   </div>;
 }
 
-export function TestnetPayScreen({ invoiceId }: { invoiceId: Hex }) {
-  const wallet = useTestnetWallet();
-  return <TestnetPaySession key={`${invoiceId}:${wallet.sessionKey}`} invoiceId={invoiceId} wallet={wallet} />;
+export function TestnetPayScreen({ invoiceId, context = BUILD_NETWORK }: { invoiceId: Hex; context?: NetworkContext }) {
+  if (!canWriteContext(context)) return <TestnetPaySession key={`${context.key}:${context.deployment?.deploymentId}:${invoiceId}`} context={context} invoiceId={invoiceId} wallet={READ_ONLY_WALLET} />;
+  return <NetworkPayWallet key={`${context.key}:${context.deployment?.deploymentId}:${invoiceId}`} context={context} invoiceId={invoiceId} />;
+}
+const READ_ONLY_WALLET: ReturnType<typeof useNetworkWallet> = {
+  session: null, sessionKey: 'read-only', getSession: () => null,
+  getProvider: () => Promise.reject(new Error('Wallet actions are disabled for this deployment.')),
+};
+function NetworkPayWallet({ context, invoiceId }: { context: NetworkContext; invoiceId: Hex }) {
+  // This hook is inert for read-only and non-build contexts; it never discovers a provider there.
+  const wallet = useNetworkWallet(context);
+  return <TestnetPaySession key={`${invoiceId}:${wallet.sessionKey}`} invoiceId={invoiceId} wallet={wallet} context={context} />;
 }
 
-function TestnetPaySession({ invoiceId, wallet }: { invoiceId: Hex; wallet: ReturnType<typeof useTestnetWallet> }) {
+function TestnetPaySession({ invoiceId, wallet, context }: { invoiceId: Hex; wallet: ReturnType<typeof useNetworkWallet>; context: NetworkContext }) {
+  const service = getNetworkService(context);
+  const { client: testnetClient, loadInvoice, preparePay, sendPreparedAction, assertReceiptMatches, confirmSubmittedOutcome, checkBroadcast, rememberPaymentHash, errorMessage } = service;
+  const { useSubmissions, recordSubmission } = service.submissions;
   const operation = useSafeOperation(`${wallet.sessionKey}:${invoiceId}`);
   const [invoice, setInvoice] = useState<LoadedInvoice | null>(null);
   const [action, setAction] = useState<PreparedAction | null>(null);
@@ -254,7 +274,7 @@ function TestnetPaySession({ invoiceId, wallet }: { invoiceId: Hex; wallet: Retu
       .catch((e: unknown) => { if (active) setError(errorMessage(e)); })
       .finally(() => { if (active) setBusy(false); });
     return () => { active = false; };
-  }, [invoiceId]);
+  }, [invoiceId, context, loadInvoice, testnetClient, errorMessage]);
 
   async function review() {
     const op = operation.start(); if (!op || !wallet.session) { op?.finish(); return; }
@@ -292,36 +312,39 @@ function TestnetPaySession({ invoiceId, wallet }: { invoiceId: Hex; wallet: Retu
     } finally { op.finish(); if (op.current()) setBusy(false); }
   }
 
-  const canPay = !!invoice && !invoice.paid && invoice.termsHash === ZERO_TERMS &&
-    wallet.session?.chainId === ARC_TESTNET.id && !pending;
+  const canPay = canWriteContext(context) && !!invoice && !invoice.paid && invoice.termsHash === ZERO_TERMS &&
+    wallet.session?.chainId === context.chain.id && !pending;
   return <div className="max-w-2xl mx-auto space-y-4">
     <section className={panel}>
-      <p className="text-sm font-semibold text-stone-600">Arc Testnet · test USDC only</p>
-      <h2 className="font-semibold text-lg">Testnet payment request</h2>
+      <p className="text-sm font-semibold text-stone-600">{context.label} · {networkCurrency(context)}</p>
+      <h2 className="font-semibold text-lg">{context.label} payment request</h2>
       <p className="text-xs font-mono break-all">{invoiceId}</p>
       {invoice ? <>
-        <p className="receipt-amount font-semibold">{formatAmountDisplay(invoice.amountNative)} test USDC</p>
+        <p className="receipt-amount font-semibold">{formatAmountDisplay(invoice.amountNative)} {networkCurrency(context)}</p>
         <p className="break-all">Merchant: <span className="font-mono text-sm">{invoice.merchant}</span></p>
         <p>Expires: {new Date(Number(invoice.expiresAt) * 1000).toISOString()} (UTC)</p>
         <p role="status">{invoice.paid ? 'Paid according to contract state. Verify the receipt independently below.' : 'Unpaid according to contract state. Fresh block time and terms are checked before signing.'}</p>
         {invoice.termsHash !== ZERO_TERMS && <p className="text-amber-800">Unsupported attached terms. This page is read-only and will not request a payment.</p>}
       </> : <p>Invoice amount, recipient and expiry are unavailable until trusted chain data loads.</p>}
-      {!wallet.session && <ConnectKitButton />}
-      {wallet.session && wallet.session.chainId !== ARC_TESTNET.id && <p className="text-amber-800">Switch your wallet to Arc Testnet (5042002). No other network is supported.</p>}
-      <button type="button" aria-describedby={error ? 'pay-error' : undefined} className={button} disabled={busy || !canPay || !!action} onClick={() => void review()}>{busy ? 'Checking…' : 'Review test payment'}</button>
-      {(invoice?.paid || hash) && <a className="block underline text-sm" href={route('receipt', invoiceId, hash ?? undefined)}>Verify receipt from chain data</a>}
+      {canWriteContext(context) && !wallet.session && <ConnectKitButton />}
+      {!canWriteContext(context) && <p role="status">Read-only deployment. Payment and wallet connection are disabled; receipt verification remains available.</p>}
+      {wallet.session && wallet.session.chainId !== context.chain.id && <p className="text-amber-800">Switch your wallet to {context.label} ({context.chain.id}). No other network is supported.</p>}
+      <button type="button" aria-describedby={error ? 'pay-error' : undefined} className={button} disabled={busy || !canPay || !!action} onClick={() => void review()}>{busy ? 'Checking…' : context.key === 'testnet' ? 'Review test payment' : 'Review payment'}</button>
+      {(invoice?.paid || hash) && <a className="block underline text-sm" href={route(context, 'receipt', invoiceId, hash ?? undefined)}>Verify receipt from chain data</a>}
     </section>
-    {action && <Review action={action} busy={busy} confirm={() => void confirm()} cancel={() => setAction(null)} />}
-    {hash && <TransactionNotice hash={hash} />}
+    {action && <Review context={context} action={action} busy={busy} confirm={() => void confirm()} cancel={() => setAction(null)} />}
+    {hash && <TransactionNotice context={context} hash={hash} />}
     {error && <p id="pay-error" role="alert" className="rounded-lg bg-red-50 p-3 text-sm text-red-800 break-words">{error}</p>}
   </div>;
 }
 
-export function TestnetReceiptScreen({ invoiceId, txHash }: { invoiceId?: Hex; txHash?: string }) {
-  return <TestnetReceiptFields key={`${invoiceId ?? ''}:${txHash ?? ''}`} invoiceId={invoiceId} txHash={txHash} />;
+export function TestnetReceiptScreen({ invoiceId, txHash, context = BUILD_NETWORK }: { invoiceId?: Hex; txHash?: string; context?: NetworkContext }) {
+  return <TestnetReceiptFields key={`${context.key}:${context.deployment?.deploymentId}:${invoiceId ?? ''}:${txHash ?? ''}`} invoiceId={invoiceId} txHash={txHash} context={context} />;
 }
 
-function TestnetReceiptFields({ invoiceId, txHash }: { invoiceId?: Hex; txHash?: string }) {
+function TestnetReceiptFields({ invoiceId, txHash, context }: { invoiceId?: Hex; txHash?: string; context: NetworkContext }) {
+  const { client: testnetClient, verifyNetworkReceipt: verifyTestnetReceipt, errorMessage } = getNetworkService(context);
+  const deployment = requireTrustedDeployment(context);
   const [id, setId] = useState(invoiceId ?? '');
   const [tx, setTx] = useState(txHash ?? '');
   const [busy, setBusy] = useState(false);
@@ -331,7 +354,9 @@ function TestnetReceiptFields({ invoiceId, txHash }: { invoiceId?: Hex; txHash?:
   const sequence = useRef(0);
   const receiptCopyVersion = useRef(0);
   const activeRequest = useRef<number | null>(null);
+  const abortRequest = useRef<AbortController | null>(null);
   function edit(field: 'id' | 'tx', value: string) {
+    abortRequest.current?.abort();
     sequence.current += 1; activeRequest.current = null;
     setBusy(false); setVerified(null); setError(''); setCopied(false);
     if (field === 'id') setId(value); else setTx(value);
@@ -339,19 +364,21 @@ function TestnetReceiptFields({ invoiceId, txHash }: { invoiceId?: Hex; txHash?:
   const runVerification = useCallback(async (targetId: string, targetTx: string) => {
     if (activeRequest.current !== null) return;
     const token = ++sequence.current;
+    const controller = new AbortController();
+    abortRequest.current = controller;
     activeRequest.current = token; setBusy(true); setError(''); setVerified(null); setCopied(false);
     try {
       // Name the field that is wrong; both rules stay the same 32-byte check.
       if (!isBytes32(targetId)) throw new Error('Invoice ID must be 0x followed by 64 hexadecimal characters (32 bytes).');
       if (targetTx && !isBytes32(targetTx)) throw new Error('Payment transaction hash must be 0x followed by 64 hexadecimal characters (32 bytes), or left empty.');
-      const result = await verifyTestnetReceipt(testnetClient, targetId, (targetTx || undefined) as Hex | undefined);
+      const result = await verifyTestnetReceipt(testnetClient, targetId, (targetTx || undefined) as Hex | undefined, { signal: controller.signal });
       if (sequence.current === token) setVerified(result);
     } catch (e) { if (sequence.current === token) setError(errorMessage(e)); }
     finally {
       if (activeRequest.current === token) activeRequest.current = null;
       if (sequence.current === token) setBusy(false);
     }
-  }, []);
+  }, [verifyTestnetReceipt, testnetClient, errorMessage, setBusy, setError, setVerified, setCopied]);
   function verify() { return runVerification(id, tx); }
   useEffect(() => {
     // Defer only to the microtask queue: StrictMode's first setup is cancelled,
@@ -360,31 +387,22 @@ function TestnetReceiptFields({ invoiceId, txHash }: { invoiceId?: Hex; txHash?:
     void Promise.resolve().then(() => {
       if (active && invoiceId && isBytes32(invoiceId) && (txHash === undefined || isBytes32(txHash))) void runVerification(invoiceId, txHash ?? '');
     });
-    return () => { active = false; sequence.current += 1; activeRequest.current = null; };
+    return () => { active = false; abortRequest.current?.abort(); sequence.current += 1; activeRequest.current = null; };
   }, [invoiceId, txHash, runVerification]);
-  const record = verified ? buildReceiptExport(TESTNET_DEPLOYMENT, verified.invoice.invoiceId, verified.hash,
+  const record = verified ? buildReceiptExport(deployment, verified.invoice.invoiceId, verified.hash,
     verified.invoice.amountNative,
     verified.invoice.paid && verified.invoice.payer !== '0x0000000000000000000000000000000000000000' ? verified.invoice.payer : null,
     verified.invoice.merchant, verified.invoice.paid && verified.invoice.paidAt > 0n ? verified.invoice.paidAt : null,
     verified.invoice.paid && verified.invoice.paidBlockNumber > 0n ? verified.invoice.paidBlockNumber : null,
     verified.result, false) : null;
   const success = verified?.result.status === 'VERIFIED' && verified.result.verified && !!record?.settlementEvidence;
-  function download(kind: 'json' | 'csv') {
-    if (!record) return;
-    const output = kind === 'json' ? exportReceiptsJson([record]) : exportReceiptsCsv([record]);
-    const blob = new Blob([output], { type: kind === 'json' ? 'application/json' : 'text/csv' });
-    const url = URL.createObjectURL(blob); const anchor = document.createElement('a');
-    anchor.href = url; anchor.download = `arcproof-testnet-${record.invoiceId}.${kind}`;
-    document.body.appendChild(anchor); anchor.click(); anchor.remove();
-    setTimeout(() => URL.revokeObjectURL(url), 1000);
-  }
   async function copyVerificationLink() {
     if (!verified || !isBytes32(verified.invoice.invoiceId) || !isBytes32(verified.hash)) return;
     const token = sequence.current;
     const copyToken = ++receiptCopyVersion.current;
     setCopied(false); setError('');
     const base = new URL(window.location.href);
-    base.search = ''; base.hash = route('receipt', verified.invoice.invoiceId, verified.hash);
+    base.search = ''; base.hash = route(context, 'receipt', verified.invoice.invoiceId, verified.hash);
     try {
       await navigator.clipboard.writeText(base.href);
       if (sequence.current === token && receiptCopyVersion.current === copyToken) setCopied(true);
@@ -395,38 +413,39 @@ function TestnetReceiptFields({ invoiceId, txHash }: { invoiceId?: Hex; txHash?:
   return <div className="max-w-2xl mx-auto space-y-4 receipt-page">
     <form className={`${panel} print:hidden`} onSubmit={(event) => { event.preventDefault(); void verify(); }}>
       <p className="ap-kicker">Read-only · no wallet needed</p>
-      <h2 className="font-semibold text-lg">Verify a testnet receipt</h2>
-      <p className="text-sm">Paste the invoice ID from a receipt or payment link. ArcProof re-reads Arc Testnet and only says “Verified” when contract code, invoice state, payment event, both USDC transfer legs and finality all check out. Network and contract come only from the checked manifest, never from imported receipt flags.</p>
-      <p className="text-xs text-stone-600 break-all">Checked contract: <span className="font-mono">{TESTNET_DEPLOYMENT.contractAddress}</span></p>
+      <h2 className="font-semibold text-lg">Verify a {context.key} receipt</h2>
+      <p className="text-sm">Paste the invoice ID from a receipt or payment link. ArcProof re-reads {context.label} and only says “Verified” when contract code, invoice state, payment event, both USDC transfer legs and finality all check out. Network and contract come only from the checked manifest, never from imported receipt flags.</p>
+      <p className="text-xs text-stone-600 break-all">Checked contract: <span className="font-mono">{deployment.contractAddress}</span></p>
       <label htmlFor="live-receipt-id" className="block text-sm">Invoice ID</label>
       <input id="live-receipt-id" aria-invalid={!!error && !isBytes32(id)} autoCapitalize="none" spellCheck={false} className={input} value={id} aria-describedby={error ? 'receipt-error' : undefined} onChange={(e) => edit('id', e.target.value)} />
       <label htmlFor="live-receipt-tx" className="block text-sm">Payment transaction hash (optional)</label>
       <input id="live-receipt-tx" aria-invalid={!!error && !!tx && !isBytes32(tx)} autoCapitalize="none" spellCheck={false} className={input} value={tx} aria-describedby={error ? 'receipt-error' : undefined} onChange={(e) => edit('tx', e.target.value)} />
       <p className="text-sm text-stone-600">Without a hash, recovery searches only the invoice’s recorded paid block. Ambiguous evidence stays unverified.</p>
+      <MainnetSampleEntry />
       <button type="submit" className={button} disabled={busy || !id}>{busy ? 'Verifying…' : 'Verify from chain data'}</button>
       {busy && <p role="status" className="text-sm">Reading chain evidence. No transaction will be sent.</p>}
     </form>
     {error && <p id="receipt-error" role="alert" className="rounded-lg bg-amber-50 p-3 text-sm text-amber-900 break-words">{error}</p>}
     {verified && record && <section className={panel} aria-label="Receipt result">
-      <p className="text-sm font-semibold text-stone-600">Arc Testnet · test USDC only · Not mainnet</p>
+      <p className="text-sm font-semibold text-stone-600">{context.label} · {networkCurrency(context)}{context.key === 'testnet' ? ' · Not mainnet' : ''}</p>
       <div role="status" aria-live="polite" className={`flex items-start gap-3 rounded-lg border p-3 ${success ? 'border-teal-300 bg-teal-50' : 'border-amber-300 bg-amber-50'}`}>
         {success ? <CheckCircle2 size={22} className="mt-0.5 shrink-0 text-teal-700" aria-hidden /> : <AlertTriangle size={22} className="mt-0.5 shrink-0 text-amber-700" aria-hidden />}
         <div>
-          <h3 className={`text-lg font-semibold ${success ? 'text-teal-900' : 'text-amber-900'}`}>{success ? 'Verified testnet payment' : verified.result.status === 'UNVERIFIED_ARC_EVIDENCE' ? 'Standard checks passed; settlement evidence incomplete' : `Not verified: ${verified.result.status}`}</h3>
+          <h3 className={`text-lg font-semibold ${success ? 'text-teal-900' : 'text-amber-900'}`}>{success ? `Verified ${context.key} payment` : verified.result.status === 'UNVERIFIED_ARC_EVIDENCE' ? 'Standard checks passed; settlement evidence incomplete' : `Not verified: ${verified.result.status}`}</h3>
           <p className={`text-sm ${success ? 'text-teal-900' : 'text-amber-900'}`}>{success ? 'All identity, native settlement and finality checks passed for this invoice and transaction.' : 'Do not treat this as payment proof. Details of each check are below.'}</p>
         </div>
       </div>
       {!success && <p className="text-sm text-amber-900">The following are observed invoice/receipt fields, not verified payment proof.</p>}
       <ReceiptFacts record={record} />
-      <p className="text-sm">Testnet evidence only, not revenue, a tax invoice, or proof of delivery. Imported verification flags are never trusted.</p>
-      <a className="block font-mono text-xs break-all underline" href={explorerTx(verified.hash)} target="_blank" rel="noreferrer">Transaction: {verified.hash}</a>
+      <p className="text-sm">{context.key === 'testnet' ? 'Testnet evidence only, not revenue' : 'Payment evidence, not proof of customer revenue'}, not a tax invoice or proof of delivery. Imported verification flags are never trusted.</p>
+      <a className="block font-mono text-xs break-all underline" href={networkExplorerTx(context, verified.hash)} target="_blank" rel="noreferrer">Transaction: {verified.hash}</a>
       <div className="flex flex-wrap gap-2 print:hidden">
         <button type="button" className="ap-btn-secondary" onClick={() => void copyVerificationLink()}>{copied ? 'Verification link copied' : 'Copy verification link'}</button>
-        <a className="ap-btn-secondary" href={route('receipt', verified.invoice.invoiceId, verified.hash)}>Open verification link</a>
-        <button type="button" className="ap-btn-secondary" onClick={() => download('json')}>Export testnet JSON</button>
-        <button type="button" className="ap-btn-secondary" onClick={() => download('csv')}>Export testnet CSV</button>
+        <a className="ap-btn-secondary" href={route(context, 'receipt', verified.invoice.invoiceId, verified.hash)}>Open verification link</a>
+
         <button type="button" className="ap-btn-secondary" onClick={() => window.print()}>Print</button>
       </div>
+      <ReceiptExportActions record={record} filename={`arcproof-${context.key}-${record.invoiceId}`} label={context.key} />
     </section>}
   </div>;
 }

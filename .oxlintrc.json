@@ -11,6 +11,10 @@
     "restriction": "off",
     "nursery": "off"
   },
+  "overrides": [{
+    "files": ["evidence/dot-independent-review-20261022/compile-runtime.cjs"],
+    "rules": { "typescript/no-require-imports": "off" }
+  }],
   "rules": {
     "typescript/await-thenable": "error",
     "typescript/ban-ts-comment": "error",

@@ -1,3 +1,4 @@
+import { createBlockReader, type ReadRetryOptions } from './readonlyRetry';
 import { receiptStatus } from './receiptStatus';
 /**
  * receiptVerifier.ts
@@ -239,8 +240,10 @@ export async function verifyReceipt(
   deployment: DeploymentRecord,
   expectedChainId: number,
   rpc: RpcProvider,
+  readOptions: ReadRetryOptions = {},
 ): Promise<VerificationResult> {
   const now = Date.now();
+  const readBlock = createBlockReader(readOptions);
 
   const checkIds = ['chain', 'runtime_code', 'receipt_identity', 'transaction_identity',
     'payment_event', 'invoice_state', 'event_and_value', 'payment_block',
@@ -419,7 +422,7 @@ export async function verifyReceipt(
 
   enter('payment_block');
   // 11. Block: number, timestamp, and blockhash consistency
-  const block = await rpc.getBlock(receipt.blockNumber).catch(() => null);
+  const block = await readBlock(() => rpc.getBlock(receipt.blockNumber));
   if (!block) return fail('PENDING', 'Block not found or not yet committed');
 
   if (block.number !== receipt.blockNumber) return fail('BLOCK_MISMATCH', 'Fetched block number differs from receipt');
@@ -525,7 +528,8 @@ export async function verifyReceipt(
   // Unsupported/null/older/conflicting responses fail closed, without fallback.
   if (!rpc.getFinalizedBlock)
     return fail('UNVERIFIED_FINALITY', 'RPC finalized-header evidence is unavailable.');
-  const finalized = await rpc.getFinalizedBlock().catch(() => null);
+  const getFinalizedBlock = rpc.getFinalizedBlock.bind(rpc);
+  const finalized = await readBlock(getFinalizedBlock);
   if (!finalized || !validBlock(finalized) || finalized.number < receipt.blockNumber || finalized.timestamp < block.timestamp)
     return fail('UNVERIFIED_FINALITY', 'RPC finalized-header evidence is missing, malformed or behind the payment block.');
   if (finalized.number === receipt.blockNumber &&
@@ -534,14 +538,14 @@ export async function verifyReceipt(
   if (finalized.number > receipt.blockNumber && addrEq(finalized.hash, receipt.blockHash))
     return fail('UNVERIFIED_FINALITY', 'Different finalized heights cannot share the payment block hash.');
   const finalizedByNumber = finalized.number === receipt.blockNumber ? null :
-    await rpc.getBlock(finalized.number).catch(() => null);
+    await readBlock(() => rpc.getBlock(finalized.number));
   if (finalized.number !== receipt.blockNumber &&
       (!finalizedByNumber || !validBlock(finalizedByNumber) || finalizedByNumber.number !== finalized.number ||
        !addrEq(finalizedByNumber.hash, finalized.hash) || finalizedByNumber.timestamp !== finalized.timestamp))
     return fail('UNVERIFIED_FINALITY', 'Finalized-tag header conflicts with the same height read by number.');
   // Read the payment height again AFTER observing finality to detect inconsistent
   // provider snapshots. This is RPC-trusted verification, not a BFT light client.
-  const canonical = await rpc.getBlock(receipt.blockNumber).catch(() => null);
+  const canonical = await readBlock(() => rpc.getBlock(receipt.blockNumber));
   if (!canonical || !validBlock(canonical) || canonical.number !== receipt.blockNumber ||
       !addrEq(canonical.hash, receipt.blockHash) || canonical.timestamp !== block.timestamp)
     return fail('UNVERIFIED_FINALITY', 'Payment block is unavailable or conflicts after finalized-header observation.');

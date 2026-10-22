@@ -172,6 +172,7 @@ export function createNetworkService(context: NetworkContext) {
   ): Promise<Hex> {
     assertWritesEnabled(context);
     assertContextDeployment(context, action.deployment);
+    if (action.deployment.deploymentId !== requireTrustedDeployment(context).deploymentId) throw new Error('Prepared deployment differs from the selected network context.');
     return runWalletIntent({
       chainId: context.chain.id, deploymentId: action.deployment.deploymentId,
       kind: action.kind, account: action.session.account, invoiceId: action.payment?.invoiceId,
@@ -262,6 +263,7 @@ export function createNetworkService(context: NetworkContext) {
   /** Bind the actual broadcast transaction before treating a receipt as its result. */
   async function checkBroadcast(client: PublicClient, action: PreparedAction, hash: Hex) {
     assertContextDeployment(context, action.deployment);
+    if (action.deployment.deploymentId !== requireTrustedDeployment(context).deploymentId) throw new Error('Prepared deployment differs from the selected network context.');
     const tx = await client.getTransaction({ hash });
     if (tx.hash.toLowerCase() !== hash.toLowerCase() ||
         tx.from.toLowerCase() !== action.session.account.toLowerCase() ||
@@ -368,13 +370,13 @@ export function createNetworkService(context: NetworkContext) {
     return logs[0].transactionHash;
   }
 
-  async function verifyTestnetReceipt(client: PublicClient, invoiceId: Hex, suppliedHash?: Hex) {
+  async function verifyTestnetReceipt(client: PublicClient, invoiceId: Hex, suppliedHash?: Hex, options: { signal?: AbortSignal } = {}) {
     if (suppliedHash !== undefined && !isBytes32(suppliedHash)) throw new Error('Transaction hash must be a 32-byte hexadecimal value.');
     const invoice = await loadInvoice(client, invoiceId);
     const hash = suppliedHash || await recoverPaymentHash(client, invoice);
     let checkedInvoice: LoadedInvoice | undefined;
     const rpc = receiptRpc(client, (snapshot) => { checkedInvoice = snapshot; });
-    const result = await verifyReceipt(hash, invoiceId, requireTrustedDeployment(context), context.chain.id, rpc);
+    const result = await verifyReceipt(hash, invoiceId, requireTrustedDeployment(context), context.chain.id, rpc, options);
     return { invoice: checkedInvoice ?? invoice, hash, result };
   }
 
@@ -478,7 +480,18 @@ export function createNetworkService(context: NetworkContext) {
 
 return { context, client, intents, submissions, assertSameSession, checkDeployment, readInvoice, loadInvoice, loadHistory, prepareCreate, preparePay, sendPreparedAction, checkBroadcast, readCreatedInvoice, assertReceiptMatches, receiptRpc, recoverPaymentHash, verifyTestnetReceipt, pendingVerification, paymentCacheKey, rememberPaymentHash, errorMessage, reconcileSubmission, recoverUnknownSubmission, confirmSubmittedOutcome, confirmCreatedInvoice, verifyNetworkReceipt: verifyTestnetReceipt };
 }
+export type NetworkService = ReturnType<typeof createNetworkService>;
+const services = new WeakMap<NetworkContext, NetworkService>();
+/** UI, persistence and RPC are selected together, never by a URL-provided endpoint. */
+export function getNetworkService(context: NetworkContext): NetworkService {
+  assertTrustedContext(context);
+  const existing = services.get(context);
+  if (existing) return existing;
+  const service = createNetworkService(context);
+  services.set(context, service);
+  return service;
+}
 /** Backward-compatible testnet surface. Never selected by a mainnet route. */
-export const testnetService = createNetworkService(TESTNET_CONTEXT);
+export const testnetService = getNetworkService(TESTNET_CONTEXT);
 export const testnetClient = testnetService.client;
 export const { assertSameSession, checkDeployment, readInvoice, loadInvoice, loadHistory, prepareCreate, preparePay, sendPreparedAction, checkBroadcast, readCreatedInvoice, assertReceiptMatches, receiptRpc, recoverPaymentHash, verifyTestnetReceipt, pendingVerification, paymentCacheKey, rememberPaymentHash, errorMessage, reconcileSubmission, recoverUnknownSubmission, confirmSubmittedOutcome, confirmCreatedInvoice } = testnetService;

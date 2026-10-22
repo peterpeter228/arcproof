@@ -1,5 +1,5 @@
-import { ARC_TESTNET, TESTNET_MANIFEST, isBytes32 } from '../../arcproof/testnet';
-import { resolveDeployment } from '../../arcproof/manifest';
+import { isBytes32 } from '../../arcproof/testnet';
+import { BUILD_NETWORK, getDeploymentContext } from '../../arcproof/networkPolicy';
 
 export interface UnavailableRequestProps {
   chainId?: number;
@@ -10,9 +10,9 @@ export interface UnavailableRequestProps {
 
 /** Immediate read-only fallback. Never attempts RPC, wallet connection or signing. */
 export function UnavailableRequest({ chainId, deploymentId, invoiceId, txHash }: UnavailableRequestProps) {
-  const reason = chainId !== ARC_TESTNET.id
-    ? 'Unsupported network. Only the checked Arc Testnet deployment is available.'
-    : !deploymentId || !resolveDeployment(TESTNET_MANIFEST, chainId, deploymentId)
+  const reason = chainId !== BUILD_NETWORK.chain.id
+    ? `Unsupported network. This build is fixed to ${BUILD_NETWORK.label} (${BUILD_NETWORK.chain.id}).`
+    : !deploymentId || !getDeploymentContext(BUILD_NETWORK, chainId, deploymentId)
       ? 'Unsupported deployment. This link is not in the trusted manifest.'
       : !invoiceId ? 'Missing invoice ID. Ask the sender for the complete link.'
         : !isBytes32(invoiceId) ? 'Invalid invoice ID. It must contain exactly 32 bytes.'

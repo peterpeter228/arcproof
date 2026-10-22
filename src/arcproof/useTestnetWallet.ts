@@ -2,7 +2,7 @@ import { useEffect, useMemo, useSyncExternalStore } from 'react';
 import { useConfig } from 'wagmi';
 import { getAccount, watchAccount } from '@wagmi/core';
 import type { Session, WalletRequest } from './testnetClient';
-import { TESTNET_CONTEXT, assertTrustedContext, assertWritesEnabled, type NetworkContext } from './networkPolicy';
+import { TESTNET_CONTEXT, assertTrustedContext, assertWritesEnabled, canWriteContext, type NetworkContext } from './networkPolicy';
 
 interface ObservableProvider extends WalletRequest {
   on?: (event: string, handler: (...args: unknown[]) => void) => void;
@@ -41,7 +41,7 @@ export function useNetworkWallet(context: NetworkContext) {
   const state = useSyncExternalStore(store.subscribe, store.getSnapshot, store.getSnapshot);
 
   useEffect(() => {
-    if (!context.writesEnabled || !context.deployment) return;
+    if (!canWriteContext(context)) return;
     let provider: ObservableProvider | undefined;
     let generation = 0;
     const invalidate = () => {
@@ -75,7 +75,7 @@ export function useNetworkWallet(context: NetworkContext) {
     session: state.session,
     sessionKey: state.key,
     getSession: () => {
-      if (!context.writesEnabled || !context.deployment) return null;
+      if (!canWriteContext(context)) return null;
       const session = store.getSnapshot().session;
       const account = getAccount(config);
       return session && account.isConnected && account.address?.toLowerCase() === session.account.toLowerCase() &&

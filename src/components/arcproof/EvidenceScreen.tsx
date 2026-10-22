@@ -1,7 +1,7 @@
 /** Historical results and current build provenance. No implicit fresh-run claims. */
 import React from 'react';
 import { BUILD_IDENTITY, identityLabel } from '../../arcproof/buildIdentity';
-import { BUILD_NETWORK } from '../../arcproof/networkPolicy';
+import { BUILD_NETWORK, networkStage } from '../../arcproof/networkPolicy';
 import { ARC_TESTNET, TESTNET_DEPLOYMENT, DEPLOYMENT_TX, explorerTx } from '../../arcproof/testnet';
 import { CheckCircle, Clock, AlertCircle } from 'lucide-react';
 
@@ -107,13 +107,13 @@ export function EvidenceScreen() {
           <div><dt>Verified base commit (not current source)</dt><dd>{identityLabel(BUILD_IDENTITY.verifiedBaseCommit)}</dd></div>
           <div><dt>Candidate source snapshot SHA-256</dt><dd>{identityLabel(BUILD_IDENTITY.sourceSnapshotSha256)}</dd></div>
           <div><dt>Build UTC</dt><dd>{identityLabel(BUILD_IDENTITY.builtAtUTC)}</dd></div>
-          <div><dt>Environment / chain</dt><dd>{BUILD_NETWORK.label} / {BUILD_NETWORK.chain.id}; {BUILD_NETWORK.writesEnabled ? 'testnet only; mainnet disabled' : 'all wallet actions disabled'}</dd></div>
+          <div><dt>Environment / chain</dt><dd>{BUILD_NETWORK.label} / {BUILD_NETWORK.chain.id}; {networkStage(BUILD_NETWORK)}; {BUILD_NETWORK.writesEnabled ? 'release write policy enabled; user wallet approval required' : 'all wallet actions disabled'}</dd></div>
           <div><dt>Manifest deployment identity</dt><dd>{BUILD_NETWORK.deployment?.deploymentId ?? 'None (no trusted deployment)'}</dd></div>
           <div><dt>Expected contract runtime keccak256</dt><dd>{BUILD_NETWORK.deployment?.runtimeCodeHash ?? 'Unknown (no trusted deployment)'}</dd></div>
         </dl>
         <p className="text-sm">The candidate hash identifies declared build inputs, not a committed source SHA. Build time is not verification time. Current tests, live network acceptance, and independent host-to-artifact matching remain Unknown unless accompanied by separate version-bound logs.</p>
         <a className="underline text-sm" href={`${import.meta.env.BASE_URL}build-provenance.json`}>Download production build provenance (generated during build)</a>
-        <p className="text-xs">The provenance file records input and emitted bundle hashes. It is unavailable in a development server and is not proof that a remote host serves these bytes. Offline demo data remains SIMULATED_NOT_VERIFIED.</p>
+        <p className="text-xs">The provenance file separates application inputs, contract build/test inputs (including forge-std), build/deployment tools, imported test evidence, installed reference-contract dependencies and final output hashes. Studio runtime instrumentation is included whenever present. It is unavailable in a development server and is not proof that a remote host serves these bytes. Offline demo data remains SIMULATED_NOT_VERIFIED.</p>
       </section>
 
       {/* Historical test matrix */}
@@ -147,7 +147,7 @@ export function EvidenceScreen() {
       <div className="ap-card p-5 space-y-3">
         <h3 className="font-medium text-stone-800 text-sm">Known limitations of this prototype</h3>
         <ul className="text-sm text-stone-700 space-y-1.5 list-disc list-outside ml-4">
-          <li>Only the checked Arc Testnet deployment is configured. Mainnet remains disabled; the user alone approves testnet wallet requests.</li>
+          <li>Network reads require a trusted deployment (R1). Wallet actions additionally require the fixed build network and approved release write policy (W2). With no deployment (U0), neither reads nor wallet actions run. The current production manifest is empty.</li>
           <li>Fresh candidate-bound Arc native-USDC system Transfer and finality acceptance (T25/T26) is not attached to this build. Historical controlled observations do not establish current acceptance. Official native events use 18 decimals at 0xfffffffffffffffffffffffffffffffffffffffe, not the 6-decimal ERC-20 path.</li>
           <li>Receipt verifier compares runtime keccak256 against the supplied manifest. No fresh network result is attached to this build.</li>
           <li>P0 UI only supports ordinary EOA wallets. Other account types are explicitly unsupported.</li>

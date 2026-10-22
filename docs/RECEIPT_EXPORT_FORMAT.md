@@ -28,3 +28,11 @@ CSV is for human-readable interchange, not the canonical evidence format. Raw in
 5. Reject the spreadsheet round trip if any digits, identifiers, escapes or null/empty meanings change. Do not use the sheet as evidence.
 
 Actual Microsoft Excel / Google Sheets / LibreOffice round-trip acceptance: **NOT_RUN** in this patch. Automated tests verify serializer strings and JSON bigint round trips only, not application precision, actual downloads or spreadsheet execution behavior. No real RPC, wallet action, deployment, or live settlement acceptance is established by fixture tests.
+
+## Offline demo and browser delivery
+
+The actual offline demo uses the same Schema 1.2 public builder as live receipts. Its registered synthetic identity retains chainId, deploymentId, contractAddress/contract and invoiceId only. All standard payment facts (including amount, merchant, payer, transaction, time, block, log index and fee) and RPC observations remain null. The page's example amount and merchant are a display model, not exported observations. No separate demo payload or changed core-field semantics is introduced.
+
+A fixture exports mode=fixture, verificationStatus=SIMULATED_NOT_VERIFIED, verificationVerified=false, verifiedEvidence=null and importedVerified=false. Synthetic results never become proof, even if a caller supplies a success flag, transaction hash or settlement evidence.
+
+JSON and CSV are serialized once per record and reused byte-for-byte for download, clipboard and expandable, selectable read-only text. Download feedback means only that a download was requested, not that a file was saved. When downloading or Clipboard API use is blocked, select the complete text manually. A longer Blob lifetime does not circumvent iframe restrictions. Actual browser acceptance is recorded separately from DOM/component tests.

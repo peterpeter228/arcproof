@@ -1,0 +1,16 @@
+{
+  "schema": "arcproof-runtime-rebuild/v1",
+  "compiler": "0.8.28+commit.7893614a.Emscripten.clang",
+  "compiler_source": "Official npm solc package",
+  "forge_version": "1.7.1",
+  "evm_version": "paris",
+  "optimizer_runs": 200,
+  "runtime_bytes": 2296,
+  "runtime_keccak256": "0xa36ede95ccce8289224d3bbabe3a2445a888c44e763a04ac4b6f4f2f03dd344c",
+  "matches_existing_runtime_expectation": true,
+  "contracts_changed": false,
+  "forge_tests": 73,
+  "suites": 5,
+  "live_chain_readback": false,
+  "limits": "Fresh local compilation, not a deployment receipt or audit."
+}

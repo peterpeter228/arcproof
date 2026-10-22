@@ -1,0 +1,3 @@
+evidence/dot-independent-review-20261022/compile-runtime.cjs:1:10: error typescript(no-require-imports): Expected "import" statement instead of "require" call help: Do not use CommonJS `require` calls
+evidence/dot-independent-review-20261022/compile-runtime.cjs:1:29: error typescript(no-require-imports): Expected "import" statement instead of "require" call help: Do not use CommonJS `require` calls
+evidence/dot-independent-review-20261022/compile-runtime.cjs:1:50: error typescript(no-require-imports): Expected "import" statement instead of "require" call help: Do not use CommonJS `require` calls

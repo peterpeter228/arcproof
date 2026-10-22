@@ -4,7 +4,7 @@ import react from '@vitejs/plugin-react'
 import path from 'path'
 import { createHash } from 'node:crypto'
 import { readFileSync, writeFileSync } from 'node:fs'
-import { sourceSnapshot, outputSnapshot } from './scripts/buildProvenance'
+import { sourceSnapshot, outputSnapshot, buildProvenanceScopes } from './scripts/buildProvenance'
 import { nodePolyfills } from 'vite-plugin-node-polyfills'
 
 // Network selection is a strict build input, not runtime URL/storage configuration.
@@ -13,6 +13,7 @@ if (networkKey !== 'testnet' && networkKey !== 'mainnet') throw new Error('Unsup
 
 // Declared inputs include the two evidence fixtures imported by tests, not logs.
 const snapshot = sourceSnapshot(__dirname);
+const provenanceScopes = buildProvenanceScopes(__dirname);
 const buildIdentity = {
   networkKey,
   sourceCommit: null,
@@ -46,8 +47,8 @@ export default defineConfig({
         sha256: createHash('sha256').update(output.type === 'chunk' ? output.code : output.source).digest('hex'),
       }));
       this.emitFile({ type: 'asset', fileName: 'build-provenance.json', source: JSON.stringify({
-        ...buildIdentity, schema: 'arcproof-build-provenance-v1', sourceInputs: snapshot.records, outputs,
-        limits: 'Candidate declared-input and final output-file hashes (including copied public assets). Excludes this root manifest, installed dependency bytes, and toolchain binaries. Not a Git commit, live host readback, test result, or chain attestation.',
+        ...buildIdentity, schema: 'arcproof-build-provenance-v2', sourceInputs: snapshot.records, ...provenanceScopes, outputs,
+        limits: 'Scoped declared-input and final output-file hashes, including checked-in forge-std, dependency locks, ABI and reference artifact. Installed artifact-referenced contract dependencies are separately fingerprinted, not all installed packages. Excludes root manifest self-hash and toolchain binaries. Not a Git commit, Studio equivalence, fresh compilation, live host readback, test result, or chain attestation.',
       }, null, 2) });
     },
   }, react(), nodePolyfills({

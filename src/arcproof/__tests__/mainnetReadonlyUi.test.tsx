@@ -8,8 +8,8 @@ vi.mock('../networkPolicy', async () => {
   return { ...actual, BUILD_NETWORK: actual.MAINNET_CONTEXT };
 });
 vi.mock('connectkit', () => ({ ConnectKitButton: () => { calls.wallet(); return <button>Connect wallet</button>; } }));
-vi.mock('../useTestnetWallet', () => ({ useTestnetWallet: () => { calls.wallet(); return {}; } }));
-vi.mock('../testnetClient', async () => ({ ...await vi.importActual<typeof import('../testnetClient')>('../testnetClient'), loadInvoice: calls.load, verifyTestnetReceipt: calls.verify, sendPreparedAction: calls.send, prepareCreate: calls.prepare, preparePay: calls.prepare }));
+vi.mock('../useTestnetWallet', () => ({ useNetworkWallet: () => { calls.wallet(); return {}; } }));
+vi.mock('../testnetClient', async () => { const original = await vi.importActual<typeof import('../testnetClient')>('../testnetClient'); return { ...original, getNetworkService: (context: import('../networkPolicy').NetworkContext) => ({ ...original.getNetworkService(context), loadInvoice: calls.load, verifyNetworkReceipt: calls.verify, sendPreparedAction: calls.send, prepareCreate: calls.prepare, preparePay: calls.prepare }) }; });
 vi.mock('../submissions', async () => ({ ...await vi.importActual<typeof import('../submissions')>('../submissions'), useSubmissions: () => { calls.saved(); return []; }, useSubmissionRequests: () => { calls.saved(); return []; } }));
 import App from '../../App';
 let root: Root, host: HTMLDivElement;
@@ -38,7 +38,7 @@ describe('fixed mainnet build is inert without a production deployment', () => {
   });
   it.each(['#', '#/'])('shows the static overview on mainnet without enabling any action: %s', hash => {
     window.history.replaceState(null, '', hash); act(() => root.render(<App />));
-    expect(host.textContent).toContain('not enabled on Arc Mainnet in this build');
+    expect(host.textContent).toContain('Arc Mainnet has no trusted deployment in this build');
     expect(host.textContent).toContain('Not deployed. Creating, paying and verifying are disabled.');
     expect(host.querySelector('main a[href="#/invoices"]')).toBeNull();
     expect(host.textContent).not.toContain('Connect wallet');
