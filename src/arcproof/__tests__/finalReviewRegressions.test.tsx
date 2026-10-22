@@ -1,6 +1,6 @@
 // @vitest-environment jsdom
 /* eslint-disable typescript/require-await -- Promise-returning offline RPC stubs. */
-// Regressions for the 2026-10-22 final review findings. Each case reproduced on 8f748d3.
+// Regression coverage for the 2026-10-22 review; per-finding reproduction provenance is recorded in docs/FINAL_REVIEW_AND_IMPROVEMENT_REPORT.md.
 import React from 'react';
 import { renderToStaticMarkup } from 'react-dom/server';
 import { describe, expect, it } from 'vitest';

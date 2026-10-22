@@ -1,0 +1,33 @@
+
+ RUN  v4.1.12 /workspace/scratch/c01bd6fe117d/arcproof-stageA-20261022/mutation
+
+ ❯ src/arcproof/__tests__/finalReviewRegressions.test.tsx (12 tests | 1 failed | 10 skipped) 21ms
+     × downgrades a VERIFIED result for an unregistered contract to UNKNOWN_DEPLOYMENT without evidence 17ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  src/arcproof/__tests__/finalReviewRegressions.test.tsx > FR-02 untrusted deployments never export verified settlement evidence > downgrades a VERIFIED result for an unregistered contract to UNKNOWN_DEPLOYMENT without evidence
+AssertionError: expected true to be false // Object.is equality
+
+- Expected
++ Received
+
+- false
++ true
+
+ ❯ src/arcproof/__tests__/finalReviewRegressions.test.tsx:44:41
+     42|     const record = buildReceiptExport(untrusted, id, tx, null, null, n…
+     43|     expect(record.mode).toBe('unknown');
+     44|     expect(record.verificationVerified).toBe(false);
+       |                                         ^
+     45|     expect(record.verifiedEvidence).toBeNull();
+     46|     expect(record.settlementEvidence).toBeUndefined();
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed | 30 skipped (31)
+      Tests  1 failed | 1 passed | 483 skipped (485)
+   Start at  12:23:03
+   Duration  6.14s (transform 7.48s, setup 0ms, import 20.81s, tests 21ms, environment 11.63s)
+

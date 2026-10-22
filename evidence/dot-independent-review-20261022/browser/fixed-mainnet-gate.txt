@@ -1,0 +1,38 @@
+- link "Skip to main content":
+  - /url: "#main-content"
+- paragraph:
+  - generic: Mainnet preview
+  - text: Arc Mainnet (5042)
+  - generic: · real USDC · no trusted deployment · all sends disabled · not audited
+- banner:
+  - link "ArcProof Verifiable USDC invoices":
+    - /url: "#/"
+    - heading "ArcProof" [level=1]
+    - generic: Verifiable USDC invoices
+  - navigation "Main navigation":
+    - button "Overview"
+    - button "Try demo"
+    - button "Verify receipt"
+    - button "Create invoice"
+    - button "Evidence"
+- main [active]:
+  - 'region "Mainnet unavailable: no trusted deployment"':
+    - paragraph: Private readiness preview · read only
+    - 'heading "Mainnet unavailable: no trusted deployment" [level=2]'
+    - paragraph: Arc Mainnet (5042) uses real USDC. This private build has no accepted mainnet contract. Creation, payment, wallet connection and receipt verification are disabled.
+    - paragraph: Choosing a network does not prove deployment or settlement. A testnet address, imported receipt or URL cannot enable mainnet operations.
+    - paragraph: Saved testnet requests are left untouched. Reopen the testnet build to inspect them; do not clear storage or resend an uncertain request.
+    - link "Try the isolated offline demo":
+      - /url: "#/demo"
+    - link "What ArcProof does":
+      - /url: "#/"
+    - paragraph: Not deployed, not audited, not production-ready. No real funds were moved by this preview.
+- contentinfo:
+  - generic: ArcProof prototype — not audited, 1 USDC cap per invoice
+  - generic: "Mainnet: no trusted deployment · sends disabled"
+  - link "Build identity and evidence":
+    - /url: "#/evidence"
+  - link "Built with Arc Studio":
+    - /url: https://studio.arc.io/
+    - text: Built with Arc Studio
+- region "Notifications alt+T"

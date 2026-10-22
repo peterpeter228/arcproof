@@ -66,7 +66,7 @@
 
 ## 6. 简介草稿（英文，待用户确认，不代表已提交）
 
-> ArcProof turns a USDC payment request into a fixed on-chain invoice on Arc. The payer pays it exactly once; the contract forwards the USDC to the merchant in the same transaction and keeps no balance. Anyone with the receipt link can re-check the payment against Arc chain data — contract code, invoice state, the InvoicePaid event, both native USDC transfer legs and finality — instead of trusting a screenshot. Contracts and the initial app were generated and tested in Arc Studio; we then reviewed and hardened them with external tools and synced the changes back into the same Studio project. Prototype, not audited; invoices are capped at 1 USDC.
+> ArcProof turns a USDC payment request into a fixed on-chain invoice on Arc. The payer pays it exactly once; the contract forwards the USDC to the merchant in the same transaction and does not retain invoice principal; any pre-existing or forcibly sent balance remains locked and cannot be recovered. Anyone with the receipt link can re-check the payment against Arc chain data — contract code, invoice state, the InvoicePaid event, both native USDC transfer legs and finality — instead of trusting a screenshot. Contracts and the initial app were generated and tested in Arc Studio; we then reviewed and hardened them with external tools and synced the changes back into the same Studio project. Prototype, not audited; invoices are capped at 1 USDC.
 
 （使用前须满足：最新快照已同步回 Studio 并回读一致，否则“synced the changes back”这句不成立，必须改写。只有当 R3–R5 真实完成后，才能加上主网合约地址和交易链接。当前状态：本轮修改**尚未**同步。）
 

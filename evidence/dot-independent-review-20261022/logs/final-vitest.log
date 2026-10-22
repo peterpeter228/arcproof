@@ -1,0 +1,9 @@
+
+ RUN  v4.1.12 /workspace/scratch/c01bd6fe117d/arcproof-stageA-20261022/fixed
+
+
+ Test Files  32 passed (32)
+      Tests  496 passed (496)
+   Start at  12:26:35
+   Duration  12.56s (transform 6.85s, setup 0ms, import 33.42s, tests 14.35s, environment 29.46s)
+

@@ -1,0 +1,147 @@
+vite v6.4.4 building for production...
+
+(!) outDir /workspace/scratch/c01bd6fe117d/arcproof-stageA-20261022/accepted-build-mainnet is not inside project root and will not be emptied.
+Use --emptyOutDir to override.
+
+transforming...
+../source/node_modules/@base-org/account/node_modules/ox/_esm/core/Address.js (6:21): A comment
+
+"/*#__PURE__*/"
+
+in "../source/node_modules/@base-org/account/node_modules/ox/_esm/core/Address.js" contains an annotation that Rollup cannot interpret due to the position of the comment. The comment will be removed to avoid issues.
+../source/node_modules/@base-org/account/node_modules/ox/_esm/core/Base64.js (6:27): A comment
+
+"/*#__PURE__*/"
+
+in "../source/node_modules/@base-org/account/node_modules/ox/_esm/core/Base64.js" contains an annotation that Rollup cannot interpret due to the position of the comment. The comment will be removed to avoid issues.
+../source/node_modules/@coinbase/wallet-sdk/node_modules/ox/_esm/core/Address.js (6:21): A comment
+
+"/*#__PURE__*/"
+
+in "../source/node_modules/@coinbase/wallet-sdk/node_modules/ox/_esm/core/Address.js" contains an annotation that Rollup cannot interpret due to the position of the comment. The comment will be removed to avoid issues.
+../source/node_modules/@coinbase/wallet-sdk/node_modules/ox/_esm/core/Base64.js (6:27): A comment
+
+"/*#__PURE__*/"
+
+in "../source/node_modules/@coinbase/wallet-sdk/node_modules/ox/_esm/core/Base64.js" contains an annotation that Rollup cannot interpret due to the position of the comment. The comment will be removed to avoid issues.
+../source/node_modules/porto/node_modules/ox/_esm/core/Base64.js (6:27): A comment
+
+"/*#__PURE__*/"
+
+in "../source/node_modules/porto/node_modules/ox/_esm/core/Base64.js" contains an annotation that Rollup cannot interpret due to the position of the comment. The comment will be removed to avoid issues.
+../source/node_modules/@base-org/account/node_modules/ox/_esm/core/internal/cursor.js (2:21): A comment
+
+"/*#__PURE__*/"
+
+in "../source/node_modules/@base-org/account/node_modules/ox/_esm/core/internal/cursor.js" contains an annotation that Rollup cannot interpret due to the position of the comment. The comment will be removed to avoid issues.
+../source/node_modules/@coinbase/wallet-sdk/node_modules/ox/_esm/core/internal/cursor.js (2:21): A comment
+
+"/*#__PURE__*/"
+
+in "../source/node_modules/@coinbase/wallet-sdk/node_modules/ox/_esm/core/internal/cursor.js" contains an annotation that Rollup cannot interpret due to the position of the comment. The comment will be removed to avoid issues.
+../source/node_modules/zod/v4/core/util.js (400:0): A comment
+
+"// Wrapped in a `@__PURE__` IIFE: esbuild never tree-shakes a top-level initializer that contains a member access on `Number`, so the bare object literal survived into every bundle."
+
+in "../source/node_modules/zod/v4/core/util.js" contains an annotation that Rollup cannot interpret due to the position of the comment. The comment will be removed to avoid issues.
+../source/node_modules/zod/v4/core/regexes.js (74:0): A comment
+
+"/** Anchors a pattern source. The interpolation lives here rather than at the call site because
+ * esbuild will not drop a `@__PURE__` call whose own argument interpolates a variable, but it
+ * will drop `anchor(dateSource)`. Keeping it inline pinned `date` into every bundle. */"
+
+in "../source/node_modules/zod/v4/core/regexes.js" contains an annotation that Rollup cannot interpret due to the position of the comment. The comment will be removed to avoid issues.
+✓ 6433 modules transformed.
+rendering chunks...
+computing gzip size...
+../accepted-build-mainnet/index.html                                        1.02 kB │ gzip:   0.59 kB
+../accepted-build-mainnet/build-provenance.json                            26.29 kB │ gzip:   9.69 kB
+../accepted-build-mainnet/assets/index-Dbd5vEfY.css                        24.25 kB │ gzip:   5.11 kB
+../accepted-build-mainnet/assets/cursor-BYcLmVkn.js                         0.26 kB │ gzip:   0.22 kB
+../accepted-build-mainnet/assets/chevron-left-V_kGnTCr.js                   0.40 kB │ gzip:   0.28 kB
+../accepted-build-mainnet/assets/chevron-top-zMXh1by6.js                    0.40 kB │ gzip:   0.28 kB
+../accepted-build-mainnet/assets/external-link-Ysb0hU5Q.js                  0.40 kB │ gzip:   0.28 kB
+../accepted-build-mainnet/assets/chevron-bottom-C6pGyVz-.js                 0.40 kB │ gzip:   0.28 kB
+../accepted-build-mainnet/assets/chevron-right-BV0qr1oA.js                  0.40 kB │ gzip:   0.28 kB
+../accepted-build-mainnet/assets/arrow-top-BwwpG9Tv.js                      0.41 kB │ gzip:   0.29 kB
+../accepted-build-mainnet/assets/arrow-bottom-BS5IEI9T.js                   0.41 kB │ gzip:   0.29 kB
+../accepted-build-mainnet/assets/arrow-left-DKWp5pkV.js                     0.41 kB │ gzip:   0.29 kB
+../accepted-build-mainnet/assets/arrow-right-_vTBtQe4.js                    0.42 kB │ gzip:   0.29 kB
+../accepted-build-mainnet/assets/off-FKIRaCE8.js                            0.43 kB │ gzip:   0.29 kB
+../accepted-build-mainnet/assets/search-DTOcmRur.js                         0.44 kB │ gzip:   0.30 kB
+../accepted-build-mainnet/assets/close-BYUSX7Tu.js                          0.44 kB │ gzip:   0.29 kB
+../accepted-build-mainnet/assets/all-wallets-DueXyCVa.js                    0.45 kB │ gzip:   0.26 kB
+../accepted-build-mainnet/assets/filters-HKw7Klra.js                        0.45 kB │ gzip:   0.28 kB
+../accepted-build-mainnet/assets/info-circle-BS4bGH3o.js                    0.47 kB │ gzip:   0.30 kB
+../accepted-build-mainnet/assets/more-D3w3W9So.js                           0.49 kB │ gzip:   0.31 kB
+../accepted-build-mainnet/assets/refresh-BMTJrKKm.js                        0.49 kB │ gzip:   0.33 kB
+../accepted-build-mainnet/assets/warning-circle-BtXXj7C3.js                 0.50 kB │ gzip:   0.31 kB
+../accepted-build-mainnet/assets/coinPlaceholder-DRaHIqEA.js                0.50 kB │ gzip:   0.35 kB
+../accepted-build-mainnet/assets/compass-DnWAamNU.js                        0.52 kB │ gzip:   0.34 kB
+../accepted-build-mainnet/assets/swapVertical-BoMPh4R8.js                   0.55 kB │ gzip:   0.34 kB
+../accepted-build-mainnet/assets/swapHorizontal-Cbs1FuiK.js                 0.55 kB │ gzip:   0.33 kB
+../accepted-build-mainnet/assets/x-B41G1Dfr.js                              0.57 kB │ gzip:   0.39 kB
+../accepted-build-mainnet/assets/cursor-transparent-BFw0TWZN.js             0.58 kB │ gzip:   0.36 kB
+../accepted-build-mainnet/assets/twitterIcon-Bwt7qLdW.js                    0.58 kB │ gzip:   0.38 kB
+../accepted-build-mainnet/assets/mobile-euBq44QR.js                         0.59 kB │ gzip:   0.32 kB
+../accepted-build-mainnet/assets/checkmark-bold-yckwiTTr.js                 0.65 kB │ gzip:   0.43 kB
+../accepted-build-mainnet/assets/etherscan-CFsoohJ7.js                      0.70 kB │ gzip:   0.45 kB
+../accepted-build-mainnet/assets/checkmark-BX2BYx1L.js                      0.71 kB │ gzip:   0.47 kB
+../accepted-build-mainnet/assets/help-circle-B3vN9Jei.js                    0.71 kB │ gzip:   0.43 kB
+../accepted-build-mainnet/assets/wallet-Dad1XUQ0.js                         0.72 kB │ gzip:   0.42 kB
+../accepted-build-mainnet/assets/plus-BFvZyMnL.js                           0.76 kB │ gzip:   0.42 kB
+../accepted-build-mainnet/assets/verify-filled-BSB8pGP9.js                  0.77 kB │ gzip:   0.47 kB
+../accepted-build-mainnet/assets/add-DYvy5LkO.js                            0.77 kB │ gzip:   0.43 kB
+../accepted-build-mainnet/assets/google-BoWG3HQu.js                         0.81 kB │ gzip:   0.46 kB
+../accepted-build-mainnet/assets/three-dots-LwDTAwzq.js                     0.84 kB │ gzip:   0.41 kB
+../accepted-build-mainnet/assets/clock-Bl5u9q_d.js                          0.84 kB │ gzip:   0.47 kB
+../accepted-build-mainnet/assets/disconnect-BURdgaDA.js                     0.89 kB │ gzip:   0.51 kB
+../accepted-build-mainnet/assets/twitch-DLCBNQTV.js                         0.90 kB │ gzip:   0.50 kB
+../accepted-build-mainnet/assets/bank-DyYaYD4e.js                           0.94 kB │ gzip:   0.52 kB
+../accepted-build-mainnet/assets/apple-COg81jwR.js                          0.96 kB │ gzip:   0.53 kB
+../accepted-build-mainnet/assets/play-store-B0m2YX19.js                     1.01 kB │ gzip:   0.52 kB
+../accepted-build-mainnet/assets/farcaster-BsXb5ADs.js                      1.02 kB │ gzip:   0.53 kB
+../accepted-build-mainnet/assets/arrow-bottom-circle-BwMl8J3P.js            1.13 kB │ gzip:   0.53 kB
+../accepted-build-mainnet/assets/github-h40ZZmW-.js                         1.13 kB │ gzip:   0.60 kB
+../accepted-build-mainnet/assets/swapHorizontalBold-CBB6iTT3.js             1.16 kB │ gzip:   0.62 kB
+../accepted-build-mainnet/assets/app-store-xdfPpTxU.js                      1.20 kB │ gzip:   0.67 kB
+../accepted-build-mainnet/assets/mail-B8opBf0-.js                           1.21 kB │ gzip:   0.65 kB
+../accepted-build-mainnet/assets/facebook-0XEQEpe3.js                       1.23 kB │ gzip:   0.64 kB
+../accepted-build-mainnet/assets/wallet-placeholder-C-OD673j.js             1.26 kB │ gzip:   0.59 kB
+../accepted-build-mainnet/assets/desktop-DODJsJWe.js                        1.27 kB │ gzip:   0.64 kB
+../accepted-build-mainnet/assets/discord-bwWCylCn.js                        1.30 kB │ gzip:   0.65 kB
+../accepted-build-mainnet/assets/swapHorizontalMedium-BlteAMrY.js           1.30 kB │ gzip:   0.68 kB
+../accepted-build-mainnet/assets/recycle-horizontal-Bvfyr4PK.js             1.35 kB │ gzip:   0.70 kB
+../accepted-build-mainnet/assets/extension-8rIra5cU.js                      1.43 kB │ gzip:   0.69 kB
+../accepted-build-mainnet/assets/telegram-CA_rAYy-.js                       1.45 kB │ gzip:   0.84 kB
+../accepted-build-mainnet/assets/swapHorizontalRoundedBold-8DqEpLQx.js      1.46 kB │ gzip:   0.77 kB
+../accepted-build-mainnet/assets/verify-pUgpCOXW.js                         1.47 kB │ gzip:   0.71 kB
+../accepted-build-mainnet/assets/qr-code-QFTW2BQJ.js                        1.52 kB │ gzip:   0.53 kB
+../accepted-build-mainnet/assets/browser-LlvKNiHk.js                        1.58 kB │ gzip:   0.78 kB
+../accepted-build-mainnet/assets/network-placeholder-BcDzK0QF.js            1.65 kB │ gzip:   0.73 kB
+../accepted-build-mainnet/assets/id-zZd0gjWR.js                             1.75 kB │ gzip:   0.81 kB
+../accepted-build-mainnet/assets/nftPlaceholder-DuL2o-CQ.js                 1.75 kB │ gzip:   0.87 kB
+../accepted-build-mainnet/assets/info-CMMjy_2N.js                           2.26 kB │ gzip:   1.14 kB
+../accepted-build-mainnet/assets/exclamation-triangle-DACzRerH.js           2.42 kB │ gzip:   1.14 kB
+../accepted-build-mainnet/assets/send-MA6gYoYs.js                           2.42 kB │ gzip:   1.28 kB
+../accepted-build-mainnet/assets/card-2LL_DPfK.js                           2.59 kB │ gzip:   1.17 kB
+../accepted-build-mainnet/assets/chrome-store-Ch25CFtt.js                   2.59 kB │ gzip:   1.01 kB
+../accepted-build-mainnet/assets/reown-logo-BZurl4sG.js                     2.60 kB │ gzip:   1.07 kB
+../accepted-build-mainnet/assets/lightbulb-C1lVORLG.js                      2.72 kB │ gzip:   1.22 kB
+../accepted-build-mainnet/assets/ccip-ma04nEoD.js                           3.04 kB │ gzip:   1.39 kB
+../accepted-build-mainnet/assets/image-BfMypw7G.js                          3.49 kB │ gzip:   1.51 kB
+../accepted-build-mainnet/assets/copy-D2LLYmMm.js                           3.82 kB │ gzip:   1.47 kB
+../accepted-build-mainnet/assets/walletconnect-B70NmWl8.js                  4.06 kB │ gzip:   1.66 kB
+../accepted-build-mainnet/assets/index-y_xyYLQn.js                         38.52 kB │ gzip:   9.38 kB
+../accepted-build-mainnet/assets/w3m-modal-BhN0JOLU.js                     40.06 kB │ gzip:   9.39 kB
+../accepted-build-mainnet/assets/index-DrAshLsx-CsL9taLf.js                41.11 kB │ gzip:  12.78 kB
+../accepted-build-mainnet/assets/basic-9y3o-RKy.js                        143.14 kB │ gzip:  33.11 kB
+../accepted-build-mainnet/assets/index.es-DCdAjsCk.js                     400.77 kB │ gzip: 115.21 kB
+../accepted-build-mainnet/assets/core-CphGjNHr.js                         484.67 kB │ gzip: 132.18 kB
+../accepted-build-mainnet/assets/index-DCtaPRsX.js                      1,502.22 kB │ gzip: 466.04 kB
+
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rollupOptions.output.manualChunks to improve chunking: https://rollupjs.org/configuration-options/#output-manualchunks
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+✓ built in 22.10s

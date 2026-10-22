@@ -14,7 +14,7 @@ const STEPS = [
   {
     serial: '02',
     title: 'Pay it exactly once',
-    body: 'The payer sends exactly the invoice amount. The contract forwards it to the merchant in the same transaction and keeps no balance. A second payment, a wrong amount or a late payment reverts.',
+    body: 'The payer sends exactly the invoice amount. The contract forwards that invoice principal to the merchant in the same transaction without retaining it. Any pre-existing or forcibly sent balance remains locked and cannot be recovered. A second payment, a wrong amount or a late payment reverts.',
   },
   {
     serial: '03',

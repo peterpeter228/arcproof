@@ -1,0 +1,12 @@
+failed to load config from /workspace/scratch/c01bd6fe117d/arcproof-stageA-20261022/source/vite.config.ts
+error during build:
+Error: Unsupported VITE_ARCPROOF_NETWORK; use testnet or mainnet.
+    at file:///workspace/scratch/c01bd6fe117d/arcproof-stageA-20261022/source/node_modules/.vite-temp/vite.config.ts.timestamp-1792639412038-dbe153e3f83b3.mjs:51:65
+    at ModuleJob.run (node:internal/modules/esm/module_job:439:25)
+    at async node:internal/modules/esm/loader:643:26
+    at async loadConfigFromBundledFile (file:///workspace/scratch/c01bd6fe117d/arcproof-stageA-20261022/source/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:49778:15)
+    at async bundleAndLoadConfigFile (file:///workspace/scratch/c01bd6fe117d/arcproof-stageA-20261022/source/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:49621:22)
+    at async loadConfigFromFile (file:///workspace/scratch/c01bd6fe117d/arcproof-stageA-20261022/source/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:49584:44)
+    at async resolveConfig (file:///workspace/scratch/c01bd6fe117d/arcproof-stageA-20261022/source/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:49079:24)
+    at async createBuilder (file:///workspace/scratch/c01bd6fe117d/arcproof-stageA-20261022/source/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:47054:18)
+    at async CAC.<anonymous> (file:///workspace/scratch/c01bd6fe117d/arcproof-stageA-20261022/source/node_modules/vite/dist/node/cli.js:862:23)

@@ -1,0 +1,267 @@
+
+ RUN  v4.1.12 /workspace/scratch/c01bd6fe117d/arcproof-stageA-20261022/security-probes
+
+ ❯ full-boundary-red.test.tsx (11 tests | 8 failed) 49ms
+     × downgrades legacy caller success for an explicitly registered fixture 15ms
+     × downgrades a registered fixture even when it has identity-bound diagnostic fields 2ms
+     × cannot promote a registered fixture by passing isFixture=false 2ms
+     × cannot promote a real testnet deployment identity when the caller declares synthetic data 2ms
+     × cannot bless an unknown deployment using the synthetic flag 1ms
+     × cannot label a synthetic mainnet claim as mainnet proof 2ms
+     × labels non-success fixture results as synthetic rather than live observations 1ms
+     × distinguishes invoice principal from locked pre-existing or forced balances 15ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 8 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  full-boundary-red.test.tsx > Fixture provenance cannot be exported as real verified payment proof > downgrades legacy caller success for an explicitly registered fixture
+AssertionError: expected { schemaVersion: '1.2', …(34) } to match object { mode: 'fixture', …(4) }
+(38 matching properties omitted from actual)
+
+- Expected
++ Received
+
+  {
+    "mode": "fixture",
+-   "reasonCode": "SIMULATED_NOT_VERIFIED",
+-   "verificationStatus": "SIMULATED_NOT_VERIFIED",
+-   "verificationVerified": false,
+-   "verifiedEvidence": null,
++   "reasonCode": "VERIFIED",
++   "verificationStatus": "VERIFIED",
++   "verificationVerified": true,
++   "verifiedEvidence": {
++     "contractToMerchantLogIndex": 1,
++     "controlled_demo": true,
++     "decimals": 18,
++     "finalizedBlockHash": "0xdddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
++     "finalizedBlockNumber": "10",
++     "nativeEmitter": "0xcccccccccccccccccccccccccccccccccccccccc",
++     "payerToContractLogIndex": 0,
++     "policyId": "synthetic-only",
++   },
+  }
+
+ ❯ expectSynthetic full-boundary-red.test.tsx:54:13
+     52| }
+     53| function expectSynthetic(r: ReceiptExportRecord, mode: ReceiptExportRe…
+     54|   expect(r).toMatchObject({ mode, verificationVerified: false, verific…
+       |             ^
+     55|     reasonCode: 'SIMULATED_NOT_VERIFIED', verifiedEvidence: null });
+     56|   expect(r.settlementEvidence).toBeUndefined();
+ ❯ full-boundary-red.test.tsx:74:5
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/8]⎯
+
+ FAIL  full-boundary-red.test.tsx > Fixture provenance cannot be exported as real verified payment proof > downgrades a registered fixture even when it has identity-bound diagnostic fields
+AssertionError: expected { schemaVersion: '1.2', …(34) } to match object { mode: 'fixture', …(4) }
+(45 matching properties omitted from actual)
+
+- Expected
++ Received
+
+  {
+    "mode": "fixture",
+-   "reasonCode": "SIMULATED_NOT_VERIFIED",
+-   "verificationStatus": "SIMULATED_NOT_VERIFIED",
+-   "verificationVerified": false,
+-   "verifiedEvidence": null,
++   "reasonCode": "VERIFIED",
++   "verificationStatus": "VERIFIED",
++   "verificationVerified": true,
++   "verifiedEvidence": {
++     "contractToMerchantLogIndex": 1,
++     "controlled_demo": true,
++     "decimals": 18,
++     "finalizedBlockHash": "0xdddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
++     "finalizedBlockNumber": "10",
++     "nativeEmitter": "0xcccccccccccccccccccccccccccccccccccccccc",
++     "payerToContractLogIndex": 0,
++     "policyId": "synthetic-only",
++   },
+  }
+
+ ❯ expectSynthetic full-boundary-red.test.tsx:54:13
+     52| }
+     53| function expectSynthetic(r: ReceiptExportRecord, mode: ReceiptExportRe…
+     54|   expect(r).toMatchObject({ mode, verificationVerified: false, verific…
+       |             ^
+     55|     reasonCode: 'SIMULATED_NOT_VERIFIED', verifiedEvidence: null });
+     56|   expect(r.settlementEvidence).toBeUndefined();
+ ❯ full-boundary-red.test.tsx:77:5
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/8]⎯
+
+ FAIL  full-boundary-red.test.tsx > Fixture provenance cannot be exported as real verified payment proof > cannot promote a registered fixture by passing isFixture=false
+AssertionError: expected { schemaVersion: '1.2', …(33) } to match object { mode: 'unknown', …(4) }
+(29 matching properties omitted from actual)
+
+- Expected
++ Received
+
+  {
+    "mode": "unknown",
+-   "reasonCode": "SIMULATED_NOT_VERIFIED",
+-   "verificationStatus": "SIMULATED_NOT_VERIFIED",
++   "reasonCode": "UNKNOWN_DEPLOYMENT",
++   "verificationStatus": "UNKNOWN_DEPLOYMENT",
+    "verificationVerified": false,
+    "verifiedEvidence": null,
+  }
+
+ ❯ expectSynthetic full-boundary-red.test.tsx:54:13
+     52| }
+     53| function expectSynthetic(r: ReceiptExportRecord, mode: ReceiptExportRe…
+     54|   expect(r).toMatchObject({ mode, verificationVerified: false, verific…
+       |             ^
+     55|     reasonCode: 'SIMULATED_NOT_VERIFIED', verifiedEvidence: null });
+     56|   expect(r.settlementEvidence).toBeUndefined();
+ ❯ full-boundary-red.test.tsx:80:5
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/8]⎯
+
+ FAIL  full-boundary-red.test.tsx > Fixture provenance cannot be exported as real verified payment proof > cannot promote a real testnet deployment identity when the caller declares synthetic data
+AssertionError: expected { schemaVersion: '1.2', …(34) } to match object { mode: 'unknown', …(4) }
+(45 matching properties omitted from actual)
+
+- Expected
++ Received
+
+  {
+-   "mode": "unknown",
+-   "reasonCode": "SIMULATED_NOT_VERIFIED",
+-   "verificationStatus": "SIMULATED_NOT_VERIFIED",
+-   "verificationVerified": false,
+-   "verifiedEvidence": null,
++   "mode": "testnet",
++   "reasonCode": "VERIFIED",
++   "verificationStatus": "VERIFIED",
++   "verificationVerified": true,
++   "verifiedEvidence": {
++     "contractToMerchantLogIndex": 1,
++     "controlled_demo": true,
++     "decimals": 18,
++     "finalizedBlockHash": "0xdddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
++     "finalizedBlockNumber": "10",
++     "nativeEmitter": "0xcccccccccccccccccccccccccccccccccccccccc",
++     "payerToContractLogIndex": 0,
++     "policyId": "synthetic-only",
++   },
+  }
+
+ ❯ expectSynthetic full-boundary-red.test.tsx:54:13
+     52| }
+     53| function expectSynthetic(r: ReceiptExportRecord, mode: ReceiptExportRe…
+     54|   expect(r).toMatchObject({ mode, verificationVerified: false, verific…
+       |             ^
+     55|     reasonCode: 'SIMULATED_NOT_VERIFIED', verifiedEvidence: null });
+     56|   expect(r.settlementEvidence).toBeUndefined();
+ ❯ full-boundary-red.test.tsx:83:5
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/8]⎯
+
+ FAIL  full-boundary-red.test.tsx > Fixture provenance cannot be exported as real verified payment proof > cannot bless an unknown deployment using the synthetic flag
+AssertionError: expected { schemaVersion: '1.2', …(33) } to match object { mode: 'unknown', …(4) }
+(29 matching properties omitted from actual)
+
+- Expected
++ Received
+
+  {
+    "mode": "unknown",
+-   "reasonCode": "SIMULATED_NOT_VERIFIED",
+-   "verificationStatus": "SIMULATED_NOT_VERIFIED",
++   "reasonCode": "UNKNOWN_DEPLOYMENT",
++   "verificationStatus": "UNKNOWN_DEPLOYMENT",
+    "verificationVerified": false,
+    "verifiedEvidence": null,
+  }
+
+ ❯ expectSynthetic full-boundary-red.test.tsx:54:13
+     52| }
+     53| function expectSynthetic(r: ReceiptExportRecord, mode: ReceiptExportRe…
+     54|   expect(r).toMatchObject({ mode, verificationVerified: false, verific…
+       |             ^
+     55|     reasonCode: 'SIMULATED_NOT_VERIFIED', verifiedEvidence: null });
+     56|   expect(r.settlementEvidence).toBeUndefined();
+ ❯ full-boundary-red.test.tsx:86:5
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/8]⎯
+
+ FAIL  full-boundary-red.test.tsx > Fixture provenance cannot be exported as real verified payment proof > cannot label a synthetic mainnet claim as mainnet proof
+AssertionError: expected { schemaVersion: '1.2', …(33) } to match object { mode: 'unknown', …(4) }
+(36 matching properties omitted from actual)
+
+- Expected
++ Received
+
+  {
+    "mode": "unknown",
+-   "reasonCode": "SIMULATED_NOT_VERIFIED",
+-   "verificationStatus": "SIMULATED_NOT_VERIFIED",
++   "reasonCode": "UNKNOWN_DEPLOYMENT",
++   "verificationStatus": "UNKNOWN_DEPLOYMENT",
+    "verificationVerified": false,
+    "verifiedEvidence": null,
+  }
+
+ ❯ expectSynthetic full-boundary-red.test.tsx:54:13
+     52| }
+     53| function expectSynthetic(r: ReceiptExportRecord, mode: ReceiptExportRe…
+     54|   expect(r).toMatchObject({ mode, verificationVerified: false, verific…
+       |             ^
+     55|     reasonCode: 'SIMULATED_NOT_VERIFIED', verifiedEvidence: null });
+     56|   expect(r.settlementEvidence).toBeUndefined();
+ ❯ full-boundary-red.test.tsx:89:5
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[6/8]⎯
+
+ FAIL  full-boundary-red.test.tsx > Fixture provenance cannot be exported as real verified payment proof > labels non-success fixture results as synthetic rather than live observations
+AssertionError: expected { schemaVersion: '1.2', …(33) } to match object { mode: 'fixture', …(4) }
+(29 matching properties omitted from actual)
+
+- Expected
++ Received
+
+  {
+    "mode": "fixture",
+-   "reasonCode": "SIMULATED_NOT_VERIFIED",
+-   "verificationStatus": "SIMULATED_NOT_VERIFIED",
++   "reasonCode": "PENDING",
++   "verificationStatus": "PENDING",
+    "verificationVerified": false,
+    "verifiedEvidence": null,
+  }
+
+ ❯ expectSynthetic full-boundary-red.test.tsx:54:13
+     52| }
+     53| function expectSynthetic(r: ReceiptExportRecord, mode: ReceiptExportRe…
+     54|   expect(r).toMatchObject({ mode, verificationVerified: false, verific…
+       |             ^
+     55|     reasonCode: 'SIMULATED_NOT_VERIFIED', verifiedEvidence: null });
+     56|   expect(r.settlementEvidence).toBeUndefined();
+ ❯ full-boundary-red.test.tsx:92:5
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[7/8]⎯
+
+ FAIL  full-boundary-red.test.tsx > Home page accurately describes the contract balance invariant > distinguishes invoice principal from locked pre-existing or forced balances
+AssertionError: expected '<div class="space-y-10 sm:space-y-12"…' not to contain 'keeps no balance'
+
+Expected: "keeps no balance"
+Received: "<div class="space-y-10 sm:space-y-12"><section class="grid items-start gap-8 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,1fr)]" aria-labelledby="home-title"><div class="space-y-5"><p class="ap-kicker">USDC invoices on Arc · prototype</p><h2 id="home-title" class="font-display text-3xl font-semibold leading-tight tracking-tight text-stone-900 sm:text-4xl">Get paid in USDC. Let anyone verify it from one link.</h2><p class="max-w-xl text-base leading-relaxed text-stone-700 sm:text-lg">ArcProof turns a payment request into a fixed on-chain invoice. The payer settles it once, in a single transaction that forwards USDC straight to the merchant. Afterwards, both sides can check the same receipt against Arc chain data instead of trusting a screenshot.</p><div class="flex flex-wrap gap-3"><a class="ap-btn-primary" href="#/demo">Try the demo — no wallet <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-right" aria-hidden="true"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg></a><a class="ap-btn-secondary" href="#/verify">Verify a receipt</a></div><p class="text-sm text-stone-600">Have a wallet on Arc Testnet? <a class="ap-link ap-inline-link" href="#/invoices">Create a testnet invoice</a> with test USDC.</p></div><aside class="ap-card p-5 sm:p-6" aria-labelledby="build-status-title"><div class="flex items-center justify-between gap-3"><h3 id="build-status-title" class="font-semibold text-stone-900">What this build can do</h3><span class="ap-chip-neutral">Arc Testnet</span></div><dl class="mt-4 space-y-3 text-sm"><div class="grid grid-cols-[7.5rem_minmax(0,1fr)] gap-3"><dt class="ap-field-label pt-0.5">Network</dt><dd>Arc Testnet (5042002), test USDC with no monetary value</dd></div><div class="grid grid-cols-[7.5rem_minmax(0,1fr)] gap-3"><dt class="ap-field-label pt-0.5">Contract</dt><dd>Deployed on testnet 2026-10-20. Mainnet not enabled.</dd></div><div class="grid grid-cols-[7.5rem_minmax(0,1fr)] gap-3"><dt class="ap-field-label pt-0.5">Wallet</dt><dd>Only for creating or paying; verifying is read-only</dd></div><div class="grid grid-cols-[7.5rem_minmax(0,1fr)] gap-3"><dt class="ap-field-label pt-0.5">Demo data</dt><dd>Simulated and labelled SIMULATED / NOT VERIFIED</dd></div><div class="grid grid-cols-[7.5rem_minmax(0,1fr)] gap-3"><dt class="ap-field-label pt-0.5">Safety</dt><dd>Unaudited prototype · 1 USDC cap per invoice · no escrow or refunds</dd></div></dl><a class="ap-link mt-3 text-sm" href="#/evidence">See build identity and evidence</a></aside></section><section aria-labelledby="how-title" class="space-y-4"><h3 id="how-title" class="font-display text-xl font-semibold text-stone-900">How it works</h3><ol class="grid gap-4 md:grid-cols-3"><li class="ap-card p-5"><p class="ap-serial">01</p><h4 class="mt-1 font-semibold text-stone-900">Create a fixed invoice</h4><p class="mt-2 text-sm leading-relaxed text-stone-700">The merchant sets the amount (up to 1 USDC), an expiry (up to 7 days) and is the payout address. The terms are written on chain and cannot be edited. The invoice ID is derived from chain, contract, merchant and nonce.</p></li><li class="ap-card p-5"><p class="ap-serial">02</p><h4 class="mt-1 font-semibold text-stone-900">Pay it exactly once</h4><p class="mt-2 text-sm leading-relaxed text-stone-700">The payer sends exactly the invoice amount. The contract forwards it to the merchant in the same transaction and keeps no balance. A second payment, a wrong amount or a late payment reverts.</p></li><li class="ap-card p-5"><p class="ap-serial">03</p><h4 class="mt-1 font-semibold text-stone-900">Anyone re-checks the receipt</h4><p class="mt-2 text-sm leading-relaxed text-stone-700">Payer, merchant or an accountant opens the same receipt link. The app re-reads Arc: contract code, invoice state, the payment event, both native USDC transfer legs and a finalized block. Anything missing stays “not verified”.</p></li></ol></section><section class="grid gap-4 lg:grid-cols-2" aria-label="What verification means"><div class="ap-card p-5 sm:p-6"><div class="flex items-center gap-2"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-shield-check text-teal-700" aria-hidden="true"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"></path><path d="m9 12 2 2 4-4"></path></svg><h3 class="font-semibold text-stone-900">“Verified” requires all of these</h3></div><ul class="mt-3 space-y-2 text-sm text-stone-700"><li class="flex gap-2"><span aria-hidden="true" class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-teal-700"></span>The contract at the trusted address runs the reviewed code</li><li class="flex gap-2"><span aria-hidden="true" class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-teal-700"></span>The invoice is marked paid, by this payer, in this block</li><li class="flex gap-2"><span aria-hidden="true" class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-teal-700"></span>The payment event matches invoice, payer, merchant and amount</li><li class="flex gap-2"><span aria-hidden="true" class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-teal-700"></span>USDC moved payer → contract → merchant in that transaction</li><li class="flex gap-2"><span aria-hidden="true" class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-teal-700"></span>The RPC’s finalized block covers the payment block</li></ul><p class="mt-3 text-sm text-stone-600">A transaction hash, a success status or a matching number on its own is never enough. Checks rely on the Arc RPC’s answers; they are not an independent consensus proof.</p></div><div class="ap-card p-5 sm:p-6"><div class="flex items-center gap-2"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-file-check2 text-stone-700" aria-hidden="true"><path d="M4 22h14a2 2 0 0 0 2-2V7l-5-5H6a2 2 0 0 0-2 2v4"></path><path d="M14 2v4a2 2 0 0 0 2 2h4"></path><path d="m3 15 2 2 4-4"></path></svg><h3 class="font-semibold text-stone-900">What a receipt does not prove</h3></div><ul class="mt-3 space-y-2 text-sm text-stone-700"><li>Delivery of goods or services</li><li>A tax invoice, or the legal identity of either party</li><li>Escrow, refunds or dispute handling (none exist)</li><li>Revenue: a self-payment from one wallet is labelled controlled_demo</li></ul></div></section><section class="ap-card p-5 sm:p-6" aria-labelledby="why-arc-title"><div class="flex items-center gap-2"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-wallet text-stone-700" aria-hidden="true"><path d="M19 7V4a1 1 0 0 0-1-1H5a2 2 0 0 0 0 4h15a1 1 0 0 1 1 1v4h-3a2 2 0 0 0 0 4h3a1 1 0 0 0 1-1v-2a1 1 0 0 0-1-1"></path><path d="M3 5v14a2 2 0 0 0 2 2h15a1 1 0 0 0 1-1v-4"></path></svg><h3 id="why-arc-title" class="font-semibold text-stone-900">Why it is built on Arc</h3></div><ul class="mt-3 grid gap-4 text-sm leading-relaxed text-stone-700 md:grid-cols-3"><li><strong class="block text-stone-900">USDC is the native asset</strong>Invoice amount, network fee and settlement are all USDC. Amounts use Arc’s 18-decimal native units, never mixed with the 6-decimal ERC-20 view.</li><li><strong class="block text-stone-900">Deterministic finality</strong>The verifier can require a finalized block instead of guessing from a confirmation count.</li><li><strong class="block text-stone-900">Public, shared facts</strong>Payer and merchant need no shared account or database: the receipt is re-derived from public chain data.</li></ul></section></div>"
+
+ ❯ full-boundary-red.test.tsx:121:22
+    119|   it('distinguishes invoice principal from locked pre-existing or forc…
+    120|     const html = renderToStaticMarkup(<HomeScreen />);
+    121|     expect(html).not.toContain('keeps no balance');
+       |                      ^
+    122|     expect(html).toContain('without retaining it');
+    123|     expect(html).toContain('Any pre-existing or forcibly sent balance …
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[8/8]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  8 failed | 3 passed (11)
+   Start at  12:25:45
+   Duration  910ms (transform 225ms, setup 0ms, import 628ms, tests 49ms, environment 0ms)
+

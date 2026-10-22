@@ -1,0 +1,30 @@
+
+ RUN  v4.1.12 /workspace/scratch/c01bd6fe117d/arcproof-stageA-20261022/mutation
+
+ ❯ src/arcproof/__tests__/finalReviewRegressions.test.tsx (12 tests | 1 failed | 10 skipped) 36ms
+     × never prints "test USDC" for an Arc Mainnet record 29ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  src/arcproof/__tests__/finalReviewRegressions.test.tsx > FR-05 receipt currency wording follows the record network > never prints "test USDC" for an Arc Mainnet record
+AssertionError: expected '<p class="text-sm text-amber-900" dat…' not to contain 'test USDC'
+
+Expected: "test USDC"
+Received: "<p class="text-sm text-amber-900" data-receipt-field="factsBasis">Provenance unavailable: these values have no established identity-bound RPC observation basis.</p><p class="text-sm font-semibold">Unattributed invoice amount</p><p class="receipt-amount font-semibold break-words tabular receipt-amount-unverified" data-receipt-field="amountDisplay">0.20 test USDC</p><dl class="space-y-3 text-sm"><div><dt class="font-semibold">Merchant</dt><dd class="font-mono break-all" data-receipt-field="merchant">Unknown</dd></div><div><dt class="font-semibold">Payer</dt><dd class="font-mono break-all" data-receipt-field="payer">Unknown</dd></div><div><dt class="font-semibold">Payment time (UTC)</dt><dd data-receipt-field="paidAt">Unknown</dd></div><div><dt class="font-semibold">Unattributed transaction fee (separate from invoice amount; not settlement proof)</dt><dd data-receipt-field="gasFeeNative">0.000000000000021 test USDC</dd></div></dl><section class="text-sm space-y-2" aria-label="Evidence summary"><h4 class="font-semibold">Evidence checked</h4><p>Invoice and transaction match: chain: not recorded; runtime code: not recorded; receipt identity: not recorded; transaction identity: not recorded; payment event: not recorded; invoice state: not recorded; event and value: not recorded; payment block: not recorded</p><div class="text-sm space-y-1"><p>Native settlement: Not verified; two transfer legs are not established.</p><p>Finality: Not established by this result.</p></div></section><div class="text-sm space-y-2" aria-label="Next step"><h4 class="font-semibold">Next step</h4><p>Payment is not verified. Review the missing or failed checks below, check wallet history, and verify again when evidence is available. Do not resend an unresolved payment.</p></div><p class="text-sm text-stone-600" data-receipt-field="csvImportNotice">JSON is the machine-evidence format. CSV is for reading: import all columns as Text, disable automatic numeric/date conversion, and verify raw integers after re-export. Excel/Sheets round-trip acceptance: NOT_RUN.</p><details class="text-sm break-all space-y-3 receipt-details"><summary class="cursor-pointer py-2 font-semibold">Evidence details and raw receipt</summary><section class="space-y-2 text-sm" aria-label="Verification diagnostics"><p class="font-semibold">Verification reason: <span data-receipt-field="reasonCode">PENDING</span></p><p data-receipt-field="message">No diagnostic message available.</p><dl class="space-y-1 break-words"><div><dt class="font-semibold">Evidence source</dt><dd data-receipt-field="source">Unknown</dd></div><div><dt>Read started (UTC)</dt><dd data-receipt-field="readStartedAt">Unknown</dd></div><div><dt>Read completed (UTC)</dt><dd data-receipt-field="readCompletedAt">Unknown</dd></div></dl><p>These supplied fields are not identity-bound RPC observations. A successful transaction status alone does not verify the payment.</p></section><dl class="space-y-2 text-sm break-all" aria-label="Unattributed receipt inclusion"><div><dt class="font-semibold">Unattributed transaction block</dt><dd data-receipt-field="observedBlockNumber">Unknown</dd></div><div><dt class="font-semibold">Unattributed block hash</dt><dd data-receipt-field="observedBlockHash">Unknown</dd></div><div><dt class="font-semibold">Fact provenance</dt><dd>Unknown</dd></div></dl><dl class="space-y-2"><div><dt>Chain / deployment</dt><dd>5042 / future-mainnet</dd></div><div><dt>Contract</dt><dd>0x1111111111111111111111111111111111111111</dd></div><div><dt>Invoice ID</dt><dd>0xaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</dd></div><div><dt>Amount (native units, 18 decimals)</dt><dd>200000000000000000</dd></div><div><dt>Payment time (Unix seconds)</dt><dd>Unknown</dd></div><div><dt>Unattributed fee (native units)</dt><dd>21000</dd></div><div><dt>Payment block / InvoicePaid log index</dt><dd>Unknown / 3</dd></div><div><dt>Unattributed block hash</dt><dd>Unknown</dd></div><div><dt>Settlement policy</dt><dd>Not established</dd></div><div><dt>Finalized block hash</dt><dd>Not established</dd></div></dl></details>"
+
+ ❯ src/arcproof/__tests__/finalReviewRegressions.test.tsx:103:22
+    101|   it('never prints "test USDC" for an Arc Mainnet record', () => {
+    102|     const html = renderToStaticMarkup(<ReceiptFacts record={base} />);
+    103|     expect(html).not.toContain('test USDC');
+       |                      ^
+    104|     expect(html).toContain('0.20 USDC (untrusted deployment)');
+    105|   });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed | 30 skipped (31)
+      Tests  1 failed | 1 passed | 483 skipped (485)
+   Start at  12:23:22
+   Duration  5.66s (transform 3.29s, setup 0ms, import 17.08s, tests 36ms, environment 12.27s)
+

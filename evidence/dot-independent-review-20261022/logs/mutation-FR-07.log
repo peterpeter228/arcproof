@@ -1,0 +1,39 @@
+
+ RUN  v4.1.12 /workspace/scratch/c01bd6fe117d/arcproof-stageA-20261022/mutation
+
+ ❯ src/arcproof/__tests__/testnetClient.test.ts (64 tests | 1 failed | 63 skipped) 35ms
+     × FR-07 rejects an RPC expiry the UI cannot render instead of crashing later 31ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  src/arcproof/__tests__/testnetClient.test.ts > Reconstructed dedicated testnet adapter with offline-only RPC/wallet mocks > FR-07 rejects an RPC expiry the UI cannot render instead of crashing later
+AssertionError: promise resolved "{ …(9) }" instead of rejecting
+
+- Expected
++ Received
+
+- Error {
+-   "message": "rejected promise",
++ {
++   "amountNative": 200000000000000000n,
++   "expiresAt": 100000000000000000000n,
++   "invoiceId": "0x0000000000000000000000000000000000000000000000000000000000004e22",
++   "merchant": "0x0000000000000000000000000000000000004e23",
++   "paid": false,
++   "paidAt": 0n,
++   "paidBlockNumber": 0n,
++   "payer": "0x0000000000000000000000000000000000000000",
++   "termsHash": "0x0000000000000000000000000000000000000000000000000000000000000000",
+  }
+
+ ❯ src/arcproof/__tests__/testnetClient.test.ts:37:193
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed | 30 skipped (31)
+      Tests  1 failed | 484 skipped (485)
+   Start at  12:23:35
+   Duration  5.55s (transform 3.59s, setup 0ms, import 17.17s, tests 35ms, environment 11.44s)
+

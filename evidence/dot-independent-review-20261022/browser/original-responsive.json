@@ -1,0 +1,23 @@
+{
+  "method": "Ordinary browser 300% zoom, not mobile-device emulation",
+  "results": [
+    {
+      "nav": "Overview",
+      "clientHeight": 252,
+      "clientWidth": 388,
+      "scrollWidth": 388
+    },
+    {
+      "nav": "Try demo",
+      "clientHeight": 252,
+      "clientWidth": 388,
+      "scrollWidth": 388
+    },
+    {
+      "nav": "Evidence",
+      "clientHeight": 252,
+      "clientWidth": 388,
+      "scrollWidth": 388
+    }
+  ]
+}

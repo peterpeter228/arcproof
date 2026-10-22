@@ -215,23 +215,27 @@ export function buildReceiptExport(
     scope.deploymentId === deployment.deploymentId && same(scope.contract, deployment.contractAddress) &&
     same(scope.invoiceId, invoiceId) && same(scope.transactionHash, txHash);
   const classified = classifyDeployment(deployment);
-  const mode = !scopeMatches ? 'unknown' : classified === 'fixture' ? (isFixture ? 'fixture' : 'unknown')
+  // Synthetic provenance can only downgrade trust, including when a fixture
+  // reuses the identity of a real deployment. It must never become payment proof.
+  const syntheticTarget = isFixture || classified === 'fixture';
+  const mode = !scopeMatches ? 'unknown' : syntheticTarget ? (classified === 'fixture' && isFixture ? 'fixture' : 'unknown')
     : classified === 'mainnet' ? (hasDiagnostics && result.status === 'VERIFIED' && result.verified ? 'mainnet' : 'unknown') : classified;
   const observedReceipt = scopeMatches ? result.observedReceipt ?? null : null;
   const observedInvoice = scopeMatches ? result.observedInvoice ?? null : null;
   // A verifier result can only certify a deployment the application itself trusts.
   const untrustedTarget = scopeMatches && mode === 'unknown' && result.status === 'VERIFIED';
-  const verified = scopeMatches && mode !== 'unknown' && result.status === 'VERIFIED' && result.verified;
+  const verified = scopeMatches && !syntheticTarget && (mode === 'testnet' || mode === 'mainnet') && result.status === 'VERIFIED' && result.verified;
   const evidence = verified ? result.settlementEvidence ?? null : null;
-  const status = !scopeMatches ? 'PENDING' : untrustedTarget ? 'UNKNOWN_DEPLOYMENT' : result.status;
+  const status = !scopeMatches ? 'PENDING' : syntheticTarget ? 'SIMULATED_NOT_VERIFIED' : untrustedTarget ? 'UNKNOWN_DEPLOYMENT' : result.status;
   const message = !scopeMatches ? 'Verification result belongs to another request; no observations exported.'
-    : untrustedTarget ? 'Deployment is not in the trusted registry; verification evidence is not exported.' : result.message;
+    : syntheticTarget ? 'Synthetic fixture only. This record is not live payment proof; verification evidence is not exported.'
+      : untrustedTarget ? 'Deployment is not in the trusted registry; verification evidence is not exported.' : result.message;
   const amount = hasDiagnostics ? observedInvoice?.amountNative ?? null : amountNative?.toString() ?? null;
   const factPayer = hasDiagnostics ? observedInvoice?.payer ?? null : payer;
   const factMerchant = hasDiagnostics ? observedInvoice?.merchant ?? null : merchant;
   return {
     schemaVersion: '1.2',
-    reasonCode: !scopeMatches ? 'PENDING' : untrustedTarget ? 'UNKNOWN_DEPLOYMENT' : result.reasonCode ?? result.status,
+    reasonCode: !scopeMatches ? 'PENDING' : syntheticTarget ? 'SIMULATED_NOT_VERIFIED' : untrustedTarget ? 'UNKNOWN_DEPLOYMENT' : result.reasonCode ?? result.status,
     message,
     checks: scopeMatches ? result.checks ?? [] : [{ id: 'export_scope', status: 'failed', reasonCode: 'PENDING', message }],
     readStartedAt: scopeMatches ? result.readStartedAt ?? null : null,
@@ -245,7 +249,7 @@ export function buildReceiptExport(
     txHash,
     blockNumber: hasDiagnostics ? observedReceipt?.blockNumber ?? null : result.blockNumber ?? null,
     gasFeeNative: hasDiagnostics ? observedReceipt?.gasFeeNative ?? null : result.gasFeeNative ?? null,
-    verifiedAt: scopeMatches ? result.verifiedAt : undefined,
+    verifiedAt: scopeMatches && !syntheticTarget ? result.verifiedAt : undefined,
     chainId: deployment.chainId,
     deploymentId: deployment.deploymentId,
     contract: deployment.contractAddress,

@@ -1,0 +1,22 @@
+[
+  {
+    "path": "src/arcproof/exportUtils.ts",
+    "sha256": "0ca2e4094a1424797f2c70ee7691782c2d6733bbd9f91fcd3db91d58a9c15c6a"
+  },
+  {
+    "path": "src/components/arcproof/HomeScreen.tsx",
+    "sha256": "e26f19a9fa36c68fc1d4f09db2d9d5132112c8f3ee47af44c85236cf34b971da"
+  },
+  {
+    "path": "docs/SUBMISSION_READINESS.md",
+    "sha256": "ba945dd82568d663952526b39ef458d19ae39982b3accad2e384f20df92dbd4a"
+  },
+  {
+    "path": "src/arcproof/__tests__/finalReviewRegressions.test.tsx",
+    "sha256": "64d6432fbcd36b6ac5fab1852e120698e59e6fcbaa2718ed433a11bc28e4325f"
+  },
+  {
+    "path": "src/arcproof/__tests__/fixtureExportBoundary.test.tsx",
+    "sha256": "79355301acb6a36d5cbe2fc85d6d622f00f2978a6427290d74255d0942b11e87"
+  }
+]

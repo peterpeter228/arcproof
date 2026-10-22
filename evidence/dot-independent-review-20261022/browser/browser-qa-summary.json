@@ -1,0 +1,210 @@
+{
+  "when": "2026-10-22T03:32:36.933Z",
+  "originalHead": "34eb952411a5d12ddba5550185593dc6df3e5584",
+  "originalSourceSnapshot": "b3bf6b038298d53619329600a084986de9e5eb386c48802513c8ff557ecd8a67",
+  "revisedSourceSnapshot": "d647cc2f5249f256e944ac217a057ba0d094614913e65a25bea6721c634f2941",
+  "environment": "Actual default cloud Chromium via supported CUA APIs; source unchanged by browser worker. Builds copied into isolated localhost serving directories. No Studio edits, publication, signatures, or external state writes.",
+  "counts": {
+    "passed": 26,
+    "failed": 0,
+    "blocked": 2,
+    "not_run": 4
+  },
+  "results": [
+    {
+      "id": "B01",
+      "name": "Original page identity and meaningful render",
+      "status": "passed",
+      "detail": "Testnet home title/URL matched, nonempty content, no framework overlay."
+    },
+    {
+      "id": "B02",
+      "name": "Exact amount and keyboard demo creation",
+      "status": "passed",
+      "detail": "0.123456 -> 123456000000000000; Enter created visibly labelled simulated receipt."
+    },
+    {
+      "id": "B03",
+      "name": "JSON downloaded and independently re-read",
+      "status": "passed",
+      "detail": "fixture, SIMULATED_NOT_VERIFIED, importedVerified false; payment locator/payer/time/block/log fields null."
+    },
+    {
+      "id": "B04",
+      "name": "CSV downloaded and independently re-read",
+      "status": "passed",
+      "detail": "Matches JSON invoice ID/amount and simulated/fixture markings."
+    },
+    {
+      "id": "B05",
+      "name": "Seven-decimal amount rejection",
+      "status": "passed",
+      "detail": "1.0000001 displays error and disables creation."
+    },
+    {
+      "id": "B06",
+      "name": "Other amount boundaries",
+      "status": "passed",
+      "detail": "0, -0.1, 1.000001, 1e-6 rejected; 0.000001 and 1 accepted."
+    },
+    {
+      "id": "B07",
+      "name": "Expiry bound",
+      "status": "passed",
+      "detail": "Typing 169 hours was clamped to 168; did not exceed seven days."
+    },
+    {
+      "id": "B08",
+      "name": "Repeated creation interaction",
+      "status": "passed",
+      "detail": "Double click added one visible invoice, distinct nonce 1 from prior nonce 0; remained simulated. Not a payment/idempotency test."
+    },
+    {
+      "id": "B09",
+      "name": "Close and route-reset behavior",
+      "status": "passed",
+      "detail": "Close hides receipt; leave/re-enter demo clears ephemeral example history/state, without stale receipt."
+    },
+    {
+      "id": "B10",
+      "name": "Malformed verification",
+      "status": "passed",
+      "detail": "0x1234 rejected with 32-byte format error; no verified state."
+    },
+    {
+      "id": "B11",
+      "name": "Noncanonical chain route",
+      "status": "passed",
+      "detail": "Leading-zero chain fails Unsupported network, no wallet control."
+    },
+    {
+      "id": "B12",
+      "name": "Duplicate tx parameter route",
+      "status": "passed",
+      "detail": "Duplicate tx fails Invalid transaction hash, no wallet control."
+    },
+    {
+      "id": "B13",
+      "name": "Unknown route",
+      "status": "passed",
+      "detail": "Unavailable route rendered instead of blank page."
+    },
+    {
+      "id": "B14",
+      "name": "Unknown deployment route",
+      "status": "passed",
+      "detail": "Unsupported deployment rendered with no wallet control."
+    },
+    {
+      "id": "B15",
+      "name": "Keyboard accessibility",
+      "status": "passed",
+      "detail": "First Tab reveals Skip link (top=8); Enter focuses main-content; keyboard CTA navigates to demo."
+    },
+    {
+      "id": "B16",
+      "name": "History navigation",
+      "status": "passed",
+      "detail": "Back returns demo; forward returns evidence."
+    },
+    {
+      "id": "B17",
+      "name": "Original mainnet create/verify gating",
+      "status": "passed",
+      "detail": "Both routes show no trusted deployment; no connect/sign/pay UI."
+    },
+    {
+      "id": "B18",
+      "name": "Old testnet receipt in mainnet",
+      "status": "passed",
+      "detail": "Known testnet link recognized but blocked in fixed-mainnet build."
+    },
+    {
+      "id": "B19",
+      "name": "Original mainnet build identity",
+      "status": "passed",
+      "detail": "DOM shows mainnet/5042, no trusted deployment, original source hash."
+    },
+    {
+      "id": "B20",
+      "name": "Original narrow responsive reflow",
+      "status": "passed",
+      "detail": "Overview/demo/evidence clientWidth=scrollWidth=388 at normal 300% zoom; not device emulation."
+    },
+    {
+      "id": "B21",
+      "name": "Application console health",
+      "status": "passed",
+      "detail": "No application-origin warning/error captured; extension metadata errors preserved separately."
+    },
+    {
+      "id": "F01",
+      "name": "Revised home disclosure",
+      "status": "passed",
+      "detail": "Rendered invoice-principal forwarding and locked pre-existing/forced balance disclosure."
+    },
+    {
+      "id": "F02",
+      "name": "Revised identity",
+      "status": "passed",
+      "detail": "DOM source hash d647cc2f5249f256e944ac217a057ba0d094614913e65a25bea6721c634f2941."
+    },
+    {
+      "id": "F03",
+      "name": "Revised demo/exports",
+      "status": "passed",
+      "detail": "Exact amount creation and actual JSON/CSV downloads passed independent re-read; no payment evidence."
+    },
+    {
+      "id": "F04",
+      "name": "Revised narrow demo",
+      "status": "passed",
+      "detail": "388 CSS px no horizontal overflow, native screenshot shows label and keyboard-focused CSV button."
+    },
+    {
+      "id": "F05",
+      "name": "Revised mainnet gate",
+      "status": "passed",
+      "detail": "Create route remains no trusted deployment/read-only."
+    },
+    {
+      "id": "L01",
+      "name": "chrome://sandbox diagnostic",
+      "status": "blocked",
+      "detail": "Browser URL policy disallowed chrome: scheme; not bypassed. Existing browser used, no security-reducing flags."
+    },
+    {
+      "id": "L02",
+      "name": "Mobile device emulation",
+      "status": "blocked",
+      "detail": "Native DevTools says organization prohibits developer tools; not bypassed. Narrow CSS zoom tested instead."
+    },
+    {
+      "id": "L03",
+      "name": "Full network trace / instrumented provider call counts",
+      "status": "not_run",
+      "detail": "Supported browser API had no network routing/CDP trace controls. Mainnet guarded server had connect-src none and no CSP violations, which is not a complete trace."
+    },
+    {
+      "id": "L04",
+      "name": "Real wallet, signing, payment, interrupted on-chain recovery",
+      "status": "not_run",
+      "detail": "No wallet/signature/transaction requested or sent. Out of this read-only/demo browser scope."
+    },
+    {
+      "id": "L05",
+      "name": "Canned verifier harness payment states",
+      "status": "not_run",
+      "detail": "Existing harness inspected but not used; not evidence of actual payment."
+    },
+    {
+      "id": "L06",
+      "name": "Existing accept.mjs 23-check suite",
+      "status": "not_run",
+      "detail": "Inspected, not executed; independent browser interactions above are distinct."
+    }
+  ],
+  "networkCaveat": "Original mainnet port 4198 had an extra test-only Content-Security-Policy connect-src 'none'; form-action 'none'; frame-src 'none'. No CSP violation was observed. This guard is not production configuration and is not a full request trace. Fixed mainnet port 4200 had ordinary Python static server headers.",
+  "screenshotCaveat": "Full-page screenshot API at 300% zoom produced cropped images. Do not use original-narrow-*.png or fixed-demo-narrow.png as visual proof. Native screenshots fixed-demo-narrow-*-native.png show correct visible narrow rendering; JSON metrics support no-overflow claim.",
+  "recommendation": "Accept the tested read-only/demo browser scope for revised candidate. This is not mainnet, real-payment, fresh T25/T26 or full mobile/device acceptance."
+}
