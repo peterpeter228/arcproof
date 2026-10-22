@@ -1,0 +1,219 @@
+{
+  "when": "2026-10-22T02:58:24.814Z",
+  "chrome": "Chrome 144 headless=new, sandboxed (chrome://sandbox: adequately sandboxed), run as unprivileged user",
+  "testnetUrl": "http://127.0.0.1:4194/",
+  "mainnetUrl": "http://127.0.0.1:4195/",
+  "results": [
+    {
+      "id": "A1-home-first-view",
+      "status": "PASS",
+      "detail": {
+        "h2": "Get paid in USDC. Let anyone verify it from one link.",
+        "current": "Overview",
+        "cta": [
+          [
+            "Try the demo — no wallet",
+            "#/demo"
+          ],
+          [
+            "Verify a receipt",
+            "#/verify"
+          ]
+        ],
+        "wallet": false,
+        "banner": "Skip to main content"
+      }
+    },
+    {
+      "id": "A2-keyboard-skip-and-cta",
+      "status": "PASS",
+      "detail": {
+        "skip": {
+          "text": "Skip to main content",
+          "visible": true,
+          "outline": "solid"
+        },
+        "mainFocused": "main-content",
+        "reached": "Try the demo — no wallet",
+        "ctaOutline": "solid 3px",
+        "afterEnter": "#/demo"
+      }
+    },
+    {
+      "id": "A3-demo-keyboard-create",
+      "status": "PASS",
+      "detail": {
+        "units": "Exact on-chain value: 123456000000000000 native units (Arc USDC uses 18 decimals)",
+        "createFocused": true,
+        "listed": "0x52599e566fb42fb089c45b92b3e755a17101ca986c3f4cd947482421cf748d83"
+      }
+    },
+    {
+      "id": "A4-demo-downloads-reread",
+      "status": "PASS",
+      "detail": {
+        "files": [
+          "arcproof-SIMULATED-0x52599e56.csv",
+          "arcproof-SIMULATED-0x52599e56.json"
+        ],
+        "jsonView": {
+          "verificationStatus": "SIMULATED_NOT_VERIFIED",
+          "mode": "fixture",
+          "payer": null,
+          "transactionHash": null,
+          "paidAt": null,
+          "amountNative": "123456000000000000",
+          "invoiceId": "0x52599e566fb42fb089c45b92b3e755a17101ca986c3f4cd947482421cf748d83"
+        },
+        "csvHead": "chainId,deploymentId,contract,invoiceId,transactionHash,paymentLogIndex,amountNative,amountDisplay,payer,merchant,paidAt"
+      }
+    },
+    {
+      "id": "A5-demo-invalid-amount",
+      "status": "PASS",
+      "detail": {
+        "alert": "alert",
+        "msg": " At most 6 fractional digits allowed",
+        "disabled": true,
+        "invalidAttr": "true"
+      }
+    },
+    {
+      "id": "A6-verify-malformed-no-request",
+      "status": "PASS",
+      "detail": {
+        "err": "Invoice ID must be 0x followed by 64 hexadecimal characters (32 bytes).",
+        "invalid": "true",
+        "externalDuring": 0
+      }
+    },
+    {
+      "id": "A7-leading-zero-chain",
+      "status": "PASS",
+      "detail": {
+        "expect": "Unsupported network",
+        "hash": "#/pay/0005042002/0xdba9a4da8a5b2a834b451f595653dd3cb4c3e51addb2d8df8e0b18312f382d2d/0xaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+      }
+    },
+    {
+      "id": "A7-duplicate-tx",
+      "status": "PASS",
+      "detail": {
+        "expect": "Invalid transaction hash",
+        "hash": "#/receipt/5042002/0xdba9a4da8a5b2a834b451f595653dd3cb4c3e51addb2d8df8e0b18312f382d2d/0xaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa?tx=0xbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb&tx=0xbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+      }
+    },
+    {
+      "id": "A7-unknown-route",
+      "status": "PASS",
+      "detail": {
+        "expect": "Unavailable route",
+        "hash": "#/nope"
+      }
+    },
+    {
+      "id": "A7-unknown-deployment",
+      "status": "PASS",
+      "detail": {
+        "expect": "Unsupported deployment",
+        "hash": "#/pay/5042002/unknown/0xaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+      }
+    },
+    {
+      "id": "A8-history-back",
+      "status": "PASS",
+      "detail": {
+        "hash": "#/demo",
+        "current": "Try demo"
+      }
+    },
+    {
+      "id": "A9-home-200pct-no-overflow",
+      "status": "PASS",
+      "detail": {
+        "sw": 705,
+        "iw": 720
+      }
+    },
+    {
+      "id": "A9-demo-200pct-no-overflow",
+      "status": "PASS",
+      "detail": {
+        "sw": 705,
+        "iw": 720
+      }
+    },
+    {
+      "id": "A9-evidence-375-no-overflow",
+      "status": "PASS",
+      "detail": {
+        "sw": 375,
+        "iw": 375
+      }
+    },
+    {
+      "id": "A9-home-320-no-overflow",
+      "status": "PASS",
+      "detail": {
+        "sw": 320,
+        "iw": 320
+      }
+    },
+    {
+      "id": "A10-reduced-motion",
+      "status": "PASS",
+      "detail": {
+        "transitionDuration": "0s"
+      }
+    },
+    {
+      "id": "A11-mainnet-home",
+      "status": "PASS",
+      "detail": {
+        "first": "Skip to main content\n\nMAINNET PREVIEW\nArc Mainnet (5042)\n· real USDC · no trusted deployment · all sends disabled · not audited\n\nArcProof\nVerifiable USDC invoic"
+      }
+    },
+    {
+      "id": "A11-mainnet-invoices",
+      "status": "PASS",
+      "detail": {
+        "hash": "#/invoices"
+      }
+    },
+    {
+      "id": "A11-mainnet-verify",
+      "status": "PASS",
+      "detail": {
+        "hash": "#/verify"
+      }
+    },
+    {
+      "id": "A11-mainnet-old-testnet-receipt",
+      "status": "PASS",
+      "detail": {
+        "hash": "#/receipt/5042002/0xdba9a4da8a5b2a834b451f595653dd3cb4c3e51addb2d8df8e0b18312f382d2d/0xaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa?tx=0xbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+      }
+    },
+    {
+      "id": "A11-mainnet-evidence-identity",
+      "status": "PASS",
+      "detail": {
+        "identity": "Current candidate build identity\nFixed build network\nmainnet\nSource commit SHA\nUnknown\nVerified base commit (not current source)\nUnknown\nCandidate source snapshot SHA-256\nb3bf6b038298d53619329600a0849"
+      }
+    },
+    {
+      "id": "A12-no-external-requests",
+      "status": "PASS",
+      "detail": {
+        "external": []
+      }
+    },
+    {
+      "id": "A13-no-uncaught-exceptions",
+      "status": "PASS",
+      "detail": {
+        "exceptions": []
+      }
+    }
+  ]
+}

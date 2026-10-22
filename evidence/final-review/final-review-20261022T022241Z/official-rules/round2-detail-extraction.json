@@ -1,0 +1,28 @@
+{
+  "url": "https://dorahacks.io/hackathon/arc-microgrants-2/detail",
+  "readAtUTC": "2026-10-22T02:27Z",
+  "tool": "Parallel web_fetch, allow_live_fetch=true, full_content=true",
+  "extractId": "extract_4b7e63fe57952242b12dc59776e5e7bb",
+  "originTimestamp": null,
+  "limits": "Extractor gives no origin response time; relative countdown text is cache-dependent. Not an authenticated read of the submission form.",
+  "anchors": {
+    "timeline": "event timeline (UTC) / Submission 2026/10/15 13:00 / Deadline 2026/11/02 04:59",
+    "countdown": "12 days left for submission / Upcoming",
+    "proseDeadline": "Submissions close November 1, 2026 and are reviewed as they come in.",
+    "ship1": "Smart contracts written and tested in Arc Studio and deployed to Arc mainnet",
+    "ship2": "A working app built in Arc Studio that calls those contracts, live at a public link",
+    "ship3": "At least one Arc mainnet transaction that moves USDC through your contract and app",
+    "needs": ["Arc Studio project URL", "link to the live app", "contract address(es) and one example transaction hash, with a link on explorer.arc.io", "A public repo", "A video walkthrough that shows the build in Arc Studio and the mainnet transaction", "A short description ... and how you used Arc Studio to build it", "A public builder profile on GitHub, X, or Farcaster"],
+    "notEligible": "projects built outside Arc Studio, testnet-only builds, design mockups, slide decks, and work already funded by a Circle or Arc program",
+    "weights": {"realUsdcMainnet": 30, "arcStudioAcrossBuild": 25, "workingProduct": 25, "potential": 20},
+    "polish": "Experiments are welcome, and polish is optional.",
+    "suggestedShapes": ["Escrow and conditional payouts", "Payment splitting and shared treasuries", "Software-to-software payments"],
+    "eligibility": ["worldwide subject to sanctions and restricted-jurisdiction screening", "pseudonymous allowed; verification after conditional selection", "one submission per project", "must be built in Arc Studio and deployed to Arc mainnet at the time you submit", "work must be yours or you must have the right to submit it", "You keep full ownership of your work. No equity, no IP assignment, no exclusivity.", "Program dates and microgrant counts may be adjusted."],
+    "prize": "Eight microgrants of $500 USDC each, from a $4,000 USDC pool",
+    "earlyAnswers": "Earlier submissions get earlier answers."
+  },
+  "differencesFromPrompt20261022": [
+    "None material. Same weights, requirements, UTC deadline 2026/11/02 04:59 vs prose November 1 conflict retained. Beijing time conversion of UTC deadline: 2026-11-02 12:59 UTC+8.",
+    "Newly noted in full text: 'Earlier submissions get earlier answers' and suggested product shapes (escrow/conditional payouts, splits, software-to-software payments)."
+  ]
+}

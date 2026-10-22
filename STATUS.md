@@ -1,3 +1,11 @@
+## 2026-10-22 UTC 最终审查与界面完善（分支 final-review-20261022，未合并 main）
+
+基于 `8f748d3` 独立重建基线：462 项测试、lint/types、两种网络构建通过。修复 7 个低危问题（FR-01…07，先写红测再修复），新增免钱包 Overview 首页和统一设计系统，重做离线演示与收据结论显示。最终结果：485 项测试/31 个文件、check、testnet/mainnet 构建、4 种非法网络参数拒绝均通过；沙箱开启的真实 Chrome 浏览器验收 23/23 通过，外部请求为 0。源码快照 `8df6b66d…1432` → `b3bf6b03…8a67`。合约未改动，Forge 本轮未运行（本机无 Foundry），依赖审计因网络超时 BLOCKED。
+
+未部署、未签名、未转账、未公开、未提交、未同步 Studio。主网部署、真实 USDC 交易、公开应用和仓库、视频仍是参赛硬门槛，资格解释待确认。见 [最终报告](docs/FINAL_REVIEW_AND_IMPROVEMENT_REPORT.md)、[参赛就绪表](docs/SUBMISSION_READINESS.md)、[评委演示指南](docs/JUDGE_DEMO_GUIDE.md) 和 `evidence/final-review/final-review-20261022T022241Z/REPORT.json`。以下内容为历史记录。
+
+---
+
 ## 2026-10-21 UTC 私有主网准备（私有阶段已交付，源码提交已回读）
 
 源码与证据已提交至私有main的10af4d92453583df04915706774914392e283e45，772文件树和91变更文件内容回读完全一致；见交付回执。基线4deb74cce889ca122ef33903d27c2be10a1c437e完整恢复。当前声明源码快照8df6b66d77c12e99b268a19c0ed6f88f33336b24c177fb0fdda88834ba631432；462测试/29文件、lint/typecheck、两种网络构建、4种非法selector拒绝及每构建84产物hash回读通过。合约6个文件与基线完全相同，未把历史73项Forge结果当本轮重跑。

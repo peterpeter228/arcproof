@@ -1,0 +1,4 @@
+selector='' exit=1 Unsupported VITE_ARCPROOF_NETWORK; use testnet or mainnet
+selector=' ' exit=1 Unsupported VITE_ARCPROOF_NETWORK; use testnet or mainnet
+selector='Mainnet' exit=1 Unsupported VITE_ARCPROOF_NETWORK; use testnet or mainnet
+selector='devnet' exit=1 Unsupported VITE_ARCPROOF_NETWORK; use testnet or mainnet

@@ -1,0 +1,13 @@
+
+ RUN  v4.1.12 /root/arcproof
+
+
+ Test Files  29 passed (29)
+      Tests  462 passed (462)
+   Start at  10:23:03
+   Duration  5.15s (transform 2.43s, setup 0ms, import 11.26s, tests 5.13s, environment 9.29s)
+
+
+real	0m5.458s
+user	0m27.825s
+sys	0m3.085s
