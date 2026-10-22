@@ -1,0 +1,308 @@
+{
+ "schema": "arcproof-final-review-report-v1",
+ "runId": "final-review-20261022T022241Z",
+ "environment": {
+  "utcStart": "2026-10-22T02:22:21Z",
+  "os": "Ubuntu 24.04.3 LTS x86_64 (kernel 6.8.0-51)",
+  "bun": "1.3.14",
+  "node": "v22.22.0",
+  "chrome": "144.0.7559.132 headless=new, sandbox enabled (run as unprivileged user)",
+  "foundry": null
+ },
+ "git": {
+  "baseline": "8f748d3052be163f2c039790a73a4238c25b5869",
+  "originMainAtStart": "8f748d3052be163f2c039790a73a4238c25b5869",
+  "branch": "final-review-20261022",
+  "codeCommits": [
+   "49253ea fix: harden build-network writes, export trust and receipt edge cases",
+   "faed3c4 feat: judge-first overview, design system and clearer receipt states"
+  ],
+  "docsEvidenceCommit": "see git log (committed after this file)"
+ },
+ "sourceSnapshot": {
+  "previous": "8df6b66d77c12e99b268a19c0ed6f88f33336b24c177fb0fdda88834ba631432",
+  "current": "b3bf6b038298d53619329600a084986de9e5eb386c48802513c8ff557ecd8a67",
+  "inputs": {
+   "previous": 87,
+   "current": 92
+  },
+  "detail": "build/source-snapshot.json"
+ },
+ "contracts": {
+  "ArcProofInvoices.sol.sha256": "8699071d250c834cd1166ece0d4001b7de95af7562796e19305ce2812635e25b",
+  "matchesG1Manifest": true,
+  "changedThisRun": false,
+  "forgeThisRun": "NOT_RUN",
+  "forgeReason": "Foundry not installed on this host; installing via curl|bash installer not authorized in this run. Historical 73 Forge passes remain historical evidence only."
+ },
+ "results": [
+  {
+   "id": "install",
+   "status": "PASS",
+   "cmd": "bun install --frozen-lockfile --ignore-scripts",
+   "log": "logs/01-install.log"
+  },
+  {
+   "id": "baseline-check",
+   "status": "PASS",
+   "cmd": "bun run check",
+   "log": "logs/02-check-baseline.log"
+  },
+  {
+   "id": "baseline-tests",
+   "status": "PASS",
+   "count": "462/462 in 29 files",
+   "log": "logs/03-vitest-baseline.log"
+  },
+  {
+   "id": "baseline-builds",
+   "status": "PASS",
+   "log": [
+    "logs/04-build-testnet-baseline.log",
+    "logs/04-build-mainnet-baseline.log"
+   ]
+  },
+  {
+   "id": "regressions-before-fix",
+   "status": "FAIL (expected red)",
+   "count": "7 failed / 12",
+   "log": "logs/05-regressions-red.log",
+   "note": "The 7 failures are FR-01 (2), FR-02 (1), FR-03 (3) and FR-04 (1). FR-05 was fixed before its test was written, so it never failed; its reproduction on 8f748d3 is the reviewer probe only (reviewer-probes/labelsAndExport.probe.test.tsx.txt). FR-06 and FR-07 tests were written with or after the fix; their failure without the fix is in logs/09 and logs/08."
+  },
+  {
+   "id": "regressions-after-fix",
+   "status": "PASS",
+   "count": "12/12",
+   "log": "logs/06-regressions-green.log"
+  },
+  {
+   "id": "fr06-fr07-without-fix",
+   "status": "FAIL (expected)",
+   "detail": "Fix reverted in a scratch worktree at the then-current HEAD; each targeted test fails.",
+   "log": [
+    "logs/09-fr06-without-fix.log",
+    "logs/08-fr07-without-fix.log"
+   ]
+  },
+  {
+   "id": "fix-commit-standalone",
+   "status": "PASS",
+   "count": "480/480 in 31 files + check",
+   "note": "Run in a scratch git worktree on the staged fix commit; console output only, not saved as a log file."
+  },
+  {
+   "id": "final-check",
+   "status": "PASS",
+   "cmd": "bun run check (oxlint type-aware + whole repo, tsc)",
+   "log": "logs/12-check-final.log"
+  },
+  {
+   "id": "final-tests",
+   "status": "PASS",
+   "count": "485/485 in 31 files",
+   "log": "logs/13-vitest-final.log"
+  },
+  {
+   "id": "final-builds",
+   "status": "PASS",
+   "log": [
+    "logs/10-build-testnet-final.log",
+    "logs/10-build-mainnet-final.log"
+   ],
+   "provenance": [
+    "build/build-provenance-testnet.json",
+    "build/build-provenance-mainnet.json"
+   ]
+  },
+  {
+   "id": "invalid-network-selectors",
+   "status": "PASS",
+   "detail": "'', ' ', 'Mainnet', 'devnet' all exit 1",
+   "log": "logs/11-invalid-selectors.log"
+  },
+  {
+   "id": "browser-acceptance",
+   "status": "PASS",
+   "count": "23/23",
+   "file": "browser/browser-acceptance.json",
+   "scope": "Real Chrome on localhost; viewport emulation, not real phones; no wallet extension; all non-localhost requests blocked and counted (0)."
+  },
+  {
+   "id": "responsive-375-768-1440",
+   "status": "PASS",
+   "detail": "No horizontal overflow on any captured screen; contrast failures 12->0; sub-44px targets 18->3 (remaining: third-party ConnectKit button 40px)",
+   "file": "ui-metrics/ui-metrics-comparison.json"
+  },
+  {
+   "id": "zoom-200pct",
+   "status": "PASS",
+   "detail": "Emulated as 720x450 CSS px at DPR 2 for home and demo; no overflow",
+   "file": "browser/browser-acceptance.json"
+  },
+  {
+   "id": "performance-localhost",
+   "status": "MEASURED",
+   "file": "ui-metrics/perf-before-after.txt",
+   "detail": "Home/verify first load, cold cache, 5 runs median: requests 7->3, external 4->0 (Google Fonts removed), transfer 546->461 KB, FCP ~144->~140-148 ms, CLS 0. Main JS chunk 1,483->1,499 KB raw (461->465 KB gzip). Same-machine localhost, not a Lighthouse score."
+  },
+  {
+   "id": "dependency-audit",
+   "status": "BLOCKED",
+   "detail": "bun audit timed out at 120 s; npm advisory endpoint did not respond within 15 s. Historical audit (5 package records) in evidence/dependency-review-20261021 stands; no clean-audit claim.",
+   "log": "logs/07-bun-audit.err"
+  },
+  {
+   "id": "csv-spreadsheet-roundtrip",
+   "status": "NOT_RUN",
+   "detail": "No spreadsheet application on host. Browser download + byte reread of simulated JSON/CSV PASSED (A4)."
+  },
+  {
+   "id": "print-pdf",
+   "status": "NOT_RUN"
+  },
+  {
+   "id": "real-clipboard-in-browser",
+   "status": "NOT_RUN",
+   "detail": "Copy buttons only appear after a live chain read or creation; covered by jsdom tests only."
+  },
+  {
+   "id": "multi-tab-real-browser",
+   "status": "NOT_RUN"
+  },
+  {
+   "id": "real-wallet",
+   "status": "NOT_RUN",
+   "detail": "Not authorized in this run."
+  },
+  {
+   "id": "testnet-live-rpc",
+   "status": "NOT_RUN",
+   "detail": "No RPC calls made; all non-localhost requests blocked in browser checks."
+  },
+  {
+   "id": "mainnet-deploy-and-transaction",
+   "status": "NOT_RUN",
+   "detail": "Not authorized; production manifest empty; writes disabled."
+  },
+  {
+   "id": "studio-sync",
+   "status": "NOT_RUN",
+   "detail": "Studio still holds snapshot 8df6b66d\u20261432; new snapshot b3bf6b03\u20268a67 pending user-approved sync (26 files: 21 changed, 5 added)."
+  },
+  {
+   "id": "ci",
+   "status": "NOT_RUN",
+   "detail": "No active CI workflow in repo (.github absent; docs/ci example inactive)."
+  }
+ ],
+ "findings": [
+  {
+   "id": "FR-01",
+   "severity": "low",
+   "status": "fixed",
+   "title": "Mainnet bundle could persist testnet wallet intents if any path reached the testnet service; only the router prevented it",
+   "files": [
+    "src/arcproof/networkPolicy.ts"
+   ]
+  },
+  {
+   "id": "FR-02",
+   "severity": "low",
+   "status": "fixed",
+   "title": "Export for an unregistered deployment kept VERIFIED status and settlement evidence (mode was unknown)",
+   "files": [
+    "src/arcproof/exportUtils.ts"
+   ]
+  },
+  {
+   "id": "FR-03",
+   "severity": "low",
+   "status": "fixed",
+   "title": "Leading-zero chain IDs in routes reached the payable screen",
+   "files": [
+    "src/arcproof/routes.ts"
+   ]
+  },
+  {
+   "id": "FR-04",
+   "severity": "low",
+   "status": "fixed",
+   "title": "Conflicting receipt log provenance reported as PENDING/not found",
+   "files": [
+    "src/arcproof/receiptVerifier.ts",
+    "src/arcproof/testnetClient.ts"
+   ]
+  },
+  {
+   "id": "FR-05",
+   "severity": "low",
+   "status": "fixed",
+   "title": "Receipt amount/fee hard-coded 'test USDC' regardless of record chain",
+   "files": [
+    "src/components/arcproof/ReceiptFacts.tsx",
+    "src/arcproof/receiptCurrency.ts"
+   ]
+  },
+  {
+   "id": "FR-06",
+   "severity": "hardening",
+   "status": "fixed",
+   "title": "Payment preflight compared payer/connection with the action itself",
+   "files": [
+    "src/arcproof/testnetClient.ts"
+   ]
+  },
+  {
+   "id": "FR-07",
+   "severity": "low",
+   "status": "fixed",
+   "title": "Out-of-range RPC expiry could crash rendering (RangeError)",
+   "files": [
+    "src/arcproof/testnetClient.ts"
+   ]
+  },
+  {
+   "id": "UX-01..12",
+   "severity": "product",
+   "status": "fixed or mitigated",
+   "title": "First-visit comprehension, simulated labelling, focus ring contrast, inline link flow, jargon, demo layout, error specificity, verdict prominence, SPA titles/focus, external fonts, favicon",
+   "detail": "see docs/FINAL_REVIEW_AND_IMPROVEMENT_REPORT.md"
+  },
+  {
+   "id": "OPEN-CSV",
+   "severity": "unverified",
+   "status": "open",
+   "title": "CSV formula neutralisation uses a tab prefix; spreadsheet behaviour not tested"
+  },
+  {
+   "id": "OPEN-RECOVER",
+   "severity": "unverified",
+   "status": "open",
+   "title": "If saving a returned hash fails, the in-memory 'Recover known hash' button cannot succeed (fails closed, misleading)"
+  },
+  {
+   "id": "OPEN-BUNDLE",
+   "severity": "performance",
+   "status": "open",
+   "title": "1.5 MB main chunk includes wallet stack even on wallet-free routes; lazy provider split deferred as risky"
+  }
+ ],
+ "competitionGates": {
+  "mainnetDeployment": "NOT_DONE",
+  "realUsdcTransaction": "NOT_DONE",
+  "publicApp": "NOT_DONE",
+  "publicRepo": "NOT_DONE",
+  "video": "NOT_DONE",
+  "studioProvenanceInterpretation": "UNKNOWN",
+  "personalEligibility": "UNKNOWN",
+  "priorFunding": "UNKNOWN",
+  "awardOrPayment": "UNKNOWN",
+  "cash_fast_pass": false
+ },
+ "notDone": [
+  "No deployment, signing, transfer, publication, submission, Studio change, paid model call or Argon call was made in this run."
+ ],
+ "corrections": [
+  "Commit 49253ea message says every finding was reproduced with a failing test before the fix; that holds for FR-01..FR-04 only. See docs/FINAL_REVIEW_AND_IMPROVEMENT_REPORT.md section 4."
+ ]
+}

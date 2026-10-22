@@ -1,0 +1,151 @@
+vite v6.4.4 building for production...
+
+(!) outDir /tmp/claude-0/-root-arcproof/0ab5a932-6e04-4a62-8cee-4b259601bfcd/scratchpad/base-mainnet is not inside project root and will not be emptied.
+Use --emptyOutDir to override.
+
+transforming...
+node_modules/@base-org/account/node_modules/ox/_esm/core/Address.js (6:21): A comment
+
+"/*#__PURE__*/"
+
+in "node_modules/@base-org/account/node_modules/ox/_esm/core/Address.js" contains an annotation that Rollup cannot interpret due to the position of the comment. The comment will be removed to avoid issues.
+node_modules/@base-org/account/node_modules/ox/_esm/core/Base64.js (6:27): A comment
+
+"/*#__PURE__*/"
+
+in "node_modules/@base-org/account/node_modules/ox/_esm/core/Base64.js" contains an annotation that Rollup cannot interpret due to the position of the comment. The comment will be removed to avoid issues.
+node_modules/@coinbase/wallet-sdk/node_modules/ox/_esm/core/Address.js (6:21): A comment
+
+"/*#__PURE__*/"
+
+in "node_modules/@coinbase/wallet-sdk/node_modules/ox/_esm/core/Address.js" contains an annotation that Rollup cannot interpret due to the position of the comment. The comment will be removed to avoid issues.
+node_modules/@coinbase/wallet-sdk/node_modules/ox/_esm/core/Base64.js (6:27): A comment
+
+"/*#__PURE__*/"
+
+in "node_modules/@coinbase/wallet-sdk/node_modules/ox/_esm/core/Base64.js" contains an annotation that Rollup cannot interpret due to the position of the comment. The comment will be removed to avoid issues.
+node_modules/porto/node_modules/ox/_esm/core/Base64.js (6:27): A comment
+
+"/*#__PURE__*/"
+
+in "node_modules/porto/node_modules/ox/_esm/core/Base64.js" contains an annotation that Rollup cannot interpret due to the position of the comment. The comment will be removed to avoid issues.
+node_modules/@base-org/account/node_modules/ox/_esm/core/internal/cursor.js (2:21): A comment
+
+"/*#__PURE__*/"
+
+in "node_modules/@base-org/account/node_modules/ox/_esm/core/internal/cursor.js" contains an annotation that Rollup cannot interpret due to the position of the comment. The comment will be removed to avoid issues.
+node_modules/@coinbase/wallet-sdk/node_modules/ox/_esm/core/internal/cursor.js (2:21): A comment
+
+"/*#__PURE__*/"
+
+in "node_modules/@coinbase/wallet-sdk/node_modules/ox/_esm/core/internal/cursor.js" contains an annotation that Rollup cannot interpret due to the position of the comment. The comment will be removed to avoid issues.
+node_modules/zod/v4/core/util.js (400:0): A comment
+
+"// Wrapped in a `@__PURE__` IIFE: esbuild never tree-shakes a top-level initializer that contains a member access on `Number`, so the bare object literal survived into every bundle."
+
+in "node_modules/zod/v4/core/util.js" contains an annotation that Rollup cannot interpret due to the position of the comment. The comment will be removed to avoid issues.
+node_modules/zod/v4/core/regexes.js (74:0): A comment
+
+"/** Anchors a pattern source. The interpolation lives here rather than at the call site because
+ * esbuild will not drop a `@__PURE__` call whose own argument interpolates a variable, but it
+ * will drop `anchor(dateSource)`. Keeping it inline pinned `date` into every bundle. */"
+
+in "node_modules/zod/v4/core/regexes.js" contains an annotation that Rollup cannot interpret due to the position of the comment. The comment will be removed to avoid issues.
+✓ 6430 modules transformed.
+rendering chunks...
+computing gzip size...
+../../tmp/claude-0/-root-arcproof/0ab5a932-6e04-4a62-8cee-4b259601bfcd/scratchpad/base-mainnet/index.html                                        0.89 kB │ gzip:   0.48 kB
+../../tmp/claude-0/-root-arcproof/0ab5a932-6e04-4a62-8cee-4b259601bfcd/scratchpad/base-mainnet/build-provenance.json                            25.35 kB │ gzip:   9.39 kB
+../../tmp/claude-0/-root-arcproof/0ab5a932-6e04-4a62-8cee-4b259601bfcd/scratchpad/base-mainnet/assets/index-CmjD2Rin.css                        17.44 kB │ gzip:   4.10 kB
+../../tmp/claude-0/-root-arcproof/0ab5a932-6e04-4a62-8cee-4b259601bfcd/scratchpad/base-mainnet/assets/cursor-BNtlxklZ.js                         0.26 kB │ gzip:   0.22 kB
+../../tmp/claude-0/-root-arcproof/0ab5a932-6e04-4a62-8cee-4b259601bfcd/scratchpad/base-mainnet/assets/chevron-left-CH0JMIxM.js                   0.40 kB │ gzip:   0.28 kB
+../../tmp/claude-0/-root-arcproof/0ab5a932-6e04-4a62-8cee-4b259601bfcd/scratchpad/base-mainnet/assets/chevron-top-BCbEmMTG.js                    0.40 kB │ gzip:   0.28 kB
+../../tmp/claude-0/-root-arcproof/0ab5a932-6e04-4a62-8cee-4b259601bfcd/scratchpad/base-mainnet/assets/external-link-DJOXhbvl.js                  0.40 kB │ gzip:   0.28 kB
+../../tmp/claude-0/-root-arcproof/0ab5a932-6e04-4a62-8cee-4b259601bfcd/scratchpad/base-mainnet/assets/chevron-bottom-CAq9eK7t.js                 0.40 kB │ gzip:   0.28 kB
+../../tmp/claude-0/-root-arcproof/0ab5a932-6e04-4a62-8cee-4b259601bfcd/scratchpad/base-mainnet/assets/chevron-right-Ds7rUs14.js                  0.40 kB │ gzip:   0.27 kB
+../../tmp/claude-0/-root-arcproof/0ab5a932-6e04-4a62-8cee-4b259601bfcd/scratchpad/base-mainnet/assets/arrow-top-BseA5GFS.js                      0.41 kB │ gzip:   0.29 kB
+../../tmp/claude-0/-root-arcproof/0ab5a932-6e04-4a62-8cee-4b259601bfcd/scratchpad/base-mainnet/assets/arrow-bottom-CWm7y9OM.js                   0.41 kB │ gzip:   0.29 kB
+../../tmp/claude-0/-root-arcproof/0ab5a932-6e04-4a62-8cee-4b259601bfcd/scratchpad/base-mainnet/assets/arrow-left-D-erevQE.js                     0.41 kB │ gzip:   0.29 kB
+../../tmp/claude-0/-root-arcproof/0ab5a932-6e04-4a62-8cee-4b259601bfcd/scratchpad/base-mainnet/assets/arrow-right-IAHBMeiL.js                    0.42 kB │ gzip:   0.29 kB
+../../tmp/claude-0/-root-arcproof/0ab5a932-6e04-4a62-8cee-4b259601bfcd/scratchpad/base-mainnet/assets/off-CqiBAhtb.js                            0.43 kB │ gzip:   0.29 kB
+../../tmp/claude-0/-root-arcproof/0ab5a932-6e04-4a62-8cee-4b259601bfcd/scratchpad/base-mainnet/assets/search-D9nNlYUh.js                         0.44 kB │ gzip:   0.30 kB
+../../tmp/claude-0/-root-arcproof/0ab5a932-6e04-4a62-8cee-4b259601bfcd/scratchpad/base-mainnet/assets/close-jP19WqZY.js                          0.44 kB │ gzip:   0.29 kB
+../../tmp/claude-0/-root-arcproof/0ab5a932-6e04-4a62-8cee-4b259601bfcd/scratchpad/base-mainnet/assets/all-wallets-CG5dY4X6.js                    0.45 kB │ gzip:   0.26 kB
+../../tmp/claude-0/-root-arcproof/0ab5a932-6e04-4a62-8cee-4b259601bfcd/scratchpad/base-mainnet/assets/filters-54EhRGAu.js                        0.45 kB │ gzip:   0.28 kB
+../../tmp/claude-0/-root-arcproof/0ab5a932-6e04-4a62-8cee-4b259601bfcd/scratchpad/base-mainnet/assets/info-circle-BUuE3pgU.js                    0.47 kB │ gzip:   0.30 kB
+../../tmp/claude-0/-root-arcproof/0ab5a932-6e04-4a62-8cee-4b259601bfcd/scratchpad/base-mainnet/assets/more-DRwuE8FR.js                           0.49 kB │ gzip:   0.31 kB
+../../tmp/claude-0/-root-arcproof/0ab5a932-6e04-4a62-8cee-4b259601bfcd/scratchpad/base-mainnet/assets/refresh-CeB-xt2T.js                        0.49 kB │ gzip:   0.33 kB
+../../tmp/claude-0/-root-arcproof/0ab5a932-6e04-4a62-8cee-4b259601bfcd/scratchpad/base-mainnet/assets/warning-circle-BtHMTj0V.js                 0.50 kB │ gzip:   0.31 kB
+../../tmp/claude-0/-root-arcproof/0ab5a932-6e04-4a62-8cee-4b259601bfcd/scratchpad/base-mainnet/assets/coinPlaceholder-DK1z32Oy.js                0.50 kB │ gzip:   0.35 kB
+../../tmp/claude-0/-root-arcproof/0ab5a932-6e04-4a62-8cee-4b259601bfcd/scratchpad/base-mainnet/assets/compass-CLOXdr0H.js                        0.52 kB │ gzip:   0.34 kB
+../../tmp/claude-0/-root-arcproof/0ab5a932-6e04-4a62-8cee-4b259601bfcd/scratchpad/base-mainnet/assets/swapVertical-BMxZMn3e.js                   0.55 kB │ gzip:   0.34 kB
+../../tmp/claude-0/-root-arcproof/0ab5a932-6e04-4a62-8cee-4b259601bfcd/scratchpad/base-mainnet/assets/swapHorizontal-Daao1VcB.js                 0.55 kB │ gzip:   0.33 kB
+../../tmp/claude-0/-root-arcproof/0ab5a932-6e04-4a62-8cee-4b259601bfcd/scratchpad/base-mainnet/assets/x-zCrA81Ph.js                              0.57 kB │ gzip:   0.39 kB
+../../tmp/claude-0/-root-arcproof/0ab5a932-6e04-4a62-8cee-4b259601bfcd/scratchpad/base-mainnet/assets/cursor-transparent-CXPQtx0k.js             0.58 kB │ gzip:   0.36 kB
+../../tmp/claude-0/-root-arcproof/0ab5a932-6e04-4a62-8cee-4b259601bfcd/scratchpad/base-mainnet/assets/twitterIcon-8Q4C73tT.js                    0.58 kB │ gzip:   0.38 kB
+../../tmp/claude-0/-root-arcproof/0ab5a932-6e04-4a62-8cee-4b259601bfcd/scratchpad/base-mainnet/assets/mobile-kPdSgB_K.js                         0.59 kB │ gzip:   0.32 kB
+../../tmp/claude-0/-root-arcproof/0ab5a932-6e04-4a62-8cee-4b259601bfcd/scratchpad/base-mainnet/assets/checkmark-bold-0Hylf3ck.js                 0.65 kB │ gzip:   0.43 kB
+../../tmp/claude-0/-root-arcproof/0ab5a932-6e04-4a62-8cee-4b259601bfcd/scratchpad/base-mainnet/assets/etherscan-iaVzrYkv.js                      0.70 kB │ gzip:   0.45 kB
+../../tmp/claude-0/-root-arcproof/0ab5a932-6e04-4a62-8cee-4b259601bfcd/scratchpad/base-mainnet/assets/checkmark-G-WSYhLk.js                      0.71 kB │ gzip:   0.47 kB
+../../tmp/claude-0/-root-arcproof/0ab5a932-6e04-4a62-8cee-4b259601bfcd/scratchpad/base-mainnet/assets/help-circle-Ceq1Uoju.js                    0.71 kB │ gzip:   0.43 kB
+../../tmp/claude-0/-root-arcproof/0ab5a932-6e04-4a62-8cee-4b259601bfcd/scratchpad/base-mainnet/assets/wallet-6h-bzE-u.js                         0.72 kB │ gzip:   0.42 kB
+../../tmp/claude-0/-root-arcproof/0ab5a932-6e04-4a62-8cee-4b259601bfcd/scratchpad/base-mainnet/assets/plus-BV-yqJzP.js                           0.76 kB │ gzip:   0.42 kB
+../../tmp/claude-0/-root-arcproof/0ab5a932-6e04-4a62-8cee-4b259601bfcd/scratchpad/base-mainnet/assets/verify-filled-CTtTi4dG.js                  0.77 kB │ gzip:   0.47 kB
+../../tmp/claude-0/-root-arcproof/0ab5a932-6e04-4a62-8cee-4b259601bfcd/scratchpad/base-mainnet/assets/add-CYHWmIIL.js                            0.77 kB │ gzip:   0.43 kB
+../../tmp/claude-0/-root-arcproof/0ab5a932-6e04-4a62-8cee-4b259601bfcd/scratchpad/base-mainnet/assets/google-BoACgM0K.js                         0.81 kB │ gzip:   0.45 kB
+../../tmp/claude-0/-root-arcproof/0ab5a932-6e04-4a62-8cee-4b259601bfcd/scratchpad/base-mainnet/assets/three-dots-CPbFqKG2.js                     0.84 kB │ gzip:   0.41 kB
+../../tmp/claude-0/-root-arcproof/0ab5a932-6e04-4a62-8cee-4b259601bfcd/scratchpad/base-mainnet/assets/clock-Be-ir1Z8.js                          0.84 kB │ gzip:   0.47 kB
+../../tmp/claude-0/-root-arcproof/0ab5a932-6e04-4a62-8cee-4b259601bfcd/scratchpad/base-mainnet/assets/disconnect-C2Q3v0fA.js                     0.89 kB │ gzip:   0.51 kB
+../../tmp/claude-0/-root-arcproof/0ab5a932-6e04-4a62-8cee-4b259601bfcd/scratchpad/base-mainnet/assets/twitch-BUxHcv0p.js                         0.90 kB │ gzip:   0.50 kB
+../../tmp/claude-0/-root-arcproof/0ab5a932-6e04-4a62-8cee-4b259601bfcd/scratchpad/base-mainnet/assets/bank-u0ko7M21.js                           0.94 kB │ gzip:   0.52 kB
+../../tmp/claude-0/-root-arcproof/0ab5a932-6e04-4a62-8cee-4b259601bfcd/scratchpad/base-mainnet/assets/apple-BcO5oXkS.js                          0.96 kB │ gzip:   0.53 kB
+../../tmp/claude-0/-root-arcproof/0ab5a932-6e04-4a62-8cee-4b259601bfcd/scratchpad/base-mainnet/assets/play-store-CvS3_lTU.js                     1.01 kB │ gzip:   0.52 kB
+../../tmp/claude-0/-root-arcproof/0ab5a932-6e04-4a62-8cee-4b259601bfcd/scratchpad/base-mainnet/assets/farcaster-K729ABF8.js                      1.02 kB │ gzip:   0.53 kB
+../../tmp/claude-0/-root-arcproof/0ab5a932-6e04-4a62-8cee-4b259601bfcd/scratchpad/base-mainnet/assets/arrow-bottom-circle-CU71eonC.js            1.13 kB │ gzip:   0.53 kB
+../../tmp/claude-0/-root-arcproof/0ab5a932-6e04-4a62-8cee-4b259601bfcd/scratchpad/base-mainnet/assets/github-_d_S9J2f.js                         1.13 kB │ gzip:   0.60 kB
+../../tmp/claude-0/-root-arcproof/0ab5a932-6e04-4a62-8cee-4b259601bfcd/scratchpad/base-mainnet/assets/swapHorizontalBold-8Lv40Wfq.js             1.16 kB │ gzip:   0.62 kB
+../../tmp/claude-0/-root-arcproof/0ab5a932-6e04-4a62-8cee-4b259601bfcd/scratchpad/base-mainnet/assets/app-store-DVFLyGiJ.js                      1.20 kB │ gzip:   0.67 kB
+../../tmp/claude-0/-root-arcproof/0ab5a932-6e04-4a62-8cee-4b259601bfcd/scratchpad/base-mainnet/assets/mail-BVI-TN9g.js                           1.21 kB │ gzip:   0.65 kB
+../../tmp/claude-0/-root-arcproof/0ab5a932-6e04-4a62-8cee-4b259601bfcd/scratchpad/base-mainnet/assets/facebook-EX5VjsLK.js                       1.23 kB │ gzip:   0.64 kB
+../../tmp/claude-0/-root-arcproof/0ab5a932-6e04-4a62-8cee-4b259601bfcd/scratchpad/base-mainnet/assets/wallet-placeholder-B1WR2R3j.js             1.26 kB │ gzip:   0.59 kB
+../../tmp/claude-0/-root-arcproof/0ab5a932-6e04-4a62-8cee-4b259601bfcd/scratchpad/base-mainnet/assets/desktop-B8kRRn0a.js                        1.27 kB │ gzip:   0.64 kB
+../../tmp/claude-0/-root-arcproof/0ab5a932-6e04-4a62-8cee-4b259601bfcd/scratchpad/base-mainnet/assets/discord-BDf783Tc.js                        1.30 kB │ gzip:   0.65 kB
+../../tmp/claude-0/-root-arcproof/0ab5a932-6e04-4a62-8cee-4b259601bfcd/scratchpad/base-mainnet/assets/swapHorizontalMedium-DDv-oOxW.js           1.30 kB │ gzip:   0.68 kB
+../../tmp/claude-0/-root-arcproof/0ab5a932-6e04-4a62-8cee-4b259601bfcd/scratchpad/base-mainnet/assets/recycle-horizontal-DHxpAB8S.js             1.35 kB │ gzip:   0.70 kB
+../../tmp/claude-0/-root-arcproof/0ab5a932-6e04-4a62-8cee-4b259601bfcd/scratchpad/base-mainnet/assets/extension-CDX7wBJP.js                      1.43 kB │ gzip:   0.69 kB
+../../tmp/claude-0/-root-arcproof/0ab5a932-6e04-4a62-8cee-4b259601bfcd/scratchpad/base-mainnet/assets/telegram-CDuCtKfk.js                       1.45 kB │ gzip:   0.84 kB
+../../tmp/claude-0/-root-arcproof/0ab5a932-6e04-4a62-8cee-4b259601bfcd/scratchpad/base-mainnet/assets/swapHorizontalRoundedBold-CcIu1E64.js      1.46 kB │ gzip:   0.77 kB
+../../tmp/claude-0/-root-arcproof/0ab5a932-6e04-4a62-8cee-4b259601bfcd/scratchpad/base-mainnet/assets/verify-BrTMkyYP.js                         1.47 kB │ gzip:   0.71 kB
+../../tmp/claude-0/-root-arcproof/0ab5a932-6e04-4a62-8cee-4b259601bfcd/scratchpad/base-mainnet/assets/qr-code-DTHardIB.js                        1.52 kB │ gzip:   0.53 kB
+../../tmp/claude-0/-root-arcproof/0ab5a932-6e04-4a62-8cee-4b259601bfcd/scratchpad/base-mainnet/assets/browser-Y5nHRP1o.js                        1.58 kB │ gzip:   0.78 kB
+../../tmp/claude-0/-root-arcproof/0ab5a932-6e04-4a62-8cee-4b259601bfcd/scratchpad/base-mainnet/assets/network-placeholder-D5o5nNu4.js            1.65 kB │ gzip:   0.73 kB
+../../tmp/claude-0/-root-arcproof/0ab5a932-6e04-4a62-8cee-4b259601bfcd/scratchpad/base-mainnet/assets/id-BPkIoae1.js                             1.75 kB │ gzip:   0.81 kB
+../../tmp/claude-0/-root-arcproof/0ab5a932-6e04-4a62-8cee-4b259601bfcd/scratchpad/base-mainnet/assets/nftPlaceholder-C38VoRY2.js                 1.75 kB │ gzip:   0.87 kB
+../../tmp/claude-0/-root-arcproof/0ab5a932-6e04-4a62-8cee-4b259601bfcd/scratchpad/base-mainnet/assets/info-Bjs31Dep.js                           2.26 kB │ gzip:   1.14 kB
+../../tmp/claude-0/-root-arcproof/0ab5a932-6e04-4a62-8cee-4b259601bfcd/scratchpad/base-mainnet/assets/exclamation-triangle-CKXgh4nD.js           2.42 kB │ gzip:   1.13 kB
+../../tmp/claude-0/-root-arcproof/0ab5a932-6e04-4a62-8cee-4b259601bfcd/scratchpad/base-mainnet/assets/send-CRiz0NEh.js                           2.42 kB │ gzip:   1.28 kB
+../../tmp/claude-0/-root-arcproof/0ab5a932-6e04-4a62-8cee-4b259601bfcd/scratchpad/base-mainnet/assets/card-C1c5tW0G.js                           2.59 kB │ gzip:   1.17 kB
+../../tmp/claude-0/-root-arcproof/0ab5a932-6e04-4a62-8cee-4b259601bfcd/scratchpad/base-mainnet/assets/chrome-store-CPT-_2uE.js                   2.59 kB │ gzip:   1.01 kB
+../../tmp/claude-0/-root-arcproof/0ab5a932-6e04-4a62-8cee-4b259601bfcd/scratchpad/base-mainnet/assets/reown-logo-DrkTToyD.js                     2.60 kB │ gzip:   1.06 kB
+../../tmp/claude-0/-root-arcproof/0ab5a932-6e04-4a62-8cee-4b259601bfcd/scratchpad/base-mainnet/assets/lightbulb-DB0MqONF.js                      2.72 kB │ gzip:   1.22 kB
+../../tmp/claude-0/-root-arcproof/0ab5a932-6e04-4a62-8cee-4b259601bfcd/scratchpad/base-mainnet/assets/ccip-AET2NA7B.js                           3.04 kB │ gzip:   1.39 kB
+../../tmp/claude-0/-root-arcproof/0ab5a932-6e04-4a62-8cee-4b259601bfcd/scratchpad/base-mainnet/assets/image-CQY0VESn.js                          3.49 kB │ gzip:   1.51 kB
+../../tmp/claude-0/-root-arcproof/0ab5a932-6e04-4a62-8cee-4b259601bfcd/scratchpad/base-mainnet/assets/copy-Dz8ChfGo.js                           3.82 kB │ gzip:   1.47 kB
+../../tmp/claude-0/-root-arcproof/0ab5a932-6e04-4a62-8cee-4b259601bfcd/scratchpad/base-mainnet/assets/walletconnect-CKr4H6nZ.js                  4.06 kB │ gzip:   1.66 kB
+../../tmp/claude-0/-root-arcproof/0ab5a932-6e04-4a62-8cee-4b259601bfcd/scratchpad/base-mainnet/assets/index-CkIn0uT2.js                         38.52 kB │ gzip:   9.37 kB
+../../tmp/claude-0/-root-arcproof/0ab5a932-6e04-4a62-8cee-4b259601bfcd/scratchpad/base-mainnet/assets/w3m-modal-DBt6kYPL.js                     40.06 kB │ gzip:   9.39 kB
+../../tmp/claude-0/-root-arcproof/0ab5a932-6e04-4a62-8cee-4b259601bfcd/scratchpad/base-mainnet/assets/index-DrAshLsx-D2p7E_g-.js                41.11 kB │ gzip:  12.78 kB
+../../tmp/claude-0/-root-arcproof/0ab5a932-6e04-4a62-8cee-4b259601bfcd/scratchpad/base-mainnet/assets/basic-BjRc13gv.js                        143.14 kB │ gzip:  33.11 kB
+../../tmp/claude-0/-root-arcproof/0ab5a932-6e04-4a62-8cee-4b259601bfcd/scratchpad/base-mainnet/assets/index.es-Bl9bMxhi.js                     400.77 kB │ gzip: 115.21 kB
+../../tmp/claude-0/-root-arcproof/0ab5a932-6e04-4a62-8cee-4b259601bfcd/scratchpad/base-mainnet/assets/core-BXITfdfH.js                         484.67 kB │ gzip: 132.18 kB
+../../tmp/claude-0/-root-arcproof/0ab5a932-6e04-4a62-8cee-4b259601bfcd/scratchpad/base-mainnet/assets/index-hRV1g8FD.js                      1,483.16 kB │ gzip: 461.36 kB
+
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rollupOptions.output.manualChunks to improve chunking: https://rollupjs.org/configuration-options/#output-manualchunks
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+✓ built in 12.94s
+
+real	0m13.238s
+user	0m21.580s
+sys	0m1.497s

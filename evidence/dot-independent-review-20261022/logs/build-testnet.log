@@ -1,0 +1,147 @@
+vite v6.4.4 building for production...
+
+(!) outDir /workspace/scratch/c01bd6fe117d/arcproof-stageA-20261022/build-testnet is not inside project root and will not be emptied.
+Use --emptyOutDir to override.
+
+transforming...
+node_modules/@base-org/account/node_modules/ox/_esm/core/Address.js (6:21): A comment
+
+"/*#__PURE__*/"
+
+in "node_modules/@base-org/account/node_modules/ox/_esm/core/Address.js" contains an annotation that Rollup cannot interpret due to the position of the comment. The comment will be removed to avoid issues.
+node_modules/@base-org/account/node_modules/ox/_esm/core/Base64.js (6:27): A comment
+
+"/*#__PURE__*/"
+
+in "node_modules/@base-org/account/node_modules/ox/_esm/core/Base64.js" contains an annotation that Rollup cannot interpret due to the position of the comment. The comment will be removed to avoid issues.
+node_modules/porto/node_modules/ox/_esm/core/Base64.js (6:27): A comment
+
+"/*#__PURE__*/"
+
+in "node_modules/porto/node_modules/ox/_esm/core/Base64.js" contains an annotation that Rollup cannot interpret due to the position of the comment. The comment will be removed to avoid issues.
+node_modules/@coinbase/wallet-sdk/node_modules/ox/_esm/core/Address.js (6:21): A comment
+
+"/*#__PURE__*/"
+
+in "node_modules/@coinbase/wallet-sdk/node_modules/ox/_esm/core/Address.js" contains an annotation that Rollup cannot interpret due to the position of the comment. The comment will be removed to avoid issues.
+node_modules/@coinbase/wallet-sdk/node_modules/ox/_esm/core/Base64.js (6:27): A comment
+
+"/*#__PURE__*/"
+
+in "node_modules/@coinbase/wallet-sdk/node_modules/ox/_esm/core/Base64.js" contains an annotation that Rollup cannot interpret due to the position of the comment. The comment will be removed to avoid issues.
+node_modules/zod/v4/core/util.js (400:0): A comment
+
+"// Wrapped in a `@__PURE__` IIFE: esbuild never tree-shakes a top-level initializer that contains a member access on `Number`, so the bare object literal survived into every bundle."
+
+in "node_modules/zod/v4/core/util.js" contains an annotation that Rollup cannot interpret due to the position of the comment. The comment will be removed to avoid issues.
+node_modules/@base-org/account/node_modules/ox/_esm/core/internal/cursor.js (2:21): A comment
+
+"/*#__PURE__*/"
+
+in "node_modules/@base-org/account/node_modules/ox/_esm/core/internal/cursor.js" contains an annotation that Rollup cannot interpret due to the position of the comment. The comment will be removed to avoid issues.
+node_modules/@coinbase/wallet-sdk/node_modules/ox/_esm/core/internal/cursor.js (2:21): A comment
+
+"/*#__PURE__*/"
+
+in "node_modules/@coinbase/wallet-sdk/node_modules/ox/_esm/core/internal/cursor.js" contains an annotation that Rollup cannot interpret due to the position of the comment. The comment will be removed to avoid issues.
+node_modules/zod/v4/core/regexes.js (74:0): A comment
+
+"/** Anchors a pattern source. The interpolation lives here rather than at the call site because
+ * esbuild will not drop a `@__PURE__` call whose own argument interpolates a variable, but it
+ * will drop `anchor(dateSource)`. Keeping it inline pinned `date` into every bundle. */"
+
+in "node_modules/zod/v4/core/regexes.js" contains an annotation that Rollup cannot interpret due to the position of the comment. The comment will be removed to avoid issues.
+✓ 6433 modules transformed.
+rendering chunks...
+computing gzip size...
+../build-testnet/index.html                                        1.02 kB │ gzip:   0.59 kB
+../build-testnet/build-provenance.json                            26.12 kB │ gzip:   9.62 kB
+../build-testnet/assets/index-Dbd5vEfY.css                        24.25 kB │ gzip:   5.11 kB
+../build-testnet/assets/cursor-DRH28hqs.js                         0.26 kB │ gzip:   0.22 kB
+../build-testnet/assets/chevron-left-BMrGwOLw.js                   0.40 kB │ gzip:   0.28 kB
+../build-testnet/assets/chevron-top-Up63aekW.js                    0.40 kB │ gzip:   0.28 kB
+../build-testnet/assets/external-link-D21ssBjz.js                  0.40 kB │ gzip:   0.28 kB
+../build-testnet/assets/chevron-bottom-DEuKrwdo.js                 0.40 kB │ gzip:   0.28 kB
+../build-testnet/assets/chevron-right-BSqR5oyZ.js                  0.40 kB │ gzip:   0.27 kB
+../build-testnet/assets/arrow-top-BBs0pRI4.js                      0.41 kB │ gzip:   0.29 kB
+../build-testnet/assets/arrow-bottom-DL26mNUz.js                   0.41 kB │ gzip:   0.29 kB
+../build-testnet/assets/arrow-left-Dgki3ALW.js                     0.41 kB │ gzip:   0.28 kB
+../build-testnet/assets/arrow-right-DtUMG8t_.js                    0.42 kB │ gzip:   0.29 kB
+../build-testnet/assets/off-C64XUbI-.js                            0.43 kB │ gzip:   0.29 kB
+../build-testnet/assets/search-Bj9ih5rj.js                         0.44 kB │ gzip:   0.30 kB
+../build-testnet/assets/close-BZ2DIiH9.js                          0.44 kB │ gzip:   0.29 kB
+../build-testnet/assets/all-wallets-BzNtbowK.js                    0.45 kB │ gzip:   0.26 kB
+../build-testnet/assets/filters-BYW3cfmS.js                        0.45 kB │ gzip:   0.27 kB
+../build-testnet/assets/info-circle-DjPocQxy.js                    0.47 kB │ gzip:   0.30 kB
+../build-testnet/assets/more-Dz8tqtKu.js                           0.49 kB │ gzip:   0.30 kB
+../build-testnet/assets/refresh-B0TP4nF2.js                        0.49 kB │ gzip:   0.32 kB
+../build-testnet/assets/warning-circle-BjPl2U0_.js                 0.50 kB │ gzip:   0.31 kB
+../build-testnet/assets/coinPlaceholder-BfaPPGhW.js                0.50 kB │ gzip:   0.35 kB
+../build-testnet/assets/compass-CeO6ijtP.js                        0.52 kB │ gzip:   0.34 kB
+../build-testnet/assets/swapVertical-BdtvT9mR.js                   0.55 kB │ gzip:   0.34 kB
+../build-testnet/assets/swapHorizontal-DCWje1WU.js                 0.55 kB │ gzip:   0.33 kB
+../build-testnet/assets/x-BmWs_koH.js                              0.57 kB │ gzip:   0.39 kB
+../build-testnet/assets/cursor-transparent-BiyKLSmy.js             0.58 kB │ gzip:   0.35 kB
+../build-testnet/assets/twitterIcon-RKOaswWN.js                    0.58 kB │ gzip:   0.38 kB
+../build-testnet/assets/mobile-BjlaYSIT.js                         0.59 kB │ gzip:   0.32 kB
+../build-testnet/assets/checkmark-bold-DjyL3C_N.js                 0.65 kB │ gzip:   0.43 kB
+../build-testnet/assets/etherscan-tu-3ZILR.js                      0.70 kB │ gzip:   0.45 kB
+../build-testnet/assets/checkmark-BAghvcLW.js                      0.71 kB │ gzip:   0.47 kB
+../build-testnet/assets/help-circle-rG-UGDCL.js                    0.71 kB │ gzip:   0.43 kB
+../build-testnet/assets/wallet-Ds311FDg.js                         0.72 kB │ gzip:   0.42 kB
+../build-testnet/assets/plus-DIKqU_Xw.js                           0.76 kB │ gzip:   0.42 kB
+../build-testnet/assets/verify-filled-BcSnXmhf.js                  0.77 kB │ gzip:   0.46 kB
+../build-testnet/assets/add-CH8NCELA.js                            0.77 kB │ gzip:   0.43 kB
+../build-testnet/assets/google-CILKV8nO.js                         0.81 kB │ gzip:   0.45 kB
+../build-testnet/assets/three-dots-ByuEgTln.js                     0.84 kB │ gzip:   0.41 kB
+../build-testnet/assets/clock-CljhT3y9.js                          0.84 kB │ gzip:   0.47 kB
+../build-testnet/assets/disconnect-Ce2yc_oO.js                     0.89 kB │ gzip:   0.50 kB
+../build-testnet/assets/twitch-CugEwiBd.js                         0.90 kB │ gzip:   0.50 kB
+../build-testnet/assets/bank-EwEeQsIB.js                           0.94 kB │ gzip:   0.52 kB
+../build-testnet/assets/apple-C24XsEZV.js                          0.96 kB │ gzip:   0.53 kB
+../build-testnet/assets/play-store-B-HBpp5F.js                     1.01 kB │ gzip:   0.52 kB
+../build-testnet/assets/farcaster-_XNpteDh.js                      1.02 kB │ gzip:   0.53 kB
+../build-testnet/assets/arrow-bottom-circle-By8DoJ9p.js            1.13 kB │ gzip:   0.53 kB
+../build-testnet/assets/github-BJLwk1bc.js                         1.13 kB │ gzip:   0.60 kB
+../build-testnet/assets/swapHorizontalBold-HBBTEFGN.js             1.16 kB │ gzip:   0.61 kB
+../build-testnet/assets/app-store-CkJ5IP58.js                      1.20 kB │ gzip:   0.67 kB
+../build-testnet/assets/mail-DaIzs2mE.js                           1.21 kB │ gzip:   0.65 kB
+../build-testnet/assets/facebook-BZNf0O8z.js                       1.23 kB │ gzip:   0.64 kB
+../build-testnet/assets/wallet-placeholder-DMrGqUfr.js             1.26 kB │ gzip:   0.59 kB
+../build-testnet/assets/desktop-BzG-YkwM.js                        1.27 kB │ gzip:   0.64 kB
+../build-testnet/assets/discord-FfPct8kr.js                        1.30 kB │ gzip:   0.65 kB
+../build-testnet/assets/swapHorizontalMedium-DWipph4f.js           1.30 kB │ gzip:   0.68 kB
+../build-testnet/assets/recycle-horizontal-BzCDDuKe.js             1.35 kB │ gzip:   0.70 kB
+../build-testnet/assets/extension-DnfSaQAY.js                      1.43 kB │ gzip:   0.69 kB
+../build-testnet/assets/telegram-DjuMUIEW.js                       1.45 kB │ gzip:   0.84 kB
+../build-testnet/assets/swapHorizontalRoundedBold-L9HislTh.js      1.46 kB │ gzip:   0.77 kB
+../build-testnet/assets/verify-CrT6x24A.js                         1.47 kB │ gzip:   0.71 kB
+../build-testnet/assets/qr-code-BYvoLxsM.js                        1.52 kB │ gzip:   0.52 kB
+../build-testnet/assets/browser-rXM17cY0.js                        1.58 kB │ gzip:   0.78 kB
+../build-testnet/assets/network-placeholder-DyhJlFMl.js            1.65 kB │ gzip:   0.73 kB
+../build-testnet/assets/id-BvHg3XAe.js                             1.75 kB │ gzip:   0.81 kB
+../build-testnet/assets/nftPlaceholder-D_QUjzch.js                 1.75 kB │ gzip:   0.87 kB
+../build-testnet/assets/info-Dnzoe1BW.js                           2.26 kB │ gzip:   1.14 kB
+../build-testnet/assets/exclamation-triangle-DoKWi2l3.js           2.42 kB │ gzip:   1.13 kB
+../build-testnet/assets/send-B4smCV-5.js                           2.42 kB │ gzip:   1.27 kB
+../build-testnet/assets/card-tmbCTqDg.js                           2.59 kB │ gzip:   1.17 kB
+../build-testnet/assets/chrome-store-DdHJZhqE.js                   2.59 kB │ gzip:   1.01 kB
+../build-testnet/assets/reown-logo-Bj6cxubu.js                     2.60 kB │ gzip:   1.06 kB
+../build-testnet/assets/lightbulb--K7DmDa0.js                      2.72 kB │ gzip:   1.22 kB
+../build-testnet/assets/ccip-D2BkSs9t.js                           3.04 kB │ gzip:   1.39 kB
+../build-testnet/assets/image-CCNOD94g.js                          3.49 kB │ gzip:   1.51 kB
+../build-testnet/assets/copy-Cmhn_CjR.js                           3.82 kB │ gzip:   1.47 kB
+../build-testnet/assets/walletconnect-wA5SmoUN.js                  4.06 kB │ gzip:   1.66 kB
+../build-testnet/assets/index-B4Wa5MEB.js                         38.52 kB │ gzip:   9.37 kB
+../build-testnet/assets/w3m-modal-DdrKkGo8.js                     40.06 kB │ gzip:   9.39 kB
+../build-testnet/assets/index-DrAshLsx-HDEOxMkh.js                41.11 kB │ gzip:  12.78 kB
+../build-testnet/assets/basic-DJBrTaXP.js                        143.14 kB │ gzip:  33.11 kB
+../build-testnet/assets/index.es-By02dELF.js                     400.77 kB │ gzip: 115.21 kB
+../build-testnet/assets/core-C4is9LzB.js                         484.67 kB │ gzip: 132.18 kB
+../build-testnet/assets/index-DFlG-dqj.js                      1,501.90 kB │ gzip: 465.97 kB
+
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rollupOptions.output.manualChunks to improve chunking: https://rollupjs.org/configuration-options/#output-manualchunks
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+✓ built in 20.45s

@@ -10,8 +10,11 @@ import { invoiceCacheKey } from './manifest';
 import { deriveInvoiceId, deriveInvoiceIds } from './invoiceId';
 import { parseInvoiceAmount } from './amountParser';
 import { preparePayment, isPrepareError, validatePaymentContext, type PreparedPayment } from './preparedPayment';
-import { verifyReceipt, type RpcProvider, type OnchainInvoiceState, type VerificationResult } from './receiptVerifier';
+import { verifyReceipt, ReceiptProvenanceError, type RpcProvider, type OnchainInvoiceState, type VerificationResult } from './receiptVerifier';
 import { receiptStatus } from './receiptStatus';
+
+/** Largest Unix second JavaScript Date can represent (8.64e15 ms). */
+const MAX_DATE_SECONDS = 8_640_000_000_000n;
 import { createWalletIntentStore } from './walletIntents';
 import { createSubmissionStore, type Submission } from './submissions';
 
@@ -75,8 +78,10 @@ export function createNetworkService(context: NetworkContext) {
     const invoice = await client.readContract({
       address: deployment.contractAddress, abi: ARCPROOF_ABI, functionName: 'getInvoice', args: [invoiceId],
     });
+    // Expiry must also be a renderable time: an out-of-range value from a broken RPC fails here, not in the UI.
     if (/^0x0{40}$/i.test(invoice.merchant) || invoice.amountNative <= 0n ||
-        invoice.amountNative > 10n ** 18n || invoice.amountNative % 10n ** 12n !== 0n) {
+        invoice.amountNative > 10n ** 18n || invoice.amountNative % 10n ** 12n !== 0n ||
+        invoice.expiresAt <= 0n || invoice.expiresAt > MAX_DATE_SECONDS) {
       throw new Error('Invalid invoice returned by RPC.');
     }
     return { ...invoice, invoiceId };
@@ -204,8 +209,11 @@ export function createNetworkService(context: NetworkContext) {
       const freshInvoice = await readInvoice(client, action.payment.invoiceId);
       const merchantCode = await client.getCode({ address: freshInvoice.merchant });
       if (merchantCode && merchantCode !== '0x') throw new Error('Merchant is no longer an ordinary EOA. Prepare and review again.');
-      const error = validatePaymentContext(action.payment, context.chain.id, action.session.account,
-        action.session.connectionVersion, requireTrustedDeployment(context).deploymentId, requireTrustedDeployment(context).contractAddress,
+      // Compare the prepared payment with the wallet session as it is now, not with itself.
+      const current = getCurrentSession();
+      if (!current) throw new Error('Wallet session changed. Prepare and review again.');
+      const error = validatePaymentContext(action.payment, context.chain.id, current.account,
+        current.connectionVersion, requireTrustedDeployment(context).deploymentId, requireTrustedDeployment(context).contractAddress,
         freshInvoice, Number(block.timestamp));
       if (error) throw new Error(error);
       if (action.data !== action.payment.calldata || action.value !== freshInvoice.amountNative) throw new Error('Payment request changed.');
@@ -336,7 +344,7 @@ export function createNetworkService(context: NetworkContext) {
         // verification can describe its event binding as passed.
         if (receipt.logs.some((log) => log.removed || log.blockHash !== receipt.blockHash ||
             log.blockNumber !== receipt.blockNumber || log.transactionHash.toLowerCase() !== receipt.transactionHash.toLowerCase())) {
-          throw new Error('Receipt log provenance conflicts with the enclosing receipt. Verification is inconclusive.');
+          throw new ReceiptProvenanceError('Receipt log provenance conflicts with the enclosing receipt. Verification is inconclusive.');
         }
         return { ...receipt, logs: receipt.logs.map((log) => ({
           address: log.address, topics: log.topics, data: log.data,

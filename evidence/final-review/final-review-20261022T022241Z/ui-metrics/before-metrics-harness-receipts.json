@@ -1,0 +1,5704 @@
+{
+ "tag": "before",
+ "when": "2026-10-22T02:35:13.223Z",
+ "screens": {
+  "receipt-verified@375": {
+   "note": "REAL TestnetReceiptScreen + ReceiptFacts with a canned 'verified' verification result (harness, no RPC)",
+   "url": "http://127.0.0.1:4182/?state=verified#/receipt/5042002/0xdba9a4da8a5b2a834b451f595653dd3cb4c3e51addb2d8df8e0b18312f382d2d/0x52599e566fb42fb089c45b92b3e755a17101ca986c3f4cd947482421cf748d83?tx=0x9f2c41d7a8e03b65c1d4f7a92be8036d5a1c7e49b02f8d63a5c1e7094b3d2a68",
+   "page": {
+    "title": "ArcProof — Prototype",
+    "lang": "en",
+    "viewportMeta": "width=device-width, initial-scale=1.0",
+    "h1Count": 1,
+    "landmarks": {
+     "header": 1,
+     "nav": 1,
+     "main": 1,
+     "footer": 1,
+     "aside": 0
+    },
+    "skipLink": true,
+    "hash": "#/receipt/5042002/0xdba9a4da8a5b2a834b451f595653dd3cb4c3e51addb2d8df8e0b18312f382d2d/0x52599e566fb42fb089c45b92b3e755a17101ca986c3f4cd947482421cf748d83?tx=0x9f2c41d7a8e03b65c1d4f7a92be8036d5a1c7e49b02f8d63a5c1e7094b3d2a68",
+    "bodyFont": "system-ui, sans-serif",
+    "fontsLoaded": [
+     "DM Sans:true",
+     "Space Grotesk:false",
+     "JetBrains Mono:true"
+    ]
+   },
+   "overflow": {
+    "innerWidth": 375,
+    "scrollWidth": 375,
+    "overflowX": false,
+    "pageHeight": 2119,
+    "offenders": []
+   },
+   "headings": [
+    {
+     "level": 1,
+     "text": "ArcProof",
+     "y": 69
+    },
+    {
+     "level": 2,
+     "text": "Verify a testnet receipt",
+     "y": 255
+    },
+    {
+     "level": 3,
+     "text": "Verified testnet payment",
+     "y": 789
+    },
+    {
+     "level": 4,
+     "text": "Evidence checked",
+     "y": 1177
+    },
+    {
+     "level": 4,
+     "text": "Next step",
+     "y": 1309
+    }
+   ],
+   "headingProblems": [],
+   "fields": [
+    {
+     "el": "input#live-receipt-id",
+     "type": "text",
+     "label": "Invoice ID",
+     "describedby": null,
+     "autocomplete": null,
+     "inputmode": null,
+     "fontPx": 16,
+     "w": 309,
+     "h": 44,
+     "disabled": false
+    },
+    {
+     "el": "input#live-receipt-tx",
+     "type": "text",
+     "label": "Payment transaction hash (optional)",
+     "describedby": null,
+     "autocomplete": null,
+     "inputmode": null,
+     "fontPx": 16,
+     "w": 309,
+     "h": 44,
+     "disabled": false
+    }
+   ],
+   "targets": [
+    {
+     "el": "a.skip-link",
+     "text": "Skip to main content",
+     "w": 178,
+     "h": 48,
+     "inline": false,
+     "disabled": false
+    },
+    {
+     "el": "button.px-3.py-1.5.rounded-md",
+     "text": "Invoices",
+     "w": 78,
+     "h": 44,
+     "inline": false,
+     "disabled": false
+    },
+    {
+     "el": "button.px-3.py-1.5.rounded-md",
+     "text": "Verify receipt",
+     "w": 113,
+     "h": 44,
+     "inline": false,
+     "disabled": false
+    },
+    {
+     "el": "button.px-3.py-1.5.rounded-md",
+     "text": "Evidence",
+     "w": 85,
+     "h": 44,
+     "inline": false,
+     "disabled": false
+    },
+    {
+     "el": "button.px-3.py-1.5.rounded-md",
+     "text": "Offline demo",
+     "w": 110,
+     "h": 44,
+     "inline": false,
+     "disabled": false
+    },
+    {
+     "el": "input#live-receipt-id",
+     "text": "0x52599e566fb42fb089c45b92b3e755a171",
+     "w": 309,
+     "h": 44,
+     "inline": false,
+     "disabled": false
+    },
+    {
+     "el": "input#live-receipt-tx",
+     "text": "0x9f2c41d7a8e03b65c1d4f7a92be8036d5a",
+     "w": 309,
+     "h": 44,
+     "inline": false,
+     "disabled": false
+    },
+    {
+     "el": "button.rounded-lg.px-4.py-2",
+     "text": "Verify from chain data",
+     "w": 196,
+     "h": 44,
+     "inline": false,
+     "disabled": false
+    },
+    {
+     "el": "summary.cursor-pointer.py-2.font-semibold",
+     "text": "Evidence details and raw receipt",
+     "w": 309,
+     "h": 44,
+     "inline": false,
+     "disabled": false
+    },
+    {
+     "el": "summary.cursor-pointer.font-semibold.py-2",
+     "text": "Individual verification checks",
+     "w": 309,
+     "h": 44,
+     "inline": false,
+     "disabled": false
+    },
+    {
+     "el": "a.block.font-mono.text-xs",
+     "text": "Transaction: 0x9f2c41d7a8e03b65c1d4f",
+     "w": 309,
+     "h": 44,
+     "inline": false,
+     "disabled": false
+    },
+    {
+     "el": "button.underline.py-2",
+     "text": "Copy verification link",
+     "w": 135,
+     "h": 44,
+     "inline": false,
+     "disabled": false
+    },
+    {
+     "el": "a.underline.py-2",
+     "text": "Open verification link",
+     "w": 137,
+     "h": 44,
+     "inline": false,
+     "disabled": false
+    },
+    {
+     "el": "button.underline.py-2",
+     "text": "Export testnet JSON",
+     "w": 132,
+     "h": 44,
+     "inline": false,
+     "disabled": false
+    },
+    {
+     "el": "button.underline.py-2",
+     "text": "Export testnet CSV",
+     "w": 124,
+     "h": 44,
+     "inline": false,
+     "disabled": false
+    },
+    {
+     "el": "button.underline.py-2",
+     "text": "Print",
+     "w": 30,
+     "h": 44,
+     "inline": false,
+     "disabled": false
+    },
+    {
+     "el": "a.underline",
+     "text": "Build identity and evidence",
+     "w": 177,
+     "h": 44,
+     "inline": false,
+     "disabled": false
+    },
+    {
+     "el": "a.studio-attribution",
+     "text": "Built with Arc Studio",
+     "w": 159,
+     "h": 44,
+     "inline": false,
+     "disabled": false
+    }
+   ],
+   "smallTargets": [
+    {
+     "el": "button.underline.py-2",
+     "text": "Print",
+     "w": 30,
+     "h": 44,
+     "inline": false,
+     "disabled": false
+    }
+   ],
+   "tinyTargets": [],
+   "fontSizes": {
+    "chars": 3239,
+    "pctLE12px": 3.7,
+    "pctLT14px": 3.7
+   },
+   "contrastFails": [],
+   "contrastLowestPassing": [
+    {
+     "el": "button.px-3.py-1.5.rounded-md",
+     "text": "Verify receipt",
+     "ratio": 5.2,
+     "need": 4.5,
+     "px": 14,
+     "disabled": false,
+     "fg": "rgb(15,118,110)@1",
+     "bg": "rgb(240,253,250)"
+    },
+    {
+     "el": "button.rounded-lg.px-4.py-2",
+     "text": "Verify from chain data",
+     "ratio": 5.5,
+     "need": 4.5,
+     "px": 16,
+     "disabled": false,
+     "fg": "rgb(255,255,255)@1",
+     "bg": "rgb(15,118,110)"
+    },
+    {
+     "el": "button.px-3.py-1.5.rounded-md",
+     "text": "Invoices",
+     "ratio": 7.6,
+     "need": 4.5,
+     "px": 14,
+     "disabled": false,
+     "fg": "rgb(87,83,78)@1",
+     "bg": "rgb(255,255,255)"
+    },
+    {
+     "el": "button.px-3.py-1.5.rounded-md",
+     "text": "Evidence",
+     "ratio": 7.6,
+     "need": 4.5,
+     "px": 14,
+     "disabled": false,
+     "fg": "rgb(87,83,78)@1",
+     "bg": "rgb(255,255,255)"
+    },
+    {
+     "el": "button.px-3.py-1.5.rounded-md",
+     "text": "Offline demo",
+     "ratio": 7.6,
+     "need": 4.5,
+     "px": 14,
+     "disabled": false,
+     "fg": "rgb(87,83,78)@1",
+     "bg": "rgb(255,255,255)"
+    }
+   ],
+   "placeholderContrast": [],
+   "hashes": [
+    {
+     "el": "p.text-xs.font-mono.break-all",
+     "len": 42,
+     "w": 309,
+     "clientW": 309,
+     "scrollW": 309,
+     "lines": 1,
+     "ws": "normal",
+     "ow": "normal",
+     "wb": "break-all",
+     "textOverflow": "clip",
+     "clippedByEllipsis": false,
+     "pastViewport": false,
+     "fontPx": 12
+    },
+    {
+     "el": "dd.font-mono.break-all",
+     "len": 42,
+     "w": 309,
+     "clientW": 309,
+     "scrollW": 309,
+     "lines": 2,
+     "ws": "normal",
+     "ow": "normal",
+     "wb": "break-all",
+     "textOverflow": "clip",
+     "clippedByEllipsis": false,
+     "pastViewport": false,
+     "fontPx": 14
+    },
+    {
+     "el": "dd.font-mono.break-all",
+     "len": 42,
+     "w": 309,
+     "clientW": 309,
+     "scrollW": 309,
+     "lines": 2,
+     "ws": "normal",
+     "ow": "normal",
+     "wb": "break-all",
+     "textOverflow": "clip",
+     "clippedByEllipsis": false,
+     "pastViewport": false,
+     "fontPx": 14
+    },
+    {
+     "el": "dd",
+     "len": 66,
+     "w": 309,
+     "clientW": 309,
+     "scrollW": 309,
+     "lines": 2,
+     "ws": "normal",
+     "ow": "anywhere",
+     "wb": "break-all",
+     "textOverflow": "clip",
+     "clippedByEllipsis": false,
+     "pastViewport": false,
+     "fontPx": 14
+    },
+    {
+     "el": "dd",
+     "len": 76,
+     "w": 309,
+     "clientW": 309,
+     "scrollW": 309,
+     "lines": 2,
+     "ws": "normal",
+     "ow": "anywhere",
+     "wb": "break-all",
+     "textOverflow": "clip",
+     "clippedByEllipsis": false,
+     "pastViewport": false,
+     "fontPx": 14
+    },
+    {
+     "el": "dd",
+     "len": 42,
+     "w": 309,
+     "clientW": 309,
+     "scrollW": 309,
+     "lines": 2,
+     "ws": "normal",
+     "ow": "anywhere",
+     "wb": "break-all",
+     "textOverflow": "clip",
+     "clippedByEllipsis": false,
+     "pastViewport": false,
+     "fontPx": 14
+    },
+    {
+     "el": "dd",
+     "len": 66,
+     "w": 309,
+     "clientW": 309,
+     "scrollW": 309,
+     "lines": 2,
+     "ws": "normal",
+     "ow": "anywhere",
+     "wb": "break-all",
+     "textOverflow": "clip",
+     "clippedByEllipsis": false,
+     "pastViewport": false,
+     "fontPx": 14
+    },
+    {
+     "el": "dd",
+     "len": 66,
+     "w": 309,
+     "clientW": 309,
+     "scrollW": 309,
+     "lines": 2,
+     "ws": "normal",
+     "ow": "anywhere",
+     "wb": "break-all",
+     "textOverflow": "clip",
+     "clippedByEllipsis": false,
+     "pastViewport": false,
+     "fontPx": 14
+    },
+    {
+     "el": "dd",
+     "len": 66,
+     "w": 309,
+     "clientW": 309,
+     "scrollW": 309,
+     "lines": 2,
+     "ws": "normal",
+     "ow": "anywhere",
+     "wb": "break-all",
+     "textOverflow": "clip",
+     "clippedByEllipsis": false,
+     "pastViewport": false,
+     "fontPx": 14
+    },
+    {
+     "el": "a.block.font-mono.text-xs",
+     "len": 79,
+     "w": 309,
+     "clientW": 309,
+     "scrollW": 309,
+     "lines": 3,
+     "ws": "normal",
+     "ow": "anywhere",
+     "wb": "break-all",
+     "textOverflow": "clip",
+     "clippedByEllipsis": false,
+     "pastViewport": false,
+     "fontPx": 12
+    }
+   ],
+   "liveRegions": [
+    {
+     "role": "status",
+     "text": "Verified testnet payment"
+    },
+    {
+     "role": "aria-live",
+     "text": "Notifications alt+T"
+    }
+   ],
+   "fold": {
+    "vh": 812,
+    "wordsAboveFold": 89,
+    "wordsTotal": 401,
+    "primaryButton": {
+     "text": "Verify from chain data",
+     "top": 663,
+     "bottom": 707,
+     "disabled": false,
+     "aboveFold": true
+    },
+    "bannerText": "Arc Testnet (5042002) · test USDC, no monetary value · mainnet disabled · not audited",
+    "firstH2": "Verify a testnet receipt",
+    "firstH2Top": 255
+   },
+   "docTitleIsRouteSpecific": "ArcProof — Prototype",
+   "activeElement": "body Skip to main content Arc",
+   "console": [
+    "log.error: Failed to load resource: the server responded with a status of 404 (Not Found) http://127.0.0.1:4182/favicon.ico"
+   ]
+  },
+  "receipt-verified@768": {
+   "note": "REAL TestnetReceiptScreen + ReceiptFacts with a canned 'verified' verification result (harness, no RPC)",
+   "url": "http://127.0.0.1:4182/?state=verified#/receipt/5042002/0xdba9a4da8a5b2a834b451f595653dd3cb4c3e51addb2d8df8e0b18312f382d2d/0x52599e566fb42fb089c45b92b3e755a17101ca986c3f4cd947482421cf748d83?tx=0x9f2c41d7a8e03b65c1d4f7a92be8036d5a1c7e49b02f8d63a5c1e7094b3d2a68",
+   "page": {
+    "title": "ArcProof — Prototype",
+    "lang": "en",
+    "viewportMeta": "width=device-width, initial-scale=1.0",
+    "h1Count": 1,
+    "landmarks": {
+     "header": 1,
+     "nav": 1,
+     "main": 1,
+     "footer": 1,
+     "aside": 0
+    },
+    "skipLink": true,
+    "hash": "#/receipt/5042002/0xdba9a4da8a5b2a834b451f595653dd3cb4c3e51addb2d8df8e0b18312f382d2d/0x52599e566fb42fb089c45b92b3e755a17101ca986c3f4cd947482421cf748d83?tx=0x9f2c41d7a8e03b65c1d4f7a92be8036d5a1c7e49b02f8d63a5c1e7094b3d2a68",
+    "bodyFont": "system-ui, sans-serif",
+    "fontsLoaded": [
+     "DM Sans:true",
+     "Space Grotesk:false",
+     "JetBrains Mono:true"
+    ]
+   },
+   "overflow": {
+    "innerWidth": 768,
+    "scrollWidth": 753,
+    "overflowX": false,
+    "pageHeight": 1643,
+    "offenders": []
+   },
+   "headings": [
+    {
+     "level": 1,
+     "text": "ArcProof",
+     "y": 51
+    },
+    {
+     "level": 2,
+     "text": "Verify a testnet receipt",
+     "y": 143
+    },
+    {
+     "level": 3,
+     "text": "Verified testnet payment",
+     "y": 633
+    },
+    {
+     "level": 4,
+     "text": "Evidence checked",
+     "y": 969
+    },
+    {
+     "level": 4,
+     "text": "Next step",
+     "y": 1081
+    }
+   ],
+   "headingProblems": [],
+   "fields": [
+    {
+     "el": "input#live-receipt-id",
+     "type": "text",
+     "label": "Invoice ID",
+     "describedby": null,
+     "autocomplete": null,
+     "inputmode": null,
+     "fontPx": 16,
+     "w": 622,
+     "h": 44,
+     "disabled": false
+    },
+    {
+     "el": "input#live-receipt-tx",
+     "type": "text",
+     "label": "Payment transaction hash (optional)",
+     "describedby": null,
+     "autocomplete": null,
+     "inputmode": null,
+     "fontPx": 16,
+     "w": 622,
+     "h": 44,
+     "disabled": false
+    }
+   ],
+   "targets": [
+    {
+     "el": "a.skip-link",
+     "text": "Skip to main content",
+     "w": 178,
+     "h": 48,
+     "inline": false,
+     "disabled": false
+    },
+    {
+     "el": "button.px-3.py-1.5.rounded-md",
+     "text": "Invoices",
+     "w": 78,
+     "h": 44,
+     "inline": false,
+     "disabled": false
+    },
+    {
+     "el": "button.px-3.py-1.5.rounded-md",
+     "text": "Verify receipt",
+     "w": 113,
+     "h": 44,
+     "inline": false,
+     "disabled": false
+    },
+    {
+     "el": "button.px-3.py-1.5.rounded-md",
+     "text": "Evidence",
+     "w": 85,
+     "h": 44,
+     "inline": false,
+     "disabled": false
+    },
+    {
+     "el": "button.px-3.py-1.5.rounded-md",
+     "text": "Offline demo",
+     "w": 110,
+     "h": 44,
+     "inline": false,
+     "disabled": false
+    },
+    {
+     "el": "input#live-receipt-id",
+     "text": "0x52599e566fb42fb089c45b92b3e755a171",
+     "w": 622,
+     "h": 44,
+     "inline": false,
+     "disabled": false
+    },
+    {
+     "el": "input#live-receipt-tx",
+     "text": "0x9f2c41d7a8e03b65c1d4f7a92be8036d5a",
+     "w": 622,
+     "h": 44,
+     "inline": false,
+     "disabled": false
+    },
+    {
+     "el": "button.rounded-lg.px-4.py-2",
+     "text": "Verify from chain data",
+     "w": 196,
+     "h": 44,
+     "inline": false,
+     "disabled": false
+    },
+    {
+     "el": "summary.cursor-pointer.py-2.font-semibold",
+     "text": "Evidence details and raw receipt",
+     "w": 622,
+     "h": 44,
+     "inline": false,
+     "disabled": false
+    },
+    {
+     "el": "summary.cursor-pointer.font-semibold.py-2",
+     "text": "Individual verification checks",
+     "w": 622,
+     "h": 44,
+     "inline": false,
+     "disabled": false
+    },
+    {
+     "el": "a.block.font-mono.text-xs",
+     "text": "Transaction: 0x9f2c41d7a8e03b65c1d4f",
+     "w": 622,
+     "h": 44,
+     "inline": false,
+     "disabled": false
+    },
+    {
+     "el": "button.underline.py-2",
+     "text": "Copy verification link",
+     "w": 135,
+     "h": 44,
+     "inline": false,
+     "disabled": false
+    },
+    {
+     "el": "a.underline.py-2",
+     "text": "Open verification link",
+     "w": 137,
+     "h": 44,
+     "inline": false,
+     "disabled": false
+    },
+    {
+     "el": "button.underline.py-2",
+     "text": "Export testnet JSON",
+     "w": 132,
+     "h": 44,
+     "inline": false,
+     "disabled": false
+    },
+    {
+     "el": "button.underline.py-2",
+     "text": "Export testnet CSV",
+     "w": 124,
+     "h": 44,
+     "inline": false,
+     "disabled": false
+    },
+    {
+     "el": "button.underline.py-2",
+     "text": "Print",
+     "w": 30,
+     "h": 44,
+     "inline": false,
+     "disabled": false
+    },
+    {
+     "el": "a.underline",
+     "text": "Build identity and evidence",
+     "w": 177,
+     "h": 44,
+     "inline": false,
+     "disabled": false
+    },
+    {
+     "el": "a.studio-attribution",
+     "text": "Built with Arc Studio",
+     "w": 159,
+     "h": 44,
+     "inline": false,
+     "disabled": false
+    }
+   ],
+   "smallTargets": [
+    {
+     "el": "button.underline.py-2",
+     "text": "Print",
+     "w": 30,
+     "h": 44,
+     "inline": false,
+     "disabled": false
+    }
+   ],
+   "tinyTargets": [],
+   "fontSizes": {
+    "chars": 3239,
+    "pctLE12px": 3.7,
+    "pctLT14px": 3.7
+   },
+   "contrastFails": [],
+   "contrastLowestPassing": [
+    {
+     "el": "button.px-3.py-1.5.rounded-md",
+     "text": "Verify receipt",
+     "ratio": 5.2,
+     "need": 4.5,
+     "px": 14,
+     "disabled": false,
+     "fg": "rgb(15,118,110)@1",
+     "bg": "rgb(240,253,250)"
+    },
+    {
+     "el": "button.rounded-lg.px-4.py-2",
+     "text": "Verify from chain data",
+     "ratio": 5.5,
+     "need": 4.5,
+     "px": 16,
+     "disabled": false,
+     "fg": "rgb(255,255,255)@1",
+     "bg": "rgb(15,118,110)"
+    },
+    {
+     "el": "button.px-3.py-1.5.rounded-md",
+     "text": "Invoices",
+     "ratio": 7.6,
+     "need": 4.5,
+     "px": 14,
+     "disabled": false,
+     "fg": "rgb(87,83,78)@1",
+     "bg": "rgb(255,255,255)"
+    },
+    {
+     "el": "button.px-3.py-1.5.rounded-md",
+     "text": "Evidence",
+     "ratio": 7.6,
+     "need": 4.5,
+     "px": 14,
+     "disabled": false,
+     "fg": "rgb(87,83,78)@1",
+     "bg": "rgb(255,255,255)"
+    },
+    {
+     "el": "button.px-3.py-1.5.rounded-md",
+     "text": "Offline demo",
+     "ratio": 7.6,
+     "need": 4.5,
+     "px": 14,
+     "disabled": false,
+     "fg": "rgb(87,83,78)@1",
+     "bg": "rgb(255,255,255)"
+    }
+   ],
+   "placeholderContrast": [],
+   "hashes": [
+    {
+     "el": "p.text-xs.font-mono.break-all",
+     "len": 42,
+     "w": 622,
+     "clientW": 622,
+     "scrollW": 622,
+     "lines": 1,
+     "ws": "normal",
+     "ow": "normal",
+     "wb": "break-all",
+     "textOverflow": "clip",
+     "clippedByEllipsis": false,
+     "pastViewport": false,
+     "fontPx": 12
+    },
+    {
+     "el": "dd.font-mono.break-all",
+     "len": 42,
+     "w": 622,
+     "clientW": 622,
+     "scrollW": 622,
+     "lines": 1,
+     "ws": "normal",
+     "ow": "normal",
+     "wb": "break-all",
+     "textOverflow": "clip",
+     "clippedByEllipsis": false,
+     "pastViewport": false,
+     "fontPx": 14
+    },
+    {
+     "el": "dd.font-mono.break-all",
+     "len": 42,
+     "w": 622,
+     "clientW": 622,
+     "scrollW": 622,
+     "lines": 1,
+     "ws": "normal",
+     "ow": "normal",
+     "wb": "break-all",
+     "textOverflow": "clip",
+     "clippedByEllipsis": false,
+     "pastViewport": false,
+     "fontPx": 14
+    },
+    {
+     "el": "dd",
+     "len": 66,
+     "w": 622,
+     "clientW": 622,
+     "scrollW": 622,
+     "lines": 1,
+     "ws": "normal",
+     "ow": "anywhere",
+     "wb": "break-all",
+     "textOverflow": "clip",
+     "clippedByEllipsis": false,
+     "pastViewport": false,
+     "fontPx": 14
+    },
+    {
+     "el": "dd",
+     "len": 76,
+     "w": 622,
+     "clientW": 622,
+     "scrollW": 622,
+     "lines": 1,
+     "ws": "normal",
+     "ow": "anywhere",
+     "wb": "break-all",
+     "textOverflow": "clip",
+     "clippedByEllipsis": false,
+     "pastViewport": false,
+     "fontPx": 14
+    },
+    {
+     "el": "dd",
+     "len": 42,
+     "w": 622,
+     "clientW": 622,
+     "scrollW": 622,
+     "lines": 1,
+     "ws": "normal",
+     "ow": "anywhere",
+     "wb": "break-all",
+     "textOverflow": "clip",
+     "clippedByEllipsis": false,
+     "pastViewport": false,
+     "fontPx": 14
+    },
+    {
+     "el": "dd",
+     "len": 66,
+     "w": 622,
+     "clientW": 622,
+     "scrollW": 622,
+     "lines": 1,
+     "ws": "normal",
+     "ow": "anywhere",
+     "wb": "break-all",
+     "textOverflow": "clip",
+     "clippedByEllipsis": false,
+     "pastViewport": false,
+     "fontPx": 14
+    },
+    {
+     "el": "dd",
+     "len": 66,
+     "w": 622,
+     "clientW": 622,
+     "scrollW": 622,
+     "lines": 1,
+     "ws": "normal",
+     "ow": "anywhere",
+     "wb": "break-all",
+     "textOverflow": "clip",
+     "clippedByEllipsis": false,
+     "pastViewport": false,
+     "fontPx": 14
+    },
+    {
+     "el": "dd",
+     "len": 66,
+     "w": 622,
+     "clientW": 622,
+     "scrollW": 622,
+     "lines": 1,
+     "ws": "normal",
+     "ow": "anywhere",
+     "wb": "break-all",
+     "textOverflow": "clip",
+     "clippedByEllipsis": false,
+     "pastViewport": false,
+     "fontPx": 14
+    },
+    {
+     "el": "a.block.font-mono.text-xs",
+     "len": 79,
+     "w": 622,
+     "clientW": 622,
+     "scrollW": 622,
+     "lines": 3,
+     "ws": "normal",
+     "ow": "anywhere",
+     "wb": "break-all",
+     "textOverflow": "clip",
+     "clippedByEllipsis": false,
+     "pastViewport": false,
+     "fontPx": 12
+    }
+   ],
+   "liveRegions": [
+    {
+     "role": "status",
+     "text": "Verified testnet payment"
+    },
+    {
+     "role": "aria-live",
+     "text": "Notifications alt+T"
+    }
+   ],
+   "fold": {
+    "vh": 1024,
+    "wordsAboveFold": 123,
+    "wordsTotal": 401,
+    "primaryButton": {
+     "text": "Verify from chain data",
+     "top": 491,
+     "bottom": 535,
+     "disabled": false,
+     "aboveFold": true
+    },
+    "bannerText": "Arc Testnet (5042002) · test USDC, no monetary value · mainnet disabled · not audited",
+    "firstH2": "Verify a testnet receipt",
+    "firstH2Top": 143
+   },
+   "docTitleIsRouteSpecific": "ArcProof — Prototype",
+   "activeElement": "body Skip to main content Arc",
+   "console": []
+  },
+  "receipt-verified@1440": {
+   "note": "REAL TestnetReceiptScreen + ReceiptFacts with a canned 'verified' verification result (harness, no RPC)",
+   "url": "http://127.0.0.1:4182/?state=verified#/receipt/5042002/0xdba9a4da8a5b2a834b451f595653dd3cb4c3e51addb2d8df8e0b18312f382d2d/0x52599e566fb42fb089c45b92b3e755a17101ca986c3f4cd947482421cf748d83?tx=0x9f2c41d7a8e03b65c1d4f7a92be8036d5a1c7e49b02f8d63a5c1e7094b3d2a68",
+   "page": {
+    "title": "ArcProof — Prototype",
+    "lang": "en",
+    "viewportMeta": "width=device-width, initial-scale=1.0",
+    "h1Count": 1,
+    "landmarks": {
+     "header": 1,
+     "nav": 1,
+     "main": 1,
+     "footer": 1,
+     "aside": 0
+    },
+    "skipLink": true,
+    "hash": "#/receipt/5042002/0xdba9a4da8a5b2a834b451f595653dd3cb4c3e51addb2d8df8e0b18312f382d2d/0x52599e566fb42fb089c45b92b3e755a17101ca986c3f4cd947482421cf748d83?tx=0x9f2c41d7a8e03b65c1d4f7a92be8036d5a1c7e49b02f8d63a5c1e7094b3d2a68",
+    "bodyFont": "system-ui, sans-serif",
+    "fontsLoaded": [
+     "DM Sans:true",
+     "Space Grotesk:false",
+     "JetBrains Mono:true"
+    ]
+   },
+   "overflow": {
+    "innerWidth": 1440,
+    "scrollWidth": 1425,
+    "overflowX": false,
+    "pageHeight": 1643,
+    "offenders": []
+   },
+   "headings": [
+    {
+     "level": 1,
+     "text": "ArcProof",
+     "y": 51
+    },
+    {
+     "level": 2,
+     "text": "Verify a testnet receipt",
+     "y": 143
+    },
+    {
+     "level": 3,
+     "text": "Verified testnet payment",
+     "y": 633
+    },
+    {
+     "level": 4,
+     "text": "Evidence checked",
+     "y": 969
+    },
+    {
+     "level": 4,
+     "text": "Next step",
+     "y": 1081
+    }
+   ],
+   "headingProblems": [],
+   "fields": [
+    {
+     "el": "input#live-receipt-id",
+     "type": "text",
+     "label": "Invoice ID",
+     "describedby": null,
+     "autocomplete": null,
+     "inputmode": null,
+     "fontPx": 16,
+     "w": 622,
+     "h": 44,
+     "disabled": false
+    },
+    {
+     "el": "input#live-receipt-tx",
+     "type": "text",
+     "label": "Payment transaction hash (optional)",
+     "describedby": null,
+     "autocomplete": null,
+     "inputmode": null,
+     "fontPx": 16,
+     "w": 622,
+     "h": 44,
+     "disabled": false
+    }
+   ],
+   "targets": [
+    {
+     "el": "a.skip-link",
+     "text": "Skip to main content",
+     "w": 178,
+     "h": 48,
+     "inline": false,
+     "disabled": false
+    },
+    {
+     "el": "button.px-3.py-1.5.rounded-md",
+     "text": "Invoices",
+     "w": 78,
+     "h": 44,
+     "inline": false,
+     "disabled": false
+    },
+    {
+     "el": "button.px-3.py-1.5.rounded-md",
+     "text": "Verify receipt",
+     "w": 113,
+     "h": 44,
+     "inline": false,
+     "disabled": false
+    },
+    {
+     "el": "button.px-3.py-1.5.rounded-md",
+     "text": "Evidence",
+     "w": 85,
+     "h": 44,
+     "inline": false,
+     "disabled": false
+    },
+    {
+     "el": "button.px-3.py-1.5.rounded-md",
+     "text": "Offline demo",
+     "w": 110,
+     "h": 44,
+     "inline": false,
+     "disabled": false
+    },
+    {
+     "el": "input#live-receipt-id",
+     "text": "0x52599e566fb42fb089c45b92b3e755a171",
+     "w": 622,
+     "h": 44,
+     "inline": false,
+     "disabled": false
+    },
+    {
+     "el": "input#live-receipt-tx",
+     "text": "0x9f2c41d7a8e03b65c1d4f7a92be8036d5a",
+     "w": 622,
+     "h": 44,
+     "inline": false,
+     "disabled": false
+    },
+    {
+     "el": "button.rounded-lg.px-4.py-2",
+     "text": "Verify from chain data",
+     "w": 196,
+     "h": 44,
+     "inline": false,
+     "disabled": false
+    },
+    {
+     "el": "summary.cursor-pointer.py-2.font-semibold",
+     "text": "Evidence details and raw receipt",
+     "w": 622,
+     "h": 44,
+     "inline": false,
+     "disabled": false
+    },
+    {
+     "el": "summary.cursor-pointer.font-semibold.py-2",
+     "text": "Individual verification checks",
+     "w": 622,
+     "h": 44,
+     "inline": false,
+     "disabled": false
+    },
+    {
+     "el": "a.block.font-mono.text-xs",
+     "text": "Transaction: 0x9f2c41d7a8e03b65c1d4f",
+     "w": 622,
+     "h": 44,
+     "inline": false,
+     "disabled": false
+    },
+    {
+     "el": "button.underline.py-2",
+     "text": "Copy verification link",
+     "w": 135,
+     "h": 44,
+     "inline": false,
+     "disabled": false
+    },
+    {
+     "el": "a.underline.py-2",
+     "text": "Open verification link",
+     "w": 137,
+     "h": 44,
+     "inline": false,
+     "disabled": false
+    },
+    {
+     "el": "button.underline.py-2",
+     "text": "Export testnet JSON",
+     "w": 132,
+     "h": 44,
+     "inline": false,
+     "disabled": false
+    },
+    {
+     "el": "button.underline.py-2",
+     "text": "Export testnet CSV",
+     "w": 124,
+     "h": 44,
+     "inline": false,
+     "disabled": false
+    },
+    {
+     "el": "button.underline.py-2",
+     "text": "Print",
+     "w": 30,
+     "h": 44,
+     "inline": false,
+     "disabled": false
+    },
+    {
+     "el": "a.underline",
+     "text": "Build identity and evidence",
+     "w": 177,
+     "h": 44,
+     "inline": false,
+     "disabled": false
+    },
+    {
+     "el": "a.studio-attribution",
+     "text": "Built with Arc Studio",
+     "w": 159,
+     "h": 44,
+     "inline": false,
+     "disabled": false
+    }
+   ],
+   "smallTargets": [
+    {
+     "el": "button.underline.py-2",
+     "text": "Print",
+     "w": 30,
+     "h": 44,
+     "inline": false,
+     "disabled": false
+    }
+   ],
+   "tinyTargets": [],
+   "fontSizes": {
+    "chars": 3239,
+    "pctLE12px": 3.7,
+    "pctLT14px": 3.7
+   },
+   "contrastFails": [],
+   "contrastLowestPassing": [
+    {
+     "el": "button.px-3.py-1.5.rounded-md",
+     "text": "Verify receipt",
+     "ratio": 5.2,
+     "need": 4.5,
+     "px": 14,
+     "disabled": false,
+     "fg": "rgb(15,118,110)@1",
+     "bg": "rgb(240,253,250)"
+    },
+    {
+     "el": "button.rounded-lg.px-4.py-2",
+     "text": "Verify from chain data",
+     "ratio": 5.5,
+     "need": 4.5,
+     "px": 16,
+     "disabled": false,
+     "fg": "rgb(255,255,255)@1",
+     "bg": "rgb(15,118,110)"
+    },
+    {
+     "el": "button.px-3.py-1.5.rounded-md",
+     "text": "Invoices",
+     "ratio": 7.6,
+     "need": 4.5,
+     "px": 14,
+     "disabled": false,
+     "fg": "rgb(87,83,78)@1",
+     "bg": "rgb(255,255,255)"
+    },
+    {
+     "el": "button.px-3.py-1.5.rounded-md",
+     "text": "Evidence",
+     "ratio": 7.6,
+     "need": 4.5,
+     "px": 14,
+     "disabled": false,
+     "fg": "rgb(87,83,78)@1",
+     "bg": "rgb(255,255,255)"
+    },
+    {
+     "el": "button.px-3.py-1.5.rounded-md",
+     "text": "Offline demo",
+     "ratio": 7.6,
+     "need": 4.5,
+     "px": 14,
+     "disabled": false,
+     "fg": "rgb(87,83,78)@1",
+     "bg": "rgb(255,255,255)"
+    }
+   ],
+   "placeholderContrast": [],
+   "hashes": [
+    {
+     "el": "p.text-xs.font-mono.break-all",
+     "len": 42,
+     "w": 622,
+     "clientW": 622,
+     "scrollW": 622,
+     "lines": 1,
+     "ws": "normal",
+     "ow": "normal",
+     "wb": "break-all",
+     "textOverflow": "clip",
+     "clippedByEllipsis": false,
+     "pastViewport": false,
+     "fontPx": 12
+    },
+    {
+     "el": "dd.font-mono.break-all",
+     "len": 42,
+     "w": 622,
+     "clientW": 622,
+     "scrollW": 622,
+     "lines": 1,
+     "ws": "normal",
+     "ow": "normal",
+     "wb": "break-all",
+     "textOverflow": "clip",
+     "clippedByEllipsis": false,
+     "pastViewport": false,
+     "fontPx": 14
+    },
+    {
+     "el": "dd.font-mono.break-all",
+     "len": 42,
+     "w": 622,
+     "clientW": 622,
+     "scrollW": 622,
+     "lines": 1,
+     "ws": "normal",
+     "ow": "normal",
+     "wb": "break-all",
+     "textOverflow": "clip",
+     "clippedByEllipsis": false,
+     "pastViewport": false,
+     "fontPx": 14
+    },
+    {
+     "el": "dd",
+     "len": 66,
+     "w": 622,
+     "clientW": 622,
+     "scrollW": 622,
+     "lines": 1,
+     "ws": "normal",
+     "ow": "anywhere",
+     "wb": "break-all",
+     "textOverflow": "clip",
+     "clippedByEllipsis": false,
+     "pastViewport": false,
+     "fontPx": 14
+    },
+    {
+     "el": "dd",
+     "len": 76,
+     "w": 622,
+     "clientW": 622,
+     "scrollW": 622,
+     "lines": 1,
+     "ws": "normal",
+     "ow": "anywhere",
+     "wb": "break-all",
+     "textOverflow": "clip",
+     "clippedByEllipsis": false,
+     "pastViewport": false,
+     "fontPx": 14
+    },
+    {
+     "el": "dd",
+     "len": 42,
+     "w": 622,
+     "clientW": 622,
+     "scrollW": 622,
+     "lines": 1,
+     "ws": "normal",
+     "ow": "anywhere",
+     "wb": "break-all",
+     "textOverflow": "clip",
+     "clippedByEllipsis": false,
+     "pastViewport": false,
+     "fontPx": 14
+    },
+    {
+     "el": "dd",
+     "len": 66,
+     "w": 622,
+     "clientW": 622,
+     "scrollW": 622,
+     "lines": 1,
+     "ws": "normal",
+     "ow": "anywhere",
+     "wb": "break-all",
+     "textOverflow": "clip",
+     "clippedByEllipsis": false,
+     "pastViewport": false,
+     "fontPx": 14
+    },
+    {
+     "el": "dd",
+     "len": 66,
+     "w": 622,
+     "clientW": 622,
+     "scrollW": 622,
+     "lines": 1,
+     "ws": "normal",
+     "ow": "anywhere",
+     "wb": "break-all",
+     "textOverflow": "clip",
+     "clippedByEllipsis": false,
+     "pastViewport": false,
+     "fontPx": 14
+    },
+    {
+     "el": "dd",
+     "len": 66,
+     "w": 622,
+     "clientW": 622,
+     "scrollW": 622,
+     "lines": 1,
+     "ws": "normal",
+     "ow": "anywhere",
+     "wb": "break-all",
+     "textOverflow": "clip",
+     "clippedByEllipsis": false,
+     "pastViewport": false,
+     "fontPx": 14
+    },
+    {
+     "el": "a.block.font-mono.text-xs",
+     "len": 79,
+     "w": 622,
+     "clientW": 622,
+     "scrollW": 622,
+     "lines": 3,
+     "ws": "normal",
+     "ow": "anywhere",
+     "wb": "break-all",
+     "textOverflow": "clip",
+     "clippedByEllipsis": false,
+     "pastViewport": false,
+     "fontPx": 12
+    }
+   ],
+   "liveRegions": [
+    {
+     "role": "status",
+     "text": "Verified testnet payment"
+    },
+    {
+     "role": "aria-live",
+     "text": "Notifications alt+T"
+    }
+   ],
+   "fold": {
+    "vh": 900,
+    "wordsAboveFold": 103,
+    "wordsTotal": 401,
+    "primaryButton": {
+     "text": "Verify from chain data",
+     "top": 491,
+     "bottom": 535,
+     "disabled": false,
+     "aboveFold": true
+    },
+    "bannerText": "Arc Testnet (5042002) · test USDC, no monetary value · mainnet disabled · not audited",
+    "firstH2": "Verify a testnet receipt",
+    "firstH2Top": 143
+   },
+   "docTitleIsRouteSpecific": "ArcProof — Prototype",
+   "activeElement": "body Skip to main content Arc",
+   "console": []
+  },
+  "receipt-incomplete@375": {
+   "note": "REAL TestnetReceiptScreen + ReceiptFacts with a canned 'incomplete' verification result (harness, no RPC)",
+   "url": "http://127.0.0.1:4182/?state=incomplete#/receipt/5042002/0xdba9a4da8a5b2a834b451f595653dd3cb4c3e51addb2d8df8e0b18312f382d2d/0x52599e566fb42fb089c45b92b3e755a17101ca986c3f4cd947482421cf748d83?tx=0x9f2c41d7a8e03b65c1d4f7a92be8036d5a1c7e49b02f8d63a5c1e7094b3d2a68",
+   "page": {
+    "title": "ArcProof — Prototype",
+    "lang": "en",
+    "viewportMeta": "width=device-width, initial-scale=1.0",
+    "h1Count": 1,
+    "landmarks": {
+     "header": 1,
+     "nav": 1,
+     "main": 1,
+     "footer": 1,
+     "aside": 0
+    },
+    "skipLink": true,
+    "hash": "#/receipt/5042002/0xdba9a4da8a5b2a834b451f595653dd3cb4c3e51addb2d8df8e0b18312f382d2d/0x52599e566fb42fb089c45b92b3e755a17101ca986c3f4cd947482421cf748d83?tx=0x9f2c41d7a8e03b65c1d4f7a92be8036d5a1c7e49b02f8d63a5c1e7094b3d2a68",
+    "bodyFont": "system-ui, sans-serif",
+    "fontsLoaded": [
+     "DM Sans:true",
+     "Space Grotesk:false",
+     "JetBrains Mono:true"
+    ]
+   },
+   "overflow": {
+    "innerWidth": 375,
+    "scrollWidth": 375,
+    "overflowX": false,
+    "pageHeight": 2243,
+    "offenders": []
+   },
+   "headings": [
+    {
+     "level": 1,
+     "text": "ArcProof",
+     "y": 69
+    },
+    {
+     "level": 2,
+     "text": "Verify a testnet receipt",
+     "y": 255
+    },
+    {
+     "level": 3,
+     "text": "Standard checks passed; settlement evidence incomplete",
+     "y": 789
+    },
+    {
+     "level": 4,
+     "text": "Evidence checked",
+     "y": 1253
+    },
+    {
+     "level": 4,
+     "text": "Next step",
+     "y": 1385
+    }
+   ],
+   "headingProblems": [],
+   "fields": [
+    {
+     "el": "input#live-receipt-id",
+     "type": "text",
+     "label": "Invoice ID",
+     "describedby": null,
+     "autocomplete": null,
+     "inputmode": null,
+     "fontPx": 16,
+     "w": 309,
+     "h": 44,
+     "disabled": false
+    },
+    {
+     "el": "input#live-receipt-tx",
+     "type": "text",
+     "label": "Payment transaction hash (optional)",
+     "describedby": null,
+     "autocomplete": null,
+     "inputmode": null,
+     "fontPx": 16,
+     "w": 309,
+     "h": 44,
+     "disabled": false
+    }
+   ],
+   "targets": [
+    {
+     "el": "a.skip-link",
+     "text": "Skip to main content",
+     "w": 178,
+     "h": 48,
+     "inline": false,
+     "disabled": false
+    },
+    {
+     "el": "button.px-3.py-1.5.rounded-md",
+     "text": "Invoices",
+     "w": 78,
+     "h": 44,
+     "inline": false,
+     "disabled": false
+    },
+    {
+     "el": "button.px-3.py-1.5.rounded-md",
+     "text": "Verify receipt",
+     "w": 113,
+     "h": 44,
+     "inline": false,
+     "disabled": false
+    },
+    {
+     "el": "button.px-3.py-1.5.rounded-md",
+     "text": "Evidence",
+     "w": 85,
+     "h": 44,
+     "inline": false,
+     "disabled": false
+    },
+    {
+     "el": "button.px-3.py-1.5.rounded-md",
+     "text": "Offline demo",
+     "w": 110,
+     "h": 44,
+     "inline": false,
+     "disabled": false
+    },
+    {
+     "el": "input#live-receipt-id",
+     "text": "0x52599e566fb42fb089c45b92b3e755a171",
+     "w": 309,
+     "h": 44,
+     "inline": false,
+     "disabled": false
+    },
+    {
+     "el": "input#live-receipt-tx",
+     "text": "0x9f2c41d7a8e03b65c1d4f7a92be8036d5a",
+     "w": 309,
+     "h": 44,
+     "inline": false,
+     "disabled": false
+    },
+    {
+     "el": "button.rounded-lg.px-4.py-2",
+     "text": "Verify from chain data",
+     "w": 196,
+     "h": 44,
+     "inline": false,
+     "disabled": false
+    },
+    {
+     "el": "summary.cursor-pointer.py-2.font-semibold",
+     "text": "Evidence details and raw receipt",
+     "w": 309,
+     "h": 44,
+     "inline": false,
+     "disabled": false
+    },
+    {
+     "el": "summary.cursor-pointer.font-semibold.py-2",
+     "text": "Individual verification checks",
+     "w": 309,
+     "h": 44,
+     "inline": false,
+     "disabled": false
+    },
+    {
+     "el": "a.block.font-mono.text-xs",
+     "text": "Transaction: 0x9f2c41d7a8e03b65c1d4f",
+     "w": 309,
+     "h": 44,
+     "inline": false,
+     "disabled": false
+    },
+    {
+     "el": "button.underline.py-2",
+     "text": "Copy verification link",
+     "w": 135,
+     "h": 44,
+     "inline": false,
+     "disabled": false
+    },
+    {
+     "el": "a.underline.py-2",
+     "text": "Open verification link",
+     "w": 137,
+     "h": 44,
+     "inline": false,
+     "disabled": false
+    },
+    {
+     "el": "button.underline.py-2",
+     "text": "Export testnet JSON",
+     "w": 132,
+     "h": 44,
+     "inline": false,
+     "disabled": false
+    },
+    {
+     "el": "button.underline.py-2",
+     "text": "Export testnet CSV",
+     "w": 124,
+     "h": 44,
+     "inline": false,
+     "disabled": false
+    },
+    {
+     "el": "button.underline.py-2",
+     "text": "Print",
+     "w": 30,
+     "h": 44,
+     "inline": false,
+     "disabled": false
+    },
+    {
+     "el": "a.underline",
+     "text": "Build identity and evidence",
+     "w": 177,
+     "h": 44,
+     "inline": false,
+     "disabled": false
+    },
+    {
+     "el": "a.studio-attribution",
+     "text": "Built with Arc Studio",
+     "w": 159,
+     "h": 44,
+     "inline": false,
+     "disabled": false
+    }
+   ],
+   "smallTargets": [
+    {
+     "el": "button.underline.py-2",
+     "text": "Print",
+     "w": 30,
+     "h": 44,
+     "inline": false,
+     "disabled": false
+    }
+   ],
+   "tinyTargets": [],
+   "fontSizes": {
+    "chars": 3498,
+    "pctLE12px": 3.4,
+    "pctLT14px": 3.4
+   },
+   "contrastFails": [],
+   "contrastLowestPassing": [
+    {
+     "el": "button.px-3.py-1.5.rounded-md",
+     "text": "Verify receipt",
+     "ratio": 5.2,
+     "need": 4.5,
+     "px": 14,
+     "disabled": false,
+     "fg": "rgb(15,118,110)@1",
+     "bg": "rgb(240,253,250)"
+    },
+    {
+     "el": "button.rounded-lg.px-4.py-2",
+     "text": "Verify from chain data",
+     "ratio": 5.5,
+     "need": 4.5,
+     "px": 16,
+     "disabled": false,
+     "fg": "rgb(255,255,255)@1",
+     "bg": "rgb(15,118,110)"
+    },
+    {
+     "el": "button.px-3.py-1.5.rounded-md",
+     "text": "Invoices",
+     "ratio": 7.6,
+     "need": 4.5,
+     "px": 14,
+     "disabled": false,
+     "fg": "rgb(87,83,78)@1",
+     "bg": "rgb(255,255,255)"
+    },
+    {
+     "el": "button.px-3.py-1.5.rounded-md",
+     "text": "Evidence",
+     "ratio": 7.6,
+     "need": 4.5,
+     "px": 14,
+     "disabled": false,
+     "fg": "rgb(87,83,78)@1",
+     "bg": "rgb(255,255,255)"
+    },
+    {
+     "el": "button.px-3.py-1.5.rounded-md",
+     "text": "Offline demo",
+     "ratio": 7.6,
+     "need": 4.5,
+     "px": 14,
+     "disabled": false,
+     "fg": "rgb(87,83,78)@1",
+     "bg": "rgb(255,255,255)"
+    }
+   ],
+   "placeholderContrast": [],
+   "hashes": [
+    {
+     "el": "p.text-xs.font-mono.break-all",
+     "len": 42,
+     "w": 309,
+     "clientW": 309,
+     "scrollW": 309,
+     "lines": 1,
+     "ws": "normal",
+     "ow": "normal",
+     "wb": "break-all",
+     "textOverflow": "clip",
+     "clippedByEllipsis": false,
+     "pastViewport": false,
+     "fontPx": 12
+    },
+    {
+     "el": "dd.font-mono.break-all",
+     "len": 42,
+     "w": 309,
+     "clientW": 309,
+     "scrollW": 309,
+     "lines": 2,
+     "ws": "normal",
+     "ow": "normal",
+     "wb": "break-all",
+     "textOverflow": "clip",
+     "clippedByEllipsis": false,
+     "pastViewport": false,
+     "fontPx": 14
+    },
+    {
+     "el": "dd.font-mono.break-all",
+     "len": 42,
+     "w": 309,
+     "clientW": 309,
+     "scrollW": 309,
+     "lines": 2,
+     "ws": "normal",
+     "ow": "normal",
+     "wb": "break-all",
+     "textOverflow": "clip",
+     "clippedByEllipsis": false,
+     "pastViewport": false,
+     "fontPx": 14
+    },
+    {
+     "el": "dd",
+     "len": 66,
+     "w": 309,
+     "clientW": 309,
+     "scrollW": 309,
+     "lines": 2,
+     "ws": "normal",
+     "ow": "anywhere",
+     "wb": "break-all",
+     "textOverflow": "clip",
+     "clippedByEllipsis": false,
+     "pastViewport": false,
+     "fontPx": 14
+    },
+    {
+     "el": "dd",
+     "len": 76,
+     "w": 309,
+     "clientW": 309,
+     "scrollW": 309,
+     "lines": 2,
+     "ws": "normal",
+     "ow": "anywhere",
+     "wb": "break-all",
+     "textOverflow": "clip",
+     "clippedByEllipsis": false,
+     "pastViewport": false,
+     "fontPx": 14
+    },
+    {
+     "el": "dd",
+     "len": 42,
+     "w": 309,
+     "clientW": 309,
+     "scrollW": 309,
+     "lines": 2,
+     "ws": "normal",
+     "ow": "anywhere",
+     "wb": "break-all",
+     "textOverflow": "clip",
+     "clippedByEllipsis": false,
+     "pastViewport": false,
+     "fontPx": 14
+    },
+    {
+     "el": "dd",
+     "len": 66,
+     "w": 309,
+     "clientW": 309,
+     "scrollW": 309,
+     "lines": 2,
+     "ws": "normal",
+     "ow": "anywhere",
+     "wb": "break-all",
+     "textOverflow": "clip",
+     "clippedByEllipsis": false,
+     "pastViewport": false,
+     "fontPx": 14
+    },
+    {
+     "el": "dd",
+     "len": 66,
+     "w": 309,
+     "clientW": 309,
+     "scrollW": 309,
+     "lines": 2,
+     "ws": "normal",
+     "ow": "anywhere",
+     "wb": "break-all",
+     "textOverflow": "clip",
+     "clippedByEllipsis": false,
+     "pastViewport": false,
+     "fontPx": 14
+    },
+    {
+     "el": "a.block.font-mono.text-xs",
+     "len": 79,
+     "w": 309,
+     "clientW": 309,
+     "scrollW": 309,
+     "lines": 3,
+     "ws": "normal",
+     "ow": "anywhere",
+     "wb": "break-all",
+     "textOverflow": "clip",
+     "clippedByEllipsis": false,
+     "pastViewport": false,
+     "fontPx": 12
+    }
+   ],
+   "liveRegions": [
+    {
+     "role": "status",
+     "text": "Standard checks passed; settlement evidence incomplete"
+    },
+    {
+     "role": "aria-live",
+     "text": "Notifications alt+T"
+    }
+   ],
+   "fold": {
+    "vh": 812,
+    "wordsAboveFold": 92,
+    "wordsTotal": 443,
+    "primaryButton": {
+     "text": "Verify from chain data",
+     "top": 663,
+     "bottom": 707,
+     "disabled": false,
+     "aboveFold": true
+    },
+    "bannerText": "Arc Testnet (5042002) · test USDC, no monetary value · mainnet disabled · not audited",
+    "firstH2": "Verify a testnet receipt",
+    "firstH2Top": 255
+   },
+   "docTitleIsRouteSpecific": "ArcProof — Prototype",
+   "activeElement": "body Skip to main content Arc",
+   "console": []
+  },
+  "receipt-incomplete@768": {
+   "note": "REAL TestnetReceiptScreen + ReceiptFacts with a canned 'incomplete' verification result (harness, no RPC)",
+   "url": "http://127.0.0.1:4182/?state=incomplete#/receipt/5042002/0xdba9a4da8a5b2a834b451f595653dd3cb4c3e51addb2d8df8e0b18312f382d2d/0x52599e566fb42fb089c45b92b3e755a17101ca986c3f4cd947482421cf748d83?tx=0x9f2c41d7a8e03b65c1d4f7a92be8036d5a1c7e49b02f8d63a5c1e7094b3d2a68",
+   "page": {
+    "title": "ArcProof — Prototype",
+    "lang": "en",
+    "viewportMeta": "width=device-width, initial-scale=1.0",
+    "h1Count": 1,
+    "landmarks": {
+     "header": 1,
+     "nav": 1,
+     "main": 1,
+     "footer": 1,
+     "aside": 0
+    },
+    "skipLink": true,
+    "hash": "#/receipt/5042002/0xdba9a4da8a5b2a834b451f595653dd3cb4c3e51addb2d8df8e0b18312f382d2d/0x52599e566fb42fb089c45b92b3e755a17101ca986c3f4cd947482421cf748d83?tx=0x9f2c41d7a8e03b65c1d4f7a92be8036d5a1c7e49b02f8d63a5c1e7094b3d2a68",
+    "bodyFont": "system-ui, sans-serif",
+    "fontsLoaded": [
+     "DM Sans:true",
+     "Space Grotesk:false",
+     "JetBrains Mono:true"
+    ]
+   },
+   "overflow": {
+    "innerWidth": 768,
+    "scrollWidth": 753,
+    "overflowX": false,
+    "pageHeight": 1703,
+    "offenders": []
+   },
+   "headings": [
+    {
+     "level": 1,
+     "text": "ArcProof",
+     "y": 51
+    },
+    {
+     "level": 2,
+     "text": "Verify a testnet receipt",
+     "y": 143
+    },
+    {
+     "level": 3,
+     "text": "Standard checks passed; settlement evidence incomplete",
+     "y": 633
+    },
+    {
+     "level": 4,
+     "text": "Evidence checked",
+     "y": 1001
+    },
+    {
+     "level": 4,
+     "text": "Next step",
+     "y": 1113
+    }
+   ],
+   "headingProblems": [],
+   "fields": [
+    {
+     "el": "input#live-receipt-id",
+     "type": "text",
+     "label": "Invoice ID",
+     "describedby": null,
+     "autocomplete": null,
+     "inputmode": null,
+     "fontPx": 16,
+     "w": 622,
+     "h": 44,
+     "disabled": false
+    },
+    {
+     "el": "input#live-receipt-tx",
+     "type": "text",
+     "label": "Payment transaction hash (optional)",
+     "describedby": null,
+     "autocomplete": null,
+     "inputmode": null,
+     "fontPx": 16,
+     "w": 622,
+     "h": 44,
+     "disabled": false
+    }
+   ],
+   "targets": [
+    {
+     "el": "a.skip-link",
+     "text": "Skip to main content",
+     "w": 178,
+     "h": 48,
+     "inline": false,
+     "disabled": false
+    },
+    {
+     "el": "button.px-3.py-1.5.rounded-md",
+     "text": "Invoices",
+     "w": 78,
+     "h": 44,
+     "inline": false,
+     "disabled": false
+    },
+    {
+     "el": "button.px-3.py-1.5.rounded-md",
+     "text": "Verify receipt",
+     "w": 113,
+     "h": 44,
+     "inline": false,
+     "disabled": false
+    },
+    {
+     "el": "button.px-3.py-1.5.rounded-md",
+     "text": "Evidence",
+     "w": 85,
+     "h": 44,
+     "inline": false,
+     "disabled": false
+    },
+    {
+     "el": "button.px-3.py-1.5.rounded-md",
+     "text": "Offline demo",
+     "w": 110,
+     "h": 44,
+     "inline": false,
+     "disabled": false
+    },
+    {
+     "el": "input#live-receipt-id",
+     "text": "0x52599e566fb42fb089c45b92b3e755a171",
+     "w": 622,
+     "h": 44,
+     "inline": false,
+     "disabled": false
+    },
+    {
+     "el": "input#live-receipt-tx",
+     "text": "0x9f2c41d7a8e03b65c1d4f7a92be8036d5a",
+     "w": 622,
+     "h": 44,
+     "inline": false,
+     "disabled": false
+    },
+    {
+     "el": "button.rounded-lg.px-4.py-2",
+     "text": "Verify from chain data",
+     "w": 196,
+     "h": 44,
+     "inline": false,
+     "disabled": false
+    },
+    {
+     "el": "summary.cursor-pointer.py-2.font-semibold",
+     "text": "Evidence details and raw receipt",
+     "w": 622,
+     "h": 44,
+     "inline": false,
+     "disabled": false
+    },
+    {
+     "el": "summary.cursor-pointer.font-semibold.py-2",
+     "text": "Individual verification checks",
+     "w": 622,
+     "h": 44,
+     "inline": false,
+     "disabled": false
+    },
+    {
+     "el": "a.block.font-mono.text-xs",
+     "text": "Transaction: 0x9f2c41d7a8e03b65c1d4f",
+     "w": 622,
+     "h": 44,
+     "inline": false,
+     "disabled": false
+    },
+    {
+     "el": "button.underline.py-2",
+     "text": "Copy verification link",
+     "w": 135,
+     "h": 44,
+     "inline": false,
+     "disabled": false
+    },
+    {
+     "el": "a.underline.py-2",
+     "text": "Open verification link",
+     "w": 137,
+     "h": 44,
+     "inline": false,
+     "disabled": false
+    },
+    {
+     "el": "button.underline.py-2",
+     "text": "Export testnet JSON",
+     "w": 132,
+     "h": 44,
+     "inline": false,
+     "disabled": false
+    },
+    {
+     "el": "button.underline.py-2",
+     "text": "Export testnet CSV",
+     "w": 124,
+     "h": 44,
+     "inline": false,
+     "disabled": false
+    },
+    {
+     "el": "button.underline.py-2",
+     "text": "Print",
+     "w": 30,
+     "h": 44,
+     "inline": false,
+     "disabled": false
+    },
+    {
+     "el": "a.underline",
+     "text": "Build identity and evidence",
+     "w": 177,
+     "h": 44,
+     "inline": false,
+     "disabled": false
+    },
+    {
+     "el": "a.studio-attribution",
+     "text": "Built with Arc Studio",
+     "w": 159,
+     "h": 44,
+     "inline": false,
+     "disabled": false
+    }
+   ],
+   "smallTargets": [
+    {
+     "el": "button.underline.py-2",
+     "text": "Print",
+     "w": 30,
+     "h": 44,
+     "inline": false,
+     "disabled": false
+    }
+   ],
+   "tinyTargets": [],
+   "fontSizes": {
+    "chars": 3498,
+    "pctLE12px": 3.4,
+    "pctLT14px": 3.4
+   },
+   "contrastFails": [],
+   "contrastLowestPassing": [
+    {
+     "el": "button.px-3.py-1.5.rounded-md",
+     "text": "Verify receipt",
+     "ratio": 5.2,
+     "need": 4.5,
+     "px": 14,
+     "disabled": false,
+     "fg": "rgb(15,118,110)@1",
+     "bg": "rgb(240,253,250)"
+    },
+    {
+     "el": "button.rounded-lg.px-4.py-2",
+     "text": "Verify from chain data",
+     "ratio": 5.5,
+     "need": 4.5,
+     "px": 16,
+     "disabled": false,
+     "fg": "rgb(255,255,255)@1",
+     "bg": "rgb(15,118,110)"
+    },
+    {
+     "el": "button.px-3.py-1.5.rounded-md",
+     "text": "Invoices",
+     "ratio": 7.6,
+     "need": 4.5,
+     "px": 14,
+     "disabled": false,
+     "fg": "rgb(87,83,78)@1",
+     "bg": "rgb(255,255,255)"
+    },
+    {
+     "el": "button.px-3.py-1.5.rounded-md",
+     "text": "Evidence",
+     "ratio": 7.6,
+     "need": 4.5,
+     "px": 14,
+     "disabled": false,
+     "fg": "rgb(87,83,78)@1",
+     "bg": "rgb(255,255,255)"
+    },
+    {
+     "el": "button.px-3.py-1.5.rounded-md",
+     "text": "Offline demo",
+     "ratio": 7.6,
+     "need": 4.5,
+     "px": 14,
+     "disabled": false,
+     "fg": "rgb(87,83,78)@1",
+     "bg": "rgb(255,255,255)"
+    }
+   ],
+   "placeholderContrast": [],
+   "hashes": [
+    {
+     "el": "p.text-xs.font-mono.break-all",
+     "len": 42,
+     "w": 622,
+     "clientW": 622,
+     "scrollW": 622,
+     "lines": 1,
+     "ws": "normal",
+     "ow": "normal",
+     "wb": "break-all",
+     "textOverflow": "clip",
+     "clippedByEllipsis": false,
+     "pastViewport": false,
+     "fontPx": 12
+    },
+    {
+     "el": "dd.font-mono.break-all",
+     "len": 42,
+     "w": 622,
+     "clientW": 622,
+     "scrollW": 622,
+     "lines": 1,
+     "ws": "normal",
+     "ow": "normal",
+     "wb": "break-all",
+     "textOverflow": "clip",
+     "clippedByEllipsis": false,
+     "pastViewport": false,
+     "fontPx": 14
+    },
+    {
+     "el": "dd.font-mono.break-all",
+     "len": 42,
+     "w": 622,
+     "clientW": 622,
+     "scrollW": 622,
+     "lines": 1,
+     "ws": "normal",
+     "ow": "normal",
+     "wb": "break-all",
+     "textOverflow": "clip",
+     "clippedByEllipsis": false,
+     "pastViewport": false,
+     "fontPx": 14
+    },
+    {
+     "el": "dd",
+     "len": 66,
+     "w": 622,
+     "clientW": 622,
+     "scrollW": 622,
+     "lines": 1,
+     "ws": "normal",
+     "ow": "anywhere",
+     "wb": "break-all",
+     "textOverflow": "clip",
+     "clippedByEllipsis": false,
+     "pastViewport": false,
+     "fontPx": 14
+    },
+    {
+     "el": "dd",
+     "len": 76,
+     "w": 622,
+     "clientW": 622,
+     "scrollW": 622,
+     "lines": 1,
+     "ws": "normal",
+     "ow": "anywhere",
+     "wb": "break-all",
+     "textOverflow": "clip",
+     "clippedByEllipsis": false,
+     "pastViewport": false,
+     "fontPx": 14
+    },
+    {
+     "el": "dd",
+     "len": 42,
+     "w": 622,
+     "clientW": 622,
+     "scrollW": 622,
+     "lines": 1,
+     "ws": "normal",
+     "ow": "anywhere",
+     "wb": "break-all",
+     "textOverflow": "clip",
+     "clippedByEllipsis": false,
+     "pastViewport": false,
+     "fontPx": 14
+    },
+    {
+     "el": "dd",
+     "len": 66,
+     "w": 622,
+     "clientW": 622,
+     "scrollW": 622,
+     "lines": 1,
+     "ws": "normal",
+     "ow": "anywhere",
+     "wb": "break-all",
+     "textOverflow": "clip",
+     "clippedByEllipsis": false,
+     "pastViewport": false,
+     "fontPx": 14
+    },
+    {
+     "el": "dd",
+     "len": 66,
+     "w": 622,
+     "clientW": 622,
+     "scrollW": 622,
+     "lines": 1,
+     "ws": "normal",
+     "ow": "anywhere",
+     "wb": "break-all",
+     "textOverflow": "clip",
+     "clippedByEllipsis": false,
+     "pastViewport": false,
+     "fontPx": 14
+    },
+    {
+     "el": "a.block.font-mono.text-xs",
+     "len": 79,
+     "w": 622,
+     "clientW": 622,
+     "scrollW": 622,
+     "lines": 3,
+     "ws": "normal",
+     "ow": "anywhere",
+     "wb": "break-all",
+     "textOverflow": "clip",
+     "clippedByEllipsis": false,
+     "pastViewport": false,
+     "fontPx": 12
+    }
+   ],
+   "liveRegions": [
+    {
+     "role": "status",
+     "text": "Standard checks passed; settlement evidence incomplete"
+    },
+    {
+     "role": "aria-live",
+     "text": "Notifications alt+T"
+    }
+   ],
+   "fold": {
+    "vh": 1024,
+    "wordsAboveFold": 131,
+    "wordsTotal": 443,
+    "primaryButton": {
+     "text": "Verify from chain data",
+     "top": 491,
+     "bottom": 535,
+     "disabled": false,
+     "aboveFold": true
+    },
+    "bannerText": "Arc Testnet (5042002) · test USDC, no monetary value · mainnet disabled · not audited",
+    "firstH2": "Verify a testnet receipt",
+    "firstH2Top": 143
+   },
+   "docTitleIsRouteSpecific": "ArcProof — Prototype",
+   "activeElement": "body Skip to main content Arc",
+   "console": []
+  },
+  "receipt-incomplete@1440": {
+   "note": "REAL TestnetReceiptScreen + ReceiptFacts with a canned 'incomplete' verification result (harness, no RPC)",
+   "url": "http://127.0.0.1:4182/?state=incomplete#/receipt/5042002/0xdba9a4da8a5b2a834b451f595653dd3cb4c3e51addb2d8df8e0b18312f382d2d/0x52599e566fb42fb089c45b92b3e755a17101ca986c3f4cd947482421cf748d83?tx=0x9f2c41d7a8e03b65c1d4f7a92be8036d5a1c7e49b02f8d63a5c1e7094b3d2a68",
+   "page": {
+    "title": "ArcProof — Prototype",
+    "lang": "en",
+    "viewportMeta": "width=device-width, initial-scale=1.0",
+    "h1Count": 1,
+    "landmarks": {
+     "header": 1,
+     "nav": 1,
+     "main": 1,
+     "footer": 1,
+     "aside": 0
+    },
+    "skipLink": true,
+    "hash": "#/receipt/5042002/0xdba9a4da8a5b2a834b451f595653dd3cb4c3e51addb2d8df8e0b18312f382d2d/0x52599e566fb42fb089c45b92b3e755a17101ca986c3f4cd947482421cf748d83?tx=0x9f2c41d7a8e03b65c1d4f7a92be8036d5a1c7e49b02f8d63a5c1e7094b3d2a68",
+    "bodyFont": "system-ui, sans-serif",
+    "fontsLoaded": [
+     "DM Sans:true",
+     "Space Grotesk:false",
+     "JetBrains Mono:true"
+    ]
+   },
+   "overflow": {
+    "innerWidth": 1440,
+    "scrollWidth": 1425,
+    "overflowX": false,
+    "pageHeight": 1703,
+    "offenders": []
+   },
+   "headings": [
+    {
+     "level": 1,
+     "text": "ArcProof",
+     "y": 51
+    },
+    {
+     "level": 2,
+     "text": "Verify a testnet receipt",
+     "y": 143
+    },
+    {
+     "level": 3,
+     "text": "Standard checks passed; settlement evidence incomplete",
+     "y": 633
+    },
+    {
+     "level": 4,
+     "text": "Evidence checked",
+     "y": 1001
+    },
+    {
+     "level": 4,
+     "text": "Next step",
+     "y": 1113
+    }
+   ],
+   "headingProblems": [],
+   "fields": [
+    {
+     "el": "input#live-receipt-id",
+     "type": "text",
+     "label": "Invoice ID",
+     "describedby": null,
+     "autocomplete": null,
+     "inputmode": null,
+     "fontPx": 16,
+     "w": 622,
+     "h": 44,
+     "disabled": false
+    },
+    {
+     "el": "input#live-receipt-tx",
+     "type": "text",
+     "label": "Payment transaction hash (optional)",
+     "describedby": null,
+     "autocomplete": null,
+     "inputmode": null,
+     "fontPx": 16,
+     "w": 622,
+     "h": 44,
+     "disabled": false
+    }
+   ],
+   "targets": [
+    {
+     "el": "a.skip-link",
+     "text": "Skip to main content",
+     "w": 178,
+     "h": 48,
+     "inline": false,
+     "disabled": false
+    },
+    {
+     "el": "button.px-3.py-1.5.rounded-md",
+     "text": "Invoices",
+     "w": 78,
+     "h": 44,
+     "inline": false,
+     "disabled": false
+    },
+    {
+     "el": "button.px-3.py-1.5.rounded-md",
+     "text": "Verify receipt",
+     "w": 113,
+     "h": 44,
+     "inline": false,
+     "disabled": false
+    },
+    {
+     "el": "button.px-3.py-1.5.rounded-md",
+     "text": "Evidence",
+     "w": 85,
+     "h": 44,
+     "inline": false,
+     "disabled": false
+    },
+    {
+     "el": "button.px-3.py-1.5.rounded-md",
+     "text": "Offline demo",
+     "w": 110,
+     "h": 44,
+     "inline": false,
+     "disabled": false
+    },
+    {
+     "el": "input#live-receipt-id",
+     "text": "0x52599e566fb42fb089c45b92b3e755a171",
+     "w": 622,
+     "h": 44,
+     "inline": false,
+     "disabled": false
+    },
+    {
+     "el": "input#live-receipt-tx",
+     "text": "0x9f2c41d7a8e03b65c1d4f7a92be8036d5a",
+     "w": 622,
+     "h": 44,
+     "inline": false,
+     "disabled": false
+    },
+    {
+     "el": "button.rounded-lg.px-4.py-2",
+     "text": "Verify from chain data",
+     "w": 196,
+     "h": 44,
+     "inline": false,
+     "disabled": false
+    },
+    {
+     "el": "summary.cursor-pointer.py-2.font-semibold",
+     "text": "Evidence details and raw receipt",
+     "w": 622,
+     "h": 44,
+     "inline": false,
+     "disabled": false
+    },
+    {
+     "el": "summary.cursor-pointer.font-semibold.py-2",
+     "text": "Individual verification checks",
+     "w": 622,
+     "h": 44,
+     "inline": false,
+     "disabled": false
+    },
+    {
+     "el": "a.block.font-mono.text-xs",
+     "text": "Transaction: 0x9f2c41d7a8e03b65c1d4f",
+     "w": 622,
+     "h": 44,
+     "inline": false,
+     "disabled": false
+    },
+    {
+     "el": "button.underline.py-2",
+     "text": "Copy verification link",
+     "w": 135,
+     "h": 44,
+     "inline": false,
+     "disabled": false
+    },
+    {
+     "el": "a.underline.py-2",
+     "text": "Open verification link",
+     "w": 137,
+     "h": 44,
+     "inline": false,
+     "disabled": false
+    },
+    {
+     "el": "button.underline.py-2",
+     "text": "Export testnet JSON",
+     "w": 132,
+     "h": 44,
+     "inline": false,
+     "disabled": false
+    },
+    {
+     "el": "button.underline.py-2",
+     "text": "Export testnet CSV",
+     "w": 124,
+     "h": 44,
+     "inline": false,
+     "disabled": false
+    },
+    {
+     "el": "button.underline.py-2",
+     "text": "Print",
+     "w": 30,
+     "h": 44,
+     "inline": false,
+     "disabled": false
+    },
+    {
+     "el": "a.underline",
+     "text": "Build identity and evidence",
+     "w": 177,
+     "h": 44,
+     "inline": false,
+     "disabled": false
+    },
+    {
+     "el": "a.studio-attribution",
+     "text": "Built with Arc Studio",
+     "w": 159,
+     "h": 44,
+     "inline": false,
+     "disabled": false
+    }
+   ],
+   "smallTargets": [
+    {
+     "el": "button.underline.py-2",
+     "text": "Print",
+     "w": 30,
+     "h": 44,
+     "inline": false,
+     "disabled": false
+    }
+   ],
+   "tinyTargets": [],
+   "fontSizes": {
+    "chars": 3498,
+    "pctLE12px": 3.4,
+    "pctLT14px": 3.4
+   },
+   "contrastFails": [],
+   "contrastLowestPassing": [
+    {
+     "el": "button.px-3.py-1.5.rounded-md",
+     "text": "Verify receipt",
+     "ratio": 5.2,
+     "need": 4.5,
+     "px": 14,
+     "disabled": false,
+     "fg": "rgb(15,118,110)@1",
+     "bg": "rgb(240,253,250)"
+    },
+    {
+     "el": "button.rounded-lg.px-4.py-2",
+     "text": "Verify from chain data",
+     "ratio": 5.5,
+     "need": 4.5,
+     "px": 16,
+     "disabled": false,
+     "fg": "rgb(255,255,255)@1",
+     "bg": "rgb(15,118,110)"
+    },
+    {
+     "el": "button.px-3.py-1.5.rounded-md",
+     "text": "Invoices",
+     "ratio": 7.6,
+     "need": 4.5,
+     "px": 14,
+     "disabled": false,
+     "fg": "rgb(87,83,78)@1",
+     "bg": "rgb(255,255,255)"
+    },
+    {
+     "el": "button.px-3.py-1.5.rounded-md",
+     "text": "Evidence",
+     "ratio": 7.6,
+     "need": 4.5,
+     "px": 14,
+     "disabled": false,
+     "fg": "rgb(87,83,78)@1",
+     "bg": "rgb(255,255,255)"
+    },
+    {
+     "el": "button.px-3.py-1.5.rounded-md",
+     "text": "Offline demo",
+     "ratio": 7.6,
+     "need": 4.5,
+     "px": 14,
+     "disabled": false,
+     "fg": "rgb(87,83,78)@1",
+     "bg": "rgb(255,255,255)"
+    }
+   ],
+   "placeholderContrast": [],
+   "hashes": [
+    {
+     "el": "p.text-xs.font-mono.break-all",
+     "len": 42,
+     "w": 622,
+     "clientW": 622,
+     "scrollW": 622,
+     "lines": 1,
+     "ws": "normal",
+     "ow": "normal",
+     "wb": "break-all",
+     "textOverflow": "clip",
+     "clippedByEllipsis": false,
+     "pastViewport": false,
+     "fontPx": 12
+    },
+    {
+     "el": "dd.font-mono.break-all",
+     "len": 42,
+     "w": 622,
+     "clientW": 622,
+     "scrollW": 622,
+     "lines": 1,
+     "ws": "normal",
+     "ow": "normal",
+     "wb": "break-all",
+     "textOverflow": "clip",
+     "clippedByEllipsis": false,
+     "pastViewport": false,
+     "fontPx": 14
+    },
+    {
+     "el": "dd.font-mono.break-all",
+     "len": 42,
+     "w": 622,
+     "clientW": 622,
+     "scrollW": 622,
+     "lines": 1,
+     "ws": "normal",
+     "ow": "normal",
+     "wb": "break-all",
+     "textOverflow": "clip",
+     "clippedByEllipsis": false,
+     "pastViewport": false,
+     "fontPx": 14
+    },
+    {
+     "el": "dd",
+     "len": 66,
+     "w": 622,
+     "clientW": 622,
+     "scrollW": 622,
+     "lines": 1,
+     "ws": "normal",
+     "ow": "anywhere",
+     "wb": "break-all",
+     "textOverflow": "clip",
+     "clippedByEllipsis": false,
+     "pastViewport": false,
+     "fontPx": 14
+    },
+    {
+     "el": "dd",
+     "len": 76,
+     "w": 622,
+     "clientW": 622,
+     "scrollW": 622,
+     "lines": 1,
+     "ws": "normal",
+     "ow": "anywhere",
+     "wb": "break-all",
+     "textOverflow": "clip",
+     "clippedByEllipsis": false,
+     "pastViewport": false,
+     "fontPx": 14
+    },
+    {
+     "el": "dd",
+     "len": 42,
+     "w": 622,
+     "clientW": 622,
+     "scrollW": 622,
+     "lines": 1,
+     "ws": "normal",
+     "ow": "anywhere",
+     "wb": "break-all",
+     "textOverflow": "clip",
+     "clippedByEllipsis": false,
+     "pastViewport": false,
+     "fontPx": 14
+    },
+    {
+     "el": "dd",
+     "len": 66,
+     "w": 622,
+     "clientW": 622,
+     "scrollW": 622,
+     "lines": 1,
+     "ws": "normal",
+     "ow": "anywhere",
+     "wb": "break-all",
+     "textOverflow": "clip",
+     "clippedByEllipsis": false,
+     "pastViewport": false,
+     "fontPx": 14
+    },
+    {
+     "el": "dd",
+     "len": 66,
+     "w": 622,
+     "clientW": 622,
+     "scrollW": 622,
+     "lines": 1,
+     "ws": "normal",
+     "ow": "anywhere",
+     "wb": "break-all",
+     "textOverflow": "clip",
+     "clippedByEllipsis": false,
+     "pastViewport": false,
+     "fontPx": 14
+    },
+    {
+     "el": "a.block.font-mono.text-xs",
+     "len": 79,
+     "w": 622,
+     "clientW": 622,
+     "scrollW": 622,
+     "lines": 3,
+     "ws": "normal",
+     "ow": "anywhere",
+     "wb": "break-all",
+     "textOverflow": "clip",
+     "clippedByEllipsis": false,
+     "pastViewport": false,
+     "fontPx": 12
+    }
+   ],
+   "liveRegions": [
+    {
+     "role": "status",
+     "text": "Standard checks passed; settlement evidence incomplete"
+    },
+    {
+     "role": "aria-live",
+     "text": "Notifications alt+T"
+    }
+   ],
+   "fold": {
+    "vh": 900,
+    "wordsAboveFold": 115,
+    "wordsTotal": 443,
+    "primaryButton": {
+     "text": "Verify from chain data",
+     "top": 491,
+     "bottom": 535,
+     "disabled": false,
+     "aboveFold": true
+    },
+    "bannerText": "Arc Testnet (5042002) · test USDC, no monetary value · mainnet disabled · not audited",
+    "firstH2": "Verify a testnet receipt",
+    "firstH2Top": 143
+   },
+   "docTitleIsRouteSpecific": "ArcProof — Prototype",
+   "activeElement": "body Skip to main content Arc",
+   "console": []
+  },
+  "receipt-mismatch@375": {
+   "note": "REAL TestnetReceiptScreen + ReceiptFacts with a canned 'mismatch' verification result (harness, no RPC)",
+   "url": "http://127.0.0.1:4182/?state=mismatch#/receipt/5042002/0xdba9a4da8a5b2a834b451f595653dd3cb4c3e51addb2d8df8e0b18312f382d2d/0x52599e566fb42fb089c45b92b3e755a17101ca986c3f4cd947482421cf748d83?tx=0x9f2c41d7a8e03b65c1d4f7a92be8036d5a1c7e49b02f8d63a5c1e7094b3d2a68",
+   "page": {
+    "title": "ArcProof — Prototype",
+    "lang": "en",
+    "viewportMeta": "width=device-width, initial-scale=1.0",
+    "h1Count": 1,
+    "landmarks": {
+     "header": 1,
+     "nav": 1,
+     "main": 1,
+     "footer": 1,
+     "aside": 0
+    },
+    "skipLink": true,
+    "hash": "#/receipt/5042002/0xdba9a4da8a5b2a834b451f595653dd3cb4c3e51addb2d8df8e0b18312f382d2d/0x52599e566fb42fb089c45b92b3e755a17101ca986c3f4cd947482421cf748d83?tx=0x9f2c41d7a8e03b65c1d4f7a92be8036d5a1c7e49b02f8d63a5c1e7094b3d2a68",
+    "bodyFont": "system-ui, sans-serif",
+    "fontsLoaded": [
+     "DM Sans:true",
+     "Space Grotesk:false",
+     "JetBrains Mono:true"
+    ]
+   },
+   "overflow": {
+    "innerWidth": 375,
+    "scrollWidth": 375,
+    "overflowX": false,
+    "pageHeight": 2239,
+    "offenders": []
+   },
+   "headings": [
+    {
+     "level": 1,
+     "text": "ArcProof",
+     "y": 69
+    },
+    {
+     "level": 2,
+     "text": "Verify a testnet receipt",
+     "y": 255
+    },
+    {
+     "level": 3,
+     "text": "Not verified: WRONG_VALUE",
+     "y": 789
+    },
+    {
+     "level": 4,
+     "text": "Evidence checked",
+     "y": 1229
+    },
+    {
+     "level": 4,
+     "text": "Next step",
+     "y": 1381
+    }
+   ],
+   "headingProblems": [],
+   "fields": [
+    {
+     "el": "input#live-receipt-id",
+     "type": "text",
+     "label": "Invoice ID",
+     "describedby": null,
+     "autocomplete": null,
+     "inputmode": null,
+     "fontPx": 16,
+     "w": 309,
+     "h": 44,
+     "disabled": false
+    },
+    {
+     "el": "input#live-receipt-tx",
+     "type": "text",
+     "label": "Payment transaction hash (optional)",
+     "describedby": null,
+     "autocomplete": null,
+     "inputmode": null,
+     "fontPx": 16,
+     "w": 309,
+     "h": 44,
+     "disabled": false
+    }
+   ],
+   "targets": [
+    {
+     "el": "a.skip-link",
+     "text": "Skip to main content",
+     "w": 178,
+     "h": 48,
+     "inline": false,
+     "disabled": false
+    },
+    {
+     "el": "button.px-3.py-1.5.rounded-md",
+     "text": "Invoices",
+     "w": 78,
+     "h": 44,
+     "inline": false,
+     "disabled": false
+    },
+    {
+     "el": "button.px-3.py-1.5.rounded-md",
+     "text": "Verify receipt",
+     "w": 113,
+     "h": 44,
+     "inline": false,
+     "disabled": false
+    },
+    {
+     "el": "button.px-3.py-1.5.rounded-md",
+     "text": "Evidence",
+     "w": 85,
+     "h": 44,
+     "inline": false,
+     "disabled": false
+    },
+    {
+     "el": "button.px-3.py-1.5.rounded-md",
+     "text": "Offline demo",
+     "w": 110,
+     "h": 44,
+     "inline": false,
+     "disabled": false
+    },
+    {
+     "el": "input#live-receipt-id",
+     "text": "0x52599e566fb42fb089c45b92b3e755a171",
+     "w": 309,
+     "h": 44,
+     "inline": false,
+     "disabled": false
+    },
+    {
+     "el": "input#live-receipt-tx",
+     "text": "0x9f2c41d7a8e03b65c1d4f7a92be8036d5a",
+     "w": 309,
+     "h": 44,
+     "inline": false,
+     "disabled": false
+    },
+    {
+     "el": "button.rounded-lg.px-4.py-2",
+     "text": "Verify from chain data",
+     "w": 196,
+     "h": 44,
+     "inline": false,
+     "disabled": false
+    },
+    {
+     "el": "summary.cursor-pointer.py-2.font-semibold",
+     "text": "Evidence details and raw receipt",
+     "w": 309,
+     "h": 44,
+     "inline": false,
+     "disabled": false
+    },
+    {
+     "el": "summary.cursor-pointer.font-semibold.py-2",
+     "text": "Individual verification checks",
+     "w": 309,
+     "h": 44,
+     "inline": false,
+     "disabled": false
+    },
+    {
+     "el": "a.block.font-mono.text-xs",
+     "text": "Transaction: 0x9f2c41d7a8e03b65c1d4f",
+     "w": 309,
+     "h": 44,
+     "inline": false,
+     "disabled": false
+    },
+    {
+     "el": "button.underline.py-2",
+     "text": "Copy verification link",
+     "w": 135,
+     "h": 44,
+     "inline": false,
+     "disabled": false
+    },
+    {
+     "el": "a.underline.py-2",
+     "text": "Open verification link",
+     "w": 137,
+     "h": 44,
+     "inline": false,
+     "disabled": false
+    },
+    {
+     "el": "button.underline.py-2",
+     "text": "Export testnet JSON",
+     "w": 132,
+     "h": 44,
+     "inline": false,
+     "disabled": false
+    },
+    {
+     "el": "button.underline.py-2",
+     "text": "Export testnet CSV",
+     "w": 124,
+     "h": 44,
+     "inline": false,
+     "disabled": false
+    },
+    {
+     "el": "button.underline.py-2",
+     "text": "Print",
+     "w": 30,
+     "h": 44,
+     "inline": false,
+     "disabled": false
+    },
+    {
+     "el": "a.underline",
+     "text": "Build identity and evidence",
+     "w": 177,
+     "h": 44,
+     "inline": false,
+     "disabled": false
+    },
+    {
+     "el": "a.studio-attribution",
+     "text": "Built with Arc Studio",
+     "w": 159,
+     "h": 44,
+     "inline": false,
+     "disabled": false
+    }
+   ],
+   "smallTargets": [
+    {
+     "el": "button.underline.py-2",
+     "text": "Print",
+     "w": 30,
+     "h": 44,
+     "inline": false,
+     "disabled": false
+    }
+   ],
+   "tinyTargets": [],
+   "fontSizes": {
+    "chars": 3426,
+    "pctLE12px": 3.5,
+    "pctLT14px": 3.5
+   },
+   "contrastFails": [],
+   "contrastLowestPassing": [
+    {
+     "el": "button.px-3.py-1.5.rounded-md",
+     "text": "Verify receipt",
+     "ratio": 5.2,
+     "need": 4.5,
+     "px": 14,
+     "disabled": false,
+     "fg": "rgb(15,118,110)@1",
+     "bg": "rgb(240,253,250)"
+    },
+    {
+     "el": "button.rounded-lg.px-4.py-2",
+     "text": "Verify from chain data",
+     "ratio": 5.5,
+     "need": 4.5,
+     "px": 16,
+     "disabled": false,
+     "fg": "rgb(255,255,255)@1",
+     "bg": "rgb(15,118,110)"
+    },
+    {
+     "el": "button.px-3.py-1.5.rounded-md",
+     "text": "Invoices",
+     "ratio": 7.6,
+     "need": 4.5,
+     "px": 14,
+     "disabled": false,
+     "fg": "rgb(87,83,78)@1",
+     "bg": "rgb(255,255,255)"
+    },
+    {
+     "el": "button.px-3.py-1.5.rounded-md",
+     "text": "Evidence",
+     "ratio": 7.6,
+     "need": 4.5,
+     "px": 14,
+     "disabled": false,
+     "fg": "rgb(87,83,78)@1",
+     "bg": "rgb(255,255,255)"
+    },
+    {
+     "el": "button.px-3.py-1.5.rounded-md",
+     "text": "Offline demo",
+     "ratio": 7.6,
+     "need": 4.5,
+     "px": 14,
+     "disabled": false,
+     "fg": "rgb(87,83,78)@1",
+     "bg": "rgb(255,255,255)"
+    }
+   ],
+   "placeholderContrast": [],
+   "hashes": [
+    {
+     "el": "p.text-xs.font-mono.break-all",
+     "len": 42,
+     "w": 309,
+     "clientW": 309,
+     "scrollW": 309,
+     "lines": 1,
+     "ws": "normal",
+     "ow": "normal",
+     "wb": "break-all",
+     "textOverflow": "clip",
+     "clippedByEllipsis": false,
+     "pastViewport": false,
+     "fontPx": 12
+    },
+    {
+     "el": "dd.font-mono.break-all",
+     "len": 42,
+     "w": 309,
+     "clientW": 309,
+     "scrollW": 309,
+     "lines": 2,
+     "ws": "normal",
+     "ow": "normal",
+     "wb": "break-all",
+     "textOverflow": "clip",
+     "clippedByEllipsis": false,
+     "pastViewport": false,
+     "fontPx": 14
+    },
+    {
+     "el": "dd.font-mono.break-all",
+     "len": 42,
+     "w": 309,
+     "clientW": 309,
+     "scrollW": 309,
+     "lines": 2,
+     "ws": "normal",
+     "ow": "normal",
+     "wb": "break-all",
+     "textOverflow": "clip",
+     "clippedByEllipsis": false,
+     "pastViewport": false,
+     "fontPx": 14
+    },
+    {
+     "el": "dd",
+     "len": 66,
+     "w": 309,
+     "clientW": 309,
+     "scrollW": 309,
+     "lines": 2,
+     "ws": "normal",
+     "ow": "anywhere",
+     "wb": "break-all",
+     "textOverflow": "clip",
+     "clippedByEllipsis": false,
+     "pastViewport": false,
+     "fontPx": 14
+    },
+    {
+     "el": "dd",
+     "len": 76,
+     "w": 309,
+     "clientW": 309,
+     "scrollW": 309,
+     "lines": 2,
+     "ws": "normal",
+     "ow": "anywhere",
+     "wb": "break-all",
+     "textOverflow": "clip",
+     "clippedByEllipsis": false,
+     "pastViewport": false,
+     "fontPx": 14
+    },
+    {
+     "el": "dd",
+     "len": 42,
+     "w": 309,
+     "clientW": 309,
+     "scrollW": 309,
+     "lines": 2,
+     "ws": "normal",
+     "ow": "anywhere",
+     "wb": "break-all",
+     "textOverflow": "clip",
+     "clippedByEllipsis": false,
+     "pastViewport": false,
+     "fontPx": 14
+    },
+    {
+     "el": "dd",
+     "len": 66,
+     "w": 309,
+     "clientW": 309,
+     "scrollW": 309,
+     "lines": 2,
+     "ws": "normal",
+     "ow": "anywhere",
+     "wb": "break-all",
+     "textOverflow": "clip",
+     "clippedByEllipsis": false,
+     "pastViewport": false,
+     "fontPx": 14
+    },
+    {
+     "el": "dd",
+     "len": 66,
+     "w": 309,
+     "clientW": 309,
+     "scrollW": 309,
+     "lines": 2,
+     "ws": "normal",
+     "ow": "anywhere",
+     "wb": "break-all",
+     "textOverflow": "clip",
+     "clippedByEllipsis": false,
+     "pastViewport": false,
+     "fontPx": 14
+    },
+    {
+     "el": "a.block.font-mono.text-xs",
+     "len": 79,
+     "w": 309,
+     "clientW": 309,
+     "scrollW": 309,
+     "lines": 3,
+     "ws": "normal",
+     "ow": "anywhere",
+     "wb": "break-all",
+     "textOverflow": "clip",
+     "clippedByEllipsis": false,
+     "pastViewport": false,
+     "fontPx": 12
+    }
+   ],
+   "liveRegions": [
+    {
+     "role": "status",
+     "text": "Not verified: WRONG_VALUE"
+    },
+    {
+     "role": "aria-live",
+     "text": "Notifications alt+T"
+    }
+   ],
+   "fold": {
+    "vh": 812,
+    "wordsAboveFold": 89,
+    "wordsTotal": 441,
+    "primaryButton": {
+     "text": "Verify from chain data",
+     "top": 663,
+     "bottom": 707,
+     "disabled": false,
+     "aboveFold": true
+    },
+    "bannerText": "Arc Testnet (5042002) · test USDC, no monetary value · mainnet disabled · not audited",
+    "firstH2": "Verify a testnet receipt",
+    "firstH2Top": 255
+   },
+   "docTitleIsRouteSpecific": "ArcProof — Prototype",
+   "activeElement": "body Skip to main content Arc",
+   "console": []
+  },
+  "receipt-mismatch@768": {
+   "note": "REAL TestnetReceiptScreen + ReceiptFacts with a canned 'mismatch' verification result (harness, no RPC)",
+   "url": "http://127.0.0.1:4182/?state=mismatch#/receipt/5042002/0xdba9a4da8a5b2a834b451f595653dd3cb4c3e51addb2d8df8e0b18312f382d2d/0x52599e566fb42fb089c45b92b3e755a17101ca986c3f4cd947482421cf748d83?tx=0x9f2c41d7a8e03b65c1d4f7a92be8036d5a1c7e49b02f8d63a5c1e7094b3d2a68",
+   "page": {
+    "title": "ArcProof — Prototype",
+    "lang": "en",
+    "viewportMeta": "width=device-width, initial-scale=1.0",
+    "h1Count": 1,
+    "landmarks": {
+     "header": 1,
+     "nav": 1,
+     "main": 1,
+     "footer": 1,
+     "aside": 0
+    },
+    "skipLink": true,
+    "hash": "#/receipt/5042002/0xdba9a4da8a5b2a834b451f595653dd3cb4c3e51addb2d8df8e0b18312f382d2d/0x52599e566fb42fb089c45b92b3e755a17101ca986c3f4cd947482421cf748d83?tx=0x9f2c41d7a8e03b65c1d4f7a92be8036d5a1c7e49b02f8d63a5c1e7094b3d2a68",
+    "bodyFont": "system-ui, sans-serif",
+    "fontsLoaded": [
+     "DM Sans:true",
+     "Space Grotesk:false",
+     "JetBrains Mono:true"
+    ]
+   },
+   "overflow": {
+    "innerWidth": 768,
+    "scrollWidth": 753,
+    "overflowX": false,
+    "pageHeight": 1703,
+    "offenders": []
+   },
+   "headings": [
+    {
+     "level": 1,
+     "text": "ArcProof",
+     "y": 51
+    },
+    {
+     "level": 2,
+     "text": "Verify a testnet receipt",
+     "y": 143
+    },
+    {
+     "level": 3,
+     "text": "Not verified: WRONG_VALUE",
+     "y": 633
+    },
+    {
+     "level": 4,
+     "text": "Evidence checked",
+     "y": 1001
+    },
+    {
+     "level": 4,
+     "text": "Next step",
+     "y": 1113
+    }
+   ],
+   "headingProblems": [],
+   "fields": [
+    {
+     "el": "input#live-receipt-id",
+     "type": "text",
+     "label": "Invoice ID",
+     "describedby": null,
+     "autocomplete": null,
+     "inputmode": null,
+     "fontPx": 16,
+     "w": 622,
+     "h": 44,
+     "disabled": false
+    },
+    {
+     "el": "input#live-receipt-tx",
+     "type": "text",
+     "label": "Payment transaction hash (optional)",
+     "describedby": null,
+     "autocomplete": null,
+     "inputmode": null,
+     "fontPx": 16,
+     "w": 622,
+     "h": 44,
+     "disabled": false
+    }
+   ],
+   "targets": [
+    {
+     "el": "a.skip-link",
+     "text": "Skip to main content",
+     "w": 178,
+     "h": 48,
+     "inline": false,
+     "disabled": false
+    },
+    {
+     "el": "button.px-3.py-1.5.rounded-md",
+     "text": "Invoices",
+     "w": 78,
+     "h": 44,
+     "inline": false,
+     "disabled": false
+    },
+    {
+     "el": "button.px-3.py-1.5.rounded-md",
+     "text": "Verify receipt",
+     "w": 113,
+     "h": 44,
+     "inline": false,
+     "disabled": false
+    },
+    {
+     "el": "button.px-3.py-1.5.rounded-md",
+     "text": "Evidence",
+     "w": 85,
+     "h": 44,
+     "inline": false,
+     "disabled": false
+    },
+    {
+     "el": "button.px-3.py-1.5.rounded-md",
+     "text": "Offline demo",
+     "w": 110,
+     "h": 44,
+     "inline": false,
+     "disabled": false
+    },
+    {
+     "el": "input#live-receipt-id",
+     "text": "0x52599e566fb42fb089c45b92b3e755a171",
+     "w": 622,
+     "h": 44,
+     "inline": false,
+     "disabled": false
+    },
+    {
+     "el": "input#live-receipt-tx",
+     "text": "0x9f2c41d7a8e03b65c1d4f7a92be8036d5a",
+     "w": 622,
+     "h": 44,
+     "inline": false,
+     "disabled": false
+    },
+    {
+     "el": "button.rounded-lg.px-4.py-2",
+     "text": "Verify from chain data",
+     "w": 196,
+     "h": 44,
+     "inline": false,
+     "disabled": false
+    },
+    {
+     "el": "summary.cursor-pointer.py-2.font-semibold",
+     "text": "Evidence details and raw receipt",
+     "w": 622,
+     "h": 44,
+     "inline": false,
+     "disabled": false
+    },
+    {
+     "el": "summary.cursor-pointer.font-semibold.py-2",
+     "text": "Individual verification checks",
+     "w": 622,
+     "h": 44,
+     "inline": false,
+     "disabled": false
+    },
+    {
+     "el": "a.block.font-mono.text-xs",
+     "text": "Transaction: 0x9f2c41d7a8e03b65c1d4f",
+     "w": 622,
+     "h": 44,
+     "inline": false,
+     "disabled": false
+    },
+    {
+     "el": "button.underline.py-2",
+     "text": "Copy verification link",
+     "w": 135,
+     "h": 44,
+     "inline": false,
+     "disabled": false
+    },
+    {
+     "el": "a.underline.py-2",
+     "text": "Open verification link",
+     "w": 137,
+     "h": 44,
+     "inline": false,
+     "disabled": false
+    },
+    {
+     "el": "button.underline.py-2",
+     "text": "Export testnet JSON",
+     "w": 132,
+     "h": 44,
+     "inline": false,
+     "disabled": false
+    },
+    {
+     "el": "button.underline.py-2",
+     "text": "Export testnet CSV",
+     "w": 124,
+     "h": 44,
+     "inline": false,
+     "disabled": false
+    },
+    {
+     "el": "button.underline.py-2",
+     "text": "Print",
+     "w": 30,
+     "h": 44,
+     "inline": false,
+     "disabled": false
+    },
+    {
+     "el": "a.underline",
+     "text": "Build identity and evidence",
+     "w": 177,
+     "h": 44,
+     "inline": false,
+     "disabled": false
+    },
+    {
+     "el": "a.studio-attribution",
+     "text": "Built with Arc Studio",
+     "w": 159,
+     "h": 44,
+     "inline": false,
+     "disabled": false
+    }
+   ],
+   "smallTargets": [
+    {
+     "el": "button.underline.py-2",
+     "text": "Print",
+     "w": 30,
+     "h": 44,
+     "inline": false,
+     "disabled": false
+    }
+   ],
+   "tinyTargets": [],
+   "fontSizes": {
+    "chars": 3426,
+    "pctLE12px": 3.5,
+    "pctLT14px": 3.5
+   },
+   "contrastFails": [],
+   "contrastLowestPassing": [
+    {
+     "el": "button.px-3.py-1.5.rounded-md",
+     "text": "Verify receipt",
+     "ratio": 5.2,
+     "need": 4.5,
+     "px": 14,
+     "disabled": false,
+     "fg": "rgb(15,118,110)@1",
+     "bg": "rgb(240,253,250)"
+    },
+    {
+     "el": "button.rounded-lg.px-4.py-2",
+     "text": "Verify from chain data",
+     "ratio": 5.5,
+     "need": 4.5,
+     "px": 16,
+     "disabled": false,
+     "fg": "rgb(255,255,255)@1",
+     "bg": "rgb(15,118,110)"
+    },
+    {
+     "el": "button.px-3.py-1.5.rounded-md",
+     "text": "Invoices",
+     "ratio": 7.6,
+     "need": 4.5,
+     "px": 14,
+     "disabled": false,
+     "fg": "rgb(87,83,78)@1",
+     "bg": "rgb(255,255,255)"
+    },
+    {
+     "el": "button.px-3.py-1.5.rounded-md",
+     "text": "Evidence",
+     "ratio": 7.6,
+     "need": 4.5,
+     "px": 14,
+     "disabled": false,
+     "fg": "rgb(87,83,78)@1",
+     "bg": "rgb(255,255,255)"
+    },
+    {
+     "el": "button.px-3.py-1.5.rounded-md",
+     "text": "Offline demo",
+     "ratio": 7.6,
+     "need": 4.5,
+     "px": 14,
+     "disabled": false,
+     "fg": "rgb(87,83,78)@1",
+     "bg": "rgb(255,255,255)"
+    }
+   ],
+   "placeholderContrast": [],
+   "hashes": [
+    {
+     "el": "p.text-xs.font-mono.break-all",
+     "len": 42,
+     "w": 622,
+     "clientW": 622,
+     "scrollW": 622,
+     "lines": 1,
+     "ws": "normal",
+     "ow": "normal",
+     "wb": "break-all",
+     "textOverflow": "clip",
+     "clippedByEllipsis": false,
+     "pastViewport": false,
+     "fontPx": 12
+    },
+    {
+     "el": "dd.font-mono.break-all",
+     "len": 42,
+     "w": 622,
+     "clientW": 622,
+     "scrollW": 622,
+     "lines": 1,
+     "ws": "normal",
+     "ow": "normal",
+     "wb": "break-all",
+     "textOverflow": "clip",
+     "clippedByEllipsis": false,
+     "pastViewport": false,
+     "fontPx": 14
+    },
+    {
+     "el": "dd.font-mono.break-all",
+     "len": 42,
+     "w": 622,
+     "clientW": 622,
+     "scrollW": 622,
+     "lines": 1,
+     "ws": "normal",
+     "ow": "normal",
+     "wb": "break-all",
+     "textOverflow": "clip",
+     "clippedByEllipsis": false,
+     "pastViewport": false,
+     "fontPx": 14
+    },
+    {
+     "el": "dd",
+     "len": 66,
+     "w": 622,
+     "clientW": 622,
+     "scrollW": 622,
+     "lines": 1,
+     "ws": "normal",
+     "ow": "anywhere",
+     "wb": "break-all",
+     "textOverflow": "clip",
+     "clippedByEllipsis": false,
+     "pastViewport": false,
+     "fontPx": 14
+    },
+    {
+     "el": "dd",
+     "len": 76,
+     "w": 622,
+     "clientW": 622,
+     "scrollW": 622,
+     "lines": 1,
+     "ws": "normal",
+     "ow": "anywhere",
+     "wb": "break-all",
+     "textOverflow": "clip",
+     "clippedByEllipsis": false,
+     "pastViewport": false,
+     "fontPx": 14
+    },
+    {
+     "el": "dd",
+     "len": 42,
+     "w": 622,
+     "clientW": 622,
+     "scrollW": 622,
+     "lines": 1,
+     "ws": "normal",
+     "ow": "anywhere",
+     "wb": "break-all",
+     "textOverflow": "clip",
+     "clippedByEllipsis": false,
+     "pastViewport": false,
+     "fontPx": 14
+    },
+    {
+     "el": "dd",
+     "len": 66,
+     "w": 622,
+     "clientW": 622,
+     "scrollW": 622,
+     "lines": 1,
+     "ws": "normal",
+     "ow": "anywhere",
+     "wb": "break-all",
+     "textOverflow": "clip",
+     "clippedByEllipsis": false,
+     "pastViewport": false,
+     "fontPx": 14
+    },
+    {
+     "el": "dd",
+     "len": 66,
+     "w": 622,
+     "clientW": 622,
+     "scrollW": 622,
+     "lines": 1,
+     "ws": "normal",
+     "ow": "anywhere",
+     "wb": "break-all",
+     "textOverflow": "clip",
+     "clippedByEllipsis": false,
+     "pastViewport": false,
+     "fontPx": 14
+    },
+    {
+     "el": "a.block.font-mono.text-xs",
+     "len": 79,
+     "w": 622,
+     "clientW": 622,
+     "scrollW": 622,
+     "lines": 3,
+     "ws": "normal",
+     "ow": "anywhere",
+     "wb": "break-all",
+     "textOverflow": "clip",
+     "clippedByEllipsis": false,
+     "pastViewport": false,
+     "fontPx": 12
+    }
+   ],
+   "liveRegions": [
+    {
+     "role": "status",
+     "text": "Not verified: WRONG_VALUE"
+    },
+    {
+     "role": "aria-live",
+     "text": "Notifications alt+T"
+    }
+   ],
+   "fold": {
+    "vh": 1024,
+    "wordsAboveFold": 128,
+    "wordsTotal": 441,
+    "primaryButton": {
+     "text": "Verify from chain data",
+     "top": 491,
+     "bottom": 535,
+     "disabled": false,
+     "aboveFold": true
+    },
+    "bannerText": "Arc Testnet (5042002) · test USDC, no monetary value · mainnet disabled · not audited",
+    "firstH2": "Verify a testnet receipt",
+    "firstH2Top": 143
+   },
+   "docTitleIsRouteSpecific": "ArcProof — Prototype",
+   "activeElement": "body Skip to main content Arc",
+   "console": []
+  },
+  "receipt-mismatch@1440": {
+   "note": "REAL TestnetReceiptScreen + ReceiptFacts with a canned 'mismatch' verification result (harness, no RPC)",
+   "url": "http://127.0.0.1:4182/?state=mismatch#/receipt/5042002/0xdba9a4da8a5b2a834b451f595653dd3cb4c3e51addb2d8df8e0b18312f382d2d/0x52599e566fb42fb089c45b92b3e755a17101ca986c3f4cd947482421cf748d83?tx=0x9f2c41d7a8e03b65c1d4f7a92be8036d5a1c7e49b02f8d63a5c1e7094b3d2a68",
+   "page": {
+    "title": "ArcProof — Prototype",
+    "lang": "en",
+    "viewportMeta": "width=device-width, initial-scale=1.0",
+    "h1Count": 1,
+    "landmarks": {
+     "header": 1,
+     "nav": 1,
+     "main": 1,
+     "footer": 1,
+     "aside": 0
+    },
+    "skipLink": true,
+    "hash": "#/receipt/5042002/0xdba9a4da8a5b2a834b451f595653dd3cb4c3e51addb2d8df8e0b18312f382d2d/0x52599e566fb42fb089c45b92b3e755a17101ca986c3f4cd947482421cf748d83?tx=0x9f2c41d7a8e03b65c1d4f7a92be8036d5a1c7e49b02f8d63a5c1e7094b3d2a68",
+    "bodyFont": "system-ui, sans-serif",
+    "fontsLoaded": [
+     "DM Sans:true",
+     "Space Grotesk:false",
+     "JetBrains Mono:true"
+    ]
+   },
+   "overflow": {
+    "innerWidth": 1440,
+    "scrollWidth": 1425,
+    "overflowX": false,
+    "pageHeight": 1703,
+    "offenders": []
+   },
+   "headings": [
+    {
+     "level": 1,
+     "text": "ArcProof",
+     "y": 51
+    },
+    {
+     "level": 2,
+     "text": "Verify a testnet receipt",
+     "y": 143
+    },
+    {
+     "level": 3,
+     "text": "Not verified: WRONG_VALUE",
+     "y": 633
+    },
+    {
+     "level": 4,
+     "text": "Evidence checked",
+     "y": 1001
+    },
+    {
+     "level": 4,
+     "text": "Next step",
+     "y": 1113
+    }
+   ],
+   "headingProblems": [],
+   "fields": [
+    {
+     "el": "input#live-receipt-id",
+     "type": "text",
+     "label": "Invoice ID",
+     "describedby": null,
+     "autocomplete": null,
+     "inputmode": null,
+     "fontPx": 16,
+     "w": 622,
+     "h": 44,
+     "disabled": false
+    },
+    {
+     "el": "input#live-receipt-tx",
+     "type": "text",
+     "label": "Payment transaction hash (optional)",
+     "describedby": null,
+     "autocomplete": null,
+     "inputmode": null,
+     "fontPx": 16,
+     "w": 622,
+     "h": 44,
+     "disabled": false
+    }
+   ],
+   "targets": [
+    {
+     "el": "a.skip-link",
+     "text": "Skip to main content",
+     "w": 178,
+     "h": 48,
+     "inline": false,
+     "disabled": false
+    },
+    {
+     "el": "button.px-3.py-1.5.rounded-md",
+     "text": "Invoices",
+     "w": 78,
+     "h": 44,
+     "inline": false,
+     "disabled": false
+    },
+    {
+     "el": "button.px-3.py-1.5.rounded-md",
+     "text": "Verify receipt",
+     "w": 113,
+     "h": 44,
+     "inline": false,
+     "disabled": false
+    },
+    {
+     "el": "button.px-3.py-1.5.rounded-md",
+     "text": "Evidence",
+     "w": 85,
+     "h": 44,
+     "inline": false,
+     "disabled": false
+    },
+    {
+     "el": "button.px-3.py-1.5.rounded-md",
+     "text": "Offline demo",
+     "w": 110,
+     "h": 44,
+     "inline": false,
+     "disabled": false
+    },
+    {
+     "el": "input#live-receipt-id",
+     "text": "0x52599e566fb42fb089c45b92b3e755a171",
+     "w": 622,
+     "h": 44,
+     "inline": false,
+     "disabled": false
+    },
+    {
+     "el": "input#live-receipt-tx",
+     "text": "0x9f2c41d7a8e03b65c1d4f7a92be8036d5a",
+     "w": 622,
+     "h": 44,
+     "inline": false,
+     "disabled": false
+    },
+    {
+     "el": "button.rounded-lg.px-4.py-2",
+     "text": "Verify from chain data",
+     "w": 196,
+     "h": 44,
+     "inline": false,
+     "disabled": false
+    },
+    {
+     "el": "summary.cursor-pointer.py-2.font-semibold",
+     "text": "Evidence details and raw receipt",
+     "w": 622,
+     "h": 44,
+     "inline": false,
+     "disabled": false
+    },
+    {
+     "el": "summary.cursor-pointer.font-semibold.py-2",
+     "text": "Individual verification checks",
+     "w": 622,
+     "h": 44,
+     "inline": false,
+     "disabled": false
+    },
+    {
+     "el": "a.block.font-mono.text-xs",
+     "text": "Transaction: 0x9f2c41d7a8e03b65c1d4f",
+     "w": 622,
+     "h": 44,
+     "inline": false,
+     "disabled": false
+    },
+    {
+     "el": "button.underline.py-2",
+     "text": "Copy verification link",
+     "w": 135,
+     "h": 44,
+     "inline": false,
+     "disabled": false
+    },
+    {
+     "el": "a.underline.py-2",
+     "text": "Open verification link",
+     "w": 137,
+     "h": 44,
+     "inline": false,
+     "disabled": false
+    },
+    {
+     "el": "button.underline.py-2",
+     "text": "Export testnet JSON",
+     "w": 132,
+     "h": 44,
+     "inline": false,
+     "disabled": false
+    },
+    {
+     "el": "button.underline.py-2",
+     "text": "Export testnet CSV",
+     "w": 124,
+     "h": 44,
+     "inline": false,
+     "disabled": false
+    },
+    {
+     "el": "button.underline.py-2",
+     "text": "Print",
+     "w": 30,
+     "h": 44,
+     "inline": false,
+     "disabled": false
+    },
+    {
+     "el": "a.underline",
+     "text": "Build identity and evidence",
+     "w": 177,
+     "h": 44,
+     "inline": false,
+     "disabled": false
+    },
+    {
+     "el": "a.studio-attribution",
+     "text": "Built with Arc Studio",
+     "w": 159,
+     "h": 44,
+     "inline": false,
+     "disabled": false
+    }
+   ],
+   "smallTargets": [
+    {
+     "el": "button.underline.py-2",
+     "text": "Print",
+     "w": 30,
+     "h": 44,
+     "inline": false,
+     "disabled": false
+    }
+   ],
+   "tinyTargets": [],
+   "fontSizes": {
+    "chars": 3426,
+    "pctLE12px": 3.5,
+    "pctLT14px": 3.5
+   },
+   "contrastFails": [],
+   "contrastLowestPassing": [
+    {
+     "el": "button.px-3.py-1.5.rounded-md",
+     "text": "Verify receipt",
+     "ratio": 5.2,
+     "need": 4.5,
+     "px": 14,
+     "disabled": false,
+     "fg": "rgb(15,118,110)@1",
+     "bg": "rgb(240,253,250)"
+    },
+    {
+     "el": "button.rounded-lg.px-4.py-2",
+     "text": "Verify from chain data",
+     "ratio": 5.5,
+     "need": 4.5,
+     "px": 16,
+     "disabled": false,
+     "fg": "rgb(255,255,255)@1",
+     "bg": "rgb(15,118,110)"
+    },
+    {
+     "el": "button.px-3.py-1.5.rounded-md",
+     "text": "Invoices",
+     "ratio": 7.6,
+     "need": 4.5,
+     "px": 14,
+     "disabled": false,
+     "fg": "rgb(87,83,78)@1",
+     "bg": "rgb(255,255,255)"
+    },
+    {
+     "el": "button.px-3.py-1.5.rounded-md",
+     "text": "Evidence",
+     "ratio": 7.6,
+     "need": 4.5,
+     "px": 14,
+     "disabled": false,
+     "fg": "rgb(87,83,78)@1",
+     "bg": "rgb(255,255,255)"
+    },
+    {
+     "el": "button.px-3.py-1.5.rounded-md",
+     "text": "Offline demo",
+     "ratio": 7.6,
+     "need": 4.5,
+     "px": 14,
+     "disabled": false,
+     "fg": "rgb(87,83,78)@1",
+     "bg": "rgb(255,255,255)"
+    }
+   ],
+   "placeholderContrast": [],
+   "hashes": [
+    {
+     "el": "p.text-xs.font-mono.break-all",
+     "len": 42,
+     "w": 622,
+     "clientW": 622,
+     "scrollW": 622,
+     "lines": 1,
+     "ws": "normal",
+     "ow": "normal",
+     "wb": "break-all",
+     "textOverflow": "clip",
+     "clippedByEllipsis": false,
+     "pastViewport": false,
+     "fontPx": 12
+    },
+    {
+     "el": "dd.font-mono.break-all",
+     "len": 42,
+     "w": 622,
+     "clientW": 622,
+     "scrollW": 622,
+     "lines": 1,
+     "ws": "normal",
+     "ow": "normal",
+     "wb": "break-all",
+     "textOverflow": "clip",
+     "clippedByEllipsis": false,
+     "pastViewport": false,
+     "fontPx": 14
+    },
+    {
+     "el": "dd.font-mono.break-all",
+     "len": 42,
+     "w": 622,
+     "clientW": 622,
+     "scrollW": 622,
+     "lines": 1,
+     "ws": "normal",
+     "ow": "normal",
+     "wb": "break-all",
+     "textOverflow": "clip",
+     "clippedByEllipsis": false,
+     "pastViewport": false,
+     "fontPx": 14
+    },
+    {
+     "el": "dd",
+     "len": 66,
+     "w": 622,
+     "clientW": 622,
+     "scrollW": 622,
+     "lines": 1,
+     "ws": "normal",
+     "ow": "anywhere",
+     "wb": "break-all",
+     "textOverflow": "clip",
+     "clippedByEllipsis": false,
+     "pastViewport": false,
+     "fontPx": 14
+    },
+    {
+     "el": "dd",
+     "len": 76,
+     "w": 622,
+     "clientW": 622,
+     "scrollW": 622,
+     "lines": 1,
+     "ws": "normal",
+     "ow": "anywhere",
+     "wb": "break-all",
+     "textOverflow": "clip",
+     "clippedByEllipsis": false,
+     "pastViewport": false,
+     "fontPx": 14
+    },
+    {
+     "el": "dd",
+     "len": 42,
+     "w": 622,
+     "clientW": 622,
+     "scrollW": 622,
+     "lines": 1,
+     "ws": "normal",
+     "ow": "anywhere",
+     "wb": "break-all",
+     "textOverflow": "clip",
+     "clippedByEllipsis": false,
+     "pastViewport": false,
+     "fontPx": 14
+    },
+    {
+     "el": "dd",
+     "len": 66,
+     "w": 622,
+     "clientW": 622,
+     "scrollW": 622,
+     "lines": 1,
+     "ws": "normal",
+     "ow": "anywhere",
+     "wb": "break-all",
+     "textOverflow": "clip",
+     "clippedByEllipsis": false,
+     "pastViewport": false,
+     "fontPx": 14
+    },
+    {
+     "el": "dd",
+     "len": 66,
+     "w": 622,
+     "clientW": 622,
+     "scrollW": 622,
+     "lines": 1,
+     "ws": "normal",
+     "ow": "anywhere",
+     "wb": "break-all",
+     "textOverflow": "clip",
+     "clippedByEllipsis": false,
+     "pastViewport": false,
+     "fontPx": 14
+    },
+    {
+     "el": "a.block.font-mono.text-xs",
+     "len": 79,
+     "w": 622,
+     "clientW": 622,
+     "scrollW": 622,
+     "lines": 3,
+     "ws": "normal",
+     "ow": "anywhere",
+     "wb": "break-all",
+     "textOverflow": "clip",
+     "clippedByEllipsis": false,
+     "pastViewport": false,
+     "fontPx": 12
+    }
+   ],
+   "liveRegions": [
+    {
+     "role": "status",
+     "text": "Not verified: WRONG_VALUE"
+    },
+    {
+     "role": "aria-live",
+     "text": "Notifications alt+T"
+    }
+   ],
+   "fold": {
+    "vh": 900,
+    "wordsAboveFold": 112,
+    "wordsTotal": 441,
+    "primaryButton": {
+     "text": "Verify from chain data",
+     "top": 491,
+     "bottom": 535,
+     "disabled": false,
+     "aboveFold": true
+    },
+    "bannerText": "Arc Testnet (5042002) · test USDC, no monetary value · mainnet disabled · not audited",
+    "firstH2": "Verify a testnet receipt",
+    "firstH2Top": 143
+   },
+   "docTitleIsRouteSpecific": "ArcProof — Prototype",
+   "activeElement": "body Skip to main content Arc",
+   "console": []
+  },
+  "receipt-selfdemo@375": {
+   "note": "REAL TestnetReceiptScreen + ReceiptFacts with a canned 'selfdemo' verification result (harness, no RPC)",
+   "url": "http://127.0.0.1:4182/?state=selfdemo#/receipt/5042002/0xdba9a4da8a5b2a834b451f595653dd3cb4c3e51addb2d8df8e0b18312f382d2d/0x52599e566fb42fb089c45b92b3e755a17101ca986c3f4cd947482421cf748d83?tx=0x9f2c41d7a8e03b65c1d4f7a92be8036d5a1c7e49b02f8d63a5c1e7094b3d2a68",
+   "page": {
+    "title": "ArcProof — Prototype",
+    "lang": "en",
+    "viewportMeta": "width=device-width, initial-scale=1.0",
+    "h1Count": 1,
+    "landmarks": {
+     "header": 1,
+     "nav": 1,
+     "main": 1,
+     "footer": 1,
+     "aside": 0
+    },
+    "skipLink": true,
+    "hash": "#/receipt/5042002/0xdba9a4da8a5b2a834b451f595653dd3cb4c3e51addb2d8df8e0b18312f382d2d/0x52599e566fb42fb089c45b92b3e755a17101ca986c3f4cd947482421cf748d83?tx=0x9f2c41d7a8e03b65c1d4f7a92be8036d5a1c7e49b02f8d63a5c1e7094b3d2a68",
+    "bodyFont": "system-ui, sans-serif",
+    "fontsLoaded": [
+     "DM Sans:true",
+     "Space Grotesk:false",
+     "JetBrains Mono:true"
+    ]
+   },
+   "overflow": {
+    "innerWidth": 375,
+    "scrollWidth": 375,
+    "overflowX": false,
+    "pageHeight": 2237,
+    "offenders": []
+   },
+   "headings": [
+    {
+     "level": 1,
+     "text": "ArcProof",
+     "y": 69
+    },
+    {
+     "level": 2,
+     "text": "Verify a testnet receipt",
+     "y": 255
+    },
+    {
+     "level": 3,
+     "text": "Verified testnet payment",
+     "y": 789
+    },
+    {
+     "level": 4,
+     "text": "Evidence checked",
+     "y": 1295
+    },
+    {
+     "level": 4,
+     "text": "Next step",
+     "y": 1427
+    }
+   ],
+   "headingProblems": [],
+   "fields": [
+    {
+     "el": "input#live-receipt-id",
+     "type": "text",
+     "label": "Invoice ID",
+     "describedby": null,
+     "autocomplete": null,
+     "inputmode": null,
+     "fontPx": 16,
+     "w": 309,
+     "h": 44,
+     "disabled": false
+    },
+    {
+     "el": "input#live-receipt-tx",
+     "type": "text",
+     "label": "Payment transaction hash (optional)",
+     "describedby": null,
+     "autocomplete": null,
+     "inputmode": null,
+     "fontPx": 16,
+     "w": 309,
+     "h": 44,
+     "disabled": false
+    }
+   ],
+   "targets": [
+    {
+     "el": "a.skip-link",
+     "text": "Skip to main content",
+     "w": 178,
+     "h": 48,
+     "inline": false,
+     "disabled": false
+    },
+    {
+     "el": "button.px-3.py-1.5.rounded-md",
+     "text": "Invoices",
+     "w": 78,
+     "h": 44,
+     "inline": false,
+     "disabled": false
+    },
+    {
+     "el": "button.px-3.py-1.5.rounded-md",
+     "text": "Verify receipt",
+     "w": 113,
+     "h": 44,
+     "inline": false,
+     "disabled": false
+    },
+    {
+     "el": "button.px-3.py-1.5.rounded-md",
+     "text": "Evidence",
+     "w": 85,
+     "h": 44,
+     "inline": false,
+     "disabled": false
+    },
+    {
+     "el": "button.px-3.py-1.5.rounded-md",
+     "text": "Offline demo",
+     "w": 110,
+     "h": 44,
+     "inline": false,
+     "disabled": false
+    },
+    {
+     "el": "input#live-receipt-id",
+     "text": "0x52599e566fb42fb089c45b92b3e755a171",
+     "w": 309,
+     "h": 44,
+     "inline": false,
+     "disabled": false
+    },
+    {
+     "el": "input#live-receipt-tx",
+     "text": "0x9f2c41d7a8e03b65c1d4f7a92be8036d5a",
+     "w": 309,
+     "h": 44,
+     "inline": false,
+     "disabled": false
+    },
+    {
+     "el": "button.rounded-lg.px-4.py-2",
+     "text": "Verify from chain data",
+     "w": 196,
+     "h": 44,
+     "inline": false,
+     "disabled": false
+    },
+    {
+     "el": "summary.cursor-pointer.py-2.font-semibold",
+     "text": "Evidence details and raw receipt",
+     "w": 309,
+     "h": 44,
+     "inline": false,
+     "disabled": false
+    },
+    {
+     "el": "summary.cursor-pointer.font-semibold.py-2",
+     "text": "Individual verification checks",
+     "w": 309,
+     "h": 44,
+     "inline": false,
+     "disabled": false
+    },
+    {
+     "el": "a.block.font-mono.text-xs",
+     "text": "Transaction: 0x9f2c41d7a8e03b65c1d4f",
+     "w": 309,
+     "h": 44,
+     "inline": false,
+     "disabled": false
+    },
+    {
+     "el": "button.underline.py-2",
+     "text": "Copy verification link",
+     "w": 135,
+     "h": 44,
+     "inline": false,
+     "disabled": false
+    },
+    {
+     "el": "a.underline.py-2",
+     "text": "Open verification link",
+     "w": 137,
+     "h": 44,
+     "inline": false,
+     "disabled": false
+    },
+    {
+     "el": "button.underline.py-2",
+     "text": "Export testnet JSON",
+     "w": 132,
+     "h": 44,
+     "inline": false,
+     "disabled": false
+    },
+    {
+     "el": "button.underline.py-2",
+     "text": "Export testnet CSV",
+     "w": 124,
+     "h": 44,
+     "inline": false,
+     "disabled": false
+    },
+    {
+     "el": "button.underline.py-2",
+     "text": "Print",
+     "w": 30,
+     "h": 44,
+     "inline": false,
+     "disabled": false
+    },
+    {
+     "el": "a.underline",
+     "text": "Build identity and evidence",
+     "w": 177,
+     "h": 44,
+     "inline": false,
+     "disabled": false
+    },
+    {
+     "el": "a.studio-attribution",
+     "text": "Built with Arc Studio",
+     "w": 159,
+     "h": 44,
+     "inline": false,
+     "disabled": false
+    }
+   ],
+   "smallTargets": [
+    {
+     "el": "button.underline.py-2",
+     "text": "Print",
+     "w": 30,
+     "h": 44,
+     "inline": false,
+     "disabled": false
+    }
+   ],
+   "tinyTargets": [],
+   "fontSizes": {
+    "chars": 3372,
+    "pctLE12px": 3.6,
+    "pctLT14px": 3.6
+   },
+   "contrastFails": [],
+   "contrastLowestPassing": [
+    {
+     "el": "button.px-3.py-1.5.rounded-md",
+     "text": "Verify receipt",
+     "ratio": 5.2,
+     "need": 4.5,
+     "px": 14,
+     "disabled": false,
+     "fg": "rgb(15,118,110)@1",
+     "bg": "rgb(240,253,250)"
+    },
+    {
+     "el": "button.rounded-lg.px-4.py-2",
+     "text": "Verify from chain data",
+     "ratio": 5.5,
+     "need": 4.5,
+     "px": 16,
+     "disabled": false,
+     "fg": "rgb(255,255,255)@1",
+     "bg": "rgb(15,118,110)"
+    },
+    {
+     "el": "button.px-3.py-1.5.rounded-md",
+     "text": "Invoices",
+     "ratio": 7.6,
+     "need": 4.5,
+     "px": 14,
+     "disabled": false,
+     "fg": "rgb(87,83,78)@1",
+     "bg": "rgb(255,255,255)"
+    },
+    {
+     "el": "button.px-3.py-1.5.rounded-md",
+     "text": "Evidence",
+     "ratio": 7.6,
+     "need": 4.5,
+     "px": 14,
+     "disabled": false,
+     "fg": "rgb(87,83,78)@1",
+     "bg": "rgb(255,255,255)"
+    },
+    {
+     "el": "button.px-3.py-1.5.rounded-md",
+     "text": "Offline demo",
+     "ratio": 7.6,
+     "need": 4.5,
+     "px": 14,
+     "disabled": false,
+     "fg": "rgb(87,83,78)@1",
+     "bg": "rgb(255,255,255)"
+    }
+   ],
+   "placeholderContrast": [],
+   "hashes": [
+    {
+     "el": "p.text-xs.font-mono.break-all",
+     "len": 42,
+     "w": 309,
+     "clientW": 309,
+     "scrollW": 309,
+     "lines": 1,
+     "ws": "normal",
+     "ow": "normal",
+     "wb": "break-all",
+     "textOverflow": "clip",
+     "clippedByEllipsis": false,
+     "pastViewport": false,
+     "fontPx": 12
+    },
+    {
+     "el": "dd.font-mono.break-all",
+     "len": 42,
+     "w": 309,
+     "clientW": 309,
+     "scrollW": 309,
+     "lines": 2,
+     "ws": "normal",
+     "ow": "normal",
+     "wb": "break-all",
+     "textOverflow": "clip",
+     "clippedByEllipsis": false,
+     "pastViewport": false,
+     "fontPx": 14
+    },
+    {
+     "el": "dd.font-mono.break-all",
+     "len": 42,
+     "w": 309,
+     "clientW": 309,
+     "scrollW": 309,
+     "lines": 2,
+     "ws": "normal",
+     "ow": "normal",
+     "wb": "break-all",
+     "textOverflow": "clip",
+     "clippedByEllipsis": false,
+     "pastViewport": false,
+     "fontPx": 14
+    },
+    {
+     "el": "dd",
+     "len": 66,
+     "w": 309,
+     "clientW": 309,
+     "scrollW": 309,
+     "lines": 2,
+     "ws": "normal",
+     "ow": "anywhere",
+     "wb": "break-all",
+     "textOverflow": "clip",
+     "clippedByEllipsis": false,
+     "pastViewport": false,
+     "fontPx": 14
+    },
+    {
+     "el": "dd",
+     "len": 76,
+     "w": 309,
+     "clientW": 309,
+     "scrollW": 309,
+     "lines": 2,
+     "ws": "normal",
+     "ow": "anywhere",
+     "wb": "break-all",
+     "textOverflow": "clip",
+     "clippedByEllipsis": false,
+     "pastViewport": false,
+     "fontPx": 14
+    },
+    {
+     "el": "dd",
+     "len": 42,
+     "w": 309,
+     "clientW": 309,
+     "scrollW": 309,
+     "lines": 2,
+     "ws": "normal",
+     "ow": "anywhere",
+     "wb": "break-all",
+     "textOverflow": "clip",
+     "clippedByEllipsis": false,
+     "pastViewport": false,
+     "fontPx": 14
+    },
+    {
+     "el": "dd",
+     "len": 66,
+     "w": 309,
+     "clientW": 309,
+     "scrollW": 309,
+     "lines": 2,
+     "ws": "normal",
+     "ow": "anywhere",
+     "wb": "break-all",
+     "textOverflow": "clip",
+     "clippedByEllipsis": false,
+     "pastViewport": false,
+     "fontPx": 14
+    },
+    {
+     "el": "dd",
+     "len": 66,
+     "w": 309,
+     "clientW": 309,
+     "scrollW": 309,
+     "lines": 2,
+     "ws": "normal",
+     "ow": "anywhere",
+     "wb": "break-all",
+     "textOverflow": "clip",
+     "clippedByEllipsis": false,
+     "pastViewport": false,
+     "fontPx": 14
+    },
+    {
+     "el": "dd",
+     "len": 66,
+     "w": 309,
+     "clientW": 309,
+     "scrollW": 309,
+     "lines": 2,
+     "ws": "normal",
+     "ow": "anywhere",
+     "wb": "break-all",
+     "textOverflow": "clip",
+     "clippedByEllipsis": false,
+     "pastViewport": false,
+     "fontPx": 14
+    },
+    {
+     "el": "a.block.font-mono.text-xs",
+     "len": 79,
+     "w": 309,
+     "clientW": 309,
+     "scrollW": 309,
+     "lines": 3,
+     "ws": "normal",
+     "ow": "anywhere",
+     "wb": "break-all",
+     "textOverflow": "clip",
+     "clippedByEllipsis": false,
+     "pastViewport": false,
+     "fontPx": 12
+    }
+   ],
+   "liveRegions": [
+    {
+     "role": "status",
+     "text": "Verified testnet payment"
+    },
+    {
+     "role": "aria-live",
+     "text": "Notifications alt+T"
+    }
+   ],
+   "fold": {
+    "vh": 812,
+    "wordsAboveFold": 89,
+    "wordsTotal": 420,
+    "primaryButton": {
+     "text": "Verify from chain data",
+     "top": 663,
+     "bottom": 707,
+     "disabled": false,
+     "aboveFold": true
+    },
+    "bannerText": "Arc Testnet (5042002) · test USDC, no monetary value · mainnet disabled · not audited",
+    "firstH2": "Verify a testnet receipt",
+    "firstH2Top": 255
+   },
+   "docTitleIsRouteSpecific": "ArcProof — Prototype",
+   "activeElement": "body Skip to main content Arc",
+   "console": []
+  },
+  "receipt-selfdemo@768": {
+   "note": "REAL TestnetReceiptScreen + ReceiptFacts with a canned 'selfdemo' verification result (harness, no RPC)",
+   "url": "http://127.0.0.1:4182/?state=selfdemo#/receipt/5042002/0xdba9a4da8a5b2a834b451f595653dd3cb4c3e51addb2d8df8e0b18312f382d2d/0x52599e566fb42fb089c45b92b3e755a17101ca986c3f4cd947482421cf748d83?tx=0x9f2c41d7a8e03b65c1d4f7a92be8036d5a1c7e49b02f8d63a5c1e7094b3d2a68",
+   "page": {
+    "title": "ArcProof — Prototype",
+    "lang": "en",
+    "viewportMeta": "width=device-width, initial-scale=1.0",
+    "h1Count": 1,
+    "landmarks": {
+     "header": 1,
+     "nav": 1,
+     "main": 1,
+     "footer": 1,
+     "aside": 0
+    },
+    "skipLink": true,
+    "hash": "#/receipt/5042002/0xdba9a4da8a5b2a834b451f595653dd3cb4c3e51addb2d8df8e0b18312f382d2d/0x52599e566fb42fb089c45b92b3e755a17101ca986c3f4cd947482421cf748d83?tx=0x9f2c41d7a8e03b65c1d4f7a92be8036d5a1c7e49b02f8d63a5c1e7094b3d2a68",
+    "bodyFont": "system-ui, sans-serif",
+    "fontsLoaded": [
+     "DM Sans:true",
+     "Space Grotesk:false",
+     "JetBrains Mono:true"
+    ]
+   },
+   "overflow": {
+    "innerWidth": 768,
+    "scrollWidth": 753,
+    "overflowX": false,
+    "pageHeight": 1721,
+    "offenders": []
+   },
+   "headings": [
+    {
+     "level": 1,
+     "text": "ArcProof",
+     "y": 51
+    },
+    {
+     "level": 2,
+     "text": "Verify a testnet receipt",
+     "y": 143
+    },
+    {
+     "level": 3,
+     "text": "Verified testnet payment",
+     "y": 633
+    },
+    {
+     "level": 4,
+     "text": "Evidence checked",
+     "y": 1047
+    },
+    {
+     "level": 4,
+     "text": "Next step",
+     "y": 1159
+    }
+   ],
+   "headingProblems": [],
+   "fields": [
+    {
+     "el": "input#live-receipt-id",
+     "type": "text",
+     "label": "Invoice ID",
+     "describedby": null,
+     "autocomplete": null,
+     "inputmode": null,
+     "fontPx": 16,
+     "w": 622,
+     "h": 44,
+     "disabled": false
+    },
+    {
+     "el": "input#live-receipt-tx",
+     "type": "text",
+     "label": "Payment transaction hash (optional)",
+     "describedby": null,
+     "autocomplete": null,
+     "inputmode": null,
+     "fontPx": 16,
+     "w": 622,
+     "h": 44,
+     "disabled": false
+    }
+   ],
+   "targets": [
+    {
+     "el": "a.skip-link",
+     "text": "Skip to main content",
+     "w": 178,
+     "h": 48,
+     "inline": false,
+     "disabled": false
+    },
+    {
+     "el": "button.px-3.py-1.5.rounded-md",
+     "text": "Invoices",
+     "w": 78,
+     "h": 44,
+     "inline": false,
+     "disabled": false
+    },
+    {
+     "el": "button.px-3.py-1.5.rounded-md",
+     "text": "Verify receipt",
+     "w": 113,
+     "h": 44,
+     "inline": false,
+     "disabled": false
+    },
+    {
+     "el": "button.px-3.py-1.5.rounded-md",
+     "text": "Evidence",
+     "w": 85,
+     "h": 44,
+     "inline": false,
+     "disabled": false
+    },
+    {
+     "el": "button.px-3.py-1.5.rounded-md",
+     "text": "Offline demo",
+     "w": 110,
+     "h": 44,
+     "inline": false,
+     "disabled": false
+    },
+    {
+     "el": "input#live-receipt-id",
+     "text": "0x52599e566fb42fb089c45b92b3e755a171",
+     "w": 622,
+     "h": 44,
+     "inline": false,
+     "disabled": false
+    },
+    {
+     "el": "input#live-receipt-tx",
+     "text": "0x9f2c41d7a8e03b65c1d4f7a92be8036d5a",
+     "w": 622,
+     "h": 44,
+     "inline": false,
+     "disabled": false
+    },
+    {
+     "el": "button.rounded-lg.px-4.py-2",
+     "text": "Verify from chain data",
+     "w": 196,
+     "h": 44,
+     "inline": false,
+     "disabled": false
+    },
+    {
+     "el": "summary.cursor-pointer.py-2.font-semibold",
+     "text": "Evidence details and raw receipt",
+     "w": 622,
+     "h": 44,
+     "inline": false,
+     "disabled": false
+    },
+    {
+     "el": "summary.cursor-pointer.font-semibold.py-2",
+     "text": "Individual verification checks",
+     "w": 622,
+     "h": 44,
+     "inline": false,
+     "disabled": false
+    },
+    {
+     "el": "a.block.font-mono.text-xs",
+     "text": "Transaction: 0x9f2c41d7a8e03b65c1d4f",
+     "w": 622,
+     "h": 44,
+     "inline": false,
+     "disabled": false
+    },
+    {
+     "el": "button.underline.py-2",
+     "text": "Copy verification link",
+     "w": 135,
+     "h": 44,
+     "inline": false,
+     "disabled": false
+    },
+    {
+     "el": "a.underline.py-2",
+     "text": "Open verification link",
+     "w": 137,
+     "h": 44,
+     "inline": false,
+     "disabled": false
+    },
+    {
+     "el": "button.underline.py-2",
+     "text": "Export testnet JSON",
+     "w": 132,
+     "h": 44,
+     "inline": false,
+     "disabled": false
+    },
+    {
+     "el": "button.underline.py-2",
+     "text": "Export testnet CSV",
+     "w": 124,
+     "h": 44,
+     "inline": false,
+     "disabled": false
+    },
+    {
+     "el": "button.underline.py-2",
+     "text": "Print",
+     "w": 30,
+     "h": 44,
+     "inline": false,
+     "disabled": false
+    },
+    {
+     "el": "a.underline",
+     "text": "Build identity and evidence",
+     "w": 177,
+     "h": 44,
+     "inline": false,
+     "disabled": false
+    },
+    {
+     "el": "a.studio-attribution",
+     "text": "Built with Arc Studio",
+     "w": 159,
+     "h": 44,
+     "inline": false,
+     "disabled": false
+    }
+   ],
+   "smallTargets": [
+    {
+     "el": "button.underline.py-2",
+     "text": "Print",
+     "w": 30,
+     "h": 44,
+     "inline": false,
+     "disabled": false
+    }
+   ],
+   "tinyTargets": [],
+   "fontSizes": {
+    "chars": 3372,
+    "pctLE12px": 3.6,
+    "pctLT14px": 3.6
+   },
+   "contrastFails": [],
+   "contrastLowestPassing": [
+    {
+     "el": "button.px-3.py-1.5.rounded-md",
+     "text": "Verify receipt",
+     "ratio": 5.2,
+     "need": 4.5,
+     "px": 14,
+     "disabled": false,
+     "fg": "rgb(15,118,110)@1",
+     "bg": "rgb(240,253,250)"
+    },
+    {
+     "el": "button.rounded-lg.px-4.py-2",
+     "text": "Verify from chain data",
+     "ratio": 5.5,
+     "need": 4.5,
+     "px": 16,
+     "disabled": false,
+     "fg": "rgb(255,255,255)@1",
+     "bg": "rgb(15,118,110)"
+    },
+    {
+     "el": "button.px-3.py-1.5.rounded-md",
+     "text": "Invoices",
+     "ratio": 7.6,
+     "need": 4.5,
+     "px": 14,
+     "disabled": false,
+     "fg": "rgb(87,83,78)@1",
+     "bg": "rgb(255,255,255)"
+    },
+    {
+     "el": "button.px-3.py-1.5.rounded-md",
+     "text": "Evidence",
+     "ratio": 7.6,
+     "need": 4.5,
+     "px": 14,
+     "disabled": false,
+     "fg": "rgb(87,83,78)@1",
+     "bg": "rgb(255,255,255)"
+    },
+    {
+     "el": "button.px-3.py-1.5.rounded-md",
+     "text": "Offline demo",
+     "ratio": 7.6,
+     "need": 4.5,
+     "px": 14,
+     "disabled": false,
+     "fg": "rgb(87,83,78)@1",
+     "bg": "rgb(255,255,255)"
+    }
+   ],
+   "placeholderContrast": [],
+   "hashes": [
+    {
+     "el": "p.text-xs.font-mono.break-all",
+     "len": 42,
+     "w": 622,
+     "clientW": 622,
+     "scrollW": 622,
+     "lines": 1,
+     "ws": "normal",
+     "ow": "normal",
+     "wb": "break-all",
+     "textOverflow": "clip",
+     "clippedByEllipsis": false,
+     "pastViewport": false,
+     "fontPx": 12
+    },
+    {
+     "el": "dd.font-mono.break-all",
+     "len": 42,
+     "w": 622,
+     "clientW": 622,
+     "scrollW": 622,
+     "lines": 1,
+     "ws": "normal",
+     "ow": "normal",
+     "wb": "break-all",
+     "textOverflow": "clip",
+     "clippedByEllipsis": false,
+     "pastViewport": false,
+     "fontPx": 14
+    },
+    {
+     "el": "dd.font-mono.break-all",
+     "len": 42,
+     "w": 622,
+     "clientW": 622,
+     "scrollW": 622,
+     "lines": 1,
+     "ws": "normal",
+     "ow": "normal",
+     "wb": "break-all",
+     "textOverflow": "clip",
+     "clippedByEllipsis": false,
+     "pastViewport": false,
+     "fontPx": 14
+    },
+    {
+     "el": "dd",
+     "len": 66,
+     "w": 622,
+     "clientW": 622,
+     "scrollW": 622,
+     "lines": 1,
+     "ws": "normal",
+     "ow": "anywhere",
+     "wb": "break-all",
+     "textOverflow": "clip",
+     "clippedByEllipsis": false,
+     "pastViewport": false,
+     "fontPx": 14
+    },
+    {
+     "el": "dd",
+     "len": 76,
+     "w": 622,
+     "clientW": 622,
+     "scrollW": 622,
+     "lines": 1,
+     "ws": "normal",
+     "ow": "anywhere",
+     "wb": "break-all",
+     "textOverflow": "clip",
+     "clippedByEllipsis": false,
+     "pastViewport": false,
+     "fontPx": 14
+    },
+    {
+     "el": "dd",
+     "len": 42,
+     "w": 622,
+     "clientW": 622,
+     "scrollW": 622,
+     "lines": 1,
+     "ws": "normal",
+     "ow": "anywhere",
+     "wb": "break-all",
+     "textOverflow": "clip",
+     "clippedByEllipsis": false,
+     "pastViewport": false,
+     "fontPx": 14
+    },
+    {
+     "el": "dd",
+     "len": 66,
+     "w": 622,
+     "clientW": 622,
+     "scrollW": 622,
+     "lines": 1,
+     "ws": "normal",
+     "ow": "anywhere",
+     "wb": "break-all",
+     "textOverflow": "clip",
+     "clippedByEllipsis": false,
+     "pastViewport": false,
+     "fontPx": 14
+    },
+    {
+     "el": "dd",
+     "len": 66,
+     "w": 622,
+     "clientW": 622,
+     "scrollW": 622,
+     "lines": 1,
+     "ws": "normal",
+     "ow": "anywhere",
+     "wb": "break-all",
+     "textOverflow": "clip",
+     "clippedByEllipsis": false,
+     "pastViewport": false,
+     "fontPx": 14
+    },
+    {
+     "el": "dd",
+     "len": 66,
+     "w": 622,
+     "clientW": 622,
+     "scrollW": 622,
+     "lines": 1,
+     "ws": "normal",
+     "ow": "anywhere",
+     "wb": "break-all",
+     "textOverflow": "clip",
+     "clippedByEllipsis": false,
+     "pastViewport": false,
+     "fontPx": 14
+    },
+    {
+     "el": "a.block.font-mono.text-xs",
+     "len": 79,
+     "w": 622,
+     "clientW": 622,
+     "scrollW": 622,
+     "lines": 3,
+     "ws": "normal",
+     "ow": "anywhere",
+     "wb": "break-all",
+     "textOverflow": "clip",
+     "clippedByEllipsis": false,
+     "pastViewport": false,
+     "fontPx": 12
+    }
+   ],
+   "liveRegions": [
+    {
+     "role": "status",
+     "text": "Verified testnet payment"
+    },
+    {
+     "role": "aria-live",
+     "text": "Notifications alt+T"
+    }
+   ],
+   "fold": {
+    "vh": 1024,
+    "wordsAboveFold": 135,
+    "wordsTotal": 420,
+    "primaryButton": {
+     "text": "Verify from chain data",
+     "top": 491,
+     "bottom": 535,
+     "disabled": false,
+     "aboveFold": true
+    },
+    "bannerText": "Arc Testnet (5042002) · test USDC, no monetary value · mainnet disabled · not audited",
+    "firstH2": "Verify a testnet receipt",
+    "firstH2Top": 143
+   },
+   "docTitleIsRouteSpecific": "ArcProof — Prototype",
+   "activeElement": "body Skip to main content Arc",
+   "console": []
+  },
+  "receipt-selfdemo@1440": {
+   "note": "REAL TestnetReceiptScreen + ReceiptFacts with a canned 'selfdemo' verification result (harness, no RPC)",
+   "url": "http://127.0.0.1:4182/?state=selfdemo#/receipt/5042002/0xdba9a4da8a5b2a834b451f595653dd3cb4c3e51addb2d8df8e0b18312f382d2d/0x52599e566fb42fb089c45b92b3e755a17101ca986c3f4cd947482421cf748d83?tx=0x9f2c41d7a8e03b65c1d4f7a92be8036d5a1c7e49b02f8d63a5c1e7094b3d2a68",
+   "page": {
+    "title": "ArcProof — Prototype",
+    "lang": "en",
+    "viewportMeta": "width=device-width, initial-scale=1.0",
+    "h1Count": 1,
+    "landmarks": {
+     "header": 1,
+     "nav": 1,
+     "main": 1,
+     "footer": 1,
+     "aside": 0
+    },
+    "skipLink": true,
+    "hash": "#/receipt/5042002/0xdba9a4da8a5b2a834b451f595653dd3cb4c3e51addb2d8df8e0b18312f382d2d/0x52599e566fb42fb089c45b92b3e755a17101ca986c3f4cd947482421cf748d83?tx=0x9f2c41d7a8e03b65c1d4f7a92be8036d5a1c7e49b02f8d63a5c1e7094b3d2a68",
+    "bodyFont": "system-ui, sans-serif",
+    "fontsLoaded": [
+     "DM Sans:true",
+     "Space Grotesk:false",
+     "JetBrains Mono:true"
+    ]
+   },
+   "overflow": {
+    "innerWidth": 1440,
+    "scrollWidth": 1425,
+    "overflowX": false,
+    "pageHeight": 1721,
+    "offenders": []
+   },
+   "headings": [
+    {
+     "level": 1,
+     "text": "ArcProof",
+     "y": 51
+    },
+    {
+     "level": 2,
+     "text": "Verify a testnet receipt",
+     "y": 143
+    },
+    {
+     "level": 3,
+     "text": "Verified testnet payment",
+     "y": 633
+    },
+    {
+     "level": 4,
+     "text": "Evidence checked",
+     "y": 1047
+    },
+    {
+     "level": 4,
+     "text": "Next step",
+     "y": 1159
+    }
+   ],
+   "headingProblems": [],
+   "fields": [
+    {
+     "el": "input#live-receipt-id",
+     "type": "text",
+     "label": "Invoice ID",
+     "describedby": null,
+     "autocomplete": null,
+     "inputmode": null,
+     "fontPx": 16,
+     "w": 622,
+     "h": 44,
+     "disabled": false
+    },
+    {
+     "el": "input#live-receipt-tx",
+     "type": "text",
+     "label": "Payment transaction hash (optional)",
+     "describedby": null,
+     "autocomplete": null,
+     "inputmode": null,
+     "fontPx": 16,
+     "w": 622,
+     "h": 44,
+     "disabled": false
+    }
+   ],
+   "targets": [
+    {
+     "el": "a.skip-link",
+     "text": "Skip to main content",
+     "w": 178,
+     "h": 48,
+     "inline": false,
+     "disabled": false
+    },
+    {
+     "el": "button.px-3.py-1.5.rounded-md",
+     "text": "Invoices",
+     "w": 78,
+     "h": 44,
+     "inline": false,
+     "disabled": false
+    },
+    {
+     "el": "button.px-3.py-1.5.rounded-md",
+     "text": "Verify receipt",
+     "w": 113,
+     "h": 44,
+     "inline": false,
+     "disabled": false
+    },
+    {
+     "el": "button.px-3.py-1.5.rounded-md",
+     "text": "Evidence",
+     "w": 85,
+     "h": 44,
+     "inline": false,
+     "disabled": false
+    },
+    {
+     "el": "button.px-3.py-1.5.rounded-md",
+     "text": "Offline demo",
+     "w": 110,
+     "h": 44,
+     "inline": false,
+     "disabled": false
+    },
+    {
+     "el": "input#live-receipt-id",
+     "text": "0x52599e566fb42fb089c45b92b3e755a171",
+     "w": 622,
+     "h": 44,
+     "inline": false,
+     "disabled": false
+    },
+    {
+     "el": "input#live-receipt-tx",
+     "text": "0x9f2c41d7a8e03b65c1d4f7a92be8036d5a",
+     "w": 622,
+     "h": 44,
+     "inline": false,
+     "disabled": false
+    },
+    {
+     "el": "button.rounded-lg.px-4.py-2",
+     "text": "Verify from chain data",
+     "w": 196,
+     "h": 44,
+     "inline": false,
+     "disabled": false
+    },
+    {
+     "el": "summary.cursor-pointer.py-2.font-semibold",
+     "text": "Evidence details and raw receipt",
+     "w": 622,
+     "h": 44,
+     "inline": false,
+     "disabled": false
+    },
+    {
+     "el": "summary.cursor-pointer.font-semibold.py-2",
+     "text": "Individual verification checks",
+     "w": 622,
+     "h": 44,
+     "inline": false,
+     "disabled": false
+    },
+    {
+     "el": "a.block.font-mono.text-xs",
+     "text": "Transaction: 0x9f2c41d7a8e03b65c1d4f",
+     "w": 622,
+     "h": 44,
+     "inline": false,
+     "disabled": false
+    },
+    {
+     "el": "button.underline.py-2",
+     "text": "Copy verification link",
+     "w": 135,
+     "h": 44,
+     "inline": false,
+     "disabled": false
+    },
+    {
+     "el": "a.underline.py-2",
+     "text": "Open verification link",
+     "w": 137,
+     "h": 44,
+     "inline": false,
+     "disabled": false
+    },
+    {
+     "el": "button.underline.py-2",
+     "text": "Export testnet JSON",
+     "w": 132,
+     "h": 44,
+     "inline": false,
+     "disabled": false
+    },
+    {
+     "el": "button.underline.py-2",
+     "text": "Export testnet CSV",
+     "w": 124,
+     "h": 44,
+     "inline": false,
+     "disabled": false
+    },
+    {
+     "el": "button.underline.py-2",
+     "text": "Print",
+     "w": 30,
+     "h": 44,
+     "inline": false,
+     "disabled": false
+    },
+    {
+     "el": "a.underline",
+     "text": "Build identity and evidence",
+     "w": 177,
+     "h": 44,
+     "inline": false,
+     "disabled": false
+    },
+    {
+     "el": "a.studio-attribution",
+     "text": "Built with Arc Studio",
+     "w": 159,
+     "h": 44,
+     "inline": false,
+     "disabled": false
+    }
+   ],
+   "smallTargets": [
+    {
+     "el": "button.underline.py-2",
+     "text": "Print",
+     "w": 30,
+     "h": 44,
+     "inline": false,
+     "disabled": false
+    }
+   ],
+   "tinyTargets": [],
+   "fontSizes": {
+    "chars": 3372,
+    "pctLE12px": 3.6,
+    "pctLT14px": 3.6
+   },
+   "contrastFails": [],
+   "contrastLowestPassing": [
+    {
+     "el": "button.px-3.py-1.5.rounded-md",
+     "text": "Verify receipt",
+     "ratio": 5.2,
+     "need": 4.5,
+     "px": 14,
+     "disabled": false,
+     "fg": "rgb(15,118,110)@1",
+     "bg": "rgb(240,253,250)"
+    },
+    {
+     "el": "button.rounded-lg.px-4.py-2",
+     "text": "Verify from chain data",
+     "ratio": 5.5,
+     "need": 4.5,
+     "px": 16,
+     "disabled": false,
+     "fg": "rgb(255,255,255)@1",
+     "bg": "rgb(15,118,110)"
+    },
+    {
+     "el": "button.px-3.py-1.5.rounded-md",
+     "text": "Invoices",
+     "ratio": 7.6,
+     "need": 4.5,
+     "px": 14,
+     "disabled": false,
+     "fg": "rgb(87,83,78)@1",
+     "bg": "rgb(255,255,255)"
+    },
+    {
+     "el": "button.px-3.py-1.5.rounded-md",
+     "text": "Evidence",
+     "ratio": 7.6,
+     "need": 4.5,
+     "px": 14,
+     "disabled": false,
+     "fg": "rgb(87,83,78)@1",
+     "bg": "rgb(255,255,255)"
+    },
+    {
+     "el": "button.px-3.py-1.5.rounded-md",
+     "text": "Offline demo",
+     "ratio": 7.6,
+     "need": 4.5,
+     "px": 14,
+     "disabled": false,
+     "fg": "rgb(87,83,78)@1",
+     "bg": "rgb(255,255,255)"
+    }
+   ],
+   "placeholderContrast": [],
+   "hashes": [
+    {
+     "el": "p.text-xs.font-mono.break-all",
+     "len": 42,
+     "w": 622,
+     "clientW": 622,
+     "scrollW": 622,
+     "lines": 1,
+     "ws": "normal",
+     "ow": "normal",
+     "wb": "break-all",
+     "textOverflow": "clip",
+     "clippedByEllipsis": false,
+     "pastViewport": false,
+     "fontPx": 12
+    },
+    {
+     "el": "dd.font-mono.break-all",
+     "len": 42,
+     "w": 622,
+     "clientW": 622,
+     "scrollW": 622,
+     "lines": 1,
+     "ws": "normal",
+     "ow": "normal",
+     "wb": "break-all",
+     "textOverflow": "clip",
+     "clippedByEllipsis": false,
+     "pastViewport": false,
+     "fontPx": 14
+    },
+    {
+     "el": "dd.font-mono.break-all",
+     "len": 42,
+     "w": 622,
+     "clientW": 622,
+     "scrollW": 622,
+     "lines": 1,
+     "ws": "normal",
+     "ow": "normal",
+     "wb": "break-all",
+     "textOverflow": "clip",
+     "clippedByEllipsis": false,
+     "pastViewport": false,
+     "fontPx": 14
+    },
+    {
+     "el": "dd",
+     "len": 66,
+     "w": 622,
+     "clientW": 622,
+     "scrollW": 622,
+     "lines": 1,
+     "ws": "normal",
+     "ow": "anywhere",
+     "wb": "break-all",
+     "textOverflow": "clip",
+     "clippedByEllipsis": false,
+     "pastViewport": false,
+     "fontPx": 14
+    },
+    {
+     "el": "dd",
+     "len": 76,
+     "w": 622,
+     "clientW": 622,
+     "scrollW": 622,
+     "lines": 1,
+     "ws": "normal",
+     "ow": "anywhere",
+     "wb": "break-all",
+     "textOverflow": "clip",
+     "clippedByEllipsis": false,
+     "pastViewport": false,
+     "fontPx": 14
+    },
+    {
+     "el": "dd",
+     "len": 42,
+     "w": 622,
+     "clientW": 622,
+     "scrollW": 622,
+     "lines": 1,
+     "ws": "normal",
+     "ow": "anywhere",
+     "wb": "break-all",
+     "textOverflow": "clip",
+     "clippedByEllipsis": false,
+     "pastViewport": false,
+     "fontPx": 14
+    },
+    {
+     "el": "dd",
+     "len": 66,
+     "w": 622,
+     "clientW": 622,
+     "scrollW": 622,
+     "lines": 1,
+     "ws": "normal",
+     "ow": "anywhere",
+     "wb": "break-all",
+     "textOverflow": "clip",
+     "clippedByEllipsis": false,
+     "pastViewport": false,
+     "fontPx": 14
+    },
+    {
+     "el": "dd",
+     "len": 66,
+     "w": 622,
+     "clientW": 622,
+     "scrollW": 622,
+     "lines": 1,
+     "ws": "normal",
+     "ow": "anywhere",
+     "wb": "break-all",
+     "textOverflow": "clip",
+     "clippedByEllipsis": false,
+     "pastViewport": false,
+     "fontPx": 14
+    },
+    {
+     "el": "dd",
+     "len": 66,
+     "w": 622,
+     "clientW": 622,
+     "scrollW": 622,
+     "lines": 1,
+     "ws": "normal",
+     "ow": "anywhere",
+     "wb": "break-all",
+     "textOverflow": "clip",
+     "clippedByEllipsis": false,
+     "pastViewport": false,
+     "fontPx": 14
+    },
+    {
+     "el": "a.block.font-mono.text-xs",
+     "len": 79,
+     "w": 622,
+     "clientW": 622,
+     "scrollW": 622,
+     "lines": 3,
+     "ws": "normal",
+     "ow": "anywhere",
+     "wb": "break-all",
+     "textOverflow": "clip",
+     "clippedByEllipsis": false,
+     "pastViewport": false,
+     "fontPx": 12
+    }
+   ],
+   "liveRegions": [
+    {
+     "role": "status",
+     "text": "Verified testnet payment"
+    },
+    {
+     "role": "aria-live",
+     "text": "Notifications alt+T"
+    }
+   ],
+   "fold": {
+    "vh": 900,
+    "wordsAboveFold": 103,
+    "wordsTotal": 420,
+    "primaryButton": {
+     "text": "Verify from chain data",
+     "top": 491,
+     "bottom": 535,
+     "disabled": false,
+     "aboveFold": true
+    },
+    "bannerText": "Arc Testnet (5042002) · test USDC, no monetary value · mainnet disabled · not audited",
+    "firstH2": "Verify a testnet receipt",
+    "firstH2Top": 143
+   },
+   "docTitleIsRouteSpecific": "ArcProof — Prototype",
+   "activeElement": "body Skip to main content Arc",
+   "console": []
+  }
+ },
+ "focus": {},
+ "blockedExternalRequests": []
+}

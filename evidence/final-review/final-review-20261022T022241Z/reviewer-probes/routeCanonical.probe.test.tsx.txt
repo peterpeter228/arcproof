@@ -1,0 +1,31 @@
+// @vitest-environment jsdom
+import React, { act } from 'react';
+import { createRoot, type Root } from 'react-dom/client';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
+import { TESTNET_DEPLOYMENT } from '../testnet';
+import { parseHash } from '../routes';
+vi.mock('connectkit', () => ({ ConnectKitButton: () => <button>Connect wallet</button> }));
+vi.mock('../../components/arcproof/TestnetScreens', () => ({
+  TestnetPayScreen: ({ invoiceId }: { invoiceId: string }) => <p>PAYABLE-SCREEN {invoiceId}</p>,
+  TestnetReceiptScreen: () => <p>RECEIPT-SCREEN</p>,
+  TestnetDashboard: () => <p>DASHBOARD</p>,
+}));
+import App from '../../App';
+let root: Root, host: HTMLDivElement;
+beforeEach(() => {
+  (globalThis as typeof globalThis & { IS_REACT_ACT_ENVIRONMENT: boolean }).IS_REACT_ACT_ENVIRONMENT = true;
+  host = document.createElement('div'); document.body.appendChild(host); root = createRoot(host);
+});
+afterEach(() => { act(() => root.unmount()); host.remove(); });
+const id = '0x' + 'a'.repeat(64);
+describe('PROBE non-canonical chainId in pay route', () => {
+  it('leading-zero chainId parses to the trusted chain and mounts the payable screen', () => {
+    const hash = `#/pay/0005042002/${TESTNET_DEPLOYMENT.deploymentId}/${id}`;
+    expect(parseHash(hash).chainId).toBe(5042002);
+    window.history.replaceState(null, '', hash);
+    act(() => root.render(<App />));
+    console.log('RENDERED:', host.textContent?.slice(0, 200));
+    // Invariant expectation: non-canonical input rejected. Observed: payable screen.
+    expect(host.textContent).toContain('PAYABLE-SCREEN');
+  });
+});

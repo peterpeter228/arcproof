@@ -1,0 +1,54 @@
+
+ RUN  v4.1.12 /workspace/scratch/c01bd6fe117d/arcproof-stageA-20261022/security-probes
+
+stdout | export-boundary.test.ts > Independent fixture export boundary > does not label an explicitly synthetic registered fixture as verified proof
+{"mode":"fixture","verificationStatus":"VERIFIED","verificationVerified":true,"verifiedEvidence":{"policyId":"synthetic-only","nativeEmitter":"0xcccccccccccccccccccccccccccccccccccccccc","decimals":18,"payerToContractLogIndex":0,"contractToMerchantLogIndex":1,"finalizedBlockNumber":"10","finalizedBlockHash":"0xdddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd","controlled_demo":true},"settlementEvidence":{"policyId":"synthetic-only","nativeEmitter":"0xcccccccccccccccccccccccccccccccccccccccc","decimals":18,"payerToContractLogIndex":0,"contractToMerchantLogIndex":1,"finalizedBlockNumber":"10","finalizedBlockHash":"0xdddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd","controlled_demo":true},"json":{"schemaVersion":"1.2","reasonCode":"VERIFIED","message":"Synthetic caller success","checks":[],"readStartedAt":null,"readCompletedAt":null,"source":null,"observationScope":null,"observedReceipt":null,"observedInvoice":null,"verifiedEvidence":{"policyId":"synthetic-only","nativeEmitter":"0xcccccccccccccccccccccccccccccccccccccccc","decimals":18,"payerToContractLogIndex":0,"contractToMerchantLogIndex":1,"finalizedBlockNumber":"10","finalizedBlockHash":"0xdddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd","controlled_demo":true},"verificationVerified":true,"factsBasis":"legacy_caller_supplied","contractAddress":"0x0000000000000000000000000000000000000001","txHash":"0xbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb","blockNumber":null,"gasFeeNative":null,"verifiedAt":1,"chainId":2482601649,"deploymentId":"fixture-arc-testnet-001","contract":"0x0000000000000000000000000000000000000001","invoiceId":"0xaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa","transactionHash":"0xbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb","paymentLogIndex":2,"amountNative":"200000000000000000","payer":null,"merchant":null,"paidAt":"1","paidBlockNumber":"10","blockHash":"0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee","verificationStatus":"VERIFIED","settlementEvidence":{"policyId":"synthetic-only","nativeEmitter":"0xcccccccccccccccccccccccccccccccccccccccc","decimals":18,"payerToContractLogIndex":0,"contractToMerchantLogIndex":1,"finalizedBlockNumber":"10","finalizedBlockHash":"0xdddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd","controlled_demo":true},"mode":"fixture","controlled_demo":false,"amountDisplay":"0.20","importedVerified":false},"csv":"chainId,deploymentId,contract,invoiceId,transactionHash,paymentLogIndex,amountNative,amountDisplay,payer,merchant,paidAt,paidBlockNumber,blockHash,verificationStatus,mode,controlled_demo,settlementPolicy,nativeEmitter,nativeDecimals,payerToContractLogIndex,contractToMerchantLogIndex,finalizedBlockNumber,finalizedBlockHash,schemaVersion,contractAddress,txHash,blockNumber,gasFeeNative,verifiedAt,reasonCode,message,factsBasis,verificationVerified,source,readStartedAt,readCompletedAt,observedReceiptStatus,observedGasUsed,observedEffectiveGasPrice,observedBlockTimestamp,checks\n2482601649,fixture-arc-testnet-001,0x0000000000000000000000000000000000000001,0xaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa,0xbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb,2,200000000000000000,0.20,,,1,10,0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee,VERIFIED,fixture,false,synthetic-only,0xcccccccccccccccccccccccccccccccccccccccc,18,0,1,10,0xdddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd,1.2,0x0000000000000000000000000000000000000001,0xbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb,,,1,VERIFIED,Synthetic caller success,legacy_caller_supplied,true,,,,,,,,[]"}
+
+stdout | export-boundary.test.ts > Independent fixture export boundary > does not let explicit isFixture=true promote a known deployed identity into real proof
+Known target marked fixture: {"mode":"testnet","verified":true,"status":"VERIFIED"}
+
+ ❯ export-boundary.test.ts (2 tests | 2 failed) 59ms
+     × does not label an explicitly synthetic registered fixture as verified proof 53ms
+     × does not let explicit isFixture=true promote a known deployed identity into real proof 3ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  export-boundary.test.ts > Independent fixture export boundary > does not label an explicitly synthetic registered fixture as verified proof
+AssertionError: expected true to be false // Object.is equality
+
+- Expected
++ Received
+
+- false
++ true
+
+ ❯ export-boundary.test.ts:15:34
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯
+
+ FAIL  export-boundary.test.ts > Independent fixture export boundary > does not let explicit isFixture=true promote a known deployed identity into real proof
+AssertionError: expected true to be false // Object.is equality
+
+- Expected
++ Received
+
+- false
++ true
+
+ ❯ export-boundary.test.ts:23:34
+     21|   const r=buildReceiptExport(TESTNET_DEPLOYMENT,id,tx,2000000000000000…
+     22|   console.log('Known target marked fixture: '+JSON.stringify({mode:r.m…
+     23|   expect(r.verificationVerified).toBe(false);
+       |                                  ^
+     24|   expect(r.settlementEvidence).toBeUndefined();
+     25|  });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  2 failed (2)
+   Start at  12:21:36
+   Duration  1.56s (transform 363ms, setup 0ms, import 971ms, tests 59ms, environment 0ms)
+

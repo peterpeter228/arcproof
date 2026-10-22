@@ -1,0 +1,40 @@
+[
+  {
+    "amount": "0",
+    "enabled": false,
+    "error": [
+      " Amount must be greater than zero"
+    ]
+  },
+  {
+    "amount": "-0.1",
+    "enabled": false,
+    "error": [
+      " Amount must be positive"
+    ]
+  },
+  {
+    "amount": "1.000001",
+    "enabled": false,
+    "error": [
+      " Amount must not exceed 1 USDC"
+    ]
+  },
+  {
+    "amount": "1e-6",
+    "enabled": false,
+    "error": [
+      " Scientific notation is not accepted"
+    ]
+  },
+  {
+    "amount": "0.000001",
+    "enabled": true,
+    "error": []
+  },
+  {
+    "amount": "1",
+    "enabled": true,
+    "error": []
+  }
+]

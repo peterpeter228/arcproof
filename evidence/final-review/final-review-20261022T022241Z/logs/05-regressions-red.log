@@ -1,0 +1,132 @@
+
+ RUN  v4.1.12 /root/arcproof
+
+ ❯ src/arcproof/__tests__/finalReviewRegressions.test.tsx (12 tests | 7 failed) 25ms
+     × rejects testnet writes when the build network is mainnet, even with a trusted testnet context 7ms
+     × keeps testnet writes available in the testnet build 1ms
+     × downgrades a VERIFIED result for an unregistered contract to UNKNOWN_DEPLOYMENT without evidence 2ms
+     × rejects chain segment 0005042002 1ms
+     × rejects chain segment 05042002 1ms
+     × rejects chain segment 0 0ms
+     × maps the adapter conflict to INVALID_LOG_PROVENANCE 3ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 7 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  src/arcproof/__tests__/finalReviewRegressions.test.tsx > FR-01 wallet writes are limited to the fixed build network > rejects testnet writes when the build network is mainnet, even with a trusted testnet context
+AssertionError: expected [Function] to throw error matching /build network/ but got '(0 , __vite_ssr_import_9__.assertWrit…'
+
+- Expected:
+/build network/
+
++ Received:
+"(0 , __vite_ssr_import_9__.assertWritesEnabledFor) is not a function"
+
+ ❯ src/arcproof/__tests__/finalReviewRegressions.test.tsx:22:76
+     20| describe('FR-01 wallet writes are limited to the fixed build network',…
+     21|   it('rejects testnet writes when the build network is mainnet, even w…
+     22|     expect(() => assertWritesEnabledFor(TESTNET_CONTEXT, MAINNET_CONTE…
+       |                                                                            ^
+     23|     expect(() => assertWritesEnabledFor(MAINNET_CONTEXT, MAINNET_CONTE…
+     24|   });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/7]⎯
+
+ FAIL  src/arcproof/__tests__/finalReviewRegressions.test.tsx > FR-01 wallet writes are limited to the fixed build network > keeps testnet writes available in the testnet build
+AssertionError: expected [Function] to not throw an error but 'TypeError: (0 , __vite_ssr_import_9__…' was thrown
+
+- Expected:
+undefined
+
++ Received:
+"TypeError: (0 , __vite_ssr_import_9__.assertWritesEnabledFor) is not a function"
+
+ ❯ src/arcproof/__tests__/finalReviewRegressions.test.tsx:26:80
+     24|   });
+     25|   it('keeps testnet writes available in the testnet build', () => {
+     26|     expect(() => assertWritesEnabledFor(TESTNET_CONTEXT, TESTNET_CONTE…
+       |                                                                                ^
+     27|     expect(() => assertWritesEnabled(TESTNET_CONTEXT)).not.toThrow();
+     28|   });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/7]⎯
+
+ FAIL  src/arcproof/__tests__/finalReviewRegressions.test.tsx > FR-02 untrusted deployments never export verified settlement evidence > downgrades a VERIFIED result for an unregistered contract to UNKNOWN_DEPLOYMENT without evidence
+AssertionError: expected true to be false // Object.is equality
+
+- Expected
++ Received
+
+- false
++ true
+
+ ❯ src/arcproof/__tests__/finalReviewRegressions.test.tsx:43:41
+     41|     const record = buildReceiptExport(untrusted, id, tx, null, null, n…
+     42|     expect(record.mode).toBe('unknown');
+     43|     expect(record.verificationVerified).toBe(false);
+       |                                         ^
+     44|     expect(record.verifiedEvidence).toBeNull();
+     45|     expect(record.settlementEvidence).toBeUndefined();
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/7]⎯
+
+ FAIL  src/arcproof/__tests__/finalReviewRegressions.test.tsx > FR-03 route chain IDs must be canonical > rejects chain segment 0005042002
+ FAIL  src/arcproof/__tests__/finalReviewRegressions.test.tsx > FR-03 route chain IDs must be canonical > rejects chain segment 05042002
+AssertionError: expected 5042002 to be undefined
+
+- Expected:
+undefined
+
++ Received:
+5042002
+
+ ❯ src/arcproof/__tests__/finalReviewRegressions.test.tsx:62:90
+     60| describe('FR-03 route chain IDs must be canonical', () => {
+     61|   it.each(['0005042002', '05042002', '0'])('rejects chain segment %s',…
+     62|     expect(parseHash(`#/pay/${chain}/${TESTNET_DEPLOYMENT.deploymentId…
+       |                                                                                          ^
+     63|     expect(parseHash(`#/receipt/${chain}/${TESTNET_DEPLOYMENT.deployme…
+     64|   });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/7]⎯
+
+ FAIL  src/arcproof/__tests__/finalReviewRegressions.test.tsx > FR-03 route chain IDs must be canonical > rejects chain segment 0
+AssertionError: expected +0 to be undefined
+
+- Expected:
+undefined
+
++ Received:
+0
+
+ ❯ src/arcproof/__tests__/finalReviewRegressions.test.tsx:62:90
+     60| describe('FR-03 route chain IDs must be canonical', () => {
+     61|   it.each(['0005042002', '05042002', '0'])('rejects chain segment %s',…
+     62|     expect(parseHash(`#/pay/${chain}/${TESTNET_DEPLOYMENT.deploymentId…
+       |                                                                                          ^
+     63|     expect(parseHash(`#/receipt/${chain}/${TESTNET_DEPLOYMENT.deployme…
+     64|   });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/7]⎯
+
+ FAIL  src/arcproof/__tests__/finalReviewRegressions.test.tsx > FR-04 conflicting receipt log provenance is reported as such, not as "not found" > maps the adapter conflict to INVALID_LOG_PROVENANCE
+AssertionError: expected 'PENDING' to be 'INVALID_LOG_PROVENANCE' // Object.is equality
+
+Expected: "INVALID_LOG_PROVENANCE"
+Received: "PENDING"
+
+ ❯ src/arcproof/__tests__/finalReviewRegressions.test.tsx:82:28
+     80|     const outcome = await verifyReceipt(tx, id, { ...TESTNET_DEPLOYMEN…
+     81|     expect(outcome.verified).toBe(false);
+     82|     expect(outcome.status).toBe('INVALID_LOG_PROVENANCE');
+       |                            ^
+     83|     expect(outcome.message).not.toMatch(/not found/);
+     84|   });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[6/7]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  7 failed | 5 passed (12)
+   Start at  10:37:17
+   Duration  1.08s (transform 210ms, setup 0ms, import 384ms, tests 25ms, environment 539ms)
+

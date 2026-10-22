@@ -1,0 +1,55 @@
+
+ RUN  v4.1.12 /workspace/scratch/c01bd6fe117d/arcproof-stageA-20261022/mutation
+
+ ❯ src/arcproof/__tests__/finalReviewRegressions.test.tsx (12 tests | 3 failed | 8 skipped) 22ms
+     × rejects chain segment 0005042002 14ms
+     × rejects chain segment 05042002 1ms
+     × rejects chain segment 0 1ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 3 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  src/arcproof/__tests__/finalReviewRegressions.test.tsx > FR-03 route chain IDs must be canonical > rejects chain segment 0005042002
+ FAIL  src/arcproof/__tests__/finalReviewRegressions.test.tsx > FR-03 route chain IDs must be canonical > rejects chain segment 05042002
+AssertionError: expected 5042002 to be undefined
+
+- Expected:
+undefined
+
++ Received:
+5042002
+
+ ❯ src/arcproof/__tests__/finalReviewRegressions.test.tsx:63:90
+     61| describe('FR-03 route chain IDs must be canonical', () => {
+     62|   it.each(['0005042002', '05042002', '0'])('rejects chain segment %s',…
+     63|     expect(parseHash(`#/pay/${chain}/${TESTNET_DEPLOYMENT.deploymentId…
+       |                                                                                          ^
+     64|     expect(parseHash(`#/receipt/${chain}/${TESTNET_DEPLOYMENT.deployme…
+     65|   });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/3]⎯
+
+ FAIL  src/arcproof/__tests__/finalReviewRegressions.test.tsx > FR-03 route chain IDs must be canonical > rejects chain segment 0
+AssertionError: expected +0 to be undefined
+
+- Expected:
+undefined
+
++ Received:
+0
+
+ ❯ src/arcproof/__tests__/finalReviewRegressions.test.tsx:63:90
+     61| describe('FR-03 route chain IDs must be canonical', () => {
+     62|   it.each(['0005042002', '05042002', '0'])('rejects chain segment %s',…
+     63|     expect(parseHash(`#/pay/${chain}/${TESTNET_DEPLOYMENT.deploymentId…
+       |                                                                                          ^
+     64|     expect(parseHash(`#/receipt/${chain}/${TESTNET_DEPLOYMENT.deployme…
+     65|   });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/3]⎯
+
+
+ Test Files  1 failed | 30 skipped (31)
+      Tests  3 failed | 1 passed | 481 skipped (485)
+   Start at  12:23:10
+   Duration  5.73s (transform 3.44s, setup 0ms, import 17.35s, tests 22ms, environment 11.61s)
+

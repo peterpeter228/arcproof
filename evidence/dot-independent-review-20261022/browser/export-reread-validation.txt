@@ -1,0 +1,2 @@
+original: PASS JSON + CSV semantic re-read; fixture / SIMULATED_NOT_VERIFIED; exact amount; null chain payment fields.
+fixed: PASS JSON + CSV semantic re-read; fixture / SIMULATED_NOT_VERIFIED; exact amount; null chain payment fields.

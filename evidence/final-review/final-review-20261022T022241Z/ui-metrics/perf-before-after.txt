@@ -1,0 +1,6 @@
+before 1440: {"dcl": 105, "load": 106, "fcp": 144, "lcp": 144, "cls": 0, "requests": 7, "external": 4, "transferKB": 546}
+before 375: {"dcl": 105, "load": 105, "fcp": 144, "lcp": 144, "cls": 0, "requests": 7, "external": 4, "transferKB": 546}
+after 1440: {"dcl": 104, "load": 104, "fcp": 148, "lcp": 148, "cls": 0, "requests": 3, "external": 0, "transferKB": 461}
+after 375: {"dcl": 105, "load": 105, "fcp": 140, "lcp": 140, "cls": 0, "requests": 3, "external": 0, "transferKB": 461}
+after-verify 1440: {"dcl": 107, "load": 107, "fcp": 144, "lcp": 144, "cls": 0, "requests": 3, "external": 0, "transferKB": 461}
+after-verify 375: {"dcl": 106, "load": 106, "fcp": 136, "lcp": 136, "cls": 0, "requests": 3, "external": 0, "transferKB": 461}

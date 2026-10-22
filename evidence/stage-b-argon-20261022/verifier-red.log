@@ -1,0 +1,30 @@
+
+ RUN  v4.1.12 /workspace/scratch/c01bd6fe117d/arcproof-stage-b-20261022/source
+
+ ❯ src/arcproof/__tests__/argonVerifierBounds.test.ts (3 tests | 1 failed) 16ms
+     × rejects direct-provider expiry beyond the supported date bound 12ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  src/arcproof/__tests__/argonVerifierBounds.test.ts > Independent Argon verifier-bound triage > rejects direct-provider expiry beyond the supported date bound
+AssertionError: expected 'VERIFIED' to be 'WRONG_EVENT_DATA' // Object.is equality
+
+Expected: "WRONG_EVENT_DATA"
+Received: "VERIFIED"
+
+ ❯ src/arcproof/__tests__/argonVerifierBounds.test.ts:11:27
+      9|     f.invoice.expiresAt = 8_640_000_000_001n;
+     10|     const result = await verifyReceipt(f.txHash, f.invoiceId, f.deploy…
+     11|     expect(result.status).toBe('WRONG_EVENT_DATA');
+       |                           ^
+     12|     expect(result.verified).toBe(false);
+     13|   });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  1 failed | 2 passed (3)
+   Start at  13:50:18
+   Duration  738ms (transform 138ms, setup 0ms, import 360ms, tests 16ms, environment 0ms)
+

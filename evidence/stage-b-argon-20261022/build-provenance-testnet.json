@@ -1,0 +1,730 @@
+{
+  "networkKey": "testnet",
+  "sourceCommit": null,
+  "verifiedBaseCommit": null,
+  "sourceSnapshotSha256": "8752073c7c83c227fc642c71deafd6583c9e69e82d490e3d43b7ed340a1a50a7",
+  "builtAtUTC": "2026-10-22T04:53:28.314Z",
+  "sourceState": "candidate",
+  "schema": "arcproof-build-provenance-v1",
+  "sourceInputs": [
+    {
+      "path": "bun.lock",
+      "sha256": "6f213340418484d065886c56b9d34cda9c29ce22f73e6a9bd58b2696180385ff"
+    },
+    {
+      "path": "contracts/ArcProofInvoices.sol",
+      "sha256": "8699071d250c834cd1166ece0d4001b7de95af7562796e19305ce2812635e25b"
+    },
+    {
+      "path": "contracts/test/ArcProofAcceptance.t.sol",
+      "sha256": "b493a925b6b6e46380521d52d3dc5491b95c00806ce467061a22ba4d847cede5"
+    },
+    {
+      "path": "contracts/test/ArcProofInvoices.t.sol",
+      "sha256": "389e730e3bdd10a77680955ac51aae32437eb2545946273eb97e18da4019563a"
+    },
+    {
+      "path": "contracts/test/IndependentBalanceReview.t.sol",
+      "sha256": "5fb0fb41bb4edd48668efa01846ac7504cb7e6a7f6fa18ffcae315ad14a00935"
+    },
+    {
+      "path": "contracts/test/IndependentReentrancyReview.t.sol",
+      "sha256": "d88c4033cfdf0fc7e286c35aeb72ac607a27e945bb999b8136cc84b77486fb1d"
+    },
+    {
+      "path": "contracts/test/IndependentReturnDataReview.t.sol",
+      "sha256": "99a7ae0b80115e973a066c06ff7efbd01494dc8a4e94ce14449dc900a38a7fec"
+    },
+    {
+      "path": "evidence/g1/ArcProofInvoices.artifact.json",
+      "sha256": "278fe52ed5901c6ebf054a42275dd11917dcc8edebd992bbd1fd24ef09bec53b"
+    },
+    {
+      "path": "evidence/g3-native-verifier/observed-browser-evidence.json",
+      "sha256": "68ddf5bc076c5f27e162033698008dc48c06535c5718d1ea0c14c636f5e08406"
+    },
+    {
+      "path": "foundry.toml",
+      "sha256": "2deb4217c39b7b62fbc9f9c844bea76b9b00f1a48cb422f174bf80e6ba155b10"
+    },
+    {
+      "path": "index.html",
+      "sha256": "10639344397df82adc590220eb40d3a98b2359014bb4c4e67f44f496c3e41b22"
+    },
+    {
+      "path": "package.json",
+      "sha256": "13c703de6950bb5c6f0a91958c0cb0b1bcd417b56dbea327d857ada649e94dc3"
+    },
+    {
+      "path": "postcss.config.js",
+      "sha256": "f0156321fafa19749b38a82ea29e7b1786a1f727b67372ef40cc66de0ed898fb"
+    },
+    {
+      "path": "remappings.txt",
+      "sha256": "7db29ab99ec9f13cfd2dc2c9c746f77e57f85c17c6186a15204e1dfdcfadd29c"
+    },
+    {
+      "path": "scripts/buildProvenance.ts",
+      "sha256": "390ba1b59d91de5eead7931e68b1fa11767f0055b193206c2f30c088bc32d621"
+    },
+    {
+      "path": "scripts/check.sh",
+      "sha256": "b2f9dc0c31f73e21e4b6ed820b2caa0c2b8ed88b8ae69301abd010683a050011"
+    },
+    {
+      "path": "src/App.tsx",
+      "sha256": "a3b82f84ddefaa81d413a74a9e25a64e8736f77c0e48b51b4779e350b9633ba2"
+    },
+    {
+      "path": "src/arcproof/__tests__/T18_amountParser.test.ts",
+      "sha256": "3e9f82b85cbe18a0ff18ff5d23a5abae977d486fd6e5992697f5f10535312ea3"
+    },
+    {
+      "path": "src/arcproof/__tests__/T19_manifest.test.ts",
+      "sha256": "20b7e900ff34d19c4d5673dab462859e9b743474b83e0c4ca7b7c2cb69a33567"
+    },
+    {
+      "path": "src/arcproof/__tests__/T20_preparedPayment.test.ts",
+      "sha256": "e70482a8b943ecdcd62136a8aecc64f57690945675ed1ce8b765ea53e3d4a132"
+    },
+    {
+      "path": "src/arcproof/__tests__/T22_receiptVerifier.test.ts",
+      "sha256": "adada0b16eef05d42be11bdeb7615acaa8f6230ca712fcbd624f45a8eb149739"
+    },
+    {
+      "path": "src/arcproof/__tests__/T24_exportUtils.test.ts",
+      "sha256": "8b3e840f4a2b48769e070af731e1b0dc123330fc485188d6ebda634b45031206"
+    },
+    {
+      "path": "src/arcproof/__tests__/argonExportDiagnostics.test.ts",
+      "sha256": "79e1d9ad48c9b880e6a4ad2bf8ea64aef4ecddb2f373fcfd35b525929c17a737"
+    },
+    {
+      "path": "src/arcproof/__tests__/argonVerifierBounds.test.ts",
+      "sha256": "2e9dc2a8802e3696806eac4d02c1965ace1093d23bed435daaec8fe19e3d0302"
+    },
+    {
+      "path": "src/arcproof/__tests__/buildIdentity.test.ts",
+      "sha256": "14d0a39209dd969787eed3883dddaf52ad48e269ab7901af7699925dfc47209c"
+    },
+    {
+      "path": "src/arcproof/__tests__/buildProvenance.test.ts",
+      "sha256": "3c448d5f262b96f5bf2f50bcba61cfff1540af13738be7b34fc3cc4f929df84d"
+    },
+    {
+      "path": "src/arcproof/__tests__/exportObservations.test.ts",
+      "sha256": "33f5b72aa1dc93efae5c0e99a2191239536fc0679e64b91f0fb855ce1aa77b19"
+    },
+    {
+      "path": "src/arcproof/__tests__/finalReviewRegressions.test.tsx",
+      "sha256": "64d6432fbcd36b6ac5fab1852e120698e59e6fcbaa2718ed433a11bc28e4325f"
+    },
+    {
+      "path": "src/arcproof/__tests__/fixtureExportBoundary.test.tsx",
+      "sha256": "79355301acb6a36d5cbe2fc85d6d622f00f2978a6427290d74255d0942b11e87"
+    },
+    {
+      "path": "src/arcproof/__tests__/fixtures/observedPayment.ts",
+      "sha256": "da7bda6762055575355e82f1389a22bc0082dcdd361c108315f61e15b5f63cda"
+    },
+    {
+      "path": "src/arcproof/__tests__/fixtures/safeBrowser.ts",
+      "sha256": "5b9aae97c717d9475d17636d60e46d537372317a51e0991aba668accbcfc14a0"
+    },
+    {
+      "path": "src/arcproof/__tests__/footerTargetSize.test.ts",
+      "sha256": "1399040966b296b3c25cd7757c3663ed0c3a30be1a9d4dd3d4bdc5d8145c0cad"
+    },
+    {
+      "path": "src/arcproof/__tests__/intentInputValidation.test.ts",
+      "sha256": "a3fbff839fc1a5e8f0f3a63d23fe5ae1649a6a01538ca7674d0febd6a7d407b1"
+    },
+    {
+      "path": "src/arcproof/__tests__/mainnetReadonlyUi.test.tsx",
+      "sha256": "1b7d2e1cc89b3001d285e99ea24c09bc971bf5e3d77d3a7196c868d1f94b5785"
+    },
+    {
+      "path": "src/arcproof/__tests__/mainnetWalletBootstrap.test.ts",
+      "sha256": "670d916d504ddd5e1994e2738a1c181875c083467200643a1ee2b2e4c36b2d3e"
+    },
+    {
+      "path": "src/arcproof/__tests__/nativeRepair.test.ts",
+      "sha256": "6efdce0617e581b1ffdc7c5426e5a9be78fb16034d592ded96a9ddf1b2b1096b"
+    },
+    {
+      "path": "src/arcproof/__tests__/nativeSettlement.test.ts",
+      "sha256": "67c5449b412a7d290c7f03614ddbb6c4b67ba36c2b1c0b01fde8b5a89fe4109c"
+    },
+    {
+      "path": "src/arcproof/__tests__/networkPolicy.test.ts",
+      "sha256": "c9cb061f604929c16d7f4f25f142b8db44947c69343f1481c8ae7857200bca7d"
+    },
+    {
+      "path": "src/arcproof/__tests__/offlineDemo.test.tsx",
+      "sha256": "b3ac40a63eb6d86c9ec2df37014bb309d96d247c37960ce6f877977601bdc4db"
+    },
+    {
+      "path": "src/arcproof/__tests__/readonlyRoutes.test.tsx",
+      "sha256": "7e9f7597680bff7697c62b1debd3675a6a4bd98bffd09a64fe815508feb9c1c0"
+    },
+    {
+      "path": "src/arcproof/__tests__/receiptClarity.test.tsx",
+      "sha256": "830e7380951456b8bb429dc744bd8f21575ec21653829a427ae65832d7bed0d1"
+    },
+    {
+      "path": "src/arcproof/__tests__/receiptCurrency.test.ts",
+      "sha256": "53029d6d18988ef76180fc923696fc5489b38366ac36e4445b8d007dac012595"
+    },
+    {
+      "path": "src/arcproof/__tests__/receiptDiagnosticsUi.test.tsx",
+      "sha256": "cd751c9a04ab4007b8007e58775b3c7aa94c70575f6e08df85fdab3758e52d98"
+    },
+    {
+      "path": "src/arcproof/__tests__/submissions.test.ts",
+      "sha256": "2694a8ec8f505ec3ba122f83bd5858325c2e542a18f5f11be8cc9077d4b95d19"
+    },
+    {
+      "path": "src/arcproof/__tests__/testnetClient.test.ts",
+      "sha256": "88b7714e6e67864899c10aa53b8fd41ee4b91f2e3f1385c733d5c792c1befb32"
+    },
+    {
+      "path": "src/arcproof/__tests__/testnetIdentity.test.ts",
+      "sha256": "6b2ab20e88faf69b2083c2a36e777171029c33ab7cc5ee2cdca97dac363f6ee8"
+    },
+    {
+      "path": "src/arcproof/__tests__/testnetUi.test.tsx",
+      "sha256": "1a447952318bcf8520f267c1f61fb01baf2d90f99606f440c62e5841b785b833"
+    },
+    {
+      "path": "src/arcproof/__tests__/uiSemantics.test.tsx",
+      "sha256": "681bb0bd5ee82540a6d84245bfd413164b95d51145742dbcc707ddb68282b962"
+    },
+    {
+      "path": "src/arcproof/__tests__/unknownRequestIdentity.test.ts",
+      "sha256": "9b21fd2071f1e30caa2f3093dc6989475ef9b84dc4565ae914d663205af0ca67"
+    },
+    {
+      "path": "src/arcproof/__tests__/unknownRequestUi.test.tsx",
+      "sha256": "7c26b57e7584e686d858e315e195fe9e56df31ffe8c437cb593274bec9356425"
+    },
+    {
+      "path": "src/arcproof/__tests__/walletBootstrap.test.ts",
+      "sha256": "c7c54ae36f4b3ef6aa00cdc548e463f964b1e23e6c80291890f4effe93bfe7d8"
+    },
+    {
+      "path": "src/arcproof/__tests__/walletIntents.test.ts",
+      "sha256": "dbbf158cac289e99da63926b1e3335356df1f40bb86ab6d621e4b91d21bdc820"
+    },
+    {
+      "path": "src/arcproof/amountParser.ts",
+      "sha256": "af1b21797cecb5dbbb8dbfd31ee4d407cbda64c48a3daddcb22cec8fa1214796"
+    },
+    {
+      "path": "src/arcproof/arcSettlement.ts",
+      "sha256": "48be72c58c3422c317895fbc7aede5c014778850c5c37c9ed60a9d23774707dd"
+    },
+    {
+      "path": "src/arcproof/arcproofAbi.ts",
+      "sha256": "9fd157cf47bfb185fe2f3740b54ee0ef09b0386dde6d7bd0cf0d6531e75621f7"
+    },
+    {
+      "path": "src/arcproof/buildIdentity.ts",
+      "sha256": "7825da2efcaadf31dcbc1c43a5fc63fbe32ca7beaf433bbbcc9ad2cdcfbaaccb"
+    },
+    {
+      "path": "src/arcproof/exportUtils.ts",
+      "sha256": "f07e43dc33fd41987d47743a4b012a79fd150c128ff70e269be5f1a83c1317a0"
+    },
+    {
+      "path": "src/arcproof/invoiceId.ts",
+      "sha256": "99f5263b31f2440ff9cd55129df084f7684c687cdfbf81b981d9db6426e1f298"
+    },
+    {
+      "path": "src/arcproof/manifest.ts",
+      "sha256": "c65ef5a548db9454c838b5ce154b811403bbd96b91aebedfb585db587c533357"
+    },
+    {
+      "path": "src/arcproof/networkPolicy.ts",
+      "sha256": "1d1900503dab157258ef007417c8fe9cdb82277cece1434ec1e84b1deef4ba42"
+    },
+    {
+      "path": "src/arcproof/offlineFixture.ts",
+      "sha256": "8af3f84549997523e20ac99c49d875c2060b059fcf2cc52d734714ca083ac68d"
+    },
+    {
+      "path": "src/arcproof/preparedPayment.ts",
+      "sha256": "ed79c737cb2b4f503ec79aaeac1e659c86ca4144bc0343ebdd1e8a54a69421b5"
+    },
+    {
+      "path": "src/arcproof/receiptCurrency.ts",
+      "sha256": "b459165b59f387f1d19ebceef7edf271c59cd968cb4fbff5e1c9d67a86d12364"
+    },
+    {
+      "path": "src/arcproof/receiptStatus.ts",
+      "sha256": "73d96ac7761e4824978a6399de2b9dcab4bb8d8e552c76f0e5bd08ab292a5906"
+    },
+    {
+      "path": "src/arcproof/receiptVerifier.ts",
+      "sha256": "8f2aecfb5ad44c733efb81ecf497ed75cad6bad6de549797cfe8f3869ab5d87a"
+    },
+    {
+      "path": "src/arcproof/routes.ts",
+      "sha256": "3a7bd314c59448b030471296c92ec3c1c04d437204ed527c5bee83b916c9b366"
+    },
+    {
+      "path": "src/arcproof/submissions.ts",
+      "sha256": "355257b3d634e185c134f45560d363866d4e50e04c4efa67f28b333f0f835e16"
+    },
+    {
+      "path": "src/arcproof/testnet.ts",
+      "sha256": "729b3325f1b1574b9a9ea9c5e96061cd9228b25959c6ebd56b574313cc81c811"
+    },
+    {
+      "path": "src/arcproof/testnetClient.ts",
+      "sha256": "84f3f3c065c478ced0daacc992cbe314fb629bce295b11ee5e8fb9ca40078dc4"
+    },
+    {
+      "path": "src/arcproof/useTestnetWallet.ts",
+      "sha256": "500dd698a56bbc8a55a5e03d5095da8c141f0bd971f251ed22ce3913d06ffa8e"
+    },
+    {
+      "path": "src/arcproof/walletIntents.ts",
+      "sha256": "9dfc28a8c72db4ebd43319b62b09c13ef9d46e70a4c9f449e08783c494802868"
+    },
+    {
+      "path": "src/components/arcproof/BrandMark.tsx",
+      "sha256": "02930e01d4ebca206cc3dd01422b38ff6e11e761633f2f1afb03704cea46b287"
+    },
+    {
+      "path": "src/components/arcproof/DashboardScreen.tsx",
+      "sha256": "34d19b23143f72d4f21da245f54f98f2fb5f497735573196a909493befde29f5"
+    },
+    {
+      "path": "src/components/arcproof/DemoReceipt.tsx",
+      "sha256": "68b3a2a3e12edb3dda02b692197cc5b0a0aa3997adfb0a8ff0c27e768284f8ab"
+    },
+    {
+      "path": "src/components/arcproof/EvidenceScreen.tsx",
+      "sha256": "7a69691d77363d8b1badb765c2279cc4cc238cce3ff9d061001535061c0fd966"
+    },
+    {
+      "path": "src/components/arcproof/HomeScreen.tsx",
+      "sha256": "e26f19a9fa36c68fc1d4f09db2d9d5132112c8f3ee47af44c85236cf34b971da"
+    },
+    {
+      "path": "src/components/arcproof/Layout.tsx",
+      "sha256": "66ad6d92cf8c9c9c5aeafbc1a1e61be6705d62f1ccf7aa606d11dd73d278829a"
+    },
+    {
+      "path": "src/components/arcproof/NetworkUnavailable.tsx",
+      "sha256": "fcf62adeb14d4b5881b8e9d02ee50594df6edbc85b5329380202d693f817c35c"
+    },
+    {
+      "path": "src/components/arcproof/PayScreen.tsx",
+      "sha256": "d43bbc66b429ca22f7eba52e9d689559e8ad7ed75707907a5476fe347977b6ad"
+    },
+    {
+      "path": "src/components/arcproof/ReceiptFacts.tsx",
+      "sha256": "f43c805dbc6f7fa5e8baefbd8ede22611f2b969e9a71dd007b01c1fae3f741cc"
+    },
+    {
+      "path": "src/components/arcproof/ReceiptScreen.tsx",
+      "sha256": "075e395630b1e7819a89cb11b70638abf0c09f11c29478d09b24a8ef003809ac"
+    },
+    {
+      "path": "src/components/arcproof/StudioAttribution.tsx",
+      "sha256": "b38e1f84992c4cd16d3be891bb880d383c04589bca80b0b2427ed967363487fd"
+    },
+    {
+      "path": "src/components/arcproof/TestnetScreens.tsx",
+      "sha256": "e4d304e2a4c06e471201ad60f64e2c12085a22cf90616309a55b5bbcd4cf289a"
+    },
+    {
+      "path": "src/components/arcproof/UnavailableRequest.tsx",
+      "sha256": "d1de6a4380ba7c9a771a76b7ee78d454c5df163bc1b66efa09a21ae89109e5db"
+    },
+    {
+      "path": "src/config.ts",
+      "sha256": "4646557b0882e7f68b0f41ca2c5aecb8e2d12104dcb9d9b1eb66f33909826b35"
+    },
+    {
+      "path": "src/index.css",
+      "sha256": "49f379aad4b2787eb1dac8916fc555eb72cb80ffd7c81c01cf4bce95309548d1"
+    },
+    {
+      "path": "src/main.tsx",
+      "sha256": "8a3d4271be438ffbf1969d70bc94cd28d1d8364460e51ec1111779858ef1d616"
+    },
+    {
+      "path": "src/onchain-facts.ts",
+      "sha256": "c7c314ada2f6be684dcd24c703fee3fec68f8bc0a2c7c9d1bcf3633c33199abd"
+    },
+    {
+      "path": "src/onchain-money.ts",
+      "sha256": "1ac379552459f345f429d85b6d3f9f5f052be0c62ab630c6b111ea6f7a78af4f"
+    },
+    {
+      "path": "src/onchain-wait.ts",
+      "sha256": "e6b89dcf266213adea50cd35dd761aa8adfc4fb121dd90c702fb635d98bb1577"
+    },
+    {
+      "path": "src/security/debug-capture.test.ts",
+      "sha256": "3b6ee2193bc78326dfd1ff1eda791465bfecae9f55f8309574d6fe7aba3583a2"
+    },
+    {
+      "path": "src/vite-env.d.ts",
+      "sha256": "65996936fbb042915f7b74a200fcdde7e410f32a669b1ab9597cfaa4b0faddb5"
+    },
+    {
+      "path": "tailwind.config.js",
+      "sha256": "1f814889221fd2b2948a22798b9c5ece3b8ab046213f7a3757c324e00b66889d"
+    },
+    {
+      "path": "tsconfig.json",
+      "sha256": "83c5d5d611eb4e1c4a4350829e46111577c6bc7d9fb06cfb961817aad721a147"
+    },
+    {
+      "path": "vite.config.ts",
+      "sha256": "875d5eac007487c9632ed76cc8a99303ce0cd22e01c46895efc46eb68743830a"
+    }
+  ],
+  "outputs": [
+    {
+      "path": "assets/add-DUFQs-Jq.js",
+      "sha256": "2a91504e09cdce3f934de4d88373daf5b865e6dd1223759cdc967ac005d7a218"
+    },
+    {
+      "path": "assets/all-wallets-BTIn0550.js",
+      "sha256": "029688d3b421f4bc203319b5267b2d4eb4c8dce7cde96e7b98fa200b3c9a35b1"
+    },
+    {
+      "path": "assets/app-store-SPrGDh2Q.js",
+      "sha256": "264cf529cf9135ae044ce9c3152a41c41eef3545b4fd0f2877bfeb16b46e0f1e"
+    },
+    {
+      "path": "assets/apple-DU4N_G05.js",
+      "sha256": "b317d7a31b0371c8087ca6886991c256cf9e38b9a810de18300e331990aef84e"
+    },
+    {
+      "path": "assets/arrow-bottom-circle-DIn6YE8O.js",
+      "sha256": "4d461cf740796bbfadbb4bdaa033a4e7b8428b48460e1bd04dfc7022f038b17f"
+    },
+    {
+      "path": "assets/arrow-bottom-os-r8If6.js",
+      "sha256": "255121241a9157bb8f189f3b3e21b6b3bc4772db6600bede7468b4b1100fe0ad"
+    },
+    {
+      "path": "assets/arrow-left-Bwymsut-.js",
+      "sha256": "a040dc72352a8f7fc86c58d547a428f929d12a0bd3b030f61244ba14522958e0"
+    },
+    {
+      "path": "assets/arrow-right---8BSvH0.js",
+      "sha256": "187bcb2c5d2a5f8e9329c96d825f6fc6f78a50a078d7697ceef0abaf896dbcdd"
+    },
+    {
+      "path": "assets/arrow-top-GyQOV8he.js",
+      "sha256": "95e2b480a097e4e59f2db9e6d4d252c67adb5acdd454630256d215e070bb053f"
+    },
+    {
+      "path": "assets/bank-ickXMgR4.js",
+      "sha256": "93782a491281f49c63a68399b0318ccaf1b9438830ad04d5ee2b1e895b607fe2"
+    },
+    {
+      "path": "assets/basic-p37E6ZlI.js",
+      "sha256": "28981502435ed99e0bbf79a8934cbd907cd98b115355cb513f89e37366323ac1"
+    },
+    {
+      "path": "assets/browser-qE9m-uQH.js",
+      "sha256": "28ae0347924dbf5a9ca4b931d6ceb6fdeae701ba5c6c407fe3bc60cf18682507"
+    },
+    {
+      "path": "assets/card-Coh_zJU7.js",
+      "sha256": "fd7244ff13fda94f4b3bbe6dee51c6cbb97dcd1ad0103307ceb85d5525ed7b49"
+    },
+    {
+      "path": "assets/ccip-Bu7TSutQ.js",
+      "sha256": "8226342fec65587c6100277510fa177c8f34a0997181fcd98564cd30b6260f6c"
+    },
+    {
+      "path": "assets/checkmark-CC7tSRBS.js",
+      "sha256": "845565c51e6176422525b6dc172719590ac7883973beedc8aad8304d5d46b95d"
+    },
+    {
+      "path": "assets/checkmark-bold-B0a1wdNL.js",
+      "sha256": "45821d6df675695ec29254adc56c41b28471a4f140727b6792df1b3cd6f431b1"
+    },
+    {
+      "path": "assets/chevron-bottom-CXB_8II9.js",
+      "sha256": "ba13a00b34b299362aff51dd69006167b12f1dba581895c19e15e574a42a772e"
+    },
+    {
+      "path": "assets/chevron-left-7uCVZiXx.js",
+      "sha256": "4a7fffe17b83e4c6d021a6de215cb5855899d3e86e9bf37300039224534edd71"
+    },
+    {
+      "path": "assets/chevron-right-B6_-4sZ6.js",
+      "sha256": "bc4ffc8fc31172387d909ea050e1eda59d0114c482061053483111692d99f954"
+    },
+    {
+      "path": "assets/chevron-top-Cw_gm3so.js",
+      "sha256": "3d904cdcb408b1cb673b7affd0930f6db67d5e43ef090cb4c01147a00b43dcb6"
+    },
+    {
+      "path": "assets/chrome-store-CzHT79tG.js",
+      "sha256": "674be6aa7d49fbff73d9eb3bf8ab286320c84d331b57e43d496b3ca7e16c6104"
+    },
+    {
+      "path": "assets/clock-07mmUq5N.js",
+      "sha256": "d1a2c59ff565b1c8517729e91be7f27ce185c8d6e65a2a83175c6c2840765c41"
+    },
+    {
+      "path": "assets/close-Bs_VJ7Ym.js",
+      "sha256": "fc996dc73c2cd354ab44394e50a90fa1c38c81e677f395ab5df20b977e146b0a"
+    },
+    {
+      "path": "assets/coinPlaceholder-DMP-Y_Vd.js",
+      "sha256": "ec489de8796d412cd852449167616e084a1dd3addddedbeb4169a778beda2105"
+    },
+    {
+      "path": "assets/compass-BBkKi-qS.js",
+      "sha256": "db03b5dfeeb66e55aca63294d4d1b79cd2b7f5e9c3779e84bda120b7ee2de955"
+    },
+    {
+      "path": "assets/copy-Dp6S39k5.js",
+      "sha256": "74e5b7f7bbcd49ea42637125b56a589e2a5a698c929ff5ceb45d7070eac3a3a7"
+    },
+    {
+      "path": "assets/core-C6nz2lTv.js",
+      "sha256": "28d8e51a613cadd028ff0cf16caddf1ece334175482206f5712f9d6033804f3a"
+    },
+    {
+      "path": "assets/cursor-DLFLvhSC.js",
+      "sha256": "1f25cd14099eb559a77c5dc3759fc56d91542ee55b385852f6cdee800d4a7fd1"
+    },
+    {
+      "path": "assets/cursor-transparent-D3pqFhP6.js",
+      "sha256": "d6cb192a85dd764a8eea655f4f44d684d1cd90591010bd5a06b95e5fb54d9e1b"
+    },
+    {
+      "path": "assets/desktop-C_ZrM6Pj.js",
+      "sha256": "145bfd02c6706e235fbd9e2b8adf534f4e9a235a0ce6019519f8d3d63d1291b8"
+    },
+    {
+      "path": "assets/disconnect-brXfmTV3.js",
+      "sha256": "3c31d79c1c1907391c46d4e2421f096c424072f8ef7b58357d88ef952ca397ba"
+    },
+    {
+      "path": "assets/discord-CcilMbTs.js",
+      "sha256": "d1462b34a064d0ca4f26418056d3c637f1d67770ef08cd435552a75acb9807a8"
+    },
+    {
+      "path": "assets/etherscan-CR09mTM1.js",
+      "sha256": "5534a05c0ca1267ec9d02fcbbe989788f28efc6e35ea50a8862531e8ca54eb4d"
+    },
+    {
+      "path": "assets/exclamation-triangle-q31PMuw1.js",
+      "sha256": "5e6fdb09da0652eb78b67f7b88995fa007bbe2169be596b8d162be28f24f6449"
+    },
+    {
+      "path": "assets/extension-Ctvaabiw.js",
+      "sha256": "a67f6156eebdbdd920ead53e8c73e52f26914607c8fa8ea9684115c44f625295"
+    },
+    {
+      "path": "assets/external-link-4RvMhq9I.js",
+      "sha256": "e95184f1c4dd09b3b2d041f92998cc661b5a925f7053fee612bca8a30c6fc53c"
+    },
+    {
+      "path": "assets/facebook-tv3_aGoV.js",
+      "sha256": "2a1d2b8339ef6aa8b02e1659abab4b164cde17b1bdf4b00be5c43465c44b605c"
+    },
+    {
+      "path": "assets/farcaster-D7srjLT0.js",
+      "sha256": "d5349d7a1649650a11cc8e879da5b527f13af0f7a3571287fb4cbd06a7f6301c"
+    },
+    {
+      "path": "assets/filters-BCBxANnk.js",
+      "sha256": "a2425cb9dba06cd35420bb9bfa37924efbdd2232957adce9c5b04c3020efa53f"
+    },
+    {
+      "path": "assets/github-eGX7p-mx.js",
+      "sha256": "26cd10edee829efcce4c43f52e60d4e023377adaad1bc6070aa4105b87a036bc"
+    },
+    {
+      "path": "assets/google-Db4_B7KY.js",
+      "sha256": "b250f6c1c60b6c970c84daf99aad85cc904963d12f3d311a0da4a711ab791227"
+    },
+    {
+      "path": "assets/help-circle-D3WX0dGL.js",
+      "sha256": "3a00e91de71286f2ae56268a3cecc6c5b137e0c51c53e6091baca9f6240be4f4"
+    },
+    {
+      "path": "assets/id-D7ERoYYK.js",
+      "sha256": "f244e1ccb9b85a3f8114495079892c1f07889b8c8b7c9518fb750bc0e6d86560"
+    },
+    {
+      "path": "assets/image-BFp0LCYP.js",
+      "sha256": "48559edeb42ca26869dc6e10539542a0933980c9b5251ba086196d1658d3367a"
+    },
+    {
+      "path": "assets/index-BsGG_7zv.js",
+      "sha256": "b99aa9ee3398d00ab11505a914b9b27c4f7aacf61e3781a3ceb99d5ddae1c33b"
+    },
+    {
+      "path": "assets/index-DU-kT7tw.js",
+      "sha256": "149181fc0568d89698d05258417aa7b46daf7073b3fd972786336362334f00f4"
+    },
+    {
+      "path": "assets/index-Dbd5vEfY.css",
+      "sha256": "fe1df33a56e1c19fbff2c103549f407126478d8814e1b8cded0ef2b6521f4d09"
+    },
+    {
+      "path": "assets/index-DrAshLsx-BidsTZde.js",
+      "sha256": "b0328d4a623459d4f4996d21c59f4e5cc1490f3912e53bdac6905177dcd840d8"
+    },
+    {
+      "path": "assets/index.es-tI6Cs5Rm.js",
+      "sha256": "3384c32c15f2a79b67dc7454b6b50ddb84d0659403d05f18b43bb054a5f6693b"
+    },
+    {
+      "path": "assets/info-BrUr182F.js",
+      "sha256": "28a15cd220003c81ec54542e7c0c4dcd0a829b8016a0e5db8542d75788f0088a"
+    },
+    {
+      "path": "assets/info-circle-cokt9jEt.js",
+      "sha256": "fd2a1e5da486150bd6811e6736fd2612d30da581e15eeaeeea8b337efaab9464"
+    },
+    {
+      "path": "assets/lightbulb-CO07Ur8Q.js",
+      "sha256": "58f23d1c93c82c7c66cb6dac38a4eaaf93cc60ed7963a78074b2fdd3a14b4bcb"
+    },
+    {
+      "path": "assets/mail-DlggDGTW.js",
+      "sha256": "8b29966c586695837e7d6e92cf6de16e7307e8c4abf3b73d9108658a20fec060"
+    },
+    {
+      "path": "assets/mobile-bs3lad-M.js",
+      "sha256": "1906ad1fc0efc4e3bf7f689a03d9b4256d030db8ffc59065f7606819d8c339fc"
+    },
+    {
+      "path": "assets/more-D4sWDaMs.js",
+      "sha256": "7a6db378da5a8c390ebc5c0d6921b2ad922840d86ff974b4ae3ca64eb7d65370"
+    },
+    {
+      "path": "assets/network-placeholder-h3_Af3C9.js",
+      "sha256": "5db82cdbff6597469eb2a868c10d5615acc98f5d45ea60da323f59f278c89faa"
+    },
+    {
+      "path": "assets/nftPlaceholder-BrEYxC2t.js",
+      "sha256": "675438d7988631e0c7b9e2cb01e2ceb0f6ba7cf68bc40fb8df37345aa189fef0"
+    },
+    {
+      "path": "assets/off-BVaGfHgp.js",
+      "sha256": "f1a19b1af8ba03e69b30edbd8eb851065d25021fb760ffae2265f635129346a9"
+    },
+    {
+      "path": "assets/play-store-D6e9snjO.js",
+      "sha256": "9829d3cf19fc0e0223fa3ddad10086ab2246d169a640e79e84bb18fff0aed20b"
+    },
+    {
+      "path": "assets/plus-j4JWEbWu.js",
+      "sha256": "08132bd328f831f388f510259dda8839b4830339699af6bf03021b29f5b3ec45"
+    },
+    {
+      "path": "assets/qr-code-rNTLuVX4.js",
+      "sha256": "571bc453f0a2d7da90cc50be2a2c9a54166083aef98dd512975e686ec99fcf20"
+    },
+    {
+      "path": "assets/recycle-horizontal-CJjpAzyS.js",
+      "sha256": "f51b71808b8db2e577004b83cd9ac70342a0782f018b32657f90aad2f343619f"
+    },
+    {
+      "path": "assets/refresh-D8LiFowM.js",
+      "sha256": "72a470bf17e7621c8390b8c35af406098ba5389d844c16122aab3966279a0190"
+    },
+    {
+      "path": "assets/reown-logo-FhzuKUvQ.js",
+      "sha256": "d15edfc0b7b62a7fcb7e535dbf54c0f62e6a6ff53a6ed1e29a962904cfdafb8e"
+    },
+    {
+      "path": "assets/search-1egY_uMr.js",
+      "sha256": "514acca27595f3f51a242773fa292f1aa477da4f356a959bd5fc77dacf5ea3dc"
+    },
+    {
+      "path": "assets/send-C_kg4FP-.js",
+      "sha256": "adac655b4cf865fc4d3befc3d8712907359e7c2463e96b82c0407bd099d5d4e9"
+    },
+    {
+      "path": "assets/swapHorizontal-BHf040Ik.js",
+      "sha256": "e40f63d3f1bc42466b703bc96b58044298fc95be3b1d72f4663739ea6a5a0e40"
+    },
+    {
+      "path": "assets/swapHorizontalBold-BKMHmHXF.js",
+      "sha256": "269b92ee4e278bf2fe734d1c98ad2b6f0aaab3e17e5e635d08c5e4edfcdf3740"
+    },
+    {
+      "path": "assets/swapHorizontalMedium-tTNcWv1g.js",
+      "sha256": "ff1e39653115a3ae39d7a543368abdfa204e56fcf5e19dd08223163675a82491"
+    },
+    {
+      "path": "assets/swapHorizontalRoundedBold-q2SB1sm2.js",
+      "sha256": "9b32f85095845be13dfd9918aaec009e7f2e833c9fcc852b568c7f5bad7fa0f2"
+    },
+    {
+      "path": "assets/swapVertical-CFrm9LrG.js",
+      "sha256": "9c1db8918eaf86656dd9598978354853d57cf794c429c230d4ee0644fbea73c7"
+    },
+    {
+      "path": "assets/telegram-CbfpEayo.js",
+      "sha256": "62d2e9e27d8a99ed923509ac15a4f2fd662d95211f5396024ddc08b9e84a5dda"
+    },
+    {
+      "path": "assets/three-dots-6bP7PY91.js",
+      "sha256": "77f500bf5fe53b89da784264e142ccc8a5d940ec86670dfbe6d98c1aab43872a"
+    },
+    {
+      "path": "assets/twitch-DHF-tvOr.js",
+      "sha256": "af73d9c60d9c4ab31a3cf10fc8261eea659eed87ea654385457fea53f736bc58"
+    },
+    {
+      "path": "assets/twitterIcon-IzuBsUa_.js",
+      "sha256": "45a829bf4613f35c6baaf4e1b919f155ac1c5a88fac20fa86727fce999bd11f9"
+    },
+    {
+      "path": "assets/verify-CaoQoNlb.js",
+      "sha256": "57d1400eb909de2de096cb81eb1e8524cd638608b8abee2e2ce619c3bd239b7d"
+    },
+    {
+      "path": "assets/verify-filled-CXwAy-3n.js",
+      "sha256": "a5791bbd3ecebfff3faa582d514eeb3e43ba246b0db0fb32911bc426f0e512ef"
+    },
+    {
+      "path": "assets/w3m-modal-BAgOu6dR.js",
+      "sha256": "2c1ac38e58647cf8383e79678709214f6229784f00c27456f108e619a1b3f808"
+    },
+    {
+      "path": "assets/wallet-D-ck_lq5.js",
+      "sha256": "00a67af54526d2790433501da846f8b64602334947d693693586562fe61f8834"
+    },
+    {
+      "path": "assets/wallet-placeholder-B3jWCrz3.js",
+      "sha256": "6ec8f04e519ce07f3b1a20b98e7bdb3346907c2b6c7deb579fdf277156458eaa"
+    },
+    {
+      "path": "assets/walletconnect-B7szPewN.js",
+      "sha256": "96405b18fb0c08ae32122c91872e0d7e841a6116952712964c14e8d969dd6b30"
+    },
+    {
+      "path": "assets/warning-circle-B9674BvN.js",
+      "sha256": "515a2efbdc219400279f527a6a89176f760b2b47ec99c2db592ab8f20bd4eae5"
+    },
+    {
+      "path": "assets/x-CakGbIba.js",
+      "sha256": "b9fc848484a013521779837e94e2c1e4d3b749229b1c9f2948b9a78a2f181738"
+    },
+    {
+      "path": "index.html",
+      "sha256": "64b53c17b3b75b35c53b394a7b609bf9bfff3bee2269960f16b848fc37431640"
+    }
+  ],
+  "limits": "Candidate declared-input and final output-file hashes (including copied public assets). Excludes this root manifest, installed dependency bytes, and toolchain binaries. Not a Git commit, live host readback, test result, or chain attestation."
+}

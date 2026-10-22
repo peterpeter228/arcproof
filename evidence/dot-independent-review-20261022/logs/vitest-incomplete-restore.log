@@ -1,0 +1,22 @@
+failed to load config from /workspace/scratch/c01bd6fe117d/arcproof-stageA-20261022/source/vite.config.ts
+
+⎯⎯⎯⎯⎯⎯⎯ Startup Error ⎯⎯⎯⎯⎯⎯⎯⎯
+Error: ENOENT: no such file or directory, open '/workspace/scratch/c01bd6fe117d/arcproof-stageA-20261022/source/evidence/g1/ArcProofInvoices.artifact.json'
+    at Object.openSync (node:fs:622:18)
+    at readFileSync (node:fs:488:35)
+    at file:///workspace/scratch/c01bd6fe117d/arcproof-stageA-20261022/source/node_modules/.vite-temp/vite.config.ts.timestamp-1792639253034-e3692cb1731dd8.mjs:31:41
+    at Array.map (<anonymous>)
+    at hashFiles (file:///workspace/scratch/c01bd6fe117d/arcproof-stageA-20261022/source/node_modules/.vite-temp/vite.config.ts.timestamp-1792639253034-e3692cb1731dd8.mjs:29:37)
+    at sourceSnapshot (file:///workspace/scratch/c01bd6fe117d/arcproof-stageA-20261022/source/node_modules/.vite-temp/vite.config.ts.timestamp-1792639253034-e3692cb1731dd8.mjs:40:19)
+    at file:///workspace/scratch/c01bd6fe117d/arcproof-stageA-20261022/source/node_modules/.vite-temp/vite.config.ts.timestamp-1792639253034-e3692cb1731dd8.mjs:52:16
+    at ModuleJob.run (node:internal/modules/esm/module_job:439:25)
+    at async node:internal/modules/esm/loader:643:26
+    at async loadConfigFromBundledFile (file:///workspace/scratch/c01bd6fe117d/arcproof-stageA-20261022/source/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:49778:15) {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/workspace/scratch/c01bd6fe117d/arcproof-stageA-20261022/source/evidence/g1/ArcProofInvoices.artifact.json'
+}
+
+
+

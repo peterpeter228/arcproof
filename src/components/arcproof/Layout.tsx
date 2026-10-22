@@ -12,8 +12,9 @@ import { isBytes32 } from '../../arcproof/testnet';
 import { recoverUnknownSubmission, reconcileSubmission, errorMessage, testnetClient } from '../../arcproof/testnetClient';
 import { ConnectKitButton } from 'connectkit';
 import { StudioAttribution } from './StudioAttribution';
+import { BrandMark } from './BrandMark';
 
-type NavTab = 'dashboard' | 'verify' | 'evidence' | 'demo';
+type NavTab = 'home' | 'dashboard' | 'verify' | 'evidence' | 'demo';
 
 interface LayoutProps {
   hideWallet?: boolean;
@@ -24,10 +25,12 @@ interface LayoutProps {
 }
 
 export function PrototypeBanner() {
+  const testnet = BUILD_NETWORK.key === 'testnet';
   return (
-    <div className="w-full bg-amber-50 border-b border-amber-200 py-2 px-4 text-center">
-      <p className="text-sm font-medium text-amber-900">
-        {BUILD_NETWORK.key === 'testnet' ? 'Arc Testnet (5042002) · test USDC, no monetary value · mainnet disabled · not audited' : 'Arc Mainnet (5042) · real USDC · no trusted deployment · all sends disabled · not audited'}
+    <div className={`w-full border-b px-4 py-2 ${testnet ? 'border-amber-200 bg-amber-50' : 'border-amber-400 bg-amber-200'}`}>
+      <p className="mx-auto flex max-w-page flex-wrap items-center justify-center gap-x-2 gap-y-1 text-center text-sm font-medium text-amber-900">
+        <span className="inline-flex items-center gap-1.5">{testnet ? <span aria-hidden className="h-2 w-2 rounded-full bg-amber-600" /> : <span className="rounded bg-amber-900 px-1.5 py-0.5 text-xs font-bold uppercase tracking-wide text-amber-50">Mainnet preview</span>}{testnet ? 'Arc Testnet (5042002)' : 'Arc Mainnet (5042)'}</span>
+        <span>{testnet ? '· test USDC, no monetary value · mainnet disabled · not audited' : '· real USDC · no trusted deployment · all sends disabled · not audited'}</span>
       </p>
     </div>
   );
@@ -44,11 +47,13 @@ export function AtomicForwardingWarning() {
   );
 }
 
+// Ordered by what a first-time visitor can do without a wallet.
 const NAV_ITEMS: { id: NavTab; label: string }[] = [
-  { id: 'dashboard', label: 'Invoices' },
+  { id: 'home', label: 'Overview' },
+  { id: 'demo', label: 'Try demo' },
   { id: 'verify', label: 'Verify receipt' },
+  { id: 'dashboard', label: 'Create invoice' },
   { id: 'evidence', label: 'Evidence' },
-  { id: 'demo', label: 'Offline demo' },
 ];
 
 function SavedTransactions() {
@@ -104,23 +109,21 @@ function SavedTransactions() {
 
 export function Layout({ activeTab, onTabChange, children, hideWallet = false, hideSavedActivity = false }: LayoutProps) {
   return (
-    <div className="min-h-dvh flex flex-col bg-stone-50 font-sans">
+    <div className="min-h-dvh flex flex-col bg-paper font-sans text-stone-900">
       <a className="skip-link" href="#main-content" onClick={(event) => { event.preventDefault(); document.getElementById('main-content')?.focus(); }}>Skip to main content</a>
       <PrototypeBanner />
 
-      {/* Header */}
-      <header className="bg-white border-b border-stone-200 ">
-        <div className="max-w-5xl mx-auto px-4 py-3 grid grid-cols-[minmax(0,1fr)_auto] items-center gap-x-4 gap-y-3 sm:h-14 sm:py-0 sm:flex sm:justify-between">
-          {/* Wordmark */}
-          <div className="flex items-center gap-2 shrink-0">
-            <div className="w-6 h-6 rounded bg-teal-600" aria-hidden />
-            <h1 className="font-display font-semibold text-stone-900 tracking-tight text-lg">
-              ArcProof
-            </h1>
-          </div>
+      <header className="border-b border-stone-200 bg-white">
+        <div className="mx-auto grid max-w-page grid-cols-[minmax(0,1fr)_auto] items-center gap-x-4 gap-y-2 px-4 py-3 md:flex md:min-h-16 md:justify-between md:py-2">
+          <a href="#/" className="flex min-h-11 min-w-0 items-center gap-2.5 no-underline">
+            <BrandMark />
+            <span className="min-w-0">
+              <h1 className="font-display text-lg font-semibold leading-tight tracking-tight text-stone-900">ArcProof</h1>
+              <span className="hidden text-xs text-stone-600 sm:block">Verifiable USDC invoices</span>
+            </span>
+          </a>
 
-          {/* Nav */}
-          <nav aria-label="Main navigation" className="col-span-2 row-start-2 flex flex-wrap items-center justify-center gap-1 sm:justify-start">
+          <nav aria-label="Main navigation" className="col-span-2 row-start-2 -mx-1 flex flex-wrap items-center gap-1 md:col-span-1 md:row-start-auto md:mx-0">
             {NAV_ITEMS.map((item) => (
               <button
                 key={item.id}
@@ -128,10 +131,10 @@ export function Layout({ activeTab, onTabChange, children, hideWallet = false, h
                 aria-current={activeTab === item.id ? 'page' : undefined}
                 onClick={() => onTabChange(item.id)}
                 className={[
-                  'px-3 py-1.5 rounded-md text-sm font-medium transition-colors',
+                  'rounded-md px-2.5 py-1.5 text-sm font-medium transition-colors sm:px-3',
                   activeTab === item.id
-                    ? 'bg-teal-50 text-teal-700'
-                    : 'text-stone-600 hover:text-stone-900 hover:bg-stone-100',
+                    ? 'bg-teal-50 text-teal-800 shadow-[inset_0_-2px_0_#0f766e]'
+                    : 'text-stone-600 hover:bg-stone-100 hover:text-stone-900',
                 ].join(' ')}
               >
                 {item.label}
@@ -139,28 +142,24 @@ export function Layout({ activeTab, onTabChange, children, hideWallet = false, h
             ))}
           </nav>
 
-          {/* Wallet */}
-          {!hideWallet && <div className="col-start-2 row-start-1 justify-self-end shrink-0">
+          {!hideWallet && <div className="col-start-2 row-start-1 shrink-0 justify-self-end">
             <ConnectKitButton />
           </div>}
         </div>
       </header>
 
-      {/* Content */}
-      <main id="main-content" tabIndex={-1} className="flex-1 min-w-0 max-w-5xl mx-auto w-full px-4 py-6">
+      <main id="main-content" tabIndex={-1} className="mx-auto w-full min-w-0 max-w-page flex-1 px-4 py-6 sm:py-8">
         {!hideSavedActivity && <SavedTransactions />}
         {children}
       </main>
 
-      {/* Footer */}
       <footer className="app-footer border-t border-stone-200 bg-white">
-        <div className="footer-metadata max-w-5xl mx-auto px-4 py-3 text-sm text-stone-600 flex flex-wrap gap-x-4 gap-y-1">
-          <span>ArcProof prototype &mdash; G1 reviewed, not audited</span>
-          <span>Grant eligibility: HOLD</span>
+        <div className="footer-metadata mx-auto flex max-w-page flex-wrap items-center gap-x-4 gap-y-1 px-4 py-3 text-sm text-stone-600">
+          <span>ArcProof prototype &mdash; not audited, 1 USDC cap per invoice</span>
+          <span>{BUILD_NETWORK.key === 'testnet' ? 'Testnet only · mainnet not enabled' : 'Mainnet: no trusted deployment · sends disabled'}</span>
           <a className="underline" href="#/evidence">Build identity and evidence</a>
-          <span>Checked testnet deployment · live payment acceptance pending</span>
         </div>
-        <div className="max-w-5xl mx-auto px-4 pb-4"><StudioAttribution /></div>
+        <div className="mx-auto max-w-page px-4 pb-4"><StudioAttribution /></div>
       </footer>
     </div>
   );

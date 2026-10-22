@@ -1,0 +1,25 @@
+
+ RUN  v4.1.12 /tmp/claude-0/-root-arcproof/0ab5a932-6e04-4a62-8cee-4b259601bfcd/scratchpad/wt-fr06
+
+ ❯ src/arcproof/__tests__/testnetClient.test.ts (64 tests | 1 failed | 63 skipped) 18ms
+     × FR-06 compares a payment with the live session after preflight reads, before the wallet is asked 17ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  src/arcproof/__tests__/testnetClient.test.ts > Reconstructed dedicated testnet adapter with offline-only RPC/wallet mocks > FR-06 compares a payment with the live session after preflight reads, before the wallet is asked
+AssertionError: expected [Function] to throw error including 'Wallet connection has changed' but got 'Wallet context changed. Review a fres…'
+
+Expected: "Wallet connection has changed"
+Received: "Wallet context changed. Review a fresh request before signing."
+
+ ❯ src/arcproof/__tests__/testnetClient.test.ts:48:318
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  1 failed | 63 skipped (64)
+   Start at  11:11:12
+   Duration  574ms (transform 177ms, setup 0ms, import 360ms, tests 18ms, environment 0ms)
+

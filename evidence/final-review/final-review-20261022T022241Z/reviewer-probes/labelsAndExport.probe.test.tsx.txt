@@ -1,0 +1,66 @@
+// @vitest-environment jsdom
+import React from 'react';
+import { renderToStaticMarkup } from 'react-dom/server';
+import { describe, expect, it } from 'vitest';
+import { keccak256, type Hex } from 'viem';
+import { ReceiptFacts } from '../../components/arcproof/ReceiptFacts';
+import { buildReceiptExport, type ReceiptExportRecord } from '../exportUtils';
+import { TESTNET_DEPLOYMENT } from '../testnet';
+import type { DeploymentRecord } from '../manifest';
+import type { VerificationResult } from '../receiptVerifier';
+import { testnetService } from '../testnetClient';
+import { verifyReceipt } from '../receiptVerifier';
+
+describe('PROBE currency label on a mainnet-shaped record', () => {
+  it('ReceiptFacts always prints "test USDC" even for chain 5042 / mode mainnet', () => {
+    const record: ReceiptExportRecord = {
+      schemaVersion: '1.2', chainId: 5042, deploymentId: 'future-mainnet', contract: '0x' + '1'.repeat(40),
+      invoiceId: '0x' + 'a'.repeat(64), transactionHash: '0x' + 'b'.repeat(64), paymentLogIndex: 3,
+      amountNative: '200000000000000000', amountDisplay: '0.20', payer: null, merchant: null, paidAt: null,
+      paidBlockNumber: null, blockHash: null, verificationStatus: 'VERIFIED', mode: 'mainnet', gasFeeNative: '21000',
+    };
+    const html = renderToStaticMarkup(<ReceiptFacts record={record} />);
+    const hits = html.match(/test USDC/g) ?? [];
+    console.log('test USDC occurrences:', hits.length);
+    expect(hits.length).toBe(2); // amount line + fee line
+  });
+});
+
+describe('PROBE export keeps VERIFIED evidence for an untrusted deployment', () => {
+  it('mode=unknown but verificationVerified=true and verifiedEvidence retained', () => {
+    const untrusted: DeploymentRecord = { ...TESTNET_DEPLOYMENT, contractAddress: '0x' + '9'.repeat(40) as Hex };
+    const tx = ('0x' + 'b'.repeat(64)) as Hex, id = ('0x' + 'a'.repeat(64)) as Hex;
+    const evidence = { policyId: 'arc-testnet-native-eip7708-finalized-v1', nativeEmitter: '0xfffffffffffffffffffffffffffffffffffffffe' as Hex,
+      decimals: 18 as const, payerToContractLogIndex: 0, contractToMerchantLogIndex: 1, finalizedBlockNumber: '10', finalizedBlockHash: ('0x' + 'c'.repeat(64)) as Hex, controlled_demo: false };
+    const result: VerificationResult = { status: 'VERIFIED', verified: true, message: 'ok', paymentLogIndex: 2, blockHash: ('0x' + 'd'.repeat(64)) as Hex, verifiedAt: 1,
+      reasonCode: 'VERIFIED', checks: [], readStartedAt: 1, readCompletedAt: 2, source: { kind: 'rpc', label: 'x' },
+      observationScope: { chainId: untrusted.chainId, deploymentId: untrusted.deploymentId, contract: untrusted.contractAddress, invoiceId: id, transactionHash: tx },
+      observedReceipt: null, observedInvoice: null, settlementEvidence: evidence };
+    const rec = buildReceiptExport(untrusted, id, tx, null, null, null, null, null, result, false);
+    console.log(JSON.stringify({ mode: rec.mode, verificationStatus: rec.verificationStatus, verificationVerified: rec.verificationVerified, hasEvidence: !!rec.verifiedEvidence }));
+    expect(rec.mode).toBe('unknown');
+    expect(rec.verificationVerified).toBe(true);
+    expect(rec.verifiedEvidence).not.toBeNull();
+    const html = renderToStaticMarkup(<ReceiptFacts record={rec} />);
+    expect(html).toContain('payer → contract (log 0)');
+    expect(html).toContain('checked finalized block 10');
+  });
+});
+
+describe('PROBE adapter provenance conflict is reported as PENDING / not found', () => {
+  it('receiptRpc throws on removed log; verifier maps to PENDING "not found or not yet committed"', async () => {
+    const tx = ('0x' + 'b'.repeat(64)) as Hex, id = ('0x' + 'a'.repeat(64)) as Hex;
+    const fakeClient = {
+      getTransactionReceipt: async () => ({ transactionHash: tx, blockHash: '0x' + '1'.repeat(64), blockNumber: 5n, status: 'success',
+        from: '0x' + '2'.repeat(40), to: TESTNET_DEPLOYMENT.contractAddress, transactionIndex: 0,
+        logs: [{ removed: true, blockHash: '0x' + '1'.repeat(64), blockNumber: 5n, transactionHash: tx, address: TESTNET_DEPLOYMENT.contractAddress, topics: [], data: '0x', logIndex: 0, transactionIndex: 0 }] }),
+    };
+    const adapter = testnetService.receiptRpc(fakeClient as never);
+    const code = '0x6000' as Hex;
+    const rpc = { ...adapter, getChainId: async () => 5042002, getContractCode: async () => code };
+    const result = await verifyReceipt(tx, id, { ...TESTNET_DEPLOYMENT, runtimeCodeHash: keccak256(code) }, 5042002, rpc);
+    console.log(result.status, '|', result.message);
+    expect(result.status).toBe('PENDING');
+    expect(result.message).toMatch(/not found or not yet committed/);
+  });
+});

@@ -1,3 +1,9 @@
+## 2026-10-22 最终审查分支
+
+分支 `final-review-20261022` 新增免钱包首页（`#/`）、统一界面和 7 项低危修复；485 项测试与真实浏览器验收 23/23 通过。仍未部署主网，也不满足参赛硬门槛。先读 [最终报告](docs/FINAL_REVIEW_AND_IMPROVEMENT_REPORT.md) 和 [参赛就绪表](docs/SUBMISSION_READINESS.md)。
+
+---
+
 ## 2026-10-21 私有主网准备阶段
 
 当前代码增加固定网络构建与主网关闭状态，生产部署清单仍为空。它不是已部署的主网产品，也不证明参赛硬门槛完成。462 项本地测试/29 文件、lint、类型检查、testnet/mainnet 两种构建与非法网络配置拒绝测试通过。真实浏览器、Studio持久快照与最终复审状态以 [本阶段记录](docs/PRIVATE_MAINNET_PHASE_20261021.md) 及 [分层报告](evidence/private-mainnet-20261021/REPORT.json) 为准；不能把本地构建通过等同于上线。

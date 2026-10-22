@@ -1,0 +1,13 @@
+{
+ "reviewedAtUTC":"2026-10-22T03:20:00Z",
+ "status":"PASS",
+ "sources":["https://dorahacks.io/hackathon/arc-microgrants-2/detail","https://docs.arc.io/ai/arc-studio","https://docs.arc.io/ai/arc-studio-cli","https://docs.arc.io/arc/references/rpc-endpoints","https://docs.arc.io/arc/concepts/stablecoin-native-model","https://docs.arc.io/arc/references/contract-addresses","https://docs.arc.io/arc/references/usdc-system-events","https://docs.arc.io/arc/concepts/deterministic-finality"],
+ "deadlineUTC":"2026-11-02T04:59:00.000Z",
+ "deadlineEvidence":{"jsonLdEndDate":"2026-11-02T04:59:00.000Z","timelineEnd":1793595540,"isExtended":false,"prose":"November 1, 2026","note":"The rendered New York widget's UTC-4 label is inconsistent with event-date EST; machine-readable cutoff matches prior review. No demonstrated deadline change."},
+ "weights":{"realUSDC":30,"studioUse":25,"workingProduct":25,"potential":20},
+ "requirements":["Studio-written and tested contracts","Arc mainnet deployment","real mainnet USDC through contract and app","public working application","Studio project URL","public repository","explorer contract and transaction links","walkthrough showing Studio building and mainnet transaction","public builder profile"],
+ "studioDeployment":"testnet only in current Studio and CLI docs",
+ "hybridWorkflowEligibility":"BLOCKED: official rules exclude projects built outside Studio, without an explicit exception for Studio-origin projects externally hardened then synchronized back; export capability is not a competition waiver",
+ "mainnet":{"chainId":5042,"rpc":"https://rpc.mainnet.arc.io","explorer":"https://explorer.arc.io","nativeUSDCDecimals":18,"erc20USDCDecimals":6,"nativeTransferEmitter":"0xfffffffffffffffffffffffffffffffffffffffe"},
+ "runtimeChecks":"NOT_RUN: live mainnet receipt/finalized-tag acceptance, deploy, payment, public release and Studio sync"
+}

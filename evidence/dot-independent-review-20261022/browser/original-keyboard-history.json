@@ -1,0 +1,12 @@
+{
+  "skipBefore": {
+    "id": "",
+    "text": "Skip to main content",
+    "top": 8
+  },
+  "skipAfter": {
+    "id": "main-content"
+  },
+  "backDemo": true,
+  "forwardEvidence": true
+}

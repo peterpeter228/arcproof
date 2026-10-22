@@ -1,0 +1,43 @@
+{
+  "compiler": "0.8.28+commit.7893614a.Emscripten.clang",
+  "settings": {
+    "remappings": [
+      "@openzeppelin/contracts/=node_modules/@openzeppelin/contracts/",
+      "forge-std/=lib/forge-std/src/"
+    ],
+    "optimizer": {
+      "enabled": true,
+      "runs": 200
+    },
+    "metadata": {
+      "bytecodeHash": "ipfs"
+    },
+    "evmVersion": "paris",
+    "libraries": {},
+    "outputSelection": {
+      "*": {
+        "*": [
+          "abi",
+          "evm.bytecode.object",
+          "evm.deployedBytecode.object",
+          "metadata"
+        ]
+      }
+    }
+  },
+  "sourcesVerified": [
+    {
+      "name": "contracts/ArcProofInvoices.sol",
+      "matchesMetadata": true
+    },
+    {
+      "name": "node_modules/@openzeppelin/contracts/utils/ReentrancyGuard.sol",
+      "matchesMetadata": true
+    }
+  ],
+  "runtimeKeccak": "0xa36ede95ccce8289224d3bbabe3a2445a888c44e763a04ac4b6f4f2f03dd344c",
+  "expectedRuntimeKeccak": "0xa36ede95ccce8289224d3bbabe3a2445a888c44e763a04ac4b6f4f2f03dd344c",
+  "runtimeBytes": 2296,
+  "artifactExactMatch": true,
+  "compiledAt": "2026-10-22T03:23:14.696Z"
+}

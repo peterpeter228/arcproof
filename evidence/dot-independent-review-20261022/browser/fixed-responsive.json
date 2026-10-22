@@ -1,0 +1,8 @@
+{
+  "method": "Ordinary browser 300% zoom, not mobile emulation",
+  "result": {
+    "clientHeight": 252,
+    "clientWidth": 388,
+    "scrollWidth": 388
+  }
+}

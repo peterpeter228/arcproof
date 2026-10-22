@@ -1,0 +1,7 @@
+$ bash scripts/check.sh
+$ oxlint --type-aware src scripts; s=$?; oxlint .; exit $((s>0?s:$?))
+$ tsc --noEmit
+
+real	0m2.074s
+user	0m7.179s
+sys	0m1.354s

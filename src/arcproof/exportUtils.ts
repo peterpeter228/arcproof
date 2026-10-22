@@ -215,49 +215,65 @@ export function buildReceiptExport(
     scope.deploymentId === deployment.deploymentId && same(scope.contract, deployment.contractAddress) &&
     same(scope.invoiceId, invoiceId) && same(scope.transactionHash, txHash);
   const classified = classifyDeployment(deployment);
-  const mode = !scopeMatches ? 'unknown' : classified === 'fixture' ? (isFixture ? 'fixture' : 'unknown')
+  // Synthetic provenance can only downgrade trust, including when a fixture
+  // reuses the identity of a real deployment. It must never become payment proof.
+  const syntheticTarget = isFixture || classified === 'fixture';
+  const mode = !scopeMatches ? 'unknown' : syntheticTarget ? (classified === 'fixture' && isFixture ? 'fixture' : 'unknown')
     : classified === 'mainnet' ? (hasDiagnostics && result.status === 'VERIFIED' && result.verified ? 'mainnet' : 'unknown') : classified;
-  const observedReceipt = scopeMatches ? result.observedReceipt ?? null : null;
-  const observedInvoice = scopeMatches ? result.observedInvoice ?? null : null;
-  const verified = scopeMatches && result.status === 'VERIFIED' && result.verified;
+  // Trust comes from registry classification, not a result's claimed status or
+  // display mode. Known trusted nonverified results still retain diagnostics.
+  const untrustedTarget = scopeMatches && !syntheticTarget && classified === 'unknown';
+  const allowObservations = scopeMatches && !syntheticTarget && !untrustedTarget;
+  // Defensive serializer boundary: the verifier normally emits bigint.toString().
+  // Do not throw, coerce empty/hex strings to amounts, or certify malformed facts.
+  const invalidAmount = allowObservations && hasDiagnostics && result.observedInvoice != null &&
+    (typeof result.observedInvoice.amountNative !== 'string' || !/^\d+$/.test(result.observedInvoice.amountNative));
+  const allowFacts = allowObservations && !invalidAmount;
+  const observedReceipt = allowFacts ? result.observedReceipt ?? null : null;
+  const observedInvoice = allowFacts ? result.observedInvoice ?? null : null;
+  const verified = allowFacts && (mode === 'testnet' || mode === 'mainnet') && result.status === 'VERIFIED' && result.verified;
   const evidence = verified ? result.settlementEvidence ?? null : null;
-  const status = scopeMatches ? result.status : 'PENDING';
-  const message = scopeMatches ? result.message : 'Verification result belongs to another request; no observations exported.';
-  const amount = hasDiagnostics ? observedInvoice?.amountNative ?? null : amountNative?.toString() ?? null;
-  const factPayer = hasDiagnostics ? observedInvoice?.payer ?? null : payer;
-  const factMerchant = hasDiagnostics ? observedInvoice?.merchant ?? null : merchant;
+  const status = !scopeMatches ? 'PENDING' : syntheticTarget ? 'SIMULATED_NOT_VERIFIED' : untrustedTarget ? 'UNKNOWN_DEPLOYMENT' : invalidAmount ? 'WRONG_EVENT_DATA' : result.status;
+  const message = !scopeMatches ? 'Verification result belongs to another request; no observations exported.'
+    : syntheticTarget ? 'Synthetic fixture only. This record is not live payment proof; verification evidence is not exported.'
+      : untrustedTarget ? 'Deployment is not in the trusted registry; verification evidence is not exported.' : invalidAmount ? 'Malformed observed invoice amount; no payment facts or verification evidence exported.' : result.message;
+  const amount = !allowFacts ? null : hasDiagnostics ? observedInvoice?.amountNative ?? null : amountNative?.toString() ?? null;
+  const factPayer = !allowFacts ? null : hasDiagnostics ? observedInvoice?.payer ?? null : payer;
+  const factMerchant = !allowFacts ? null : hasDiagnostics ? observedInvoice?.merchant ?? null : merchant;
   return {
     schemaVersion: '1.2',
-    reasonCode: scopeMatches ? result.reasonCode ?? result.status : 'PENDING',
+    reasonCode: !scopeMatches ? 'PENDING' : syntheticTarget ? 'SIMULATED_NOT_VERIFIED' : untrustedTarget ? 'UNKNOWN_DEPLOYMENT' : invalidAmount ? 'WRONG_EVENT_DATA' : result.reasonCode ?? result.status,
     message,
-    checks: scopeMatches ? result.checks ?? [] : [{ id: 'export_scope', status: 'failed', reasonCode: 'PENDING', message }],
-    readStartedAt: scopeMatches ? result.readStartedAt ?? null : null,
-    readCompletedAt: scopeMatches ? result.readCompletedAt ?? null : null,
-    source: scopeMatches ? result.source ?? null : null,
-    observationScope: scopeMatches ? scope ?? null : null,
+    checks: !scopeMatches ? [{ id: 'export_scope', status: 'failed', reasonCode: 'PENDING', message }]
+      : invalidAmount ? [{ id: 'export_amount', status: 'failed', reasonCode: 'WRONG_EVENT_DATA', message }]
+        : allowFacts ? result.checks ?? [] : [],
+    readStartedAt: allowFacts ? result.readStartedAt ?? null : null,
+    readCompletedAt: allowFacts ? result.readCompletedAt ?? null : null,
+    source: allowFacts ? result.source ?? null : null,
+    observationScope: allowFacts ? scope ?? null : null,
     observedReceipt, observedInvoice, verifiedEvidence: evidence,
     verificationVerified: verified,
-    factsBasis: hasDiagnostics ? observedReceipt ? 'identity_bound_rpc_observation' : 'unavailable' : 'legacy_caller_supplied',
+    factsBasis: !allowFacts ? 'unavailable' : hasDiagnostics ? observedReceipt ? 'identity_bound_rpc_observation' : 'unavailable' : 'legacy_caller_supplied',
     contractAddress: deployment.contractAddress,
     txHash,
-    blockNumber: hasDiagnostics ? observedReceipt?.blockNumber ?? null : result.blockNumber ?? null,
-    gasFeeNative: hasDiagnostics ? observedReceipt?.gasFeeNative ?? null : result.gasFeeNative ?? null,
-    verifiedAt: scopeMatches ? result.verifiedAt : undefined,
+    blockNumber: !allowFacts ? null : hasDiagnostics ? observedReceipt?.blockNumber ?? null : result.blockNumber ?? null,
+    gasFeeNative: !allowFacts ? null : hasDiagnostics ? observedReceipt?.gasFeeNative ?? null : result.gasFeeNative ?? null,
+    verifiedAt: allowFacts ? result.verifiedAt : undefined,
     chainId: deployment.chainId,
     deploymentId: deployment.deploymentId,
     contract: deployment.contractAddress,
     invoiceId,
     transactionHash: txHash,
-    paymentLogIndex: hasDiagnostics ? observedReceipt?.paymentLogIndex ?? null : result.paymentLogIndex,
+    paymentLogIndex: !allowFacts ? null : hasDiagnostics ? observedReceipt?.paymentLogIndex ?? null : result.paymentLogIndex,
     amountNative: amount,
     payer: factPayer ?? null,
     merchant: factMerchant ?? null,
-    paidAt: hasDiagnostics ? observedInvoice?.paidAt ?? null : paidAt?.toString() ?? null,
-    paidBlockNumber: hasDiagnostics ? observedInvoice?.paidBlockNumber ?? null : paidBlockNumber?.toString() ?? null,
-    blockHash: hasDiagnostics ? observedReceipt?.blockHash ?? null : result.blockHash,
+    paidAt: !allowFacts ? null : hasDiagnostics ? observedInvoice?.paidAt ?? null : paidAt?.toString() ?? null,
+    paidBlockNumber: !allowFacts ? null : hasDiagnostics ? observedInvoice?.paidBlockNumber ?? null : paidBlockNumber?.toString() ?? null,
+    blockHash: !allowFacts ? null : hasDiagnostics ? observedReceipt?.blockHash ?? null : result.blockHash,
     verificationStatus: status,
     ...(evidence ? { settlementEvidence: evidence } : {}),
-    mode,
+    mode: invalidAmount && classified === 'mainnet' ? 'unknown' : mode,
     controlled_demo: !!factPayer && !!factMerchant && factPayer.toLowerCase() === factMerchant.toLowerCase(),
     amountDisplay: amount === null ? null : formatAmountDisplay(BigInt(amount)),
   };

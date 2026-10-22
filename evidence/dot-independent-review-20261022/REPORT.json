@@ -1,0 +1,172 @@
+{
+  "runId": "dot-independent-review-20261022T031541Z",
+  "startedAtUTC": "2026-10-22T03:15:41Z",
+  "sourceHead": "34eb952411a5d12ddba5550185593dc6df3e5584",
+  "baseline": "8f748d3052be163f2c039790a73a4238c25b5869",
+  "branch": "dot-independent-review-20261022",
+  "phase": "A",
+  "original": {
+    "check": "PASS",
+    "tests": 485,
+    "testFiles": 31,
+    "testnetBuild": "PASS",
+    "mainnetBuild": "PASS",
+    "snapshot": "b3bf6b038298d53619329600a084986de9e5eb386c48802513c8ff557ecd8a67",
+    "sourceInputs": 92
+  },
+  "fixed": {
+    "check": "PASS",
+    "tests": 496,
+    "testFiles": 32,
+    "snapshot": "d647cc2f5249f256e944ac217a057ba0d094614913e65a25bea6721c634f2941",
+    "sourceInputs": 93,
+    "testnetBuild": "PASS",
+    "mainnetBuild": "PASS",
+    "outputsPerBuild": 84
+  },
+  "mutation": [
+    {
+      "finding": "FR-01",
+      "exit": 1,
+      "seconds": 8.62,
+      "mutation": {
+        "path": "src/arcproof/networkPolicy.ts",
+        "before": "  if (context !== build) throw new Error('Wallet actions are limited to this build network.');",
+        "after": ""
+      }
+    },
+    {
+      "finding": "FR-02",
+      "exit": 1,
+      "seconds": 6.63,
+      "mutation": {
+        "path": "src/arcproof/exportUtils.ts",
+        "before": "scopeMatches && mode !== 'unknown' && result.status",
+        "after": "scopeMatches && result.status"
+      }
+    },
+    {
+      "finding": "FR-03",
+      "exit": 1,
+      "seconds": 6.12,
+      "mutation": {
+        "path": "src/arcproof/routes.ts",
+        "before": "/^[1-9][0-9]*$/",
+        "after": "/^[0-9]+$/"
+      }
+    },
+    {
+      "finding": "FR-04",
+      "exit": 1,
+      "seconds": 5.82,
+      "mutation": {
+        "path": "src/arcproof/testnetClient.ts",
+        "before": "throw new ReceiptProvenanceError('Receipt log provenance",
+        "after": "throw new Error('Receipt log provenance"
+      }
+    },
+    {
+      "finding": "FR-05",
+      "exit": 1,
+      "seconds": 6.1,
+      "mutation": {
+        "path": "src/arcproof/receiptCurrency.ts",
+        "replacement": "export function receiptCurrencyLabel(_record: unknown): string { return \"test USDC\"; }",
+        "note": "Replaces label helper with prior constant-label behavior; not a historical checkout."
+      }
+    },
+    {
+      "finding": "FR-06",
+      "exit": 1,
+      "seconds": 6.77,
+      "mutation": {
+        "path": "src/arcproof/testnetClient.ts",
+        "before": "const current = getCurrentSession();",
+        "after": "const current = action.session;"
+      }
+    },
+    {
+      "finding": "FR-07",
+      "exit": 1,
+      "seconds": 5.98,
+      "mutation": {
+        "path": "src/arcproof/testnetClient.ts",
+        "before": " ||\n        invoice.expiresAt <= 0n || invoice.expiresAt > MAX_DATE_SECONDS",
+        "after": ""
+      }
+    }
+  ],
+  "runtime": {
+    "compiler": "0.8.28+commit.7893614a.Emscripten.clang",
+    "settings": {
+      "remappings": [
+        "@openzeppelin/contracts/=node_modules/@openzeppelin/contracts/",
+        "forge-std/=lib/forge-std/src/"
+      ],
+      "optimizer": {
+        "enabled": true,
+        "runs": 200
+      },
+      "metadata": {
+        "bytecodeHash": "ipfs"
+      },
+      "evmVersion": "paris",
+      "libraries": {},
+      "outputSelection": {
+        "*": {
+          "*": [
+            "abi",
+            "evm.bytecode.object",
+            "evm.deployedBytecode.object",
+            "metadata"
+          ]
+        }
+      }
+    },
+    "sourcesVerified": [
+      {
+        "name": "contracts/ArcProofInvoices.sol",
+        "matchesMetadata": true
+      },
+      {
+        "name": "node_modules/@openzeppelin/contracts/utils/ReentrancyGuard.sol",
+        "matchesMetadata": true
+      }
+    ],
+    "runtimeKeccak": "0xa36ede95ccce8289224d3bbabe3a2445a888c44e763a04ac4b6f4f2f03dd344c",
+    "expectedRuntimeKeccak": "0xa36ede95ccce8289224d3bbabe3a2445a888c44e763a04ac4b6f4f2f03dd344c",
+    "runtimeBytes": 2296,
+    "artifactExactMatch": true,
+    "compiledAt": "2026-10-22T03:23:14.696Z"
+  },
+  "browser": {
+    "status": "PASS",
+    "scope": "Actual cloud-browser original and fixed offline/read-only routes, downloads, errors, keyboard, repeat paths; narrow 388 CSS px via 300% zoom",
+    "sandboxDiagnostics": "BLOCKED by browser policy; no bypass",
+    "deviceEmulation": "NOT_RUN",
+    "networkTrace": "NOT_RUN; test-only connect-src none guard is not production CSP",
+    "liveWalletMainnet": "NOT_RUN"
+  },
+  "mergeDecision": "Recommend fixed candidate for private mainnet-disabled prototype only; original unchanged candidate not recommended; Stage B needs user approval",
+  "stageB": "BLOCKED pending explicit user approval",
+  "mainnetAcceptance": "NOT_RUN",
+  "forge": "NOT_RUN",
+  "invalidSelectors": [
+    {
+      "value": "",
+      "exit": 1
+    },
+    {
+      "value": "devnet",
+      "exit": 1
+    },
+    {
+      "value": "mainnet ",
+      "exit": 1
+    },
+    {
+      "value": "TESTNET",
+      "exit": 1
+    }
+  ]
+}

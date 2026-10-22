@@ -63,8 +63,14 @@ export function assertContextDeployment(context: NetworkContext, deployment: Dep
   }
 }
 export function assertWritesEnabled(context: NetworkContext): void {
+  assertWritesEnabledFor(context, BUILD_NETWORK);
+}
+/** Writes need both a write-enabled context and that context being this build's fixed network. */
+export function assertWritesEnabledFor(context: NetworkContext, build: NetworkContext): void {
   assertTrustedContext(context);
+  assertTrustedContext(build);
   if (!context.writesEnabled) throw new Error('Mainnet wallet actions are disabled: no trusted deployment or release acceptance.');
+  if (context !== build) throw new Error('Wallet actions are limited to this build network.');
   requireTrustedDeployment(context);
 }
 export function networkExplorerTx(context: NetworkContext, hash: Hex): string {

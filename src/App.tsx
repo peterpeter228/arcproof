@@ -16,10 +16,20 @@ import { NetworkUnavailable } from './components/arcproof/NetworkUnavailable';
 import { resolveDeployment } from './arcproof/manifest';
 
 import { DashboardScreen } from './components/arcproof/DashboardScreen';
+import { HomeScreen } from './components/arcproof/HomeScreen';
 import { parseHash, type HashRoute, type NavTab } from './arcproof/routes';
+
+const ROUTE_TITLES: Record<HashRoute['screen'], string> = {
+  home: 'Verifiable USDC invoices', demo: 'Offline demo', verify: 'Verify receipt', dashboard: 'Create invoice',
+  evidence: 'Evidence', pay: 'Payment request', receipt: 'Receipt', invalid: 'Unavailable route',
+};
 
 export default function App() {
   const [route, setRoute] = useState<HashRoute>(() => parseHash(window.location.hash));
+
+  useEffect(() => {
+    document.title = `${ROUTE_TITLES[route.screen]} · ArcProof`;
+  }, [route.screen]);
 
   useEffect(() => {
     function onHashChange() {
@@ -30,16 +40,19 @@ export default function App() {
   }, []);
 
   function handleTabChange(tab: NavTab) {
-    window.location.hash = tab === 'dashboard' ? '/invoices' : `/${tab}`;
+    window.location.hash = tab === 'dashboard' ? '/invoices' : tab === 'home' ? '/' : `/${tab}`;
     setRoute(parseHash(window.location.hash));
+    // Announce the new page to keyboard and screen-reader users instead of leaving focus on the tab.
+    setTimeout(() => document.getElementById('main-content')?.focus(), 0);
   }
 
   // Determine what to render
   let content: React.ReactNode;
-  let effectiveTab: NavTab = route.screen === 'dashboard' ? 'dashboard' : route.screen === 'demo' ? 'demo' : route.screen === 'evidence' ? 'evidence' : 'verify';
+  let effectiveTab: NavTab = route.screen === 'dashboard' || route.screen === 'demo' || route.screen === 'evidence' || route.screen === 'home' ? route.screen : 'verify';
   let hideWallet = true;
 
-  if (BUILD_NETWORK.key === 'mainnet' && route.screen !== 'demo' && route.screen !== 'evidence' && route.screen !== 'invalid') {
+  // Mainnet keeps only static, offline or historical surfaces until a trusted deployment exists.
+  if (BUILD_NETWORK.key === 'mainnet' && route.screen !== 'home' && route.screen !== 'demo' && route.screen !== 'evidence' && route.screen !== 'invalid') {
     content = <NetworkUnavailable routeChainId={route.chainId} routeDeploymentId={route.deploymentId} />;
     hideWallet = true;
   } else if (route.screen === 'pay') {
@@ -69,6 +82,9 @@ export default function App() {
     hideWallet = true;
   } else {
     switch (route.screen) {
+      case 'home':
+        content = <HomeScreen />;
+        break;
       case 'dashboard':
         hideWallet = false;
         content = <TestnetDashboard />;
@@ -80,7 +96,7 @@ export default function App() {
         content = <DashboardScreen />;
         break;
       case 'invalid':
-        content = <section role="alert"><h2>Unavailable route</h2><p>This link is not recognized. No wallet action or chain request was made.</p><a href="#/verify">Open read-only verification</a></section>;
+        content = <section role="alert" className="ap-card mx-auto max-w-xl space-y-3 p-5"><h2 className="text-lg font-semibold">Unavailable route</h2><p>This link is not recognized. No wallet action or chain request was made.</p><a className="ap-link" href="#/">Go to the overview</a></section>;
         break;
       case 'evidence':
         content = <EvidenceScreen />;

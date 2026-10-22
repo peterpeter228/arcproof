@@ -1,5 +1,5 @@
 /** URL state is the navigation authority; malformed requests never become a wallet entry. */
-export type NavTab = 'dashboard' | 'verify' | 'evidence' | 'demo';
+export type NavTab = 'home' | 'dashboard' | 'verify' | 'evidence' | 'demo';
 export interface HashRoute {
   screen: NavTab | 'pay' | 'receipt' | 'invalid';
   chainId?: number;
@@ -9,7 +9,8 @@ export interface HashRoute {
 }
 export function parseHash(hash: string): HashRoute {
   const path = hash.startsWith('#') ? hash.slice(1) : hash;
-  if (path === '' || path === '/') return { screen: 'verify' };
+  // The empty route is a static overview: it never mounts wallet hooks or makes chain requests.
+  if (path === '' || path === '/') return { screen: 'home' };
   if (path === '/invoices') return { screen: 'dashboard' };
   if (path === '/verify' || path === '/evidence' || path === '/demo') return { screen: path.slice(1) as NavTab };
   const question = path.indexOf('?');
@@ -17,7 +18,8 @@ export function parseHash(hash: string): HashRoute {
   const params = new URLSearchParams(question < 0 ? '' : path.slice(question + 1));
   const parts = pathname.split('/');
   if (parts[0] === '' && (parts[1] === 'pay' || parts[1] === 'receipt')) {
-    const chainId = /^[0-9]+$/.test(parts[2] ?? '') ? Number(parts[2]) : NaN;
+    // Canonical decimal only: leading zeros are a different link, not the same chain.
+    const chainId = /^[1-9][0-9]*$/.test(parts[2] ?? '') ? Number(parts[2]) : NaN;
     return {
       screen: parts[1],
       chainId: Number.isSafeInteger(chainId) ? chainId : undefined,

@@ -1,0 +1,72 @@
+[
+  {
+    "finding": "FR-01",
+    "exit": 1,
+    "seconds": 8.62,
+    "mutation": {
+      "path": "src/arcproof/networkPolicy.ts",
+      "before": "  if (context !== build) throw new Error('Wallet actions are limited to this build network.');",
+      "after": ""
+    }
+  },
+  {
+    "finding": "FR-02",
+    "exit": 1,
+    "seconds": 6.63,
+    "mutation": {
+      "path": "src/arcproof/exportUtils.ts",
+      "before": "scopeMatches && mode !== 'unknown' && result.status",
+      "after": "scopeMatches && result.status"
+    }
+  },
+  {
+    "finding": "FR-03",
+    "exit": 1,
+    "seconds": 6.12,
+    "mutation": {
+      "path": "src/arcproof/routes.ts",
+      "before": "/^[1-9][0-9]*$/",
+      "after": "/^[0-9]+$/"
+    }
+  },
+  {
+    "finding": "FR-04",
+    "exit": 1,
+    "seconds": 5.82,
+    "mutation": {
+      "path": "src/arcproof/testnetClient.ts",
+      "before": "throw new ReceiptProvenanceError('Receipt log provenance",
+      "after": "throw new Error('Receipt log provenance"
+    }
+  },
+  {
+    "finding": "FR-05",
+    "exit": 1,
+    "seconds": 6.1,
+    "mutation": {
+      "path": "src/arcproof/receiptCurrency.ts",
+      "replacement": "export function receiptCurrencyLabel(_record: unknown): string { return \"test USDC\"; }",
+      "note": "Replaces label helper with prior constant-label behavior; not a historical checkout."
+    }
+  },
+  {
+    "finding": "FR-06",
+    "exit": 1,
+    "seconds": 6.77,
+    "mutation": {
+      "path": "src/arcproof/testnetClient.ts",
+      "before": "const current = getCurrentSession();",
+      "after": "const current = action.session;"
+    }
+  },
+  {
+    "finding": "FR-07",
+    "exit": 1,
+    "seconds": 5.98,
+    "mutation": {
+      "path": "src/arcproof/testnetClient.ts",
+      "before": " ||\n        invoice.expiresAt <= 0n || invoice.expiresAt > MAX_DATE_SECONDS",
+      "after": ""
+    }
+  }
+]

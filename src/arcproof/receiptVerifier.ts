@@ -86,6 +86,9 @@ export interface RpcProvider {
   getChainId(): Promise<number>;
 }
 
+/** Thrown by an RPC adapter when a receipt exists but its log identity is inconsistent. */
+export class ReceiptProvenanceError extends Error {}
+
 export type VerificationStatus =
   | 'VERIFIED'
   | 'PENDING'                  // RPC missing/uncommitted
@@ -294,7 +297,13 @@ export async function verifyReceipt(
 
   enter('receipt_identity');
   // 3. Fetch receipt — must be committed and successful
-  const receipt = await rpc.getTransactionReceipt(txHash).catch(() => null);
+  let provenanceConflict: string | null = null;
+  const receipt = await rpc.getTransactionReceipt(txHash).catch((error: unknown) => {
+    // A conflicting receipt is not a missing one: report it without retrying or guessing.
+    if (error instanceof ReceiptProvenanceError) provenanceConflict = error.message;
+    return null;
+  });
+  if (provenanceConflict) return fail('INVALID_LOG_PROVENANCE', provenanceConflict);
   if (!receipt) return fail('PENDING', 'Transaction receipt not found or not yet committed');
 
   // 4. Bind: receipt.transactionHash must match input txHash
@@ -451,6 +460,7 @@ export async function verifyReceipt(
   if (!/^0x[0-9a-fA-F]{40}$/.test(onchain.payer) || !/^0x[0-9a-fA-F]{40}$/.test(onchain.merchant) ||
       addrEq(onchain.payer, zeroAddress) || addrEq(onchain.merchant, zeroAddress) ||
       addrEq(onchain.payer, deployment.contractAddress) || addrEq(onchain.merchant, deployment.contractAddress) ||
+      onchain.expiresAt <= 0n || onchain.expiresAt > 8_640_000_000_000n ||
       onchain.paidAt >= onchain.expiresAt)
     return fail('WRONG_EVENT_DATA', 'Paid invoice has an impossible sender, recipient or expiry relationship.');
 

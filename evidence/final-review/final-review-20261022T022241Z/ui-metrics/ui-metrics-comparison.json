@@ -1,0 +1,1073 @@
+[
+ {
+  "screen": "demo-created@1440",
+  "before": {
+   "overflowX": false,
+   "small44": 0,
+   "contrastFails": 0,
+   "headingProblems": 0,
+   "pctTextLE12px": 29.8,
+   "firstH2": "Create invoice",
+   "wordsAboveFold": 213
+  },
+  "after": {
+   "overflowX": false,
+   "small44": 0,
+   "contrastFails": 0,
+   "headingProblems": 0,
+   "pctTextLE12px": 31,
+   "firstH2": "See an invoice and its receipt in 30 seconds",
+   "wordsAboveFold": 366
+  }
+ },
+ {
+  "screen": "demo-created@375",
+  "before": {
+   "overflowX": false,
+   "small44": 0,
+   "contrastFails": 0,
+   "headingProblems": 0,
+   "pctTextLE12px": 29.8,
+   "firstH2": "Create invoice",
+   "wordsAboveFold": 213
+  },
+  "after": {
+   "overflowX": false,
+   "small44": 0,
+   "contrastFails": 0,
+   "headingProblems": 0,
+   "pctTextLE12px": 30.4,
+   "firstH2": "See an invoice and its receipt in 30 seconds",
+   "wordsAboveFold": 337
+  }
+ },
+ {
+  "screen": "demo-created@768",
+  "before": {
+   "overflowX": false,
+   "small44": 0,
+   "contrastFails": 0,
+   "headingProblems": 0,
+   "pctTextLE12px": 29.8,
+   "firstH2": "Create invoice",
+   "wordsAboveFold": 213
+  },
+  "after": {
+   "overflowX": false,
+   "small44": 0,
+   "contrastFails": 0,
+   "headingProblems": 0,
+   "pctTextLE12px": 31,
+   "firstH2": "See an invoice and its receipt in 30 seconds",
+   "wordsAboveFold": 361
+  }
+ },
+ {
+  "screen": "demo-initial@1440",
+  "before": {
+   "overflowX": false,
+   "small44": 0,
+   "contrastFails": 0,
+   "headingProblems": 0,
+   "pctTextLE12px": 26.8,
+   "firstH2": "Create invoice",
+   "wordsAboveFold": 177
+  },
+  "after": {
+   "overflowX": false,
+   "small44": 0,
+   "contrastFails": 0,
+   "headingProblems": 0,
+   "pctTextLE12px": 28.9,
+   "firstH2": "See an invoice and its receipt in 30 seconds",
+   "wordsAboveFold": 243
+  }
+ },
+ {
+  "screen": "demo-initial@375",
+  "before": {
+   "overflowX": false,
+   "small44": 0,
+   "contrastFails": 0,
+   "headingProblems": 0,
+   "pctTextLE12px": 26.8,
+   "firstH2": "Create invoice",
+   "wordsAboveFold": 132
+  },
+  "after": {
+   "overflowX": false,
+   "small44": 0,
+   "contrastFails": 0,
+   "headingProblems": 0,
+   "pctTextLE12px": 27.9,
+   "firstH2": "See an invoice and its receipt in 30 seconds",
+   "wordsAboveFold": 144
+  }
+ },
+ {
+  "screen": "demo-initial@768",
+  "before": {
+   "overflowX": false,
+   "small44": 0,
+   "contrastFails": 0,
+   "headingProblems": 0,
+   "pctTextLE12px": 26.8,
+   "firstH2": "Create invoice",
+   "wordsAboveFold": 185
+  },
+  "after": {
+   "overflowX": false,
+   "small44": 0,
+   "contrastFails": 0,
+   "headingProblems": 0,
+   "pctTextLE12px": 28.9,
+   "firstH2": "See an invoice and its receipt in 30 seconds",
+   "wordsAboveFold": 220
+  }
+ },
+ {
+  "screen": "demo-invalid-amount@1440",
+  "before": {
+   "overflowX": false,
+   "small44": 0,
+   "contrastFails": 0,
+   "headingProblems": 0,
+   "pctTextLE12px": 26.6,
+   "firstH2": "Create invoice",
+   "wordsAboveFold": 178
+  },
+  "after": {
+   "overflowX": false,
+   "small44": 0,
+   "contrastFails": 0,
+   "headingProblems": 0,
+   "pctTextLE12px": 27.1,
+   "firstH2": "See an invoice and its receipt in 30 seconds",
+   "wordsAboveFold": 238
+  }
+ },
+ {
+  "screen": "demo-invalid-amount@375",
+  "before": {
+   "overflowX": false,
+   "small44": 0,
+   "contrastFails": 0,
+   "headingProblems": 0,
+   "pctTextLE12px": 26.6,
+   "firstH2": "Create invoice",
+   "wordsAboveFold": 133
+  },
+  "after": {
+   "overflowX": false,
+   "small44": 0,
+   "contrastFails": 0,
+   "headingProblems": 0,
+   "pctTextLE12px": 26,
+   "firstH2": "See an invoice and its receipt in 30 seconds",
+   "wordsAboveFold": 212
+  }
+ },
+ {
+  "screen": "demo-invalid-amount@768",
+  "before": {
+   "overflowX": false,
+   "small44": 0,
+   "contrastFails": 0,
+   "headingProblems": 0,
+   "pctTextLE12px": 26.6,
+   "firstH2": "Create invoice",
+   "wordsAboveFold": 186
+  },
+  "after": {
+   "overflowX": false,
+   "small44": 0,
+   "contrastFails": 0,
+   "headingProblems": 0,
+   "pctTextLE12px": 27.1,
+   "firstH2": "See an invoice and its receipt in 30 seconds",
+   "wordsAboveFold": 215
+  }
+ },
+ {
+  "screen": "demo-receipt@1440",
+  "before": {
+   "overflowX": false,
+   "small44": 0,
+   "contrastFails": 0,
+   "headingProblems": 0,
+   "pctTextLE12px": 21.9,
+   "firstH2": "Create invoice",
+   "wordsAboveFold": 234
+  },
+  "after": {
+   "overflowX": false,
+   "small44": 0,
+   "contrastFails": 0,
+   "headingProblems": 0,
+   "pctTextLE12px": 31,
+   "firstH2": "See an invoice and its receipt in 30 seconds",
+   "wordsAboveFold": 397
+  }
+ },
+ {
+  "screen": "demo-receipt@375",
+  "before": {
+   "overflowX": false,
+   "small44": 0,
+   "contrastFails": 0,
+   "headingProblems": 0,
+   "pctTextLE12px": 21.9,
+   "firstH2": "Create invoice",
+   "wordsAboveFold": 226
+  },
+  "after": {
+   "overflowX": false,
+   "small44": 0,
+   "contrastFails": 0,
+   "headingProblems": 0,
+   "pctTextLE12px": 30.4,
+   "firstH2": "See an invoice and its receipt in 30 seconds",
+   "wordsAboveFold": 368
+  }
+ },
+ {
+  "screen": "demo-receipt@768",
+  "before": {
+   "overflowX": false,
+   "small44": 0,
+   "contrastFails": 0,
+   "headingProblems": 0,
+   "pctTextLE12px": 21.9,
+   "firstH2": "Create invoice",
+   "wordsAboveFold": 234
+  },
+  "after": {
+   "overflowX": false,
+   "small44": 0,
+   "contrastFails": 0,
+   "headingProblems": 0,
+   "pctTextLE12px": 31,
+   "firstH2": "See an invoice and its receipt in 30 seconds",
+   "wordsAboveFold": 397
+  }
+ },
+ {
+  "screen": "evidence@1440",
+  "before": {
+   "overflowX": false,
+   "small44": 0,
+   "contrastFails": 0,
+   "headingProblems": 0,
+   "pctTextLE12px": 76.2,
+   "firstH2": "Project evidence",
+   "wordsAboveFold": 222
+  },
+  "after": {
+   "overflowX": false,
+   "small44": 0,
+   "contrastFails": 0,
+   "headingProblems": 0,
+   "pctTextLE12px": 43.7,
+   "firstH2": "Project evidence",
+   "wordsAboveFold": 252
+  }
+ },
+ {
+  "screen": "evidence@375",
+  "before": {
+   "overflowX": false,
+   "small44": 0,
+   "contrastFails": 0,
+   "headingProblems": 0,
+   "pctTextLE12px": 76.2,
+   "firstH2": "Project evidence",
+   "wordsAboveFold": 145
+  },
+  "after": {
+   "overflowX": false,
+   "small44": 0,
+   "contrastFails": 0,
+   "headingProblems": 0,
+   "pctTextLE12px": 43.5,
+   "firstH2": "Project evidence",
+   "wordsAboveFold": 132
+  }
+ },
+ {
+  "screen": "evidence@768",
+  "before": {
+   "overflowX": false,
+   "small44": 0,
+   "contrastFails": 0,
+   "headingProblems": 0,
+   "pctTextLE12px": 76.2,
+   "firstH2": "Project evidence",
+   "wordsAboveFold": 263
+  },
+  "after": {
+   "overflowX": false,
+   "small44": 0,
+   "contrastFails": 0,
+   "headingProblems": 0,
+   "pctTextLE12px": 43.7,
+   "firstH2": "Project evidence",
+   "wordsAboveFold": 252
+  }
+ },
+ {
+  "screen": "invoices@1440",
+  "before": {
+   "overflowX": false,
+   "small44": 2,
+   "contrastFails": 3,
+   "headingProblems": 0,
+   "pctTextLE12px": 0,
+   "firstH2": "Create a testnet invoice",
+   "wordsAboveFold": 143
+  },
+  "after": {
+   "overflowX": false,
+   "small44": 1,
+   "contrastFails": 0,
+   "headingProblems": 0,
+   "pctTextLE12px": 2.6,
+   "firstH2": "Create a testnet invoice",
+   "wordsAboveFold": 146
+  }
+ },
+ {
+  "screen": "invoices@375",
+  "before": {
+   "overflowX": false,
+   "small44": 2,
+   "contrastFails": 3,
+   "headingProblems": 0,
+   "pctTextLE12px": 0,
+   "firstH2": "Create a testnet invoice",
+   "wordsAboveFold": 86
+  },
+  "after": {
+   "overflowX": false,
+   "small44": 1,
+   "contrastFails": 0,
+   "headingProblems": 0,
+   "pctTextLE12px": 0,
+   "firstH2": "Create a testnet invoice",
+   "wordsAboveFold": 85
+  }
+ },
+ {
+  "screen": "invoices@768",
+  "before": {
+   "overflowX": false,
+   "small44": 2,
+   "contrastFails": 3,
+   "headingProblems": 0,
+   "pctTextLE12px": 0,
+   "firstH2": "Create a testnet invoice",
+   "wordsAboveFold": 147
+  },
+  "after": {
+   "overflowX": false,
+   "small44": 1,
+   "contrastFails": 0,
+   "headingProblems": 0,
+   "pctTextLE12px": 2.6,
+   "firstH2": "Create a testnet invoice",
+   "wordsAboveFold": 150
+  }
+ },
+ {
+  "screen": "landing@1440",
+  "before": {
+   "overflowX": false,
+   "small44": 0,
+   "contrastFails": 1,
+   "headingProblems": 0,
+   "pctTextLE12px": 5.8,
+   "firstH2": "Verify a testnet receipt",
+   "wordsAboveFold": 103
+  },
+  "after": {
+   "overflowX": false,
+   "small44": 0,
+   "contrastFails": 0,
+   "headingProblems": 0,
+   "pctTextLE12px": 3.6,
+   "firstH2": "Get paid in USDC. Let anyone verify it from one link.",
+   "wordsAboveFold": 302
+  }
+ },
+ {
+  "screen": "landing@375",
+  "before": {
+   "overflowX": false,
+   "small44": 0,
+   "contrastFails": 1,
+   "headingProblems": 0,
+   "pctTextLE12px": 5.8,
+   "firstH2": "Verify a testnet receipt",
+   "wordsAboveFold": 91
+  },
+  "after": {
+   "overflowX": false,
+   "small44": 0,
+   "contrastFails": 0,
+   "headingProblems": 0,
+   "pctTextLE12px": 2.8,
+   "firstH2": "Get paid in USDC. Let anyone verify it from one link.",
+   "wordsAboveFold": 110
+  }
+ },
+ {
+  "screen": "landing@768",
+  "before": {
+   "overflowX": false,
+   "small44": 0,
+   "contrastFails": 1,
+   "headingProblems": 0,
+   "pctTextLE12px": 5.8,
+   "firstH2": "Verify a testnet receipt",
+   "wordsAboveFold": 103
+  },
+  "after": {
+   "overflowX": false,
+   "small44": 0,
+   "contrastFails": 0,
+   "headingProblems": 0,
+   "pctTextLE12px": 3.6,
+   "firstH2": "Get paid in USDC. Let anyone verify it from one link.",
+   "wordsAboveFold": 193
+  }
+ },
+ {
+  "screen": "mainnet-demo@1440",
+  "before": {
+   "overflowX": false,
+   "small44": 0,
+   "contrastFails": 0,
+   "headingProblems": 0,
+   "pctTextLE12px": 26.7,
+   "firstH2": "Create invoice",
+   "wordsAboveFold": 179
+  },
+  "after": {
+   "overflowX": false,
+   "small44": 0,
+   "contrastFails": 0,
+   "headingProblems": 0,
+   "pctTextLE12px": 27.3,
+   "firstH2": "See an invoice and its receipt in 30 seconds",
+   "wordsAboveFold": 254
+  }
+ },
+ {
+  "screen": "mainnet-demo@375",
+  "before": {
+   "overflowX": false,
+   "small44": 0,
+   "contrastFails": 0,
+   "headingProblems": 0,
+   "pctTextLE12px": 26.7,
+   "firstH2": "Create invoice",
+   "wordsAboveFold": 134
+  },
+  "after": {
+   "overflowX": false,
+   "small44": 0,
+   "contrastFails": 0,
+   "headingProblems": 0,
+   "pctTextLE12px": 26.3,
+   "firstH2": "See an invoice and its receipt in 30 seconds",
+   "wordsAboveFold": 170
+  }
+ },
+ {
+  "screen": "mainnet-demo@768",
+  "before": {
+   "overflowX": false,
+   "small44": 0,
+   "contrastFails": 0,
+   "headingProblems": 0,
+   "pctTextLE12px": 26.7,
+   "firstH2": "Create invoice",
+   "wordsAboveFold": 187
+  },
+  "after": {
+   "overflowX": false,
+   "small44": 0,
+   "contrastFails": 0,
+   "headingProblems": 0,
+   "pctTextLE12px": 27.3,
+   "firstH2": "See an invoice and its receipt in 30 seconds",
+   "wordsAboveFold": 246
+  }
+ },
+ {
+  "screen": "mainnet-evidence@1440",
+  "before": {
+   "overflowX": false,
+   "small44": 0,
+   "contrastFails": 0,
+   "headingProblems": 0,
+   "pctTextLE12px": 77.2,
+   "firstH2": "Project evidence",
+   "wordsAboveFold": 224
+  },
+  "after": {
+   "overflowX": false,
+   "small44": 0,
+   "contrastFails": 0,
+   "headingProblems": 0,
+   "pctTextLE12px": 44.3,
+   "firstH2": "Project evidence",
+   "wordsAboveFold": 256
+  }
+ },
+ {
+  "screen": "mainnet-evidence@375",
+  "before": {
+   "overflowX": false,
+   "small44": 0,
+   "contrastFails": 0,
+   "headingProblems": 0,
+   "pctTextLE12px": 77.2,
+   "firstH2": "Project evidence",
+   "wordsAboveFold": 147
+  },
+  "after": {
+   "overflowX": false,
+   "small44": 0,
+   "contrastFails": 0,
+   "headingProblems": 0,
+   "pctTextLE12px": 44.1,
+   "firstH2": "Project evidence",
+   "wordsAboveFold": 136
+  }
+ },
+ {
+  "screen": "mainnet-evidence@768",
+  "before": {
+   "overflowX": false,
+   "small44": 0,
+   "contrastFails": 0,
+   "headingProblems": 0,
+   "pctTextLE12px": 77.2,
+   "firstH2": "Project evidence",
+   "wordsAboveFold": 271
+  },
+  "after": {
+   "overflowX": false,
+   "small44": 0,
+   "contrastFails": 0,
+   "headingProblems": 0,
+   "pctTextLE12px": 44.3,
+   "firstH2": "Project evidence",
+   "wordsAboveFold": 253
+  }
+ },
+ {
+  "screen": "mainnet-landing@1440",
+  "before": {
+   "overflowX": false,
+   "small44": 0,
+   "contrastFails": 0,
+   "headingProblems": 0,
+   "pctTextLE12px": 0,
+   "firstH2": "Mainnet unavailable: no trusted deployment",
+   "wordsAboveFold": 151
+  },
+  "after": {
+   "overflowX": false,
+   "small44": 0,
+   "contrastFails": 0,
+   "headingProblems": 0,
+   "pctTextLE12px": 4.1,
+   "firstH2": "Get paid in USDC. Let anyone verify it from one link.",
+   "wordsAboveFold": 307
+  }
+ },
+ {
+  "screen": "mainnet-landing@375",
+  "before": {
+   "overflowX": false,
+   "small44": 0,
+   "contrastFails": 0,
+   "headingProblems": 0,
+   "pctTextLE12px": 0,
+   "firstH2": "Mainnet unavailable: no trusted deployment",
+   "wordsAboveFold": 125
+  },
+  "after": {
+   "overflowX": false,
+   "small44": 0,
+   "contrastFails": 0,
+   "headingProblems": 0,
+   "pctTextLE12px": 3.3,
+   "firstH2": "Get paid in USDC. Let anyone verify it from one link.",
+   "wordsAboveFold": 121
+  }
+ },
+ {
+  "screen": "mainnet-landing@768",
+  "before": {
+   "overflowX": false,
+   "small44": 0,
+   "contrastFails": 0,
+   "headingProblems": 0,
+   "pctTextLE12px": 0,
+   "firstH2": "Mainnet unavailable: no trusted deployment",
+   "wordsAboveFold": 151
+  },
+  "after": {
+   "overflowX": false,
+   "small44": 0,
+   "contrastFails": 0,
+   "headingProblems": 0,
+   "pctTextLE12px": 4.1,
+   "firstH2": "Get paid in USDC. Let anyone verify it from one link.",
+   "wordsAboveFold": 183
+  }
+ },
+ {
+  "screen": "receipt-incomplete@1440",
+  "before": {
+   "overflowX": false,
+   "small44": 1,
+   "contrastFails": 0,
+   "headingProblems": 0,
+   "pctTextLE12px": 3.4,
+   "firstH2": "Verify a testnet receipt",
+   "wordsAboveFold": 115
+  },
+  "after": {
+   "overflowX": false,
+   "small44": 0,
+   "contrastFails": 0,
+   "headingProblems": 0,
+   "pctTextLE12px": 5,
+   "firstH2": "Verify a testnet receipt",
+   "wordsAboveFold": 160
+  }
+ },
+ {
+  "screen": "receipt-incomplete@375",
+  "before": {
+   "overflowX": false,
+   "small44": 1,
+   "contrastFails": 0,
+   "headingProblems": 0,
+   "pctTextLE12px": 3.4,
+   "firstH2": "Verify a testnet receipt",
+   "wordsAboveFold": 92
+  },
+  "after": {
+   "overflowX": false,
+   "small44": 0,
+   "contrastFails": 0,
+   "headingProblems": 0,
+   "pctTextLE12px": 4.4,
+   "firstH2": "Verify a testnet receipt",
+   "wordsAboveFold": 109
+  }
+ },
+ {
+  "screen": "receipt-incomplete@768",
+  "before": {
+   "overflowX": false,
+   "small44": 1,
+   "contrastFails": 0,
+   "headingProblems": 0,
+   "pctTextLE12px": 3.4,
+   "firstH2": "Verify a testnet receipt",
+   "wordsAboveFold": 131
+  },
+  "after": {
+   "overflowX": false,
+   "small44": 0,
+   "contrastFails": 0,
+   "headingProblems": 0,
+   "pctTextLE12px": 5,
+   "firstH2": "Verify a testnet receipt",
+   "wordsAboveFold": 162
+  }
+ },
+ {
+  "screen": "receipt-link-invalid@1440",
+  "before": {
+   "overflowX": false,
+   "small44": 0,
+   "contrastFails": 0,
+   "headingProblems": 0,
+   "pctTextLE12px": 0,
+   "firstH2": "Request unavailable",
+   "wordsAboveFold": 97
+  },
+  "after": {
+   "overflowX": false,
+   "small44": 0,
+   "contrastFails": 0,
+   "headingProblems": 0,
+   "pctTextLE12px": 16.5,
+   "firstH2": "Request unavailable",
+   "wordsAboveFold": 100
+  }
+ },
+ {
+  "screen": "receipt-link-invalid@375",
+  "before": {
+   "overflowX": false,
+   "small44": 0,
+   "contrastFails": 0,
+   "headingProblems": 0,
+   "pctTextLE12px": 0,
+   "firstH2": "Request unavailable",
+   "wordsAboveFold": 93
+  },
+  "after": {
+   "overflowX": false,
+   "small44": 0,
+   "contrastFails": 0,
+   "headingProblems": 0,
+   "pctTextLE12px": 13.2,
+   "firstH2": "Request unavailable",
+   "wordsAboveFold": 89
+  }
+ },
+ {
+  "screen": "receipt-link-invalid@768",
+  "before": {
+   "overflowX": false,
+   "small44": 0,
+   "contrastFails": 0,
+   "headingProblems": 0,
+   "pctTextLE12px": 0,
+   "firstH2": "Request unavailable",
+   "wordsAboveFold": 97
+  },
+  "after": {
+   "overflowX": false,
+   "small44": 0,
+   "contrastFails": 0,
+   "headingProblems": 0,
+   "pctTextLE12px": 16.5,
+   "firstH2": "Request unavailable",
+   "wordsAboveFold": 100
+  }
+ },
+ {
+  "screen": "receipt-mismatch@1440",
+  "before": {
+   "overflowX": false,
+   "small44": 1,
+   "contrastFails": 0,
+   "headingProblems": 0,
+   "pctTextLE12px": 3.5,
+   "firstH2": "Verify a testnet receipt",
+   "wordsAboveFold": 112
+  },
+  "after": {
+   "overflowX": false,
+   "small44": 0,
+   "contrastFails": 0,
+   "headingProblems": 0,
+   "pctTextLE12px": 5.1,
+   "firstH2": "Verify a testnet receipt",
+   "wordsAboveFold": 157
+  }
+ },
+ {
+  "screen": "receipt-mismatch@375",
+  "before": {
+   "overflowX": false,
+   "small44": 1,
+   "contrastFails": 0,
+   "headingProblems": 0,
+   "pctTextLE12px": 3.5,
+   "firstH2": "Verify a testnet receipt",
+   "wordsAboveFold": 89
+  },
+  "after": {
+   "overflowX": false,
+   "small44": 0,
+   "contrastFails": 0,
+   "headingProblems": 0,
+   "pctTextLE12px": 4.5,
+   "firstH2": "Verify a testnet receipt",
+   "wordsAboveFold": 109
+  }
+ },
+ {
+  "screen": "receipt-mismatch@768",
+  "before": {
+   "overflowX": false,
+   "small44": 1,
+   "contrastFails": 0,
+   "headingProblems": 0,
+   "pctTextLE12px": 3.5,
+   "firstH2": "Verify a testnet receipt",
+   "wordsAboveFold": 128
+  },
+  "after": {
+   "overflowX": false,
+   "small44": 0,
+   "contrastFails": 0,
+   "headingProblems": 0,
+   "pctTextLE12px": 5.1,
+   "firstH2": "Verify a testnet receipt",
+   "wordsAboveFold": 160
+  }
+ },
+ {
+  "screen": "receipt-selfdemo@1440",
+  "before": {
+   "overflowX": false,
+   "small44": 1,
+   "contrastFails": 0,
+   "headingProblems": 0,
+   "pctTextLE12px": 3.6,
+   "firstH2": "Verify a testnet receipt",
+   "wordsAboveFold": 103
+  },
+  "after": {
+   "overflowX": false,
+   "small44": 0,
+   "contrastFails": 0,
+   "headingProblems": 0,
+   "pctTextLE12px": 5.2,
+   "firstH2": "Verify a testnet receipt",
+   "wordsAboveFold": 147
+  }
+ },
+ {
+  "screen": "receipt-selfdemo@375",
+  "before": {
+   "overflowX": false,
+   "small44": 1,
+   "contrastFails": 0,
+   "headingProblems": 0,
+   "pctTextLE12px": 3.6,
+   "firstH2": "Verify a testnet receipt",
+   "wordsAboveFold": 89
+  },
+  "after": {
+   "overflowX": false,
+   "small44": 0,
+   "contrastFails": 0,
+   "headingProblems": 0,
+   "pctTextLE12px": 4.5,
+   "firstH2": "Verify a testnet receipt",
+   "wordsAboveFold": 109
+  }
+ },
+ {
+  "screen": "receipt-selfdemo@768",
+  "before": {
+   "overflowX": false,
+   "small44": 1,
+   "contrastFails": 0,
+   "headingProblems": 0,
+   "pctTextLE12px": 3.6,
+   "firstH2": "Verify a testnet receipt",
+   "wordsAboveFold": 135
+  },
+  "after": {
+   "overflowX": false,
+   "small44": 0,
+   "contrastFails": 0,
+   "headingProblems": 0,
+   "pctTextLE12px": 5.2,
+   "firstH2": "Verify a testnet receipt",
+   "wordsAboveFold": 150
+  }
+ },
+ {
+  "screen": "receipt-verified@1440",
+  "before": {
+   "overflowX": false,
+   "small44": 1,
+   "contrastFails": 0,
+   "headingProblems": 0,
+   "pctTextLE12px": 3.7,
+   "firstH2": "Verify a testnet receipt",
+   "wordsAboveFold": 103
+  },
+  "after": {
+   "overflowX": false,
+   "small44": 0,
+   "contrastFails": 0,
+   "headingProblems": 0,
+   "pctTextLE12px": 5.4,
+   "firstH2": "Verify a testnet receipt",
+   "wordsAboveFold": 147
+  }
+ },
+ {
+  "screen": "receipt-verified@375",
+  "before": {
+   "overflowX": false,
+   "small44": 1,
+   "contrastFails": 0,
+   "headingProblems": 0,
+   "pctTextLE12px": 3.7,
+   "firstH2": "Verify a testnet receipt",
+   "wordsAboveFold": 89
+  },
+  "after": {
+   "overflowX": false,
+   "small44": 0,
+   "contrastFails": 0,
+   "headingProblems": 0,
+   "pctTextLE12px": 4.7,
+   "firstH2": "Verify a testnet receipt",
+   "wordsAboveFold": 109
+  }
+ },
+ {
+  "screen": "receipt-verified@768",
+  "before": {
+   "overflowX": false,
+   "small44": 1,
+   "contrastFails": 0,
+   "headingProblems": 0,
+   "pctTextLE12px": 3.7,
+   "firstH2": "Verify a testnet receipt",
+   "wordsAboveFold": 123
+  },
+  "after": {
+   "overflowX": false,
+   "small44": 0,
+   "contrastFails": 0,
+   "headingProblems": 0,
+   "pctTextLE12px": 5.4,
+   "firstH2": "Verify a testnet receipt",
+   "wordsAboveFold": 150
+  }
+ },
+ {
+  "screen": "route-unknown@1440",
+  "before": {
+   "overflowX": false,
+   "small44": 0,
+   "contrastFails": 0,
+   "headingProblems": 0,
+   "pctTextLE12px": 0,
+   "firstH2": "Unavailable route",
+   "wordsAboveFold": 70
+  },
+  "after": {
+   "overflowX": false,
+   "small44": 0,
+   "contrastFails": 0,
+   "headingProblems": 0,
+   "pctTextLE12px": 5.5,
+   "firstH2": "Unavailable route",
+   "wordsAboveFold": 74
+  }
+ },
+ {
+  "screen": "route-unknown@375",
+  "before": {
+   "overflowX": false,
+   "small44": 0,
+   "contrastFails": 0,
+   "headingProblems": 0,
+   "pctTextLE12px": 0,
+   "firstH2": "Unavailable route",
+   "wordsAboveFold": 70
+  },
+  "after": {
+   "overflowX": false,
+   "small44": 0,
+   "contrastFails": 0,
+   "headingProblems": 0,
+   "pctTextLE12px": 0,
+   "firstH2": "Unavailable route",
+   "wordsAboveFold": 71
+  }
+ },
+ {
+  "screen": "route-unknown@768",
+  "before": {
+   "overflowX": false,
+   "small44": 0,
+   "contrastFails": 0,
+   "headingProblems": 0,
+   "pctTextLE12px": 0,
+   "firstH2": "Unavailable route",
+   "wordsAboveFold": 70
+  },
+  "after": {
+   "overflowX": false,
+   "small44": 0,
+   "contrastFails": 0,
+   "headingProblems": 0,
+   "pctTextLE12px": 5.5,
+   "firstH2": "Unavailable route",
+   "wordsAboveFold": 74
+  }
+ },
+ {
+  "screen": "verify-invalid@1440",
+  "before": {
+   "overflowX": false,
+   "small44": 0,
+   "contrastFails": 0,
+   "headingProblems": 0,
+   "pctTextLE12px": 5.3,
+   "firstH2": "Verify a testnet receipt",
+   "wordsAboveFold": 114
+  },
+  "after": {
+   "overflowX": false,
+   "small44": 0,
+   "contrastFails": 0,
+   "headingProblems": 0,
+   "pctTextLE12px": 11.2,
+   "firstH2": "Verify a testnet receipt",
+   "wordsAboveFold": 152
+  }
+ },
+ {
+  "screen": "verify-invalid@375",
+  "before": {
+   "overflowX": false,
+   "small44": 0,
+   "contrastFails": 0,
+   "headingProblems": 0,
+   "pctTextLE12px": 5.3,
+   "firstH2": "Verify a testnet receipt",
+   "wordsAboveFold": 110
+  },
+  "after": {
+   "overflowX": false,
+   "small44": 0,
+   "contrastFails": 0,
+   "headingProblems": 0,
+   "pctTextLE12px": 9,
+   "firstH2": "Verify a testnet receipt",
+   "wordsAboveFold": 145
+  }
+ },
+ {
+  "screen": "verify-invalid@768",
+  "before": {
+   "overflowX": false,
+   "small44": 0,
+   "contrastFails": 0,
+   "headingProblems": 0,
+   "pctTextLE12px": 5.3,
+   "firstH2": "Verify a testnet receipt",
+   "wordsAboveFold": 114
+  },
+  "after": {
+   "overflowX": false,
+   "small44": 0,
+   "contrastFails": 0,
+   "headingProblems": 0,
+   "pctTextLE12px": 11.2,
+   "firstH2": "Verify a testnet receipt",
+   "wordsAboveFold": 152
+  }
+ }
+]
