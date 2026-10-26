@@ -3,13 +3,13 @@
 编制：2026-10-22 UTC，对应分支 `final-review-20261022`。
 用途：给评委或录制视频的人一条最短、诚实的理解路径。这里写的每个镜头，都标明了它现在是真实可演示、仅为模拟，还是待人工执行。
 
-> 边界：当前没有 Arc Mainnet 部署，也没有真实 USDC 交易。本指南不提供、也不允许伪造主网录像、交易哈希、客户、收入或到账时间。下面标为 **待真实执行** 的镜头，必须在用户本人完成主网部署和签名后才能录制。
+> 边界：Arc Mainnet 合约和一笔 0.20 USDC 样本付款已经记录。公开 App 是 https://zippy-narwhal-31f5db.netlify.app 。本指南不提供、也不允许伪造录像、客户、收入或到账时间。下面仍标为 **待真实执行** 的镜头，是还没有录下来的画面，不能用测试网或模拟画面代替。
 
 ## 1. 30 秒理解路径（无需钱包）
 
 | 秒 | 评委看到什么 | 说明要点 | 状态 |
 |---|---|---|---|
-| 0–5 | 打开应用根路径 `#/`，首屏是 **Overview**：标题 “Get paid in USDC. Let anyone verify it from one link.”，顶部琥珀色网络条，右侧 “What this build can do” 状态卡 | 这是做什么的；当前是 Arc Testnet（test USDC，无货币价值）或主网未启用；未审计 | 真实可演示（本地/私有构建） |
+| 0–5 | 打开 https://zippy-narwhal-31f5db.netlify.app 的 `#/`。首屏是 **Overview**：标题 “Get paid in USDC. Let anyone verify it from one link.”，顶部网络条，右侧 “What this build can do” 状态卡 | 这是 Arc Mainnet（5042）公开 App，可信部署日期 2026-10-26；未审计 | 真实可演示 |
 | 5–15 | 点主按钮 **Try the demo — no wallet**，进入离线演示 | 金额用整数 microUSDC 解析再换算成 18 位原生单位；不连钱包、不发交易 | 真实可演示，数据为 **SIMULATED** |
 | 15–25 | 点 **Create invoice (offline demo — no signing)**，右侧自动出现虚线边框的模拟收据，带 “Simulated” 印章 | 收据绑定哪些字段；付款方/交易/时间为空，因为演示里没有付款 | 模拟，`SIMULATED_NOT_VERIFIED` |
 | 25–30 | 收据下方 “Checks a real receipt must pass” 列出 5 项检查，每项标 “Not run (simulation)” | “已验证”需要合约代码、发票状态、事件、两段原生 USDC 转账和最终性同时成立 | 模拟（检查项真实存在于代码，演示中不运行） |
@@ -22,9 +22,9 @@
 | 0:15–0:35 | 下拉到 “How it works” 三步和 “Verified requires all of these” | “‘已验证’不是看到交易成功就算。要同时核对合约运行时代码、发票已付状态、InvoicePaid 事件、付款方到合约再到商户的两段原生 USDC 转账，以及 RPC 报告的最终块。缺任何一项都保持未验证。” | 真实 UI；检查逻辑在 `src/arcproof/receiptVerifier.ts` |
 | 0:35–1:05 | 离线演示：输入 `0.20`，显示精确原生值 `200000000000000000`；创建；查看模拟收据；导出 JSON | “这是离线模拟，不碰钱包和链。注意它明确标着 SIMULATED / NOT VERIFIED，付款字段是空的，我们不会编造交易。” | 模拟；导出的 JSON 中 `verificationStatus` 为 `SIMULATED_NOT_VERIFIED`，payer/tx/time 为 null |
 | 1:05–1:25 | **Verify receipt**：输入 `0x1234`，点击验证 | “核验页不需要钱包。格式不对的输入在发任何链上请求之前就被拒绝。” | 真实 UI，只读，不发请求 |
-| 1:25–1:45 | **Evidence** 页：“Recorded so far / Not yet shown”和构建身份 | “这里诚实列出已有证据和缺口：合约测试、测试网部署是历史记录；主网部署、真实 USDC 交易和两钱包实测还没有。构建身份用源码快照哈希标识。” | 真实 UI；历史记录不等于本构建重跑 |
+| 1:25–1:45 | **Evidence** 页：“Recorded so far / Not yet shown”和构建身份 | “这里列出已有证据和缺口：主网合约、公开 App 和 0.20 USDC 样本付款已记录。视频、DoraHacks 提交和审计还没有。历史测试不等于本页重跑。” | 真实 UI；历史记录不等于本构建重跑 |
 | 1:45–2:20 | Arc Studio 项目页：合约、测试、应用 | 说明 Studio 起源、外部审查与同步链条（见 `docs/SUBMISSION_READINESS.md` 的 Studio 一节） | **待真实执行**：需用户在 Studio 中录屏；当前 Studio 同步对应的是旧快照 |
-| 2:20–2:50 | 主网：部署合约、两个钱包完成一笔真实 USDC 付款、在 explorer.arc.io 打开交易、回到 ArcProof 得到 Verified | “这是主网上的一笔真实 USDC，经过我们的合约和应用。” | **待真实执行**：当前不存在，禁止用测试网或模拟画面代替 |
+| 2:20–2:50 | 打开样本收据 https://zippy-narwhal-31f5db.netlify.app/#/receipt/5042/0x3157f8feee81d6f2447756a99f6a12c88dff63d7165ca521322e0cc7ace2c2aa/0xe23fad9eb20137dc97b4b54e666fcb0a90f7447c82935a0285494b77aa80d6ae?tx=0x94c559e0816b8e741f2cbf4fe764ed8e7dcfeab447ba8ac700f6f7e7ec4b82ce ，再在 explorer.arc.io 打开同一笔付款 | “这是主网上的一笔 0.20 USDC。页面上的 Verified 必须来自当次链上读取，不能靠这份文档代替。” | 付款已在链上。把当次核验结果录成视频仍是 **待真实执行** |
 
 ## 3. 可选：测试网钱包流程（仅限测试资产）
 

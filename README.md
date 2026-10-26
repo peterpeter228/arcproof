@@ -12,10 +12,11 @@ ArcProof creates immutable invoice terms on Arc, forwards the exact payment to t
 | --- | --- |
 | Arc Studio project | https://studio.arc.io/app/2dbdda0d-1b70-408b-ae23-cccb8a4b8753 — origin project; final-candidate sync recorded in [studio-sync-20261026](evidence/studio-sync-20261026/); **not Studio Publish** |
 | Public repository | https://github.com/peterpeter228/arcproof |
-| Live public App URL | `{{PUBLIC_APP_URL}}` — **not yet published** |
+| Live public App URL | https://zippy-narwhal-31f5db.netlify.app — Studio→Netlify public App, not a Studio preview |
 | Arc Mainnet contract (chain `5042`) | `0xd6b1C2A7F6C406E6BbB981F66847aff60D6600eE` |
 | Mainnet deployment tx | `0x3e94bdb67dcf28a12c224ab693b863220a2744766607136a0d88c7683124d503` — [explorer](https://explorer.arc.io/tx/0x3e94bdb67dcf28a12c224ab693b863220a2744766607136a0d88c7683124d503) |
-| Mainnet sample payment tx | `{{TX_HASH}}` (pay) — null until real USDC via App |
+| Mainnet sample payment tx | `0x94c559e0816b8e741f2cbf4fe764ed8e7dcfeab447ba8ac700f6f7e7ec4b82ce` — [explorer](https://explorer.arc.io/tx/0x94c559e0816b8e741f2cbf4fe764ed8e7dcfeab447ba8ac700f6f7e7ec4b82ce) — 0.20 USDC, invoice `0xe23fad9eb20137dc97b4b54e666fcb0a90f7447c82935a0285494b77aa80d6ae` |
+| Sample receipt | https://zippy-narwhal-31f5db.netlify.app/#/receipt/5042/0x3157f8feee81d6f2447756a99f6a12c88dff63d7165ca521322e0cc7ace2c2aa/0xe23fad9eb20137dc97b4b54e666fcb0a90f7447c82935a0285494b77aa80d6ae?tx=0x94c559e0816b8e741f2cbf4fe764ed8e7dcfeab447ba8ac700f6f7e7ec4b82ce |
 | Walkthrough video | `{{VIDEO_URL}}` — outline only: [VIDEO_OUTLINE.md](docs/final-delivery-20261022/VIDEO_OUTLINE.md) |
 | Judge demo path (honest) | [JUDGE_DEMO_GUIDE.md](docs/JUDGE_DEMO_GUIDE.md) |
 | Engineering / release state | [STATUS.md](STATUS.md), [release-status.json](evidence/release-status.json) |
@@ -26,24 +27,24 @@ ArcProof creates immutable invoice terms on Arc, forwards the exact payment to t
 | --- | --- | --- |
 | 1 | Built in Arc Studio (`studio.arc.io/app/<uuid>`) | **Recorded** — final-candidate sync and export compare are `done` in evidence; **Studio Publish was not done** |
 | 2 | Contracts tested + deployed on Arc **mainnet** | **Deployed** — chain `5042` contract `0xd6b1C2A7F6C406E6BbB981F66847aff60D6600eE`, deploy tx `0x3e94bdb67dcf28a12c224ab693b863220a2744766607136a0d88c7683124d503`. Runtime keccak matches the reviewed artifact. **No createInvoice or payInvoice yet.** Studio Deploy misclick testnet `0x0D54be3d3c17D73be58c1bAeDFBdBC2f79677018` is **not** this contract. |
-| 3 | Public Studio/App calling those contracts | **Missing** — no public App URL; `{{PUBLIC_APP_URL}}` stays literal |
-| 4 | ≥1 real Arc mainnet USDC flow via contract + App | **Missing** — `payment_transaction=null`; `{{TX_HASH}}` (pay) stays literal |
+| 3 | Public Studio/App calling those contracts | **Recorded** — https://zippy-narwhal-31f5db.netlify.app serves the Arc Mainnet `5042` build for `0xd6b1C2A7F6C406E6BbB981F66847aff60D6600eE` |
+| 4 | ≥1 real Arc mainnet USDC flow via contract + App | **Recorded** — pay tx `0x94c559e0816b8e741f2cbf4fe764ed8e7dcfeab447ba8ac700f6f7e7ec4b82ce`, 0.20 USDC. `MAINNET_SAMPLE` is that locator. Not an in-app VERIFIED badge by itself |
 | 5 | Submit: Studio URL + public repo + video + short description | **Partial** — Studio URL + public repo ready; short desc in draft; **video missing** (`{{VIDEO_URL}}`); DoraHacks form **not submitted** |
 
-`PRODUCTION_MANIFEST` has one record, deployment id `0x3157f8feee81d6f2447756a99f6a12c88dff63d7165ca521322e0cc7ace2c2aa`. `MAINNET_RELEASE_POLICY.writesAccepted=true` for that id, so a mainnet build is stage **W2**. `MAINNET_SAMPLE` is still null. This is not an audit, a public App, or a completed USDC payment.
+`PRODUCTION_MANIFEST` has one record, deployment id `0x3157f8feee81d6f2447756a99f6a12c88dff63d7165ca521322e0cc7ace2c2aa`. `MAINNET_RELEASE_POLICY.writesAccepted=true` for that id, so a mainnet build is stage **W2**. `MAINNET_SAMPLE` is the 0.20 USDC pay locator above. This is not an audit, a video, or a DoraHacks submission.
 
 ### Testnet vs mainnet
 
 | Network | chainId | Contract | App writes | Role for judges |
 | --- | --- | --- | --- | --- |
 | Arc Testnet | `5042002` | `0x3Dcd2bDD924BCC384Cb39e9e12038e00fde0FA30` | Enabled in testnet builds | Historical / optional demo with **test USDC only** — does **not** satisfy mainnet gates |
-| Arc Mainnet | `5042` | `0xd6b1C2A7F6C406E6BbB981F66847aff60D6600eE` | Enabled in a mainnet build (W2). No sample payment yet | Deployed; public App and a real payment are still required |
+| Arc Mainnet | `5042` | `0xd6b1C2A7F6C406E6BbB981F66847aff60D6600eE` | Enabled in a mainnet build (W2). Sample payment recorded | Public App and 0.20 USDC sample are recorded. Video is not |
 
 Testnet deploy tx (historical): `0x2e43459e213e993b2290749e5549f993d63db1af6e1d8feab2fcca94917db535`. Explorer: https://explorer.testnet.arc.io/
 
 ### Judge walkthrough (shortest honest path)
 
-1. Read this table — the contract is deployed; do not expect a live mainnet App until `{{PUBLIC_APP_URL}}` is filled, and do not treat the deploy tx as a payment.
+1. Open https://zippy-narwhal-31f5db.netlify.app. The deploy tx created the contract. The sample payment is the pay tx in the table above.
 2. Follow [docs/JUDGE_DEMO_GUIDE.md](docs/JUDGE_DEMO_GUIDE.md) §1 (30s, no wallet) and §2 (2–3 min). Sections marked **待真实执行** require owner-signed mainnet actions.
 3. Optional testnet wallet flow: JUDGE_DEMO_GUIDE §3 — label test USDC; never claim mainnet acceptance.
 4. Do **not** treat offline `SIMULATED_NOT_VERIFIED` exports or fixture manifests as payment evidence.
@@ -51,7 +52,7 @@ Testnet deploy tx (historical): `0x2e43459e213e993b2290749e5549f993d63db1af6e1d8
 ### What we will not claim
 
 - “Live on Arc mainnet”, “audited”, “zero vulnerabilities”, escrow/refunds, tax invoices, customer revenue, or award probability.
-- Filling `{{PUBLIC_APP_URL}}`, `{{VIDEO_URL}}`, or the payment `{{TX_HASH}}` with projected or testnet values. The deploy transaction above is the contract creation only.
+- Filling `{{VIDEO_URL}}` or any further payment hash with a projected or testnet value. The deploy transaction above is the contract creation. The pay transaction above is the 0.20 USDC sample.
 
 ## What a verified receipt checks
 
@@ -95,4 +96,4 @@ First-party code and original project documentation in this repository are relea
 
 Engineering readiness, actual network acceptance, public availability and competition submission are separate milestones. No award probability or payment date is promised.
 
-Next owner gates, in order: public App (`{{PUBLIC_APP_URL}}`) → `createInvoice` of 0.20 USDC → `payInvoice` → video (`{{VIDEO_URL}}`). Those placeholders stay literal. DoraHacks is not submitted.
+Next owner gate: walkthrough video (`{{VIDEO_URL}}`). The public App and the 0.20 USDC sample are recorded in [evidence/public-app-20261026](evidence/public-app-20261026/). DoraHacks is not submitted.

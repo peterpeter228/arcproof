@@ -1,6 +1,6 @@
 {
   "schema": "arcproof-release-state/v1",
-  "updated_at_utc": "2026-10-26T07:50:51Z",
+  "updated_at_utc": "2026-10-26T08:35:03Z",
   "baseline_commit": "cd579e567457ff8acf0fe041a5cff3df07c344c0",
   "candidate": {
     "source_commit": null,
@@ -41,7 +41,7 @@
     "T07": "bounded_browser_passed",
     "T08": "first_party_MIT_recorded_notice_deferred",
     "C1_freeze": "candidate_tag_not_release_accepted",
-    "C2_public_app": "not_run",
+    "C2_public_app": "recorded_netlify_public_app",
     "C3_submission": "not_run"
   },
   "studio": {
@@ -147,8 +147,8 @@
   },
   "mainnet": {
     "stage": "W2",
-    "operator_deploy_stage": "U1_deployed",
-    "stage_note": "Code stage is W2: PRODUCTION_MANIFEST has the verified deployment and writesAccepted is true. Operator evidence stage is U1_deployed. createInvoice and payInvoice have not run. MAINNET_SAMPLE remains null. Studio Deploy misclick testnet 0x0D54be3d3c17D73be58c1bAeDFBdBC2f79677018 is not this mainnet contract and is not stored in any mainnet field.",
+    "operator_deploy_stage": "U2_paid",
+    "stage_note": "Code stage remains W2. Operator evidence stage is U2_paid: one createInvoice and one payInvoice of 0.20 USDC were read from https://rpc.mainnet.arc.io. MAINNET_SAMPLE is that pay locator. The public App is the Netlify URL in public_release.app_url. video_url stays null. DoraHacks was not submitted. This is not an in-app VERIFIED badge. Studio Deploy misclick testnet 0x0D54be3d3c17D73be58c1bAeDFBdBC2f79677018 is not this mainnet contract and is not stored in any mainnet field.",
     "trusted_deployments": 1,
     "writes_enabled": true,
     "chain_id": 5042,
@@ -160,15 +160,23 @@
     "deployment_block_number": 27931307,
     "deployed_at_utc": "2026-10-26T07:44:36Z",
     "deployment_transaction": "0x3e94bdb67dcf28a12c224ab693b863220a2744766607136a0d88c7683124d503",
-    "payment_transaction": null,
-    "receipt_url": null,
-    "evidence_directory": "evidence/mainnet-u1-20261026"
+    "payment_transaction": "0x94c559e0816b8e741f2cbf4fe764ed8e7dcfeab447ba8ac700f6f7e7ec4b82ce",
+    "creation_transaction": "0x496b6a29441cd2c7af201c301d3860f34e329fb7d9ab4f7706cab74d7aa22c45",
+    "invoice_id": "0xe23fad9eb20137dc97b4b54e666fcb0a90f7447c82935a0285494b77aa80d6ae",
+    "payer": "0x54145b97d5CeCf72b9900C702a02774171574171",
+    "merchant": "0xf22c752EBeB09d3eD8C6b8ba04c7F299D1C9C960",
+    "payment_amount_usdc": "0.20",
+    "payment_amount_native": "200000000000000000",
+    "payment_log_index": 6,
+    "receipt_url": "https://zippy-narwhal-31f5db.netlify.app/#/receipt/5042/0x3157f8feee81d6f2447756a99f6a12c88dff63d7165ca521322e0cc7ace2c2aa/0xe23fad9eb20137dc97b4b54e666fcb0a90f7447c82935a0285494b77aa80d6ae?tx=0x94c559e0816b8e741f2cbf4fe764ed8e7dcfeab447ba8ac700f6f7e7ec4b82ce",
+    "evidence_directory": "evidence/mainnet-u1-20261026",
+    "sample_evidence_directory": "evidence/public-app-20261026"
   },
   "public_release": {
-    "app_url": null,
+    "app_url": "https://zippy-narwhal-31f5db.netlify.app",
     "video_url": null,
     "source_commit_url": null,
-    "source_branch_authorization": "2026-10-26 owner authorized recording the already-signed Arc mainnet deployment. This record does not sign, Publish, or submit to DoraHacks."
+    "source_branch_authorization": "2026-10-26 owner authorized recording the public Netlify App URL and the verified Arc mainnet sample payment. This record does not sign, Publish, or submit to DoraHacks."
   },
   "reviews": {
     "argon_current": "outcome_uncertain_no_response_record_no_retry",
@@ -184,20 +192,21 @@
     "owner_authorized_path": "shortest_microgrants_license_readme_freeze_and_docs",
     "production_manifest_entries": 1,
     "mainnet_stage": "W2",
-    "operator_deploy_stage": "U1_deployed",
+    "operator_deploy_stage": "U2_paid",
     "candidate_freeze": "annotated_tag_on_the_materials_commit_not_release_acceptance",
     "source_snapshot_sha256": "not_recomputed",
     "next_gates": [
-      "public_app",
-      "createInvoice_0_20_usdc",
-      "payInvoice",
       "video"
     ],
+    "public_app_url": "https://zippy-narwhal-31f5db.netlify.app",
+    "mainnet_sample": {
+      "chainId": 5042,
+      "deploymentId": "0x3157f8feee81d6f2447756a99f6a12c88dff63d7165ca521322e0cc7ace2c2aa",
+      "invoiceId": "0xe23fad9eb20137dc97b4b54e666fcb0a90f7447c82935a0285494b77aa80d6ae",
+      "txHash": "0x94c559e0816b8e741f2cbf4fe764ed8e7dcfeab447ba8ac700f6f7e7ec4b82ce"
+    },
     "not_done": {
-      "public_app_url": null,
-      "payment_transaction": null,
       "video_url": null,
-      "mainnet_sample": null,
       "dorahacks_submitted": false,
       "deploy_publish": false
     },
@@ -234,10 +243,10 @@
       "preview_is_public_app_url": false
     }
   },
-  "next_action": "Public App → createInvoice(0.20 USDC) → payInvoice → video. The Arc mainnet contract is deployed and writes are accepted for that deployment (W2 / operator U1). payment_transaction, app_url, and video_url stay null. MAINNET_SAMPLE stays null. This record does not sign, Publish, or submit.",
+  "next_action": "Video. The public App URL and the 0.20 USDC MAINNET_SAMPLE are recorded. video_url stays null. DoraHacks is not submitted. Code stage remains W2. This record does not sign, Publish, or submit.",
   "evidence_directory": "final-handoff-20261022",
   "scope_limits": [
-    "This record does not sign, transfer, host a public App, or submit. The deployment transaction was already confirmed on Arc mainnet and is copied here.",
+    "This record does not sign, transfer, or submit. It cites the already-hosted Netlify App and the pay transaction already confirmed on Arc mainnet.",
     "Studio Deploy misclick testnet 0x0D54be3d3c17D73be58c1bAeDFBdBC2f79677018 is not the mainnet contract.",
     "Functional test results are not eligibility approval or winning probability.",
     "No imported private conversation text or credentials in this record.",

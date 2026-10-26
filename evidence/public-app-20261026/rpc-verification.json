@@ -1,0 +1,89 @@
+{
+  "schema": "arcproof-public-app-and-sample-rpc/v1",
+  "checked_at_utc": "2026-10-26T08:35:03Z",
+  "checked_on_asia_shanghai": "2026-10-26",
+  "rpc": "https://rpc.mainnet.arc.io",
+  "chain_id": 5042,
+  "chain_id_hex": "0x13b2",
+  "contract": "0xd6b1C2A7F6C406E6BbB981F66847aff60D6600eE",
+  "deployment_id": "0x3157f8feee81d6f2447756a99f6a12c88dff63d7165ca521322e0cc7ace2c2aa",
+  "pay": {
+    "transaction_hash": "0x94c559e0816b8e741f2cbf4fe764ed8e7dcfeab447ba8ac700f6f7e7ec4b82ce",
+    "status": "0x1",
+    "from": "0x54145b97d5cecf72b9900c702a02774171574171",
+    "to": "0xd6b1c2a7f6c406e6bbb981f66847aff60d6600ee",
+    "block_number": 27936503,
+    "block_hash": "0xb12a7871fa8b7f76332d254ee9cdc88ea0d4fbc24205232de219b5b0053b7ee7",
+    "block_timestamp_unix": 1793003310,
+    "block_timestamp_utc": "2026-10-26T08:28:30Z",
+    "logs": [
+      {
+        "address": "0xfffffffffffffffffffffffffffffffffffffffe",
+        "topics": [
+          "0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef",
+          "0x00000000000000000000000054145b97d5cecf72b9900c702a02774171574171",
+          "0x000000000000000000000000d6b1c2a7f6c406e6bbb981f66847aff60d6600ee"
+        ],
+        "data": "0x00000000000000000000000000000000000000000000000002c68af0bb140000",
+        "logIndex": 4
+      },
+      {
+        "address": "0xfffffffffffffffffffffffffffffffffffffffe",
+        "topics": [
+          "0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef",
+          "0x000000000000000000000000d6b1c2a7f6c406e6bbb981f66847aff60d6600ee",
+          "0x000000000000000000000000f22c752ebeb09d3ed8c6b8ba04c7f299d1c9c960"
+        ],
+        "data": "0x00000000000000000000000000000000000000000000000002c68af0bb140000",
+        "logIndex": 5
+      },
+      {
+        "address": "0xd6b1c2a7f6c406e6bbb981f66847aff60d6600ee",
+        "topics": [
+          "0x787fcac3b50ab9534e1ef2e289dfa2a75eb9481de9f9061d4773232074751582",
+          "0xe23fad9eb20137dc97b4b54e666fcb0a90f7447c82935a0285494b77aa80d6ae",
+          "0x00000000000000000000000054145b97d5cecf72b9900c702a02774171574171",
+          "0x000000000000000000000000f22c752ebeb09d3ed8c6b8ba04c7f299d1c9c960"
+        ],
+        "data": "0x00000000000000000000000000000000000000000000000002c68af0bb140000",
+        "logIndex": 6
+      }
+    ],
+    "invoice_paid_log_index": 6,
+    "amount_native": "200000000000000000",
+    "amount_usdc": "0.20"
+  },
+  "create": {
+    "classification": "re_read_on_this_checkout",
+    "orchestrator_label": "operator-reported",
+    "transaction_hash": "0x496b6a29441cd2c7af201c301d3860f34e329fb7d9ab4f7706cab74d7aa22c45",
+    "status": "0x1",
+    "from": "0xf22c752ebeb09d3ed8c6b8ba04c7f299d1c9c960",
+    "to": "0xd6b1c2a7f6c406e6bbb981f66847aff60d6600ee",
+    "block_number": 27936238,
+    "block_hash": "0xb95dea113eadc713561fb1d318840ff36b163fbbe9172a85615e224fa11c5dba",
+    "block_timestamp_unix": 1793003175,
+    "block_timestamp_utc": "2026-10-26T08:26:15Z",
+    "logs": [
+      {
+        "address": "0xd6b1c2a7f6c406e6bbb981f66847aff60d6600ee",
+        "topics": [
+          "0x686b99029dc637e64008d3cc52464efa15b0e52f54a63bec3e9054dceebc0e51",
+          "0xe23fad9eb20137dc97b4b54e666fcb0a90f7447c82935a0285494b77aa80d6ae",
+          "0x000000000000000000000000f22c752ebeb09d3ed8c6b8ba04c7f299d1c9c960"
+        ],
+        "data": "0x000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000002c68af0bb140000000000000000000000000000000000000000000000000000000000006ae060270000000000000000000000000000000000000000000000000000000000000000",
+        "logIndex": 6
+      }
+    ]
+  },
+  "not_filled": {
+    "video_url": null,
+    "dorahacks_submitted": false,
+    "mainnet_sample_is_cached_verified_badge": false
+  },
+  "excluded_addresses": {
+    "studio_deploy_misclick_testnet": "0x0D54be3d3c17D73be58c1bAeDFBdBC2f79677018",
+    "note": "Not written into any mainnet field."
+  }
+}

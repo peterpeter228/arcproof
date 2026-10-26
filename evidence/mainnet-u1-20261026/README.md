@@ -1,5 +1,7 @@
 # Arc mainnet U1 — 2026-10-26
 
+The public App and the sample payment were recorded later the same day in [../public-app-20261026](../public-app-20261026/). This directory stays the 07:50 UTC creation-transaction check. Its `app_url` null is that checkpoint, not the current App.
+
 Operator JSON: [operator-deploy.json](operator-deploy.json). Independent RPC read: [rpc-verification.json](rpc-verification.json).
 
 The creation transaction `0x3e94bdb67dcf28a12c224ab693b863220a2744766607136a0d88c7683124d503` succeeded on Arc mainnet chain `5042`. The contract is `0xd6b1C2A7F6C406E6BbB981F66847aff60D6600eE`. Block `27931307` is timestamp `2026-10-26T07:44:36Z`. Runtime bytecode matches `evidence/g1/ArcProofInvoices.artifact.json` (2296 bytes, keccak256 `0xa36ede95ccce8289224d3bbabe3a2445a888c44e763a04ac4b6f4f2f03dd344c`). That hash also matches the historical testnet artifact because the bytecode is the same. It does not make the testnet address a mainnet contract.

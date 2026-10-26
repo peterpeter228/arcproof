@@ -1,6 +1,6 @@
 {
   "schema": "arcproof-production-manifest-template/v1",
-  "note": "TEMPLATE ONLY — mirror of src/arcproof DeploymentRecord[] + related release/submission fields. Do NOT copy mock values into the repo. Keep nulls until real mainnet evidence exists. This file is not runtime input.",
+  "note": "TEMPLATE ONLY — blank field shapes, not runtime input. Do not copy these nulls over live values. Live public App: https://zippy-narwhal-31f5db.netlify.app. Live MAINNET_SAMPLE is in src/arcproof/mainnetSample.ts.",
   "baseline_head": "5ef3a8c75f8a09393783e66694d2c510313bd232",
   "prepared_on_asia_shanghai": "2026-10-26",
 
@@ -105,7 +105,7 @@
     "4. Set MAINNET_RELEASE_POLICY.activeDeploymentId + writesAccepted=true only after release acceptance",
     "5. After App create+pay: set MAINNET_SAMPLE {chainId, deploymentId, invoiceId, txHash}",
     "6. Mirror into evidence/deployments.json, release-status.json, submission-state.json",
-    "7. Rebuild mainnet dist and host {{PUBLIC_APP_URL}}"
+    "7. Rebuild mainnet dist and host https://zippy-narwhal-31f5db.netlify.app"
   ],
 
   "limits": [
