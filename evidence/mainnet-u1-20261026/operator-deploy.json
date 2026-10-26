@@ -1,0 +1,18 @@
+{
+  "stage": "U1_deployed",
+  "chainId": 5042,
+  "network": "arc-mainnet",
+  "contract": "0xd6b1C2A7F6C406E6BbB981F66847aff60D6600eE",
+  "deploy_tx": "0x3e94bdb67dcf28a12c224ab693b863220a2744766607136a0d88c7683124d503",
+  "deployer": "0xf22c752EBeB09d3eD8C6b8ba04c7F299D1C9C960",
+  "blockNumber": 27931307,
+  "runtimeCodeHash": "0xa36ede95ccce8289224d3bbabe3a2445a888c44e763a04ac4b6f4f2f03dd344c",
+  "artifactRuntimeHash": "0xa36ede95ccce8289224d3bbabe3a2445a888c44e763a04ac4b6f4f2f03dd344c",
+  "hashMatch": true,
+  "deploymentId": "0x3157f8feee81d6f2447756a99f6a12c88dff63d7165ca521322e0cc7ace2c2aa",
+  "explorer_tx": "https://explorer.arc.io/tx/0x3e94bdb67dcf28a12c224ab693b863220a2744766607136a0d88c7683124d503",
+  "explorer_address": "https://explorer.arc.io/address/0xd6b1C2A7F6C406E6BbB981F66847aff60D6600eE",
+  "studio_project": "https://studio.arc.io/app/2dbdda0d-1b70-408b-ae23-cccb8a4b8753",
+  "note": "forge create Path B; Studio Deploy is testnet-only; Studio project remains provenance URL",
+  "recordedAt": "2026-10-26T15:44:54.113663+08:00"
+}

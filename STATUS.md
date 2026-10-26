@@ -1,3 +1,21 @@
+## 2026-10-26 07:50 UTC Arc mainnet U1 recorded (W2 policy, no payment)
+
+Independently read from `https://rpc.mainnet.arc.io` (chain id `5042`):
+
+- Contract `0xd6b1C2A7F6C406E6BbB981F66847aff60D6600eE`
+- Creation tx `0x3e94bdb67dcf28a12c224ab693b863220a2744766607136a0d88c7683124d503` (success, `to` null), block `27931307`, timestamp `2026-10-26T07:44:36Z`
+- Deployer `0xf22c752EBeB09d3eD8C6b8ba04c7F299D1C9C960`
+- Runtime bytecode equals `evidence/g1/ArcProofInvoices.artifact.json` (2296 bytes). keccak256 `0xa36ede95ccce8289224d3bbabe3a2445a888c44e763a04ac4b6f4f2f03dd344c`
+- `deploymentId` `0x3157f8feee81d6f2447756a99f6a12c88dff63d7165ca521322e0cc7ace2c2aa` = `keccak256(abi.encode(uint256(5042), address))`
+
+`PRODUCTION_MANIFEST` has that one record. `settlementPolicy` is `ARC_MAINNET_SETTLEMENT_POLICY`. `MAINNET_RELEASE_POLICY.activeDeploymentId` is that id and `writesAccepted` is true, so a mainnet build is stage **W2**. `MAINNET_SAMPLE` stays null. `payment_transaction`, `{{PUBLIC_APP_URL}}`, and `{{VIDEO_URL}}` stay null. DoraHacks was not submitted. Studio Publish was not done.
+
+Studio Deploy misclick testnet `0x0D54be3d3c17D73be58c1bAeDFBdBC2f79677018` is not this mainnet contract and is not written into any mainnet field. Historical testnet `0x3Dcd2bDD924BCC384Cb39e9e12038e00fde0FA30` stays testnet-only. The shared runtime hash is the same bytecode, not a second network.
+
+Next gates: public App → `createInvoice(0.20 USDC)` → `payInvoice` → video.
+
+Evidence: [mainnet-u1-20261026](evidence/mainnet-u1-20261026/).
+
 ## 2026-10-26 12:12 Asia/Shanghai Studio final-candidate sync recorded
 
 Studio project `https://studio.arc.io/app/2dbdda0d-1b70-408b-ae23-cccb8a4b8753`. Freeze tag `candidate/20261026-1603f9a` points at `1603f9aa077915a1da95daa71fd4a2a0e0ab588a`. Base main is `fdce4a759552b71e141f1b97ea607da63295f374`.

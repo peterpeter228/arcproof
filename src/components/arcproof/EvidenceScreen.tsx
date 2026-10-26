@@ -147,7 +147,7 @@ export function EvidenceScreen() {
       <div className="ap-card p-5 space-y-3">
         <h3 className="font-medium text-stone-800 text-sm">Known limitations of this prototype</h3>
         <ul className="text-sm text-stone-700 space-y-1.5 list-disc list-outside ml-4">
-          <li>Network reads require a trusted deployment (R1). Wallet actions additionally require the fixed build network and approved release write policy (W2). With no deployment (U0), neither reads nor wallet actions run. The current production manifest is empty.</li>
+          <li>Network reads require a trusted deployment (R1). Wallet actions additionally require the fixed build network and approved release write policy (W2). With no deployment (U0), neither reads nor wallet actions run. A deployment record does not publish a sample payment, public App, or video.</li>
           <li>Fresh candidate-bound Arc native-USDC system Transfer and finality acceptance (T25/T26) is not attached to this build. Historical controlled observations do not establish current acceptance. Official native events use 18 decimals at 0xfffffffffffffffffffffffffffffffffffffffe, not the 6-decimal ERC-20 path.</li>
           <li>Receipt verifier compares runtime keccak256 against the supplied manifest. No fresh network result is attached to this build.</li>
           <li>P0 UI only supports ordinary EOA wallets. Other account types are explicitly unsupported.</li>

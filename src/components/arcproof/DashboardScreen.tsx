@@ -95,7 +95,7 @@ export function DashboardScreen() {
           Separate from the live testnet deployment. Creating an invoice here only runs the real ID derivation and amount checks;
           no transaction is sent. No wallet is needed. The demo merchant and contract are fixtures, not deployed addresses.
         </p>
-        {BUILD_NETWORK.key === 'mainnet' && <p className="text-sm text-amber-900">This mainnet build has no trusted deployment, so the demo keeps using the offline testnet fixture and its amounts are test USDC.</p>}
+        {BUILD_NETWORK.key === 'mainnet' && <p className="text-sm text-amber-900">This offline demo stays on the fixture. Amounts here are simulated, not a mainnet USDC payment, even when this build has a trusted deployment.</p>}
         <ol className="flex flex-wrap gap-x-6 gap-y-1 text-sm text-stone-700" aria-label="Demo steps">
           <li><span className="ap-serial">01</span> Set an amount</li>
           <li><span className="ap-serial">02</span> Create the simulated invoice</li>

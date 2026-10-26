@@ -1,0 +1,33 @@
+{
+  "schema": "arcproof-mainnet-u1-rpc-verification/v1",
+  "checked_at_utc": "2026-10-26T07:50:51Z",
+  "rpc": "https://rpc.mainnet.arc.io",
+  "method": "eth_chainId, eth_getTransactionReceipt, eth_getBlockByNumber, eth_getCode, then local keccak256",
+  "chain_id": 5042,
+  "chain_id_hex": "0x13b2",
+  "transaction_hash": "0x3e94bdb67dcf28a12c224ab693b863220a2744766607136a0d88c7683124d503",
+  "receipt_status": "0x1",
+  "to": null,
+  "contract_address": "0xd6b1C2A7F6C406E6BbB981F66847aff60D6600eE",
+  "deployer": "0xf22c752EBeB09d3eD8C6b8ba04c7F299D1C9C960",
+  "block_number": 27931307,
+  "block_hash": "0xec56ddb71942d82817a41bffe9d1d0b6903705fb524173c8b56983f8267b0e27",
+  "transaction_index": 2,
+  "block_timestamp_unix": 1793000676,
+  "deployed_at_utc": "2026-10-26T07:44:36Z",
+  "runtime_bytes": 2296,
+  "runtime_equals_artifact": true,
+  "artifact_path": "evidence/g1/ArcProofInvoices.artifact.json",
+  "runtime_code_hash": "0xa36ede95ccce8289224d3bbabe3a2445a888c44e763a04ac4b6f4f2f03dd344c",
+  "deployment_id": "0x3157f8feee81d6f2447756a99f6a12c88dff63d7165ca521322e0cc7ace2c2aa",
+  "deployment_id_preimage": "keccak256(abi.encode(uint256(5042), address))",
+  "payment_transaction": null,
+  "app_url": null,
+  "video_url": null,
+  "mainnet_sample": null,
+  "excluded_addresses": {
+    "studio_deploy_misclick_testnet": "0x0D54be3d3c17D73be58c1bAeDFBdBC2f79677018",
+    "historical_testnet_contract": "0x3Dcd2bDD924BCC384Cb39e9e12038e00fde0FA30",
+    "note": "Neither address is the Arc mainnet contract. They are listed here only so they are not copied into a mainnet field."
+  }
+}

@@ -1,7 +1,7 @@
 /* eslint-disable typescript/require-await -- Offline-only Promise mocks. */
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import type { Address, Hex, PublicClient } from 'viem';
-import { MAINNET_CONTEXT, TESTNET_CONTEXT, BUILD_NETWORK, getNetworkContext, assertContextDeployment, classifyDeployment, type NetworkContext } from '../networkPolicy';
+import { MAINNET_CONTEXT, TESTNET_CONTEXT, BUILD_NETWORK, canWriteContext, getNetworkContext, assertContextDeployment, classifyDeployment, networkStage, type NetworkContext } from '../networkPolicy';
 import { ARC_MAINNET_SETTLEMENT_POLICY, ARC_TESTNET_SETTLEMENT_POLICY, isSupportedSettlementPolicy } from '../arcSettlement';
 import { TESTNET_DEPLOYMENT } from '../testnet';
 import { FIXTURE_MANIFEST, PRODUCTION_MANIFEST } from '../manifest';
@@ -18,11 +18,15 @@ beforeEach(() => { vi.stubGlobal('localStorage', memoryStorage()); vi.stubGlobal
 afterEach(() => { vi.unstubAllGlobals(); vi.restoreAllMocks(); });
 
 describe('Closed network registry, not live mainnet acceptance', () => {
-  it('defaults to testnet and retains an empty mainnet manifest', () => {
+  it('defaults to testnet and keeps mainnet writes off this build', () => {
     expect(BUILD_NETWORK).toBe(TESTNET_CONTEXT);
-    expect(PRODUCTION_MANIFEST).toEqual([]);
-    expect(MAINNET_CONTEXT.deployment).toBeNull();
-    expect(MAINNET_CONTEXT.writesEnabled).toBe(false);
+    expect(PRODUCTION_MANIFEST).toHaveLength(1);
+    expect(MAINNET_CONTEXT.deployment?.contractAddress).toBe('0xd6b1C2A7F6C406E6BbB981F66847aff60D6600eE');
+    expect(MAINNET_CONTEXT.deployment?.deploymentId).toBe('0x3157f8feee81d6f2447756a99f6a12c88dff63d7165ca521322e0cc7ace2c2aa');
+    expect(MAINNET_CONTEXT.writesEnabled).toBe(true);
+    expect(networkStage(MAINNET_CONTEXT)).toBe('W2');
+    expect(canWriteContext(MAINNET_CONTEXT)).toBe(false);
+    expect(classifyDeployment(PRODUCTION_MANIFEST[0])).toBe('mainnet');
     expect(MAINNET_CONTEXT.chain.id).toBe(5042);
     expect(MAINNET_CONTEXT.chain.nativeCurrency.decimals).toBe(18);
     expect(Object.isFrozen(MAINNET_CONTEXT.chain.rpcUrls.default.http)).toBe(true);
@@ -51,23 +55,18 @@ describe('Closed network registry, not live mainnet acceptance', () => {
   });
 });
 
-describe('Unconfigured mainnet fails before RPC, wallet or persistence mutation', () => {
-  it('rejects preparation, send, receipt and recovery with zero external calls', async () => {
+describe('Mainnet writes stay on the mainnet build', () => {
+  it('rejects preparation, send and recovery from the testnet build before any wallet call', async () => {
     const service = createNetworkService(MAINNET_CONTEXT);
     const rpc = { getChainId: vi.fn(), getCode: vi.fn(), readContract: vi.fn(), getBlock: vi.fn(), getTransaction: vi.fn(), getTransactionReceipt: vi.fn() };
     const client = rpc as unknown as PublicClient;
     const wallet = { request: vi.fn() };
     const write = vi.spyOn(localStorage, 'setItem');
-    await expect(service.checkDeployment(client)).rejects.toThrow('No trusted mainnet');
-    await expect(service.loadInvoice(client, hash)).rejects.toThrow('No trusted mainnet');
-    await expect(service.loadHistory(client, account)).rejects.toThrow('No trusted mainnet');
-    await expect(service.prepareCreate(client, session, '0.1', 1)).rejects.toThrow('disabled');
-    await expect(service.preparePay(client, session, hash)).rejects.toThrow('disabled');
-    await expect(service.sendPreparedAction(client, wallet, {} as PreparedAction, () => session)).rejects.toThrow('disabled');
-    await expect(service.verifyNetworkReceipt(client, hash, hash)).rejects.toThrow('No trusted mainnet');
-    await expect(service.recoverUnknownSubmission(client, 'unused', hash)).rejects.toThrow('No trusted mainnet');
-    expect(() => service.paymentCacheKey(hash)).toThrow('No trusted mainnet');
-    expect(() => service.rememberPaymentHash(hash, hash)).toThrow('No trusted mainnet');
+    await expect(service.prepareCreate(client, session, '0.1', 1)).rejects.toThrow('build network');
+    await expect(service.preparePay(client, session, hash)).rejects.toThrow('build network');
+    await expect(service.sendPreparedAction(client, wallet, {} as PreparedAction, () => session)).rejects.toThrow('build network');
+    await expect(service.recoverUnknownSubmission(client, 'unused', hash)).rejects.toThrow('unresolved');
+    expect(service.paymentCacheKey(hash)).toContain('5042');
     for (const fn of Object.values(rpc)) expect(fn).not.toHaveBeenCalled();
     expect(wallet.request).not.toHaveBeenCalled();
     expect(write).not.toHaveBeenCalled();
@@ -80,12 +79,12 @@ describe('Unconfigured mainnet fails before RPC, wallet or persistence mutation'
     const row = testnet.getWalletIntents().find((x) => x.invoiceId === hash)!;
     expect(row.state).toBe('uncertain');
     const callback = vi.fn();
-    await expect(mainnet.runWalletIntent(input, callback)).rejects.toThrow('disabled');
-    await expect(mainnet.recoverWalletIntent(row.operationId, hash, callback)).rejects.toThrow('No trusted mainnet');
+    await expect(mainnet.runWalletIntent(input, callback)).rejects.toThrow('build network');
+    await expect(mainnet.recoverWalletIntent(row.operationId, hash, callback)).rejects.toThrow('unresolved');
     expect(mainnet.getWalletIntents()).toEqual([]);
     const submissions = createSubmissionStore(MAINNET_CONTEXT);
     expect(submissions.getSubmissions()).toEqual([]);
-    expect(() => submissions.beginSubmission('pay', account, hash)).toThrow('disabled');
+    expect(() => submissions.beginSubmission('pay', account, hash)).toThrow('build network');
     expect(callback).not.toHaveBeenCalled();
     for (const [key, value] of stored) expect(localStorage.getItem(key!)).toBe(value);
     await expect(testnet.runWalletIntent(input, callback)).rejects.toThrow('unresolved');

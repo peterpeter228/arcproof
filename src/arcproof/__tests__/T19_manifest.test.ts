@@ -46,9 +46,12 @@ const DEP_C_CHAINB: DeploymentRecord = {
 };
 const TEST_MANIFEST = [DEP_A, DEP_B, DEP_C_CHAINB];
 
-describe('T19 — Production manifest is empty', () => {
-  it('PRODUCTION_MANIFEST has no entries', () => {
-    expect(PRODUCTION_MANIFEST).toHaveLength(0);
+describe('T19 — Production manifest is the verified mainnet deployment', () => {
+  it('PRODUCTION_MANIFEST has the Arc mainnet U1 record', () => {
+    expect(PRODUCTION_MANIFEST).toHaveLength(1);
+    expect(PRODUCTION_MANIFEST[0].chainId).toBe(5042);
+    expect(PRODUCTION_MANIFEST[0].contractAddress).toBe('0xd6b1C2A7F6C406E6BbB981F66847aff60D6600eE');
+    expect(PRODUCTION_MANIFEST[0].deploymentId).toBe('0x3157f8feee81d6f2447756a99f6a12c88dff63d7165ca521322e0cc7ace2c2aa');
   });
 });
 

@@ -1,6 +1,6 @@
 {
   "schema": "arcproof-release-state/v1",
-  "updated_at_utc": "2026-10-26T04:14:32Z",
+  "updated_at_utc": "2026-10-26T07:50:51Z",
   "baseline_commit": "cd579e567457ff8acf0fe041a5cff3df07c344c0",
   "candidate": {
     "source_commit": null,
@@ -146,18 +146,29 @@
     "two_wallet_create_pay_verify": "not_run"
   },
   "mainnet": {
-    "stage": "U0",
-    "trusted_deployments": 0,
-    "writes_enabled": false,
-    "deployment_transaction": null,
+    "stage": "W2",
+    "operator_deploy_stage": "U1_deployed",
+    "stage_note": "Code stage is W2: PRODUCTION_MANIFEST has the verified deployment and writesAccepted is true. Operator evidence stage is U1_deployed. createInvoice and payInvoice have not run. MAINNET_SAMPLE remains null. Studio Deploy misclick testnet 0x0D54be3d3c17D73be58c1bAeDFBdBC2f79677018 is not this mainnet contract and is not stored in any mainnet field.",
+    "trusted_deployments": 1,
+    "writes_enabled": true,
+    "chain_id": 5042,
+    "contract_address": "0xd6b1C2A7F6C406E6BbB981F66847aff60D6600eE",
+    "deployment_id": "0x3157f8feee81d6f2447756a99f6a12c88dff63d7165ca521322e0cc7ace2c2aa",
+    "runtime_code_hash": "0xa36ede95ccce8289224d3bbabe3a2445a888c44e763a04ac4b6f4f2f03dd344c",
+    "runtime_matches_reviewed_artifact": true,
+    "deployer": "0xf22c752EBeB09d3eD8C6b8ba04c7F299D1C9C960",
+    "deployment_block_number": 27931307,
+    "deployed_at_utc": "2026-10-26T07:44:36Z",
+    "deployment_transaction": "0x3e94bdb67dcf28a12c224ab693b863220a2744766607136a0d88c7683124d503",
     "payment_transaction": null,
-    "receipt_url": null
+    "receipt_url": null,
+    "evidence_directory": "evidence/mainnet-u1-20261026"
   },
   "public_release": {
     "app_url": null,
     "video_url": null,
     "source_commit_url": null,
-    "source_branch_authorization": "2026-10-26 owner authorized one PR to main for license, judge README, candidate freeze, and mainnet docs; no deploy, no Studio Publish, no DoraHacks submit"
+    "source_branch_authorization": "2026-10-26 owner authorized recording the already-signed Arc mainnet deployment. This record does not sign, Publish, or submit to DoraHacks."
   },
   "reviews": {
     "argon_current": "outcome_uncertain_no_response_record_no_retry",
@@ -171,25 +182,26 @@
   "microgrants_20261026": {
     "baseline_commit": "5ef3a8c75f8a09393783e66694d2c510313bd232",
     "owner_authorized_path": "shortest_microgrants_license_readme_freeze_and_docs",
-    "production_manifest_entries": 0,
-    "mainnet_stage": "U0",
+    "production_manifest_entries": 1,
+    "mainnet_stage": "W2",
+    "operator_deploy_stage": "U1_deployed",
     "candidate_freeze": "annotated_tag_on_the_materials_commit_not_release_acceptance",
     "source_snapshot_sha256": "not_recomputed",
     "next_gates": [
-      "arc_mainnet_deploy_5042_owner_signed",
       "public_app",
-      "real_usdc_transaction",
+      "createInvoice_0_20_usdc",
+      "payInvoice",
       "video"
     ],
     "not_done": {
-      "mainnet_contract": null,
-      "mainnet_deployment_transaction": null,
       "public_app_url": null,
       "payment_transaction": null,
       "video_url": null,
+      "mainnet_sample": null,
       "dorahacks_submitted": false,
       "deploy_publish": false
     },
+    "studio_deploy_misclick_testnet_not_mainnet": "0x0D54be3d3c17D73be58c1bAeDFBdBC2f79677018",
     "studio_final_candidate_sync": "done",
     "export_comparison": "done",
     "studio": {
@@ -222,10 +234,11 @@
       "preview_is_public_app_url": false
     }
   },
-  "next_action": "Arc mainnet deploy 5042 (owner-signed) \u2192 public App \u2192 real USDC \u2192 video. Those gates are not done. Mainnet remains U0, writes_enabled is false, and contract, deployment transaction, payment transaction, public app URL, and video URL stay null. This record does not deploy, sign, Publish, or submit.",
+  "next_action": "Public App → createInvoice(0.20 USDC) → payInvoice → video. The Arc mainnet contract is deployed and writes are accepted for that deployment (W2 / operator U1). payment_transaction, app_url, and video_url stay null. MAINNET_SAMPLE stays null. This record does not sign, Publish, or submit.",
   "evidence_directory": "final-handoff-20261022",
   "scope_limits": [
-    "No deployment, signing, transfer, public hosting, outreach or submission.",
+    "This record does not sign, transfer, host a public App, or submit. The deployment transaction was already confirmed on Arc mainnet and is copied here.",
+    "Studio Deploy misclick testnet 0x0D54be3d3c17D73be58c1bAeDFBdBC2f79677018 is not the mainnet contract.",
     "Functional test results are not eligibility approval or winning probability.",
     "No imported private conversation text or credentials in this record.",
     "Studio zip SHA-256 values are copied from the operator JSON. This checkout did not re-hash those zips.",
