@@ -1,3 +1,17 @@
+## 2026-10-26 12:12 Asia/Shanghai Studio final-candidate sync recorded
+
+Studio project `https://studio.arc.io/app/2dbdda0d-1b70-408b-ae23-cccb8a4b8753`. Freeze tag `candidate/20261026-1603f9a` points at `1603f9aa077915a1da95daa71fd4a2a0e0ab588a`. Base main is `fdce4a759552b71e141f1b97ea607da63295f374`.
+
+`studio.final_candidate_sync` is `done`. `export_comparison` is `done` for the operator focus compare: same 107, modified 0, only_freeze 0, only_studio 15. Post-sync export zip SHA-256 is `0381f5ff2c706c610808a106f6b7b9de3dfacd3c51d107b7a4b911c7aae6eddd` (5146996 bytes, `oqpnex.zip`). `export_tree_sha256` stays null. This checkout did not have the zip and did not recompute that hash. Studio tests stay operator-reported: bun 559 and forge 73, exit 0. They were not re-run here.
+
+`scripts/buildProvenance.ts` SHA-256 `af241da0bad9d79dc33dfcf8e1780db1eb6fd3b0ca2d8096f778e7b3a7a25e1d` matches GitHub main and the freeze commit. The operator final JSON marks that path absent from the freeze tree and also lists `.oxlintrc.json`, `AGENTS.md`, and `scripts/check.sh` as Studio-only. Those four paths are in the freeze commit and match main. Eleven other listed paths, including `src/console-capture.ts` and `src/tracing.ts`, are absent from both the freeze commit and main.
+
+A Studio preview opened on the testnet overview with no wallet. That is not a public App URL. Deploy and Publish were not done. DoraHacks was not submitted. Mainnet stage remains U0. Writes stay disabled. Contract, deployment transaction, payment transaction, public app URL, and video URL stay null.
+
+Next: Arc mainnet deploy 5042 (owner-signed) → public App → real USDC → video.
+
+Evidence: [studio-sync-20261026](evidence/studio-sync-20261026/).
+
 ## 2026-10-26 03:46 UTC Microgrants 最短路径（候选冻结，不是主网验收）
 
 Owner authorized the shortest Arc Microgrants path from baseline `5ef3a8c75f8a09393783e66694d2c510313bd232` (current `main` at the start of this change).

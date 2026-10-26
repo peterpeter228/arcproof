@@ -1,6 +1,6 @@
 {
   "schema": "arcproof-release-state/v1",
-  "updated_at_utc": "2026-10-26T03:46:00Z",
+  "updated_at_utc": "2026-10-26T04:14:32Z",
   "baseline_commit": "cd579e567457ff8acf0fe041a5cff3df07c344c0",
   "candidate": {
     "source_commit": null,
@@ -45,8 +45,102 @@
     "C3_submission": "not_run"
   },
   "studio": {
-    "final_candidate_sync": "not_run",
-    "export_comparison": "not_run"
+    "final_candidate_sync": "done",
+    "export_comparison": "done",
+    "note": "Done records the operator post-sync export and focus compare. It is not a mainnet deployment, Studio Publish, public App, or DoraHacks submission. The export zip was not in this checkout and its SHA-256 was not recomputed here. Four paths the operator listed as Studio-only are in the freeze commit; see checkout_git_check.",
+    "studio_project_url": "https://studio.arc.io/app/2dbdda0d-1b70-408b-ae23-cccb8a4b8753",
+    "freeze_tag": "candidate/20261026-1603f9a",
+    "freeze_commit": "1603f9aa077915a1da95daa71fd4a2a0e0ab588a",
+    "main_merge": "fdce4a759552b71e141f1b97ea607da63295f374",
+    "evidence_directory": "evidence/studio-sync-20261026",
+    "pre_sync_export_zip": {
+      "sha256": "e395ec713ebe711c3a799f74f0ab7396c133bf6cbeb8c08b0e36c2440d6ef597",
+      "bytes": 5071360,
+      "rehashed_in_this_checkout": false,
+      "source": "evidence/studio-sync-20261026/studio-sync-evidence-interim.json"
+    },
+    "pre_sync_vs_freeze": {
+      "status": "operator_reported_superseded_by_post_sync",
+      "same": 65,
+      "modified": 28,
+      "only_freeze": 14,
+      "only_studio": 15
+    },
+    "upload_delta_zip": {
+      "sha256": "36b746a494bdda70b28b01703d7f74ab0c58001d031d95c3cb64954db8f1cfd6",
+      "file_count": 42,
+      "rehashed_in_this_checkout": false,
+      "source": "evidence/studio-sync-20261026/studio-sync-evidence-interim.json"
+    },
+    "buildProvenance_fix_zip": {
+      "sha256": "dfc1dcc15277d02f68299750c13811c174ed54aad74e6372eb3dd78c26fc15ee",
+      "rehashed_in_this_checkout": false,
+      "source": "evidence/studio-sync-20261026/studio-sync-evidence-interim.json"
+    },
+    "export_tree_sha256": null,
+    "post_sync_export_sha256": "0381f5ff2c706c610808a106f6b7b9de3dfacd3c51d107b7a4b911c7aae6eddd",
+    "post_sync_export_zip": {
+      "filename": "arcproof_smart_contract_developer_oqpnex.zip",
+      "sha256": "0381f5ff2c706c610808a106f6b7b9de3dfacd3c51d107b7a4b911c7aae6eddd",
+      "bytes": 5146996,
+      "rehashed_in_this_checkout": false,
+      "source": "evidence/studio-sync-20261026/studio-sync-evidence-final.json"
+    },
+    "export_vs_freeze": {
+      "status": "done",
+      "operator_focus": {
+        "studio_focus": 122,
+        "freeze_focus": 107,
+        "same": 107,
+        "modified": 0,
+        "only_freeze": 0,
+        "only_studio": 15
+      },
+      "source": "evidence/studio-sync-20261026/studio-sync-evidence-final.json"
+    },
+    "studio_buildProvenance_ts_sha256": "af241da0bad9d79dc33dfcf8e1780db1eb6fd3b0ca2d8096f778e7b3a7a25e1d",
+    "buildProvenance_ts": {
+      "sha256": "af241da0bad9d79dc33dfcf8e1780db1eb6fd3b0ca2d8096f778e7b3a7a25e1d",
+      "matches_github_main": true,
+      "in_freeze_tree": true,
+      "matches_freeze_commit": true,
+      "operator_json_in_freeze": false,
+      "checkout_note": "Operator final JSON sets scripts/buildProvenance.ts in_freeze to false. This checkout hashed the path in freeze commit 1603f9aa077915a1da95daa71fd4a2a0e0ab588a and main fdce4a759552b71e141f1b97ea607da63295f374; both are af241da0bad9d79dc33dfcf8e1780db1eb6fd3b0ca2d8096f778e7b3a7a25e1d."
+    },
+    "operator_only_studio_present_in_freeze_and_main": [
+      ".oxlintrc.json",
+      "AGENTS.md",
+      "scripts/buildProvenance.ts",
+      "scripts/check.sh"
+    ],
+    "studio_only_absent_from_freeze_and_main": [
+      "contracts/contract-metadata/.gitkeep",
+      "contracts/script/Create2Factory.sol",
+      "contracts/script/DeployCreate2.s.sol",
+      "contracts/test-integration/.gitkeep",
+      "contracts/test/.gitkeep",
+      "scripts/compass-deploy-helpers.ts",
+      "scripts/compass-deploy.ts",
+      "scripts/fetch-abi.ts",
+      "scripts/self-deploy.ts",
+      "src/console-capture.ts",
+      "src/tracing.ts"
+    ],
+    "studio_vitest": "operator_reported_not_reverified_here",
+    "studio_forge": "operator_reported_not_reverified_here",
+    "studio_tests": {
+      "classification": "operator_reported_not_reverified_here",
+      "bun_run_test": 559,
+      "forge_test": 73,
+      "exit": 0
+    },
+    "preview": {
+      "opened": true,
+      "description": "preview.studio.arc.io ArcProof testnet overview, no wallet",
+      "is_public_app_url": false
+    },
+    "deploy_publish": false,
+    "checkout_git_check": "evidence/studio-sync-20261026/checkout-git-check.json"
   },
   "testnet_acceptance": {
     "two_wallet_create_pay_verify": "not_run"
@@ -82,28 +176,60 @@
     "candidate_freeze": "annotated_tag_on_the_materials_commit_not_release_acceptance",
     "source_snapshot_sha256": "not_recomputed",
     "next_gates": [
-      "studio_final_candidate_sync",
-      "arc_mainnet_deploy_5042",
+      "arc_mainnet_deploy_5042_owner_signed",
       "public_app",
       "real_usdc_transaction",
       "video"
     ],
     "not_done": {
-      "studio_final_candidate_sync": "not_run",
-      "export_comparison": "not_run",
       "mainnet_contract": null,
       "mainnet_deployment_transaction": null,
       "public_app_url": null,
       "payment_transaction": null,
       "video_url": null,
-      "dorahacks_submitted": false
+      "dorahacks_submitted": false,
+      "deploy_publish": false
+    },
+    "studio_final_candidate_sync": "done",
+    "export_comparison": "done",
+    "studio": {
+      "final_candidate_sync": "done",
+      "export_comparison": "done",
+      "studio_project_url": "https://studio.arc.io/app/2dbdda0d-1b70-408b-ae23-cccb8a4b8753",
+      "freeze_tag": "candidate/20261026-1603f9a",
+      "freeze_commit": "1603f9aa077915a1da95daa71fd4a2a0e0ab588a",
+      "main_merge": "fdce4a759552b71e141f1b97ea607da63295f374",
+      "post_sync_export_sha256": "0381f5ff2c706c610808a106f6b7b9de3dfacd3c51d107b7a4b911c7aae6eddd",
+      "post_sync_export_zip_bytes": 5146996,
+      "export_tree_sha256": null,
+      "export_vs_freeze": {
+        "status": "done",
+        "operator_focus": {
+          "studio_focus": 122,
+          "freeze_focus": 107,
+          "same": 107,
+          "modified": 0,
+          "only_freeze": 0,
+          "only_studio": 15
+        },
+        "source": "evidence/studio-sync-20261026/studio-sync-evidence-final.json"
+      },
+      "studio_buildProvenance_ts_sha256": "af241da0bad9d79dc33dfcf8e1780db1eb6fd3b0ca2d8096f778e7b3a7a25e1d",
+      "buildProvenance_in_freeze_tree": true,
+      "studio_vitest": "operator_reported_not_reverified_here",
+      "studio_forge": "operator_reported_not_reverified_here",
+      "deploy_publish": false,
+      "preview_is_public_app_url": false
     }
   },
-  "next_action": "Next gates in order: Studio final-candidate sync (not_run) → Arc mainnet deploy chain 5042 (not deployed) → public App (no URL) → real USDC tx (null) → video (no URL). The candidate tag is not release acceptance. Do not deploy, sign, Publish, or submit from this record.",
+  "next_action": "Arc mainnet deploy 5042 (owner-signed) \u2192 public App \u2192 real USDC \u2192 video. Those gates are not done. Mainnet remains U0, writes_enabled is false, and contract, deployment transaction, payment transaction, public app URL, and video URL stay null. This record does not deploy, sign, Publish, or submit.",
   "evidence_directory": "final-handoff-20261022",
   "scope_limits": [
     "No deployment, signing, transfer, public hosting, outreach or submission.",
     "Functional test results are not eligibility approval or winning probability.",
-    "No imported private conversation text or credentials in this record."
+    "No imported private conversation text or credentials in this record.",
+    "Studio zip SHA-256 values are copied from the operator JSON. This checkout did not re-hash those zips.",
+    "Studio bun 559 and forge 73 are operator-reported and were not re-run here.",
+    "Operator final JSON marks scripts/buildProvenance.ts as absent from the freeze tree. The freeze commit contains it, matching main, at af241da0bad9d79dc33dfcf8e1780db1eb6fd3b0ca2d8096f778e7b3a7a25e1d. .oxlintrc.json, AGENTS.md, and scripts/check.sh are also in that commit and match main."
   ]
 }

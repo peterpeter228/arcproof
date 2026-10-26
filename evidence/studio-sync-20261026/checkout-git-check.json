@@ -1,0 +1,199 @@
+{
+  "checked_at_utc": "2026-10-26T04:14:32Z",
+  "method": "git show <rev>:<path> | sha256. This checkout does not contain the Studio export zip, so zip hashes were not recomputed.",
+  "freeze_tag": "candidate/20261026-1603f9a",
+  "freeze_tag_target": "1603f9aa077915a1da95daa71fd4a2a0e0ab588a",
+  "main_commit": "fdce4a759552b71e141f1b97ea607da63295f374",
+  "expected_main_merge": "fdce4a759552b71e141f1b97ea607da63295f374",
+  "key_files": [
+    {
+      "path": "src/arcproof/networkReleasePolicy.ts",
+      "freeze_sha256": "be43d85797ee1d9cd4dfd2f775c43a94de5421a2b8fec4227f159f937a5b6da3",
+      "main_sha256": "be43d85797ee1d9cd4dfd2f775c43a94de5421a2b8fec4227f159f937a5b6da3",
+      "blob_identical": true
+    },
+    {
+      "path": "src/arcproof/mainnetSample.ts",
+      "freeze_sha256": "e8dd1f72011c7dc39c684daa862fc609ae50fe3f1f1499b4fd5d256150385331",
+      "main_sha256": "e8dd1f72011c7dc39c684daa862fc609ae50fe3f1f1499b4fd5d256150385331",
+      "blob_identical": true
+    },
+    {
+      "path": "src/App.tsx",
+      "freeze_sha256": "6d9a3058e767750fc70c4a8713be0242e845909fa9c1c3f3936c33388dbefec1",
+      "main_sha256": "6d9a3058e767750fc70c4a8713be0242e845909fa9c1c3f3936c33388dbefec1",
+      "blob_identical": true
+    },
+    {
+      "path": "vite.config.ts",
+      "freeze_sha256": "66a7ed0f4bd3111ef2b6835bcbb6ba882c9f0ad04bdd8b582bcb8563119ded8c",
+      "main_sha256": "66a7ed0f4bd3111ef2b6835bcbb6ba882c9f0ad04bdd8b582bcb8563119ded8c",
+      "blob_identical": true
+    },
+    {
+      "path": "ArcProofInvoices.abi.json",
+      "freeze_sha256": "745476dbf5c166ceb32fab85f5346b204258b7991a5c5b1541e8002d0cb75fa5",
+      "main_sha256": "745476dbf5c166ceb32fab85f5346b204258b7991a5c5b1541e8002d0cb75fa5",
+      "blob_identical": true
+    },
+    {
+      "path": "contracts/ArcProofInvoices.sol",
+      "freeze_sha256": "8699071d250c834cd1166ece0d4001b7de95af7562796e19305ce2812635e25b",
+      "main_sha256": "8699071d250c834cd1166ece0d4001b7de95af7562796e19305ce2812635e25b",
+      "blob_identical": true
+    },
+    {
+      "path": "scripts/buildProvenance.ts",
+      "freeze_sha256": "af241da0bad9d79dc33dfcf8e1780db1eb6fd3b0ca2d8096f778e7b3a7a25e1d",
+      "main_sha256": "af241da0bad9d79dc33dfcf8e1780db1eb6fd3b0ca2d8096f778e7b3a7a25e1d",
+      "blob_identical": true
+    }
+  ],
+  "operator_only_studio_paths": [
+    {
+      "path": ".oxlintrc.json",
+      "in_freeze_commit": true,
+      "in_main": true,
+      "freeze_sha256": "15d836ba1270f979cd8b15e4fab74caf10d315667ec5cb19dee49539158616c2",
+      "main_sha256": "15d836ba1270f979cd8b15e4fab74caf10d315667ec5cb19dee49539158616c2",
+      "freeze_matches_main": true
+    },
+    {
+      "path": "AGENTS.md",
+      "in_freeze_commit": true,
+      "in_main": true,
+      "freeze_sha256": "d206b433e101b8abcc1d4197595b1d001fcba230d936d6e1923956b6b597ab3b",
+      "main_sha256": "d206b433e101b8abcc1d4197595b1d001fcba230d936d6e1923956b6b597ab3b",
+      "freeze_matches_main": true
+    },
+    {
+      "path": "contracts/contract-metadata/.gitkeep",
+      "in_freeze_commit": false,
+      "in_main": false,
+      "freeze_sha256": null,
+      "main_sha256": null,
+      "freeze_matches_main": null
+    },
+    {
+      "path": "contracts/script/Create2Factory.sol",
+      "in_freeze_commit": false,
+      "in_main": false,
+      "freeze_sha256": null,
+      "main_sha256": null,
+      "freeze_matches_main": null
+    },
+    {
+      "path": "contracts/script/DeployCreate2.s.sol",
+      "in_freeze_commit": false,
+      "in_main": false,
+      "freeze_sha256": null,
+      "main_sha256": null,
+      "freeze_matches_main": null
+    },
+    {
+      "path": "contracts/test-integration/.gitkeep",
+      "in_freeze_commit": false,
+      "in_main": false,
+      "freeze_sha256": null,
+      "main_sha256": null,
+      "freeze_matches_main": null
+    },
+    {
+      "path": "contracts/test/.gitkeep",
+      "in_freeze_commit": false,
+      "in_main": false,
+      "freeze_sha256": null,
+      "main_sha256": null,
+      "freeze_matches_main": null
+    },
+    {
+      "path": "scripts/buildProvenance.ts",
+      "in_freeze_commit": true,
+      "in_main": true,
+      "freeze_sha256": "af241da0bad9d79dc33dfcf8e1780db1eb6fd3b0ca2d8096f778e7b3a7a25e1d",
+      "main_sha256": "af241da0bad9d79dc33dfcf8e1780db1eb6fd3b0ca2d8096f778e7b3a7a25e1d",
+      "freeze_matches_main": true
+    },
+    {
+      "path": "scripts/check.sh",
+      "in_freeze_commit": true,
+      "in_main": true,
+      "freeze_sha256": "b2f9dc0c31f73e21e4b6ed820b2caa0c2b8ed88b8ae69301abd010683a050011",
+      "main_sha256": "b2f9dc0c31f73e21e4b6ed820b2caa0c2b8ed88b8ae69301abd010683a050011",
+      "freeze_matches_main": true
+    },
+    {
+      "path": "scripts/compass-deploy-helpers.ts",
+      "in_freeze_commit": false,
+      "in_main": false,
+      "freeze_sha256": null,
+      "main_sha256": null,
+      "freeze_matches_main": null
+    },
+    {
+      "path": "scripts/compass-deploy.ts",
+      "in_freeze_commit": false,
+      "in_main": false,
+      "freeze_sha256": null,
+      "main_sha256": null,
+      "freeze_matches_main": null
+    },
+    {
+      "path": "scripts/fetch-abi.ts",
+      "in_freeze_commit": false,
+      "in_main": false,
+      "freeze_sha256": null,
+      "main_sha256": null,
+      "freeze_matches_main": null
+    },
+    {
+      "path": "scripts/self-deploy.ts",
+      "in_freeze_commit": false,
+      "in_main": false,
+      "freeze_sha256": null,
+      "main_sha256": null,
+      "freeze_matches_main": null
+    },
+    {
+      "path": "src/console-capture.ts",
+      "in_freeze_commit": false,
+      "in_main": false,
+      "freeze_sha256": null,
+      "main_sha256": null,
+      "freeze_matches_main": null
+    },
+    {
+      "path": "src/tracing.ts",
+      "in_freeze_commit": false,
+      "in_main": false,
+      "freeze_sha256": null,
+      "main_sha256": null,
+      "freeze_matches_main": null
+    }
+  ],
+  "conclusion": {
+    "buildProvenance_ts_sha256": "af241da0bad9d79dc33dfcf8e1780db1eb6fd3b0ca2d8096f778e7b3a7a25e1d",
+    "buildProvenance_in_freeze_tree": true,
+    "buildProvenance_matches_main_and_freeze": true,
+    "operator_final_json_said_buildProvenance_in_freeze": false,
+    "operator_only_studio_but_present_in_freeze_and_main": [
+      ".oxlintrc.json",
+      "AGENTS.md",
+      "scripts/buildProvenance.ts",
+      "scripts/check.sh"
+    ],
+    "absent_from_freeze_and_main": [
+      "contracts/contract-metadata/.gitkeep",
+      "contracts/script/Create2Factory.sol",
+      "contracts/script/DeployCreate2.s.sol",
+      "contracts/test-integration/.gitkeep",
+      "contracts/test/.gitkeep",
+      "scripts/compass-deploy-helpers.ts",
+      "scripts/compass-deploy.ts",
+      "scripts/fetch-abi.ts",
+      "scripts/self-deploy.ts",
+      "src/console-capture.ts",
+      "src/tracing.ts"
+    ]
+  }
+}

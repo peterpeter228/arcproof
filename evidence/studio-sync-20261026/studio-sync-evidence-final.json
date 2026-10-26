@@ -1,0 +1,107 @@
+{
+  "recorded_at": "2026-10-26T12:12:32+08:00",
+  "studio_project": "https://studio.arc.io/app/2dbdda0d-1b70-408b-ae23-cccb8a4b8753",
+  "freeze_tag": "candidate/20261026-1603f9a",
+  "freeze_commit": "1603f9aa077915a1da95daa71fd4a2a0e0ab588a",
+  "post_sync_export_zip": {
+    "path": "/home/box/Downloads/arcproof_smart_contract_developer_oqpnex.zip",
+    "bytes": 5146996,
+    "sha256": "0381f5ff2c706c610808a106f6b7b9de3dfacd3c51d107b7a4b911c7aae6eddd",
+    "files_in_archive_note": "315 per computerUse report"
+  },
+  "counts": {
+    "studio_focus": 122,
+    "freeze_focus": 107,
+    "same": 107,
+    "modified": 0,
+    "only_studio": 15,
+    "only_freeze": 0
+  },
+  "modified": [],
+  "only_freeze": [],
+  "only_studio": [
+    ".oxlintrc.json",
+    "AGENTS.md",
+    "contracts/contract-metadata/.gitkeep",
+    "contracts/script/Create2Factory.sol",
+    "contracts/script/DeployCreate2.s.sol",
+    "contracts/test-integration/.gitkeep",
+    "contracts/test/.gitkeep",
+    "scripts/buildProvenance.ts",
+    "scripts/check.sh",
+    "scripts/compass-deploy-helpers.ts",
+    "scripts/compass-deploy.ts",
+    "scripts/fetch-abi.ts",
+    "scripts/self-deploy.ts",
+    "src/console-capture.ts",
+    "src/tracing.ts"
+  ],
+  "key_files": {
+    "src/arcproof/networkReleasePolicy.ts": {
+      "in_studio": true,
+      "in_freeze": true,
+      "studio_sha": "be43d85797ee1d9cd4dfd2f775c43a94de5421a2b8fec4227f159f937a5b6da3",
+      "freeze_sha": "be43d85797ee1d9cd4dfd2f775c43a94de5421a2b8fec4227f159f937a5b6da3",
+      "match": true
+    },
+    "src/arcproof/mainnetSample.ts": {
+      "in_studio": true,
+      "in_freeze": true,
+      "studio_sha": "e8dd1f72011c7dc39c684daa862fc609ae50fe3f1f1499b4fd5d256150385331",
+      "freeze_sha": "e8dd1f72011c7dc39c684daa862fc609ae50fe3f1f1499b4fd5d256150385331",
+      "match": true
+    },
+    "src/App.tsx": {
+      "in_studio": true,
+      "in_freeze": true,
+      "studio_sha": "6d9a3058e767750fc70c4a8713be0242e845909fa9c1c3f3936c33388dbefec1",
+      "freeze_sha": "6d9a3058e767750fc70c4a8713be0242e845909fa9c1c3f3936c33388dbefec1",
+      "match": true
+    },
+    "vite.config.ts": {
+      "in_studio": true,
+      "in_freeze": true,
+      "studio_sha": "66a7ed0f4bd3111ef2b6835bcbb6ba882c9f0ad04bdd8b582bcb8563119ded8c",
+      "freeze_sha": "66a7ed0f4bd3111ef2b6835bcbb6ba882c9f0ad04bdd8b582bcb8563119ded8c",
+      "match": true
+    },
+    "scripts/buildProvenance.ts": {
+      "in_studio": true,
+      "in_freeze": false,
+      "studio_sha": "af241da0bad9d79dc33dfcf8e1780db1eb6fd3b0ca2d8096f778e7b3a7a25e1d",
+      "freeze_sha": null,
+      "match": false
+    },
+    "ArcProofInvoices.abi.json": {
+      "in_studio": true,
+      "in_freeze": true,
+      "studio_sha": "745476dbf5c166ceb32fab85f5346b204258b7991a5c5b1541e8002d0cb75fa5",
+      "freeze_sha": "745476dbf5c166ceb32fab85f5346b204258b7991a5c5b1541e8002d0cb75fa5",
+      "match": true
+    },
+    "contracts/ArcProofInvoices.sol": {
+      "in_studio": true,
+      "in_freeze": true,
+      "studio_sha": "8699071d250c834cd1166ece0d4001b7de95af7562796e19305ce2812635e25b",
+      "freeze_sha": "8699071d250c834cd1166ece0d4001b7de95af7562796e19305ce2812635e25b",
+      "match": true
+    }
+  },
+  "preserve_studio_only_present": {
+    "src/console-capture.ts": true,
+    "src/tracing.ts": true
+  },
+  "studio_tests": {
+    "bun_run_test": 559,
+    "forge_test": 73,
+    "exit": 0
+  },
+  "preview": "opened preview.studio.arc.io ArcProof testnet overview (no wallet)",
+  "final_candidate_sync": "done",
+  "buildProvenance_post_sync": {
+    "studio_export_sha256": "af241da0bad9d79dc33dfcf8e1780db1eb6fd3b0ca2d8096f778e7b3a7a25e1d",
+    "github_main_sha256": "af241da0bad9d79dc33dfcf8e1780db1eb6fd3b0ca2d8096f778e7b3a7a25e1d",
+    "matches_github_main": true
+  },
+  "interpretation": "All freeze application/contract focus files match Studio export (107/107). 15 Studio-only extras preserved (console-capture, tracing, deploy scripts, etc.). buildProvenance.ts in Studio export matches GitHub main."
+}
