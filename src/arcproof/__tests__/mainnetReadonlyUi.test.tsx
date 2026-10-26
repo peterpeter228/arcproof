@@ -26,7 +26,8 @@ beforeEach(() => {
 afterEach(() => { act(() => root.unmount()); host.remove(); });
 const MAINNET = '0xd6b1C2A7F6C406E6BbB981F66847aff60D6600eE';
 const DEPLOYMENT = '0x3157f8feee81d6f2447756a99f6a12c88dff63d7165ca521322e0cc7ace2c2aa';
-describe('mainnet build uses the verified deployment and still has no sample payment', () => {
+const SAMPLE_HREF = '#/receipt/5042/0x3157f8feee81d6f2447756a99f6a12c88dff63d7165ca521322e0cc7ace2c2aa/0xe23fad9eb20137dc97b4b54e666fcb0a90f7447c82935a0285494b77aa80d6ae?tx=0x94c559e0816b8e741f2cbf4fe764ed8e7dcfeab447ba8ac700f6f7e7ec4b82ce';
+describe('mainnet build uses the verified deployment and the published sample locator', () => {
   it.each(['#/pay/5042/unknown/0x' + 'a'.repeat(64), '#/receipt/5042002/testnet/0x' + 'b'.repeat(64)])('rejects unknown or testnet links without a wallet: %s', hash => {
     window.history.replaceState(null, '', hash); act(() => root.render(<App />));
     expect(host.textContent).toContain('Request unavailable');
@@ -56,11 +57,13 @@ describe('mainnet build uses the verified deployment and still has no sample pay
     expect(calls.prepare).not.toHaveBeenCalled();
     expect(calls.send).not.toHaveBeenCalled();
   });
-  it.each(['#', '#/'])('shows the accepted deployment without a sample payment: %s', hash => {
+  it.each(['#', '#/'])('shows the accepted deployment and the sample receipt link: %s', hash => {
     window.history.replaceState(null, '', hash); act(() => root.render(<App />));
     expect(host.textContent).toContain('Arc Mainnet is enabled for this release');
     expect(host.textContent).toContain('Trusted mainnet deployment 2026-10-26');
-    expect(host.textContent).toContain('no actual mainnet application payment');
+    expect(host.textContent).toContain('read-only verification');
+    expect(host.textContent).not.toContain('no actual mainnet application payment');
+    expect(host.querySelector(`a[href="${SAMPLE_HREF}"]`)).not.toBeNull();
     expect(host.querySelector('main a[href="#/invoices"]')).toBeNull();
     expect(host.textContent).not.toContain('Connect wallet');
     expect(host.textContent).not.toContain('Not deployed');

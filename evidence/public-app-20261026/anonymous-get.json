@@ -1,0 +1,32 @@
+{
+  "schema": "arcproof-public-app-anonymous-get/v1",
+  "checked_at_utc": "2026-10-26T08:35:03Z",
+  "checked_on_asia_shanghai": "2026-10-26",
+  "url": "https://zippy-narwhal-31f5db.netlify.app",
+  "kind": "studio_to_netlify_public_app",
+  "not_a_studio_preview": true,
+  "http_status": 200,
+  "final_url": "https://zippy-narwhal-31f5db.netlify.app",
+  "content_type": "text/html; charset=UTF-8",
+  "html_bytes": 1551,
+  "generator": "Arc Studio by Circle \u2014 https://studio.arc.io",
+  "netlify_public_variant": true,
+  "module_src": "/assets/index-CZTJDUib.js",
+  "module_http_status": 200,
+  "module_bytes": 1514768,
+  "module_content_type": "application/javascript; charset=UTF-8",
+  "module_contains": {
+    "name:\"Arc Mainnet\"": true,
+    "id:5042,name:\"Arc Mainnet\"": true,
+    "0xd6b1C2A7F6C406E6BbB981F66847aff60D6600eE": true,
+    "0x3157f8feee81d6f2447756a99f6a12c88dff63d7165ca521322e0cc7ace2c2aa": true,
+    "2026-10-26T07:44:36Z": true,
+    "writesAccepted:!0": true,
+    "networkKey:\"mainnet\"": true,
+    "2026-10-26T08:22:57.104Z": true,
+    "0x0D54be3d3c17D73be58c1bAeDFBdBC2f79677018": false
+  },
+  "html_inlines_chain_id": false,
+  "home_template_renders_trusted_deployment_date": true,
+  "note": "Anonymous GET of the HTML shell and its module. The shell does not inline chain id 5042. The module contains the Arc Mainnet 5042 deployment deployedAt 2026-10-26T07:44:36Z. The home screen template renders Trusted plus the network key and the deployedAt date. This checkout did not execute the bundle in a browser. The published module predates the MAINNET_SAMPLE locator added in this change."
+}

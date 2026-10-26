@@ -6,13 +6,13 @@ This template is documentation. It is not imported by the app. Runtime values st
 
 | Code / evidence | Role |
 | --- | --- |
-| `src/arcproof/manifest.ts` | `DeploymentRecord`, `PRODUCTION_MANIFEST` (currently `[]`) |
+| `src/arcproof/manifest.ts` | `DeploymentRecord`, `PRODUCTION_MANIFEST` (one Arc mainnet row) |
 | `src/arcproof/networkReleasePolicy.ts` | `MAINNET_RELEASE_POLICY` |
 | `src/arcproof/mainnetSample.ts` | `MAINNET_SAMPLE` locator |
 | `src/arcproof/networkPolicy.ts` | `ARC_MAINNET` chain `5042`, `MAINNET_CONTEXT` |
 | `src/arcproof/arcSettlement.ts` | `ARC_MAINNET_SETTLEMENT_POLICY` |
 | `src/arcproof/testnet.ts` | Reference for how a **real** `DeploymentRecord` looks |
-| `evidence/release-status.json` → `mainnet` | Stage U0 honesty |
+| `evidence/release-status.json` → `mainnet` | Stage W2 / operator U2_paid |
 | `evidence/deployments.json` → `networks["5042"]` | Reserved slot `arcproof-v1-mainnet-01` |
 | `docs/final-delivery-20261022/submission-state.json` → `mainnet` / `publication` | Contest worksheet |
 
@@ -36,7 +36,7 @@ Real mainnet addresses in this template stay `null`. The block `known_non_mainne
 
 **Security rule (from manifest.ts):** URL / localStorage may locate an `invoiceId`, never override contract address, chainId, or merchant for that deployment.
 
-Empty array `[]` is the correct production state until a verified on-chain deployment exists.
+The checked-in manifest has the verified Arc mainnet deployment. Do not replace that row. A new contract address needs a new deployment id.
 
 ---
 
@@ -44,8 +44,8 @@ Empty array `[]` is the correct production state until a verified on-chain deplo
 
 | Field | Meaning | Current |
 | --- | --- | --- |
-| `activeDeploymentId` | Which manifest row may become the write target | `null` |
-| `writesAccepted` | Explicit release acceptance for wallet sends | `false` |
+| `activeDeploymentId` | Which manifest row may become the write target | `0x3157f8feee81d6f2447756a99f6a12c88dff63d7165ca521322e0cc7ace2c2aa` |
+| `writesAccepted` | Explicit release acceptance for wallet sends | `true` |
 
 Writes enable only when: trusted context + non-null deployment + `writesAccepted` + active id matches (`networkPolicy.ts` → stage **W2**). Stages: **U0** none, **R1** trusted read-only, **W2** writes.
 
@@ -62,7 +62,7 @@ Locator only (not a saved receipt). All four fields required for `mainnetSampleH
 | `invoiceId` | `bytes32` invoice id |
 | `txHash` | Payment transaction hash |
 
-Add **only** after an actual application payment and separate publication approval. Current code: `null`.
+Current code is the 2026-10-26 0.20 USDC pay locator: chain `5042`, deployment `0x3157f8feee81d6f2447756a99f6a12c88dff63d7165ca521322e0cc7ace2c2aa`, invoice `0xe23fad9eb20137dc97b4b54e666fcb0a90f7447c82935a0285494b77aa80d6ae`, tx `0x94c559e0816b8e741f2cbf4fe764ed8e7dcfeab447ba8ac700f6f7e7ec4b82ce`. The blank template below still keeps null shapes. It is not runtime input.
 
 ---
 

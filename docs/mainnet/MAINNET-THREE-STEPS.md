@@ -23,7 +23,7 @@ This document is an owner runbook. Checking it in does not deploy, sign, publish
 | Wallet A = deployer + merchant | Owner signs | Address recorded; funded for gas (native USDC on Arc) |
 | Wallet B = payer | Owner or second operator | Funded for **exact** invoice principal + gas |
 | Confirm wallet network = `5042` | Signer | Recheck RPC/chain id before every signature |
-| Mainnet App build path | After A+manifest | Need W2 (`PRODUCTION_MANIFEST` + `writesAccepted`) and preferably `{{PUBLIC_APP_URL}}` |
+| Mainnet App build path | After A+manifest | Need W2 (`PRODUCTION_MANIFEST` + `writesAccepted`). Hosted App: https://zippy-narwhal-31f5db.netlify.app |
 
 ---
 
@@ -82,7 +82,7 @@ Scaffold npm aliases `deploy:self` / `compass:deploy` are **missing their script
 
 ### Prerequisites
 - (A) complete; App points at trusted mainnet deployment (W2)
-- Prefer hosted `{{PUBLIC_APP_URL}}`; localhost mainnet build acceptable for operator demo if later disclosed
+- Hosted App: https://zippy-narwhal-31f5db.netlify.app. A localhost mainnet build is a separate operator demo if later disclosed
 - Wallet A connected as **merchant**
 - Agreed `amountNative` (e.g. `200000000000000000`), `expiresAt` (absolute; within `MAX_LIFETIME` 7d), `termsHash` (prototype often zero `bytes32`)
 
@@ -153,7 +153,7 @@ Then set `MAINNET_SAMPLE = { chainId: 5042, deploymentId, invoiceId, txHash }` i
 | Gate | Done when |
 | --- | --- |
 | 2 Mainnet deploy | Explorer contract + runtime hash match + manifest filled |
-| 3 Public App | Anonymous `{{PUBLIC_APP_URL}}` mainnet build calling that contract |
+| 3 Public App | Anonymous https://zippy-narwhal-31f5db.netlify.app mainnet build calling that contract |
 | 4 Real USDC | Pay tx + Verified receipt via App, recorded in submission-state |
 
 Studio sync (gate 1 narrative) and video / DoraHacks submit remain separate owner actions.

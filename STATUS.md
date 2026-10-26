@@ -1,3 +1,15 @@
+## 2026-10-26 16:35 Asia/Shanghai public App and mainnet sample recorded
+
+Anonymous GET `200` of https://zippy-narwhal-31f5db.netlify.app on `2026-10-26T08:35:03Z`. It is a Studio→Netlify public App (`data-nf-variant="public"`), not a Studio preview. The served module is Arc Mainnet chain `5042`, contract `0xd6b1C2A7F6C406E6BbB981F66847aff60D6600eE`, deployment id `0x3157f8feee81d6f2447756a99f6a12c88dff63d7165ca521322e0cc7ace2c2aa`, `deployedAt` `2026-10-26T07:44:36Z`.
+
+`MAINNET_SAMPLE` is `{ chainId: 5042, deploymentId, invoiceId: 0xe23fad9eb20137dc97b4b54e666fcb0a90f7447c82935a0285494b77aa80d6ae, txHash: 0x94c559e0816b8e741f2cbf4fe764ed8e7dcfeab447ba8ac700f6f7e7ec4b82ce }`. That pay transaction succeeded on `https://rpc.mainnet.arc.io` in block `27936503` at `2026-10-26T08:28:30Z`. Payer `0x54145b97d5CeCf72b9900C702a02774171574171`. Merchant `0xf22c752EBeB09d3eD8C6b8ba04c7F299D1C9C960`. Amount `0.20` USDC (`200000000000000000`). InvoicePaid log index `6`. Create transaction `0x496b6a29441cd2c7af201c301d3860f34e329fb7d9ab4f7706cab74d7aa22c45` was re-read on the same RPC and matches that invoice. Receipt: https://zippy-narwhal-31f5db.netlify.app/#/receipt/5042/0x3157f8feee81d6f2447756a99f6a12c88dff63d7165ca521322e0cc7ace2c2aa/0xe23fad9eb20137dc97b4b54e666fcb0a90f7447c82935a0285494b77aa80d6ae?tx=0x94c559e0816b8e741f2cbf4fe764ed8e7dcfeab447ba8ac700f6f7e7ec4b82ce
+
+`PRODUCTION_MANIFEST` settlement and contract fields were not changed. `{{VIDEO_URL}}` stays unset. DoraHacks was not submitted. This locator is not an in-app VERIFIED badge, an audit, or customer revenue. Studio Deploy misclick testnet `0x0D54be3d3c17D73be58c1bAeDFBdBC2f79677018` is not a mainnet field.
+
+Next gate: video.
+
+Evidence: [public-app-20261026](evidence/public-app-20261026/).
+
 ## 2026-10-26 07:50 UTC Arc mainnet U1 recorded (W2 policy, no payment)
 
 Independently read from `https://rpc.mainnet.arc.io` (chain id `5042`):
@@ -8,7 +20,7 @@ Independently read from `https://rpc.mainnet.arc.io` (chain id `5042`):
 - Runtime bytecode equals `evidence/g1/ArcProofInvoices.artifact.json` (2296 bytes). keccak256 `0xa36ede95ccce8289224d3bbabe3a2445a888c44e763a04ac4b6f4f2f03dd344c`
 - `deploymentId` `0x3157f8feee81d6f2447756a99f6a12c88dff63d7165ca521322e0cc7ace2c2aa` = `keccak256(abi.encode(uint256(5042), address))`
 
-`PRODUCTION_MANIFEST` has that one record. `settlementPolicy` is `ARC_MAINNET_SETTLEMENT_POLICY`. `MAINNET_RELEASE_POLICY.activeDeploymentId` is that id and `writesAccepted` is true, so a mainnet build is stage **W2**. `MAINNET_SAMPLE` stays null. `payment_transaction`, `{{PUBLIC_APP_URL}}`, and `{{VIDEO_URL}}` stay null. DoraHacks was not submitted. Studio Publish was not done.
+`PRODUCTION_MANIFEST` has that one record. `settlementPolicy` is `ARC_MAINNET_SETTLEMENT_POLICY`. `MAINNET_RELEASE_POLICY.activeDeploymentId` is that id and `writesAccepted` is true, so a mainnet build is stage **W2**. At this checkpoint `MAINNET_SAMPLE`, `payment_transaction`, the public App URL, and `{{VIDEO_URL}}` were still null. DoraHacks was not submitted. Studio Publish was not done. The public App and sample payment recorded above came later the same day.
 
 Studio Deploy misclick testnet `0x0D54be3d3c17D73be58c1bAeDFBdBC2f79677018` is not this mainnet contract and is not written into any mainnet field. Historical testnet `0x3Dcd2bDD924BCC384Cb39e9e12038e00fde0FA30` stays testnet-only. The shared runtime hash is the same bytecode, not a second network.
 
@@ -37,7 +49,7 @@ Owner authorized the shortest Arc Microgrants path from baseline `5ef3a8c75f8a09
 Recorded in this change:
 
 - Root MIT `LICENSE`. Copyright line is `Copyright (c) 2026 peterpeter228`. Solidity `SPDX-License-Identifier: MIT` is unchanged. `NOTICE` for Studio / Arc / Circle brands is still deferred.
-- Judge-facing `README.md`. Placeholders stay literal: `{{PUBLIC_APP_URL}}`, `{{MAINNET_CONTRACT}}`, `{{TX_HASH}}`, `{{VIDEO_URL}}`.
+- Judge-facing `README.md`. At this checkpoint the public App URL, `{{MAINNET_CONTRACT}}`, `{{TX_HASH}}`, and `{{VIDEO_URL}}` stayed literal.
 - Candidate freeze procedure: `scripts/freeze-candidate.sh`, `docs/freeze/FREEZE-CANDIDATE.md`. The annotated tag is cut on the commit that contains these materials. The hash log is a follow-up evidence file and does not move the tag.
 - Docs only: `docs/mainnet/PRODUCTION_MANIFEST.template.json`, `PRODUCTION_MANIFEST.README.md`, `MAINNET-THREE-STEPS.md`. Runtime `PRODUCTION_MANIFEST` stays `[]`.
 

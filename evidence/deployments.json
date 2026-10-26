@@ -2,7 +2,7 @@
   "schemaVersion": "1.0",
   "project": "ArcProof",
   "artifactRole": "checked_testnet_deployment_and_verified_mainnet_u1",
-  "note": "Root independently verified the Arc mainnet creation transaction, block timestamp, and entire runtime against the reviewed artifact on 2026-10-26. Writes are accepted for that deployment. No payment, public App, audit, or income claim. Studio Deploy misclick testnet 0x0D54be3d3c17D73be58c1bAeDFBdBC2f79677018 is not a mainnet deployment and is not recorded as one.",
+  "note": "Root independently verified the Arc mainnet creation transaction, block timestamp, and entire runtime against the reviewed artifact on 2026-10-26. Writes are accepted for that deployment. A later same-day read recorded the public App and one 0.20 USDC pay receipt. That read is not an audit or an income claim. Studio Deploy misclick testnet 0x0D54be3d3c17D73be58c1bAeDFBdBC2f79677018 is not a mainnet deployment and is not recorded as one.",
   "identityPolicy": {
     "key": [
       "chainId",
@@ -73,12 +73,19 @@
           "runtimeMatchesReviewedArtifact": true,
           "label": "ArcProof mainnet U1",
           "writesAccepted": true,
-          "paymentTransaction": null,
-          "verificationScope": "Successful contract-creation receipt and exact runtime bytes independently observed through https://rpc.mainnet.arc.io. Same bytecode as the historical testnet artifact. Not payment acceptance.",
+          "paymentTransaction": "0x94c559e0816b8e741f2cbf4fe764ed8e7dcfeab447ba8ac700f6f7e7ec4b82ce",
+          "creationTransaction": "0x496b6a29441cd2c7af201c301d3860f34e329fb7d9ab4f7706cab74d7aa22c45",
+          "invoiceId": "0xe23fad9eb20137dc97b4b54e666fcb0a90f7447c82935a0285494b77aa80d6ae",
+          "paymentAmountUsdc": "0.20",
+          "paymentAmountNative": "200000000000000000",
+          "publicAppUrl": "https://zippy-narwhal-31f5db.netlify.app",
+          "receiptUrl": "https://zippy-narwhal-31f5db.netlify.app/#/receipt/5042/0x3157f8feee81d6f2447756a99f6a12c88dff63d7165ca521322e0cc7ace2c2aa/0xe23fad9eb20137dc97b4b54e666fcb0a90f7447c82935a0285494b77aa80d6ae?tx=0x94c559e0816b8e741f2cbf4fe764ed8e7dcfeab447ba8ac700f6f7e7ec4b82ce",
+          "verificationScope": "Contract creation was matched to the reviewed runtime on 2026-10-26. The pay receipt was later read on https://rpc.mainnet.arc.io: status success, InvoicePaid log index 6, 0.20 USDC. That read is not an in-app VERIFIED badge or finality acceptance.",
           "verifiedOn": "2026-10-26",
           "sourcePublished": false,
-          "paymentAcceptanceStatus": "not_run",
-          "evidenceUrl": "https://explorer.arc.io/tx/0x3e94bdb67dcf28a12c224ab693b863220a2744766607136a0d88c7683124d503"
+          "paymentAcceptanceStatus": "rpc_receipt_observed",
+          "evidenceUrl": "https://explorer.arc.io/tx/0x3e94bdb67dcf28a12c224ab693b863220a2744766607136a0d88c7683124d503",
+          "paymentEvidenceUrl": "https://explorer.arc.io/tx/0x94c559e0816b8e741f2cbf4fe764ed8e7dcfeab447ba8ac700f6f7e7ec4b82ce"
         }
       }
     },

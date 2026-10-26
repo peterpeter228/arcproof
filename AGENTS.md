@@ -1,6 +1,6 @@
 # 2026-10-26 07:50 UTC 已核对的 Arc 主网部署
 
-`PRODUCTION_MANIFEST` 现为已核对的 chain `5042` 合约 `0xd6b1C2A7F6C406E6BbB981F66847aff60D6600eE`，`writesAccepted=true`（代码阶段 W2 / 操作者阶段 U1）。`MAINNET_SAMPLE`、付款交易、公开 App、视频仍为空。下方“production manifest 保持空、主网钱包动作关闭”是该部署之前的口径，不再描述当前清单。仍不由此推导新的签名、转账、Studio Publish 或 DoraHacks 提交。Studio Deploy 误点的测试网 `0x0D54be3d3c17D73be58c1bAeDFBdBC2f79677018` 不是主网合约。
+`PRODUCTION_MANIFEST` 现为已核对的 chain `5042` 合约 `0xd6b1C2A7F6C406E6BbB981F66847aff60D6600eE`，`writesAccepted=true`（代码阶段 W2 / 操作者阶段 U2_paid）。`MAINNET_SAMPLE` 是付款 `0x94c559e0816b8e741f2cbf4fe764ed8e7dcfeab447ba8ac700f6f7e7ec4b82ce`（发票 `0xe23fad9eb20137dc97b4b54e666fcb0a90f7447c82935a0285494b77aa80d6ae`，0.20 USDC）。公开 App 是 https://zippy-narwhal-31f5db.netlify.app 。视频与 DoraHacks 提交仍为空。下方“production manifest 保持空、主网钱包动作关闭”是该部署之前的口径，不再描述当前清单。仍不由此推导新的签名、转账、Studio Publish 或 DoraHacks 提交。Studio Deploy 误点的测试网 `0x0D54be3d3c17D73be58c1bAeDFBdBC2f79677018` 不是主网合约。
 
 # 2026-10-21 22:42:43 UTC 当前阶段授权（优先于下方历史 18 小时限制）
 

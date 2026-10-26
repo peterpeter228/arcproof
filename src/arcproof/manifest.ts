@@ -33,7 +33,8 @@ export interface DeploymentRecord {
  * Production manifest: the verified Arc mainnet deployment only.
  * deploymentId = keccak256(abi.encode(uint256(5042), contractAddress)).
  * Runtime bytecode matches the reviewed artifact (same keccak as the historical
- * testnet deployment). This record is not a payment, public App, or audit.
+ * testnet deployment). This record is the deployment identity. The sample payment
+ * locator is MAINNET_SAMPLE. Neither record is an audit.
  * Studio Deploy misclick testnet 0x0D54be3d3c17D73be58c1bAeDFBdBC2f79677018 is not an entry.
  */
 export const MAINNET_DEPLOYMENT: DeploymentRecord = Object.freeze({
