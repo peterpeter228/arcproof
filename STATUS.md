@@ -4,9 +4,9 @@ Anonymous GET `200` of https://zippy-narwhal-31f5db.netlify.app on `2026-10-26T0
 
 `MAINNET_SAMPLE` is `{ chainId: 5042, deploymentId, invoiceId: 0xe23fad9eb20137dc97b4b54e666fcb0a90f7447c82935a0285494b77aa80d6ae, txHash: 0x94c559e0816b8e741f2cbf4fe764ed8e7dcfeab447ba8ac700f6f7e7ec4b82ce }`. That pay transaction succeeded on `https://rpc.mainnet.arc.io` in block `27936503` at `2026-10-26T08:28:30Z`. Payer `0x54145b97d5CeCf72b9900C702a02774171574171`. Merchant `0xf22c752EBeB09d3eD8C6b8ba04c7F299D1C9C960`. Amount `0.20` USDC (`200000000000000000`). InvoicePaid log index `6`. Create transaction `0x496b6a29441cd2c7af201c301d3860f34e329fb7d9ab4f7706cab74d7aa22c45` was re-read on the same RPC and matches that invoice. Receipt: https://zippy-narwhal-31f5db.netlify.app/#/receipt/5042/0x3157f8feee81d6f2447756a99f6a12c88dff63d7165ca521322e0cc7ace2c2aa/0xe23fad9eb20137dc97b4b54e666fcb0a90f7447c82935a0285494b77aa80d6ae?tx=0x94c559e0816b8e741f2cbf4fe764ed8e7dcfeab447ba8ac700f6f7e7ec4b82ce
 
-`PRODUCTION_MANIFEST` settlement and contract fields were not changed. `{{VIDEO_URL}}` stays unset. DoraHacks was not submitted. This locator is not an in-app VERIFIED badge, an audit, or customer revenue. Studio Deploy misclick testnet `0x0D54be3d3c17D73be58c1bAeDFBdBC2f79677018` is not a mainnet field.
+`PRODUCTION_MANIFEST` settlement and contract fields were not changed. Walkthrough video: https://youtu.be/fRGUjTdF3nk (YouTube Unlisted). DoraHacks was not submitted. This locator is not an in-app VERIFIED badge, an audit, or customer revenue. Studio Deploy misclick testnet `0x0D54be3d3c17D73be58c1bAeDFBdBC2f79677018` is not a mainnet field.
 
-Next gate: video.
+Next gate: DoraHacks submission remains unsubmitted. The walkthrough video is https://youtu.be/fRGUjTdF3nk.
 
 Evidence: [public-app-20261026](evidence/public-app-20261026/).
 
@@ -20,11 +20,11 @@ Independently read from `https://rpc.mainnet.arc.io` (chain id `5042`):
 - Runtime bytecode equals `evidence/g1/ArcProofInvoices.artifact.json` (2296 bytes). keccak256 `0xa36ede95ccce8289224d3bbabe3a2445a888c44e763a04ac4b6f4f2f03dd344c`
 - `deploymentId` `0x3157f8feee81d6f2447756a99f6a12c88dff63d7165ca521322e0cc7ace2c2aa` = `keccak256(abi.encode(uint256(5042), address))`
 
-`PRODUCTION_MANIFEST` has that one record. `settlementPolicy` is `ARC_MAINNET_SETTLEMENT_POLICY`. `MAINNET_RELEASE_POLICY.activeDeploymentId` is that id and `writesAccepted` is true, so a mainnet build is stage **W2**. At this checkpoint `MAINNET_SAMPLE`, `payment_transaction`, the public App URL, and `{{VIDEO_URL}}` were still null. DoraHacks was not submitted. Studio Publish was not done. The public App and sample payment recorded above came later the same day.
+`PRODUCTION_MANIFEST` has that one record. `settlementPolicy` is `ARC_MAINNET_SETTLEMENT_POLICY`. `MAINNET_RELEASE_POLICY.activeDeploymentId` is that id and `writesAccepted` is true, so a mainnet build is stage **W2**. At this checkpoint `MAINNET_SAMPLE`, `payment_transaction`, the public App URL, and the walkthrough video were still null. DoraHacks was not submitted. Studio Publish was not done. The public App and sample payment recorded above came later the same day. The walkthrough video recorded after that checkpoint is https://youtu.be/fRGUjTdF3nk.
 
 Studio Deploy misclick testnet `0x0D54be3d3c17D73be58c1bAeDFBdBC2f79677018` is not this mainnet contract and is not written into any mainnet field. Historical testnet `0x3Dcd2bDD924BCC384Cb39e9e12038e00fde0FA30` stays testnet-only. The shared runtime hash is the same bytecode, not a second network.
 
-Next gates: public App → `createInvoice(0.20 USDC)` → `payInvoice` → video.
+Next gates at this checkpoint: public App → `createInvoice(0.20 USDC)` → `payInvoice` → video. Walkthrough video: https://youtu.be/fRGUjTdF3nk.
 
 Evidence: [mainnet-u1-20261026](evidence/mainnet-u1-20261026/).
 
@@ -36,9 +36,9 @@ Studio project `https://studio.arc.io/app/2dbdda0d-1b70-408b-ae23-cccb8a4b8753`.
 
 `scripts/buildProvenance.ts` SHA-256 `af241da0bad9d79dc33dfcf8e1780db1eb6fd3b0ca2d8096f778e7b3a7a25e1d` matches GitHub main and the freeze commit. The operator final JSON marks that path absent from the freeze tree and also lists `.oxlintrc.json`, `AGENTS.md`, and `scripts/check.sh` as Studio-only. Those four paths are in the freeze commit and match main. Eleven other listed paths, including `src/console-capture.ts` and `src/tracing.ts`, are absent from both the freeze commit and main.
 
-A Studio preview opened on the testnet overview with no wallet. That is not a public App URL. Deploy and Publish were not done. DoraHacks was not submitted. Mainnet stage remains U0. Writes stay disabled. Contract, deployment transaction, payment transaction, public app URL, and video URL stay null.
+A Studio preview opened on the testnet overview with no wallet. That is not a public App URL. Deploy and Publish were not done. DoraHacks was not submitted. Mainnet stage remains U0 at this checkpoint. Writes stay disabled. Contract, deployment transaction, payment transaction, and public app URL stay null at this checkpoint. The walkthrough video recorded later is https://youtu.be/fRGUjTdF3nk.
 
-Next: Arc mainnet deploy 5042 (owner-signed) → public App → real USDC → video.
+Next at this checkpoint: Arc mainnet deploy 5042 (owner-signed) → public App → real USDC → video. Walkthrough video: https://youtu.be/fRGUjTdF3nk.
 
 Evidence: [studio-sync-20261026](evidence/studio-sync-20261026/).
 
@@ -49,7 +49,7 @@ Owner authorized the shortest Arc Microgrants path from baseline `5ef3a8c75f8a09
 Recorded in this change:
 
 - Root MIT `LICENSE`. Copyright line is `Copyright (c) 2026 peterpeter228`. Solidity `SPDX-License-Identifier: MIT` is unchanged. `NOTICE` for Studio / Arc / Circle brands is still deferred.
-- Judge-facing `README.md`. At this checkpoint the public App URL, `{{MAINNET_CONTRACT}}`, `{{TX_HASH}}`, and `{{VIDEO_URL}}` stayed literal.
+- Judge-facing `README.md`. At this checkpoint the public App URL, `{{MAINNET_CONTRACT}}`, and `{{TX_HASH}}` stayed literal. The walkthrough video placeholder stayed literal at this checkpoint. It is now https://youtu.be/fRGUjTdF3nk.
 - Candidate freeze procedure: `scripts/freeze-candidate.sh`, `docs/freeze/FREEZE-CANDIDATE.md`. The annotated tag is cut on the commit that contains these materials. The hash log is a follow-up evidence file and does not move the tag.
 - Docs only: `docs/mainnet/PRODUCTION_MANIFEST.template.json`, `PRODUCTION_MANIFEST.README.md`, `MAINNET-THREE-STEPS.md`. Runtime `PRODUCTION_MANIFEST` stays `[]`.
 
@@ -59,7 +59,7 @@ Next gates, in order. None of these are done:
 2. Arc mainnet deploy (chain `5042`) — contract and deployment tx remain null
 3. Public App — no URL
 4. Real USDC transaction through that App — `payment_transaction` null
-5. Walkthrough video — no URL
+5. Walkthrough video — https://youtu.be/fRGUjTdF3nk (recorded after this checkpoint)
 
 Mainnet stage remains **U0**. `writesAccepted` remains false. This change does not deploy, sign a wallet, Studio Publish, or submit to DoraHacks. Historical testnet identity is not mainnet evidence.
 

@@ -25,6 +25,6 @@ Read from `https://rpc.mainnet.arc.io` (chain id `5042`):
 
 Receipt: https://zippy-narwhal-31f5db.netlify.app/#/receipt/5042/0x3157f8feee81d6f2447756a99f6a12c88dff63d7165ca521322e0cc7ace2c2aa/0xe23fad9eb20137dc97b4b54e666fcb0a90f7447c82935a0285494b77aa80d6ae?tx=0x94c559e0816b8e741f2cbf4fe764ed8e7dcfeab447ba8ac700f6f7e7ec4b82ce
 
-This read is not an in-app VERIFIED badge, a finality acceptance run, an audit, or customer revenue. `PRODUCTION_MANIFEST` settlement and contract fields were not changed. Video URL and DoraHacks submission stay empty.
+This read is not an in-app VERIFIED badge, a finality acceptance run, an audit, or customer revenue. `PRODUCTION_MANIFEST` settlement and contract fields were not changed. Walkthrough video: https://youtu.be/fRGUjTdF3nk. DoraHacks was not submitted.
 
 Raw receipts: [rpc-verification.json](rpc-verification.json). The earlier U1 file [../mainnet-u1-20261026/rpc-verification.json](../mainnet-u1-20261026/rpc-verification.json) still records `app_url: null` because that check was `2026-10-26T07:50:51Z`, before this App and payment.

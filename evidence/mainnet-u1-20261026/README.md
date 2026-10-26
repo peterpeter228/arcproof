@@ -8,8 +8,8 @@ The creation transaction `0x3e94bdb67dcf28a12c224ab693b863220a2744766607136a0d88
 
 `deploymentId` `0x3157f8feee81d6f2447756a99f6a12c88dff63d7165ca521322e0cc7ace2c2aa` is `keccak256(abi.encode(uint256(5042), address))`.
 
-Code stage is **W2**: `PRODUCTION_MANIFEST` contains this deployment and `writesAccepted` is true. The operator stage name is **U1_deployed**. `createInvoice` and `payInvoice` have not run. `MAINNET_SAMPLE`, the payment transaction, the public App URL, and the video URL stay null.
+Code stage is **W2**: `PRODUCTION_MANIFEST` contains this deployment and `writesAccepted` is true. The operator stage name is **U1_deployed**. `createInvoice` and `payInvoice` have not run in this checkpoint file. `MAINNET_SAMPLE`, the payment transaction, and the public App URL stay null here. `video_url` is https://youtu.be/fRGUjTdF3nk.
 
 Studio Deploy misclick testnet `0x0D54be3d3c17D73be58c1bAeDFBdBC2f79677018` is **not** mainnet. It is not the contract address in `PRODUCTION_MANIFEST`, `evidence/deployments.json` network `5042`, or `evidence/release-status.json` `mainnet.contract_address`. Historical testnet `0x3Dcd2bDD924BCC384Cb39e9e12038e00fde0FA30` stays on chain `5042002`.
 
-Next gates: public App → `createInvoice(0.20 USDC)` → `payInvoice` → video. This directory does not publish, sign, or submit.
+Next gates at this checkpoint were public App → `createInvoice(0.20 USDC)` → `payInvoice` → video. Walkthrough video: https://youtu.be/fRGUjTdF3nk. This directory does not publish, sign, or submit.

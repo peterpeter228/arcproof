@@ -1,6 +1,6 @@
 # Real-footage video outline
 
-This is a recording plan, not a finished video. A 60–90 second edit is suggested, not required by the rules. No mainnet footage, link or transaction is invented.
+This is a recording plan. The published walkthrough is https://youtu.be/fRGUjTdF3nk (YouTube Unlisted). A 60–90 second edit is suggested, not required by the rules. No mainnet footage, link or transaction is invented. DoraHacks was not submitted.
 
 | Segment | Capture only when actually available | Narration direction |
 | --- | --- | --- |
