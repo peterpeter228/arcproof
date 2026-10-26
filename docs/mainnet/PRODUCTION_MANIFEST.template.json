@@ -1,0 +1,116 @@
+{
+  "schema": "arcproof-production-manifest-template/v1",
+  "note": "TEMPLATE ONLY — mirror of src/arcproof DeploymentRecord[] + related release/submission fields. Do NOT copy mock values into the repo. Keep nulls until real mainnet evidence exists. This file is not runtime input.",
+  "baseline_head": "5ef3a8c75f8a09393783e66694d2c510313bd232",
+  "prepared_on_asia_shanghai": "2026-10-26",
+
+  "PRODUCTION_MANIFEST": [],
+
+  "PRODUCTION_MANIFEST_entry_shape": {
+    "deploymentId": null,
+    "chainId": 5042,
+    "contractAddress": null,
+    "runtimeCodeHash": null,
+    "label": "ArcProof mainnet candidate",
+    "deployedAt": null,
+    "settlementPolicy": {
+      "id": "arc-mainnet-native-eip7708-finalized-v1",
+      "chainId": 5042,
+      "emitter": "0xfffffffffffffffffffffffffffffffffffffffe",
+      "decimals": 18,
+      "finality": "rpc-finalized-header"
+    }
+  },
+
+  "MAINNET_RELEASE_POLICY": {
+    "activeDeploymentId": null,
+    "writesAccepted": false
+  },
+
+  "MAINNET_SAMPLE": null,
+
+  "MAINNET_SAMPLE_shape": {
+    "chainId": 5042,
+    "deploymentId": null,
+    "invoiceId": null,
+    "txHash": null
+  },
+
+  "evidence_release_status_mainnet_mirror": {
+    "stage": "U0",
+    "trusted_deployments": 0,
+    "writes_enabled": false,
+    "deployment_transaction": null,
+    "payment_transaction": null,
+    "receipt_url": null
+  },
+
+  "evidence_deployments_json_5042_placeholder": {
+    "chainId": 5042,
+    "networkName": "Arc mainnet",
+    "rpcUrl": "https://rpc.mainnet.arc.io",
+    "explorerUrl": "https://explorer.arc.io",
+    "activeDeploymentId": null,
+    "reserved_key": "arcproof-v1-mainnet-01",
+    "deploymentId": null,
+    "status": "not_run",
+    "deployed": false,
+    "contractAddress": null,
+    "runtimeBytecodeKeccak256": null,
+    "deploymentTxHash": null,
+    "deploymentBlockNumber": null,
+    "deployer": null,
+    "deployedAt": null,
+    "sourceCommit": null
+  },
+
+  "submission_state_mainnet_mirror": {
+    "chain_id": 5042,
+    "contract_address": null,
+    "deployment_id": null,
+    "deployment_transaction_hash": null,
+    "observed_runtime_hash": null,
+    "runtime_matches_frozen_artifact": null,
+    "invoice_id": null,
+    "creation_transaction_hash": null,
+    "payment_transaction_hash": null,
+    "payment_initiating_app_commit": null,
+    "payment_amount_usdc": null,
+    "verification_status": "not_run",
+    "verified_at_utc": null,
+    "operator_controlled": null,
+    "distinct_addresses": null
+  },
+
+  "publication_mirror": {
+    "app_url": null,
+    "receipt_url": null,
+    "video_url": null,
+    "final_source_commit_url": null
+  },
+
+  "known_non_mainnet_reference_DO_NOT_COPY_TO_MAINNET_FIELDS": {
+    "testnet_chainId": 5042002,
+    "testnet_contractAddress": "0x3Dcd2bDD924BCC384Cb39e9e12038e00fde0FA30",
+    "testnet_deploymentId": "0xdba9a4da8a5b2a834b451f595653dd3cb4c3e51addb2d8df8e0b18312f382d2d",
+    "testnet_runtimeCodeHash": "0xa36ede95ccce8289224d3bbabe3a2445a888c44e763a04ac4b6f4f2f03dd344c",
+    "testnet_deployTx": "0x2e43459e213e993b2290749e5549f993d63db1af6e1d8feab2fcca94917db535",
+    "testnet_deployedAt": "2026-10-20T09:48:47Z"
+  },
+
+  "fill_order_after_real_deploy": [
+    "1. Verify runtime bytecode keccak256 on-chain == frozen artifact",
+    "2. deploymentId := keccak256(abi.encode(uint256(5042), address(contract))) — same scheme as testnet.ts comment",
+    "3. Append DeploymentRecord to PRODUCTION_MANIFEST (never overwrite old ids)",
+    "4. Set MAINNET_RELEASE_POLICY.activeDeploymentId + writesAccepted=true only after release acceptance",
+    "5. After App create+pay: set MAINNET_SAMPLE {chainId, deploymentId, invoiceId, txHash}",
+    "6. Mirror into evidence/deployments.json, release-status.json, submission-state.json",
+    "7. Rebuild mainnet dist and host {{PUBLIC_APP_URL}}"
+  ],
+
+  "limits": [
+    "Unknown evidence remains null. Do not populate with mock, fixture, testnet or projected values.",
+    "URL params and localStorage must never override contractAddress, chainId, or merchant for a deployment.",
+    "New contract address requires a new deploymentId; never retarget an existing id."
+  ]
+}

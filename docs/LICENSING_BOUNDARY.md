@@ -1,6 +1,12 @@
 # Licensing and provenance boundary (IP-01)
 
-No repository-wide open-source license has been selected or granted by this work. No root LICENSE or NOTICE was invented, and no material was published. Public release/commercial reuse remains blocked on the owner's decision and an asset-by-asset provenance review. This is a project inventory, not legal advice or a finding of infringement.
+## 2026-10-26 addendum
+
+The owner authorized a first-party MIT grant. Root `LICENSE` now contains the standard MIT text with `Copyright (c) 2026 peterpeter228`. That grant does not add a `NOTICE`, does not claim Arc, Circle, or Studio marks, and does not relicense upstream packages. Solidity SPDX headers were already MIT and were not edited. Brand, media, and third-party notice review stays open.
+
+The table below is the earlier inventory. Where it says no root license had been selected, read that as the pre-decision state, superseded for first-party code and original project documentation by the root `LICENSE`.
+
+No `NOTICE` was invented. This file is a project inventory, not legal advice or a finding of infringement.
 
 | Material | What is established | What remains unresolved |
 | --- | --- | --- |

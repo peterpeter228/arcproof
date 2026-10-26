@@ -1,3 +1,24 @@
+## 2026-10-26 03:46 UTC Microgrants 最短路径（候选冻结，不是主网验收）
+
+Owner authorized the shortest Arc Microgrants path from baseline `5ef3a8c75f8a09393783e66694d2c510313bd232` (current `main` at the start of this change).
+
+Recorded in this change:
+
+- Root MIT `LICENSE`. Copyright line is `Copyright (c) 2026 peterpeter228`. Solidity `SPDX-License-Identifier: MIT` is unchanged. `NOTICE` for Studio / Arc / Circle brands is still deferred.
+- Judge-facing `README.md`. Placeholders stay literal: `{{PUBLIC_APP_URL}}`, `{{MAINNET_CONTRACT}}`, `{{TX_HASH}}`, `{{VIDEO_URL}}`.
+- Candidate freeze procedure: `scripts/freeze-candidate.sh`, `docs/freeze/FREEZE-CANDIDATE.md`. The annotated tag is cut on the commit that contains these materials. The hash log is a follow-up evidence file and does not move the tag.
+- Docs only: `docs/mainnet/PRODUCTION_MANIFEST.template.json`, `PRODUCTION_MANIFEST.README.md`, `MAINNET-THREE-STEPS.md`. Runtime `PRODUCTION_MANIFEST` stays `[]`.
+
+Next gates, in order. None of these are done:
+
+1. Studio final-candidate sync and export compare — `not_run`
+2. Arc mainnet deploy (chain `5042`) — contract and deployment tx remain null
+3. Public App — no URL
+4. Real USDC transaction through that App — `payment_transaction` null
+5. Walkthrough video — no URL
+
+Mainnet stage remains **U0**. `writesAccepted` remains false. This change does not deploy, sign a wallet, Studio Publish, or submit to DoraHacks. Historical testnet identity is not mainnet evidence.
+
 ## 2026-10-22 16:39 UTC 最终交接本地候选（尚未发布、未达 C1 冻结）
 
 基于 main `cd579e567457ff8acf0fe041a5cff3df07c344c0` 完成网络上下文、模拟导出、来源范围、只读重试和已知哈希持久化失败修复。当前本地源码快照 `54f45d85f8453dee7c7af415647f74a00d2bdd9daaab5729ff1f46a1c68e6e43`（148 个声明输入）；候选提交仍为 null，不用基线冒充新提交。
