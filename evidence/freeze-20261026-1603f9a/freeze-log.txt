@@ -1,0 +1,42 @@
+# ArcProof freeze candidate log
+# generated_at_utc=2026-10-26T03:47:22Z
+# generated_at_local=2026-10-26 03:47:22 UTC
+# repo=/workspace
+# head=1603f9aa077915a1da95daa71fd4a2a0e0ab588a
+# baseline=5ef3a8c75f8a09393783e66694d2c510313bd232
+# proposed_tag=candidate/20261026-1603f9a
+# mainnet_stage=U0
+# source_snapshot_sha256=not_recomputed
+# execute=1
+# note=no mainnet claim; tag is not deploy, publish, or submission
+
+## file hashes (sha256)
+8699071d250c834cd1166ece0d4001b7de95af7562796e19305ce2812635e25b  contracts/ArcProofInvoices.sol
+745476dbf5c166ceb32fab85f5346b204258b7991a5c5b1541e8002d0cb75fa5  ArcProofInvoices.abi.json
+9fd157cf47bfb185fe2f3740b54ee0ef09b0386dde6d7bd0cf0d6531e75621f7  src/arcproof/arcproofAbi.ts
+915a7481c3783f15a06dcaf8cba54fcc47e9d7b47f2e2924c73ffafbfe393c2b  src/arcproof/manifest.ts
+be43d85797ee1d9cd4dfd2f775c43a94de5421a2b8fec4227f159f937a5b6da3  src/arcproof/networkReleasePolicy.ts
+e8dd1f72011c7dc39c684daa862fc609ae50fe3f1f1499b4fd5d256150385331  src/arcproof/mainnetSample.ts
+729b3325f1b1574b9a9ea9c5e96061cd9228b25959c6ebd56b574313cc81c811  src/arcproof/testnet.ts
+cc9643a64a642c9667c4554897db0dcff47dfce60910b6439ea0ccc6cd2fb387  src/arcproof/networkPolicy.ts
+48be72c58c3422c317895fbc7aede5c014778850c5c37c9ed60a9d23774707dd  src/arcproof/arcSettlement.ts
+2deb4217c39b7b62fbc9f9c844bea76b9b00f1a48cb422f174bf80e6ba155b10  foundry.toml
+7db29ab99ec9f13cfd2dc2c9c746f77e57f85c17c6186a15204e1dfdcfadd29c  remappings.txt
+b59269d636da76a16dca895a43085d37114d105ca9f933cb45d3ec23fdfe0845  .foundry-version
+13c703de6950bb5c6f0a91958c0cb0b1bcd417b56dbea327d857ada649e94dc3  package.json
+6f213340418484d065886c56b9d34cda9c29ce22f73e6a9bd58b2696180385ff  bun.lock
+b5e4e9ac40f59f470856bae6ffe2394a61ff893ce2ff1a194a727fd9582142cc  evidence/release-status.json
+2b951d0746df977d1d3b57baec23fa98a8440ab2e77a2ee096372fa5c9f71847  evidence/deployments.json
+4becbec473a7a414c82c3577bffef2373124bfebb189e6416318b32936c7d451  docs/final-delivery-20261022/submission-state.json
+febda3d43c1fe171d168f6c1014b3f93931292683b93512fb5ea53c0214f028b  docs/JUDGE_DEMO_GUIDE.md
+84fb542d29572e41be5303de0ba979eafa802c00b5cba266c5a4c0042f28e0e0  docs/final-delivery-20261022/VIDEO_OUTLINE.md
+4c56bd53068a143479c9aa6d24d86231dd9970cc3c6e0097b8e2380c775c1d9b  docs/final-delivery-20261022/SUBMISSION_DRAFT.md
+5108955ebaace6d24ff299310753c07d44abed8f17b1914dc603559b617147ac  README.md
+7992789b1bcd925d0b0869be06036df9effdea07b4064f07540c12eafc06c64b  STATUS.md
+1103960c267c949bce9ab8556de5577f1a6277bfe0f6a106712529f43cba3dfd  LICENSE
+
+## git
+HEAD 1603f9aa077915a1da95daa71fd4a2a0e0ab588a
+?? evidence/freeze-20261026-1603f9a/
+CREATED TAG candidate/20261026-1603f9a
+NOTE: tag is local until pushed. Do not force-move it. Push with: git push origin candidate/20261026-1603f9a

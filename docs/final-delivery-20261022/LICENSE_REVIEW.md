@@ -1,6 +1,12 @@
 # License and attribution review
 
-This document is a proposal and factual inventory, not a license grant or legal opinion. It does not create a root LICENSE or NOTICE. The existing [licensing boundary](../LICENSING_BOUNDARY.md) remains open until the owner makes an appropriate decision and distribution-specific provenance is checked.
+## 2026-10-26 owner decision
+
+The owner chose first-party MIT. Root [LICENSE](../../LICENSE) is the standard MIT text with the copyright line `Copyright (c) 2026 peterpeter228`. Solidity `SPDX-License-Identifier: MIT` headers are unchanged. A `NOTICE` for Arc, Circle, and Studio brands, and any attribution beyond existing upstream license files, is still deferred. This note is not a legal opinion, an audit, or clearance of brand and media rights.
+
+The sections below are the 2026-10-22 proposal and inventory. They described the state before that decision.
+
+This document is a proposal and factual inventory, not a legal opinion. The existing [licensing boundary](../LICENSING_BOUNDARY.md) still tracks unresolved brand, media, and third-party notice scope.
 
 ## First-party proposal for review
 
