@@ -55,6 +55,8 @@ const HISTORICAL_PROJECT_SUITE = '485 tests in 31 files recorded on 2026-10-22 i
 const HISTORICAL_PROJECT_SUITE_SHORT = '485 tests (2026-10-22, overlapping suites not added)';
 
 export function EvidenceScreen() {
+  const mainnetDeploymentTxHash = '0x3e94bdb67dcf28a12c224ab693b863220a2744766607136a0d88c7683124d503';
+  const mainnetDeploymentBlockNumber = 27931307;
   const passCount = FORGE_TESTS.filter((t) => t.status === 'pass').length;
   const notRunCount = FORGE_TESTS.filter((t) => t.status === 'not_run').length;
 
@@ -73,15 +75,16 @@ export function EvidenceScreen() {
             <li><strong className="text-stone-900">Contract tests:</strong> 73 Forge tests recorded (69 Studio + 4 supplemental), including reentrancy, exact amount, expiry and one-time payment. Historical, not rerun for this build.</li>
             <li className="break-words"><strong className="text-stone-900">Testnet deployment:</strong> <a className="ap-inline-link underline" href={`${ARC_TESTNET.blockExplorers.default.url}/address/${TESTNET_DEPLOYMENT.contractAddress}?tab=contract`} target="_blank" rel="noreferrer">contract on Arc Testnet</a>, runtime code matched the reviewed artifact on 2026-10-20 (<a className="ap-inline-link underline" href={explorerTx(DEPLOYMENT_TX)} target="_blank" rel="noreferrer">deployment transaction</a>).</li>
             <li><strong className="text-stone-900">App test suite:</strong> {HISTORICAL_PROJECT_SUITE}. Overlapping suites are not added together.</li>
-            <li className="break-words"><strong className="text-stone-900">Arc Mainnet contract:</strong> chain {MAINNET_DEPLOYMENT.chainId}, {MAINNET_DEPLOYMENT.contractAddress}, deployed {MAINNET_DEPLOYMENT.deployedAt}.</li>
+            <li className="break-words"><strong className="text-stone-900">Arc Mainnet contract:</strong> chain {MAINNET_DEPLOYMENT.chainId}, <a className="ap-inline-link underline" href={`https://explorer.arc.io/address/${MAINNET_DEPLOYMENT.contractAddress}`} target="_blank" rel="noreferrer">{MAINNET_DEPLOYMENT.contractAddress}</a>, deployed {MAINNET_DEPLOYMENT.deployedAt}; deployment transaction <a className="ap-inline-link underline" href={`https://explorer.arc.io/tx/${mainnetDeploymentTxHash}`} target="_blank" rel="noreferrer">{mainnetDeploymentTxHash}</a> in block {mainnetDeploymentBlockNumber}.</li>
             <li className="break-words"><strong className="text-stone-900">Public App:</strong> <a className="ap-inline-link underline" href="https://zippy-narwhal-31f5db.netlify.app">https://zippy-narwhal-31f5db.netlify.app</a>. Studio build hosted on Netlify. Not a Studio preview.</li>
-            <li className="break-words"><strong className="text-stone-900">Mainnet sample:</strong> chain 5042, invoice {MAINNET_SAMPLE.invoiceId}, pay transaction {MAINNET_SAMPLE.txHash}. Opening it re-reads Arc. This page does not store a VERIFIED badge.</li>
+            <li className="break-words"><strong className="text-stone-900">Mainnet sample:</strong> chain 5042, invoice {MAINNET_SAMPLE.invoiceId}, 0.20 USDC pay transaction <a className="ap-inline-link underline" href={`https://explorer.arc.io/tx/${MAINNET_SAMPLE.txHash}`} target="_blank" rel="noreferrer">{MAINNET_SAMPLE.txHash}</a> in block 27936503. Opening it re-reads Arc. This page does not store a VERIFIED badge.</li>
+            <li className="break-words"><strong className="text-stone-900">Walkthrough video:</strong> <a className="ap-inline-link underline" href="https://youtu.be/fRGUjTdF3nk" target="_blank" rel="noreferrer">https://youtu.be/fRGUjTdF3nk</a> (YouTube Unlisted).</li>
+            <li className="break-words"><strong className="text-stone-900">DoraHacks:</strong> submitted 2026-10-26 (hackathon 2444, <a className="ap-inline-link underline" href="https://dorahacks.io/build/50358" target="_blank" rel="noreferrer">BUIDL 50358</a>), under organizer review.</li>
           </ul>
         </section>
         <section className="ap-card border-amber-200 p-5 space-y-3" aria-labelledby="evidence-missing">
           <h3 id="evidence-missing" className="font-semibold text-stone-900">Not yet shown</h3>
           <ul className="space-y-2 text-sm text-stone-700">
-            <li><strong className="text-stone-900">Video and DoraHacks:</strong> no walkthrough video and no contest submission.</li>
             <li><strong className="text-stone-900">Live payment acceptance:</strong> a fresh two-wallet testnet payment verified end-to-end by this build (T25/T26) has not been run.</li>
             <li><strong className="text-stone-900">Audit:</strong> none. Independent and model reviews are not security certification.</li>
             <li><strong className="text-stone-900">Grant eligibility:</strong> HOLD — not established.</li>
@@ -152,7 +155,7 @@ export function EvidenceScreen() {
       <div className="ap-card p-5 space-y-3">
         <h3 className="font-medium text-stone-800 text-sm">Known limitations of this prototype</h3>
         <ul className="text-sm text-stone-700 space-y-1.5 list-disc list-outside ml-4">
-          <li>Network reads require a trusted deployment (R1). Wallet actions additionally require the fixed build network and approved release write policy (W2). With no deployment (U0), neither reads nor wallet actions run. The deployment record is not the sample payment. The sample locator and public App are separate. No video is published.</li>
+          <li>Network reads require a trusted deployment (R1). Wallet actions additionally require the fixed build network and approved release write policy (W2). With no deployment (U0), neither reads nor wallet actions run. The deployment record is not the sample payment. The sample locator and public App are separate.</li>
           <li>Fresh candidate-bound Arc native-USDC system Transfer and finality acceptance (T25/T26) is not attached to this build. Historical controlled observations do not establish current acceptance. Official native events use 18 decimals at 0xfffffffffffffffffffffffffffffffffffffffe, not the 6-decimal ERC-20 path.</li>
           <li>Receipt verifier compares runtime keccak256 against the supplied manifest. No fresh network result is attached to this build.</li>
           <li>P0 UI only supports ordinary EOA wallets. Other account types are explicitly unsupported.</li>
