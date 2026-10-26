@@ -1,3 +1,11 @@
+## 2026-10-26 Asia/Shanghai DoraHacks submission recorded
+
+DoraHacks submission on 2026-10-26 to Arc Microgrants (hackathon 2444): [BUIDL 50358](https://dorahacks.io/build/50358), **Under Review** by organizers.
+
+Next gate: organizer review of BUIDL 50358.
+
+The not-submitted statements in the checkpoints below are historical records of those earlier checkpoints, not the current submission state.
+
 ## 2026-10-26 16:35 Asia/Shanghai public App and mainnet sample recorded
 
 Anonymous GET `200` of https://zippy-narwhal-31f5db.netlify.app on `2026-10-26T08:35:03Z`. It is a Studio→Netlify public App (`data-nf-variant="public"`), not a Studio preview. The served module is Arc Mainnet chain `5042`, contract `0xd6b1C2A7F6C406E6BbB981F66847aff60D6600eE`, deployment id `0x3157f8feee81d6f2447756a99f6a12c88dff63d7165ca521322e0cc7ace2c2aa`, `deployedAt` `2026-10-26T07:44:36Z`.
@@ -6,7 +14,7 @@ Anonymous GET `200` of https://zippy-narwhal-31f5db.netlify.app on `2026-10-26T0
 
 `PRODUCTION_MANIFEST` settlement and contract fields were not changed. Walkthrough video: https://youtu.be/fRGUjTdF3nk (YouTube Unlisted). DoraHacks was not submitted. This locator is not an in-app VERIFIED badge, an audit, or customer revenue. Studio Deploy misclick testnet `0x0D54be3d3c17D73be58c1bAeDFBdBC2f79677018` is not a mainnet field.
 
-Next gate: DoraHacks submission remains unsubmitted. The walkthrough video is https://youtu.be/fRGUjTdF3nk.
+Next gate: organizer review of BUIDL 50358.
 
 Evidence: [public-app-20261026](evidence/public-app-20261026/).
 

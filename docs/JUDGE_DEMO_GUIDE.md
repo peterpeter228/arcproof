@@ -22,7 +22,7 @@
 | 0:15–0:35 | 下拉到 “How it works” 三步和 “Verified requires all of these” | “‘已验证’不是看到交易成功就算。要同时核对合约运行时代码、发票已付状态、InvoicePaid 事件、付款方到合约再到商户的两段原生 USDC 转账，以及 RPC 报告的最终块。缺任何一项都保持未验证。” | 真实 UI；检查逻辑在 `src/arcproof/receiptVerifier.ts` |
 | 0:35–1:05 | 离线演示：输入 `0.20`，显示精确原生值 `200000000000000000`；创建；查看模拟收据；导出 JSON | “这是离线模拟，不碰钱包和链。注意它明确标着 SIMULATED / NOT VERIFIED，付款字段是空的，我们不会编造交易。” | 模拟；导出的 JSON 中 `verificationStatus` 为 `SIMULATED_NOT_VERIFIED`，payer/tx/time 为 null |
 | 1:05–1:25 | **Verify receipt**：输入 `0x1234`，点击验证 | “核验页不需要钱包。格式不对的输入在发任何链上请求之前就被拒绝。” | 真实 UI，只读，不发请求 |
-| 1:25–1:45 | **Evidence** 页：“Recorded so far / Not yet shown”和构建身份 | “这里列出已有证据和缺口：主网合约、公开 App 和 0.20 USDC 样本付款已记录。走查视频是 https://youtu.be/fRGUjTdF3nk 。DoraHacks 提交和审计还没有。历史测试不等于本页重跑。” | 真实 UI；视频链接在仓库文档中。应用内 Evidence 文案仍可能写着没有视频，因为这次只改了文档 |
+| 1:25–1:45 | **Evidence** 页：“Recorded so far / Not yet shown”和构建身份 | “这里列出已有证据和缺口：主网合约、公开 App 和 0.20 USDC 样本付款已记录。走查视频是 https://youtu.be/fRGUjTdF3nk 。DoraHacks 已于 2026-10-26 提交（BUIDL 50358，审核中）；审计还没有。历史测试不等于本页重跑。” | 本地 Evidence 页文案提供主网 explorer、走查视频（YouTube Unlisted）和 [BUIDL 50358](https://dorahacks.io/build/50358) 链接 |
 | 1:45–2:20 | Arc Studio 项目页：合约、测试、应用 | 说明 Studio 起源、外部审查与同步链条（见 `docs/SUBMISSION_READINESS.md` 的 Studio 一节） | **待真实执行**：需用户在 Studio 中录屏；当前 Studio 同步对应的是旧快照 |
 | 2:20–2:50 | 打开样本收据 https://zippy-narwhal-31f5db.netlify.app/#/receipt/5042/0x3157f8feee81d6f2447756a99f6a12c88dff63d7165ca521322e0cc7ace2c2aa/0xe23fad9eb20137dc97b4b54e666fcb0a90f7447c82935a0285494b77aa80d6ae?tx=0x94c559e0816b8e741f2cbf4fe764ed8e7dcfeab447ba8ac700f6f7e7ec4b82ce ，再在 explorer.arc.io 打开同一笔付款 | “这是主网上的一笔 0.20 USDC。页面上的 Verified 必须来自当次链上读取，不能靠这份文档代替。” | 付款已在链上。走查视频：https://youtu.be/fRGUjTdF3nk 。页面上的 Verified 仍须来自当次链上读取 |
 

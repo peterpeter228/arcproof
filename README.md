@@ -10,7 +10,7 @@ ArcProof creates immutable invoice terms on Arc, forwards the exact payment to t
 
 | Material | Current state |
 | --- | --- |
-| Arc Studio project | https://studio.arc.io/app/2dbdda0d-1b70-408b-ae23-cccb8a4b8753 — origin project; final-candidate sync recorded in [studio-sync-20261026](evidence/studio-sync-20261026/); **not Studio Publish** |
+| Arc Studio project | https://studio.arc.io/app/2dbdda0d-1b70-408b-ae23-cccb8a4b8753 — origin project; final-candidate sync recorded in [studio-sync-20261026](evidence/studio-sync-20261026/); public App published through Arc Studio's built-in **Deploy to Netlify** integration (no separate Publish button) |
 | Public repository | https://github.com/peterpeter228/arcproof |
 | Live public App URL | https://zippy-narwhal-31f5db.netlify.app — Studio→Netlify public App, not a Studio preview |
 | Arc Mainnet contract (chain `5042`) | `0xd6b1C2A7F6C406E6BbB981F66847aff60D6600eE` |
@@ -18,6 +18,7 @@ ArcProof creates immutable invoice terms on Arc, forwards the exact payment to t
 | Mainnet sample payment tx | `0x94c559e0816b8e741f2cbf4fe764ed8e7dcfeab447ba8ac700f6f7e7ec4b82ce` — [explorer](https://explorer.arc.io/tx/0x94c559e0816b8e741f2cbf4fe764ed8e7dcfeab447ba8ac700f6f7e7ec4b82ce) — 0.20 USDC, invoice `0xe23fad9eb20137dc97b4b54e666fcb0a90f7447c82935a0285494b77aa80d6ae` |
 | Sample receipt | https://zippy-narwhal-31f5db.netlify.app/#/receipt/5042/0x3157f8feee81d6f2447756a99f6a12c88dff63d7165ca521322e0cc7ace2c2aa/0xe23fad9eb20137dc97b4b54e666fcb0a90f7447c82935a0285494b77aa80d6ae?tx=0x94c559e0816b8e741f2cbf4fe764ed8e7dcfeab447ba8ac700f6f7e7ec4b82ce |
 | Walkthrough video | https://youtu.be/fRGUjTdF3nk (YouTube Unlisted) — outline: [VIDEO_OUTLINE.md](docs/final-delivery-20261022/VIDEO_OUTLINE.md) |
+| DoraHacks BUIDL | [BUIDL 50358](https://dorahacks.io/build/50358) — submitted 2026-10-26 to Arc Microgrants (hackathon 2444); **Under Review** by organizers |
 | Judge demo path (honest) | [JUDGE_DEMO_GUIDE.md](docs/JUDGE_DEMO_GUIDE.md) |
 | Engineering / release state | [STATUS.md](STATUS.md), [release-status.json](evidence/release-status.json) |
 
@@ -25,13 +26,13 @@ ArcProof creates immutable invoice terms on Arc, forwards the exact payment to t
 
 | # | Gate | Status |
 | --- | --- | --- |
-| 1 | Built in Arc Studio (`studio.arc.io/app/<uuid>`) | **Recorded** — final-candidate sync and export compare are `done` in evidence; **Studio Publish was not done** |
+| 1 | Built in Arc Studio (`studio.arc.io/app/<uuid>`) | **Recorded** — final-candidate sync and export compare are `done` in evidence; public App published through Arc Studio's built-in **Deploy to Netlify** integration (no separate Publish button) |
 | 2 | Contracts tested + deployed on Arc **mainnet** | **Deployed** — chain `5042` contract `0xd6b1C2A7F6C406E6BbB981F66847aff60D6600eE`, deploy tx `0x3e94bdb67dcf28a12c224ab693b863220a2744766607136a0d88c7683124d503`. Runtime keccak matches the reviewed artifact. This gate covers the deploy stage only; `createInvoice` (`0x496b6a29441cd2c7af201c301d3860f34e329fb7d9ab4f7706cab74d7aa22c45`) and `payInvoice` (`0x94c559e0816b8e741f2cbf4fe764ed8e7dcfeab447ba8ac700f6f7e7ec4b82ce`, 0.20 USDC) on this contract were recorded later — see Gate 4. Studio Deploy misclick testnet `0x0D54be3d3c17D73be58c1bAeDFBdBC2f79677018` is **not** this contract. |
 | 3 | Public Studio/App calling those contracts | **Recorded** — https://zippy-narwhal-31f5db.netlify.app serves the Arc Mainnet `5042` build for `0xd6b1C2A7F6C406E6BbB981F66847aff60D6600eE` |
 | 4 | ≥1 real Arc mainnet USDC flow via contract + App | **Recorded** — pay tx `0x94c559e0816b8e741f2cbf4fe764ed8e7dcfeab447ba8ac700f6f7e7ec4b82ce`, 0.20 USDC. `MAINNET_SAMPLE` is that locator. Not an in-app VERIFIED badge by itself |
-| 5 | Submit: Studio URL + public repo + video + short description | **Partial** — Studio URL + public repo + walkthrough https://youtu.be/fRGUjTdF3nk ready; short desc in draft; DoraHacks form **not submitted** |
+| 5 | Submit: Studio URL + public repo + video + short description | **Recorded submission** — submitted 2026-10-26 to Arc Microgrants (hackathon 2444), [BUIDL 50358](https://dorahacks.io/build/50358); **Under Review** by organizers |
 
-`PRODUCTION_MANIFEST` has one record, deployment id `0x3157f8feee81d6f2447756a99f6a12c88dff63d7165ca521322e0cc7ace2c2aa`. `MAINNET_RELEASE_POLICY.writesAccepted=true` for that id, so a mainnet build is stage **W2**. `MAINNET_SAMPLE` is the 0.20 USDC pay locator above. This is not an audit, a video, or a DoraHacks submission.
+`PRODUCTION_MANIFEST` has one record, deployment id `0x3157f8feee81d6f2447756a99f6a12c88dff63d7165ca521322e0cc7ace2c2aa`. `MAINNET_RELEASE_POLICY.writesAccepted=true` for that id, so a mainnet build is stage **W2**. `MAINNET_SAMPLE` is the 0.20 USDC pay locator above. These deployment and sample-payment records do not establish an audit, a walkthrough video, or a DoraHacks submission; the video and submission are separately linked above.
 
 ### Testnet vs mainnet
 
@@ -96,4 +97,4 @@ First-party code and original project documentation in this repository are relea
 
 Engineering readiness, actual network acceptance, public availability and competition submission are separate milestones. No award probability or payment date is promised.
 
-Walkthrough video: https://youtu.be/fRGUjTdF3nk (YouTube Unlisted). The public App and the 0.20 USDC sample are recorded in [evidence/public-app-20261026](evidence/public-app-20261026/). DoraHacks is not submitted.
+Walkthrough video: https://youtu.be/fRGUjTdF3nk (YouTube Unlisted). The public App and the 0.20 USDC sample are recorded in [evidence/public-app-20261026](evidence/public-app-20261026/). DoraHacks submission was recorded on 2026-10-26 for Arc Microgrants (hackathon 2444), [BUIDL 50358](https://dorahacks.io/build/50358), and is **Under Review** by organizers.
