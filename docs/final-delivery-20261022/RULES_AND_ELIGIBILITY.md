@@ -32,7 +32,7 @@ All eight are `required: true`. Short labels below summarize the exact field tex
 | 6 | Live app | Anonymous working HTTPS app |
 | 7 | Contract and example transaction | Actual mainnet address/hash and Explorer links |
 | 8 | Public repository | Correct final source version |
-| 9 | Studio and mainnet video | Real footage, accessible link |
+| 9 | Studio and mainnet video | https://youtu.be/fRGUjTdF3nk (YouTube Unlisted) |
 | 10 | Product and Studio use | Evidence-matched explanation |
 | 11 | Earlier Circle/Arc grant, bounty or prize for this project | Owner-supplied Yes/No |
 

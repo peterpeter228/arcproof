@@ -81,7 +81,7 @@ The contract and frontend were built and tested in Arc Studio at [STUDIO_PROJECT
 - Mainnet contract: [VERIFIED_CONTRACT_EXPLORER_URL]
 - Verified controlled demonstration payments: [TX_URL_1], [TX_URL_2], [TX_URL_3]
 - Build and test evidence: [TEST_REPORT_URL]
-- Demonstration video: [VIDEO_URL]
+- Demonstration video: https://youtu.be/fRGUjTdF3nk
 
 ### Limitations
 

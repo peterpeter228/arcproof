@@ -14,7 +14,7 @@ Unaudited prototype. Maximum 1 USDC per invoice. No escrow, refund mechanism, pl
 | Re-verify a mainnet sample | Not yet evidenced; never substitute a fixture |
 | Arc Studio project (owner-held reference) | Same project; final synchronization/access must be checked |
 | Mainnet contract and payment | Not yet evidenced |
-| Walkthrough video | Outline prepared; real footage and public URL pending |
+| Walkthrough video | https://youtu.be/fRGUjTdF3nk (YouTube Unlisted) |
 | [Repository](https://github.com/peterpeter228/arcproof) | Link the actual final commit after publication is verified |
 | [Round 2 materials](README.md) | Draft, not a submission receipt |
 

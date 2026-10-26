@@ -23,7 +23,7 @@
   "deployment_id_preimage": "keccak256(abi.encode(uint256(5042), address))",
   "payment_transaction": null,
   "app_url": null,
-  "video_url": null,
+  "video_url": "https://youtu.be/fRGUjTdF3nk",
   "mainnet_sample": null,
   "excluded_addresses": {
     "studio_deploy_misclick_testnet": "0x0D54be3d3c17D73be58c1bAeDFBdBC2f79677018",

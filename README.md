@@ -17,7 +17,7 @@ ArcProof creates immutable invoice terms on Arc, forwards the exact payment to t
 | Mainnet deployment tx | `0x3e94bdb67dcf28a12c224ab693b863220a2744766607136a0d88c7683124d503` — [explorer](https://explorer.arc.io/tx/0x3e94bdb67dcf28a12c224ab693b863220a2744766607136a0d88c7683124d503) |
 | Mainnet sample payment tx | `0x94c559e0816b8e741f2cbf4fe764ed8e7dcfeab447ba8ac700f6f7e7ec4b82ce` — [explorer](https://explorer.arc.io/tx/0x94c559e0816b8e741f2cbf4fe764ed8e7dcfeab447ba8ac700f6f7e7ec4b82ce) — 0.20 USDC, invoice `0xe23fad9eb20137dc97b4b54e666fcb0a90f7447c82935a0285494b77aa80d6ae` |
 | Sample receipt | https://zippy-narwhal-31f5db.netlify.app/#/receipt/5042/0x3157f8feee81d6f2447756a99f6a12c88dff63d7165ca521322e0cc7ace2c2aa/0xe23fad9eb20137dc97b4b54e666fcb0a90f7447c82935a0285494b77aa80d6ae?tx=0x94c559e0816b8e741f2cbf4fe764ed8e7dcfeab447ba8ac700f6f7e7ec4b82ce |
-| Walkthrough video | `{{VIDEO_URL}}` — outline only: [VIDEO_OUTLINE.md](docs/final-delivery-20261022/VIDEO_OUTLINE.md) |
+| Walkthrough video | https://youtu.be/fRGUjTdF3nk (YouTube Unlisted) — outline: [VIDEO_OUTLINE.md](docs/final-delivery-20261022/VIDEO_OUTLINE.md) |
 | Judge demo path (honest) | [JUDGE_DEMO_GUIDE.md](docs/JUDGE_DEMO_GUIDE.md) |
 | Engineering / release state | [STATUS.md](STATUS.md), [release-status.json](evidence/release-status.json) |
 
@@ -29,7 +29,7 @@ ArcProof creates immutable invoice terms on Arc, forwards the exact payment to t
 | 2 | Contracts tested + deployed on Arc **mainnet** | **Deployed** — chain `5042` contract `0xd6b1C2A7F6C406E6BbB981F66847aff60D6600eE`, deploy tx `0x3e94bdb67dcf28a12c224ab693b863220a2744766607136a0d88c7683124d503`. Runtime keccak matches the reviewed artifact. **No createInvoice or payInvoice yet.** Studio Deploy misclick testnet `0x0D54be3d3c17D73be58c1bAeDFBdBC2f79677018` is **not** this contract. |
 | 3 | Public Studio/App calling those contracts | **Recorded** — https://zippy-narwhal-31f5db.netlify.app serves the Arc Mainnet `5042` build for `0xd6b1C2A7F6C406E6BbB981F66847aff60D6600eE` |
 | 4 | ≥1 real Arc mainnet USDC flow via contract + App | **Recorded** — pay tx `0x94c559e0816b8e741f2cbf4fe764ed8e7dcfeab447ba8ac700f6f7e7ec4b82ce`, 0.20 USDC. `MAINNET_SAMPLE` is that locator. Not an in-app VERIFIED badge by itself |
-| 5 | Submit: Studio URL + public repo + video + short description | **Partial** — Studio URL + public repo ready; short desc in draft; **video missing** (`{{VIDEO_URL}}`); DoraHacks form **not submitted** |
+| 5 | Submit: Studio URL + public repo + video + short description | **Partial** — Studio URL + public repo + walkthrough https://youtu.be/fRGUjTdF3nk ready; short desc in draft; DoraHacks form **not submitted** |
 
 `PRODUCTION_MANIFEST` has one record, deployment id `0x3157f8feee81d6f2447756a99f6a12c88dff63d7165ca521322e0cc7ace2c2aa`. `MAINNET_RELEASE_POLICY.writesAccepted=true` for that id, so a mainnet build is stage **W2**. `MAINNET_SAMPLE` is the 0.20 USDC pay locator above. This is not an audit, a video, or a DoraHacks submission.
 
@@ -38,7 +38,7 @@ ArcProof creates immutable invoice terms on Arc, forwards the exact payment to t
 | Network | chainId | Contract | App writes | Role for judges |
 | --- | --- | --- | --- | --- |
 | Arc Testnet | `5042002` | `0x3Dcd2bDD924BCC384Cb39e9e12038e00fde0FA30` | Enabled in testnet builds | Historical / optional demo with **test USDC only** — does **not** satisfy mainnet gates |
-| Arc Mainnet | `5042` | `0xd6b1C2A7F6C406E6BbB981F66847aff60D6600eE` | Enabled in a mainnet build (W2). Sample payment recorded | Public App and 0.20 USDC sample are recorded. Video is not |
+| Arc Mainnet | `5042` | `0xd6b1C2A7F6C406E6BbB981F66847aff60D6600eE` | Enabled in a mainnet build (W2). Sample payment recorded | Public App, 0.20 USDC sample, and walkthrough https://youtu.be/fRGUjTdF3nk are recorded |
 
 Testnet deploy tx (historical): `0x2e43459e213e993b2290749e5549f993d63db1af6e1d8feab2fcca94917db535`. Explorer: https://explorer.testnet.arc.io/
 
@@ -52,7 +52,7 @@ Testnet deploy tx (historical): `0x2e43459e213e993b2290749e5549f993d63db1af6e1d8
 ### What we will not claim
 
 - “Live on Arc mainnet”, “audited”, “zero vulnerabilities”, escrow/refunds, tax invoices, customer revenue, or award probability.
-- Filling `{{VIDEO_URL}}` or any further payment hash with a projected or testnet value. The deploy transaction above is the contract creation. The pay transaction above is the 0.20 USDC sample.
+- Treating https://youtu.be/fRGUjTdF3nk as a DoraHacks submission, or filling any further payment hash with a projected or testnet value. The deploy transaction above is the contract creation. The pay transaction above is the 0.20 USDC sample.
 
 ## What a verified receipt checks
 
@@ -96,4 +96,4 @@ First-party code and original project documentation in this repository are relea
 
 Engineering readiness, actual network acceptance, public availability and competition submission are separate milestones. No award probability or payment date is promised.
 
-Next owner gate: walkthrough video (`{{VIDEO_URL}}`). The public App and the 0.20 USDC sample are recorded in [evidence/public-app-20261026](evidence/public-app-20261026/). DoraHacks is not submitted.
+Walkthrough video: https://youtu.be/fRGUjTdF3nk (YouTube Unlisted). The public App and the 0.20 USDC sample are recorded in [evidence/public-app-20261026](evidence/public-app-20261026/). DoraHacks is not submitted.
