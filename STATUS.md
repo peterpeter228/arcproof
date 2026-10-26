@@ -1,3 +1,35 @@
+## 2026-10-26 07:50 UTC Arc mainnet U1 recorded (W2 policy, no payment)
+
+Independently read from `https://rpc.mainnet.arc.io` (chain id `5042`):
+
+- Contract `0xd6b1C2A7F6C406E6BbB981F66847aff60D6600eE`
+- Creation tx `0x3e94bdb67dcf28a12c224ab693b863220a2744766607136a0d88c7683124d503` (success, `to` null), block `27931307`, timestamp `2026-10-26T07:44:36Z`
+- Deployer `0xf22c752EBeB09d3eD8C6b8ba04c7F299D1C9C960`
+- Runtime bytecode equals `evidence/g1/ArcProofInvoices.artifact.json` (2296 bytes). keccak256 `0xa36ede95ccce8289224d3bbabe3a2445a888c44e763a04ac4b6f4f2f03dd344c`
+- `deploymentId` `0x3157f8feee81d6f2447756a99f6a12c88dff63d7165ca521322e0cc7ace2c2aa` = `keccak256(abi.encode(uint256(5042), address))`
+
+`PRODUCTION_MANIFEST` has that one record. `settlementPolicy` is `ARC_MAINNET_SETTLEMENT_POLICY`. `MAINNET_RELEASE_POLICY.activeDeploymentId` is that id and `writesAccepted` is true, so a mainnet build is stage **W2**. `MAINNET_SAMPLE` stays null. `payment_transaction`, `{{PUBLIC_APP_URL}}`, and `{{VIDEO_URL}}` stay null. DoraHacks was not submitted. Studio Publish was not done.
+
+Studio Deploy misclick testnet `0x0D54be3d3c17D73be58c1bAeDFBdBC2f79677018` is not this mainnet contract and is not written into any mainnet field. Historical testnet `0x3Dcd2bDD924BCC384Cb39e9e12038e00fde0FA30` stays testnet-only. The shared runtime hash is the same bytecode, not a second network.
+
+Next gates: public App → `createInvoice(0.20 USDC)` → `payInvoice` → video.
+
+Evidence: [mainnet-u1-20261026](evidence/mainnet-u1-20261026/).
+
+## 2026-10-26 12:12 Asia/Shanghai Studio final-candidate sync recorded
+
+Studio project `https://studio.arc.io/app/2dbdda0d-1b70-408b-ae23-cccb8a4b8753`. Freeze tag `candidate/20261026-1603f9a` points at `1603f9aa077915a1da95daa71fd4a2a0e0ab588a`. Base main is `fdce4a759552b71e141f1b97ea607da63295f374`.
+
+`studio.final_candidate_sync` is `done`. `export_comparison` is `done` for the operator focus compare: same 107, modified 0, only_freeze 0, only_studio 15. Post-sync export zip SHA-256 is `0381f5ff2c706c610808a106f6b7b9de3dfacd3c51d107b7a4b911c7aae6eddd` (5146996 bytes, `oqpnex.zip`). `export_tree_sha256` stays null. This checkout did not have the zip and did not recompute that hash. Studio tests stay operator-reported: bun 559 and forge 73, exit 0. They were not re-run here.
+
+`scripts/buildProvenance.ts` SHA-256 `af241da0bad9d79dc33dfcf8e1780db1eb6fd3b0ca2d8096f778e7b3a7a25e1d` matches GitHub main and the freeze commit. The operator final JSON marks that path absent from the freeze tree and also lists `.oxlintrc.json`, `AGENTS.md`, and `scripts/check.sh` as Studio-only. Those four paths are in the freeze commit and match main. Eleven other listed paths, including `src/console-capture.ts` and `src/tracing.ts`, are absent from both the freeze commit and main.
+
+A Studio preview opened on the testnet overview with no wallet. That is not a public App URL. Deploy and Publish were not done. DoraHacks was not submitted. Mainnet stage remains U0. Writes stay disabled. Contract, deployment transaction, payment transaction, public app URL, and video URL stay null.
+
+Next: Arc mainnet deploy 5042 (owner-signed) → public App → real USDC → video.
+
+Evidence: [studio-sync-20261026](evidence/studio-sync-20261026/).
+
 ## 2026-10-26 03:46 UTC Microgrants 最短路径（候选冻结，不是主网验收）
 
 Owner authorized the shortest Arc Microgrants path from baseline `5ef3a8c75f8a09393783e66694d2c510313bd232` (current `main` at the start of this change).

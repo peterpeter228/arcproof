@@ -19,9 +19,9 @@ const tx: Hex = `0x${'b'.repeat(64)}`;
 const finalizedHash: Hex = `0x${'c'.repeat(64)}`;
 
 describe('FR-01 wallet writes are limited to the fixed build network', () => {
-  it('rejects testnet writes when the build network is mainnet, even with a trusted testnet context', () => {
+  it('rejects testnet writes when the build network is mainnet, and accepts the verified mainnet context', () => {
     expect(() => assertWritesEnabledFor(TESTNET_CONTEXT, MAINNET_CONTEXT)).toThrow(/build network/);
-    expect(() => assertWritesEnabledFor(MAINNET_CONTEXT, MAINNET_CONTEXT)).toThrow(/disabled/);
+    expect(() => assertWritesEnabledFor(MAINNET_CONTEXT, MAINNET_CONTEXT)).not.toThrow();
   });
   it('keeps testnet writes available in the testnet build', () => {
     expect(() => assertWritesEnabledFor(TESTNET_CONTEXT, TESTNET_CONTEXT)).not.toThrow();

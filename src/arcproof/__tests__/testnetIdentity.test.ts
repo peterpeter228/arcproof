@@ -7,7 +7,19 @@ import type { DeploymentRecord } from '../manifest';
 import { ARCPROOF_ABI } from '../arcproofAbi';
 
 describe('Dedicated Arc Testnet identity (offline artifact checks)', () => {
-  it('keeps mainnet unconfigured', () => { expect(PRODUCTION_MANIFEST).toHaveLength(0); expect(ARC_TESTNET.id).toBe(5042002); expect(ARC_TESTNET.testnet).toBe(true); });
+  it('records the verified mainnet deployment apart from testnet', () => {
+    expect(PRODUCTION_MANIFEST).toHaveLength(1);
+    const row = PRODUCTION_MANIFEST[0];
+    expect(row.chainId).toBe(5042);
+    expect(row.contractAddress).toBe('0xd6b1C2A7F6C406E6BbB981F66847aff60D6600eE');
+    expect(row.runtimeCodeHash).toBe(TESTNET_DEPLOYMENT.runtimeCodeHash);
+    expect(row.deployedAt).toBe('2026-10-26T07:44:36Z');
+    expect(row.contractAddress.toLowerCase()).not.toBe(TESTNET_DEPLOYMENT.contractAddress.toLowerCase());
+    expect(row.contractAddress.toLowerCase()).not.toBe('0x0d54be3d3c17d73be58c1baedfbdbc2f79677018');
+    expect(keccak256(encodeAbiParameters([{ type: 'uint256' }, { type: 'address' }], [5042n, row.contractAddress]))).toBe(row.deploymentId);
+    expect(ARC_TESTNET.id).toBe(5042002);
+    expect(ARC_TESTNET.testnet).toBe(true);
+  });
   it('has exactly one immutable trusted testnet record', () => { expect(TESTNET_MANIFEST).toHaveLength(1); expect(Object.isFrozen(TESTNET_DEPLOYMENT)).toBe(true); expect(Object.isFrozen(TESTNET_MANIFEST)).toBe(true); });
   it('matches the complete compiled runtime', () => { expect(keccak256(artifact.deployedBytecode.object as `0x${string}`)).toBe(TESTNET_DEPLOYMENT.runtimeCodeHash); });
   it('derives deployment identity from chain and address', () => { expect(keccak256(encodeAbiParameters([{type:'uint256'},{type:'address'}],[5042002n,TESTNET_DEPLOYMENT.contractAddress]))).toBe(TESTNET_DEPLOYMENT.deploymentId); });

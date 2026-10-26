@@ -1,8 +1,8 @@
 {
   "schemaVersion": "1.0",
   "project": "ArcProof",
-  "artifactRole": "checked_testnet_deployment_mainnet_unconfigured",
-  "note": "Root independently verified successful testnet deployment and entire runtime against the reviewed artifact. Legacy reservations retained. No source-publication, payment, audit or income claim.",
+  "artifactRole": "checked_testnet_deployment_and_verified_mainnet_u1",
+  "note": "Root independently verified the Arc mainnet creation transaction, block timestamp, and entire runtime against the reviewed artifact on 2026-10-26. Writes are accepted for that deployment. No payment, public App, audit, or income claim. Studio Deploy misclick testnet 0x0D54be3d3c17D73be58c1bAeDFBdBC2f79677018 is not a mainnet deployment and is not recorded as one.",
   "identityPolicy": {
     "key": [
       "chainId",
@@ -27,12 +27,12 @@
         "nativeCurrencyDecimals": 18,
         "rpcUrl": "https://rpc.mainnet.arc.io",
         "explorerUrl": "https://explorer.arc.io",
-        "runtimeVerified": false,
-        "runtimeObservedChainId": null,
-        "runtimeCheckedAt": null,
-        "runtimeEvidence": null
+        "runtimeVerified": true,
+        "runtimeObservedChainId": 5042,
+        "runtimeCheckedAt": "2026-10-26T07:50:51Z",
+        "runtimeEvidence": "evidence/mainnet-u1-20261026/rpc-verification.json"
       },
-      "activeDeploymentId": null,
+      "activeDeploymentId": "0x3157f8feee81d6f2447756a99f6a12c88dff63d7165ca521322e0cc7ace2c2aa",
       "deployments": {
         "arcproof-v1-mainnet-01": {
           "deploymentId": "arcproof-v1-mainnet-01",
@@ -55,6 +55,30 @@
           "verifiedAt": null,
           "authorizationEvidence": null,
           "evidence": null
+        },
+        "0x3157f8feee81d6f2447756a99f6a12c88dff63d7165ca521322e0cc7ace2c2aa": {
+          "deploymentId": "0x3157f8feee81d6f2447756a99f6a12c88dff63d7165ca521322e0cc7ace2c2aa",
+          "chainId": 5042,
+          "status": "passed",
+          "deployed": true,
+          "contractAddress": "0xd6b1C2A7F6C406E6BbB981F66847aff60D6600eE",
+          "deploymentTxHash": "0x3e94bdb67dcf28a12c224ab693b863220a2744766607136a0d88c7683124d503",
+          "deploymentBlockNumber": 27931307,
+          "deploymentBlockHash": "0xec56ddb71942d82817a41bffe9d1d0b6903705fb524173c8b56983f8267b0e27",
+          "deployer": "0xf22c752EBeB09d3eD8C6b8ba04c7F299D1C9C960",
+          "deployedAt": "2026-10-26T07:44:36Z",
+          "runtimeBytes": 2296,
+          "runtimeBytecodeKeccak256": "0xa36ede95ccce8289224d3bbabe3a2445a888c44e763a04ac4b6f4f2f03dd344c",
+          "artifactPath": "evidence/g1/ArcProofInvoices.artifact.json",
+          "runtimeMatchesReviewedArtifact": true,
+          "label": "ArcProof mainnet U1",
+          "writesAccepted": true,
+          "paymentTransaction": null,
+          "verificationScope": "Successful contract-creation receipt and exact runtime bytes independently observed through https://rpc.mainnet.arc.io. Same bytecode as the historical testnet artifact. Not payment acceptance.",
+          "verifiedOn": "2026-10-26",
+          "sourcePublished": false,
+          "paymentAcceptanceStatus": "not_run",
+          "evidenceUrl": "https://explorer.arc.io/tx/0x3e94bdb67dcf28a12c224ab693b863220a2744766607136a0d88c7683124d503"
         }
       }
     },

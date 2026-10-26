@@ -1,0 +1,142 @@
+{
+  "recorded_at": "2026-10-26T12:11:37+08:00",
+  "studio_project": "https://studio.arc.io/app/2dbdda0d-1b70-408b-ae23-cccb8a4b8753",
+  "freeze_tag": "candidate/20261026-1603f9a",
+  "freeze_commit": "1603f9aa077915a1da95daa71fd4a2a0e0ab588a",
+  "main_merge": "fdce4a759552b71e141f1b97ea607da63295f374",
+  "pre_sync_vs_freeze_counts": {
+    "studio_focus": 108,
+    "freeze_focus": 107,
+    "same": 65,
+    "modified": 28,
+    "only_studio": 15,
+    "only_freeze": 14
+  },
+  "pre_sync_modified": [
+    "src/App.tsx",
+    "src/arcproof/__tests__/buildProvenance.test.ts",
+    "src/arcproof/__tests__/mainnetReadonlyUi.test.tsx",
+    "src/arcproof/__tests__/readonlyRoutes.test.tsx",
+    "src/arcproof/__tests__/receiptClarity.test.tsx",
+    "src/arcproof/__tests__/testnetUi.test.tsx",
+    "src/arcproof/__tests__/uiSemantics.test.tsx",
+    "src/arcproof/__tests__/unknownRequestIdentity.test.ts",
+    "src/arcproof/__tests__/unknownRequestUi.test.tsx",
+    "src/arcproof/exportUtils.ts",
+    "src/arcproof/manifest.ts",
+    "src/arcproof/networkPolicy.ts",
+    "src/arcproof/offlineFixture.ts",
+    "src/arcproof/receiptVerifier.ts",
+    "src/arcproof/submissions.ts",
+    "src/arcproof/testnetClient.ts",
+    "src/arcproof/useTestnetWallet.ts",
+    "src/arcproof/walletIntents.ts",
+    "src/components/arcproof/DemoReceipt.tsx",
+    "src/components/arcproof/EvidenceScreen.tsx",
+    "src/components/arcproof/HomeScreen.tsx",
+    "src/components/arcproof/Layout.tsx",
+    "src/components/arcproof/NetworkUnavailable.tsx",
+    "src/components/arcproof/ReceiptFacts.tsx",
+    "src/components/arcproof/TestnetScreens.tsx",
+    "src/components/arcproof/UnavailableRequest.tsx",
+    "src/config.ts",
+    "vite.config.ts"
+  ],
+  "uploaded_files": [
+    "src/App.tsx",
+    "src/arcproof/__tests__/buildProvenance.test.ts",
+    "src/arcproof/__tests__/mainnetReadonlyUi.test.tsx",
+    "src/arcproof/__tests__/readonlyRoutes.test.tsx",
+    "src/arcproof/__tests__/receiptClarity.test.tsx",
+    "src/arcproof/__tests__/testnetUi.test.tsx",
+    "src/arcproof/__tests__/uiSemantics.test.tsx",
+    "src/arcproof/__tests__/unknownRequestIdentity.test.ts",
+    "src/arcproof/__tests__/unknownRequestUi.test.tsx",
+    "src/arcproof/exportUtils.ts",
+    "src/arcproof/manifest.ts",
+    "src/arcproof/networkPolicy.ts",
+    "src/arcproof/offlineFixture.ts",
+    "src/arcproof/receiptVerifier.ts",
+    "src/arcproof/submissions.ts",
+    "src/arcproof/testnetClient.ts",
+    "src/arcproof/useTestnetWallet.ts",
+    "src/arcproof/walletIntents.ts",
+    "src/components/arcproof/DemoReceipt.tsx",
+    "src/components/arcproof/EvidenceScreen.tsx",
+    "src/components/arcproof/HomeScreen.tsx",
+    "src/components/arcproof/Layout.tsx",
+    "src/components/arcproof/NetworkUnavailable.tsx",
+    "src/components/arcproof/ReceiptFacts.tsx",
+    "src/components/arcproof/TestnetScreens.tsx",
+    "src/components/arcproof/UnavailableRequest.tsx",
+    "src/config.ts",
+    "vite.config.ts",
+    "ArcProofInvoices.abi.json",
+    "src/arcproof/__tests__/demoExportFallback.test.tsx",
+    "src/arcproof/__tests__/mainnetSample.test.tsx",
+    "src/arcproof/__tests__/readonlyRetry.test.ts",
+    "src/arcproof/__tests__/receiptFactGroups.test.tsx",
+    "src/arcproof/__tests__/receiptReadRetry.test.ts",
+    "src/arcproof/__tests__/trustedNetworkStages.test.ts",
+    "src/arcproof/__tests__/trustedNetworkUi.test.tsx",
+    "src/arcproof/mainnetSample.ts",
+    "src/arcproof/networkReleasePolicy.ts",
+    "src/arcproof/readonlyRetry.ts",
+    "src/components/arcproof/MainnetSampleEntry.tsx",
+    "src/components/arcproof/ReceiptExportActions.tsx",
+    "src/components/arcproof/VerificationFactGroups.tsx"
+  ],
+  "uploaded_file_count": 42,
+  "preserved_studio_only_sample": [
+    ".oxlintrc.json",
+    "AGENTS.md",
+    "contracts/contract-metadata/.gitkeep",
+    "contracts/script/Create2Factory.sol",
+    "contracts/script/DeployCreate2.s.sol",
+    "contracts/test-integration/.gitkeep",
+    "contracts/test/.gitkeep",
+    "scripts/buildProvenance.ts",
+    "scripts/check.sh",
+    "scripts/compass-deploy-helpers.ts",
+    "scripts/compass-deploy.ts",
+    "scripts/fetch-abi.ts",
+    "scripts/self-deploy.ts",
+    "src/console-capture.ts",
+    "src/tracing.ts"
+  ],
+  "artifact_hashes": {
+    "pre_sync_export_zip": {
+      "path": "/home/box/Downloads/arcproof_smart_contract_developer_oq5ipv.zip",
+      "bytes": 5071360,
+      "sha256": "e395ec713ebe711c3a799f74f0ab7396c133bf6cbeb8c08b0e36c2440d6ef597"
+    },
+    "upload_delta_zip": {
+      "path": "/home/box/Downloads/studio-upload-1603f9a.zip",
+      "bytes": 107450,
+      "sha256": "36b746a494bdda70b28b01703d7f74ab0c58001d031d95c3cb64954db8f1cfd6"
+    },
+    "buildProvenance_fix_zip": {
+      "path": "/home/box/Downloads/studio-fix-buildProvenance.zip",
+      "bytes": 2843,
+      "sha256": "dfc1dcc15277d02f68299750c13811c174ed54aad74e6372eb3dd78c26fc15ee"
+    }
+  },
+  "studio_tests_after_sync": {
+    "bun_run_test": {
+      "exit": 0,
+      "files": 41,
+      "tests": 559
+    },
+    "forge_test": {
+      "exit": 0,
+      "suites": 5,
+      "tests": 73
+    },
+    "buildProvenance_sha256_in_studio": "af241da0bad9d79dc33dfcf8e1780db1eb6fd3b0ca2d8096f778e7b3a7a25e1d"
+  },
+  "post_sync_export": {
+    "status": "in_progress",
+    "note": "Re-download running; prior oqou6x.zip was 22 bytes incomplete — will replace with full zip SHA when ready"
+  },
+  "final_candidate_sync_recommendation": "partial_until_post_sync_export_hash"
+}

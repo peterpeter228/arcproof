@@ -1,3 +1,7 @@
+# 2026-10-26 07:50 UTC 已核对的 Arc 主网部署
+
+`PRODUCTION_MANIFEST` 现为已核对的 chain `5042` 合约 `0xd6b1C2A7F6C406E6BbB981F66847aff60D6600eE`，`writesAccepted=true`（代码阶段 W2 / 操作者阶段 U1）。`MAINNET_SAMPLE`、付款交易、公开 App、视频仍为空。下方“production manifest 保持空、主网钱包动作关闭”是该部署之前的口径，不再描述当前清单。仍不由此推导新的签名、转账、Studio Publish 或 DoraHacks 提交。Studio Deploy 误点的测试网 `0x0D54be3d3c17D73be58c1bAeDFBdBC2f79677018` 不是主网合约。
+
 # 2026-10-21 22:42:43 UTC 当前阶段授权（优先于下方历史 18 小时限制）
 
 用户明确同意：本阶段不再沿用无法核对的 18 小时工程上限，同步既有 Arc Studio 项目并继续私有主网适配；安排初审、最终复审各一次 Argon 调用。仍不部署、不签名、不转账、不公开。本调整不是无限投入承诺，不扩大付费服务、凭据、资金或比赛提交权限。按可验证里程碑推进，安全阻塞不得以工期理由跳过。

@@ -16,7 +16,7 @@ async function closedRegistry() {
   return import('../mainnetSample');
 }
 describe('mainnet sample is a locator requiring fresh route verification', () => {
-  it('publishes no actual sample and shows a disabled entry under the real empty production registry', async () => {
+  it('publishes no actual sample and shows a disabled entry until a payment exists', async () => {
     const m = await import('../mainnetSample'); const { MainnetSampleEntry } = await import('../../components/arcproof/MainnetSampleEntry');
     expect(m.MAINNET_SAMPLE).toBeNull(); expect(m.mainnetSampleHref()).toBeNull(); expect(m.mainnetSampleHref(sample)).toBeNull();
     const html = renderToStaticMarkup(<MainnetSampleEntry />);

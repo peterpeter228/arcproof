@@ -27,12 +27,17 @@ beforeEach(() => {
 afterEach(() => { vi.doUnmock('../manifest'); vi.doUnmock('../networkReleasePolicy'); vi.unstubAllEnvs(); vi.unstubAllGlobals(); vi.restoreAllMocks(); });
 
 describe('closed source-registry scenarios, never live deployment evidence', () => {
-  it('U0 remains inert with the real empty production manifest', async () => {
+  it('the real mainnet registry is W2 for the verified deployment', async () => {
     const m = await import('../networkPolicy');
-    expect(m.networkStage(m.BUILD_NETWORK)).toBe('U0');
-    expect(m.MAINNET_CONTEXT.deployment).toBeNull();
-    expect(m.canWriteContext(m.MAINNET_CONTEXT)).toBe(false);
+    const deploymentId = '0x3157f8feee81d6f2447756a99f6a12c88dff63d7165ca521322e0cc7ace2c2aa';
+    expect(m.networkStage(m.BUILD_NETWORK)).toBe('W2');
+    expect(m.MAINNET_CONTEXT.deployment?.deploymentId).toBe(deploymentId);
+    expect(m.MAINNET_CONTEXT.deployment?.contractAddress).toBe('0xd6b1C2A7F6C406E6BbB981F66847aff60D6600eE');
+    expect(m.MAINNET_CONTEXT.writesEnabled).toBe(true);
+    expect(m.canWriteContext(m.MAINNET_CONTEXT)).toBe(true);
+    expect(m.getDeploymentContext(m.MAINNET_CONTEXT, 5042, deploymentId)).toBe(m.MAINNET_CONTEXT);
     expect(m.getDeploymentContext(m.MAINNET_CONTEXT, 5042, 'mainnet-current')).toBeNull();
+    expect(m.MAINNET_CONTEXT.deployment?.contractAddress.toLowerCase()).not.toBe('0x0d54be3d3c17d73be58c1baedfbdbc2f79677018');
   });
   it.each([false, true])('source registry creates R1/W2 with independent release acceptance=%s', async accepted => {
     const m = await registry(accepted);

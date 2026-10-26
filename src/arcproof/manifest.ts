@@ -1,6 +1,7 @@
 /**
  * manifest.ts
- * Trusted deployment manifest. Production manifest is EMPTY until a real deployment occurs.
+ * Trusted deployment manifest. Production contains the verified Arc mainnet deployment.
+ * Old deployments are preserved; addresses are never overwritten.
  * A deploymentId is an immutable opaque string derived from chainId+contractAddress at
  * deploy time. Old deployments are preserved; addresses are never overwritten.
  *
@@ -8,7 +9,7 @@
  * the contract address, chainId, or merchant for that deployment.
  */
 
-import type { ArcSettlementPolicy } from './arcSettlement';
+import { ARC_MAINNET_SETTLEMENT_POLICY, type ArcSettlementPolicy } from './arcSettlement';
 import { OFFLINE_FIXTURE_DEPLOYMENT } from './offlineFixture';
 
 export interface DeploymentRecord {
@@ -29,10 +30,22 @@ export interface DeploymentRecord {
 }
 
 /**
- * Production manifest: EMPTY. No trusted deployment exists yet.
- * DO NOT add entries here without an actual on-chain deployment with verified runtimeCodeHash.
+ * Production manifest: the verified Arc mainnet deployment only.
+ * deploymentId = keccak256(abi.encode(uint256(5042), contractAddress)).
+ * Runtime bytecode matches the reviewed artifact (same keccak as the historical
+ * testnet deployment). This record is not a payment, public App, or audit.
+ * Studio Deploy misclick testnet 0x0D54be3d3c17D73be58c1bAeDFBdBC2f79677018 is not an entry.
  */
-export const PRODUCTION_MANIFEST: readonly DeploymentRecord[] = [];
+export const MAINNET_DEPLOYMENT: DeploymentRecord = Object.freeze({
+  settlementPolicy: ARC_MAINNET_SETTLEMENT_POLICY,
+  deploymentId: '0x3157f8feee81d6f2447756a99f6a12c88dff63d7165ca521322e0cc7ace2c2aa',
+  chainId: 5042,
+  contractAddress: '0xd6b1C2A7F6C406E6BbB981F66847aff60D6600eE',
+  runtimeCodeHash: '0xa36ede95ccce8289224d3bbabe3a2445a888c44e763a04ac4b6f4f2f03dd344c',
+  label: 'ArcProof mainnet U1',
+  deployedAt: '2026-10-26T07:44:36Z',
+});
+export const PRODUCTION_MANIFEST: readonly DeploymentRecord[] = Object.freeze([MAINNET_DEPLOYMENT]);
 
 /**
  * Fixture manifest: used ONLY in tests and clearly-labelled demo mode.

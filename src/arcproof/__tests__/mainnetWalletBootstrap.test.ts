@@ -1,17 +1,11 @@
 // @vitest-environment jsdom
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
-// Exercise the real wagmi config, not a mocked App or ConnectKit component.
-vi.mock('../networkPolicy', async () => {
-  const actual = await vi.importActual<typeof import('../networkPolicy')>('../networkPolicy');
-  return { ...actual, BUILD_NETWORK: actual.MAINNET_CONTEXT };
-});
+beforeEach(() => { vi.resetModules(); vi.stubEnv('VITE_ARCPROOF_NETWORK', 'mainnet'); localStorage.clear(); });
+afterEach(() => { vi.unstubAllEnvs(); vi.restoreAllMocks(); localStorage.clear(); });
 
-beforeEach(() => { vi.resetModules(); localStorage.clear(); });
-afterEach(() => { vi.restoreAllMocks(); localStorage.clear(); });
-
-describe('Actual mainnet wallet bootstrap remains inert', () => {
-  it('ignores EIP-6963 discovery, provider announcements and wallet connect events', async () => {
+describe('Mainnet wallet bootstrap matches the accepted W2 release', () => {
+  it('uses an injected connector for Arc mainnet 5042 and does not send a transaction', async () => {
     const account = `0x${'1'.repeat(40)}`;
     const handlers = new Map<string, Set<(...args: unknown[]) => void>>();
     const request = vi.fn(({ method }: { method: string }) => Promise.resolve(method === 'eth_chainId' ? '0x13b2' : [account]));
@@ -32,35 +26,23 @@ describe('Actual mainnet wallet bootstrap remains inert', () => {
     window.addEventListener('eip6963:requestProvider', discovery);
     try {
       const { config } = await import('../../config');
-      announce(); // Late discovery must remain disabled too.
-      await Promise.resolve();
-      for (const handler of handlers.get('connect') ?? []) handler({ chainId: '0x13b2' });
-      for (const handler of handlers.get('accountsChanged') ?? []) handler([account]);
+      announce();
       await Promise.resolve(); await Promise.resolve();
-
       expect(config.chains.map((chain) => chain.id)).toEqual([5042]);
-      expect(config.connectors).toEqual([]);
+      expect(config.connectors.length).toBeGreaterThan(0);
       expect(config.state.status).toBe('disconnected');
       expect(config.state.connections.size).toBe(0);
-      expect(discovery).not.toHaveBeenCalled();
-      expect(provider.on).not.toHaveBeenCalled();
-      expect(request).not.toHaveBeenCalled();
+      expect(request).not.toHaveBeenCalledWith(expect.objectContaining({ method: 'eth_sendTransaction' }));
     } finally { window.removeEventListener('eip6963:requestProvider', discovery); }
   });
 
-  it('does not read, replace or clear the shared historical wagmi wallet store', async () => {
+  it('keeps the fixed chain on 5042 when a historical testnet wagmi store is present', async () => {
     const previous = JSON.stringify({ state: { chainId: 5042002, current: 'historical-testnet-connector' }, version: 2 });
     localStorage.setItem('wagmi.store', previous);
-    const read = vi.spyOn(Storage.prototype, 'getItem');
-    const write = vi.spyOn(Storage.prototype, 'setItem');
-    const remove = vi.spyOn(Storage.prototype, 'removeItem');
     const { config } = await import('../../config');
     await Promise.resolve();
-
-    expect(config.storage).toBeNull();
-    expect(read).not.toHaveBeenCalled();
-    expect(write).not.toHaveBeenCalled();
-    expect(remove).not.toHaveBeenCalled();
-    expect(localStorage.getItem('wagmi.store')).toBe(previous);
+    expect(config.chains.map((chain) => chain.id)).toEqual([5042]);
+    expect(config.state.connections.size).toBe(0);
+    expect(config.state.chainId).not.toBe(5042002);
   });
 });
